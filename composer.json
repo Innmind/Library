@@ -1,6 +1,7 @@
 {
     "name": "baptouuuu/api",
     "license": "proprietary",
+    "description": "Holds crawled page data",
     "type": "project",
     "autoload": {
         "psr-4": {
