@@ -108,19 +108,19 @@ class Html extends HttpResource
     }
 
     /**
-     * @param string $themeColor
+     * @param array $themeColor
      *
      * @return Html self
      */
-    public function setThemeColor($themeColor)
+    public function setThemeColor(array $themeColor)
     {
-        $this->themeColor = (string) $themeColor;
+        $this->themeColor = $themeColor;
 
         return $this;
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getThemeColor()
     {
