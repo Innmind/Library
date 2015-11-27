@@ -112,11 +112,13 @@ class Image extends HttpResource
     }
 
     /**
+     * List of key/value pairs
+     *
      * @param array $exif
      *
      * @return Image self
      */
-    public function setWeight(array $exif)
+    public function setExif(array $exif)
     {
         $this->exif = $exif;
 
@@ -126,7 +128,7 @@ class Image extends HttpResource
     /**
      * @return array
      */
-    public function getWeight()
+    public function getExif()
     {
         return $this->exif;
     }
