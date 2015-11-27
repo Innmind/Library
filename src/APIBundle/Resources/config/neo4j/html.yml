@@ -21,7 +21,7 @@ APIBundle\Graph\Node\Html:
         language: string
         themeColor:
             type: array
-            inner_type: int
+            inner_type: float
         title: string
         rss: string
         android: string
