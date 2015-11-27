@@ -1,0 +1,10 @@
+APIBundle\Graph\Node\Host:
+    type: node
+    alias: Host
+    id:
+        uuid:
+            type: string
+            generator: { strategy: UUID }
+    labels: [Host]
+    properties:
+        host: string

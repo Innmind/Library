@@ -1,0 +1,28 @@
+APIBundle\Graph\Node\Html:
+    type: node
+    alias: Html
+    id:
+        uuid:
+            type: string
+            generator: { strategy: UUID }
+    labels: [Resource, Html]
+    properties:
+        scheme: string
+        port: int
+        path: string
+        query: string
+        charset: string
+        content: string
+        description: string
+        anchors:
+            type: array
+            inner_type: string
+        journal: bool
+        language: string
+        themeColor:
+            type: array
+            inner_type: int
+        title: string
+        rss: string
+        android: string
+        ios: string

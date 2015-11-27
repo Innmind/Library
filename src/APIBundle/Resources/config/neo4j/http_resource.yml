@@ -1,0 +1,14 @@
+APIBundle\Graph\Node\HttpResource:
+    type: node
+    alias: Resource
+    id:
+        uuid:
+            type: string
+            generator: { strategy: UUID }
+    labels: [Resource]
+    properties:
+        scheme: string
+        port: int
+        path: string
+        query: string
+        charset: string

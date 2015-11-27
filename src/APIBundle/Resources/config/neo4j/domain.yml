@@ -1,0 +1,11 @@
+APIBundle\Graph\Node\Domain:
+    type: node
+    alias: Domain
+    id:
+        uuid:
+            type: string
+            generator: { strategy: UUID }
+    labels: [Domain]
+    properties:
+        domain: string
+        tld: string

@@ -1,0 +1,15 @@
+APIBundle\Graph\Relationship\Referrer:
+    type: relationship
+    alias: Referrer
+    id:
+        uuid:
+            type: string
+            generator: { strategy: UUID }
+    rel_type: REFER_RESOURCE
+    properties:
+        source:
+            type: startNode
+            node: Resource
+        destination:
+            type: endNode
+            node: Resource

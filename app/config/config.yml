@@ -45,3 +45,14 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+innmind_neo4j:
+    connections:
+        default:
+            scheme: https
+            username: %neo4j_user%
+            password: %neo4j_password%
+    managers:
+        default:
+            connection: default
+            reader: yaml

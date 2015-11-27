@@ -1,0 +1,10 @@
+APIBundle\Graph\Node\Citation:
+    type: node
+    alias: Citation
+    id:
+        uuid:
+            type: string
+            generator: { strategy: UUID }
+    labels: [Citation]
+    properties:
+        text: string

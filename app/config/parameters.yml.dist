@@ -17,3 +17,6 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            GWtXkRMHBlATwBDbPjAdiLsTrvszCR
+
+    neo4j_user: neo4j
+    neo4j_password: neo4j
