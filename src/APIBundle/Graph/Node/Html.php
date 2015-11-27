@@ -32,7 +32,7 @@ class Html extends HttpResource
      */
     public function getContent()
     {
-        return $content;
+        return $this->content;
     }
 
     /**
@@ -52,7 +52,7 @@ class Html extends HttpResource
      */
     public function getDescription()
     {
-        return $description;
+        return $this->description;
     }
 
     /**

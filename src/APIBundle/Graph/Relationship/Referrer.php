@@ -19,11 +19,11 @@ class Referrer
     }
 
     /**
-     * @param HttpResource $resource
+     * @param HttpResource $source
      *
      * @return Referrer self
      */
-    public function setSource(HttpResource $resource)
+    public function setSource(HttpResource $source)
     {
         $this->source = $source;
 
@@ -39,11 +39,11 @@ class Referrer
     }
 
     /**
-     * @param HttpResource $resource
+     * @param HttpResource $destination
      *
      * @return Referrer self
      */
-    public function setDestination(HttpResource $resource)
+    public function setDestination(HttpResource $destination)
     {
         $this->destination = $destination;
 
