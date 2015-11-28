@@ -11,6 +11,13 @@ class PageImage
     protected $page;
     protected $image;
     protected $date;
+    protected $description;
+
+    /**
+     * Non mapped property used to publish a message in the queue so this
+     * url can be crawled
+     */
+    protected $url;
 
     /**
      * @return string
@@ -78,5 +85,45 @@ class PageImage
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return PageImage self
+     */
+    public function setDescription($description)
+    {
+        $this->description = (string) $description;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return Alternate self
+     */
+    public function setUrl($url)
+    {
+        $this->url = (string) $url;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 }

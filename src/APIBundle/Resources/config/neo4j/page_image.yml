@@ -14,3 +14,4 @@ APIBundle\Graph\Relationship\PageImage:
             type: endNode
             node: Html
         date: date
+        description: string
