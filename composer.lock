@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6f7de79f3c754735c3f2398da9e21a9a",
-    "content-hash": "c9046194a7dfa47c980556079e35f777",
+    "hash": "46a7f9b215cb6901cf80c46fd321de11",
+    "content-hash": "46bfa4f30cd6b2479149aa721caa4ec1",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1127,6 +1127,215 @@
             "time": "2015-09-03 14:36:43"
         },
         {
+            "name": "innmind/rest-bundle",
+            "version": "2.0.0",
+            "target-dir": "Innmind/RestBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/RestBundle.git",
+                "reference": "0228323de4cdd45449d9ac49f475849efc5da9c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/RestBundle/zipball/0228323de4cdd45449d9ac49f475849efc5da9c5",
+                "reference": "0228323de4cdd45449d9ac49f475849efc5da9c5",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~5.0",
+                "innmind/rest-client": "~2",
+                "innmind/rest-server": "~2",
+                "innmind/url-resolver": "^1.0",
+                "php": ">=5.5",
+                "symfony/config": "~2.7",
+                "symfony/console": "~2.7",
+                "symfony/dependency-injection": "~2.7",
+                "symfony/filesystem": "~2.7",
+                "symfony/framework-bundle": "~2.7",
+                "symfony/http-kernel": "~2.7"
+            },
+            "require-dev": {
+                "innmind/neo4j-onm": "~1.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Innmind\\RestBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "This Bundle wraps the innmind rest server library",
+            "homepage": "http://github.com/Innmind/RestBundle",
+            "keywords": [
+                "api",
+                "rest"
+            ],
+            "time": "2015-11-22 13:00:18"
+        },
+        {
+            "name": "innmind/rest-client",
+            "version": "2.0.0",
+            "target-dir": "Innmind/Rest/Client",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/rest-client.git",
+                "reference": "6a9641a42c1273728d5b5c02ac544653b81d8157"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/rest-client/zipball/6a9641a42c1273728d5b5c02ac544653b81d8157",
+                "reference": "6a9641a42c1273728d5b5c02ac544653b81d8157",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~5",
+                "innmind/url-resolver": "^1.0",
+                "php": ">=5.5",
+                "symfony/event-dispatcher": "~2.7",
+                "symfony/filesystem": "~2.7",
+                "symfony/serializer": "~2.7",
+                "symfony/validator": "~2.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Innmind\\Rest\\Client": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "Library to consume REST APIs",
+            "homepage": "http://github.com/Innmind/rest-client",
+            "keywords": [
+                "api",
+                "client",
+                "rest"
+            ],
+            "time": "2015-11-21 17:23:10"
+        },
+        {
+            "name": "innmind/rest-server",
+            "version": "2.0.0",
+            "target-dir": "Innmind/Rest/Server",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/rest-server.git",
+                "reference": "a36fd5e558cee0c669e34f30d848e93cef5472f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/rest-server/zipball/a36fd5e558cee0c669e34f30d848e93cef5472f1",
+                "reference": "a36fd5e558cee0c669e34f30d848e93cef5472f1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "psr/log": "^1.0",
+                "symfony/config": "~2.7",
+                "symfony/dependency-injection": "^2.7",
+                "symfony/event-dispatcher": "~2.7",
+                "symfony/framework-bundle": "^2.7",
+                "symfony/http-foundation": "~2.7",
+                "symfony/http-kernel": "^2.7",
+                "symfony/options-resolver": "~2.7",
+                "symfony/property-access": "~2.7",
+                "symfony/routing": "~2.7",
+                "symfony/serializer": "~2.7",
+                "symfony/validator": "~2.7",
+                "symfony/yaml": "~2.7",
+                "willdurand/negotiation": "~2"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.5",
+                "innmind/neo4j-onm": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Innmind\\Rest\\Server": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "Library to easily expose REST APIs",
+            "homepage": "http://github.com/Innmind/rest-server",
+            "keywords": [
+                "api",
+                "rest"
+            ],
+            "time": "2015-11-21 15:55:20"
+        },
+        {
+            "name": "innmind/url-resolver",
+            "version": "1.0.0",
+            "target-dir": "Innmind/UrlResolver",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/url-resolver.git",
+                "reference": "8ee75264fb3a159a3fa672ecf50713bf76250eac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/url-resolver/zipball/8ee75264fb3a159a3fa672ecf50713bf76250eac",
+                "reference": "8ee75264fb3a159a3fa672ecf50713bf76250eac",
+                "shasum": ""
+            },
+            "require": {
+                "jeremykendall/php-domain-parser": "~3.0",
+                "php": ">=5.5",
+                "symfony/validator": "~2.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Innmind\\UrlResolver": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "Library to resolve relative urls to absolute ones",
+            "homepage": "http://github.com/Innmind/url-resolver",
+            "keywords": [
+                "resolver",
+                "uri",
+                "url"
+            ],
+            "time": "2015-09-21 06:42:54"
+        },
+        {
             "name": "jdorn/sql-formatter",
             "version": "v1.2.17",
             "source": {
@@ -1175,6 +1384,68 @@
                 "sql"
             ],
             "time": "2014-01-12 16:20:24"
+        },
+        {
+            "name": "jeremykendall/php-domain-parser",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeremykendall/php-domain-parser.git",
+                "reference": "896e7e70f02bd4fd77190052799bc61e4d779672"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeremykendall/php-domain-parser/zipball/896e7e70f02bd4fd77190052799bc61e4d779672",
+                "reference": "896e7e70f02bd4fd77190052799bc61e4d779672",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-intl": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "jeremykendall/debug-die": "0.0.1.*",
+                "mikey179/vfsstream": "~1.4",
+                "phpunit/phpunit": "~4.4"
+            },
+            "bin": [
+                "bin/parse",
+                "bin/update-psl"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Pdp\\": "src/"
+                },
+                "files": [
+                    "src/pdp-parse-url.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Kendall",
+                    "homepage": "http://about.me/jeremykendall",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/jeremykendall/php-domain-parser/graphs/contributors"
+                }
+            ],
+            "description": "Public Suffix List based URL parsing implemented in PHP.",
+            "homepage": "https://github.com/jeremykendall/php-domain-parser",
+            "keywords": [
+                "Public Suffix List",
+                "domain parsing",
+                "url parsing"
+            ],
+            "time": "2015-03-30 12:49:45"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2463,6 +2734,55 @@
                 "templating"
             ],
             "time": "2015-11-05 12:49:06"
+        },
+        {
+            "name": "willdurand/negotiation",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/willdurand/Negotiation.git",
+                "reference": "a99d19330bfaa050fd09c3b8a10fc8ac258b9a55"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/willdurand/Negotiation/zipball/a99d19330bfaa050fd09c3b8a10fc8ac258b9a55",
+                "reference": "a99d19330bfaa050fd09c3b8a10fc8ac258b9a55",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Negotiation\\": "src/Negotiation"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "William Durand",
+                    "email": "will+git@drnd.me"
+                }
+            ],
+            "description": "Content Negotiation tools for PHP provided as a standalone library.",
+            "homepage": "http://williamdurand.fr/Negotiation/",
+            "keywords": [
+                "accept",
+                "content",
+                "format",
+                "header",
+                "negotiation"
+            ],
+            "time": "2015-10-02 12:52:52"
         },
         {
             "name": "zendframework/zend-code",

@@ -16,6 +16,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Innmind\Neo4jBundle\InnmindNeo4jBundle,
+            new Innmind\RestBundle\InnmindRestBundle,
             new APIBundle\APIBundle(),
         );
 
