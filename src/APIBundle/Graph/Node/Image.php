@@ -1,6 +1,6 @@
 <?php
 
-namespace APIBunle\Graph\Node;
+namespace APIBundle\Graph\Node;
 
 class Image extends HttpResource
 {
