@@ -41,6 +41,8 @@ innmind_rest:
                             canonical:
                                 type: string
                                 access: [READ, CREATE]
+                        options:
+                            class: APIBundle\Graph\Node\HttpResource
                     html:
                         id: uuid
                         properties:
@@ -131,6 +133,8 @@ innmind_rest:
                                 access: [READ, CREATE]
                                 options:
                                     inner_type: string
+                        options:
+                            class: APIBundle\Graph\Node\Html
                     image:
                         id: uuid
                         properties:
@@ -188,6 +192,8 @@ innmind_rest:
                                 access: [READ, CREATE]
                                 options:
                                     format: string
+                        options:
+                            class: APIBundle\Graph\Node\Image
                     image_caption:
                         id: url
                         properties:
