@@ -13,6 +13,12 @@ class Alternate
     protected $language;
 
     /**
+     * Non mapped property used to publish a message in the queue so this
+     * url can be crawled
+     */
+    protected $url;
+
+    /**
      * @return string
      */
     public function getUuid()
@@ -102,5 +108,25 @@ class Alternate
     public function getLanguage()
     {
         return $this->language;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return Alternate self
+     */
+    public function setUrl($url)
+    {
+        $this->url = (string) $url;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 }
