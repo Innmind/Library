@@ -5,3 +5,10 @@ services:
             - @entity_factory.delegation
         tags:
             - { name: kernel.event_subscriber }
+
+    listener.relationship_persist:
+        class: APIBundle\EventListener\RelationshipPersistListener
+        arguments:
+            - @innmind_neo4j.manager.default
+        tags:
+            - { name: kernel.event_subscriber }
