@@ -1,0 +1,7 @@
+services:
+    listener.entity_builder:
+        class: APIBundle\EventListener\EntityBuilderListener
+        arguments:
+            - @entity_factory.delegation
+        tags:
+            - { name: kernel.event_subscriber }

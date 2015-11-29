@@ -1,5 +1,6 @@
 imports:
     - { resource: entity_factories.yml }
+    - { resource: listeners.yml }
 
 services:
     neo4j_storage:
