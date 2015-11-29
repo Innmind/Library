@@ -21,6 +21,14 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    listener.build.canonical:
+        class: APIBundle\EventListener\CanonicalBuildListener
+        arguments:
+            - @innmind_neo4j.manager.default
+            - @domain_parser
+        tags:
+            - { name: kernel.event_subscriber }
+
     listener.build.author:
         class: APIBundle\EventListener\AuthorBuildListener
         arguments:
