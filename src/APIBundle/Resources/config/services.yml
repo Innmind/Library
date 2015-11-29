@@ -9,3 +9,12 @@ services:
             index_0: innmind_neo4j.manager.default
         tags:
             - { name: innmind_rest.server.storage, alias: neo4j }
+
+    domain_parser:
+        class: Pdp\Parser
+        arguments:
+            - @=service('domain_parser.suffix').getList()
+
+    domain_parser.suffix:
+        class: Pdp\PublicSuffixListManager
+        public: false

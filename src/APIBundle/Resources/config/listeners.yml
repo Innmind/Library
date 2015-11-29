@@ -12,3 +12,11 @@ services:
             - @innmind_neo4j.manager.default
         tags:
             - { name: kernel.event_subscriber }
+
+    listener.alternate_build:
+        class: APIBundle\EventListener\AlternateBuildListener
+        arguments:
+            - @innmind_neo4j.manager.default
+            - @domain_parser
+        tags:
+            - { name: kernel.event_subscriber }
