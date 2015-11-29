@@ -5,7 +5,6 @@ namespace APIBundle\EntityFactory;
 use APIBundle\EntityFactoryInterface;
 use APIBundle\Graph\Node\Html;
 use Innmind\Rest\Server\HttpResourceInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class HtmlFactory implements EntityFactoryInterface
 {
