@@ -1,3 +1,6 @@
+imports:
+    - { resource: entity_factories.yml }
+
 services:
     neo4j_storage:
         parent: innmind_rest.server.storage.abstract.neo4j
