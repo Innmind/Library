@@ -13,7 +13,7 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    listener.alternate_build:
+    listener.build.alternate:
         class: APIBundle\EventListener\AlternateBuildListener
         arguments:
             - @innmind_neo4j.manager.default
@@ -21,7 +21,7 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    listener.author_build:
+    listener.build.author:
         class: APIBundle\EventListener\AuthorBuildListener
         arguments:
             - @innmind_neo4j.manager.default
