@@ -3,6 +3,7 @@
 namespace APIBundle\Tests\Graph\Relationship;
 
 use APIBundle\Graph\Relationship\Referrer;
+use APIBundle\Graph\Relationship\TargetableInterface;
 use APIBundle\Graph\Node\HttpResource;
 
 class ReferrerTest extends \PHPUnit_Framework_TestCase
@@ -11,6 +12,7 @@ class ReferrerTest extends \PHPUnit_Framework_TestCase
     {
         $c = new Referrer;
 
+        $this->assertInstanceOf(TargetableInterface::class, $c);
         $this->assertSame($c, $c->setSource($r = new HttpResource));
         $this->assertSame($r, $c->getSource());
         $this->assertSame($c, $c->setDestination($r = new HttpResource));

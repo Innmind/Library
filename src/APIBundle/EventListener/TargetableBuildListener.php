@@ -4,13 +4,13 @@ namespace APIBundle\EventListener;
 
 use APIBundle\Events;
 use APIBundle\Event\RelationshipBuildEvent;
-use APIBundle\Graph\Relationship\Canonical;
+use APIBundle\Graph\Relationship\TargetableInterface;
 use Innmind\Neo4j\ONM\EntityManagerInterface;
 use Innmind\Neo4j\ONM\Query;
 use Pdp\Parser;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class CanonicalBuildListener implements EventSubscriberInterface
+class TargetableBuildListener implements EventSubscriberInterface
 {
     protected $em;
     protected $parser;
@@ -27,7 +27,7 @@ class CanonicalBuildListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            Events::RELATIONSHIP_BUILD => [['replaceCanonical', 50]],
+            Events::RELATIONSHIP_BUILD => [['replaceTarget', 50]],
         ];
     }
 
@@ -39,11 +39,11 @@ class CanonicalBuildListener implements EventSubscriberInterface
      *
      * @return void
      */
-    public function replaceCanonical(RelationshipBuildEvent $event)
+    public function replaceTarget(RelationshipBuildEvent $event)
     {
         $rel = $event->getRelationship();
 
-        if (!$rel instanceof Canonical) {
+        if (!$rel instanceof TargetableInterface) {
             return;
         }
 
@@ -82,6 +82,6 @@ CYPHER
             return;
         }
 
-        $rel->setSource($resources->current());
+        $rel->setTarget($resources->current());
     }
 }

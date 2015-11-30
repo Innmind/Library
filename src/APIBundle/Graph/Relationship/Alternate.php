@@ -4,7 +4,7 @@ namespace APIBundle\Graph\Relationship;
 
 use APIBundle\Graph\Node\HttpResource;
 
-class Alternate
+class Alternate implements TargetableInterface
 {
     protected $uuid;
     protected $source;
@@ -44,6 +44,14 @@ class Alternate
     public function getSource()
     {
         return $this->source;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTarget(HttpResource $target)
+    {
+        return $this->setSource($target);
     }
 
     /**
@@ -123,7 +131,7 @@ class Alternate
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getUrl()
     {

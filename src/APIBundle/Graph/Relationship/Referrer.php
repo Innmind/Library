@@ -4,7 +4,7 @@ namespace APIBundle\Graph\Relationship;
 
 use APIBundle\Graph\Node\HttpResource;
 
-class Referrer
+class Referrer implements TargetableInterface
 {
     protected $uuid;
     protected $source;
@@ -65,6 +65,14 @@ class Referrer
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function setTarget(HttpResource $target)
+    {
+        return $this->setDestination($target);
+    }
+
+    /**
      * @param string $url
      *
      * @return Alternate self
@@ -77,7 +85,7 @@ class Referrer
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getUrl()
     {

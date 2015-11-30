@@ -13,16 +13,8 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    listener.build.alternate:
-        class: APIBundle\EventListener\AlternateBuildListener
-        arguments:
-            - @innmind_neo4j.manager.default
-            - @domain_parser
-        tags:
-            - { name: kernel.event_subscriber }
-
-    listener.build.canonical:
-        class: APIBundle\EventListener\CanonicalBuildListener
+    listener.build.targetable:
+        class: APIBundle\EventListener\TargetableBuildListener
         arguments:
             - @innmind_neo4j.manager.default
             - @domain_parser

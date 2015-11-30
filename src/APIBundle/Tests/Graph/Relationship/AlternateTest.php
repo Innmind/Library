@@ -3,6 +3,7 @@
 namespace APIBundle\Tests\Graph\Relationship;
 
 use APIBundle\Graph\Relationship\Alternate;
+use APIBundle\Graph\Relationship\TargetableInterface;
 use APIBundle\Graph\Node\HttpResource;
 
 class AlternateTest extends \PHPUnit_Framework_TestCase
@@ -11,6 +12,7 @@ class AlternateTest extends \PHPUnit_Framework_TestCase
     {
         $a = new Alternate;
 
+        $this->assertInstanceOf(TargetableInterface::class, $a);
         $this->assertSame($a, $a->setSource($r = new HttpResource));
         $this->assertSame($r, $a->getSource());
         $this->assertSame($a, $a->setDestination($r = new HttpResource));

@@ -4,8 +4,9 @@ namespace APIBundle\Graph\Relationship;
 
 use APIBundle\Graph\Node\Image;
 use APIBundle\Graph\Node\Html;
+use APIBundle\Graph\Node\HttpResource;
 
-class PageImage
+class PageImage implements TargetableInterface
 {
     protected $uuid;
     protected $page;
@@ -68,6 +69,14 @@ class PageImage
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function setTarget(HttpResource $source)
+    {
+        return $this->setImage($source);
+    }
+
+    /**
      * @param DateTime $date
      *
      * @return PageImage self
@@ -120,7 +129,7 @@ class PageImage
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getUrl()
     {

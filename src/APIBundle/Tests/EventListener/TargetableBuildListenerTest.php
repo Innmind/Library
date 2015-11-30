@@ -2,24 +2,24 @@
 
 namespace APIBundle\Tests\EventListener;
 
-use APIBundle\EventListener\CanonicalBuildListener;
+use APIBundle\EventListener\TargetableBuildListener;
 use APIBundle\Events;
 use APIBundle\Event\RelationshipBuildEvent;
 use APIBundle\Graph\Node\HttpResource;
-use APIBundle\Graph\Relationship\Canonical;
+use APIBundle\Graph\Relationship\Alternate;
 use Innmind\Neo4j\ONM\EntityManagerInterface;
 use Innmind\Neo4j\ONM\UnitOfWork;
 use Pdp\Parser;
 use Pdp\PublicSuffixListManager;
 
-class CanonicalBuildListenerTest extends \PHPUnit_Framework_TestCase
+class TargetableBuildListenerTest extends \PHPUnit_Framework_TestCase
 {
     protected $l;
     protected $p;
 
     public function setUp()
     {
-        $this->l = new CanonicalBuildListener(
+        $this->l = new TargetableBuildListener(
             $this->getMock(EntityManagerInterface::class),
             $this->p = new Parser((new PublicSuffixListManager)->getList())
         );
@@ -28,12 +28,12 @@ class CanonicalBuildListenerTest extends \PHPUnit_Framework_TestCase
     public function testSubscribedEvents()
     {
         $this->assertSame(
-            [Events::RELATIONSHIP_BUILD => [['replaceCanonical', 50]]],
-            CanonicalBuildListener::getSubscribedEvents()
+            [Events::RELATIONSHIP_BUILD => [['replaceTarget', 50]]],
+            TargetableBuildListener::getSubscribedEvents()
         );
     }
 
-    public function testReplaceCanonical()
+    public function testReplaceAlternate()
     {
         $resources = new \SplObjectStorage;
         $resources->attach($wished = new HttpResource);
@@ -49,18 +49,18 @@ class CanonicalBuildListenerTest extends \PHPUnit_Framework_TestCase
         $em
             ->method('getUnitOfWork')
             ->willReturn($uow);
-        $l = new CanonicalBuildListener($em, $this->p);
-        $rel = new Canonical;
+        $l = new TargetableBuildListener($em, $this->p);
+        $rel = new Alternate;
         $rel
             ->setSource(new HttpResource)
             ->setUrl('http://xn--example.com');
         $e = new RelationshipBuildEvent($rel);
 
-        $this->assertSame(null, $l->replaceCanonical($e));
+        $this->assertSame(null, $l->replaceTarget($e));
         $this->assertSame($wished, $rel->getSource());
     }
 
-    public function testDoesntReplaceCanonical()
+    public function testDoesntReplaceAlternate()
     {
         $resources = new \SplObjectStorage;
         $uow = $this
@@ -74,18 +74,18 @@ class CanonicalBuildListenerTest extends \PHPUnit_Framework_TestCase
         $em
             ->method('getUnitOfWork')
             ->willReturn($uow);
-        $l = new CanonicalBuildListener($em, $this->p);
-        $rel = new Canonical;
+        $l = new TargetableBuildListener($em, $this->p);
+        $rel = new Alternate;
         $rel
             ->setSource($actual = new HttpResource)
             ->setUrl('http://xn--example.com');
         $e = new RelationshipBuildEvent($rel);
 
-        $this->assertSame(null, $l->replaceCanonical($e));
+        $this->assertSame(null, $l->replaceTarget($e));
         $this->assertSame($actual, $rel->getSource());
 
         $e = new RelationshipBuildEvent(new \stdClass);
 
-        $this->assertSame(null, $l->replaceCanonical($e));
+        $this->assertSame(null, $l->replaceTarget($e));
     }
 }

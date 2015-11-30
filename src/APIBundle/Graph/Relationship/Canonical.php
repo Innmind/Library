@@ -4,7 +4,7 @@ namespace APIBundle\Graph\Relationship;
 
 use APIBundle\Graph\Node\HttpResource;
 
-class Canonical
+class Canonical implements TargetableInterface
 {
     protected $uuid;
     protected $source;
@@ -45,6 +45,14 @@ class Canonical
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function setTarget(HttpResource $target)
+    {
+        return $this->setSource($target);
+    }
+
+    /**
      * @param HttpResource $destination
      *
      * @return Canonical self
@@ -77,7 +85,7 @@ class Canonical
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getUrl()
     {
