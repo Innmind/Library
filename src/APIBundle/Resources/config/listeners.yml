@@ -41,3 +41,10 @@ services:
             - @innmind_neo4j.manager.default
         tags:
             - { name: kernel.event_subscriber }
+
+    listener.build.host:
+        class: APIBundle\EventListener\HostBuildListener
+        arguments:
+            - @innmind_neo4j.manager.default
+        tags:
+            - { name: kernel.event_subscriber }
