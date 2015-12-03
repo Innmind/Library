@@ -49,7 +49,7 @@ swiftmailer:
 innmind_neo4j:
     connections:
         default:
-            scheme: https
+            scheme: %neo4j_scheme%
             host: %neo4j_host%
             port: %neo4j_port%
             username: %neo4j_user%
