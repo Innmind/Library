@@ -1,4 +1,20 @@
+imports:
+    - { resource: entity_factories.yml }
+    - { resource: listeners.yml }
+
 services:
-#    api.example:
-#        class: APIBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    neo4j_storage:
+        parent: innmind_rest.server.storage.abstract.neo4j
+        arguments:
+            index_0: @innmind_neo4j.manager.default
+        tags:
+            - { name: innmind_rest.server.storage, alias: neo4j }
+
+    domain_parser:
+        class: Pdp\Parser
+        arguments:
+            - @=service('domain_parser.suffix').getList()
+
+    domain_parser.suffix:
+        class: Pdp\PublicSuffixListManager
+        public: false

@@ -45,7 +45,7 @@ class CitedIn
      *
      * @return CitedIn self
      */
-    public function setAuthor(HttpResource $resource)
+    public function setResource(HttpResource $resource)
     {
         $this->resource = $resource;
 
@@ -55,7 +55,7 @@ class CitedIn
     /**
      * @return HttpResource
      */
-    public function getAuthor()
+    public function getResource()
     {
         return $this->resource;
     }

@@ -1,0 +1,218 @@
+innmind_rest:
+    server:
+        collections:
+            web:
+                storage: neo4j
+                resources:
+                    resource:
+                        id: uuid
+                        properties:
+                            uuid: string
+                            domain:
+                                type: string
+                                access: [READ, CREATE]
+                            tld:
+                                type: string
+                                access: [READ, CREATE]
+                            host:
+                                type: string
+                                access: [READ, CREATE]
+                            scheme:
+                                type: string
+                                access: [READ, CREATE]
+                            port:
+                                type: int
+                                access: [READ, CREATE]
+                            path:
+                                type: string
+                                access: [READ, CREATE]
+                            query:
+                                type: string
+                                access: [READ, CREATE]
+                            charset:
+                                type: string
+                                access: [READ, CREATE]
+                            alternates:
+                                type: array
+                                access: [READ, CREATE]
+                                options:
+                                    inner_type: resource
+                                    resource: alternate
+                            canonical:
+                                type: string
+                                access: [READ, CREATE]
+                        options:
+                            class: APIBundle\Graph\Node\HttpResource
+                    html:
+                        id: uuid
+                        properties:
+                            uuid: string
+                            domain:
+                                type: string
+                                access: [READ, CREATE]
+                            tld:
+                                type: string
+                                access: [READ, CREATE]
+                            host:
+                                type: string
+                                access: [READ, CREATE]
+                            scheme:
+                                type: string
+                                access: [READ, CREATE]
+                            port:
+                                type: int
+                                access: [READ, CREATE]
+                            path:
+                                type: string
+                                access: [READ, CREATE]
+                            query:
+                                type: string
+                                access: [READ, CREATE]
+                            charset:
+                                type: string
+                                access: [READ, CREATE]
+                            alternates:
+                                type: array
+                                access: [READ, CREATE]
+                                options:
+                                    inner_type: resource
+                                    resource: alternate
+                            canonical:
+                                type: string
+                                access: [READ, CREATE]
+                            content:
+                                type: string
+                                access: [READ, CREATE]
+                            description:
+                                type: string
+                                access: [READ, CREATE]
+                            anchors:
+                                type: array
+                                access: [READ, CREATE]
+                                options:
+                                    inner_type: string
+                            journal:
+                                type: bool
+                                access: [READ, CREATE]
+                            language:
+                                type: string
+                                access: [READ, CREATE]
+                            theme_color:
+                                type: array
+                                access: [READ, CREATE]
+                                options:
+                                    inner_type: float
+                            title:
+                                type: string
+                                access: [READ, CREATE]
+                            rss:
+                                type: string
+                                access: [READ, CREATE]
+                            android:
+                                type: string
+                                access: [READ, CREATE]
+                            ios:
+                                type: string
+                                access: [READ, CREATE]
+                            images:
+                                type: array
+                                access: [READ, CREATE]
+                                options:
+                                    inner_type: resource
+                                    resource: image_caption
+                            links:
+                                type: array
+                                access: [READ, CREATE]
+                                options:
+                                    inner_type: string
+                            author:
+                                type: string
+                                access: [READ, CREATE]
+                            citations:
+                                type: array
+                                access: [READ, CREATE]
+                                options:
+                                    inner_type: string
+                        options:
+                            class: APIBundle\Graph\Node\Html
+                    image:
+                        id: uuid
+                        properties:
+                            uuid: string
+                            domain:
+                                type: string
+                                access: [READ, CREATE]
+                            tld:
+                                type: string
+                                access: [READ, CREATE]
+                            host:
+                                type: string
+                                access: [READ, CREATE]
+                            scheme:
+                                type: string
+                                access: [READ, CREATE]
+                            port:
+                                type: int
+                                access: [READ, CREATE]
+                            path:
+                                type: string
+                                access: [READ, CREATE]
+                            query:
+                                type: string
+                                access: [READ, CREATE]
+                            charset:
+                                type: string
+                                access: [READ, CREATE]
+                            alternates:
+                                type: array
+                                access: [READ, CREATE]
+                                options:
+                                    inner_type: resource
+                                    resource: alternate
+                            canonical:
+                                type: string
+                                access: [READ, CREATE]
+                            width:
+                                type: int
+                                access: [READ, CREATE]
+                            height:
+                                type: int
+                                access: [READ, CREATE]
+                            mime:
+                                type: string
+                                access: [READ, CREATE]
+                            extension:
+                                type: string
+                                access: [READ, CREATE]
+                            weight:
+                                type: int
+                                access: [READ, CREATE]
+                            exif:
+                                type: string
+                                access: [READ, CREATE]
+                                options:
+                                    format: string
+                        options:
+                            class: APIBundle\Graph\Node\Image
+                    image_caption:
+                        id: url
+                        properties:
+                            url:
+                                type: string
+                                access: [READ, CREATE]
+                            description:
+                                type: string
+                                access: [READ, CREATE]
+                        options:
+                            private: true
+                    alternate:
+                        id: url
+                        properties:
+                            url:
+                                type: string
+                                access: [READ, CREATE]
+                            language:
+                                type: string
+                                access: [READ, CREATE]
+                        options:
+                            private: true

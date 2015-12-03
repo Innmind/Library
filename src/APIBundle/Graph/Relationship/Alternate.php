@@ -4,13 +4,19 @@ namespace APIBundle\Graph\Relationship;
 
 use APIBundle\Graph\Node\HttpResource;
 
-class Alternate
+class Alternate implements TargetableInterface
 {
     protected $uuid;
     protected $source;
     protected $destination;
     protected $date;
     protected $language;
+
+    /**
+     * Non mapped property used to publish a message in the queue so this
+     * url can be crawled
+     */
+    protected $url;
 
     /**
      * @return string
@@ -38,6 +44,14 @@ class Alternate
     public function getSource()
     {
         return $this->source;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTarget(HttpResource $target)
+    {
+        return $this->setSource($target);
     }
 
     /**
@@ -102,5 +116,25 @@ class Alternate
     public function getLanguage()
     {
         return $this->language;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return Alternate self
+     */
+    public function setUrl($url)
+    {
+        $this->url = (string) $url;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 }
