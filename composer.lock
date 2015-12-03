@@ -1232,17 +1232,17 @@
         },
         {
             "name": "innmind/rest-server",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "target-dir": "Innmind/Rest/Server",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/rest-server.git",
-                "reference": "a36fd5e558cee0c669e34f30d848e93cef5472f1"
+                "reference": "ac3674a515bd80ab8e8972cff68144741bc6a707"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/rest-server/zipball/a36fd5e558cee0c669e34f30d848e93cef5472f1",
-                "reference": "a36fd5e558cee0c669e34f30d848e93cef5472f1",
+                "url": "https://api.github.com/repos/Innmind/rest-server/zipball/ac3674a515bd80ab8e8972cff68144741bc6a707",
+                "reference": "ac3674a515bd80ab8e8972cff68144741bc6a707",
                 "shasum": ""
             },
             "require": {
@@ -1288,7 +1288,7 @@
                 "api",
                 "rest"
             ],
-            "time": "2015-11-21 15:55:20"
+            "time": "2015-11-30 07:54:24"
         },
         {
             "name": "innmind/url-resolver",
