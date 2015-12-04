@@ -18,6 +18,7 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            GWtXkRMHBlATwBDbPjAdiLsTrvszCR
 
+    neo4j_scheme: https
     neo4j_host: localhost
     neo4j_port: 7474
     neo4j_user: neo4j

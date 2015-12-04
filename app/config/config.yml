@@ -16,7 +16,6 @@ framework:
         strict_requirements: ~
     form:            ~
     validation:      { enable_annotations: true }
-    serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
@@ -50,9 +49,9 @@ swiftmailer:
 innmind_neo4j:
     connections:
         default:
-            scheme: https
+            scheme: %neo4j_scheme%
             host: %neo4j_host%
-            host: %neo4j_port%
+            port: %neo4j_port%
             username: %neo4j_user%
             password: %neo4j_password%
     managers:

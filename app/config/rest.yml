@@ -32,15 +32,20 @@ innmind_rest:
                             charset:
                                 type: string
                                 access: [READ, CREATE]
+                                options:
+                                    optional: true
                             alternates:
                                 type: array
                                 access: [READ, CREATE]
                                 options:
                                     inner_type: resource
                                     resource: alternate
+                                    optional: true
                             canonical:
                                 type: string
                                 access: [READ, CREATE]
+                                options:
+                                    optional: true
                         options:
                             class: APIBundle\Graph\Node\HttpResource
                     html:
@@ -71,15 +76,20 @@ innmind_rest:
                             charset:
                                 type: string
                                 access: [READ, CREATE]
+                                options:
+                                    optional: true
                             alternates:
                                 type: array
                                 access: [READ, CREATE]
                                 options:
                                     inner_type: resource
                                     resource: alternate
+                                    optional: true
                             canonical:
                                 type: string
                                 access: [READ, CREATE]
+                                options:
+                                    optional: true
                             content:
                                 type: string
                                 access: [READ, CREATE]
@@ -97,42 +107,56 @@ innmind_rest:
                             language:
                                 type: string
                                 access: [READ, CREATE]
+                                options:
+                                    optional: true
                             theme_color:
                                 type: array
                                 access: [READ, CREATE]
                                 options:
                                     inner_type: float
+                                    optional: true
                             title:
                                 type: string
                                 access: [READ, CREATE]
                             rss:
                                 type: string
                                 access: [READ, CREATE]
+                                options:
+                                    optional: true
                             android:
                                 type: string
                                 access: [READ, CREATE]
+                                options:
+                                    optional: true
                             ios:
                                 type: string
                                 access: [READ, CREATE]
+                                options:
+                                    optional: true
                             images:
                                 type: array
                                 access: [READ, CREATE]
                                 options:
                                     inner_type: resource
                                     resource: image_caption
+                                    optional: true
                             links:
                                 type: array
                                 access: [READ, CREATE]
                                 options:
                                     inner_type: string
+                                    optional: true
                             author:
                                 type: string
                                 access: [READ, CREATE]
+                                options:
+                                    optional: true
                             citations:
                                 type: array
                                 access: [READ, CREATE]
                                 options:
                                     inner_type: string
+                                    optional: true
                         options:
                             class: APIBundle\Graph\Node\Html
                     image:
@@ -163,15 +187,20 @@ innmind_rest:
                             charset:
                                 type: string
                                 access: [READ, CREATE]
+                                options:
+                                    optional: true
                             alternates:
                                 type: array
                                 access: [READ, CREATE]
                                 options:
                                     inner_type: resource
                                     resource: alternate
+                                    optional: true
                             canonical:
                                 type: string
                                 access: [READ, CREATE]
+                                options:
+                                    optional: true
                             width:
                                 type: int
                                 access: [READ, CREATE]
@@ -191,7 +220,7 @@ innmind_rest:
                                 type: string
                                 access: [READ, CREATE]
                                 options:
-                                    format: string
+                                    optional: true
                         options:
                             class: APIBundle\Graph\Node\Image
                     image_caption:

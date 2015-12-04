@@ -17,4 +17,9 @@ services:
 
     domain_parser.suffix:
         class: Pdp\PublicSuffixListManager
-        public: false
+
+    serializer:
+        class: Symfony\Component\Serializer\Serializer
+        arguments:
+            - []
+            - []
