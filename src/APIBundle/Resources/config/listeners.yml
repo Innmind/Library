@@ -53,3 +53,5 @@ services:
         class: APIBundle\EventListener\CrawlListener
         arguments:
             - @old_sound_rabbit_mq.crawling_producer
+        tags:
+            - { name: kernel.event_subscriber }
