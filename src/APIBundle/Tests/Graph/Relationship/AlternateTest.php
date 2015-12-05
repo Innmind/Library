@@ -23,5 +23,6 @@ class AlternateTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('fr', $a->getLanguage());
         $this->assertSame($a, $a->setUrl('fr'));
         $this->assertSame('fr', $a->getUrl());
+        $this->assertSame($a->getSource(), $a->getTarget());
     }
 }

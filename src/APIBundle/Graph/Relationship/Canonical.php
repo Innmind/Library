@@ -53,6 +53,14 @@ class Canonical implements TargetableInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getTarget()
+    {
+        return $this->getSource();
+    }
+
+    /**
      * @param HttpResource $destination
      *
      * @return Canonical self

@@ -55,6 +55,14 @@ class Alternate implements TargetableInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getTarget()
+    {
+        return $this->getSource();
+    }
+
+    /**
      * @param HttpResource $destination
      *
      * @return Alternate self

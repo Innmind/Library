@@ -18,6 +18,11 @@ php:
         - application
     links:
         - db
+        - rabbitmq
+rabbitmq:
+    image: rabbitmq:3
+    ports:
+        - 5672:5672
 nginx:
     build: docker/nginx
     ports:

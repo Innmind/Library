@@ -77,6 +77,14 @@ class PageImage implements TargetableInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getTarget()
+    {
+        return $this->getImage();
+    }
+
+    /**
      * @param DateTime $date
      *
      * @return PageImage self
