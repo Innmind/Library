@@ -48,3 +48,8 @@ services:
             - @innmind_neo4j.manager.default
         tags:
             - { name: kernel.event_subscriber }
+
+    listener.crawl:
+        class: APIBundle\EventListener\CrawlListener
+        arguments:
+            - @old_sound_rabbit_mq.crawling_producer
