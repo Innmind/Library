@@ -73,6 +73,14 @@ class Referrer implements TargetableInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getTarget()
+    {
+        return $this->getDestination();
+    }
+
+    /**
      * @param string $url
      *
      * @return Alternate self

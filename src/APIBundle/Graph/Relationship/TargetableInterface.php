@@ -20,6 +20,13 @@ interface TargetableInterface
     public function setTarget(HttpResource $target);
 
     /**
+     * Return the target resource (the one indicated by the url)
+     *
+     * @return HttpResource
+     */
+    public function getTarget();
+
+    /**
      * Return the url designating the target resource
      *
      * @return string
