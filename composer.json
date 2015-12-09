@@ -1,6 +1,6 @@
 {
-    "name": "baptouuuu/api",
-    "license": "proprietary",
+    "name": "innmind/api",
+    "license": "MIT",
     "description": "Holds crawled page data",
     "type": "project",
     "autoload": {
