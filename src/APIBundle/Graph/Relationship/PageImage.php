@@ -85,7 +85,7 @@ class PageImage implements TargetableInterface
     }
 
     /**
-     * @param DateTime $date
+     * @param \DateTime $date
      *
      * @return PageImage self
      */
@@ -97,7 +97,7 @@ class PageImage implements TargetableInterface
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -127,7 +127,7 @@ class PageImage implements TargetableInterface
     /**
      * @param string $url
      *
-     * @return Alternate self
+     * @return PageImage self
      */
     public function setUrl($url)
     {
