@@ -108,6 +108,8 @@ innmind_rest:
                             journal:
                                 type: bool
                                 access: [READ, CREATE]
+                                options:
+                                    optional: true
                             language:
                                 type: string
                                 access: [READ, CREATE]

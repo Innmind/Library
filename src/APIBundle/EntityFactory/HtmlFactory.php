@@ -60,13 +60,30 @@ class HtmlFactory implements EntityFactoryInterface
             ->setContent($resource->get('content'))
             ->setDescription($resource->get('description'))
             ->setAnchors($resource->get('anchors'))
-            ->setJournal($resource->get('journal'))
-            ->setLanguage($resource->get('language'))
-            ->setThemeColor($resource->get('theme_color'))
-            ->setTitle($resource->get('title'))
-            ->setRss($resource->get('rss'))
-            ->setAndroid($resource->get('android'))
-            ->setIos($resource->get('ios'));
+            ->setJournal(
+                $resource->has('journal') ? $resource->get('journal') : false
+            )
+            ->setTitle($resource->get('title'));
+
+        if ($resource->has('language')) {
+            $entity->setLanguage($resource->get('language'));
+        }
+
+        if ($resource->has('theme_color')) {
+            $entity->setThemeColor($resource->get('theme_color'));
+        }
+
+        if ($resource->has('rss')) {
+            $entity->setRss($resource->get('rss'));
+        }
+
+        if ($resource->has('android')) {
+            $entity->setAndroid($resource->get('android'));
+        }
+
+        if ($resource->has('ios')) {
+            $entity->setIos($resource->get('ios'));
+        }
 
         if ($this->imagesFactory->supports($resource)) {
             $this->imagesFactory->build($resource, $entity);
