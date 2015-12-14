@@ -71,7 +71,7 @@ class CrawlListener implements EventSubscriberInterface
             $this->producer->publish(serialize([
                 'url' => $this->targets[$resource],
                 'uuid' => $resource->getUuid(),
-                'host' => $event->getRequest()->getHost(),
+                'server' => $event->getRequest()->getSchemeAndHttpHost(),
             ]));
         }
     }
