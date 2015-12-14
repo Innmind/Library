@@ -48,6 +48,10 @@ innmind_rest:
                                     optional: true
                         options:
                             class: APIBundle\Graph\Node\HttpResource
+                        meta:
+                            accept:
+                                type: '*'
+                                quality: 0.1
                     html:
                         id: uuid
                         properties:
@@ -159,6 +163,10 @@ innmind_rest:
                                     optional: true
                         options:
                             class: APIBundle\Graph\Node\Html
+                        meta:
+                            accept:
+                                type: '*html*'
+                                quality: 1
                     image:
                         id: uuid
                         properties:
@@ -223,6 +231,10 @@ innmind_rest:
                                     optional: true
                         options:
                             class: APIBundle\Graph\Node\Image
+                        meta:
+                            accept:
+                                type: 'image/*'
+                                quality: 1
                     image_caption:
                         id: url
                         properties:
