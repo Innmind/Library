@@ -6,17 +6,13 @@ use APIBundle\Graph\Node\HttpResource;
 
 class Alternate implements TargetableInterface
 {
+    use UrlableTrait;
+
     protected $uuid;
     protected $source;
     protected $destination;
     protected $date;
     protected $language;
-
-    /**
-     * Non mapped property used to publish a message in the queue so this
-     * url can be crawled
-     */
-    protected $url;
 
     /**
      * @return string
@@ -124,25 +120,5 @@ class Alternate implements TargetableInterface
     public function getLanguage()
     {
         return $this->language;
-    }
-
-    /**
-     * @param string $url
-     *
-     * @return Alternate self
-     */
-    public function setUrl($url)
-    {
-        $this->url = (string) $url;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUrl()
-    {
-        return $this->url;
     }
 }

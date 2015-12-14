@@ -48,7 +48,7 @@ class CrawlListener implements EventSubscriberInterface
             return;
         }
 
-        if (empty($relationship->getUrl())) {
+        if (!$relationship->hasUrl()) {
             return;
         }
 

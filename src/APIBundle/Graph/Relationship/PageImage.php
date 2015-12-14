@@ -8,17 +8,13 @@ use APIBundle\Graph\Node\HttpResource;
 
 class PageImage implements TargetableInterface
 {
+    use UrlableTrait;
+
     protected $uuid;
     protected $page;
     protected $image;
     protected $date;
     protected $description;
-
-    /**
-     * Non mapped property used to publish a message in the queue so this
-     * url can be crawled
-     */
-    protected $url;
 
     /**
      * @return string
@@ -122,25 +118,5 @@ class PageImage implements TargetableInterface
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * @param string $url
-     *
-     * @return PageImage self
-     */
-    public function setUrl($url)
-    {
-        $this->url = (string) $url;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUrl()
-    {
-        return $this->url;
     }
 }

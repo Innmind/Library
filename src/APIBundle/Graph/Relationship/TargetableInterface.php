@@ -32,4 +32,18 @@ interface TargetableInterface
      * @return string
      */
     public function getUrl();
+
+    /**
+     * Check if a url is set for crawling
+     *
+     * @return bool
+     */
+    public function hasUrl();
+
+    /**
+     * Remove a url from the relationship, so it won't be crawled
+     *
+     * @return TargetableInterface self
+     */
+    public function removeUrl();
 }

@@ -61,6 +61,9 @@ class CrawlListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getUrl')
             ->willReturn('foo');
         $relationship
+            ->method('hasUrl')
+            ->willReturn(true);
+        $relationship
             ->method('getTarget')
             ->willReturn($hr = $this->getMock(HttpResource::class));
         $hr
@@ -89,6 +92,9 @@ class CrawlListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getUrl')
             ->willReturn('foo');
         $r2
+            ->method('hasUrl')
+            ->willReturn(true);
+        $r2
             ->method('getTarget')
             ->willReturn($hr = $this->getMock(HttpResource::class));
         $hr
@@ -114,8 +120,8 @@ class CrawlListenerTest extends \PHPUnit_Framework_TestCase
     {
         $mock = $this->getMock(TargetableInterface::class);
         $mock
-            ->method('getUrl')
-            ->willReturn(null);
+            ->method('hasUrl')
+            ->willReturn(false);
 
         return [
             [new \stdClass],

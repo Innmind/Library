@@ -23,7 +23,10 @@ class PageImageTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($pi, $pi->setDescription('foo'));
         $this->assertSame('foo', $pi->getDescription());
         $this->assertSame($pi, $pi->setUrl('foo.fr'));
+        $this->assertTrue($pi->hasUrl());
         $this->assertSame('foo.fr', $pi->getUrl());
         $this->assertSame($pi->getImage(), $pi->getTarget());
+        $this->assertSame($pi, $pi->removeUrl());
+        $this->assertFalse($pi->hasUrl());
     }
 }

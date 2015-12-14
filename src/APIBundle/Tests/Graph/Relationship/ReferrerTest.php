@@ -18,7 +18,10 @@ class ReferrerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($c, $c->setDestination($r = new HttpResource));
         $this->assertSame($r, $c->getDestination());
         $this->assertSame($c, $c->setUrl('fr'));
+        $this->assertTrue($c->hasUrl());
         $this->assertSame('fr', $c->getUrl());
         $this->assertSame($c->getDestination(), $c->getTarget());
+        $this->assertSame($c, $c->removeUrl());
+        $this->assertFalse($c->hasUrl());
     }
 }

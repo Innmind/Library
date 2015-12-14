@@ -82,6 +82,8 @@ CYPHER
             return;
         }
 
-        $rel->setTarget($resources->current());
+        $rel
+            ->setTarget($resources->current())
+            ->removeUrl();
     }
 }

@@ -6,15 +6,11 @@ use APIBundle\Graph\Node\HttpResource;
 
 class Canonical implements TargetableInterface
 {
+    use UrlableTrait;
+
     protected $uuid;
     protected $source;
     protected $destination;
-
-    /**
-     * Non mapped property used to publish a message in the queue so this
-     * url can be crawled
-     */
-    protected $url;
 
     /**
      * @return string
@@ -78,25 +74,5 @@ class Canonical implements TargetableInterface
     public function getDestination()
     {
         return $this->destination;
-    }
-
-    /**
-     * @param string $url
-     *
-     * @return Alternate self
-     */
-    public function setUrl($url)
-    {
-        $this->url = (string) $url;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUrl()
-    {
-        return $this->url;
     }
 }
