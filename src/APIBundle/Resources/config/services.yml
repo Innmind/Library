@@ -6,7 +6,7 @@ services:
     neo4j_storage:
         parent: innmind_rest.server.storage.abstract.neo4j
         arguments:
-            index_0: @innmind_neo4j.manager.default
+            index_0: '@innmind_neo4j.manager.default'
         tags:
             - { name: innmind_rest.server.storage, alias: neo4j }
 
