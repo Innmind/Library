@@ -10,40 +10,40 @@ innmind_rest:
                             uuid: string
                             domain:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             tld:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             host:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             scheme:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             port:
                                 type: int
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             path:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             query:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             charset:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     optional: true
                             alternates:
                                 type: array
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     inner_type: resource
                                     resource: alternate
                                     optional: true
                             canonical:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     optional: true
                         options:
@@ -58,113 +58,115 @@ innmind_rest:
                             uuid: string
                             domain:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             tld:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             host:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             scheme:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             port:
                                 type: int
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             path:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             query:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             charset:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     optional: true
                             alternates:
                                 type: array
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     inner_type: resource
                                     resource: alternate
                                     optional: true
                             canonical:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     optional: true
                             content:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             description:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             anchors:
                                 type: array
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     inner_type: string
                             journal:
                                 type: bool
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     optional: true
                             language:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     optional: true
                             theme_color:
                                 type: array
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     inner_type: float
                                     optional: true
                             title:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             rss:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     optional: true
                             android:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     optional: true
                             ios:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     optional: true
                             images:
                                 type: array
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     inner_type: resource
                                     resource: image_caption
                                     optional: true
                             links:
                                 type: array
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     inner_type: string
                                     optional: true
                             author:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     optional: true
                             citations:
                                 type: array
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     inner_type: string
                                     optional: true
                         options:
                             class: APIBundle\Graph\Node\Html
+                            mutable_from:
+                                - APIBundle\Graph\Node\HttpResource
                         meta:
                             accept:
                                 type: '*html*'
@@ -175,64 +177,66 @@ innmind_rest:
                             uuid: string
                             domain:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             tld:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             host:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             scheme:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             port:
                                 type: int
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             path:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             query:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             charset:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     optional: true
                             alternates:
                                 type: array
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     inner_type: resource
                                     resource: alternate
                                     optional: true
                             canonical:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     optional: true
                             width:
                                 type: int
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             height:
                                 type: int
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             mime:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             extension:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             weight:
                                 type: int
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             exif:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                                 options:
                                     optional: true
                         options:
                             class: APIBundle\Graph\Node\Image
+                            mutable_from:
+                                - APIBundle\Graph\Node\HttpResource
                         meta:
                             accept:
                                 type: 'image/*'
@@ -242,10 +246,10 @@ innmind_rest:
                         properties:
                             url:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             description:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                         options:
                             private: true
                     alternate:
@@ -253,9 +257,9 @@ innmind_rest:
                         properties:
                             url:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                             language:
                                 type: string
-                                access: [READ, CREATE]
+                                access: [READ, CREATE, UPDATE]
                         options:
                             private: true
