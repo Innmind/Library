@@ -81,7 +81,7 @@ class CrawlListenerTest extends \PHPUnit_Framework_TestCase
                 $expected = [
                     'url' => $relationship->getUrl(),
                     'uuid' => $relationship->getTarget()->getUuid(),
-                    'host' => 'innmind.io',
+                    'server' => 'http://innmind.io',
                 ];
 
                 $this->assertSame($expected, $data);
