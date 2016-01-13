@@ -14,7 +14,7 @@ services:
     domain_parser:
         class: Pdp\Parser
         arguments:
-            - @=service('domain_parser.suffix').getList()
+            - "@=service('domain_parser.suffix').getList()"
 
     domain_parser.suffix:
         class: Pdp\PublicSuffixListManager
