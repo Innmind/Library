@@ -7,6 +7,7 @@ use APIBundle\Event\RelationshipBuildEvent;
 use Innmind\Neo4j\ONM\EntityManagerInterface;
 use Innmind\Rest\Server\Events;
 use Innmind\Rest\Server\Event\Storage\PreCreateEvent;
+use Innmind\Rest\Server\Event\Storage\PreUpdateEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class RelationshipPersistListener implements EventSubscriberInterface
@@ -25,8 +26,10 @@ class RelationshipPersistListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            Events::STORAGE_PRE_CREATE => 'enable',
+            Events::STORAGE_PRE_CREATE => 'onPreCreate',
             Events::STORAGE_POST_CREATE => 'disable',
+            Events::STORAGE_PRE_UPDATE => 'onPreUpdate',
+            Events::STORAGE_POST_UPDATE => 'disable',
             ApiEvents::RELATIONSHIP_BUILD => 'persist',
         ];
     }
@@ -34,13 +37,37 @@ class RelationshipPersistListener implements EventSubscriberInterface
     /**
      * Enable the persistance of relationships
      *
-     * @param PreCreateEvent $event
+     * @param PreUpdateEvent $event
      *
      * @return void
      */
-    public function enable(PreCreateEvent $event)
+    public function onPreCreate(PreCreateEvent $event)
     {
-        if ($event->getResource()->getDefinition()->getStorage() === 'neo4j') {
+        $this->enable($event->getResource()->getDefinition()->getStorage());
+    }
+
+    /**
+     * Enable the persistance of relationships
+     *
+     * @param PreUpdateEvent $event
+     *
+     * @return void
+     */
+    public function onPreUpdate(PreUpdateEvent $event)
+    {
+        $this->enable($event->getResource()->getDefinition()->getStorage());
+    }
+
+    /**
+     * Enable the persistence
+     *
+     * @param string $storage
+     *
+     * @return void
+     */
+    public function enable($storage)
+    {
+        if ((string) $storage === 'neo4j') {
             $this->enabled = true;
         }
     }

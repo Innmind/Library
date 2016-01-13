@@ -3,17 +3,23 @@
 namespace APIBundle\EventListener;
 
 use APIBundle\EntityFactoryInterface;
+use APIBundle\ResourceFactoryInterface;
 use Innmind\Rest\Server\Event\EntityBuildEvent;
+use Innmind\Rest\Server\Event\ResourceBuildEvent;
 use Innmind\Rest\Server\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class EntityBuilderListener implements EventSubscriberInterface
 {
     protected $entityFactory;
+    protected $resourceFactory;
 
-    public function __construct(EntityFactoryInterface $entityFactory)
-    {
+    public function __construct(
+        EntityFactoryInterface $entityFactory,
+        ResourceFactoryInterface $resourceFactory
+    ) {
         $this->entityFactory = $entityFactory;
+        $this->resourceFactory = $resourceFactory;
     }
 
     /**
@@ -23,6 +29,7 @@ class EntityBuilderListener implements EventSubscriberInterface
     {
         return [
             Events::ENTITY_BUILD => 'buildEntity',
+            Events::RESOURCE_BUILD => 'buildResource',
         ];
     }
 
@@ -46,5 +53,27 @@ class EntityBuilderListener implements EventSubscriberInterface
 
         $this->entityFactory->build($resource, $event->getEntity());
         $event->stopPropagation();
+    }
+
+    /**
+     * Use a resource factory to build the wished resource
+     *
+     * @param ResourceBuildEvent $event
+     *
+     * @return void
+     */
+    public function buildResource(ResourceBuildEvent $event)
+    {
+        $data = $event->getData();
+        $definition = $event->getDefinition();
+
+        if (!$this->resourceFactory->supports($data, $definition)) {
+            return;
+        }
+
+        $data = $this->resourceFactory->build($data, $definition);
+        $event
+            ->replaceData($data)
+            ->stopPropagation();
     }
 }

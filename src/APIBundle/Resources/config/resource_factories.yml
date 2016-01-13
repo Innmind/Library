@@ -1,0 +1,18 @@
+services:
+    resource_factory.delegation:
+        class: APIBundle\ResourceFactory\DelegationFactory
+        arguments:
+            -
+                - '@resource_factory.http_resource'
+                - '@resource_factory.generic'
+
+    resource_factory.http_resource:
+        class: APIBundle\ResourceFactory\HttpResourceFactory
+        arguments:
+            - '@innmind_neo4j.manager.default'
+
+    resource_factory.generic:
+        class: APIBundle\ResourceFactory\GenericFactory
+        arguments:
+            - '@innmind_neo4j.manager.default'
+            - '@property_accessor'

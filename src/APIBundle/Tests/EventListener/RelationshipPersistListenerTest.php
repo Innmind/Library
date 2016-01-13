@@ -26,8 +26,10 @@ class RelationshipPersistListenerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             [
-                Events::STORAGE_PRE_CREATE => 'enable',
+                Events::STORAGE_PRE_CREATE => 'onPreCreate',
                 Events::STORAGE_POST_CREATE => 'disable',
+                Events::STORAGE_PRE_UPDATE => 'onPreUpdate',
+                Events::STORAGE_POST_UPDATE => 'disable',
                 ApiEvents::RELATIONSHIP_BUILD => 'persist',
             ],
             RelationshipPersistListener::getSubscribedEvents()
@@ -59,7 +61,7 @@ class RelationshipPersistListenerTest extends \PHPUnit_Framework_TestCase
         $e = new RelationshipBuildEvent(new \stdClass);
         $l = new RelationshipPersistListener($em);
 
-        $this->assertSame(null, $l->enable($event));
+        $this->assertSame(null, $l->onPreCreate($event));
         $this->assertSame(null, $l->persist($e));
         $this->assertSame(null, $l->disable());
         $this->assertTrue($fired);
@@ -89,7 +91,7 @@ class RelationshipPersistListenerTest extends \PHPUnit_Framework_TestCase
         $e = new RelationshipBuildEvent(new \stdClass);
         $l = new RelationshipPersistListener($em);
 
-        $this->assertSame(null, $l->enable($event));
+        $this->assertSame(null, $l->onPreCreate($event));
         $this->assertSame(null, $l->persist($e));
         $this->assertSame(null, $l->disable());
         $this->assertFalse($fired);

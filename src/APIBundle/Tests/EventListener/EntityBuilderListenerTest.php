@@ -4,6 +4,7 @@ namespace APIBundle\Tests\EventListener;
 
 use APIBundle\EventListener\EntityBuilderListener;
 use APIBundle\EntityFactoryInterface;
+use APIBundle\ResourceFactoryInterface;
 use Innmind\Rest\Server\HttpResource;
 use Innmind\Rest\Server\Events;
 use Innmind\Rest\Server\Event\EntityBuildEvent;
@@ -15,14 +16,18 @@ class EntityBuilderListenerTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->l = new EntityBuilderListener(
-            $this->getMock(EntityFactoryInterface::class)
+            $this->getMock(EntityFactoryInterface::class),
+            $this->getMock(ResourceFactoryInterface::class)
         );
     }
 
     public function testSubscribedEvents()
     {
         $this->assertSame(
-            [Events::ENTITY_BUILD => 'buildEntity'],
+            [
+                Events::ENTITY_BUILD => 'buildEntity',
+                Events::RESOURCE_BUILD => 'buildResource',
+            ],
             EntityBuilderListener::getSubscribedEvents()
         );
     }
@@ -30,7 +35,8 @@ class EntityBuilderListenerTest extends \PHPUnit_Framework_TestCase
     public function testBuildEntity()
     {
         $l = new EntityBuilderListener(
-            $f = $this->getMock(EntityFactoryInterface::class)
+            $f = $this->getMock(EntityFactoryInterface::class),
+            $this->getMock(ResourceFactoryInterface::class)
         );
         $fired = false;
         $f
@@ -49,7 +55,8 @@ class EntityBuilderListenerTest extends \PHPUnit_Framework_TestCase
     public function testDoesntBuildEntity()
     {
         $l = new EntityBuilderListener(
-            $f = $this->getMock(EntityFactoryInterface::class)
+            $f = $this->getMock(EntityFactoryInterface::class),
+            $this->getMock(ResourceFactoryInterface::class)
         );
         $fired = false;
         $f
