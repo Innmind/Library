@@ -1,8 +1,8 @@
 tools:
     external_code_coverage:
-        runs: 2
+        runs: 1
 filter:
     excluded_paths:
-        - src/APIBundle/Tests/*
+        - tests/*
         - app/*
         - web/*

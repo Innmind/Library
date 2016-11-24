@@ -1,7 +1,1 @@
 vendor
-app/bootstrap*
-*/logs/*
-*/cache/*
-web/uploads/*
-web/bundles/*
-app/config/parameters.yml
