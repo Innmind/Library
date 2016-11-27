@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1b6e8b0802266ae131532e8a2c1ab71b",
-    "content-hash": "7a0f6ecb752abf4545bbaa62ca93d174",
+    "hash": "15bd2c9e56cdbd8f82cdc3be3c552c7d",
+    "content-hash": "5c9ff4eb1c9050a9997ee8f3058373f0",
     "packages": [
         {
             "name": "innmind/event-bus",
@@ -91,6 +91,47 @@
                 "wrapper"
             ],
             "time": "2016-07-15 12:23:56"
+        },
+        {
+            "name": "innmind/time-continuum",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/TimeContinuum.git",
+                "reference": "46f6beafa006671711288c8bc84a9a57e151c6e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/TimeContinuum/zipball/46f6beafa006671711288c8bc84a9a57e151c6e6",
+                "reference": "46f6beafa006671711288c8bc84a9a57e151c6e6",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Innmind\\TimeContinuum\\": "src/",
+                    "Tests\\Innmind\\TimeContinuum\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "Library to manipulate time",
+            "homepage": "http://github.com/Innmind/TimeContinuum",
+            "keywords": [
+                "time"
+            ],
+            "time": "2016-10-11 11:11:47"
         },
         {
             "name": "innmind/url",
