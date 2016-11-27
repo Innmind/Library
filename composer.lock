@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "15bd2c9e56cdbd8f82cdc3be3c552c7d",
-    "content-hash": "5c9ff4eb1c9050a9997ee8f3058373f0",
+    "hash": "7e3860e03efed8e9fc730f4c9d781250",
+    "content-hash": "79e47ba0a3d99729954bbddf2086074c",
     "packages": [
         {
             "name": "innmind/event-bus",
@@ -363,7 +363,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "~7.0"
+        "php": "~7.1"
     },
     "platform-dev": []
 }
