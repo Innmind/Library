@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7e3860e03efed8e9fc730f4c9d781250",
-    "content-hash": "79e47ba0a3d99729954bbddf2086074c",
+    "hash": "8a8c85b303710e6da1e04ecc3660d138",
+    "content-hash": "b65fadc3f9906f28b11aa19c2396f99f",
     "packages": [
         {
             "name": "innmind/event-bus",
@@ -91,6 +91,48 @@
                 "wrapper"
             ],
             "time": "2016-07-15 12:23:56"
+        },
+        {
+            "name": "innmind/specification",
+            "version": "1.0.0",
+            "target-dir": "Innmind/Specification",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/Specification.git",
+                "reference": "fc38adfba1872513109b148eab77a088b27fc1a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/Specification/zipball/fc38adfba1872513109b148eab77a088b27fc1a1",
+                "reference": "fc38adfba1872513109b148eab77a088b27fc1a1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Innmind\\Specification": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "Interfaces allowing to compose a tree of specifications",
+            "homepage": "http://github.com/Innmind/Specification",
+            "keywords": [
+                "ddd",
+                "specification"
+            ],
+            "time": "2016-03-19 15:43:59"
         },
         {
             "name": "innmind/time-continuum",
