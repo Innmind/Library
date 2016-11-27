@@ -1,0 +1,155 @@
+<?php
+declare(strict_types = 1);
+
+namespace Tests\Domain\Entity;
+
+use Domain\{
+    Entity\HttpResource,
+    Entity\HttpResource\IdentityInterface,
+    Event\HttpResourceRegistered,
+    Event\HttpResource\LanguagesSpecified,
+    Event\HttpResource\CharsetSpecified
+};
+use Innmind\Url\{
+    PathInterface,
+    QueryInterface
+};
+use Innmind\EventBus\ContainsRecordedEventsInterface;
+use Innmind\Immutable\Set;
+
+class HttpResourceTest extends \PHPUnit_Framework_TestCase
+{
+    public function testInterface()
+    {
+        $resource = new HttpResource(
+            $identity = $this->createMock(IdentityInterface::class),
+            $path = $this->createMock(PathInterface::class),
+            $query = $this->createMock(QueryInterface::class)
+        );
+
+        $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $resource);
+        $this->assertSame($identity, $resource->identity());
+        $this->assertSame($path, $resource->path());
+        $this->assertSame($query, $resource->query());
+        $this->assertCount(0, $resource->recordedEvents());
+    }
+
+    public function testRegister()
+    {
+        $resource = HttpResource::register(
+            $identity = $this->createMock(IdentityInterface::class),
+            $path = $this->createMock(PathInterface::class),
+            $query = $this->createMock(QueryInterface::class)
+        );
+
+        $this->assertInstanceOf(HttpResource::class, $resource);
+        $this->assertSame($identity, $resource->identity());
+        $this->assertSame($path, $resource->path());
+        $this->assertSame($query, $resource->query());
+        $this->assertCount(1, $resource->recordedEvents());
+        $this->assertInstanceOf(
+            HttpResourceRegistered::class,
+            $resource->recordedEvents()->current()
+        );
+        $this->assertSame($identity, $resource->recordedEvents()->current()->identity());
+        $this->assertSame($path, $resource->recordedEvents()->current()->path());
+        $this->assertSame($query, $resource->recordedEvents()->current()->query());
+    }
+
+    public function testSpecifyLanguages()
+    {
+        $resource = new HttpResource(
+            $this->createMock(IdentityInterface::class),
+            $this->createMock(PathInterface::class),
+            $this->createMock(QueryInterface::class)
+        );
+
+        $this->assertCount(0, $resource->languages());
+        $this->assertSame(
+            $resource,
+            $resource->specifyLanguages(
+                $languages = (new Set('string'))->add('fr')
+            )
+        );
+        $this->assertSame($languages, $resource->languages());
+        $this->assertCount(1, $resource->recordedEvents());
+        $this->assertInstanceOf(
+            LanguagesSpecified::class,
+            $resource->recordedEvents()->current()
+        );
+        $this->assertSame(
+            $resource->identity(),
+            $resource->recordedEvents()->current()->identity()
+        );
+        $this->assertSame(
+            $resource->languages(),
+            $resource->recordedEvents()->current()->languages()
+        );
+    }
+
+    /**
+     * @expectedException Domain\Exception\InvalidArgumentException
+     */
+    public function testThrowWhenInvalidLanguagesType()
+    {
+        (new HttpResource(
+            $this->createMock(IdentityInterface::class),
+            $this->createMock(PathInterface::class),
+            $this->createMock(QueryInterface::class)
+        ))->specifyLanguages((new Set('int'))->add(42));
+    }
+
+    /**
+     * @expectedException Domain\Exception\InvalidArgumentException
+     */
+    public function testThrowWhenEmptyLanguagesSet()
+    {
+        (new HttpResource(
+            $this->createMock(IdentityInterface::class),
+            $this->createMock(PathInterface::class),
+            $this->createMock(QueryInterface::class)
+        ))->specifyLanguages(new Set('string'));
+    }
+
+    public function testSpecifyCharset()
+    {
+        $resource = new HttpResource(
+            $this->createMock(IdentityInterface::class),
+            $this->createMock(PathInterface::class),
+            $this->createMock(QueryInterface::class)
+        );
+
+        $this->assertFalse($resource->hasCharset());
+        $this->assertSame(
+            $resource,
+            $resource->specifyCharset('utf-8')
+        );
+        $this->assertTrue($resource->hasCharset());
+        $this->assertSame('utf-8', $resource->charset());
+        $this->assertCount(1, $resource->recordedEvents());
+        $this->assertInstanceOf(
+            CharsetSpecified::class,
+            $resource->recordedEvents()->current()
+        );
+        $this->assertSame(
+            $resource->identity(),
+            $resource->recordedEvents()->current()->identity()
+        );
+        $this->assertSame(
+            $resource->charset(),
+            $resource->recordedEvents()->current()->charset()
+        );
+    }
+
+    /**
+     * @expectedException Domain\Exception\InvalidArgumentException
+     */
+    public function testThrowWhenEmptyCharset()
+    {
+        (new HttpResource(
+            $this->createMock(IdentityInterface::class),
+            $this->createMock(PathInterface::class),
+            $this->createMock(QueryInterface::class)
+        ))->specifyCharset('');
+    }
+}

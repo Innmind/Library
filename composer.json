@@ -14,7 +14,10 @@
         }
     },
     "require": {
-        "php": "~7.0"
+        "php": "~7.0",
+        "innmind/url": "^1.0",
+        "innmind/immutable": "^1.9",
+        "innmind/event-bus": "^1.0"
     },
     "config": {
         "bin-dir": "bin"
