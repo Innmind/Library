@@ -10,6 +10,8 @@ use Innmind\Specification\{
 
 class Not implements NotInterface
 {
+    use Composable;
+
     private $specification;
 
     public function __construct(SpecificationInterface $specification)
