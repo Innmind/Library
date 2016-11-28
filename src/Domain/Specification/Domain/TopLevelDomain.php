@@ -1,8 +1,9 @@
 <?php
 declare(strict_types = 1);
 
-namespace Domain\Specification;
+namespace Domain\Specification\Domain;
 
+use Domain\Specification\Composable;
 use Innmind\Specification\ComparatorInterface;
 
 final class TopLevelDomain implements ComparatorInterface

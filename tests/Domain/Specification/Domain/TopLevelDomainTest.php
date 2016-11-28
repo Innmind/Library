@@ -1,9 +1,9 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\Domain\Specification;
+namespace Tests\Domain\Specification\Domain;
 
-use Domain\Specification\TopLevelDomain;
+use Domain\Specification\Domain\TopLevelDomain;
 use Innmind\Specification\ComparatorInterface;
 
 class TopLevelDomainTest extends \PHPUnit_Framework_TestCase

@@ -1,16 +1,16 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\Domain\Specification;
+namespace Tests\Domain\Specification\Domain;
 
-use Domain\Specification\DomainName;
+use Domain\Specification\Domain\Name;
 use Innmind\Specification\ComparatorInterface;
 
-class DomainNameTest extends \PHPUnit_Framework_TestCase
+class NameTest extends \PHPUnit_Framework_TestCase
 {
     public function testInterface()
     {
-        $spec = new DomainName('foo');
+        $spec = new Name('foo');
 
         $this->assertInstanceOf(ComparatorInterface::class, $spec);
         $this->assertSame('name', $spec->property());
