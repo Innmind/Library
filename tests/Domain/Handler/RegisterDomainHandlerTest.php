@@ -9,7 +9,9 @@ use Domain\{
     Entity\Domain,
     Entity\Domain\IdentityInterface,
     Repository\DomainRepositoryInterface,
-    Specification\AndSpecification
+    Specification\AndSpecification,
+    Specification\Domain\Name,
+    Specification\Domain\TopLevelDomain
 };
 use Domain\Specification;
 use Innmind\Url\Authority\Host;
@@ -41,7 +43,9 @@ class RegisterDomainHandlerTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('matching')
             ->with($this->callback(function(AndSpecification $spec): bool {
-                return $spec->left()->value() === 'example' &&
+                return $spec->left() instanceof Name &&
+                    $spec->right() instanceof TopLevelDomain &&
+                    $spec->left()->value() === 'example' &&
                     $spec->right()->value() === 'co.uk';
             }))
             ->willReturn(new Set(Domain::class));
@@ -76,7 +80,9 @@ class RegisterDomainHandlerTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('matching')
             ->with($this->callback(function(AndSpecification $spec): bool {
-                return $spec->left()->value() === 'example' &&
+                return $spec->left() instanceof Name &&
+                    $spec->right() instanceof TopLevelDomain &&
+                    $spec->left()->value() === 'example' &&
                     $spec->right()->value() === 'co.uk';
             }))
             ->willReturn(
