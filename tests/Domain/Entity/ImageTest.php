@@ -11,6 +11,7 @@ use Domain\{
     Event\ImageRegistered,
     Event\Image\DimensionSpecified,
     Event\Image\WeightSpecified,
+    Event\Image\DescriptionAdded,
     Model\Image\Dimension
 };
 use Innmind\Url\{
@@ -34,6 +35,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($query, $image->query());
         $this->assertFalse($image->isDimensionKnown());
         $this->assertFalse($image->isWeightKnown());
+        $this->assertCount(0, $image->descriptions());
         $this->assertCount(0, $image->recordedEvents());
     }
 
@@ -132,5 +134,64 @@ class ImageTest extends \PHPUnit_Framework_TestCase
             $image->recordedEvents()->current()->identity()
         );
         $this->assertSame(42, $image->recordedEvents()->current()->weight());
+    }
+
+    public function testAddDescription()
+    {
+        $image = new Image(
+            $this->createMock(IdentityInterface::class),
+            $this->createMock(PathInterface::class),
+            $this->createMock(QueryInterface::class)
+        );
+
+        $this->assertSame(
+            $image,
+            $image->addDescription('foobar')
+        );
+        $this->assertSame(['foobar'], $image->descriptions()->toPrimitive());
+        $this->assertCount(1, $image->recordedEvents());
+        $this->assertInstanceOf(
+            DescriptionAdded::class,
+            $image->recordedEvents()->current()
+        );
+        $this->assertSame(
+            $image->identity(),
+            $image->recordedEvents()->current()->identity()
+        );
+        $this->assertSame(
+            'foobar',
+            $image->recordedEvents()->current()->description()
+        );
+    }
+
+    /**
+     * @expectedException Domain\Exception\InvalidArgumentException
+     */
+    public function testThrowWhenEmptyDescription()
+    {
+        $image = new Image(
+            $this->createMock(IdentityInterface::class),
+            $this->createMock(PathInterface::class),
+            $this->createMock(QueryInterface::class)
+        );
+
+        $image->addDescription('');
+    }
+
+    public function testDoesntRecordEventWhenDescriptionAlreadyInSet()
+    {
+        $image = new Image(
+            $this->createMock(IdentityInterface::class),
+            $this->createMock(PathInterface::class),
+            $this->createMock(QueryInterface::class)
+        );
+
+        $image->addDescription('foobar');
+        $events = $image->recordedEvents();
+        $this->assertSame(
+            $image,
+            $image->addDescription('foobar')
+        );
+        $this->assertSame($events, $image->recordedEvents());
     }
 }

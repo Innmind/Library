@@ -9,6 +9,7 @@ use Domain\{
     Event\ImageRegistered,
     Event\Image\DimensionSpecified,
     Event\Image\WeightSpecified,
+    Event\Image\DescriptionAdded,
     Model\Image\Dimension,
     Exception\InvalidArgumentException
 };
@@ -16,11 +17,16 @@ use Innmind\Url\{
     PathInterface,
     QueryInterface
 };
+use Innmind\Immutable\{
+    Set,
+    SetInterface
+};
 
 final class Image extends HttpResource
 {
     private $dimension;
     private $weight;
+    private $descriptions;
 
     public function __construct(
         ResourceIdentity $identity,
@@ -32,6 +38,7 @@ final class Image extends HttpResource
         }
 
         parent::__construct($identity, $path, $query);
+        $this->descriptions = new Set('string');
     }
 
     public static function register(
@@ -83,5 +90,26 @@ final class Image extends HttpResource
     public function weight(): int
     {
         return $this->weight;
+    }
+
+    public function addDescription(string $description): self
+    {
+        if (empty($description)) {
+            throw new InvalidArgumentException;
+        }
+
+        $descriptions = $this->descriptions;
+        $this->descriptions = $this->descriptions->add($description);
+
+        if ($this->descriptions !== $descriptions) {
+            $this->record(new DescriptionAdded($this->identity(), $description));
+        }
+
+        return $this;
+    }
+
+    public function descriptions(): SetInterface
+    {
+        return $this->descriptions;
     }
 }
