@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "innmind/event-bus",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/EventBus.git",
-                "reference": "91d471f0219db0015a2bbd2449e350ab597b03ea"
+                "reference": "5e4cdbb5f14301f2908a9ee71f1d9f4be927f497"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/EventBus/zipball/91d471f0219db0015a2bbd2449e350ab597b03ea",
-                "reference": "91d471f0219db0015a2bbd2449e350ab597b03ea",
+                "url": "https://api.github.com/repos/Innmind/EventBus/zipball/5e4cdbb5f14301f2908a9ee71f1d9f4be927f497",
+                "reference": "5e4cdbb5f14301f2908a9ee71f1d9f4be927f497",
                 "shasum": ""
             },
             "require": {
@@ -29,7 +29,7 @@
             "autoload": {
                 "psr-4": {
                     "Innmind\\EventBus\\": "src/",
-                    "Tests\\Innmind\\EventBus\\": "src/"
+                    "Tests\\Innmind\\EventBus\\": "tests/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -48,7 +48,7 @@
                 "dispatcher",
                 "event"
             ],
-            "time": "2016-06-18 14:20:24"
+            "time": "2016-11-30 07:42:50"
         },
         {
             "name": "innmind/immutable",
