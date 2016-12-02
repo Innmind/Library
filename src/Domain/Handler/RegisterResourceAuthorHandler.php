@@ -4,13 +4,13 @@ declare(strict_types = 1);
 namespace Domain\Handler;
 
 use Domain\{
-    Command\DeclareResourceAuthor,
+    Command\RegisterResourceAuthor,
     Repository\ResourceAuthorRepositoryInterface,
     Entity\ResourceAuthor
 };
 use Innmind\TimeContinuum\TimeContinuumInterface;
 
-final class DeclareResourceAuthorHandler
+final class RegisterResourceAuthorHandler
 {
     private $repository;
     private $clock;
@@ -23,10 +23,10 @@ final class DeclareResourceAuthorHandler
         $this->clock = $clock;
     }
 
-    public function __invoke(DeclareResourceAuthor $wished): void
+    public function __invoke(RegisterResourceAuthor $wished): void
     {
         $this->repository->add(
-            ResourceAuthor::declare(
+            ResourceAuthor::register(
                 $wished->identity(),
                 $wished->author(),
                 $wished->resource(),

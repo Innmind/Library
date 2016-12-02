@@ -4,29 +4,29 @@ declare(strict_types = 1);
 namespace Tests\Domain\Handler;
 
 use Domain\{
-    Handler\DeclareResourceAuthorHandler,
-    Command\DeclareResourceAuthor,
+    Handler\RegisterResourceAuthorHandler,
+    Command\RegisterResourceAuthor,
     Repository\ResourceAuthorRepositoryInterface,
     Entity\ResourceAuthor,
     Entity\ResourceAuthor\IdentityInterface,
     Entity\Author\IdentityInterface as AuthorIdentity,
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
-    Event\ResourceAuthorDeclared
+    Event\ResourceAuthorRegistered
 };
 use Innmind\TimeContinuum\{
     TimeContinuumInterface,
     PointInTimeInterface
 };
 
-class DeclareResourceAuthorHandlerTest extends \PHPUnit_Framework_TestCase
+class RegisterResourceAuthorHandlerTest extends \PHPUnit_Framework_TestCase
 {
     public function testExecution()
     {
-        $handler = new DeclareResourceAuthorHandler(
+        $handler = new RegisterResourceAuthorHandler(
             $repository = $this->createMock(ResourceAuthorRepositoryInterface::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
-        $command = new DeclareResourceAuthor(
+        $command = new RegisterResourceAuthor(
             $this->createMock(IdentityInterface::class),
             $this->createMock(AuthorIdentity::class),
             $this->createMock(ResourceIdentity::class)
@@ -46,7 +46,7 @@ class DeclareResourceAuthorHandlerTest extends \PHPUnit_Framework_TestCase
                     $entity->resource() === $command->resource() &&
                     $entity->asOf() === $now &&
                     $entity->recordedEvents()->size() === 1 &&
-                    $entity->recordedEvents()->current() instanceof ResourceAuthorDeclared;
+                    $entity->recordedEvents()->current() instanceof ResourceAuthorRegistered;
             }));
 
         $this->assertNull($handler($command));

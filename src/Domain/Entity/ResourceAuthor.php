@@ -7,7 +7,7 @@ use Domain\{
     Entity\ResourceAuthor\IdentityInterface,
     Entity\Author\IdentityInterface as AuthorIdentity,
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
-    Event\ResourceAuthorDeclared
+    Event\ResourceAuthorRegistered
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use Innmind\EventBus\{
@@ -36,14 +36,14 @@ final class ResourceAuthor implements ContainsRecordedEventsInterface
         $this->asOf = $asOf;
     }
 
-    public static function declare(
+    public static function register(
         IdentityInterface $identity,
         AuthorIdentity $author,
         ResourceIdentity $resource,
         PointInTimeInterface $asOf
     ): self {
         $self = new self($identity, $author, $resource, $asOf);
-        $self->record(new ResourceAuthorDeclared(
+        $self->record(new ResourceAuthorRegistered(
             $identity,
             $author,
             $resource,

@@ -4,18 +4,18 @@ declare(strict_types = 1);
 namespace Tests\Domain\Event;
 
 use Domain\{
-    Event\ResourceAuthorDeclared,
+    Event\ResourceAuthorRegistered,
     Entity\ResourceAuthor\IdentityInterface,
     Entity\Author\IdentityInterface as AuthorIdentity,
     Entity\HttpResource\IdentityInterface as ResourceIdentity
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 
-class ResourceAuthorDeclaredTest extends \PHPUnit_Framework_TestCase
+class ResourceAuthorRegisteredTest extends \PHPUnit_Framework_TestCase
 {
     public function testInterface()
     {
-        $event = new ResourceAuthorDeclared(
+        $event = new ResourceAuthorRegistered(
             $identity = $this->createMock(IdentityInterface::class),
             $author = $this->createMock(AuthorIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),

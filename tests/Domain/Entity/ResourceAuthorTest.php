@@ -8,7 +8,7 @@ use Domain\{
     Entity\ResourceAuthor\IdentityInterface,
     Entity\Author\IdentityInterface as AuthorIdentity,
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
-    Event\ResourceAuthorDeclared
+    Event\ResourceAuthorRegistered
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use Innmind\EventBus\ContainsRecordedEventsInterface;
@@ -32,9 +32,9 @@ class ResourceAuthorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(0, $entity->recordedEvents());
     }
 
-    public function testDeclare()
+    public function testRegister()
     {
-        $entity = ResourceAuthor::declare(
+        $entity = ResourceAuthor::register(
             $identity = $this->createMock(IdentityInterface::class),
             $author = $this->createMock(AuthorIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
@@ -44,7 +44,7 @@ class ResourceAuthorTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(ResourceAuthor::class, $entity);
         $this->assertCount(1, $entity->recordedEvents());
         $this->assertInstanceOf(
-            ResourceAuthorDeclared::class,
+            ResourceAuthorRegistered::class,
             $entity->recordedEvents()->current()
         );
         $this->assertSame(
