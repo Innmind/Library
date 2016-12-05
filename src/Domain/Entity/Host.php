@@ -17,7 +17,7 @@ final class Host implements ContainsRecordedEventsInterface
 {
     use EventRecorder;
 
-    private $entity;
+    private $identity;
     private $name;
 
     public function __construct(
