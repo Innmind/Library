@@ -9,7 +9,7 @@ use Domain\{
 };
 use Innmind\Specification\ComparatorInterface;
 
-final class Resource implements ComparatorInterface
+final class HttpResource implements ComparatorInterface
 {
     use Composable;
 

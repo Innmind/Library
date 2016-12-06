@@ -7,7 +7,7 @@ use Domain\{
     Command\RegisterAlternateResource,
     Repository\AlternateRepositoryInterface,
     Entity\Alternate,
-    Specification\Alternate\Resource,
+    Specification\Alternate\HttpResource,
     Specification\Alternate\Alternate as AlternateSpec,
     Specification\Alternate\Language,
     Exception\AlternateAlreadyExistException
@@ -25,7 +25,7 @@ final class RegisterAlternateResourceHandler
     public function __invoke(RegisterAlternateResource $wished): void
     {
         $alternates = $this->repository->matching(
-            (new Resource($wished->resource()))
+            (new HttpResource($wished->resource()))
                 ->and(new AlternateSpec($wished->alternate()))
                 ->and(new Language($wished->language()))
         );

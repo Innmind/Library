@@ -4,12 +4,12 @@ declare(strict_types = 1);
 namespace Tests\Domain\Specification\Alternate;
 
 use Domain\{
-    Specification\Alternate\Resource,
+    Specification\Alternate\HttpResource,
     Entity\HttpResource\IdentityInterface
 };
 use Innmind\Specification\ComparatorInterface;
 
-class ResourceTest extends \PHPUnit_Framework_TestCase
+class HttpResourceTest extends \PHPUnit_Framework_TestCase
 {
     public function testInterface()
     {
@@ -18,7 +18,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('__toString')
             ->willReturn('uuid');
-        $spec = new Resource($identity);
+        $spec = new HttpResource($identity);
 
         $this->assertInstanceOf(ComparatorInterface::class, $spec);
         $this->assertSame('resource', $spec->property());

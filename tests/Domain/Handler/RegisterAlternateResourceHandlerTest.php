@@ -12,7 +12,7 @@ use Domain\{
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
     Event\AlternateCreated,
     Specification\AndSpecification,
-    Specification\Alternate\Resource,
+    Specification\Alternate\HttpResource,
     Specification\Alternate\Alternate as AlternateSpec,
     Specification\Alternate\Language
 };
@@ -49,7 +49,7 @@ class RegisterAlternateResourceHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('matching')
             ->with($this->callback(function(AndSpecification $spec): bool {
                 return $spec->left() instanceof AndSpecification &&
-                    $spec->left()->left() instanceof Resource &&
+                    $spec->left()->left() instanceof HttpResource &&
                     $spec->left()->right() instanceof AlternateSpec &&
                     $spec->right() instanceof Language &&
                     $spec->left()->left()->value() === 'resource uuid' &&
@@ -101,7 +101,7 @@ class RegisterAlternateResourceHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('matching')
             ->with($this->callback(function(AndSpecification $spec): bool {
                 return $spec->left() instanceof AndSpecification &&
-                    $spec->left()->left() instanceof Resource &&
+                    $spec->left()->left() instanceof HttpResource &&
                     $spec->left()->right() instanceof AlternateSpec &&
                     $spec->right() instanceof Language &&
                     $spec->left()->left()->value() === 'resource uuid' &&
