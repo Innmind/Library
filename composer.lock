@@ -4,9 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8a8c85b303710e6da1e04ecc3660d138",
-    "content-hash": "b65fadc3f9906f28b11aa19c2396f99f",
+    "hash": "74830b633137c50f6b2e8b0ccbf0ce17",
+    "content-hash": "f7255226d44e4390a926056244267916",
     "packages": [
+        {
+            "name": "innmind/colour",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/Colour.git",
+                "reference": "a0c63daa929b78f26c0fd4f8a1fc5b3b407e9542"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/Colour/zipball/a0c63daa929b78f26c0fd4f8a1fc5b3b407e9542",
+                "reference": "a0c63daa929b78f26c0fd4f8a1fc5b3b407e9542",
+                "shasum": ""
+            },
+            "require": {
+                "innmind/immutable": "^1.9",
+                "php": "~7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Innmind\\Colour\\": "src/",
+                    "Tests\\Innmind\\Colour\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "Handle colours strictly",
+            "homepage": "http://github.com/Innmind/Colour",
+            "keywords": [
+                "colour"
+            ],
+            "time": "2016-09-09 08:23:15"
+        },
         {
             "name": "innmind/event-bus",
             "version": "1.0.1",
