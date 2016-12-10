@@ -9,6 +9,7 @@ use Domain\{
     Command\RegisterHost,
     Specification\Host\Name,
     Entity\Host,
+    Entity\Host\Name as Model,
     Entity\DomainHost,
     Exception\HostAlreadyExistException
 };
@@ -32,8 +33,9 @@ final class RegisterHostHandler
 
     public function __invoke(RegisterHost $wished): void
     {
+        $name = new Model((string) $wished->host());
         $hosts = $this->hostRepository->matching(
-            new Name((string) $wished->host())
+            new Name($name)
         );
 
         if ($hosts->size() > 0) {
@@ -42,7 +44,7 @@ final class RegisterHostHandler
 
         $host = Host::register(
             $wished->identity(),
-            (string) $wished->host()
+            $name
         );
         $relation = DomainHost::create(
             $wished->relation(),

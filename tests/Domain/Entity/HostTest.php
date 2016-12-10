@@ -6,6 +6,7 @@ namespace Tests\Domain\Entity;
 use Domain\{
     Entity\Host,
     Entity\Host\IdentityInterface,
+    Entity\Host\Name,
     Event\HostRegistered
 };
 use Innmind\EventBus\ContainsRecordedEventsInterface;
@@ -16,32 +17,21 @@ class HostTest extends \PHPUnit_Framework_TestCase
     {
         $host = new Host(
             $identity = $this->createMock(IdentityInterface::class),
-            'www.example.com'
+            $name = new Name('www.example.com')
         );
 
         $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $host);
         $this->assertSame($identity, $host->identity());
-        $this->assertSame('www.example.com', $host->name());
+        $this->assertSame($name, $host->name());
         $this->assertSame('www.example.com', (string) $host);
         $this->assertCount(0, $host->recordedEvents());
-    }
-
-    /**
-     * @expectedException Domain\Exception\InvalidArgumentException
-     */
-    public function testThrowWhenEmptyName()
-    {
-        new Host(
-            $this->createMock(IdentityInterface::class),
-            ''
-        );
     }
 
     public function testRegister()
     {
         $host = Host::register(
             $identity = $this->createMock(IdentityInterface::class),
-            'www.example.com'
+            $name = new Name('www.example.com')
         );
 
         $this->assertInstanceOf(Host::class, $host);
@@ -55,7 +45,7 @@ class HostTest extends \PHPUnit_Framework_TestCase
             $host->recordedEvents()->current()->identity()
         );
         $this->assertSame(
-            'www.example.com',
+            $name,
             $host->recordedEvents()->current()->name()
         );
     }

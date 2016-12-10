@@ -14,6 +14,7 @@ use Domain\{
     Entity\HttpResource\IdentityInterface,
     Entity\HostResource\IdentityInterface as RelationIdentity,
     Entity\Host\IdentityInterface as HostIdentity,
+    Entity\Host\Name,
     Specification\AndSpecification,
     Specification\HttpResource\Path,
     Specification\HttpResource\Query,
@@ -257,7 +258,7 @@ class RegisterHttpResourceHandlerTest extends \PHPUnit_Framework_TestCase
                 (new Set(Host::class))->add(
                     new Host(
                         $this->createMock(HostIdentity::class),
-                        'some.domain.tld'
+                        new Name('some.domain.tld')
                     )
                 )
             );

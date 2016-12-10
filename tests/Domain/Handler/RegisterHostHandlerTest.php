@@ -60,7 +60,7 @@ class RegisterHostHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('add')
             ->with($this->callback(function(HostEntity $host) use ($command): bool {
                 return $host->identity() === $command->identity() &&
-                    $host->name() === 'www.example.com' &&
+                    (string) $host->name() === 'www.example.com' &&
                     $host->recordedEvents()->size() === 1 &&
                     $host->recordedEvents()->current() instanceof HostRegistered;
             }));

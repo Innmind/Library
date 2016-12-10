@@ -5,8 +5,8 @@ namespace Domain\Entity;
 
 use Domain\{
     Entity\Host\IdentityInterface,
-    Event\HostRegistered,
-    Exception\InvalidArgumentException
+    Entity\Host\Name,
+    Event\HostRegistered
 };
 use Innmind\EventBus\{
     ContainsRecordedEventsInterface,
@@ -22,19 +22,15 @@ final class Host implements ContainsRecordedEventsInterface
 
     public function __construct(
         IdentityInterface $identity,
-        string $name
+        Name $name
     ) {
-        if (empty($name)) {
-            throw new InvalidArgumentException;
-        }
-
         $this->identity = $identity;
         $this->name = $name;
     }
 
     public static function register(
         IdentityInterface $identity,
-        string $name
+        Name $name
     ): self {
         $self = new self($identity, $name);
         $self->record(new HostRegistered($identity, $name));
@@ -47,13 +43,13 @@ final class Host implements ContainsRecordedEventsInterface
         return $this->identity;
     }
 
-    public function name(): string
+    public function name(): Name
     {
         return $this->name;
     }
 
     public function __toString(): string
     {
-        return $this->name;
+        return (string) $this->name;
     }
 }

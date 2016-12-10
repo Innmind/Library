@@ -5,7 +5,8 @@ namespace Tests\Domain\Event;
 
 use Domain\{
     Event\HostRegistered,
-    Entity\Host\IdentityInterface
+    Entity\Host\IdentityInterface,
+    Entity\Host\Name
 };
 
 class HostRegisteredTest extends \PHPUnit_Framework_TestCase
@@ -14,10 +15,10 @@ class HostRegisteredTest extends \PHPUnit_Framework_TestCase
     {
         $event = new HostRegistered(
             $identity = $this->createMock(IdentityInterface::class),
-            'www.example.com'
+            $name = new Name('www.example.com')
         );
 
         $this->assertSame($identity, $event->identity());
-        $this->assertSame('www.example.com', $event->name());
+        $this->assertSame($name, $event->name());
     }
 }
