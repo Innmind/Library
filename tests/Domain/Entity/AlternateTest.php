@@ -7,7 +7,8 @@ use Domain\{
     Entity\Alternate,
     Entity\Alternate\IdentityInterface,
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
-    Event\AlternateCreated
+    Event\AlternateCreated,
+    Model\Language
 };
 use Innmind\EventBus\ContainsRecordedEventsInterface;
 
@@ -19,28 +20,15 @@ class AlternateTest extends \PHPUnit_Framework_TestCase
             $identity = $this->createMock(IdentityInterface::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $alternate = $this->createMock(ResourceIdentity::class),
-            'fr'
+            $language = new Language('fr')
         );
 
         $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $entity);
         $this->assertSame($identity, $entity->identity());
         $this->assertSame($resource, $entity->resource());
         $this->assertSame($alternate, $entity->alternate());
-        $this->assertSame('fr', $entity->language());
+        $this->assertSame($language, $entity->language());
         $this->assertCount(0, $entity->recordedEvents());
-    }
-
-    /**
-     * @expectedException Domain\Exception\InvalidArgumentException
-     */
-    public function testThrowWhenEmptyLanguage()
-    {
-        new Alternate(
-            $this->createMock(IdentityInterface::class),
-            $this->createMock(ResourceIdentity::class),
-            $this->createMock(ResourceIdentity::class),
-            ''
-        );
     }
 
     public function testCreate()
@@ -49,7 +37,7 @@ class AlternateTest extends \PHPUnit_Framework_TestCase
             $identity = $this->createMock(IdentityInterface::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $alternate = $this->createMock(ResourceIdentity::class),
-            'fr'
+            $language = new Language('fr')
         );
 
         $this->assertInstanceOf(Alternate::class, $entity);
@@ -71,7 +59,7 @@ class AlternateTest extends \PHPUnit_Framework_TestCase
             $entity->recordedEvents()->current()->alternate()
         );
         $this->assertSame(
-            'fr',
+            $language,
             $entity->recordedEvents()->current()->language()
         );
     }

@@ -3,9 +3,10 @@ declare(strict_types = 1);
 
 namespace Domain\Command;
 
-use Domain\Entity\{
-    Alternate\IdentityInterface,
-    HttpResource\IdentityInterface as ResourceIdentity
+use Domain\{
+    Entity\Alternate\IdentityInterface,
+    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Model\Language
 };
 
 final class RegisterAlternateResource
@@ -19,7 +20,7 @@ final class RegisterAlternateResource
         IdentityInterface $identity,
         ResourceIdentity $resource,
         ResourceIdentity $alternate,
-        string $language
+        Language $language
     ) {
         $this->identity = $identity;
         $this->resource = $resource;
@@ -42,7 +43,7 @@ final class RegisterAlternateResource
         return $this->alternate;
     }
 
-    public function language(): string
+    public function language(): Language
     {
         return $this->language;
     }

@@ -7,7 +7,7 @@ use Domain\{
     Entity\Alternate\IdentityInterface,
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
     Event\AlternateCreated,
-    Exception\InvalidArgumentException
+    Model\Language
 };
 use Innmind\EventBus\{
     ContainsRecordedEventsInterface,
@@ -27,12 +27,8 @@ final class Alternate implements ContainsRecordedEventsInterface
         IdentityInterface $identity,
         ResourceIdentity $resource,
         ResourceIdentity $alternate,
-        string $language
+        Language $language
     ) {
-        if (empty($language)) {
-            throw new InvalidArgumentException;
-        }
-
         $this->identity = $identity;
         $this->resource = $resource;
         $this->alternate = $alternate;
@@ -43,7 +39,7 @@ final class Alternate implements ContainsRecordedEventsInterface
         IdentityInterface $identity,
         ResourceIdentity $resource,
         ResourceIdentity $alternate,
-        string $language
+        Language $language
     ): self {
         $self = new self($identity, $resource, $alternate, $language);
         $self->record(new AlternateCreated(
@@ -71,7 +67,7 @@ final class Alternate implements ContainsRecordedEventsInterface
         return $this->alternate;
     }
 
-    public function language(): string
+    public function language(): Language
     {
         return $this->language;
     }

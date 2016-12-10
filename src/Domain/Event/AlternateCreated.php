@@ -5,7 +5,8 @@ namespace Domain\Event;
 
 use Domain\{
     Entity\Alternate\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Model\Language
 };
 
 final class AlternateCreated
@@ -19,7 +20,7 @@ final class AlternateCreated
         IdentityInterface $identity,
         ResourceIdentity $resource,
         ResourceIdentity $alternate,
-        string $language
+        Language $language
     ) {
         $this->identity = $identity;
         $this->resource = $resource;
@@ -42,7 +43,7 @@ final class AlternateCreated
         return $this->alternate;
     }
 
-    public function language(): string
+    public function language(): Language
     {
         return $this->language;
     }

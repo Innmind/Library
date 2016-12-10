@@ -14,7 +14,8 @@ use Domain\{
     Specification\AndSpecification,
     Specification\Alternate\HttpResource,
     Specification\Alternate\Alternate as AlternateSpec,
-    Specification\Alternate\Language
+    Specification\Alternate\Language,
+    Model\Language as Model
 };
 use Innmind\Immutable\{
     Set,
@@ -32,7 +33,7 @@ class RegisterAlternateResourceHandlerTest extends \PHPUnit_Framework_TestCase
             $this->createMock(IdentityInterface::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class),
-            'fr'
+            new Model('fr')
         );
         $command
             ->resource()
@@ -84,7 +85,7 @@ class RegisterAlternateResourceHandlerTest extends \PHPUnit_Framework_TestCase
             $this->createMock(IdentityInterface::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class),
-            'fr'
+            new Model('fr')
         );
         $command
             ->resource()
