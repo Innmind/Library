@@ -7,6 +7,7 @@ use Domain\{
     Entity\Image,
     Entity\HttpResource,
     Entity\Image\IdentityInterface,
+    Entity\Image\Weight,
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
     Event\ImageRegistered,
     Event\Image\DimensionSpecified,
@@ -120,10 +121,10 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             $image,
-            $image->specifyWeight(42)
+            $image->specifyWeight($weight = new Weight(42))
         );
         $this->assertTrue($image->isWeightKnown());
-        $this->assertSame(42, $image->weight());
+        $this->assertSame($weight, $image->weight());
         $this->assertCount(1, $image->recordedEvents());
         $this->assertInstanceOf(
             WeightSpecified::class,
@@ -133,7 +134,10 @@ class ImageTest extends \PHPUnit_Framework_TestCase
             $image->identity(),
             $image->recordedEvents()->current()->identity()
         );
-        $this->assertSame(42, $image->recordedEvents()->current()->weight());
+        $this->assertSame(
+            $weight,
+            $image->recordedEvents()->current()->weight()
+        );
     }
 
     public function testAddDescription()

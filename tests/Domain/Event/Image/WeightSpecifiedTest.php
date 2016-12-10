@@ -5,7 +5,8 @@ namespace Tests\Domain\Event\Image;
 
 use Domain\{
     Event\Image\WeightSpecified,
-    Entity\Image\IdentityInterface
+    Entity\Image\IdentityInterface,
+    Entity\Image\Weight
 };
 
 class WeightSpecifiedTest extends \PHPUnit_Framework_TestCase
@@ -14,10 +15,10 @@ class WeightSpecifiedTest extends \PHPUnit_Framework_TestCase
     {
         $event = new WeightSpecified(
             $identity = $this->createMock(IdentityInterface::class),
-            42
+            $weight = new Weight(42)
         );
 
         $this->assertSame($identity, $event->identity());
-        $this->assertSame(42, $event->weight());
+        $this->assertSame($weight, $event->weight());
     }
 }

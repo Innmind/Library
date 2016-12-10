@@ -5,6 +5,7 @@ namespace Domain\Entity;
 
 use Domain\{
     Entity\Image\IdentityInterface,
+    Entity\Image\Weight,
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
     Event\ImageRegistered,
     Event\Image\DimensionSpecified,
@@ -70,12 +71,8 @@ final class Image extends HttpResource
         return $this->dimension;
     }
 
-    public function specifyWeight(int $weight): self
+    public function specifyWeight(Weight $weight): self
     {
-        if ($weight < 0) {
-            throw new InvalidArgumentException;
-        }
-
         $this->weight = $weight;
         $this->record(new WeightSpecified($this->identity(), $weight));
 
@@ -84,10 +81,10 @@ final class Image extends HttpResource
 
     public function isWeightKnown(): bool
     {
-        return is_int($this->weight);
+        return $this->weight instanceof Weight;
     }
 
-    public function weight(): int
+    public function weight(): Weight
     {
         return $this->weight;
     }
