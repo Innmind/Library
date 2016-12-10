@@ -5,6 +5,7 @@ namespace Domain\Entity;
 
 use Domain\{
     Entity\Citation\IdentityInterface,
+    Entity\Citation\Text,
     Event\CitationRegistered,
     Exception\InvalidArgumentException
 };
@@ -20,7 +21,7 @@ final class Citation implements ContainsRecordedEventsInterface
     private $identity;
     private $text;
 
-    public function __construct(IdentityInterface $identity, string $text)
+    public function __construct(IdentityInterface $identity, Text $text)
     {
         if (empty($text)) {
             throw new InvalidArgumentException;
@@ -32,7 +33,7 @@ final class Citation implements ContainsRecordedEventsInterface
 
     public static function register(
         IdentityInterface $identity,
-        string $text
+        Text $text
     ): self {
         $self = new self($identity, $text);
         $self->record(new CitationRegistered($identity, $text));
@@ -45,13 +46,13 @@ final class Citation implements ContainsRecordedEventsInterface
         return $this->identity;
     }
 
-    public function text(): string
+    public function text(): Text
     {
         return $this->text;
     }
 
     public function __toString(): string
     {
-        return $this->text;
+        return (string) $this->text;
     }
 }

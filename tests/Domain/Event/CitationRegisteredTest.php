@@ -5,7 +5,8 @@ namespace Tests\Domain\Event;
 
 use Domain\{
     Event\CitationRegistered,
-    Entity\Citation\IdentityInterface
+    Entity\Citation\IdentityInterface,
+    Entity\Citation\Text
 };
 
 class CitationRegisteredTest extends \PHPUnit_Framework_TestCase
@@ -14,10 +15,10 @@ class CitationRegisteredTest extends \PHPUnit_Framework_TestCase
     {
         $event = new CitationRegistered(
             $identity = $this->createMock(IdentityInterface::class),
-            'foo'
+            $text = new Text('foo')
         );
 
         $this->assertSame($identity, $event->identity());
-        $this->assertSame('foo', $event->text());
+        $this->assertSame($text, $event->text());
     }
 }

@@ -6,6 +6,7 @@ namespace Tests\Domain\Entity;
 use Domain\{
     Entity\Citation,
     Entity\Citation\IdentityInterface,
+    Entity\Citation\Text,
     Event\CitationRegistered
 };
 use Innmind\EventBus\ContainsRecordedEventsInterface;
@@ -16,32 +17,21 @@ class CitationTest extends \PHPUnit_Framework_TestCase
     {
         $entity = new Citation(
             $identity = $this->createMock(IdentityInterface::class),
-            'foo'
+            $text = new Text('foo')
         );
 
         $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $entity);
         $this->assertSame($identity, $entity->identity());
-        $this->assertSame('foo', $entity->text());
+        $this->assertSame($text, $entity->text());
         $this->assertSame('foo', (string) $entity);
         $this->assertCount(0, $entity->recordedEvents());
-    }
-
-    /**
-     * @expectedException Domain\Exception\InvalidArgumentException
-     */
-    public function testThrowWhenEmptyText()
-    {
-        new Citation(
-            $this->createMock(IdentityInterface::class),
-            ''
-        );
     }
 
     public function testRegister()
     {
         $entity = Citation::register(
             $identity = $this->createMock(IdentityInterface::class),
-            'foo'
+            $text = new Text('foo')
         );
 
         $this->assertInstanceOf(Citation::class, $entity);
@@ -55,7 +45,7 @@ class CitationTest extends \PHPUnit_Framework_TestCase
             $entity->recordedEvents()->current()->identity()
         );
         $this->assertSame(
-            'foo',
+            $text,
             $entity->recordedEvents()->current()->text()
         );
     }

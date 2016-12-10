@@ -5,7 +5,8 @@ namespace Tests\Domain\Command;
 
 use Domain\{
     Command\RegisterCitation,
-    Entity\Citation\IdentityInterface
+    Entity\Citation\IdentityInterface,
+    Entity\Citation\Text
 };
 
 class RegisterCitationTest extends \PHPUnit_Framework_TestCase
@@ -14,10 +15,10 @@ class RegisterCitationTest extends \PHPUnit_Framework_TestCase
     {
         $command = new RegisterCitation(
             $identity = $this->createMock(IdentityInterface::class),
-            'foo'
+            $text = new Text('foo')
         );
 
         $this->assertSame($identity, $command->identity());
-        $this->assertSame('foo', $command->text());
+        $this->assertSame($text, $command->text());
     }
 }

@@ -3,7 +3,10 @@ declare(strict_types = 1);
 
 namespace Domain\Specification\Citation;
 
-use Domain\Specification\Composable;
+use Domain\{
+    Specification\Composable,
+    Entity\Citation\Text as Model
+};
 use Innmind\Specification\ComparatorInterface;
 
 final class Text implements ComparatorInterface
@@ -12,9 +15,9 @@ final class Text implements ComparatorInterface
 
     private $value;
 
-    public function __construct(string $value)
+    public function __construct(Model $value)
     {
-        $this->value = $value;
+        $this->value = (string) $value;
     }
 
     /**
