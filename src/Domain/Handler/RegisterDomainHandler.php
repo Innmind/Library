@@ -6,8 +6,9 @@ namespace Domain\Handler;
 use Domain\{
     Command\RegisterDomain,
     Entity\Domain,
+    Entity\Domain\Name,
     Repository\DomainRepositoryInterface,
-    Specification\Domain\Name,
+    Specification\Domain\Name as NameSpec,
     Specification\Domain\TopLevelDomain,
     Exception\DomainAlreadyExistException
 };
@@ -34,9 +35,10 @@ final class RegisterDomainHandler
             (string) $parsed->host->registerableDomain,
             2
         );
+        $name = new Name($name);
 
         $existing = $this->repository->matching(
-            (new Name($name))
+            (new NameSpec($name))
                 ->and(new TopLevelDomain($tld))
         );
 

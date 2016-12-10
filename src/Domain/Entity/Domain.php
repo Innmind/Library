@@ -5,6 +5,7 @@ namespace Domain\Entity;
 
 use Domain\{
     Entity\Domain\IdentityInterface,
+    Entity\Domain\Name,
     Event\DomainRegistered,
     Exception\InvalidArgumentException
 };
@@ -23,10 +24,10 @@ final class Domain implements ContainsRecordedEventsInterface
 
     public function __construct(
         IdentityInterface $identity,
-        string $name,
+        Name $name,
         string $tld
     ) {
-        if (empty($name) || empty($tld)) {
+        if (empty($tld)) {
             throw new InvalidArgumentException;
         }
 
@@ -37,7 +38,7 @@ final class Domain implements ContainsRecordedEventsInterface
 
     public static function register(
         IdentityInterface $identity,
-        string $name,
+        Name $name,
         string $tld
     ): self {
         $self = new self($identity, $name, $tld);
@@ -51,7 +52,7 @@ final class Domain implements ContainsRecordedEventsInterface
         return $this->identity;
     }
 
-    public function name(): string
+    public function name(): Name
     {
         return $this->name;
     }

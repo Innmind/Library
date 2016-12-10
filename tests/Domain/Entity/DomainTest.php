@@ -6,6 +6,7 @@ namespace Tests\Domain\Entity;
 use Domain\{
     Entity\Domain,
     Entity\Domain\IdentityInterface,
+    Entity\Domain\Name,
     Event\DomainRegistered
 };
 use Innmind\EventBus\ContainsRecordedEventsInterface;
@@ -16,28 +17,16 @@ class DomainTest extends \PHPUnit_Framework_TestCase
     {
         $domain = new Domain(
             $identity = $this->createMock(IdentityInterface::class),
-            'example',
+            $name = new Name('example'),
             'com'
         );
 
         $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $domain);
         $this->assertSame($identity, $domain->identity());
-        $this->assertSame('example', $domain->name());
+        $this->assertSame($name, $domain->name());
         $this->assertSame('com', $domain->tld());
         $this->assertSame('example.com', (string) $domain);
         $this->assertCount(0, $domain->recordedEvents());
-    }
-
-    /**
-     * @expectedException Domain\Exception\InvalidArgumentException
-     */
-    public function testThrowWhenEmptyName()
-    {
-        new Domain(
-            $this->createMock(IdentityInterface::class),
-            '',
-            'com'
-        );
     }
 
     /**
@@ -47,7 +36,7 @@ class DomainTest extends \PHPUnit_Framework_TestCase
     {
         new Domain(
             $this->createMock(IdentityInterface::class),
-            'example',
+            new Name('example'),
             ''
         );
     }
@@ -56,7 +45,7 @@ class DomainTest extends \PHPUnit_Framework_TestCase
     {
         $domain = Domain::register(
             $identity = $this->createMock(IdentityInterface::class),
-            'example',
+            $name = new Name('example'),
             'com'
         );
 
@@ -71,7 +60,7 @@ class DomainTest extends \PHPUnit_Framework_TestCase
             $domain->recordedEvents()->current()->identity()
         );
         $this->assertSame(
-            'example',
+            $name,
             $domain->recordedEvents()->current()->name()
         );
         $this->assertSame(
