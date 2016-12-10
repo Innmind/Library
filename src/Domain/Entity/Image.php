@@ -6,12 +6,12 @@ namespace Domain\Entity;
 use Domain\{
     Entity\Image\IdentityInterface,
     Entity\Image\Weight,
+    Entity\Image\Dimension,
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
     Event\ImageRegistered,
     Event\Image\DimensionSpecified,
     Event\Image\WeightSpecified,
     Event\Image\DescriptionAdded,
-    Model\Image\Dimension,
     Exception\InvalidArgumentException
 };
 use Innmind\Url\{

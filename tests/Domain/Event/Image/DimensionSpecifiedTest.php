@@ -6,7 +6,7 @@ namespace Tests\Domain\Event\Image;
 use Domain\{
     Event\Image\DimensionSpecified,
     Entity\Image\IdentityInterface,
-    Model\Image\Dimension
+    Entity\Image\Dimension
 };
 
 class DimensionSpecifiedTest extends \PHPUnit_Framework_TestCase

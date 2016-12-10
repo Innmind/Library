@@ -5,7 +5,7 @@ namespace Domain\Event\Image;
 
 use Domain\{
     Entity\Image\IdentityInterface,
-    Model\Image\Dimension
+    Entity\Image\Dimension
 };
 
 final class DimensionSpecified

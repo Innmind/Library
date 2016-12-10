@@ -8,12 +8,12 @@ use Domain\{
     Entity\HttpResource,
     Entity\Image\IdentityInterface,
     Entity\Image\Weight,
+    Entity\Image\Dimension,
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
     Event\ImageRegistered,
     Event\Image\DimensionSpecified,
     Event\Image\WeightSpecified,
-    Event\Image\DescriptionAdded,
-    Model\Image\Dimension
+    Event\Image\DescriptionAdded
 };
 use Innmind\Url\{
     PathInterface,

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\Domain\Model\Image;
+namespace Tests\Domain\Entity\Image;
 
-use Domain\Model\Image\Dimension;
+use Domain\Entity\Image\Dimension;
 
 class DimensionTest extends \PHPUnit_Framework_TestCase
 {

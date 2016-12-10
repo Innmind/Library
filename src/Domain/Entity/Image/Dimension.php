@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Domain\Model\Image;
+namespace Domain\Entity\Image;
 
 use Domain\Exception\InvalidArgumentException;
 
