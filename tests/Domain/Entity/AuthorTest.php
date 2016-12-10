@@ -6,6 +6,7 @@ namespace Tests\Domain\Entity;
 use Domain\{
     Entity\Author,
     Entity\Author\IdentityInterface,
+    Entity\Author\Name,
     Event\AuthorRegistered
 };
 use Innmind\EventBus\ContainsRecordedEventsInterface;
@@ -16,32 +17,21 @@ class AuthorTest extends \PHPUnit_Framework_TestCase
     {
         $entity = new Author(
             $identity = $this->createMock(IdentityInterface::class),
-            'John Doe'
+            $name = new Name('John Doe')
         );
 
         $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $entity);
         $this->assertSame($identity, $entity->identity());
-        $this->assertSame('John Doe', $entity->name());
+        $this->assertSame($name, $entity->name());
         $this->assertSame('John Doe', (string) $entity);
         $this->assertCount(0, $entity->recordedEvents());
-    }
-
-    /**
-     * @expectedException Domain\Exception\InvalidArgumentException
-     */
-    public function testThrowWhenEmptyName()
-    {
-        new Author(
-            $this->createMock(IdentityInterface::class),
-            ''
-        );
     }
 
     public function testRegister()
     {
         $entity = Author::register(
             $identity = $this->createMock(IdentityInterface::class),
-            'John Doe'
+            $name = new Name('John Doe')
         );
 
         $this->assertInstanceOf(Author::class, $entity);
@@ -55,7 +45,7 @@ class AuthorTest extends \PHPUnit_Framework_TestCase
             $entity->recordedEvents()->current()->identity()
         );
         $this->assertSame(
-            'John Doe',
+            $name,
             $entity->recordedEvents()->current()->name()
         );
     }

@@ -5,7 +5,8 @@ namespace Tests\Domain\Event;
 
 use Domain\{
     Event\AuthorRegistered,
-    Entity\Author\IdentityInterface
+    Entity\Author\IdentityInterface,
+    Entity\Author\Name
 };
 
 class AuthorRegisteredTest extends \PHPUnit_Framework_TestCase
@@ -14,10 +15,10 @@ class AuthorRegisteredTest extends \PHPUnit_Framework_TestCase
     {
         $event = new AuthorRegistered(
             $identity = $this->createMock(IdentityInterface::class),
-            'John Doe'
+            $name = new Name('John Doe')
         );
 
         $this->assertSame($identity, $event->identity());
-        $this->assertSame('John Doe', $event->name());
+        $this->assertSame($name, $event->name());
     }
 }

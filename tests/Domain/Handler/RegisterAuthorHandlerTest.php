@@ -9,6 +9,7 @@ use Domain\{
     Repository\AuthorRepositoryInterface,
     Entity\Author,
     Entity\Author\IdentityInterface,
+    Entity\Author\Name as Model,
     Specification\Author\Name
 };
 use Innmind\Immutable\{
@@ -25,7 +26,7 @@ class RegisterAuthorHandlerTest extends \PHPUnit_Framework_TestCase
         );
         $command = new RegisterAuthor(
             $this->createMock(IdentityInterface::class),
-            'John Doe'
+            new Model('John Doe')
         );
         $repository
             ->expects($this->once())
@@ -39,7 +40,7 @@ class RegisterAuthorHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('add')
             ->with($this->callback(function(Author $author) use ($command): bool {
                 return $author->identity() === $command->identity() &&
-                    $author->name() === 'John Doe';
+                    $author->name() === $command->name();
             }));
 
         $this->assertNull($handler($command));
@@ -55,7 +56,7 @@ class RegisterAuthorHandlerTest extends \PHPUnit_Framework_TestCase
         );
         $command = new RegisterAuthor(
             $this->createMock(IdentityInterface::class),
-            'John Doe'
+            new Model('John Doe')
         );
         $repository
             ->expects($this->once())

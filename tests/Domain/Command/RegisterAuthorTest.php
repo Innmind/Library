@@ -5,7 +5,8 @@ namespace Tests\Domain\Command;
 
 use Domain\{
     Command\RegisterAuthor,
-    Entity\Author\IdentityInterface
+    Entity\Author\IdentityInterface,
+    Entity\Author\Name
 };
 
 class RegisterAuthorTest extends \PHPUnit_Framework_TestCase
@@ -14,10 +15,10 @@ class RegisterAuthorTest extends \PHPUnit_Framework_TestCase
     {
         $command = new RegisterAuthor(
             $identity = $this->createMock(IdentityInterface::class),
-            'John Doe'
+            $name = new Name('John Doe')
         );
 
         $this->assertSame($identity, $command->identity());
-        $this->assertSame('John Doe', $command->name());
+        $this->assertSame($name, $command->name());
     }
 }

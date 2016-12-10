@@ -3,7 +3,10 @@ declare(strict_types = 1);
 
 namespace Domain\Specification\Author;
 
-use Domain\Specification\Composable;
+use Domain\{
+    Specification\Composable,
+    Entity\Author\Name as Model
+};
 use Innmind\Specification\ComparatorInterface;
 
 final class Name implements ComparatorInterface
@@ -12,9 +15,9 @@ final class Name implements ComparatorInterface
 
     private $value;
 
-    public function __construct(string $value)
+    public function __construct(Model $value)
     {
-        $this->value = $value;
+        $this->value = (string) $value;
     }
 
     /**
