@@ -7,9 +7,10 @@ use Domain\{
     Command\RegisterDomain,
     Entity\Domain,
     Entity\Domain\Name,
+    Entity\Domain\TopLevelDomain,
     Repository\DomainRepositoryInterface,
     Specification\Domain\Name as NameSpec,
-    Specification\Domain\TopLevelDomain,
+    Specification\Domain\TopLevelDomain as TopLevelDomainSpec,
     Exception\DomainAlreadyExistException
 };
 use Pdp\Parser;
@@ -36,10 +37,11 @@ final class RegisterDomainHandler
             2
         );
         $name = new Name($name);
+        $tld = new TopLevelDomain($tld);
 
         $existing = $this->repository->matching(
             (new NameSpec($name))
-                ->and(new TopLevelDomain($tld))
+                ->and(new TopLevelDomainSpec($tld))
         );
 
         if ($existing->size() !== 0) {

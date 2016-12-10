@@ -6,8 +6,8 @@ namespace Domain\Entity;
 use Domain\{
     Entity\Domain\IdentityInterface,
     Entity\Domain\Name,
-    Event\DomainRegistered,
-    Exception\InvalidArgumentException
+    Entity\Domain\TopLevelDomain,
+    Event\DomainRegistered
 };
 use Innmind\EventBus\{
     ContainsRecordedEventsInterface,
@@ -25,12 +25,8 @@ final class Domain implements ContainsRecordedEventsInterface
     public function __construct(
         IdentityInterface $identity,
         Name $name,
-        string $tld
+        TopLevelDomain $tld
     ) {
-        if (empty($tld)) {
-            throw new InvalidArgumentException;
-        }
-
         $this->identity = $identity;
         $this->name = $name;
         $this->tld = $tld;
@@ -39,7 +35,7 @@ final class Domain implements ContainsRecordedEventsInterface
     public static function register(
         IdentityInterface $identity,
         Name $name,
-        string $tld
+        TopLevelDomain $tld
     ): self {
         $self = new self($identity, $name, $tld);
         $self->record(new DomainRegistered($identity, $name, $tld));
@@ -57,7 +53,7 @@ final class Domain implements ContainsRecordedEventsInterface
         return $this->name;
     }
 
-    public function tld(): string
+    public function tld(): TopLevelDomain
     {
         return $this->tld;
     }
