@@ -4,19 +4,19 @@ declare(strict_types = 1);
 namespace Domain\Specification\Alternate;
 
 use Innmind\Specification\{
-    SpecificationInterface,
+    SpecificationInterface as MasterSpec,
     CompositeInterface,
     NotInterface
 };
 
 trait Composable
 {
-    public function and(SpecificationInterface $specification): CompositeInterface
+    public function and(MasterSpec $specification): CompositeInterface
     {
         return new AndSpecification($this, $specification);
     }
 
-    public function or(SpecificationInterface $specification): CompositeInterface
+    public function or(MasterSpec $specification): CompositeInterface
     {
         return new OrSpecification($this, $specification);
     }

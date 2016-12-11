@@ -5,7 +5,7 @@ namespace Domain\Specification\Alternate;
 
 use Domain\{
     Specification\AndSpecification as ParentSpec,
-    Entity\Alternate
+    Entity\Alternate as Entity
 };
 
 final class AndSpecification extends ParentSpec implements SpecificationInterface
@@ -19,7 +19,7 @@ final class AndSpecification extends ParentSpec implements SpecificationInterfac
         parent::__construct($left, $right);
     }
 
-    public function isSatisfiedBy(Alternate $alternate): bool
+    public function isSatisfiedBy(Entity $alternate): bool
     {
         return $this->left()->isSatisfiedBy($alternate) &&
             $this->right()->isSatisfiedBy($alternate);

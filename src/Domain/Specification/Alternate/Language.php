@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Domain\Specification\Alternate;
 
 use Domain\{
-    Entity\Alternate,
+    Entity\Alternate as Entity,
     Model\Language as Model
 };
 use Innmind\Specification\ComparatorInterface;
@@ -44,7 +44,7 @@ final class Language implements ComparatorInterface, SpecificationInterface
         return $this->value;
     }
 
-    public function isSatisfiedBy(Alternate $alternate): bool
+    public function isSatisfiedBy(Entity $alternate): bool
     {
         return (string) $alternate->language() === $this->value;
     }

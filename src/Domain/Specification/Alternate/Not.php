@@ -5,7 +5,7 @@ namespace Domain\Specification\Alternate;
 
 use Domain\{
     Specification\Not as ParentSpec,
-    Entity\Alternate
+    Entity\Alternate as Entity
 };
 
 final class Not extends ParentSpec implements SpecificationInterface
@@ -17,7 +17,7 @@ final class Not extends ParentSpec implements SpecificationInterface
         parent::__construct($specification);
     }
 
-    public function isSatisfiedBy(Alternate $alternate): bool
+    public function isSatisfiedBy(Entity $alternate): bool
     {
         return !$this->specification()->isSatisfiedBy($alternate);
     }

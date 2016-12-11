@@ -5,7 +5,7 @@ namespace Domain\Specification\Alternate;
 
 use Domain\{
     Entity\HttpResource\IdentityInterface,
-    Entity\Alternate
+    Entity\Alternate as Entity
 };
 use Innmind\Specification\ComparatorInterface;
 
@@ -44,7 +44,7 @@ final class HttpResource implements ComparatorInterface, SpecificationInterface
         return $this->value;
     }
 
-    public function isSatisfiedBy(Alternate $alternate): bool
+    public function isSatisfiedBy(Entity $alternate): bool
     {
         return (string) $alternate->resource() === $this->value;
     }
