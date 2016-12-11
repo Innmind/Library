@@ -9,6 +9,7 @@ use Domain\{
     Repository\HttpResourceRepositoryInterface,
     Entity\HttpResource,
     Entity\HttpResource\IdentityInterface,
+    Entity\HttpResource\Charset,
     Event\HttpResource\CharsetSpecified
 };
 use Innmind\Url\{
@@ -37,9 +38,9 @@ class SpecifyCharsetHandlerTest extends \PHPunit_Framework_TestCase
             );
 
         $this->assertNull($handler(
-            new SpecifyCharset($identity, 'utf-8')
+            new SpecifyCharset($identity, $charset = new Charset('utf-8'))
         ));
-        $this->assertSame('utf-8', $resource->charset());
+        $this->assertSame($charset, $resource->charset());
         $this->assertInstanceOf(
             CharsetSpecified::class,
             $resource->recordedEvents()->current()

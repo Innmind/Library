@@ -3,14 +3,17 @@ declare(strict_types = 1);
 
 namespace Domain\Event\HttpResource;
 
-use Domain\Entity\HttpResource\IdentityInterface;
+use Domain\Entity\HttpResource\{
+    IdentityInterface,
+    Charset
+};
 
 final class CharsetSpecified
 {
     private $identity;
     private $charset;
 
-    public function __construct(IdentityInterface $identity, string $charset)
+    public function __construct(IdentityInterface $identity, Charset $charset)
     {
         $this->identity = $identity;
         $this->charset = $charset;
@@ -21,7 +24,7 @@ final class CharsetSpecified
         return $this->identity;
     }
 
-    public function charset(): string
+    public function charset(): Charset
     {
         return $this->charset;
     }

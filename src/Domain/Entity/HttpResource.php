@@ -5,6 +5,7 @@ namespace Domain\Entity;
 
 use Domain\{
     Entity\HttpResource\IdentityInterface,
+    Entity\HttpResource\Charset,
     Event\HttpResourceRegistered,
     Event\HttpResource\LanguagesSpecified,
     Event\HttpResource\CharsetSpecified,
@@ -91,12 +92,8 @@ class HttpResource implements ContainsRecordedEventsInterface
         return $this->languages;
     }
 
-    public function specifyCharset(string $charset): self
+    public function specifyCharset(Charset $charset): self
     {
-        if (empty($charset)) {
-            throw new InvalidArgumentException;
-        }
-
         $this->charset = $charset;
         $this->record(new CharsetSpecified($this->identity, $charset));
 
@@ -105,10 +102,10 @@ class HttpResource implements ContainsRecordedEventsInterface
 
     public function hasCharset(): bool
     {
-        return $this->charset !== null;
+        return $this->charset instanceof Charset;
     }
 
-    public function charset(): string
+    public function charset(): Charset
     {
         return $this->charset;
     }

@@ -6,6 +6,7 @@ namespace Tests\Domain\Entity;
 use Domain\{
     Entity\HttpResource,
     Entity\HttpResource\IdentityInterface,
+    Entity\HttpResource\Charset,
     Event\HttpResourceRegistered,
     Event\HttpResource\LanguagesSpecified,
     Event\HttpResource\CharsetSpecified,
@@ -124,10 +125,10 @@ class HttpResourceTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($resource->hasCharset());
         $this->assertSame(
             $resource,
-            $resource->specifyCharset('utf-8')
+            $resource->specifyCharset($charset = new Charset('utf-8'))
         );
         $this->assertTrue($resource->hasCharset());
-        $this->assertSame('utf-8', $resource->charset());
+        $this->assertSame($charset, $resource->charset());
         $this->assertCount(1, $resource->recordedEvents());
         $this->assertInstanceOf(
             CharsetSpecified::class,
@@ -141,17 +142,5 @@ class HttpResourceTest extends \PHPUnit_Framework_TestCase
             $resource->charset(),
             $resource->recordedEvents()->current()->charset()
         );
-    }
-
-    /**
-     * @expectedException Domain\Exception\InvalidArgumentException
-     */
-    public function testThrowWhenEmptyCharset()
-    {
-        (new HttpResource(
-            $this->createMock(IdentityInterface::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
-        ))->specifyCharset('');
     }
 }

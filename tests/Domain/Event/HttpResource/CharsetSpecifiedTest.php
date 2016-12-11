@@ -5,7 +5,8 @@ namespace Tests\Domain\Event\HttpResource;
 
 use Domain\{
     Event\HttpResource\CharsetSpecified,
-    Entity\HttpResource\IdentityInterface
+    Entity\HttpResource\IdentityInterface,
+    Entity\HttpResource\Charset
 };
 
 class CharsetSpecifiedTest extends \PHPUnit_Framework_TestCase
@@ -14,10 +15,10 @@ class CharsetSpecifiedTest extends \PHPUnit_Framework_TestCase
     {
         $event = new CharsetSpecified(
             $identity = $this->createMock(IdentityInterface::class),
-            'utf-8'
+            $charset = new Charset('utf-8')
         );
 
         $this->assertSame($identity, $event->identity());
-        $this->assertSame('utf-8', $event->charset());
+        $this->assertSame($charset, $event->charset());
     }
 }
