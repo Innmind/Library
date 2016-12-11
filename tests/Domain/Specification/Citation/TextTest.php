@@ -31,19 +31,19 @@ class TextTest extends \PHPUnit_Framework_TestCase
     public function testIsSatisfiedBy()
     {
         $spec = new Text(new Model('foo'));
-        $author = new Citation(
+        $citation = new Citation(
             $this->createMock(IdentityInterface::class),
             new Model('foo')
         );
 
-        $this->assertTrue($spec->isSatisfiedBy($author));
+        $this->assertTrue($spec->isSatisfiedBy($citation));
 
-        $author = new Citation(
+        $citation = new Citation(
             $this->createMock(IdentityInterface::class),
             new Model('bar')
         );
 
-        $this->assertFalse($spec->isSatisfiedBy($author));
+        $this->assertFalse($spec->isSatisfiedBy($citation));
     }
 
     public function testAnd()
