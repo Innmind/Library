@@ -3,12 +3,12 @@ declare(strict_types = 1);
 
 namespace Domain\Repository;
 
-use Domain\Entity\{
-    Citation\IdentityInterface,
-    Citation
+use Domain\{
+    Entity\Citation\IdentityInterface,
+    Entity\Citation,
+    Specification\Citation\SpecificationInterface
 };
 use Innmind\Immutable\SetInterface;
-use Innmind\Specification\SpecificationInterface;
 
 interface CitationRepositoryInterface
 {
