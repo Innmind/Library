@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Domain\Command;
+namespace Domain\Command\HttpResource;
 
 use Domain\Entity\{
     ResourceAuthor\IdentityInterface,
@@ -9,7 +9,7 @@ use Domain\Entity\{
     HttpResource\IdentityInterface as ResourceIdentity
 };
 
-final class RegisterResourceAuthor
+final class RegisterAuthor
 {
     private $identity;
     private $author;

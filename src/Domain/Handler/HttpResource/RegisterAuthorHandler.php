@@ -1,16 +1,16 @@
 <?php
 declare(strict_types = 1);
 
-namespace Domain\Handler;
+namespace Domain\Handler\HttpResource;
 
 use Domain\{
-    Command\RegisterResourceAuthor,
+    Command\HttpResource\RegisterAuthor,
     Repository\ResourceAuthorRepositoryInterface,
     Entity\ResourceAuthor
 };
 use Innmind\TimeContinuum\TimeContinuumInterface;
 
-final class RegisterResourceAuthorHandler
+final class RegisterAuthorHandler
 {
     private $repository;
     private $clock;
@@ -23,7 +23,7 @@ final class RegisterResourceAuthorHandler
         $this->clock = $clock;
     }
 
-    public function __invoke(RegisterResourceAuthor $wished): void
+    public function __invoke(RegisterAuthor $wished): void
     {
         $this->repository->add(
             ResourceAuthor::register(

@@ -1,20 +1,20 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\Domain\Command;
+namespace Tests\Domain\Command\HttpResource;
 
 use Domain\{
-    Command\RegisterResourceAuthor,
+    Command\HttpResource\RegisterAuthor,
     Entity\ResourceAuthor\IdentityInterface,
     Entity\Author\IdentityInterface as AuthorIdentity,
     Entity\HttpResource\IdentityInterface as ResourceIdentity
 };
 
-class RegisterResourceAuthorTest extends \PHPUnit_Framework_TestCase
+class RegisterAuthorTest extends \PHPUnit_Framework_TestCase
 {
     public function testInterface()
     {
-        $command = new RegisterResourceAuthor(
+        $command = new RegisterAuthor(
             $identity = $this->createMock(IdentityInterface::class),
             $author = $this->createMock(AuthorIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class)

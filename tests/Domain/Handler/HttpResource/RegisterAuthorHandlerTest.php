@@ -1,11 +1,11 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\Domain\Handler;
+namespace Tests\Domain\Handler\HttpResource;
 
 use Domain\{
-    Handler\RegisterResourceAuthorHandler,
-    Command\RegisterResourceAuthor,
+    Handler\HttpResource\RegisterAuthorHandler,
+    Command\HttpResource\RegisterAuthor,
     Repository\ResourceAuthorRepositoryInterface,
     Entity\ResourceAuthor,
     Entity\ResourceAuthor\IdentityInterface,
@@ -18,15 +18,15 @@ use Innmind\TimeContinuum\{
     PointInTimeInterface
 };
 
-class RegisterResourceAuthorHandlerTest extends \PHPUnit_Framework_TestCase
+class RegisterAuthorHandlerTest extends \PHPUnit_Framework_TestCase
 {
     public function testExecution()
     {
-        $handler = new RegisterResourceAuthorHandler(
+        $handler = new RegisterAuthorHandler(
             $repository = $this->createMock(ResourceAuthorRepositoryInterface::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
-        $command = new RegisterResourceAuthor(
+        $command = new RegisterAuthor(
             $this->createMock(IdentityInterface::class),
             $this->createMock(AuthorIdentity::class),
             $this->createMock(ResourceIdentity::class)
