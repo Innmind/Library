@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Domain\Command;
+namespace Domain\Command\Citation;
 
 use Domain\Entity\{
     CitationAppearance\IdentityInterface,
@@ -9,7 +9,7 @@ use Domain\Entity\{
     HttpResource\IdentityInterface as ResourceIdentity
 };
 
-final class RegisterCitationAppearance
+final class RegisterAppearance
 {
     private $identity;
     private $citation;

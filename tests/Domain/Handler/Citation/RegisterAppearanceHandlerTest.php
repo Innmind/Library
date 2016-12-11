@@ -1,11 +1,11 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\Domain\Handler;
+namespace Tests\Domain\Handler\Citation;
 
 use Domain\{
-    Handler\RegisterCitationAppearanceHandler,
-    Command\RegisterCitationAppearance,
+    Handler\Citation\RegisterAppearanceHandler,
+    Command\Citation\RegisterAppearance,
     Repository\CitationAppearanceRepositoryInterface,
     Entity\CitationAppearance,
     Entity\CitationAppearance\IdentityInterface,
@@ -25,15 +25,15 @@ use Innmind\Immutable\{
     SetInterface
 };
 
-class RegisterCitationAppearanceHandlerTest extends \PHPUnit_Framework_TestCase
+class RegisterAppearanceHandlerTest extends \PHPUnit_Framework_TestCase
 {
     public function testExecution()
     {
-        $handler = new RegisterCitationAppearanceHandler(
+        $handler = new RegisterAppearanceHandler(
             $repository = $this->createMock(CitationAppearanceRepositoryInterface::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
-        $command = new RegisterCitationAppearance(
+        $command = new RegisterAppearance(
             $this->createMock(IdentityInterface::class),
             $this->createMock(CitationIdentity::class),
             $this->createMock(ResourceIdentity::class)
@@ -84,11 +84,11 @@ class RegisterCitationAppearanceHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testThrowWhenAppearanceAlreadyRegistered()
     {
-        $handler = new RegisterCitationAppearanceHandler(
+        $handler = new RegisterAppearanceHandler(
             $repository = $this->createMock(CitationAppearanceRepositoryInterface::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
-        $command = new RegisterCitationAppearance(
+        $command = new RegisterAppearance(
             $this->createMock(IdentityInterface::class),
             $this->createMock(CitationIdentity::class),
             $this->createMock(ResourceIdentity::class)

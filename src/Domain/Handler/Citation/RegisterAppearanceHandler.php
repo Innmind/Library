@@ -1,10 +1,10 @@
 <?php
 declare(strict_types = 1);
 
-namespace Domain\Handler;
+namespace Domain\Handler\Citation;
 
 use Domain\{
-    Command\RegisterCitationAppearance,
+    Command\Citation\RegisterAppearance,
     Repository\CitationAppearanceRepositoryInterface,
     Entity\CitationAppearance,
     Specification\CitationAppearance\Citation,
@@ -13,7 +13,7 @@ use Domain\{
 };
 use Innmind\TimeContinuum\TimeContinuumInterface;
 
-final class RegisterCitationAppearanceHandler
+final class RegisterAppearanceHandler
 {
     private $repository;
     private $clock;
@@ -26,7 +26,7 @@ final class RegisterCitationAppearanceHandler
         $this->clock = $clock;
     }
 
-    public function __invoke(RegisterCitationAppearance $wished): void
+    public function __invoke(RegisterAppearance $wished): void
     {
         $appearances = $this->repository->matching(
             (new Citation($wished->citation()))

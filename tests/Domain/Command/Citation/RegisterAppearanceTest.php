@@ -1,20 +1,20 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\Domain\Command;
+namespace Tests\Domain\Command\Citation;
 
 use Domain\{
-    Command\RegisterCitationAppearance,
+    Command\Citation\RegisterAppearance,
     Entity\CitationAppearance\IdentityInterface,
     Entity\Citation\IdentityInterface as CitationIdentity,
     Entity\HttpResource\IdentityInterface as ResourceIdentity
 };
 
-class RegisterCitationAppearanceTest extends \PHPUnit_Framework_TestCase
+class RegisterAppearanceTest extends \PHPUnit_Framework_TestCase
 {
     public function testInterface()
     {
-        $command = new RegisterCitationAppearance(
+        $command = new RegisterAppearance(
             $identity = $this->createMock(IdentityInterface::class),
             $citation = $this->createMock(CitationIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class)
