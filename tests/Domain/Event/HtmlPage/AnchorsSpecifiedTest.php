@@ -5,9 +5,10 @@ namespace Tests\Domain\Event\HtmlPage;
 
 use Domain\{
     Event\HtmlPage\AnchorsSpecified,
-    Entity\HtmlPage\IdentityInterface
+    Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Anchor
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 class AnchorsSpecifiedTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,10 +16,21 @@ class AnchorsSpecifiedTest extends \PHPUnit_Framework_TestCase
     {
         $event = new AnchorsSpecified(
             $identity = $this->createMock(IdentityInterface::class),
-            $anchors = $this->createMock(SetInterface::class)
+            $anchors = new Set(Anchor::class)
         );
 
         $this->assertSame($identity, $event->identity());
         $this->assertSame($anchors, $event->anchors());
+    }
+
+    /**
+     * @expectedException Domain\Exception\InvalidArgumentException
+     */
+    public function testThrowWhenInvalidAnchorSet()
+    {
+        new AnchorsSpecified(
+            $this->createMock(IdentityInterface::class),
+            new Set('string')
+        );
     }
 }

@@ -9,6 +9,7 @@ use Domain\{
     Repository\HtmlPageRepositoryInterface,
     Entity\HtmlPage,
     Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Anchor,
     Event\HtmlPage\AnchorsSpecified
 };
 use Innmind\Url\{
@@ -26,7 +27,7 @@ class SpecifyAnchorsHandlerTest extends \PHPUnit_Framework_TestCase
         );
         $command = new SpecifyAnchors(
             $this->createMock(IdentityInterface::class),
-            new Set('string')
+            new Set(Anchor::class)
         );
         $repository
             ->expects($this->once())

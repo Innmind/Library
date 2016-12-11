@@ -5,6 +5,7 @@ namespace Domain\Entity;
 
 use Domain\{
     Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Anchor,
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
     Event\HtmlPageRegistered,
     Event\HtmlPage\MainContentSpecified,
@@ -49,7 +50,7 @@ final class HtmlPage extends HttpResource
         }
 
         parent::__construct($identity, $path, $query);
-        $this->anchors = new Set('string');
+        $this->anchors = new Set(Anchor::class);
     }
 
     public static function register(
@@ -91,7 +92,7 @@ final class HtmlPage extends HttpResource
 
     public function specifyAnchors(SetInterface $anchors): self
     {
-        if ((string) $anchors->type() !== 'string') {
+        if ((string) $anchors->type() !== Anchor::class) {
             throw new InvalidArgumentException;
         }
 
@@ -102,7 +103,7 @@ final class HtmlPage extends HttpResource
     }
 
     /**
-     * @return SetInterface<string>
+     * @return SetInterface<Anchor>
      */
     public function anchors(): SetInterface
     {

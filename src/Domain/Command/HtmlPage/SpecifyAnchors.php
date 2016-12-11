@@ -3,7 +3,11 @@ declare(strict_types = 1);
 
 namespace Domain\Command\HtmlPage;
 
-use Domain\Entity\HtmlPage\IdentityInterface;
+use Domain\{
+    Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Anchor,
+    Exception\InvalidArgumentException
+};
 use Innmind\Immutable\SetInterface;
 
 final class SpecifyAnchors
@@ -15,6 +19,10 @@ final class SpecifyAnchors
         IdentityInterface $identity,
         SetInterface $anchors
     ) {
+        if ((string) $anchors->type() !== Anchor::class) {
+            throw new InvalidArgumentException;
+        }
+
         $this->identity = $identity;
         $this->anchors = $anchors;
     }

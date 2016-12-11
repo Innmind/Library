@@ -7,6 +7,7 @@ use Domain\{
     Entity\HtmlPage,
     Entity\HttpResource,
     Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Anchor,
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
     Event\HtmlPageRegistered,
     Event\HtmlPage\MainContentSpecified,
@@ -154,11 +155,12 @@ class HtmlPageTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertCount(0, $htmlPage->anchors());
-        $this->assertSame('string', (string) $htmlPage->anchors()->type());
+        $this->assertSame(Anchor::class, (string) $htmlPage->anchors()->type());
         $this->assertSame(
             $htmlPage,
             $htmlPage->specifyAnchors(
-                $anchors = (new Set('string'))->add('foo')
+                $anchors = (new Set(Anchor::class))
+                    ->add(new Anchor('foo'))
             )
         );
         $this->assertSame($anchors, $htmlPage->anchors());
