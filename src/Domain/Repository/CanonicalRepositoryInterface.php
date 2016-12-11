@@ -3,12 +3,12 @@ declare(strict_types = 1);
 
 namespace Domain\Repository;
 
-use Domain\Entity\{
-    Canonical\IdentityInterface,
-    Canonical
+use Domain\{
+    Entity\Canonical\IdentityInterface,
+    Entity\Canonical,
+    Specification\Canonical\SpecificationInterface
 };
 use Innmind\Immutable\SetInterface;
-use Innmind\Specification\SpecificationInterface;
 
 interface CanonicalRepositoryInterface
 {
