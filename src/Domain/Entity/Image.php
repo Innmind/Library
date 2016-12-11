@@ -5,6 +5,7 @@ namespace Domain\Entity;
 
 use Domain\{
     Entity\Image\IdentityInterface,
+    Entity\Image\Description,
     Entity\Image\Weight,
     Entity\Image\Dimension,
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
@@ -39,7 +40,7 @@ final class Image extends HttpResource
         }
 
         parent::__construct($identity, $path, $query);
-        $this->descriptions = new Set('string');
+        $this->descriptions = new Set(Description::class);
     }
 
     public static function register(
@@ -89,22 +90,28 @@ final class Image extends HttpResource
         return $this->weight;
     }
 
-    public function addDescription(string $description): self
+    public function addDescription(Description $description): self
     {
-        if (empty($description)) {
-            throw new InvalidArgumentException;
-        }
+        $known = $this
+            ->descriptions
+            ->reduce(
+                false,
+                function(bool $known, Description $inSet) use ($description): bool {
+                    return $known ?: $description->equals($inSet);
+                }
+            );
 
-        $descriptions = $this->descriptions;
-        $this->descriptions = $this->descriptions->add($description);
-
-        if ($this->descriptions !== $descriptions) {
+        if (!$known) {
+            $this->descriptions = $this->descriptions->add($description);
             $this->record(new DescriptionAdded($this->identity(), $description));
         }
 
         return $this;
     }
 
+    /**
+     * @return SetInterface<Description>
+     */
     public function descriptions(): SetInterface
     {
         return $this->descriptions;

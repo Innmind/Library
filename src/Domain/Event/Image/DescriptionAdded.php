@@ -3,15 +3,20 @@ declare(strict_types = 1);
 
 namespace Domain\Event\Image;
 
-use Domain\Entity\Image\IdentityInterface;
+use Domain\Entity\Image\{
+    IdentityInterface,
+    Description
+};
 
 final class DescriptionAdded
 {
     private $identity;
     private $description;
 
-    public function __construct(IdentityInterface $identity, string $description)
-    {
+    public function __construct(
+        IdentityInterface $identity,
+        Description $description
+    ) {
         $this->identity = $identity;
         $this->description = $description;
     }
@@ -21,7 +26,7 @@ final class DescriptionAdded
         return $this->identity;
     }
 
-    public function description(): string
+    public function description(): Description
     {
         return $this->description;
     }

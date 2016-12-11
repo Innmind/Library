@@ -9,6 +9,7 @@ use Domain\{
     Repository\ImageRepositoryInterface,
     Entity\Image,
     Entity\Image\IdentityInterface,
+    Entity\Image\Description,
     Event\Image\DescriptionAdded
 };
 use Innmind\Url\{
@@ -25,7 +26,7 @@ class AddDescriptionHandlerTest extends \PHPUnit_Framework_TestCase
         );
         $command = new AddDescription(
             $this->createMock(IdentityInterface::class),
-            'foobar'
+            new Description('foobar')
         );
         $repository
             ->expects($this->once())
@@ -40,7 +41,10 @@ class AddDescriptionHandlerTest extends \PHPUnit_Framework_TestCase
             );
 
         $this->assertNull($handler($command));
-        $this->assertSame(['foobar'], $image->descriptions()->toPrimitive());
+        $this->assertSame(
+            [$command->description()],
+            $image->descriptions()->toPrimitive()
+        );
         $this->assertInstanceOf(
             DescriptionAdded::class,
             $image->recordedEvents()->current()

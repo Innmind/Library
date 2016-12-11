@@ -5,7 +5,8 @@ namespace Tests\Domain\Event\Image;
 
 use Domain\{
     Event\Image\DescriptionAdded,
-    Entity\Image\IdentityInterface
+    Entity\Image\IdentityInterface,
+    Entity\Image\Description
 };
 
 class DescriptionAddedTest extends \PHPUnit_Framework_TestCase
@@ -14,10 +15,10 @@ class DescriptionAddedTest extends \PHPUnit_Framework_TestCase
     {
         $event = new DescriptionAdded(
             $identity = $this->createMock(IdentityInterface::class),
-            'foobar'
+            $description = new Description('foobar')
         );
 
         $this->assertSame($identity, $event->identity());
-        $this->assertSame('foobar', $event->description());
+        $this->assertSame($description, $event->description());
     }
 }

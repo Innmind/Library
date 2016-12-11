@@ -7,6 +7,7 @@ use Domain\{
     Entity\Image,
     Entity\HttpResource,
     Entity\Image\IdentityInterface,
+    Entity\Image\Description,
     Entity\Image\Weight,
     Entity\Image\Dimension,
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
@@ -150,9 +151,13 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             $image,
-            $image->addDescription('foobar')
+            $image->addDescription($description = new Description('foobar'))
         );
-        $this->assertSame(['foobar'], $image->descriptions()->toPrimitive());
+        $this->assertSame([$description], $image->descriptions()->toPrimitive());
+        $this->assertSame(
+            Description::class,
+            (string) $image->descriptions()->type()
+        );
         $this->assertCount(1, $image->recordedEvents());
         $this->assertInstanceOf(
             DescriptionAdded::class,
@@ -163,23 +168,9 @@ class ImageTest extends \PHPUnit_Framework_TestCase
             $image->recordedEvents()->current()->identity()
         );
         $this->assertSame(
-            'foobar',
+            $description,
             $image->recordedEvents()->current()->description()
         );
-    }
-
-    /**
-     * @expectedException Domain\Exception\InvalidArgumentException
-     */
-    public function testThrowWhenEmptyDescription()
-    {
-        $image = new Image(
-            $this->createMock(IdentityInterface::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
-        );
-
-        $image->addDescription('');
     }
 
     public function testDoesntRecordEventWhenDescriptionAlreadyInSet()
@@ -190,11 +181,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
             $this->createMock(QueryInterface::class)
         );
 
-        $image->addDescription('foobar');
+        $image->addDescription(new Description('foobar'));
         $events = $image->recordedEvents();
         $this->assertSame(
             $image,
-            $image->addDescription('foobar')
+            $image->addDescription(new Description('foobar'))
         );
         $this->assertSame($events, $image->recordedEvents());
     }
