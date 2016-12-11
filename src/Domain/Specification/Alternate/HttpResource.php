@@ -4,12 +4,12 @@ declare(strict_types = 1);
 namespace Domain\Specification\Alternate;
 
 use Domain\{
-    Specification\Composable,
-    Entity\HttpResource\IdentityInterface
+    Entity\HttpResource\IdentityInterface,
+    Entity\Alternate
 };
 use Innmind\Specification\ComparatorInterface;
 
-final class HttpResource implements ComparatorInterface
+final class HttpResource implements ComparatorInterface, SpecificationInterface
 {
     use Composable;
 
@@ -42,5 +42,10 @@ final class HttpResource implements ComparatorInterface
     public function value()
     {
         return $this->value;
+    }
+
+    public function isSatisfiedBy(Alternate $alternate): bool
+    {
+        return (string) $alternate->resource() === $this->value;
     }
 }

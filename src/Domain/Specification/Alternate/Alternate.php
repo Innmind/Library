@@ -3,13 +3,13 @@ declare(strict_types = 1);
 
 namespace Domain\Specification\Alternate;
 
-use Domain\{
-    Specification\Composable,
-    Entity\HttpResource\IdentityInterface
+use Domain\Entity\{
+    HttpResource\IdentityInterface,
+    Alternate as Entity
 };
 use Innmind\Specification\ComparatorInterface;
 
-final class Alternate implements ComparatorInterface
+final class Alternate implements ComparatorInterface, SpecificationInterface
 {
     use Composable;
 
@@ -42,5 +42,10 @@ final class Alternate implements ComparatorInterface
     public function value()
     {
         return $this->value;
+    }
+
+    public function isSatisfiedBy(Entity $alternate): bool
+    {
+        return (string) $alternate->alternate() === $this->value;
     }
 }

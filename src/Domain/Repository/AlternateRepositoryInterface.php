@@ -3,12 +3,12 @@ declare(strict_types = 1);
 
 namespace Domain\Repository;
 
-use Domain\Entity\{
-    Alternate\IdentityInterface,
-    Alternate
+use Domain\{
+    Entity\Alternate\IdentityInterface,
+    Entity\Alternate,
+    Specification\Alternate\SpecificationInterface
 };
 use Innmind\Immutable\SetInterface;
-use Innmind\Specification\SpecificationInterface;
 
 interface AlternateRepositoryInterface
 {
