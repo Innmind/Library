@@ -3,13 +3,13 @@ declare(strict_types = 1);
 
 namespace Domain\Specification\CitationAppearance;
 
-use Domain\{
-    Specification\Composable,
-    Entity\HttpResource\IdentityInterface
+use Domain\Entity\{
+    CitationAppearance,
+    HttpResource\IdentityInterface
 };
 use Innmind\Specification\ComparatorInterface;
 
-final class HttpResource implements ComparatorInterface
+final class HttpResource implements ComparatorInterface, SpecificationInterface
 {
     use Composable;
 
@@ -42,5 +42,10 @@ final class HttpResource implements ComparatorInterface
     public function value()
     {
         return $this->value;
+    }
+
+    public function isSatisfiedBy(CitationAppearance $appearance): bool
+    {
+        return (string) $appearance->resource() === $this->value;
     }
 }
