@@ -3,13 +3,13 @@ declare(strict_types = 1);
 
 namespace Domain\Specification\Host;
 
-use Domain\{
-    Specification\Composable,
-    Entity\Host\Name as Model
+use Domain\Entity\{
+    Host,
+    Host\Name as Model
 };
 use Innmind\Specification\ComparatorInterface;
 
-final class Name implements ComparatorInterface
+final class Name implements ComparatorInterface, SpecificationInterface
 {
     use Composable;
 
@@ -42,5 +42,10 @@ final class Name implements ComparatorInterface
     public function value()
     {
         return $this->value;
+    }
+
+    public function isSatisfiedBy(Host $host): bool
+    {
+        return (string) $host->name() === $this->value;
     }
 }

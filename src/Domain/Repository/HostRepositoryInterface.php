@@ -3,12 +3,12 @@ declare(strict_types = 1);
 
 namespace Domain\Repository;
 
-use Domain\Entity\{
-    Host\IdentityInterface,
-    Host
+use Domain\{
+    Entity\Host\IdentityInterface,
+    Entity\Host,
+    Specification\Host\SpecificationInterface
 };
 use Innmind\Immutable\SetInterface;
-use Innmind\Specification\SpecificationInterface;
 
 interface HostRepositoryInterface
 {
