@@ -3,13 +3,13 @@ declare(strict_types = 1);
 
 namespace Domain\Specification\Reference;
 
-use Domain\{
-    Specification\Composable,
-    Entity\HttpResource\IdentityInterface
+use Domain\Entity\{
+    Reference,
+    HttpResource\IdentityInterface
 };
 use Innmind\Specification\ComparatorInterface;
 
-final class Target implements ComparatorInterface
+final class Target implements ComparatorInterface, SpecificationInterface
 {
     use Composable;
 
@@ -42,5 +42,10 @@ final class Target implements ComparatorInterface
     public function value()
     {
         return $this->value;
+    }
+
+    public function isSatisfiedBy(Reference $reference): bool
+    {
+        return (string) $reference->target() === $this->value;
     }
 }
