@@ -1,19 +1,19 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\Domain\Command;
+namespace Tests\Domain\Command\HttpResource;
 
 use Domain\{
-    Command\SpecifyHttpResourceLanguages,
+    Command\HttpResource\SpecifyLanguages,
     Entity\HttpResource\IdentityInterface
 };
 use Innmind\Immutable\Set;
 
-class SpecifyHttpResourceLanguagesTest extends \PHPUnit_Framework_TestCase
+class SpecifyLanguagesTest extends \PHPUnit_Framework_TestCase
 {
     public function testInterface()
     {
-        $command = new SpecifyHttpResourceLanguages(
+        $command = new SpecifyLanguages(
             $identity = $this->createMock(IdentityInterface::class),
             $languages = (new Set('string'))->add('fr')
         );

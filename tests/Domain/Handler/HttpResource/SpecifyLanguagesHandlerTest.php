@@ -1,11 +1,11 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\Domain\Handler;
+namespace Tests\Domain\Handler\HttpResource;
 
 use Domain\{
-    Handler\SpecifyHttpResourceLanguagesHandler,
-    Command\SpecifyHttpResourceLanguages,
+    Handler\HttpResource\SpecifyLanguagesHandler,
+    Command\HttpResource\SpecifyLanguages,
     Repository\HttpResourceRepositoryInterface,
     Entity\HttpResource,
     Entity\HttpResource\IdentityInterface,
@@ -17,11 +17,11 @@ use Innmind\Url\{
 };
 use Innmind\Immutable\Set;
 
-class SpecifyHttpResourceLanguagesHandlerTest extends \PHPunit_Framework_TestCase
+class SpecifyLanguagesHandlerTest extends \PHPunit_Framework_TestCase
 {
     public function testExecution()
     {
-        $handler = new SpecifyHttpResourceLanguagesHandler(
+        $handler = new SpecifyLanguagesHandler(
             $repository = $this->createMock(HttpResourceRepositoryInterface::class)
         );
         $identity = $this->createMock(IdentityInterface::class);
@@ -38,7 +38,7 @@ class SpecifyHttpResourceLanguagesHandlerTest extends \PHPunit_Framework_TestCas
             );
 
         $this->assertNull($handler(
-            new SpecifyHttpResourceLanguages(
+            new SpecifyLanguages(
                 $identity,
                 $languages = (new Set('string'))->add('fr')
             )

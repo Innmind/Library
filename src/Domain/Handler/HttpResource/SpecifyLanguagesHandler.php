@@ -1,14 +1,14 @@
 <?php
 declare(strict_types = 1);
 
-namespace Domain\Handler;
+namespace Domain\Handler\HttpResource;
 
 use Domain\{
-    Command\SpecifyHttpResourceLanguages,
+    Command\HttpResource\SpecifyLanguages,
     Repository\HttpResourceRepositoryInterface
 };
 
-final class SpecifyHttpResourceLanguagesHandler
+final class SpecifyLanguagesHandler
 {
     private $repository;
 
@@ -17,7 +17,7 @@ final class SpecifyHttpResourceLanguagesHandler
         $this->repository = $repository;
     }
 
-    public function __invoke(SpecifyHttpResourceLanguages $wished): void
+    public function __invoke(SpecifyLanguages $wished): void
     {
         $this
             ->repository

@@ -1,12 +1,12 @@
 <?php
 declare(strict_types = 1);
 
-namespace Domain\Command;
+namespace Domain\Command\HttpResource;
 
 use Domain\Entity\HttpResource\IdentityInterface;
 use Innmind\Immutable\SetInterface;
 
-final class SpecifyHttpResourceLanguages
+final class SpecifyLanguages
 {
     private $identity;
     private $languages;
