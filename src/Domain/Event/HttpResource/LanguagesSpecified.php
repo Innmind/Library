@@ -3,7 +3,11 @@ declare(strict_types = 1);
 
 namespace Domain\Event\HttpResource;
 
-use Domain\Entity\HttpResource\IdentityInterface;
+use Domain\{
+    Entity\HttpResource\IdentityInterface,
+    Model\Language,
+    Exception\InvalidArgumentException
+};
 use Innmind\Immutable\SetInterface;
 
 final class LanguagesSpecified
@@ -15,6 +19,10 @@ final class LanguagesSpecified
         IdentityInterface $identity,
         SetInterface $languages
     ) {
+        if ((string) $languages->type() !== Language::class) {
+            throw new InvalidArgumentException;
+        }
+
         $this->identity = $identity;
         $this->languages = $languages;
     }

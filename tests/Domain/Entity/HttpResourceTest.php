@@ -8,7 +8,8 @@ use Domain\{
     Entity\HttpResource\IdentityInterface,
     Event\HttpResourceRegistered,
     Event\HttpResource\LanguagesSpecified,
-    Event\HttpResource\CharsetSpecified
+    Event\HttpResource\CharsetSpecified,
+    Model\Language
 };
 use Innmind\Url\{
     PathInterface,
@@ -68,7 +69,8 @@ class HttpResourceTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(
             $resource,
             $resource->specifyLanguages(
-                $languages = (new Set('string'))->add('fr')
+                $languages = (new Set(Language::class))
+                    ->add(new Language('fr'))
             )
         );
         $this->assertSame($languages, $resource->languages());

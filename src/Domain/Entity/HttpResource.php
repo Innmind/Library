@@ -8,6 +8,7 @@ use Domain\{
     Event\HttpResourceRegistered,
     Event\HttpResource\LanguagesSpecified,
     Event\HttpResource\CharsetSpecified,
+    Model\Language,
     Exception\InvalidArgumentException
 };
 use Innmind\EventBus\{
@@ -73,7 +74,7 @@ class HttpResource implements ContainsRecordedEventsInterface
     public function specifyLanguages(SetInterface $languages): self
     {
         if (
-            (string) $languages->type() !== 'string' ||
+            (string) $languages->type() !== Language::class ||
             $languages->size() === 0
         ) {
             throw new InvalidArgumentException;

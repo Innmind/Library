@@ -9,7 +9,8 @@ use Domain\{
     Repository\HttpResourceRepositoryInterface,
     Entity\HttpResource,
     Entity\HttpResource\IdentityInterface,
-    Event\HttpResource\LanguagesSpecified
+    Event\HttpResource\LanguagesSpecified,
+    Model\Language
 };
 use Innmind\Url\{
     PathInterface,
@@ -40,7 +41,8 @@ class SpecifyLanguagesHandlerTest extends \PHPunit_Framework_TestCase
         $this->assertNull($handler(
             new SpecifyLanguages(
                 $identity,
-                $languages = (new Set('string'))->add('fr')
+                $languages = (new Set(Language::class))
+                    ->add(new Language('fr'))
             )
         ));
         $this->assertSame($languages, $resource->languages());
