@@ -3,12 +3,12 @@ declare(strict_types = 1);
 
 namespace Domain\Repository;
 
-use Domain\Entity\{
-    Image\IdentityInterface,
-    Image
+use Domain\{
+    Entity\Image\IdentityInterface,
+    Entity\Image,
+    Specification\HttpResource\SpecificationInterface
 };
 use Innmind\Immutable\SetInterface;
-use Innmind\Specification\SpecificationInterface;
 
 interface ImageRepositoryInterface
 {

@@ -3,12 +3,12 @@ declare(strict_types = 1);
 
 namespace Domain\Repository;
 
-use Domain\Entity\{
-    HtmlPage\IdentityInterface,
-    HtmlPage
+use Domain\{
+    Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage,
+    Specification\HttpResource\SpecificationInterface
 };
 use Innmind\Immutable\SetInterface;
-use Innmind\Specification\SpecificationInterface;
 
 interface HtmlPageRepositoryInterface
 {

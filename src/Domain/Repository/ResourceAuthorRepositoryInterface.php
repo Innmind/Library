@@ -3,12 +3,12 @@ declare(strict_types = 1);
 
 namespace Domain\Repository;
 
-use Domain\Entity\{
-    ResourceAuthor\IdentityInterface,
-    ResourceAuthor
+use Domain\{
+    Entity\ResourceAuthor\IdentityInterface,
+    Entity\ResourceAuthor,
+    Specification\ResourceAuthor\SpecificationInterface
 };
 use Innmind\Immutable\SetInterface;
-use Innmind\Specification\SpecificationInterface;
 
 interface ResourceAuthorRepositoryInterface
 {
