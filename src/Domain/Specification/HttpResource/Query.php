@@ -3,11 +3,11 @@ declare(strict_types = 1);
 
 namespace Domain\Specification\HttpResource;
 
-use Domain\Specification\Composable;
+use Domain\Entity\HttpResource;
 use Innmind\Specification\ComparatorInterface;
 use Innmind\Url\QueryInterface;
 
-final class Query implements ComparatorInterface
+final class Query implements ComparatorInterface, SpecificationInterface
 {
     use Composable;
 
@@ -40,5 +40,10 @@ final class Query implements ComparatorInterface
     public function value()
     {
         return $this->value;
+    }
+
+    public function isSatisfiedBy(HttpResource $resource): bool
+    {
+        return (string) $resource->query() === $this->value;
     }
 }
