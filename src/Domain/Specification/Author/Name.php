@@ -3,13 +3,13 @@ declare(strict_types = 1);
 
 namespace Domain\Specification\Author;
 
-use Domain\{
-    Specification\Composable,
-    Entity\Author\Name as Model
+use Domain\Entity\{
+    Author,
+    Author\Name as Model
 };
 use Innmind\Specification\ComparatorInterface;
 
-final class Name implements ComparatorInterface
+final class Name implements ComparatorInterface, SpecificationInterface
 {
     use Composable;
 
@@ -42,5 +42,10 @@ final class Name implements ComparatorInterface
     public function value()
     {
         return $this->value;
+    }
+
+    public function isSatisfiedBy(Author $author): bool
+    {
+        return (string) $author->name() === $this->value;
     }
 }
