@@ -1,18 +1,18 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\Domain\Command;
+namespace Tests\Domain\Command\HttpResource;
 
 use Domain\{
-    Command\SpecifyHttpResourceCharset,
+    Command\HttpResource\SpecifyCharset,
     Entity\HttpResource\IdentityInterface
 };
 
-class SpecifyHttpResourceCharsetTest extends \PHPUnit_Framework_TestCase
+class SpecifyCharsetTest extends \PHPUnit_Framework_TestCase
 {
     public function testInterface()
     {
-        $command = new SpecifyHttpResourceCharset(
+        $command = new SpecifyCharset(
             $identity = $this->createMock(IdentityInterface::class),
             'utf-8'
         );

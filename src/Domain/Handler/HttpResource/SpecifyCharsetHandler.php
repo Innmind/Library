@@ -1,14 +1,14 @@
 <?php
 declare(strict_types = 1);
 
-namespace Domain\Handler;
+namespace Domain\Handler\HttpResource;
 
 use Domain\{
-    Command\SpecifyHttpResourceCharset,
+    Command\HttpResource\SpecifyCharset,
     Repository\HttpResourceRepositoryInterface
 };
 
-final class SpecifyHttpResourceCharsetHandler
+final class SpecifyCharsetHandler
 {
     private $repository;
 
@@ -17,7 +17,7 @@ final class SpecifyHttpResourceCharsetHandler
         $this->repository = $repository;
     }
 
-    public function __invoke(SpecifyHttpResourceCharset $wished): void
+    public function __invoke(SpecifyCharset $wished): void
     {
         $this
             ->repository

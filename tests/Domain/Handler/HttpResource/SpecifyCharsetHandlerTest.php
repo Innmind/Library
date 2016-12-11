@@ -1,11 +1,11 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\Domain\Handler;
+namespace Tests\Domain\Handler\HttpResource;
 
 use Domain\{
-    Handler\SpecifyHttpResourceCharsetHandler,
-    Command\SpecifyHttpResourceCharset,
+    Handler\HttpResource\SpecifyCharsetHandler,
+    Command\HttpResource\SpecifyCharset,
     Repository\HttpResourceRepositoryInterface,
     Entity\HttpResource,
     Entity\HttpResource\IdentityInterface,
@@ -16,11 +16,11 @@ use Innmind\Url\{
     QueryInterface
 };
 
-class SpecifyHttpResourceCharsetHandlerTest extends \PHPunit_Framework_TestCase
+class SpecifyCharsetHandlerTest extends \PHPunit_Framework_TestCase
 {
     public function testExecution()
     {
-        $handler = new SpecifyHttpResourceCharsetHandler(
+        $handler = new SpecifyCharsetHandler(
             $repository = $this->createMock(HttpResourceRepositoryInterface::class)
         );
         $identity = $this->createMock(IdentityInterface::class);
@@ -37,7 +37,7 @@ class SpecifyHttpResourceCharsetHandlerTest extends \PHPunit_Framework_TestCase
             );
 
         $this->assertNull($handler(
-            new SpecifyHttpResourceCharset($identity, 'utf-8')
+            new SpecifyCharset($identity, 'utf-8')
         ));
         $this->assertSame('utf-8', $resource->charset());
         $this->assertInstanceOf(

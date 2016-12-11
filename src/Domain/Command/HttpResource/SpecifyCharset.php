@@ -1,11 +1,11 @@
 <?php
 declare(strict_types = 1);
 
-namespace Domain\Command;
+namespace Domain\Command\HttpResource;
 
 use Domain\Entity\HttpResource\IdentityInterface;
 
-final class SpecifyHttpResourceCharset
+final class SpecifyCharset
 {
     private $identity;
     private $charset;
