@@ -1,11 +1,11 @@
 <?php
 declare(strict_types = 1);
 
-namespace Domain\Command;
+namespace Domain\Command\Image;
 
 use Domain\Entity\Image\IdentityInterface;
 
-final class AddImageDescription
+final class AddDescription
 {
     private $identity;
     private $description;

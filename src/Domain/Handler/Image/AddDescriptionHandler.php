@@ -1,14 +1,14 @@
 <?php
 declare(strict_types = 1);
 
-namespace Domain\Handler;
+namespace Domain\Handler\Image;
 
 use Domain\{
-    Command\AddImageDescription,
+    Command\Image\AddDescription,
     Repository\ImageRepositoryInterface
 };
 
-final class AddImageDescriptionHandler
+final class AddDescriptionHandler
 {
     private $repository;
 
@@ -17,7 +17,7 @@ final class AddImageDescriptionHandler
         $this->repository = $repository;
     }
 
-    public function __invoke(AddImageDescription $wished): void
+    public function __invoke(AddDescription $wished): void
     {
         $this
             ->repository

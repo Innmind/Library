@@ -1,11 +1,11 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\Domain\Handler;
+namespace Tests\Domain\Handler\Image;
 
 use Domain\{
-    Handler\AddImageDescriptionHandler,
-    Command\AddImageDescription,
+    Handler\Image\AddDescriptionHandler,
+    Command\Image\AddDescription,
     Repository\ImageRepositoryInterface,
     Entity\Image,
     Entity\Image\IdentityInterface,
@@ -16,14 +16,14 @@ use Innmind\Url\{
     QueryInterface
 };
 
-class AddImageDescriptionHandlerTest extends \PHPUnit_Framework_TestCase
+class AddDescriptionHandlerTest extends \PHPUnit_Framework_TestCase
 {
     public function testExecution()
     {
-        $handler = new AddImageDescriptionHandler(
+        $handler = new AddDescriptionHandler(
             $repository = $this->createMock(ImageRepositoryInterface::class)
         );
-        $command = new AddImageDescription(
+        $command = new AddDescription(
             $this->createMock(IdentityInterface::class),
             'foobar'
         );

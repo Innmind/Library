@@ -1,18 +1,18 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\Domain\Command;
+namespace Tests\Domain\Command\Image;
 
 use Domain\{
-    Command\AddImageDescription,
+    Command\Image\AddDescription,
     Entity\Image\IdentityInterface
 };
 
-class AddImageDescriptionTest extends \PHPUnit_Framework_TestCase
+class AddDescriptionTest extends \PHPUnit_Framework_TestCase
 {
     public function testInterface()
     {
-        $command = new AddImageDescription(
+        $command = new AddDescription(
             $identity = $this->createMock(IdentityInterface::class),
             'foobar'
         );
