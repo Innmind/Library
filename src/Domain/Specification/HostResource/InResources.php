@@ -4,14 +4,14 @@ declare(strict_types = 1);
 namespace Domain\Specification\HostResource;
 
 use Domain\{
-    Specification\Composable,
+    Entity\HostResource,
     Entity\HttpResource\IdentityInterface,
     Exception\InvalidArgumentException
 };
 use Innmind\Specification\ComparatorInterface;
 use Innmind\Immutable\SetInterface;
 
-final class InResources implements ComparatorInterface
+final class InResources implements ComparatorInterface, SpecificationInterface
 {
     use Composable;
 
@@ -55,5 +55,10 @@ final class InResources implements ComparatorInterface
     public function value()
     {
         return $this->value;
+    }
+
+    public function isSatisfiedBy(HostResource $relation): bool
+    {
+        return in_array((string) $relation->resource(), $this->value, true);
     }
 }

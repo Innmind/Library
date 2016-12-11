@@ -3,13 +3,13 @@ declare(strict_types = 1);
 
 namespace Domain\Specification\HostResource;
 
-use Domain\{
-    Specification\Composable,
-    Entity\Host\IdentityInterface
+use Domain\Entity\{
+    HostResource,
+    Host\IdentityInterface
 };
 use Innmind\Specification\ComparatorInterface;
 
-final class Host implements ComparatorInterface
+final class Host implements ComparatorInterface, SpecificationInterface
 {
     use Composable;
 
@@ -42,5 +42,10 @@ final class Host implements ComparatorInterface
     public function value()
     {
         return $this->value;
+    }
+
+    public function isSatisfiedBy(HostResource $relation): bool
+    {
+        return (string) $relation->host() === $this->value;
     }
 }
