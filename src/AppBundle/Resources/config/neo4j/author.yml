@@ -1,0 +1,9 @@
+Author:
+    type: aggregate
+    labels: [Person, Author]
+    identity:
+        property: identity
+        type: AppBundle\Entity\Author\Identity
+    properties:
+        name:
+            type: author_name
