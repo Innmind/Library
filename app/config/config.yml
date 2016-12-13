@@ -29,3 +29,7 @@ framework:
     assets: ~
     php_errors:
         log: true
+
+innmind_neo4j:
+    types:
+        - AppBundle\Neo4j\Type\AuthorName
