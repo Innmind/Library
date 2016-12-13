@@ -1,3 +1,12 @@
 services:
-    repository.neo4j.author:
+    repository.author:
         class: AppBundle\Repository\Neo4j\AuthorRepository
+        arguments:
+            - '@repository.neo4j.author'
+
+    repository.neo4j.author:
+        factory:
+            - '@innmind_neo4j.manager'
+            - 'repository'
+        arguments:
+            - Domain\Entity\Author
