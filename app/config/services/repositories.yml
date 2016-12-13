@@ -1,0 +1,3 @@
+services:
+    repository.neo4j.author:
+        class: AppBundle\Repository\Neo4j\AuthorRepository
