@@ -801,17 +801,16 @@
         },
         {
             "name": "innmind/neo4j-bundle",
-            "version": "2.0.1",
-            "target-dir": "Innmind/Neo4jBundle",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Neo4jBundle.git",
-                "reference": "568e7c44bad899b9970a7db56b2088ffbca149b3"
+                "reference": "33842a865ce1633843ab8a7c1f93a8cf932ae3c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Neo4jBundle/zipball/568e7c44bad899b9970a7db56b2088ffbca149b3",
-                "reference": "568e7c44bad899b9970a7db56b2088ffbca149b3",
+                "url": "https://api.github.com/repos/Innmind/Neo4jBundle/zipball/33842a865ce1633843ab8a7c1f93a8cf932ae3c8",
+                "reference": "33842a865ce1633843ab8a7c1f93a8cf932ae3c8",
                 "shasum": ""
             },
             "require": {
@@ -824,10 +823,13 @@
                 "symfony/http-kernel": "~3.0",
                 "symfony/yaml": "~3.0"
             },
+            "require-dev": {
+                "phpunit/phpunit": "~5.6"
+            },
             "type": "symfony-bundle",
             "autoload": {
-                "psr-0": {
-                    "Innmind\\Neo4jBundle": ""
+                "psr-4": {
+                    "Innmind\\Neo4jBundle\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -846,7 +848,7 @@
                 "neo4j",
                 "orm"
             ],
-            "time": "2016-12-12 07:39:48"
+            "time": "2016-12-13 07:07:50"
         },
         {
             "name": "innmind/neo4j-dbal",

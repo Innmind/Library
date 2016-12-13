@@ -1,0 +1,22 @@
+<?php
+declare(strict_types = 1);
+
+namespace Tests\AppBundle\Entity\Author;
+
+use AppBundle\Entity\Author\Identity;
+use Domain\Entity\Author\IdentityInterface;
+use Innmind\Neo4j\ONM\Identity\Uuid as UuidIdentity;
+use Ramsey\Uuid\Uuid;
+
+class IdentityTest extends \PHPUnit_Framework_TestCase
+{
+    public function testInterface()
+    {
+        $uuid = (string) Uuid::uuid4();
+        $identity = new Identity($uuid);
+
+        $this->assertInstanceOf(IdentityInterface::class, $identity);
+        $this->assertInstanceOf(UuidIdentity::class, $identity);
+        $this->assertSame($uuid, (string) $identity);
+    }
+}

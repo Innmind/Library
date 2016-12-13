@@ -1,0 +1,5 @@
+services:
+    neo4j.identity.generator.author:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\Author\Identity'

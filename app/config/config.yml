@@ -33,3 +33,5 @@ framework:
 innmind_neo4j:
     types:
         - AppBundle\Neo4j\Type\AuthorName
+    identity_generators:
+        AppBundle\Entity\Author\Identity: neo4j.identity.generator.author
