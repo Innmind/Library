@@ -32,7 +32,8 @@
         "symfony/polyfill-apcu": "^1.0",
         "sensio/distribution-bundle": "^5.0",
         "incenteev/composer-parameter-handler": "^2.0",
-        "innmind/neo4j-bundle": "^2.0"
+        "innmind/neo4j-bundle": "^2.0",
+        "innmind/command-bus-bundle": "^1.0"
     },
     "config": {
         "bin-dir": "bin"
