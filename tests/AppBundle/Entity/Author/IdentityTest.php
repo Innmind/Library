@@ -6,6 +6,7 @@ namespace Tests\AppBundle\Entity\Author;
 use AppBundle\Entity\Author\Identity;
 use Domain\Entity\Author\IdentityInterface;
 use Innmind\Neo4j\ONM\Identity\Uuid as UuidIdentity;
+use Innmind\Rest\Server\IdentityInterface as RestIdentity;
 use Ramsey\Uuid\Uuid;
 
 class IdentityTest extends \PHPUnit_Framework_TestCase
@@ -17,6 +18,7 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(IdentityInterface::class, $identity);
         $this->assertInstanceOf(UuidIdentity::class, $identity);
+        $this->assertInstanceOf(RestIdentity::class, $identity);
         $this->assertSame($uuid, (string) $identity);
     }
 }

@@ -6,7 +6,8 @@ namespace AppBundle\Entity\Author;
 use AppBundle\Exception\InvalidArgumentException;
 use Domain\Entity\Author\IdentityInterface;
 use Innmind\Neo4j\ONM\Identity\Uuid;
+use Innmind\Rest\Server\IdentityInterface as RestIdentity;
 
-final class Identity extends Uuid implements IdentityInterface
+final class Identity extends Uuid implements IdentityInterface, RestIdentity
 {
 }
