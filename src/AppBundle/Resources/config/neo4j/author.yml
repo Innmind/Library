@@ -1,4 +1,4 @@
-Author:
+Domain\Entity\Author:
     type: aggregate
     labels: [Person, Author]
     identity:
