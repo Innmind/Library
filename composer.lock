@@ -671,20 +671,21 @@
         },
         {
             "name": "innmind/command-bus",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/CommandBus.git",
-                "reference": "bd899c1479979c1edf60d01d599720c7ff0506f0"
+                "reference": "996f2d5c69bdbdc33eb71ceecea1b648bc31341f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/CommandBus/zipball/bd899c1479979c1edf60d01d599720c7ff0506f0",
-                "reference": "bd899c1479979c1edf60d01d599720c7ff0506f0",
+                "url": "https://api.github.com/repos/Innmind/CommandBus/zipball/996f2d5c69bdbdc33eb71ceecea1b648bc31341f",
+                "reference": "996f2d5c69bdbdc33eb71ceecea1b648bc31341f",
                 "shasum": ""
             },
             "require": {
                 "innmind/immutable": "~1.9",
+                "innmind/reflection": "^1.1",
                 "php": "~7.0",
                 "psr/log": "^1.0",
                 "ramsey/uuid": "^3.5"
@@ -715,7 +716,7 @@
                 "command bus",
                 "ddd"
             ],
-            "time": "2016-12-17 13:28:33"
+            "time": "2016-12-17 14:44:49"
         },
         {
             "name": "innmind/command-bus-bundle",
