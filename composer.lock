@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f198f9ec8214bdbb09252e5ee2c812cb",
-    "content-hash": "e105a1ca9f781954641a3bedd8df2ff1",
+    "hash": "eb570912d69168ca85e44fe30435d278",
+    "content-hash": "5c1081dd3205dc8497061e0c06081385",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -856,6 +856,54 @@
             "time": "2016-11-06 15:46:51"
         },
         {
+            "name": "innmind/http",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/Http.git",
+                "reference": "da6d8c63e3d5f2f699a96519f5ed2e42b2121aff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/Http/zipball/da6d8c63e3d5f2f699a96519f5ed2e42b2121aff",
+                "reference": "da6d8c63e3d5f2f699a96519f5ed2e42b2121aff",
+                "shasum": ""
+            },
+            "require": {
+                "innmind/filesystem": "~1.1",
+                "innmind/immutable": "~1.6",
+                "innmind/url": "^1.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "psr/http-message": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Innmind\\Http\\": "src/",
+                    "Tests\\Innmind\\Http\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "Value Objects to abstract http messages",
+            "homepage": "http://github.com/Innmind/Http",
+            "keywords": [
+                "Value Object",
+                "http"
+            ],
+            "time": "2016-09-24 14:46:25"
+        },
+        {
             "name": "innmind/immutable",
             "version": "1.9.0",
             "target-dir": "Innmind/Immutable",
@@ -1087,6 +1135,104 @@
                 "reflection"
             ],
             "time": "2016-02-28 11:23:07"
+        },
+        {
+            "name": "innmind/rest-server",
+            "version": "3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/rest-server.git",
+                "reference": "a64047a81338dfc0eccb766195c6f34fcfccfc0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/rest-server/zipball/a64047a81338dfc0eccb766195c6f34fcfccfc0e",
+                "reference": "a64047a81338dfc0eccb766195c6f34fcfccfc0e",
+                "shasum": ""
+            },
+            "require": {
+                "innmind/filesystem": "^1.1",
+                "innmind/http": "^1.2",
+                "innmind/immutable": "~1.9",
+                "innmind/specification": "^1.0",
+                "php": "~7.0",
+                "symfony/config": "~3.0",
+                "symfony/serializer": "~3.0",
+                "symfony/yaml": "~3.0",
+                "willdurand/negotiation": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Innmind\\Rest\\Server\\": "src/",
+                    "Tests\\Innmind\\Rest\\Server\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "Library to easily expose REST APIs",
+            "homepage": "http://github.com/Innmind/rest-server",
+            "keywords": [
+                "api",
+                "rest"
+            ],
+            "time": "2016-11-11 14:41:08"
+        },
+        {
+            "name": "innmind/rest-server-bundle",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/RestServerBundle.git",
+                "reference": "8019f459baac07275ff2ce03ac42326de652d302"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/RestServerBundle/zipball/8019f459baac07275ff2ce03ac42326de652d302",
+                "reference": "8019f459baac07275ff2ce03ac42326de652d302",
+                "shasum": ""
+            },
+            "require": {
+                "innmind/rest-server": "~3.0",
+                "php": "~7.0",
+                "symfony/dependency-injection": "~3.0",
+                "symfony/framework-bundle": "~3.0",
+                "symfony/http-kernel": "~3.0",
+                "symfony/routing": "~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Innmind\\Rest\\ServerBundle\\": "src/",
+                    "Tests\\Innmind\\Rest\\ServerBundle\\": "tests/",
+                    "Fixtures\\Innmind\\Rest\\ServerBundle\\": "fixtures/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "Symfony integration of innmind/rest-server",
+            "homepage": "http://github.com/Innmind/RestServerBundle",
+            "keywords": [
+                "api",
+                "rest"
+            ],
+            "time": "2016-07-24 13:44:54"
         },
         {
             "name": "innmind/specification",
@@ -2390,6 +2536,58 @@
                 "templating"
             ],
             "time": "2016-12-13 17:28:18"
+        },
+        {
+            "name": "willdurand/negotiation",
+            "version": "v2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/willdurand/Negotiation.git",
+                "reference": "1f210db45723b21edd69f39794662b8d64656b93"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/willdurand/Negotiation/zipball/1f210db45723b21edd69f39794662b8d64656b93",
+                "reference": "1f210db45723b21edd69f39794662b8d64656b93",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Negotiation\\": "src/Negotiation"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "William Durand",
+                    "email": "will+git@drnd.me"
+                }
+            ],
+            "description": "Content Negotiation tools for PHP provided as a standalone library.",
+            "homepage": "http://williamdurand.fr/Negotiation/",
+            "keywords": [
+                "accept",
+                "content",
+                "format",
+                "header",
+                "negotiation"
+            ],
+            "time": "2016-10-14 09:17:47"
         }
     ],
     "packages-dev": [
