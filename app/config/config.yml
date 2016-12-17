@@ -35,3 +35,10 @@ innmind_neo4j:
         - AppBundle\Neo4j\Type\AuthorName
     identity_generators:
         AppBundle\Entity\Author\Identity: neo4j.identity.generator.author
+
+innmind_command_bus:
+    stack:
+        - queue
+        - logger
+        - persister
+        - default

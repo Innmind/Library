@@ -4,3 +4,10 @@ imports:
     - { resource: services/handlers.yml }
 
 services:
+    command_bus.persister:
+        class: AppBundle\CommandBus\PersisterCommandBus
+        arguments:
+            - ~
+            - '@innmind_neo4j.manager'
+        tags:
+            - { name: innmind_command_bus, alias: persister }
