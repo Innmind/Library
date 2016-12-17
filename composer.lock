@@ -857,16 +857,16 @@
         },
         {
             "name": "innmind/http",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Http.git",
-                "reference": "da6d8c63e3d5f2f699a96519f5ed2e42b2121aff"
+                "reference": "bbad73acba917691fd0084c96ff47c68c9700a77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Http/zipball/da6d8c63e3d5f2f699a96519f5ed2e42b2121aff",
-                "reference": "da6d8c63e3d5f2f699a96519f5ed2e42b2121aff",
+                "url": "https://api.github.com/repos/Innmind/Http/zipball/bbad73acba917691fd0084c96ff47c68c9700a77",
+                "reference": "bbad73acba917691fd0084c96ff47c68c9700a77",
                 "shasum": ""
             },
             "require": {
@@ -901,7 +901,7 @@
                 "Value Object",
                 "http"
             ],
-            "time": "2016-09-24 14:46:25"
+            "time": "2016-12-17 16:36:00"
         },
         {
             "name": "innmind/immutable",
@@ -1188,16 +1188,16 @@
         },
         {
             "name": "innmind/rest-server-bundle",
-            "version": "1.0.1",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/RestServerBundle.git",
-                "reference": "8019f459baac07275ff2ce03ac42326de652d302"
+                "reference": "20ae5296a493f082449e40958d8c38f6ca004157"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/RestServerBundle/zipball/8019f459baac07275ff2ce03ac42326de652d302",
-                "reference": "8019f459baac07275ff2ce03ac42326de652d302",
+                "url": "https://api.github.com/repos/Innmind/RestServerBundle/zipball/20ae5296a493f082449e40958d8c38f6ca004157",
+                "reference": "20ae5296a493f082449e40958d8c38f6ca004157",
                 "shasum": ""
             },
             "require": {
@@ -1207,6 +1207,9 @@
                 "symfony/framework-bundle": "~3.0",
                 "symfony/http-kernel": "~3.0",
                 "symfony/routing": "~3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.6"
             },
             "type": "library",
             "autoload": {
@@ -1232,7 +1235,7 @@
                 "api",
                 "rest"
             ],
-            "time": "2016-07-24 13:44:54"
+            "time": "2016-12-17 17:19:14"
         },
         {
             "name": "innmind/specification",
