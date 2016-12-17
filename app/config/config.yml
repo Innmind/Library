@@ -16,7 +16,7 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: false }
-    #serializer:      { enable_annotations: true }
+    serializer: ~
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
@@ -48,3 +48,15 @@ innmind_command_bus:
         - logger
         - persister
         - default
+
+innmind_rest_server:
+    accept:
+        json:
+            priority: 0
+            media_types:
+                application/json: 0
+    content_type:
+        json:
+            priority: 0
+            media_types:
+                application/json: 0

@@ -1,0 +1,12 @@
+web:
+    resources:
+        author:
+            identity: identity
+            gateway: author
+            properties:
+                identity:
+                    type: string
+                    access: [READ]
+                name:
+                    type: string
+                    access: [READ, CREATE]
