@@ -32,6 +32,7 @@ framework:
 
 innmind_neo4j:
     connection:
+        scheme: '%database_scheme%'
         host: '%database_host%'
         port: '%database_port%'
         user: '%database_user%'
