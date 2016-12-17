@@ -1,4 +1,11 @@
 services:
+    gateway.author:
+        class: AppBundle\Rest\Gateway\AuthorGateway
+        arguments:
+            - '@gateway.author.creator'
+        tags:
+            - { name: innmind_rest_server.gateway, alias: author }
+
     gateway.author.creator:
         class: AppBundle\Rest\Gateway\AuthorGateway\ResourceCreator
         arguments:
