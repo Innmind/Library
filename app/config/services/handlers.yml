@@ -1,0 +1,7 @@
+services:
+    handler.register_author:
+        class: Domain\Handler\RegisterAuthorHandler
+        arguments:
+            - '@repository.author'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\RegisterAuthor }
