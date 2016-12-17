@@ -1,0 +1,5 @@
+services:
+    gateway.author.creator:
+        class: AppBundle\Rest\Gateway\AuthorGateway\ResourceCreator
+        arguments:
+            - '@command_bus'

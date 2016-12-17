@@ -2,8 +2,11 @@ imports:
     - { resource: services/repositories.yml }
     - { resource: services/identity_generators.yml }
     - { resource: services/handlers.yml }
+    - { resource: services/gateways.yml }
 
 services:
+    command_bus: '@innmind_command_bus'
+
     command_bus.persister:
         class: AppBundle\CommandBus\PersisterCommandBus
         arguments:
