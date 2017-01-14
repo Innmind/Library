@@ -27,7 +27,7 @@ class ExceptionListenerTest extends \PHPUnit_Framework_TestCase
     public function testGetSubscribedEvents()
     {
         $this->assertSame(
-            [KernelEvents::EXCEPTION => 'transform'],
+            [KernelEvents::EXCEPTION => [['transform', 200]]],
             ExceptionListener::getSubscribedEvents()
         );
     }
