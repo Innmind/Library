@@ -10,3 +10,5 @@ web:
                 name:
                     type: string
                     access: [READ, CREATE]
+            options:
+                actions: [get, create, options]
