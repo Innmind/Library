@@ -1188,16 +1188,16 @@
         },
         {
             "name": "innmind/rest-server-bundle",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/RestServerBundle.git",
-                "reference": "20ae5296a493f082449e40958d8c38f6ca004157"
+                "reference": "5f3118217d7f8b8f9ef204441041bd50b93a564d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/RestServerBundle/zipball/20ae5296a493f082449e40958d8c38f6ca004157",
-                "reference": "20ae5296a493f082449e40958d8c38f6ca004157",
+                "url": "https://api.github.com/repos/Innmind/RestServerBundle/zipball/5f3118217d7f8b8f9ef204441041bd50b93a564d",
+                "reference": "5f3118217d7f8b8f9ef204441041bd50b93a564d",
                 "shasum": ""
             },
             "require": {
@@ -1235,7 +1235,7 @@
                 "api",
                 "rest"
             ],
-            "time": "2016-12-17 17:19:14"
+            "time": "2017-01-14 16:17:07"
         },
         {
             "name": "innmind/specification",

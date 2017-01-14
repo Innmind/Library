@@ -3,6 +3,7 @@ imports:
     - { resource: services/identity_generators.yml }
     - { resource: services/handlers.yml }
     - { resource: services/gateways.yml }
+    - { resource: services/listeners.yml }
 
 services:
     command_bus: '@innmind_command_bus'
