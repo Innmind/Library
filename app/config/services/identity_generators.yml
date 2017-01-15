@@ -3,3 +3,8 @@ services:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\Author\Identity'
+
+    neo4j.identity.generator.citation:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\Citation\Identity'

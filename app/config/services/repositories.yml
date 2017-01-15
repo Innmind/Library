@@ -10,3 +10,15 @@ services:
             - 'repository'
         arguments:
             - Domain\Entity\Author
+
+    repository.citation:
+        class: AppBundle\Repository\Neo4j\CitationRepository
+        arguments:
+            - '@repository.neo4j.citation'
+
+    repository.neo4j.citation:
+        factory:
+            - '@innmind_neo4j.manager'
+            - 'repository'
+        arguments:
+            - Domain\Entity\Citation

@@ -1,0 +1,9 @@
+Domain\Entity\Citation:
+    type: aggregate
+    labels: [Citation]
+    identity:
+        property: identity
+        type: AppBundle\Entity\Citation\Identity
+    properties:
+        name:
+            type: citation_text

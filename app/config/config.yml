@@ -39,8 +39,10 @@ innmind_neo4j:
         password: '%database_password%'
     types:
         - AppBundle\Neo4j\Type\AuthorName
+        - AppBundle\Neo4j\Type\Citation\TextType
     identity_generators:
         AppBundle\Entity\Author\Identity: neo4j.identity.generator.author
+        AppBundle\Entity\Citation\Identity: neo4j.identity.generator.citation
 
 innmind_command_bus:
     stack:
