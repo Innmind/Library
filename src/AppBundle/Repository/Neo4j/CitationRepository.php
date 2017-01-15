@@ -81,8 +81,8 @@ final class CitationRepository implements CitationRepositoryInterface
             ->matching($specification)
             ->reduce(
                 new Set(Citation::class),
-                function(Set $all, Citation $author): Set {
-                    return $all->add($author);
+                function(Set $all, Citation $citation): Set {
+                    return $all->add($citation);
                 }
             );
     }
