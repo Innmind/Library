@@ -18,3 +18,8 @@ services:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\Host\Identity'
+
+    neo4j.identity.generator.http_resource:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\HttpResource\Identity'

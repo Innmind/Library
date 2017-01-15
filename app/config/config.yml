@@ -43,11 +43,16 @@ innmind_neo4j:
         - AppBundle\Neo4j\Type\Domain\NameType
         - AppBundle\Neo4j\Type\Domain\TopLevelDomainType
         - AppBundle\Neo4j\Type\Host\NameType
+        - AppBundle\Neo4j\Type\HttpResource\CharsetType
+        - AppBundle\Neo4j\Type\HttpResource\PathType
+        - AppBundle\Neo4j\Type\HttpResource\QueryType
+        - AppBundle\Neo4j\Type\LanguageType
     identity_generators:
         AppBundle\Entity\Author\Identity: neo4j.identity.generator.author
         AppBundle\Entity\Citation\Identity: neo4j.identity.generator.citation
         AppBundle\Entity\Domain\Identity: neo4j.identity.generator.domain
         AppBundle\Entity\Host\Identity: neo4j.identity.generator.host
+        AppBundle\Entity\HttpResource\Identity: neo4j.identity.generator.http_resource
 
 innmind_command_bus:
     stack:

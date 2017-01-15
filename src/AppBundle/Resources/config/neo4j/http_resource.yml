@@ -1,0 +1,16 @@
+Domain\Entity\HttpResource:
+    type: aggregate
+    labels: [Web, Resource]
+    identity:
+        property: identity
+        type: AppBundle\Entity\HttpResource\Identity
+    properties:
+        path:
+            type: http_resource_path
+        query:
+            type: http_resource_query
+        languages:
+            type: set
+            inner: language
+        charset:
+            type: http_resource_charset
