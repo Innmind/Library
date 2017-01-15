@@ -6,8 +6,7 @@ namespace Domain\Entity;
 use Domain\{
     Entity\Citation\IdentityInterface,
     Entity\Citation\Text,
-    Event\CitationRegistered,
-    Exception\InvalidArgumentException
+    Event\CitationRegistered
 };
 use Innmind\EventBus\{
     ContainsRecordedEventsInterface,
@@ -23,10 +22,6 @@ final class Citation implements ContainsRecordedEventsInterface
 
     public function __construct(IdentityInterface $identity, Text $text)
     {
-        if (empty($text)) {
-            throw new InvalidArgumentException;
-        }
-
         $this->identity = $identity;
         $this->text = $text;
     }
