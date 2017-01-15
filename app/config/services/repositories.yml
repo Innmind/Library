@@ -58,3 +58,15 @@ services:
             - 'repository'
         arguments:
             - Domain\Entity\HttpResource
+
+    repository.image:
+        class: AppBundle\Repository\Neo4j\ImageRepository
+        arguments:
+            - '@repository.neo4j.image'
+
+    repository.neo4j.image:
+        factory:
+            - '@innmind_neo4j.manager'
+            - 'repository'
+        arguments:
+            - Domain\Entity\Image

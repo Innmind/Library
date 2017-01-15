@@ -23,3 +23,8 @@ services:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\HttpResource\Identity'
+
+    neo4j.identity.generator.image:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\Image\Identity'

@@ -1,0 +1,22 @@
+Domain\Entity\Image:
+    type: aggregate
+    labels: [Web, Resource]
+    identity:
+        property: identity
+        type: AppBundle\Entity\Image\Identity
+    properties:
+        path:
+            type: http_resource_path
+        query:
+            type: http_resource_query
+        languages:
+            type: set
+            inner: language
+        charset:
+            type: http_resource_charset
+        dimension:
+            type: image_dimension
+        weight:
+            type: image_weight
+        descriptions:
+            inner: image_descriptions
