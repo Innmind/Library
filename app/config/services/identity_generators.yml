@@ -8,3 +8,8 @@ services:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\Citation\Identity'
+
+    neo4j.identity.generator.domain:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\Domain\Identity'

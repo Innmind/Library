@@ -1,0 +1,11 @@
+Domain\Entity\Domain:
+    type: aggregate
+    labels: [Web, Domain]
+    identity:
+        property: identity
+        type: AppBundle\Entity\Domain\Identity
+    properties:
+        name:
+            type: domain_name
+        topLevelDomain:
+            type: domain_tld

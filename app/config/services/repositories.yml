@@ -22,3 +22,15 @@ services:
             - 'repository'
         arguments:
             - Domain\Entity\Citation
+
+    repository.domain:
+        class: AppBundle\Repository\Neo4j\DomainRepository
+        arguments:
+            - '@repository.neo4j.domain'
+
+    repository.neo4j.domain:
+        factory:
+            - '@innmind_neo4j.manager'
+            - 'repository'
+        arguments:
+            - Domain\Entity\Domain

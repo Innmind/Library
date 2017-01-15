@@ -40,9 +40,12 @@ innmind_neo4j:
     types:
         - AppBundle\Neo4j\Type\Author\NameType
         - AppBundle\Neo4j\Type\Citation\TextType
+        - AppBundle\Neo4j\Type\Domain\NameType
+        - AppBundle\Neo4j\Type\Domain\TopLevelDomainType
     identity_generators:
         AppBundle\Entity\Author\Identity: neo4j.identity.generator.author
         AppBundle\Entity\Citation\Identity: neo4j.identity.generator.citation
+        AppBundle\Entity\Domain\Identity: neo4j.identity.generator.domain
 
 innmind_command_bus:
     stack:
