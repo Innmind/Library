@@ -5,5 +5,5 @@ Domain\Entity\Citation:
         property: identity
         type: AppBundle\Entity\Citation\Identity
     properties:
-        name:
+        text:
             type: citation_text
