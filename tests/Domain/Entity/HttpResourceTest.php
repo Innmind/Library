@@ -68,6 +68,10 @@ class HttpResourceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(0, $resource->languages());
         $this->assertSame(
+            Language::class,
+            (string) $resource->languages()->type()
+        );
+        $this->assertSame(
             $resource,
             $resource->specifyLanguages(
                 $languages = (new Set(Language::class))

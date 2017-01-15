@@ -43,7 +43,7 @@ class HttpResource implements ContainsRecordedEventsInterface
         $this->identity = $identity;
         $this->path = $path;
         $this->query = $query;
-        $this->languages = new Set('string');
+        $this->languages = new Set(Language::class);
     }
 
     public static function register(
