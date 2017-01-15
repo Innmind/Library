@@ -1,9 +1,9 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\AppBundle\Neo4j\Type;
+namespace Tests\AppBundle\Neo4j\Type\Author;
 
-use AppBundle\Neo4j\Type\AuthorName;
+use AppBundle\Neo4j\Type\NameType;
 use Domain\Entity\Author\Name;
 use Innmind\Neo4j\ONM\TypeInterface;
 use Innmind\Immutable\{
@@ -11,13 +11,13 @@ use Innmind\Immutable\{
     CollectionInterface
 };
 
-class AuthorNameTest extends \PHPUnit_Framework_TestCase
+class NameTypeTest extends \PHPUnit_Framework_TestCase
 {
     public function testInterface()
     {
         $this->assertInstanceOf(
             TypeInterface::class,
-            new AuthorName
+            new NameType
         );
     }
 
@@ -25,21 +25,21 @@ class AuthorNameTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(
             SetInterface::class,
-            AuthorName::identifiers()
+            NameType::identifiers()
         );
-        $this->assertSame('string', (string) AuthorName::identifiers()->type());
-        $this->assertSame(AuthorName::identifiers(), AuthorName::identifiers());
+        $this->assertSame('string', (string) NameType::identifiers()->type());
+        $this->assertSame(NameType::identifiers(), NameType::identifiers());
         $this->assertSame(
             ['author_name'],
-            AuthorName::identifiers()->toPrimitive()
+            NameType::identifiers()->toPrimitive()
         );
     }
 
     public function testFromConfig()
     {
         $this->assertInstanceOf(
-            AuthorName::class,
-            AuthorName::fromConfig(
+            NameType::class,
+            NameType::fromConfig(
                 $this->createMock(CollectionInterface::class)
             )
         );
@@ -49,7 +49,7 @@ class AuthorNameTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             'foo',
-            (new AuthorName)->forDatabase(new Name('foo'))
+            (new NameType)->forDatabase(new Name('foo'))
         );
     }
 
@@ -57,11 +57,11 @@ class AuthorNameTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(
             Name::class,
-            (new AuthorName)->fromDatabase('foo')
+            (new NameType)->fromDatabase('foo')
         );
         $this->assertSame(
             'foo',
-            (string) (new AuthorName)->fromDatabase('foo')
+            (string) (new NameType)->fromDatabase('foo')
         );
     }
 }

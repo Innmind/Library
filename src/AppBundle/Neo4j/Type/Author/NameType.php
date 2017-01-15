@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace AppBundle\Neo4j\Type;
+namespace AppBundle\Neo4j\Type\Author;
 
 use Domain\Entity\Author\Name;
 use Innmind\Neo4j\ONM\TypeInterface;
@@ -11,7 +11,7 @@ use Innmind\Immutable\{
     Set
 };
 
-final class AuthorName implements TypeInterface
+final class NameType implements TypeInterface
 {
     private static $identifiers;
 
