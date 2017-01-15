@@ -3,7 +3,6 @@ declare(strict_types = 1);
 
 namespace AppBundle\Entity\Domain;
 
-use AppBundle\Exception\InvalidArgumentException;
 use Domain\Entity\Domain\IdentityInterface;
 use Innmind\Neo4j\ONM\Identity\Uuid;
 use Innmind\Rest\Server\IdentityInterface as RestIdentity;
