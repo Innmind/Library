@@ -1,0 +1,9 @@
+Domain\Entity\Bost:
+    type: aggregate
+    labels: [Web, Host]
+    identity:
+        property: identity
+        type: AppBundle\Entity\Host\Identity
+    properties:
+        name:
+            type: host_name
