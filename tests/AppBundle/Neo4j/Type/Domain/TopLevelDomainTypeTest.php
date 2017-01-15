@@ -64,6 +64,9 @@ class TopLevelDomainTypeTest extends \PHPUnit_Framework_TestCase
             (string) (new TopLevelDomainType)->fromDatabase('foo')
         );
     }
+
+    public function testIsNullable()
+    {
+        $this->assertFalse((new TopLevelDomainType)->isNullable());
+    }
 }
-
-

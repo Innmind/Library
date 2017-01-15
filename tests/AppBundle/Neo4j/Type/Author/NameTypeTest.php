@@ -64,6 +64,9 @@ class NameTypeTest extends \PHPUnit_Framework_TestCase
             (string) (new NameType)->fromDatabase('foo')
         );
     }
+
+    public function testIsNullable()
+    {
+        $this->assertFalse((new NameType)->isNullable());
+    }
 }
-
-

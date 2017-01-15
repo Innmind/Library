@@ -64,6 +64,9 @@ class TextTypeTest extends \PHPUnit_Framework_TestCase
             (string) (new TextType)->fromDatabase('foo')
         );
     }
+
+    public function testIsNullable()
+    {
+        $this->assertFalse((new TextType)->isNullable());
+    }
 }
-
-
