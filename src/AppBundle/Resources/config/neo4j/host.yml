@@ -1,4 +1,4 @@
-Domain\Entity\Bost:
+Domain\Entity\Host:
     type: aggregate
     labels: [Web, Host]
     identity:
