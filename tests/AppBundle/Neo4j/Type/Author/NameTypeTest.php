@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Tests\AppBundle\Neo4j\Type\Author;
 
-use AppBundle\Neo4j\Type\NameType;
+use AppBundle\Neo4j\Type\Author\NameType;
 use Domain\Entity\Author\Name;
 use Innmind\Neo4j\ONM\TypeInterface;
 use Innmind\Immutable\{
