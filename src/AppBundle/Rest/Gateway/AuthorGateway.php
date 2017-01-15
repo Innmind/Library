@@ -3,7 +3,10 @@ declare(strict_types = 1);
 
 namespace AppBundle\Rest\Gateway;
 
-use AppBundle\Rest\Gateway\AuthorGateway\ResourceCreator;
+use AppBundle\Rest\Gateway\AuthorGateway\{
+    ResourceCreator,
+    ResourceAccessor
+};
 use Innmind\Rest\Server\{
     GatewayInterface,
     ResourceListAccessorInterface,
@@ -19,10 +22,14 @@ use Innmind\Rest\Server\{
 final class AuthorGateway implements GatewayInterface
 {
     private $resourceCreator;
+    private $resourceAccessor;
 
-    public function __construct(ResourceCreator $resourceCreator)
-    {
+    public function __construct(
+        ResourceCreator $resourceCreator,
+        ResourceAccessor $resourceAccessor
+    ) {
         $this->resourceCreator = $resourceCreator;
+        $this->resourceAccessor = $resourceAccessor;
     }
 
     public function resourceListAccessor(): ResourceListAccessorInterface
@@ -32,7 +39,7 @@ final class AuthorGateway implements GatewayInterface
 
     public function resourceAccessor(): ResourceAccessorInterface
     {
-        throw new ActionNotImplementedException;
+        return $this->resourceAccessor;
     }
     public function resourceCreator(): ResourceCreatorInterface
     {

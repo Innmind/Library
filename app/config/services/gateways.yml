@@ -3,6 +3,7 @@ services:
         class: AppBundle\Rest\Gateway\AuthorGateway
         arguments:
             - '@gateway.author.creator'
+            - '@gateway.author.accessor'
         tags:
             - { name: innmind_rest_server.gateway, alias: author }
 
@@ -10,3 +11,8 @@ services:
         class: AppBundle\Rest\Gateway\AuthorGateway\ResourceCreator
         arguments:
             - '@command_bus'
+
+    gateway.author.accessor:
+        class: AppBundle\Rest\Gateway\AuthorGateway\ResourceAccessor
+        arguments:
+            - '@repository.author'

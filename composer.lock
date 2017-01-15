@@ -1044,17 +1044,16 @@
         },
         {
             "name": "innmind/neo4j-onm",
-            "version": "2.1.0",
-            "target-dir": "Innmind/Neo4j/ONM",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/neo4j-onm.git",
-                "reference": "5beaaa8d95fdae7d08eadd36adb83c6de80e73f6"
+                "reference": "e77db6851c109305b95d2604b589dcd67021f276"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/5beaaa8d95fdae7d08eadd36adb83c6de80e73f6",
-                "reference": "5beaaa8d95fdae7d08eadd36adb83c6de80e73f6",
+                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/e77db6851c109305b95d2604b589dcd67021f276",
+                "reference": "e77db6851c109305b95d2604b589dcd67021f276",
                 "shasum": ""
             },
             "require": {
@@ -1067,12 +1066,13 @@
                 "symfony/config": "~2.7|~3.0"
             },
             "require-dev": {
+                "phpunit/phpunit": "~5.6",
                 "symfony/yaml": "~2.7|~3.0"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Innmind\\Neo4j\\ONM": ""
+                "psr-4": {
+                    "Innmind\\Neo4j\\ONM\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1092,7 +1092,7 @@
                 "neo4j",
                 "node"
             ],
-            "time": "2016-05-29 13:40:38"
+            "time": "2017-01-15 10:52:37"
         },
         {
             "name": "innmind/reflection",
@@ -1188,16 +1188,16 @@
         },
         {
             "name": "innmind/rest-server-bundle",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/RestServerBundle.git",
-                "reference": "5f3118217d7f8b8f9ef204441041bd50b93a564d"
+                "reference": "94873fddce762e49bcbdc6c8b99c3946b15694e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/RestServerBundle/zipball/5f3118217d7f8b8f9ef204441041bd50b93a564d",
-                "reference": "5f3118217d7f8b8f9ef204441041bd50b93a564d",
+                "url": "https://api.github.com/repos/Innmind/RestServerBundle/zipball/94873fddce762e49bcbdc6c8b99c3946b15694e4",
+                "reference": "94873fddce762e49bcbdc6c8b99c3946b15694e4",
                 "shasum": ""
             },
             "require": {
@@ -1235,7 +1235,7 @@
                 "api",
                 "rest"
             ],
-            "time": "2017-01-14 16:17:07"
+            "time": "2017-01-14 16:27:40"
         },
         {
             "name": "innmind/specification",

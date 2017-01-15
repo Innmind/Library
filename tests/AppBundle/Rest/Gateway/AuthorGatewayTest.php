@@ -5,8 +5,10 @@ namespace Tests\AppBundle\Rest\Gateway;
 
 use AppBundle\Rest\Gateway\{
     AuthorGateway,
-    AuthorGateway\ResourceCreator
+    AuthorGateway\ResourceCreator,
+    AuthorGateway\ResourceAccessor
 };
+use Domain\Repository\AuthorRepositoryInterface;
 use Innmind\Rest\Server\GatewayInterface;
 use Innmind\CommandBus\CommandBusInterface;
 
@@ -14,12 +16,16 @@ class AuthorGatewayTest extends \PHPUnit_Framework_TestCase
 {
     private $gateway;
     private $creator;
+    private $accessor;
 
     public function setUp()
     {
         $this->gateway = new AuthorGateway(
             $this->creator = new ResourceCreator(
                 $this->createMock(CommandBusInterface::class)
+            ),
+            $this->accessor = new ResourceAccessor(
+                $this->createMock(AuthorRepositoryInterface::class)
             )
         );
     }
@@ -45,12 +51,12 @@ class AuthorGatewayTest extends \PHPUnit_Framework_TestCase
         $this->gateway->resourceListAccessor();
     }
 
-    /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplementedException
-     */
-    public function testThrowWhenAccessingResourceAccessor()
+    public function testResourceAccessor()
     {
-        $this->gateway->resourceAccessor();
+        $this->assertSame(
+            $this->accessor,
+            $this->gateway->resourceAccessor()
+        );
     }
 
     /**
