@@ -4,6 +4,7 @@ imports:
     - { resource: services/handlers.yml }
     - { resource: services/gateways.yml }
     - { resource: services/listeners.yml }
+    - { resource: services/onm.yml }
 
 services:
     command_bus: '@innmind_command_bus'

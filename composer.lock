@@ -947,16 +947,16 @@
         },
         {
             "name": "innmind/neo4j-bundle",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Neo4jBundle.git",
-                "reference": "33842a865ce1633843ab8a7c1f93a8cf932ae3c8"
+                "reference": "f1a3688ebae18c33f6a79968933e37a4ef5b70cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Neo4jBundle/zipball/33842a865ce1633843ab8a7c1f93a8cf932ae3c8",
-                "reference": "33842a865ce1633843ab8a7c1f93a8cf932ae3c8",
+                "url": "https://api.github.com/repos/Innmind/Neo4jBundle/zipball/f1a3688ebae18c33f6a79968933e37a4ef5b70cf",
+                "reference": "f1a3688ebae18c33f6a79968933e37a4ef5b70cf",
                 "shasum": ""
             },
             "require": {
@@ -994,7 +994,7 @@
                 "neo4j",
                 "orm"
             ],
-            "time": "2016-12-13 07:07:50"
+            "time": "2017-01-19 07:32:54"
         },
         {
             "name": "innmind/neo4j-dbal",
@@ -1044,16 +1044,16 @@
         },
         {
             "name": "innmind/neo4j-onm",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/neo4j-onm.git",
-                "reference": "5b39b13c5c91b61ec9555f867069dc33839d1c1d"
+                "reference": "de73ac1ba3ab3ca6648181414c2834554f628e27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/5b39b13c5c91b61ec9555f867069dc33839d1c1d",
-                "reference": "5b39b13c5c91b61ec9555f867069dc33839d1c1d",
+                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/de73ac1ba3ab3ca6648181414c2834554f628e27",
+                "reference": "de73ac1ba3ab3ca6648181414c2834554f628e27",
                 "shasum": ""
             },
             "require": {
@@ -1092,31 +1092,33 @@
                 "neo4j",
                 "node"
             ],
-            "time": "2017-01-16 07:26:06"
+            "time": "2017-01-19 06:53:35"
         },
         {
             "name": "innmind/reflection",
-            "version": "1.1.1",
-            "target-dir": "Innmind/Reflection",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Reflection.git",
-                "reference": "b4ce2d38147896e7c78981adcd80dc6220e254c9"
+                "reference": "993dc1e847636aef6fcbe6041d100c3229dc23d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Reflection/zipball/b4ce2d38147896e7c78981adcd80dc6220e254c9",
-                "reference": "b4ce2d38147896e7c78981adcd80dc6220e254c9",
+                "url": "https://api.github.com/repos/Innmind/Reflection/zipball/993dc1e847636aef6fcbe6041d100c3229dc23d5",
+                "reference": "993dc1e847636aef6fcbe6041d100c3229dc23d5",
                 "shasum": ""
             },
             "require": {
                 "innmind/immutable": "~0.6|~1.0",
                 "php": "~7.0"
             },
+            "require-dev": {
+                "phpunit/phpunit": "~5.6"
+            },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Innmind\\Reflection": ""
+                "psr-4": {
+                    "Innmind\\Reflection\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1134,7 +1136,7 @@
             "keywords": [
                 "reflection"
             ],
-            "time": "2016-02-28 11:23:07"
+            "time": "2017-01-18 07:15:43"
         },
         {
             "name": "innmind/rest-server",
