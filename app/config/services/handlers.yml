@@ -5,3 +5,10 @@ services:
             - '@repository.author'
         tags:
             - { name: innmind_command_bus.handler, handles: Domain\Command\RegisterAuthor }
+
+    handler.register_citation:
+        class: Domain\Handler\RegisterCitationHandler
+        arguments:
+            - '@repository.citation'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\RegisterCitation }

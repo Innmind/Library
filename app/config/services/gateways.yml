@@ -16,3 +16,21 @@ services:
         class: AppBundle\Rest\Gateway\AuthorGateway\ResourceAccessor
         arguments:
             - '@repository.author'
+
+    gateway.citation:
+        class: AppBundle\Rest\Gateway\CitationGateway
+        arguments:
+            - '@gateway.citation.creator'
+            - '@gateway.citation.accessor'
+        tags:
+            - { name: innmind_rest_server.gateway, alias: citation }
+
+    gateway.citation.creator:
+        class: AppBundle\Rest\Gateway\CitationGateway\ResourceCreator
+        arguments:
+            - '@command_bus'
+
+    gateway.citation.accessor:
+        class: AppBundle\Rest\Gateway\CitationGateway\ResourceAccessor
+        arguments:
+            - '@repository.citation'
