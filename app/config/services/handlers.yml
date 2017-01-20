@@ -12,3 +12,11 @@ services:
             - '@repository.citation'
         tags:
             - { name: innmind_command_bus.handler, handles: Domain\Command\RegisterCitation }
+
+    handler.register_domain:
+        class: Domain\Handler\RegisterDomainHandler
+        arguments:
+            - '@repository.domain'
+            - '@domain_parser'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\RegisterDomain }

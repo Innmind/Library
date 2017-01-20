@@ -16,3 +16,9 @@ services:
             - '@innmind_neo4j.manager'
         tags:
             - { name: innmind_command_bus, alias: persister }
+
+    domain_parser:
+        class: Pdp\Parser
+        factory:
+            - AppBundle\Factory\DomainParserFactory
+            - make

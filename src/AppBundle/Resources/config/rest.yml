@@ -25,3 +25,23 @@ web:
                     access: [READ, CREATE]
             options:
                 actions: [get, create, options]
+
+        domain:
+            identity: identity
+            gateway: domain
+            properties:
+                identity:
+                    type: string
+                    access: [READ]
+                authority:
+                    type: string
+                    access: [CREATE]
+                name:
+                    type: string
+                    access: [READ]
+                tld:
+                    type: string
+                    access: [READ]
+                    variants: [top_level_domain]
+            options:
+                actions: [get, create, options]
