@@ -7,5 +7,5 @@ Domain\Entity\Domain:
     properties:
         name:
             type: domain_name
-        topLevelDomain:
+        tld:
             type: domain_tld
