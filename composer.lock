@@ -671,16 +671,16 @@
         },
         {
             "name": "innmind/command-bus",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/CommandBus.git",
-                "reference": "996f2d5c69bdbdc33eb71ceecea1b648bc31341f"
+                "reference": "be12810950620a037f2ab4ed2cfeb3a9bde41f39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/CommandBus/zipball/996f2d5c69bdbdc33eb71ceecea1b648bc31341f",
-                "reference": "996f2d5c69bdbdc33eb71ceecea1b648bc31341f",
+                "url": "https://api.github.com/repos/Innmind/CommandBus/zipball/be12810950620a037f2ab4ed2cfeb3a9bde41f39",
+                "reference": "be12810950620a037f2ab4ed2cfeb3a9bde41f39",
                 "shasum": ""
             },
             "require": {
@@ -716,7 +716,7 @@
                 "command bus",
                 "ddd"
             ],
-            "time": "2016-12-17 14:44:49"
+            "time": "2017-01-21 15:16:34"
         },
         {
             "name": "innmind/command-bus-bundle",
@@ -769,16 +769,16 @@
         },
         {
             "name": "innmind/event-bus",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/EventBus.git",
-                "reference": "5e4cdbb5f14301f2908a9ee71f1d9f4be927f497"
+                "reference": "a498ff02f0cd0d8a2317c1f53bcc1c32ac13b9b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/EventBus/zipball/5e4cdbb5f14301f2908a9ee71f1d9f4be927f497",
-                "reference": "5e4cdbb5f14301f2908a9ee71f1d9f4be927f497",
+                "url": "https://api.github.com/repos/Innmind/EventBus/zipball/a498ff02f0cd0d8a2317c1f53bcc1c32ac13b9b1",
+                "reference": "a498ff02f0cd0d8a2317c1f53bcc1c32ac13b9b1",
                 "shasum": ""
             },
             "require": {
@@ -808,7 +808,7 @@
                 "dispatcher",
                 "event"
             ],
-            "time": "2016-11-30 07:42:50"
+            "time": "2017-01-21 15:30:30"
         },
         {
             "name": "innmind/filesystem",
@@ -1044,16 +1044,16 @@
         },
         {
             "name": "innmind/neo4j-onm",
-            "version": "2.4.0",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/neo4j-onm.git",
-                "reference": "ad5974f6b4c5dccb4cd23054f771680c6e528f13"
+                "reference": "4e6ab230b16364e76062aac94437e721c07cfe8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/ad5974f6b4c5dccb4cd23054f771680c6e528f13",
-                "reference": "ad5974f6b4c5dccb4cd23054f771680c6e528f13",
+                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/4e6ab230b16364e76062aac94437e721c07cfe8a",
+                "reference": "4e6ab230b16364e76062aac94437e721c07cfe8a",
                 "shasum": ""
             },
             "require": {
@@ -1096,20 +1096,20 @@
                 "neo4j",
                 "node"
             ],
-            "time": "2017-01-21 13:12:13"
+            "time": "2017-01-21 14:26:45"
         },
         {
             "name": "innmind/reflection",
-            "version": "1.3.0",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Reflection.git",
-                "reference": "11510de6d4fa3ba857564c660dc89b88f0c4d9fb"
+                "reference": "23fa6f7e085dffcb1fb7c7d0903922d5020a3124"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Reflection/zipball/11510de6d4fa3ba857564c660dc89b88f0c4d9fb",
-                "reference": "11510de6d4fa3ba857564c660dc89b88f0c4d9fb",
+                "url": "https://api.github.com/repos/Innmind/Reflection/zipball/23fa6f7e085dffcb1fb7c7d0903922d5020a3124",
+                "reference": "23fa6f7e085dffcb1fb7c7d0903922d5020a3124",
                 "shasum": ""
             },
             "require": {
@@ -1140,7 +1140,7 @@
             "keywords": [
                 "reflection"
             ],
-            "time": "2017-01-21 12:11:51"
+            "time": "2017-01-21 15:06:38"
         },
         {
             "name": "innmind/rest-server",
