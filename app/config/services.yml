@@ -22,3 +22,12 @@ services:
         factory:
             - AppBundle\Factory\DomainParserFactory
             - make
+
+    clock:
+        class: Innmind\TimeContinuum\TimeContinuum\Earth
+        arguments:
+            - '@clock.timezone.paris'
+
+    clock.timezone.paris:
+        class: Innmind\TimeContinuum\Timezone\Earth\Europe\Paris
+        public: false

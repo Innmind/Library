@@ -20,3 +20,12 @@ services:
             - '@domain_parser'
         tags:
             - { name: innmind_command_bus.handler, handles: Domain\Command\RegisterDomain }
+
+    handler.register_host:
+        class: Domain\Handler\RegisterHostHandler
+        arguments:
+            - '@repository.host'
+            - '@repository.domain_host'
+            - '@clock'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\RegisterHost }
