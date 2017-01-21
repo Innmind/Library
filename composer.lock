@@ -1044,16 +1044,16 @@
         },
         {
             "name": "innmind/neo4j-onm",
-            "version": "2.3.0",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/neo4j-onm.git",
-                "reference": "de73ac1ba3ab3ca6648181414c2834554f628e27"
+                "reference": "ad5974f6b4c5dccb4cd23054f771680c6e528f13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/de73ac1ba3ab3ca6648181414c2834554f628e27",
-                "reference": "de73ac1ba3ab3ca6648181414c2834554f628e27",
+                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/ad5974f6b4c5dccb4cd23054f771680c6e528f13",
+                "reference": "ad5974f6b4c5dccb4cd23054f771680c6e528f13",
                 "shasum": ""
             },
             "require": {
@@ -1066,8 +1066,12 @@
                 "symfony/config": "~2.7|~3.0"
             },
             "require-dev": {
+                "innmind/time-continuum": "^1.0",
                 "phpunit/phpunit": "~5.6",
                 "symfony/yaml": "~2.7|~3.0"
+            },
+            "suggest": {
+                "innmind/time-continuum": "To be able to use point_in_time type"
             },
             "type": "library",
             "autoload": {
@@ -1092,24 +1096,24 @@
                 "neo4j",
                 "node"
             ],
-            "time": "2017-01-19 06:53:35"
+            "time": "2017-01-21 13:12:13"
         },
         {
             "name": "innmind/reflection",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Reflection.git",
-                "reference": "993dc1e847636aef6fcbe6041d100c3229dc23d5"
+                "reference": "11510de6d4fa3ba857564c660dc89b88f0c4d9fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Reflection/zipball/993dc1e847636aef6fcbe6041d100c3229dc23d5",
-                "reference": "993dc1e847636aef6fcbe6041d100c3229dc23d5",
+                "url": "https://api.github.com/repos/Innmind/Reflection/zipball/11510de6d4fa3ba857564c660dc89b88f0c4d9fb",
+                "reference": "11510de6d4fa3ba857564c660dc89b88f0c4d9fb",
                 "shasum": ""
             },
             "require": {
-                "innmind/immutable": "~0.6|~1.0",
+                "innmind/immutable": "~1.0",
                 "php": "~7.0"
             },
             "require-dev": {
@@ -1136,7 +1140,7 @@
             "keywords": [
                 "reflection"
             ],
-            "time": "2017-01-18 07:15:43"
+            "time": "2017-01-21 12:11:51"
         },
         {
             "name": "innmind/rest-server",
@@ -2904,16 +2908,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "4.0.4",
+            "version": "4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "c14196e64a78570034afd0b7a9f3757ba71c2a0a"
+                "reference": "c19cfc7cbb0e9338d8c469c7eedecc2a428b0971"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c14196e64a78570034afd0b7a9f3757ba71c2a0a",
-                "reference": "c14196e64a78570034afd0b7a9f3757ba71c2a0a",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c19cfc7cbb0e9338d8c469c7eedecc2a428b0971",
+                "reference": "c19cfc7cbb0e9338d8c469c7eedecc2a428b0971",
                 "shasum": ""
             },
             "require": {
@@ -2963,7 +2967,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-12-20 15:22:42"
+            "time": "2017-01-20 15:06:43"
         },
         {
             "name": "phpunit/php-file-iterator",

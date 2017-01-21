@@ -35,6 +35,18 @@ services:
         arguments:
             - Domain\Entity\Domain
 
+    repository.domain_host:
+        class: AppBundle\Repository\Neo4j\DomainHostRepository
+        arguments:
+            - '@repository.neo4j.domain_host'
+
+    repository.neo4j.domain_host:
+        factory:
+            - '@innmind_neo4j.manager'
+            - 'repository'
+        arguments:
+            - Domain\Entity\DomainHost
+
     repository.host:
         class: AppBundle\Repository\Neo4j\HostRepository
         arguments:

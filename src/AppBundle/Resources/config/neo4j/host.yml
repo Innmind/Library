@@ -7,3 +7,21 @@ Domain\Entity\Host:
     properties:
         name:
             type: host_name
+
+Domain\Entity\DomainHost:
+    type: relationship
+    rel_type: HOST_OF_DOMAIN
+    identity:
+        property: identity
+        type: AppBundle\Entity\DomainHost\Identity
+    startNode:
+        property: host
+        type: AppBundle\Entity\Host\Identity
+        target: identity
+    endNode:
+        property: domain
+        type: AppBundle\Entity\Domain\Identity
+        target: identity
+    properties:
+        foundAt:
+            type: point_in_time

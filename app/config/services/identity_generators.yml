@@ -14,6 +14,11 @@ services:
         arguments:
             - 'AppBundle\Entity\Domain\Identity'
 
+    neo4j.identity.generator.domain_host:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\DomainHost\Identity'
+
     neo4j.identity.generator.host:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
