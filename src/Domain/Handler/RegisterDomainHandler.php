@@ -45,7 +45,7 @@ final class RegisterDomainHandler
         );
 
         if ($existing->size() !== 0) {
-            throw new DomainAlreadyExistException;
+            throw new DomainAlreadyExistException($existing->current());
         }
 
         $this->repository->add(

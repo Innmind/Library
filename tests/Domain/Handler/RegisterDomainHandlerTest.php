@@ -8,6 +8,8 @@ use Domain\{
     Command\RegisterDomain,
     Entity\Domain,
     Entity\Domain\IdentityInterface,
+    Entity\Domain\Name as NameModel,
+    Entity\Domain\TopLevelDomain as TLD,
     Repository\DomainRepositoryInterface,
     Specification\AndSpecification,
     Specification\Domain\Name,
@@ -95,6 +97,16 @@ class RegisterDomainHandlerTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('size')
             ->willReturn(1);
+        $set
+            ->expects($this->once())
+            ->method('current')
+            ->willReturn(
+                new Domain(
+                    $this->createMock(IdentityInterface::class),
+                    new NameModel('foo'),
+                    new TLD('fr')
+                )
+            );
 
         $handler($command);
     }
