@@ -39,7 +39,7 @@ final class RegisterHostHandler
         );
 
         if ($hosts->size() > 0) {
-            throw new HostAlreadyExistException;
+            throw new HostAlreadyExistException($hosts->current());
         }
 
         $host = Host::register(

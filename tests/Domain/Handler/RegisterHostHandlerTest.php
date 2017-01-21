@@ -9,6 +9,7 @@ use Domain\{
     Repository\HostRepositoryInterface,
     Repository\DomainHostRepositoryInterface,
     Entity\Host\IdentityInterface,
+    Entity\Host\Name as NameModel,
     Entity\Domain\IdentityInterface as DomainIdentity,
     Entity\DomainHost\IdentityInterface as RelationIdentity,
     Specification\Host\Name,
@@ -108,6 +109,15 @@ class RegisterHostHandlerTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('size')
             ->willReturn(2);
+        $set
+            ->expects($this->once())
+            ->method('current')
+            ->willReturn(
+                new HostEntity(
+                    $this->createMock(IdentityInterface::class),
+                    new NameModel('example.com')
+                )
+            );
         $clock
             ->expects($this->never())
             ->method('now');
