@@ -57,6 +57,7 @@ innmind_neo4j:
         AppBundle\Entity\Domain\Identity: neo4j.identity.generator.domain
         AppBundle\Entity\DomainHost\Identity: neo4j.identity.generator.domain_host
         AppBundle\Entity\Host\Identity: neo4j.identity.generator.host
+        AppBundle\Entity\HostResource\Identity: neo4j.identity.generator.host_resource
         AppBundle\Entity\HttpResource\Identity: neo4j.identity.generator.http_resource
         AppBundle\Entity\Image\Identity: neo4j.identity.generator.image
 
