@@ -105,6 +105,16 @@ class ReferResourceHandlerTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('size')
             ->willReturn(2);
+        $set
+            ->expects($this->once())
+            ->method('current')
+            ->willReturn(
+                new Reference(
+                    $this->createMock(IdentityInterface::class),
+                    $this->createMock(ResourceIdentity::class),
+                    $this->createMock(ResourceIdentity::class)
+                )
+            );
         $repository
             ->expects($this->never())
             ->method('add');

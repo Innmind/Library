@@ -25,7 +25,7 @@ final class RegisterAuthorHandler
         $authors = $this->repository->matching(new Name($wished->name()));
 
         if ($authors->size() > 0) {
-            throw new AuthorAlreadyExistException;
+            throw new AuthorAlreadyExistException($authors->current());
         }
 
         $this->repository->add(

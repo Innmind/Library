@@ -29,7 +29,7 @@ final class MakeCanonicalLinkHandler
         );
 
         if ($canonicals->size() > 0) {
-            throw new CanonicalAlreadyExistException;
+            throw new CanonicalAlreadyExistException($canonicals->current());
         }
 
         $this->repository->add(

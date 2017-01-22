@@ -29,7 +29,7 @@ final class ReferResourceHandler
         );
 
         if ($references->size() > 0) {
-            throw new ReferenceAlreadyExistException;
+            throw new ReferenceAlreadyExistException($references->current());
         }
 
         $this->repository->add(

@@ -34,7 +34,9 @@ final class RegisterAppearanceHandler
         );
 
         if ($appearances->size() > 0) {
-            throw new CitationAppearanceAlreadyExistException;
+            throw new CitationAppearanceAlreadyExistException(
+                $appearances->current()
+            );
         }
 
         $this->repository->add(

@@ -122,6 +122,17 @@ class RegisterAppearanceHandlerTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('size')
             ->willReturn(2);
+        $set
+            ->expects($this->once())
+            ->method('current')
+            ->willReturn(
+                new CitationAppearance(
+                    $this->createMock(IdentityInterface::class),
+                    $this->createMock(CitationIdentity::class),
+                    $this->createMock(ResourceIdentity::class),
+                    $this->createMock(PointInTimeInterface::class)
+                )
+            );
         $repository
             ->expects($this->never())
             ->method('add');

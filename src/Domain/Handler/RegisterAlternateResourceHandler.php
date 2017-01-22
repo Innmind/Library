@@ -31,7 +31,7 @@ final class RegisterAlternateResourceHandler
         );
 
         if ($alternates->size() > 0) {
-            throw new AlternateAlreadyExistException;
+            throw new AlternateAlreadyExistException($alternates->current());
         }
 
         $this->repository->add(

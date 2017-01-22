@@ -71,6 +71,15 @@ class RegisterAuthorHandlerTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('size')
             ->willReturn(2);
+        $set
+            ->expects($this->once())
+            ->method('current')
+            ->willReturn(
+                new Author(
+                    $this->createMock(IdentityInterface::class),
+                    new Model('foo')
+                )
+            );
         $repository
             ->expects($this->never())
             ->method('add');

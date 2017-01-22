@@ -4,7 +4,12 @@ declare(strict_types = 1);
 namespace Tests\AppBundle\EventListener;
 
 use AppBundle\EventListener\ExceptionListener;
-use Domain\Exception\AuthorAlreadyExistException;
+use Domain\{
+    Exception\AuthorAlreadyExistException,
+    Entity\Author,
+    Entity\Author\IdentityInterface as AuthorIdentity,
+    Entity\Author\Name
+};
 use Innmind\Http\Exception\Http\ConflictException;
 use Symfony\Component\{
     HttpKernel\HttpKernelInterface,
@@ -53,7 +58,12 @@ class ExceptionListenerTest extends \PHPUnit_Framework_TestCase
             $this->createMock(HttpKernelInterface::class),
             new Request,
             HttpKernelInterface::MASTER_REQUEST,
-            $expected = new AuthorAlreadyExistException
+            $expected = new AuthorAlreadyExistException(
+                new Author(
+                    $this->createMock(AuthorIdentity::class),
+                    new Name('foo')
+                )
+            )
         );
 
         $this->assertNull($listener->transform($event));

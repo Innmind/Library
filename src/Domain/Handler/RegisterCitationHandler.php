@@ -25,7 +25,7 @@ final class RegisterCitationHandler
         $citations = $this->repository->matching(new Text($wished->text()));
 
         if ($citations->size() > 0) {
-            throw new CitationAlreadyExistException;
+            throw new CitationAlreadyExistException($citations->current());
         }
 
         $this->repository->add(
