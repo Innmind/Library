@@ -52,3 +52,33 @@ services:
             - '@repository.http_resource'
         tags:
             - { name: innmind_command_bus.handler, handles: Domain\Command\HttpResource\SpecifyLanguages }
+
+    handler.register_image:
+        class: Domain\Handler\RegisterImageHandler
+        arguments:
+            - '@repository.image'
+            - '@repository.host_resource'
+            - '@clock'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\RegisterImage }
+
+    handler.image.specify_dimension:
+        class: Domain\Handler\Image\SpecifyDimensionHandler
+        arguments:
+            - '@repository.image'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\Image\SpecifyDimension }
+
+    handler.image.specify_weight:
+        class: Domain\Handler\Image\SpecifyWeightHandler
+        arguments:
+            - '@repository.image'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\Image\SpecifyWeight }
+
+    handler.image.add_description:
+        class: Domain\Handler\Image\AddDescriptionHandler
+        arguments:
+            - '@repository.image'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\Image\AddDescription }

@@ -70,3 +70,21 @@ services:
         class: AppBundle\Rest\Gateway\HttpResourceGateway\ResourceAccessor
         arguments:
             - '@repository.http_resource'
+
+    gateway.image:
+        class: AppBundle\Rest\Gateway\ImageGateway
+        arguments:
+            - '@gateway.image.creator'
+            - '@gateway.image.accessor'
+        tags:
+            - { name: innmind_rest_server.gateway, alias: image }
+
+    gateway.image.creator:
+        class: AppBundle\Rest\Gateway\ImageGateway\ResourceCreator
+        arguments:
+            - '@command_bus'
+
+    gateway.image.accessor:
+        class: AppBundle\Rest\Gateway\ImageGateway\ResourceAccessor
+        arguments:
+            - '@repository.image'

@@ -72,3 +72,37 @@ web:
                     type: string
                     access: [READ, CREATE]
                     optional: true
+
+        image:
+            identity: identity
+            gateway: image
+            properties:
+                identity:
+                    type: string
+                    access: [READ]
+                host:
+                    type: string
+                    access: [CREATE]
+                path:
+                    type: string
+                    access: [READ, CREATE]
+                query:
+                    type: string
+                    access: [READ, CREATE]
+                descriptions:
+                    type: set
+                    access: [READ, CREATE]
+                    optional: true
+                    options:
+                        inner: string
+                dimension:
+                    type: map
+                    access: [READ, CREATE]
+                    optional: true
+                    options:
+                        key: string
+                        inner: int
+                weight:
+                    type: int
+                    access: [READ, CREATE]
+                    optional: true
