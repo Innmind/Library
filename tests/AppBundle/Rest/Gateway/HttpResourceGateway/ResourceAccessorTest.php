@@ -77,7 +77,7 @@ class ResourceAccessorTest extends \PHPUnit_Framework_TestCase
         );
         $resource->specifyCharset(new Charset('UTF-8'));
         $definition = new Definition(
-            'citation',
+            'http_resource',
             new IdentityDefinition('identity'),
             (new Map('string', Property::class))
                 ->put(
@@ -132,7 +132,7 @@ class ResourceAccessorTest extends \PHPUnit_Framework_TestCase
                 ),
             new Map('scalar', 'variable'),
             new Map('scalar', 'variable'),
-            new Gateway('citation'),
+            new Gateway('http_resource'),
             false,
             new Map('string', 'string')
         );
