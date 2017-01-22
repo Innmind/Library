@@ -94,3 +94,15 @@ services:
             - 'repository'
         arguments:
             - Domain\Entity\Image
+
+    repository.html_page:
+        class: AppBundle\Repository\Neo4j\HtmlPageRepository
+        arguments:
+            - '@repository.neo4j.html_page'
+
+    repository.neo4j.html_page:
+        factory:
+            - '@innmind_neo4j.manager'
+            - 'repository'
+        arguments:
+            - Domain\Entity\HtmlPage

@@ -50,6 +50,9 @@ innmind_neo4j:
         - AppBundle\Neo4j\Type\Image\DescriptionType
         - AppBundle\Neo4j\Type\Image\DimensionType
         - AppBundle\Neo4j\Type\Image\WeightType
+        - AppBundle\Neo4j\Type\HtmlPage\AnchorType
+        - AppBundle\Neo4j\Type\UrlType
+        - AppBundle\Neo4j\Type\ColourType
         - Innmind\Neo4j\ONM\Type\PointInTimeType
     identity_generators:
         AppBundle\Entity\Author\Identity: neo4j.identity.generator.author
@@ -60,6 +63,7 @@ innmind_neo4j:
         AppBundle\Entity\HostResource\Identity: neo4j.identity.generator.host_resource
         AppBundle\Entity\HttpResource\Identity: neo4j.identity.generator.http_resource
         AppBundle\Entity\Image\Identity: neo4j.identity.generator.image
+        AppBundle\Entity\HtmlPage\Identity: neo4j.identity.generator.html_page
 
 innmind_command_bus:
     stack:
