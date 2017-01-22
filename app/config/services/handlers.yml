@@ -82,3 +82,68 @@ services:
             - '@repository.image'
         tags:
             - { name: innmind_command_bus.handler, handles: Domain\Command\Image\AddDescription }
+
+    handler.register_html_page:
+        class: Domain\Handler\RegisterHtmlPageHandler
+        arguments:
+            - '@repository.html_page'
+            - '@repository.host_resource'
+            - '@clock'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\RegisterHtmlPage }
+
+    handler.html_page.flag_as_journal:
+        class: Domain\Handler\HtmlPage\FlagAsJournalHandler
+        arguments:
+            - '@repository.html_page'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\HtmlPage\FlagAsJournal }
+
+    handler.html_page.specify_anchors:
+        class: Domain\Handler\HtmlPage\SpecifyAnchorsHandler
+        arguments:
+            - '@repository.html_page'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\HtmlPage\SpecifyAnchors }
+
+    handler.html_page.specify_android_app_link:
+        class: Domain\Handler\HtmlPage\SpecifyAndroidAppLinkHandler
+        arguments:
+            - '@repository.html_page'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\HtmlPage\SpecifyAndroidAppLink }
+
+    handler.html_page.specify_ios_app_link:
+        class: Domain\Handler\HtmlPage\SpecifyIosAppLinkHandler
+        arguments:
+            - '@repository.html_page'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\HtmlPage\SpecifyIosAppLink }
+
+    handler.html_page.specify_description:
+        class: Domain\Handler\HtmlPage\SpecifyDescriptionHandler
+        arguments:
+            - '@repository.html_page'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\HtmlPage\SpecifyDescription }
+
+    handler.html_page.specify_main_content:
+        class: Domain\Handler\HtmlPage\SpecifyMainContentHandler
+        arguments:
+            - '@repository.html_page'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\HtmlPage\SpecifyMainContent }
+
+    handler.html_page.specify_theme_colour:
+        class: Domain\Handler\HtmlPage\SpecifyThemeColourHandler
+        arguments:
+            - '@repository.html_page'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\HtmlPage\SpecifyThemeColour }
+
+    handler.html_page.specify_title:
+        class: Domain\Handler\HtmlPage\SpecifyTitleHandler
+        arguments:
+            - '@repository.html_page'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\HtmlPage\SpecifyTitle }
