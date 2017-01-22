@@ -7,3 +7,21 @@ Domain\Entity\Citation:
     properties:
         text:
             type: citation_text
+
+Domain\Entity\CitationAppearance:
+    type: relationship
+    rel_type: CITED_IN_RESOURCE
+    identity:
+        property: identity
+        type: AppBundle\Entity\CitationAppearance\Identity
+    startNode:
+        property: citation
+        type: AppBundle\Entity\Citation\Identity
+        target: identity
+    endNode:
+        property: resource
+        type: AppBundle\Entity\HttpResource\Identity
+        target: identity
+    properties:
+        foundAt:
+            type: point_in_time

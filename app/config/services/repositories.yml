@@ -35,6 +35,18 @@ services:
         arguments:
             - Domain\Entity\Citation
 
+    repository.citation_appearance:
+        class: AppBundle\Repository\Neo4j\CitationRepository
+        arguments:
+            - '@repository.neo4j.citation_appearance'
+
+    repository.neo4j.citation_appearance:
+        factory:
+            - '@innmind_neo4j.manager'
+            - 'repository'
+        arguments:
+            - Domain\Entity\CitationAppearance
+
     repository.domain:
         class: AppBundle\Repository\Neo4j\DomainRepository
         arguments:

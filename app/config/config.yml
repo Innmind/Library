@@ -58,6 +58,7 @@ innmind_neo4j:
         AppBundle\Entity\Author\Identity: neo4j.identity.generator.author
         AppBundle\Entity\ResourceAuthor\Identity: neo4j.identity.generator.resource_author
         AppBundle\Entity\Citation\Identity: neo4j.identity.generator.citation
+        AppBundle\Entity\CitationAppearance\Identity: neo4j.identity.generator.citation_appearance
         AppBundle\Entity\Domain\Identity: neo4j.identity.generator.domain
         AppBundle\Entity\DomainHost\Identity: neo4j.identity.generator.domain_host
         AppBundle\Entity\Host\Identity: neo4j.identity.generator.host
