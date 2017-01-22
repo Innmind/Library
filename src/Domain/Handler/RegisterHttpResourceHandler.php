@@ -14,7 +14,7 @@ use Domain\{
     Specification\HttpResource\Query,
     Specification\HostResource\InResources,
     Specification\HostResource\Host,
-    Exception\ResourceAlreadyExistException
+    Exception\HttpResourceAlreadyExistException
 };
 use Innmind\TimeContinuum\TimeContinuumInterface;
 use Innmind\Immutable\Set;
@@ -56,7 +56,7 @@ final class RegisterHttpResourceHandler
     }
 
     /**
-     * @throws ResourceAlreadyExistException
+     * @throws HttpResourceAlreadyExistException
      */
     private function verifyResourceDoesntExist(RegisterHttpResource $wished): void
     {
@@ -81,7 +81,7 @@ final class RegisterHttpResourceHandler
         );
 
         if ($relations->size() > 0) {
-            throw new ResourceAlreadyExistException;
+            throw new HttpResourceAlreadyExistException;
         }
     }
 }

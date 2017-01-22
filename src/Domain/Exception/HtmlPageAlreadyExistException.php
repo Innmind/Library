@@ -3,6 +3,6 @@ declare(strict_types = 1);
 
 namespace Domain\Exception;
 
-final class HtmlPageAlreadyExistException extends ResourceAlreadyExistException
+final class HtmlPageAlreadyExistException extends HttpResourceAlreadyExistException
 {
 }

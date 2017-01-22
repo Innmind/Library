@@ -188,7 +188,7 @@ class RegisterHttpResourceHandlerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\ResourceAlreadyExistException
+     * @expectedException Domain\Exception\HttpResourceAlreadyExistException
      */
     public function testThrowWhenResourceAlreadyExist()
     {
