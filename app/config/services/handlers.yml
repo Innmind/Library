@@ -29,3 +29,26 @@ services:
             - '@clock'
         tags:
             - { name: innmind_command_bus.handler, handles: Domain\Command\RegisterHost }
+
+    handler.register_http_resource:
+        class: Domain\Handler\RegisterHttpResourceHandler
+        arguments:
+            - '@repository.http_resource'
+            - '@repository.host_resource'
+            - '@clock'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\RegisterHttpResource }
+
+    handler.http_resource.specify_charset:
+        class: Domain\Handler\HttpResource\SpecifyCharsetHandler
+        arguments:
+            - '@repository.http_resource'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\HttpResource\SpecifyCharset }
+
+    handler.http_resource.specify_languages:
+        class: Domain\Handler\HttpResource\SpecifyLanguagesHandler
+        arguments:
+            - '@repository.http_resource'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\HttpResource\SpecifyLanguages }

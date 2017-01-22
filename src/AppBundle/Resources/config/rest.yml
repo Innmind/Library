@@ -45,3 +45,30 @@ web:
                     variants: [top_level_domain]
             options:
                 actions: [get, create, options]
+
+        resource:
+            identity: identity
+            gateway: http_resource
+            properties:
+                identity:
+                    type: string
+                    access: [READ]
+                host:
+                    type: string
+                    access: [CREATE]
+                path:
+                    type: string
+                    access: [READ, CREATE]
+                query:
+                    type: string
+                    access: [READ, CREATE]
+                languages:
+                    type: set
+                    access: [READ, CREATE]
+                    options:
+                        inner: string
+                    optional: true
+                charset:
+                    type: string
+                    access: [READ, CREATE]
+                    optional: true
