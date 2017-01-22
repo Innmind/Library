@@ -1100,16 +1100,16 @@
         },
         {
             "name": "innmind/reflection",
-            "version": "1.3.1",
+            "version": "1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Reflection.git",
-                "reference": "23fa6f7e085dffcb1fb7c7d0903922d5020a3124"
+                "reference": "f00018907e805f29f2a4becfaff774444d5d51f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Reflection/zipball/23fa6f7e085dffcb1fb7c7d0903922d5020a3124",
-                "reference": "23fa6f7e085dffcb1fb7c7d0903922d5020a3124",
+                "url": "https://api.github.com/repos/Innmind/Reflection/zipball/f00018907e805f29f2a4becfaff774444d5d51f6",
+                "reference": "f00018907e805f29f2a4becfaff774444d5d51f6",
                 "shasum": ""
             },
             "require": {
@@ -1140,7 +1140,7 @@
             "keywords": [
                 "reflection"
             ],
-            "time": "2017-01-21 15:06:38"
+            "time": "2017-01-22 09:43:17"
         },
         {
             "name": "innmind/rest-server",
