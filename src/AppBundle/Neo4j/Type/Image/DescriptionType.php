@@ -11,7 +11,7 @@ use Innmind\Immutable\{
     Set
 };
 
-final class DescriptionsType implements TypeInterface
+final class DescriptionType implements TypeInterface
 {
     private static $identifiers;
 
@@ -28,14 +28,7 @@ final class DescriptionsType implements TypeInterface
      */
     public function forDatabase($value)
     {
-        return $value->reduce(
-            [],
-            function(array $carry, Description $description): array {
-                $carry[] = (string) $description;
-
-                return $carry;
-            }
-        );
+        return (string) $value;
     }
 
     /**
@@ -43,13 +36,7 @@ final class DescriptionsType implements TypeInterface
      */
     public function fromDatabase($value)
     {
-        $set = new Set(Description::class);
-
-        foreach ($value as $description) {
-            $set = $set->add(new Description((string) $description));
-        }
-
-        return $set;
+        return new Description((string) $value);
     }
 
     /**
@@ -66,7 +53,7 @@ final class DescriptionsType implements TypeInterface
     public static function identifiers(): SetInterface
     {
         if (self::$identifiers === null) {
-            self::$identifiers = (new Set('string'))->add('image_descriptions');
+            self::$identifiers = (new Set('string'))->add('image_description');
         }
 
         return self::$identifiers;

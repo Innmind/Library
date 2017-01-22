@@ -20,4 +20,6 @@ Domain\Entity\Image:
         weight:
             type: image_weight
         descriptions:
-            type: image_descriptions
+            type: set
+            inner: image_description
+            set_type: Domain\Entity\Image\Description
