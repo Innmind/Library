@@ -56,6 +56,7 @@ innmind_neo4j:
         - Innmind\Neo4j\ONM\Type\PointInTimeType
     identity_generators:
         AppBundle\Entity\Author\Identity: neo4j.identity.generator.author
+        AppBundle\Entity\ResourceAuthor\Identity: neo4j.identity.generator.resource_author
         AppBundle\Entity\Citation\Identity: neo4j.identity.generator.citation
         AppBundle\Entity\Domain\Identity: neo4j.identity.generator.domain
         AppBundle\Entity\DomainHost\Identity: neo4j.identity.generator.domain_host

@@ -11,6 +11,18 @@ services:
         arguments:
             - Domain\Entity\Author
 
+    repository.resource_author:
+        class: AppBundle\Repository\Neo4j\AuthorRepository
+        arguments:
+            - '@repository.neo4j.resource_author'
+
+    repository.neo4j.resource_author:
+        factory:
+            - '@innmind_neo4j.manager'
+            - 'repository'
+        arguments:
+            - Domain\Entity\ResourceAuthor
+
     repository.citation:
         class: AppBundle\Repository\Neo4j\CitationRepository
         arguments:

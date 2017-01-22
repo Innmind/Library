@@ -33,3 +33,21 @@ Domain\Entity\HostResource:
     properties:
         foundAt:
             type: point_in_time
+
+Domain\Entity\ResourceAuthor:
+    type: relationship
+    rel_type: AUTHOR_OF_RESOURCE
+    identity:
+        property: identity
+        type: AppBundle\Entity\ResourceAuthor\Identity
+    startNode:
+        property: author
+        type: AppBundle\Entity\Author\Identity
+        target: identity
+    endNode:
+        property: resource
+        type: AppBundle\Entity\HttpResource\Identity
+        target: identity
+    properties:
+        asOf:
+            type: point_in_time
