@@ -52,6 +52,8 @@ web:
                     type: string
                     access: [READ, CREATE]
                     optional: true
+            options:
+                actions: [get, create, options]
 
         image:
             identity: identity
@@ -86,6 +88,8 @@ web:
                     type: int
                     access: [READ, CREATE]
                     optional: true
+            options:
+                actions: [get, create, options]
 
         html_page:
             identity: identity
