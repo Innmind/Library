@@ -1,6 +1,6 @@
 Domain\Entity\Image:
     type: aggregate
-    labels: [Web, Resource]
+    labels: [Web, Resource, Image]
     identity:
         property: identity
         type: AppBundle\Entity\Image\Identity
