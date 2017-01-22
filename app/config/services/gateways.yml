@@ -35,24 +35,6 @@ services:
         arguments:
             - '@repository.citation'
 
-    gateway.domain:
-        class: AppBundle\Rest\Gateway\DomainGateway
-        arguments:
-            - '@gateway.domain.creator'
-            - '@gateway.domain.accessor'
-        tags:
-            - { name: innmind_rest_server.gateway, alias: domain }
-
-    gateway.domain.creator:
-        class: AppBundle\Rest\Gateway\DomainGateway\ResourceCreator
-        arguments:
-            - '@command_bus'
-
-    gateway.domain.accessor:
-        class: AppBundle\Rest\Gateway\DomainGateway\ResourceAccessor
-        arguments:
-            - '@repository.domain'
-
     gateway.http_resource:
         class: AppBundle\Rest\Gateway\HttpResourceGateway
         arguments:
