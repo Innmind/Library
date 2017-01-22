@@ -1,13 +1,13 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\AppBundle\Entity\Image;
+namespace Tests\AppBundle\Entity\HtmlPage;
 
 use AppBundle\Entity\{
-    Image\Identity,
+    HtmlPage\Identity,
     HttpResource\Identity as HttpResourceIdentity
 };
-use Domain\Entity\Image\IdentityInterface;
+use Domain\Entity\HtmlPage\IdentityInterface;
 use Innmind\Rest\Server\IdentityInterface as RestIdentity;
 use Ramsey\Uuid\Uuid;
 

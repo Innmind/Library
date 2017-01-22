@@ -1,13 +1,11 @@
 <?php
 declare(strict_types = 1);
 
-namespace Tests\AppBundle\Entity\Image;
+namespace Tests\AppBundle\Entity\HostResource;
 
-use AppBundle\Entity\{
-    Image\Identity,
-    HttpResource\Identity as HttpResourceIdentity
-};
-use Domain\Entity\Image\IdentityInterface;
+use AppBundle\Entity\HostResource\Identity;
+use Domain\Entity\HostResource\IdentityInterface;
+use Innmind\Neo4j\ONM\Identity\Uuid as UuidIdentity;
 use Innmind\Rest\Server\IdentityInterface as RestIdentity;
 use Ramsey\Uuid\Uuid;
 
@@ -19,7 +17,7 @@ class IdentityTest extends \PHPUnit_Framework_TestCase
         $identity = new Identity($uuid);
 
         $this->assertInstanceOf(IdentityInterface::class, $identity);
-        $this->assertInstanceOf(HttpResourceIdentity::class, $identity);
+        $this->assertInstanceOf(UuidIdentity::class, $identity);
         $this->assertInstanceOf(RestIdentity::class, $identity);
         $this->assertSame($uuid, (string) $identity);
     }
