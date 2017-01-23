@@ -8,12 +8,18 @@ use AppBundle\Entity\{
     HostResource\Identity as HostResourceIdentity,
     Domain\Identity as DomainIdentity,
     Host\Identity as HostIdentity,
-    DomainHost\Identity as DomainHostIdentity
+    DomainHost\Identity as DomainHostIdentity,
+    Author\Identity as AuthorIdentity,
+    ResourceAuthor\Identity as ResourceAuthorIdentity,
+    Citation\Identity as CitationIdentity,
+    CitationAppearance\Identity as CitationAppearanceIdentity
 };
 use Domain\{
     Command\RegisterDomain,
     Command\RegisterHost,
     Command\RegisterHtmlPage,
+    Command\RegisterAuthor,
+    Command\RegisterCitation,
     Command\HtmlPage\FlagAsJournal,
     Command\HtmlPage\SpecifyAnchors,
     Command\HtmlPage\SpecifyAndroidAppLink,
@@ -24,10 +30,16 @@ use Domain\{
     Command\HtmlPage\SpecifyTitle,
     Command\HttpResource\SpecifyCharset,
     Command\HttpResource\SpecifyLanguages,
+    Command\HttpResource\RegisterAuthor as RegisterResourceAuthor,
+    Command\Citation\RegisterAppearance,
     Exception\DomainAlreadyExistException,
     Exception\HostAlreadyExistException,
+    Exception\AuthorAlreadyExistException,
+    Exception\CitationAlreadyExistException,
     Entity\HttpResource\Charset,
     Entity\HtmlPage\Anchor,
+    Entity\Author\Name as AuthorName,
+    Entity\Citation\Text as CitationText,
     Model\Language
 };
 use Innmind\Url\{
@@ -64,6 +76,8 @@ final class ResourceCreator implements ResourceCreatorInterface
         $identity = $this->registerResource($resource, $host);
         $this->specifyCharset($resource, $identity);
         $this->specifyLanguages($resource, $identity);
+        $this->registerAuthor($resource, $identity);
+        $this->registerCitations($resource, $identity);
         $this->flagAsJournal($resource, $identity);
         $this->specifyAnchors($resource, $identity);
         $this->specifyAndroidAppLink($resource, $identity);
@@ -156,6 +170,74 @@ final class ResourceCreator implements ResourceCreatorInterface
             new SpecifyLanguages(
                 $identity,
                 $languages
+            )
+        );
+    }
+
+    private function registerAuthor(
+        HttpResourceInterface $resource,
+        Identity $identity
+    ): void {
+        if (!$resource->has('author')) {
+            return;
+        }
+
+        try {
+            $this->commandBus->handle(
+                new RegisterAuthor(
+                    $author = new AuthorIdentity((string) Uuid::uuid4()),
+                    new AuthorName(
+                        $resource->property('author')->value()
+                    )
+                )
+            );
+        } catch (AuthorAlreadyExistException $e) {
+            $author = $e->author()->identity();
+        }
+
+        $this->commandBus->handle(
+            new RegisterResourceAuthor(
+                new ResourceAuthorIdentity((string) Uuid::uuid4()),
+                $author,
+                $identity
+            )
+        );
+    }
+
+    private function registerCitations(
+        HttpResourceInterface $resource,
+        Identity $identity
+    ): void {
+        if (!$resource->has('citations')) {
+            return;
+        }
+
+        $resource
+            ->property('citations')
+            ->value()
+            ->foreach(function(string $citation) use ($identity): void {
+                $this->registerCitation($citation, $identity);
+            });
+    }
+
+    private function registerCitation(string $citation, Identity $identity): void
+    {
+        try {
+            $this->commandBus->handle(
+                new RegisterCitation(
+                    $citationIdentity = new CitationIdentity((string) Uuid::uuid4()),
+                    new CitationText($citation)
+                )
+            );
+        } catch (CitationAlreadyExistException $e) {
+            $citationIdentity = $e->citation()->identity();
+        }
+
+        $this->commandBus->handle(
+            new RegisterAppearance(
+                new CitationAppearanceIdentity((string) Uuid::uuid4()),
+                $citationIdentity,
+                $identity
             )
         );
     }

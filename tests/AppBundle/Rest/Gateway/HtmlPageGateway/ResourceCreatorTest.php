@@ -10,6 +10,7 @@ use Domain\Command\{
     RegisterHost,
     HttpResource\SpecifyCharset,
     HttpResource\SpecifyLanguages,
+    HttpResource\RegisterAuthor as RegisterResourceAuthor,
     HtmlPage\FlagAsJournal,
     HtmlPage\SpecifyAnchors,
     HtmlPage\SpecifyAndroidAppLink,
@@ -17,7 +18,10 @@ use Domain\Command\{
     HtmlPage\SpecifyDescription,
     HtmlPage\SpecifyMainContent,
     HtmlPage\SpecifyThemeColour,
-    HtmlPage\SpecifyTitle
+    HtmlPage\SpecifyTitle,
+    RegisterAuthor,
+    RegisterCitation,
+    Citation\RegisterAppearance
 };
 use Innmind\Rest\Server\{
     ResourceCreatorInterface,
@@ -95,10 +99,36 @@ class ResourceCreatorTest extends \PHPUnit_Framework_TestCase
             ->expects($this->at(5))
             ->method('handle')
             ->with($this->callback(function($command) {
-                return $command instanceof FlagAsJournal;
+                return $command instanceof RegisterAuthor &&
+                    (string) $command->name() === 'author name';
             }));
         $bus
             ->expects($this->at(6))
+            ->method('handle')
+            ->with($this->callback(function($command) {
+                return $command instanceof RegisterResourceAuthor;
+            }));
+        $bus
+            ->expects($this->at(7))
+            ->method('handle')
+            ->with($this->callback(function($command) {
+                return $command instanceof RegisterCitation &&
+                    (string) $command->text() === 'cite';
+            }));
+        $bus
+            ->expects($this->at(8))
+            ->method('handle')
+            ->with($this->callback(function($command) {
+                return $command instanceof RegisterAppearance;
+            }));
+        $bus
+            ->expects($this->at(9))
+            ->method('handle')
+            ->with($this->callback(function($command) {
+                return $command instanceof FlagAsJournal;
+            }));
+        $bus
+            ->expects($this->at(10))
             ->method('handle')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyAnchors &&
@@ -106,42 +136,42 @@ class ResourceCreatorTest extends \PHPUnit_Framework_TestCase
                     (string) $command->anchors()->current() === '#someAnchor';
             }));
         $bus
-            ->expects($this->at(7))
+            ->expects($this->at(11))
             ->method('handle')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyAndroidAppLink &&
                     (string) $command->url() === 'android://foo/';
             }));
         $bus
-            ->expects($this->at(8))
+            ->expects($this->at(12))
             ->method('handle')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyDescription &&
                     $command->description() === 'desc';
             }));
         $bus
-            ->expects($this->at(9))
+            ->expects($this->at(13))
             ->method('handle')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyIosAppLink &&
                     (string) $command->url() === 'ios://foo/';
             }));
         $bus
-            ->expects($this->at(10))
+            ->expects($this->at(14))
             ->method('handle')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyMainContent &&
                     $command->mainContent() === 'main content';
             }));
         $bus
-            ->expects($this->at(11))
+            ->expects($this->at(15))
             ->method('handle')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyThemeColour &&
                     (string) $command->colour() === '#3399ff';
             }));
         $bus
-            ->expects($this->at(12))
+            ->expects($this->at(16))
             ->method('handle')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyTitle &&
@@ -196,75 +226,95 @@ class ResourceCreatorTest extends \PHPUnit_Framework_TestCase
         $resource
             ->expects($this->at(7))
             ->method('has')
-            ->with('is_journal')
+            ->with('author')
             ->willReturn(true);
         $resource
             ->expects($this->at(8))
-            ->method('has')
-            ->with('anchors')
-            ->willReturn(true);
+            ->method('property')
+            ->with('author')
+            ->willReturn(new Property('author', 'author name'));
         $resource
             ->expects($this->at(9))
-            ->method('property')
-            ->with('anchors')
-            ->willReturn(new Property('anchors', (new Set('string'))->add('someAnchor')));
-        $resource
-            ->expects($this->at(10))
             ->method('has')
-            ->with('android_app_link')
+            ->with('citations')
             ->willReturn(true);
         $resource
-            ->expects($this->at(11))
+            ->expects($this->at(10))
             ->method('property')
-            ->with('android_app_link')
-            ->willReturn(new Property('android_app_link', 'android://foo/'));
+            ->with('citations')
+            ->willReturn(new Property('citations', (new Set('string'))->add('cite')));
+        $resource
+            ->expects($this->at(11))
+            ->method('has')
+            ->with('is_journal')
+            ->willReturn(true);
         $resource
             ->expects($this->at(12))
             ->method('has')
-            ->with('description')
+            ->with('anchors')
             ->willReturn(true);
         $resource
             ->expects($this->at(13))
             ->method('property')
-            ->with('description')
-            ->willReturn(new Property('description', 'desc'));
+            ->with('anchors')
+            ->willReturn(new Property('anchors', (new Set('string'))->add('someAnchor')));
         $resource
             ->expects($this->at(14))
             ->method('has')
-            ->with('ios_app_link')
+            ->with('android_app_link')
             ->willReturn(true);
         $resource
             ->expects($this->at(15))
             ->method('property')
-            ->with('ios_app_link')
-            ->willReturn(new Property('ios_app_link', 'ios://foo/'));
+            ->with('android_app_link')
+            ->willReturn(new Property('android_app_link', 'android://foo/'));
         $resource
             ->expects($this->at(16))
             ->method('has')
-            ->with('main_content')
+            ->with('description')
             ->willReturn(true);
         $resource
             ->expects($this->at(17))
             ->method('property')
-            ->with('main_content')
-            ->willReturn(new Property('main_content', 'main content'));
+            ->with('description')
+            ->willReturn(new Property('description', 'desc'));
         $resource
             ->expects($this->at(18))
             ->method('has')
-            ->with('theme_colour')
+            ->with('ios_app_link')
             ->willReturn(true);
         $resource
             ->expects($this->at(19))
             ->method('property')
+            ->with('ios_app_link')
+            ->willReturn(new Property('ios_app_link', 'ios://foo/'));
+        $resource
+            ->expects($this->at(20))
+            ->method('has')
+            ->with('main_content')
+            ->willReturn(true);
+        $resource
+            ->expects($this->at(21))
+            ->method('property')
+            ->with('main_content')
+            ->willReturn(new Property('main_content', 'main content'));
+        $resource
+            ->expects($this->at(22))
+            ->method('has')
+            ->with('theme_colour')
+            ->willReturn(true);
+        $resource
+            ->expects($this->at(23))
+            ->method('property')
             ->with('theme_colour')
             ->willReturn(new Property('theme_colour', '39F'));
         $resource
-            ->expects($this->at(20))
+            ->expects($this->at(24))
             ->method('has')
             ->with('title')
             ->willReturn(true);
         $resource
-            ->expects($this->at(21))
+            ->expects($this->at(25))
             ->method('property')
             ->with('title')
             ->willReturn(new Property('title', 'some title'));

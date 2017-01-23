@@ -101,6 +101,16 @@ web:
                 host:
                     type: string
                     access: [CREATE]
+                author:
+                    type: string
+                    access: [CREATE]
+                    optional: true
+                citations:
+                    type: set
+                    access: [CREATE]
+                    options:
+                        inner: string
+                    optional: true
                 path:
                     type: string
                     access: [READ, CREATE]

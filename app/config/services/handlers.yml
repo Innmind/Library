@@ -13,6 +13,14 @@ services:
         tags:
             - { name: innmind_command_bus.handler, handles: Domain\Command\RegisterCitation }
 
+    handler.citation.register_appearance:
+        class: Domain\Handler\Citation\RegisterAppearanceHandler
+        arguments:
+            - '@repository.citation_appearance'
+            - '@clock'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\Citation\RegisterAppearance }
+
     handler.register_domain:
         class: Domain\Handler\RegisterDomainHandler
         arguments:
@@ -52,6 +60,14 @@ services:
             - '@repository.http_resource'
         tags:
             - { name: innmind_command_bus.handler, handles: Domain\Command\HttpResource\SpecifyLanguages }
+
+    handler.http_resource.register_author:
+        class: Domain\Handler\HttpResource\RegisterAuthorHandler
+        arguments:
+            - '@repository.resource_author'
+            - '@clock'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\HttpResource\RegisterAuthor }
 
     handler.register_image:
         class: Domain\Handler\RegisterImageHandler
