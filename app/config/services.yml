@@ -27,6 +27,14 @@ services:
         tags:
             - { name: innmind_command_bus, alias: dispatch_domain_events }
 
+    command_bus.clear_domain_events:
+        class: AppBundle\CommandBus\ClearDomainEventsBus
+        arguments:
+            - ~
+            - '@innmind_neo4j.entity_container'
+        tags:
+            - { name: innmind_command_bus, alias: clear_domain_events }
+
     domain_parser:
         class: Pdp\Parser
         factory:
