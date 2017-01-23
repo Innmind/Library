@@ -1,0 +1,24 @@
+<?php
+declare(strict_types = 1);
+
+namespace Domain\Exception;
+
+use Domain\Entity\Alternate;
+
+final class AlternateAlreadyExistException extends LogicException
+{
+    private $alternate;
+
+    public function __construct(Alternate $alternate)
+    {
+        $this->alternate = $alternate;
+    }
+
+    /**
+     * The alternate that already exist
+     */
+    public function alternate(): Alternate
+    {
+        return $this->alternate;
+    }
+}

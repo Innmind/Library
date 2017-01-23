@@ -1,9 +1,51 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
-parameters:
-#    parameter_name: value
+imports:
+    - { resource: services/repositories.yml }
+    - { resource: services/identity_generators.yml }
+    - { resource: services/handlers.yml }
+    - { resource: services/gateways.yml }
+    - { resource: services/listeners.yml }
+    - { resource: services/onm.yml }
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    command_bus: '@innmind_command_bus'
+    event_bus: '@innmind_event_bus'
+
+    command_bus.persister:
+        class: AppBundle\CommandBus\PersisterBus
+        arguments:
+            - ~
+            - '@innmind_neo4j.manager'
+        tags:
+            - { name: innmind_command_bus, alias: persister }
+
+    command_bus.dispatch_domain_events:
+        class: AppBundle\CommandBus\DispatchDomainEventsBus
+        arguments:
+            - ~
+            - '@event_bus'
+            - '@innmind_neo4j.entity_container'
+        tags:
+            - { name: innmind_command_bus, alias: dispatch_domain_events }
+
+    command_bus.clear_domain_events:
+        class: AppBundle\CommandBus\ClearDomainEventsBus
+        arguments:
+            - ~
+            - '@innmind_neo4j.entity_container'
+        tags:
+            - { name: innmind_command_bus, alias: clear_domain_events }
+
+    domain_parser:
+        class: Pdp\Parser
+        factory:
+            - AppBundle\Factory\DomainParserFactory
+            - make
+
+    clock:
+        class: Innmind\TimeContinuum\TimeContinuum\Earth
+        arguments:
+            - '@clock.timezone.paris'
+
+    clock.timezone.paris:
+        class: Innmind\TimeContinuum\Timezone\Earth\Europe\Paris
+        public: false

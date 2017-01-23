@@ -1,0 +1,54 @@
+services:
+    gateway.http_resource:
+        class: AppBundle\Rest\Gateway\HttpResourceGateway
+        arguments:
+            - '@gateway.http_resource.creator'
+            - '@gateway.http_resource.accessor'
+        tags:
+            - { name: innmind_rest_server.gateway, alias: http_resource }
+
+    gateway.http_resource.creator:
+        class: AppBundle\Rest\Gateway\HttpResourceGateway\ResourceCreator
+        arguments:
+            - '@command_bus'
+
+    gateway.http_resource.accessor:
+        class: AppBundle\Rest\Gateway\HttpResourceGateway\ResourceAccessor
+        arguments:
+            - '@repository.http_resource'
+
+    gateway.image:
+        class: AppBundle\Rest\Gateway\ImageGateway
+        arguments:
+            - '@gateway.image.creator'
+            - '@gateway.image.accessor'
+        tags:
+            - { name: innmind_rest_server.gateway, alias: image }
+
+    gateway.image.creator:
+        class: AppBundle\Rest\Gateway\ImageGateway\ResourceCreator
+        arguments:
+            - '@command_bus'
+
+    gateway.image.accessor:
+        class: AppBundle\Rest\Gateway\ImageGateway\ResourceAccessor
+        arguments:
+            - '@repository.image'
+
+    gateway.html_page:
+        class: AppBundle\Rest\Gateway\HtmlPageGateway
+        arguments:
+            - '@gateway.html_page.creator'
+            - '@gateway.html_page.accessor'
+        tags:
+            - { name: innmind_rest_server.gateway, alias: html_page }
+
+    gateway.html_page.creator:
+        class: AppBundle\Rest\Gateway\HtmlPageGateway\ResourceCreator
+        arguments:
+            - '@command_bus'
+
+    gateway.html_page.accessor:
+        class: AppBundle\Rest\Gateway\HtmlPageGateway\ResourceAccessor
+        arguments:
+            - '@repository.html_page'

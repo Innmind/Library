@@ -1,0 +1,17 @@
+services:
+    onm.data_extractor.strategies:
+        class: Innmind\Reflection\ExtractionStrategy\ExtractionStrategies
+        public: false
+        arguments:
+            - '@onm.data_extractor.strategies.collection'
+
+    onm.data_extractor.strategies.collection:
+        class: Innmind\Immutable\TypedCollection
+        public: false
+        arguments:
+            - 'Innmind\Reflection\ExtractionStrategy\ExtractionStrategyInterface'
+            - ['@onm.data_extractor.strategy']
+
+    onm.data_extractor.strategy:
+        class: Innmind\Reflection\ExtractionStrategy\ReflectionStrategy
+        public: false

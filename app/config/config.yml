@@ -2,52 +2,88 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: rest.yml }
-    - { resource: rabbitmq.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
 
 framework:
-    #translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
     form:            ~
-    validation:      { enable_annotations: true }
-    templating:
-        engines: ['twig']
-        #assets_version: SomeVersionScheme
+    csrf_protection: ~
+    validation:      { enable_annotations: false }
+    serializer: ~
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments:       ~
     http_method_override: true
-
-# Twig Configuration
-twig:
-    debug:            "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
-
-# Swiftmailer Configuration
-swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+    assets: ~
+    php_errors:
+        log: true
 
 innmind_neo4j:
-    connections:
-        default:
-            scheme: %neo4j_scheme%
-            host: %neo4j_host%
-            port: %neo4j_port%
-            username: %neo4j_user%
-            password: %neo4j_password%
-    managers:
-        default:
-            connection: default
-            reader: yaml
+    connection:
+        scheme: '%database_scheme%'
+        host: '%database_host%'
+        port: '%database_port%'
+        user: '%database_user%'
+        password: '%database_password%'
+    types:
+        - AppBundle\Neo4j\Type\Author\NameType
+        - AppBundle\Neo4j\Type\Citation\TextType
+        - AppBundle\Neo4j\Type\Domain\NameType
+        - AppBundle\Neo4j\Type\Domain\TopLevelDomainType
+        - AppBundle\Neo4j\Type\Host\NameType
+        - AppBundle\Neo4j\Type\HttpResource\CharsetType
+        - AppBundle\Neo4j\Type\HttpResource\PathType
+        - AppBundle\Neo4j\Type\HttpResource\QueryType
+        - AppBundle\Neo4j\Type\LanguageType
+        - AppBundle\Neo4j\Type\Image\DescriptionType
+        - AppBundle\Neo4j\Type\Image\DimensionType
+        - AppBundle\Neo4j\Type\Image\WeightType
+        - AppBundle\Neo4j\Type\HtmlPage\AnchorType
+        - AppBundle\Neo4j\Type\UrlType
+        - AppBundle\Neo4j\Type\ColourType
+        - Innmind\Neo4j\ONM\Type\PointInTimeType
+    identity_generators:
+        AppBundle\Entity\Author\Identity: neo4j.identity.generator.author
+        AppBundle\Entity\ResourceAuthor\Identity: neo4j.identity.generator.resource_author
+        AppBundle\Entity\Citation\Identity: neo4j.identity.generator.citation
+        AppBundle\Entity\CitationAppearance\Identity: neo4j.identity.generator.citation_appearance
+        AppBundle\Entity\Domain\Identity: neo4j.identity.generator.domain
+        AppBundle\Entity\DomainHost\Identity: neo4j.identity.generator.domain_host
+        AppBundle\Entity\Host\Identity: neo4j.identity.generator.host
+        AppBundle\Entity\HostResource\Identity: neo4j.identity.generator.host_resource
+        AppBundle\Entity\HttpResource\Identity: neo4j.identity.generator.http_resource
+        AppBundle\Entity\Image\Identity: neo4j.identity.generator.image
+        AppBundle\Entity\HtmlPage\Identity: neo4j.identity.generator.html_page
+
+innmind_command_bus:
+    stack:
+        - queue
+        - logger
+        - clear_domain_events
+        - dispatch_domain_events
+        - persister
+        - default
+
+innmind_rest_server:
+    accept:
+        json:
+            priority: 0
+            media_types:
+                application/json: 0
+    content_type:
+        json:
+            priority: 0
+            media_types:
+                application/json: 0

@@ -1,0 +1,55 @@
+services:
+    neo4j.identity.generator.author:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\Author\Identity'
+
+    neo4j.identity.generator.resource_author:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\ResourceAuthor\Identity'
+
+    neo4j.identity.generator.citation:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\Citation\Identity'
+
+    neo4j.identity.generator.citation_appearance:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\CitationAppearance\Identity'
+
+    neo4j.identity.generator.domain:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\Domain\Identity'
+
+    neo4j.identity.generator.domain_host:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\DomainHost\Identity'
+
+    neo4j.identity.generator.host:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\Host\Identity'
+
+    neo4j.identity.generator.host_resource:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\HostResource\Identity'
+
+    neo4j.identity.generator.http_resource:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\HttpResource\Identity'
+
+    neo4j.identity.generator.image:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\Image\Identity'
+
+    neo4j.identity.generator.html_page:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\HtmlPage\Identity'
