@@ -8,6 +8,7 @@ imports:
 
 services:
     command_bus: '@innmind_command_bus'
+    event_bus: '@innmind_event_bus'
 
     command_bus.persister:
         class: AppBundle\CommandBus\PersisterBus
@@ -16,6 +17,15 @@ services:
             - '@innmind_neo4j.manager'
         tags:
             - { name: innmind_command_bus, alias: persister }
+
+    command_bus.dispatch_domain_events:
+        class: AppBundle\CommandBus\DispatchDomainEventsBus
+        arguments:
+            - ~
+            - '@event_bus'
+            - '@innmind_neo4j.entity_container'
+        tags:
+            - { name: innmind_command_bus, alias: dispatch_domain_events }
 
     domain_parser:
         class: Pdp\Parser

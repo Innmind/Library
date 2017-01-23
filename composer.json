@@ -34,7 +34,8 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "innmind/neo4j-bundle": "^2.0",
         "innmind/command-bus-bundle": "^1.0",
-        "innmind/rest-server-bundle": "^1.0"
+        "innmind/rest-server-bundle": "^1.0",
+        "innmind/event-bus-bundle": "^1.0"
     },
     "config": {
         "bin-dir": "bin"

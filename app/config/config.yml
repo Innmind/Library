@@ -71,6 +71,7 @@ innmind_command_bus:
     stack:
         - queue
         - logger
+        - dispatch_domain_events
         - persister
         - default
 

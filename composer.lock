@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eb570912d69168ca85e44fe30435d278",
-    "content-hash": "5c1081dd3205dc8497061e0c06081385",
+    "hash": "8d2fd41261f7668cefa33ad89e89f98d",
+    "content-hash": "8728dd4dce03954066a60ad5b401b332",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -809,6 +809,52 @@
                 "event"
             ],
             "time": "2017-01-21 15:30:30"
+        },
+        {
+            "name": "innmind/event-bus-bundle",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/EventBusBundle.git",
+                "reference": "cf7bb9cad53ecd5f42308c39965b921bb357bb34"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/EventBusBundle/zipball/cf7bb9cad53ecd5f42308c39965b921bb357bb34",
+                "reference": "cf7bb9cad53ecd5f42308c39965b921bb357bb34",
+                "shasum": ""
+            },
+            "require": {
+                "innmind/event-bus": "~1.0",
+                "php": "~7.0",
+                "symfony/config": "~3.0",
+                "symfony/dependency-injection": "~3.0",
+                "symfony/http-kernel": "~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Innmind\\EventBusBundle\\": "src/",
+                    "Tests\\Innmind\\EventBusBundle\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "Event Bus Bundle",
+            "homepage": "http://github.com/Innmind/EventBusBundle",
+            "keywords": [
+                "ddd",
+                "event bus"
+            ],
+            "time": "2016-07-24 14:54:54"
         },
         {
             "name": "innmind/filesystem",
