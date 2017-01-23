@@ -1,31 +1,5 @@
 web:
     resources:
-        author:
-            identity: identity
-            gateway: author
-            properties:
-                identity:
-                    type: string
-                    access: [READ]
-                name:
-                    type: string
-                    access: [READ, CREATE]
-            options:
-                actions: [get, create, options]
-
-        citation:
-            identity: identity
-            gateway: citation
-            properties:
-                identity:
-                    type: string
-                    access: [READ]
-                text:
-                    type: string
-                    access: [READ, CREATE]
-            options:
-                actions: [get, create, options]
-
         resource:
             identity: identity
             gateway: http_resource
