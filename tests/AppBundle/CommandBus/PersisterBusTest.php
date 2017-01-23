@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Tests\AppBundle\CommandBus;
 
-use AppBundle\CommandBus\PersisterCommandBus;
+use AppBundle\CommandBus\PersisterBus;
 use Innmind\CommandBus\CommandBusInterface;
 use Innmind\Neo4j\{
     ONM\ManagerInterface,
@@ -12,13 +12,13 @@ use Innmind\Neo4j\{
     DBAL\ConnectionInterface
 };
 
-class PersisterCommandBusTest extends \PHPUnit_Framework_TestCase
+class PersisterBusTest extends \PHPUnit_Framework_TestCase
 {
     public function testInterface()
     {
         $this->assertInstanceOf(
             CommandBusInterface::class,
-            new PersisterCommandBus(
+            new PersisterBus(
                 $this->createMock(CommandBusInterface::class),
                 $this->createMock(ManagerInterface::class)
             )
@@ -68,7 +68,7 @@ class PersisterCommandBusTest extends \PHPUnit_Framework_TestCase
             {
             }
         };
-        $bus = new PersisterCommandBus($innerBus, $manager);
+        $bus = new PersisterBus($innerBus, $manager);
 
         $this->assertNull($bus->handle($command));
         $this->assertTrue($manager->persisted);

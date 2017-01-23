@@ -6,7 +6,7 @@ namespace AppBundle\CommandBus;
 use Innmind\CommandBus\CommandBusInterface;
 use Innmind\Neo4j\ONM\ManagerInterface;
 
-final class PersisterCommandBus implements CommandBusInterface
+final class PersisterBus implements CommandBusInterface
 {
     private $commandBus;
     private $manager;

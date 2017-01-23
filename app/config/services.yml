@@ -10,7 +10,7 @@ services:
     command_bus: '@innmind_command_bus'
 
     command_bus.persister:
-        class: AppBundle\CommandBus\PersisterCommandBus
+        class: AppBundle\CommandBus\PersisterBus
         arguments:
             - ~
             - '@innmind_neo4j.manager'
