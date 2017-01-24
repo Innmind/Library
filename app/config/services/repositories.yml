@@ -12,7 +12,7 @@ services:
             - Domain\Entity\Author
 
     repository.resource_author:
-        class: AppBundle\Repository\Neo4j\AuthorRepository
+        class: AppBundle\Repository\Neo4j\ResourceAuthorRepository
         arguments:
             - '@repository.neo4j.resource_author'
 
@@ -36,7 +36,7 @@ services:
             - Domain\Entity\Citation
 
     repository.citation_appearance:
-        class: AppBundle\Repository\Neo4j\CitationRepository
+        class: AppBundle\Repository\Neo4j\CitationAppearanceRepository
         arguments:
             - '@repository.neo4j.citation_appearance'
 
