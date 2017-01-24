@@ -3,3 +3,10 @@ services:
         class: AppBundle\EventListener\ExceptionListener
         tags:
             - { name: kernel.event_subscriber }
+
+    event.listener.store_domain_event:
+        class: AppBundle\Listener\StoreDomainEventListener
+        arguments:
+            - '@innmind_filesystem'
+        tags:
+            - { name: innmind_event_bus.listener, listen_to: Domain\Event\* }

@@ -49,3 +49,8 @@ services:
     clock.timezone.paris:
         class: Innmind\TimeContinuum\Timezone\Earth\Europe\Paris
         public: false
+
+    innmind_filesystem:
+        class: Innmind\Filesystem\Adapter\FilesystemAdapter
+        arguments:
+            - '%kernel.root_dir%/../var/innmind/domain_events'
