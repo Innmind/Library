@@ -9,7 +9,6 @@ use Innmind\Neo4j\ONM\{
     Entity\Container,
     IdentityInterface
 };
-use Innmind\Immutable\Sequence;
 
 final class ClearDomainEventsBus implements CommandBusInterface
 {
