@@ -17,6 +17,10 @@ use Innmind\Rest\Server\{
     Property,
     Definition\HttpResource as ResourceDefinition
 };
+use Innmind\Neo4j\DBAL\{
+    ConnectionInterface,
+    Query
+};
 use Innmind\Immutable\{
     Map,
     Set
@@ -25,10 +29,14 @@ use Innmind\Immutable\{
 final class ResourceAccessor implements ResourceAccessorInterface
 {
     private $repository;
+    private $dbal;
 
-    public function __construct(HtmlPageRepositoryInterface $repository)
-    {
+    public function __construct(
+        HtmlPageRepositoryInterface $repository,
+        ConnectionInterface $dbal
+    ) {
         $this->repository = $repository;
+        $this->dbal = $dbal;
     }
 
     public function __invoke(
@@ -38,10 +46,23 @@ final class ResourceAccessor implements ResourceAccessorInterface
         $resource = $this->repository->get(
             new Identity((string) $identity)
         );
+        $result = $this->dbal->execute(
+            (new Query)
+                ->match('host', ['Web', 'Host'])
+                ->linkedTo('resource', ['Web', 'Resource'])
+                ->through('RESOURCE_OF_HOST')
+                ->where('resource.identity = {identity}')
+                ->withParameter('identity', (string) $identity)
+                ->return('host')
+        );
         $properties = (new Map('string', Property::class))
             ->put(
                 'identity',
                 new Property('identity', (string) $resource->identity())
+            )
+            ->put(
+                'host',
+                new Property('host', $result->rows()->first()->value()['name'])
             )
             ->put(
                 'path',

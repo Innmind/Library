@@ -9,7 +9,7 @@ web:
                     access: [READ]
                 host:
                     type: string
-                    access: [CREATE]
+                    access: [READ, CREATE]
                 path:
                     type: string
                     access: [READ, CREATE]
@@ -38,7 +38,7 @@ web:
                     access: [READ]
                 host:
                     type: string
-                    access: [CREATE]
+                    access: [READ, CREATE]
                 path:
                     type: string
                     access: [READ, CREATE]
@@ -74,7 +74,7 @@ web:
                     access: [READ]
                 host:
                     type: string
-                    access: [CREATE]
+                    access: [READ, CREATE]
                 author:
                     type: string
                     access: [CREATE]
