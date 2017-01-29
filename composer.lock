@@ -994,20 +994,21 @@
         },
         {
             "name": "innmind/neo4j-bundle",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Neo4jBundle.git",
-                "reference": "f1a3688ebae18c33f6a79968933e37a4ef5b70cf"
+                "reference": "f803428bfdd2e9225c331f2eab7da9b9469ce3f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Neo4jBundle/zipball/f1a3688ebae18c33f6a79968933e37a4ef5b70cf",
-                "reference": "f1a3688ebae18c33f6a79968933e37a4ef5b70cf",
+                "url": "https://api.github.com/repos/Innmind/Neo4jBundle/zipball/f803428bfdd2e9225c331f2eab7da9b9469ce3f4",
+                "reference": "f803428bfdd2e9225c331f2eab7da9b9469ce3f4",
                 "shasum": ""
             },
             "require": {
                 "innmind/filesystem": "^1.0",
+                "innmind/neo4j-dbal": "~2.2",
                 "innmind/neo4j-onm": "^2.0",
                 "php": "~7.0",
                 "psr/log": "~1.0",
@@ -1041,20 +1042,20 @@
                 "neo4j",
                 "orm"
             ],
-            "time": "2017-01-19 07:32:54"
+            "time": "2017-01-29 13:58:53"
         },
         {
             "name": "innmind/neo4j-dbal",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/neo4j-dbal.git",
-                "reference": "d3540b1b6976c406bd77aecea4b18bfb031b843f"
+                "reference": "daebe3e1a0c8cd91674ca6baaa10c11a50a0def3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/neo4j-dbal/zipball/d3540b1b6976c406bd77aecea4b18bfb031b843f",
-                "reference": "d3540b1b6976c406bd77aecea4b18bfb031b843f",
+                "url": "https://api.github.com/repos/Innmind/neo4j-dbal/zipball/daebe3e1a0c8cd91674ca6baaa10c11a50a0def3",
+                "reference": "daebe3e1a0c8cd91674ca6baaa10c11a50a0def3",
                 "shasum": ""
             },
             "require": {
@@ -1062,6 +1063,7 @@
                 "innmind/immutable": "~1.0",
                 "php": ">=7.0",
                 "psr/http-message": "^1.0",
+                "psr/log": "^1.0",
                 "symfony/event-dispatcher": "~2.7|~3.0"
             },
             "type": "library",
@@ -1087,7 +1089,7 @@
                 "neo4j",
                 "wrapper"
             ],
-            "time": "2016-10-23 10:42:50"
+            "time": "2017-01-29 12:51:20"
         },
         {
             "name": "innmind/neo4j-onm",
@@ -1191,16 +1193,16 @@
         },
         {
             "name": "innmind/rest-server",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/rest-server.git",
-                "reference": "a64047a81338dfc0eccb766195c6f34fcfccfc0e"
+                "reference": "a5fd199062dfe36733e239e3b0f1acdc6f2ad0bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/rest-server/zipball/a64047a81338dfc0eccb766195c6f34fcfccfc0e",
-                "reference": "a64047a81338dfc0eccb766195c6f34fcfccfc0e",
+                "url": "https://api.github.com/repos/Innmind/rest-server/zipball/a5fd199062dfe36733e239e3b0f1acdc6f2ad0bd",
+                "reference": "a5fd199062dfe36733e239e3b0f1acdc6f2ad0bd",
                 "shasum": ""
             },
             "require": {
@@ -1213,6 +1215,9 @@
                 "symfony/serializer": "~3.0",
                 "symfony/yaml": "~3.0",
                 "willdurand/negotiation": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.6"
             },
             "type": "library",
             "autoload": {
@@ -1237,7 +1242,7 @@
                 "api",
                 "rest"
             ],
-            "time": "2016-11-11 14:41:08"
+            "time": "2017-01-29 14:56:05"
         },
         {
             "name": "innmind/rest-server-bundle",
