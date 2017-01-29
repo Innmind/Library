@@ -130,3 +130,15 @@ services:
             - 'repository'
         arguments:
             - Domain\Entity\HtmlPage
+
+    repository.alternate:
+        class: AppBundle\Repository\Neo4j\AlternateRepository
+        arguments:
+            - '@repository.neo4j.alternate'
+
+    repository.neo4j.alternate:
+        factory:
+            - '@innmind_neo4j.manager'
+            - 'repository'
+        arguments:
+            - Domain\Entity\Alternate

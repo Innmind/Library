@@ -51,3 +51,21 @@ Domain\Entity\ResourceAuthor:
     properties:
         asOf:
             type: point_in_time
+
+Domain\Entity\Alternate:
+    type: relationship
+    rel_type: ALTERNATE_OF_RESOURCE
+    identity:
+        property: identity
+        type: AppBundle\Entity\Alternate\Identity
+    startNode:
+        property: alternate
+        type: AppBundle\Entity\HttpResource\Identity
+        target: identity
+    endNode:
+        property: resource
+        type: AppBundle\Entity\HttpResource\Identity
+        target: identity
+    properties:
+        language:
+            type: language
