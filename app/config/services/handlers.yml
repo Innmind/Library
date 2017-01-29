@@ -163,3 +163,10 @@ services:
             - '@repository.html_page'
         tags:
             - { name: innmind_command_bus.handler, handles: Domain\Command\HtmlPage\SpecifyTitle }
+
+    handler.http_resource.register_alternate:
+        class: Domain\Handler\RegisterAlternateResourceHandler
+        arguments:
+            - '@repository.alternate'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\RegisterAlternateResource }
