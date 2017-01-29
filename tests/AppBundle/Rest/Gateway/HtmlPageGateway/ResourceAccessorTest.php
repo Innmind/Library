@@ -31,10 +31,17 @@ use Innmind\Rest\Server\{
     Definition\TypeInterface,
     Definition\Access
 };
+use Innmind\Neo4j\DBAL\{
+    ConnectionInterface,
+    QueryInterface,
+    ResultInterface,
+    Result\RowInterface
+};
 use Innmind\Immutable\{
     Map,
     Set,
-    SetInterface
+    SetInterface,
+    TypedCollection
 };
 use Ramsey\Uuid\Uuid;
 
@@ -42,11 +49,13 @@ class ResourceAccessorTest extends \PHPUnit_Framework_TestCase
 {
     private $accessor;
     private $repository;
+    private $dbal;
 
     public function setUp()
     {
         $this->accessor = new ResourceAccessor(
-            $this->repository = $this->createMock(HtmlPageRepositoryInterface::class)
+            $this->repository = $this->createMock(HtmlPageRepositoryInterface::class),
+            $this->dbal = $this->createMock(ConnectionInterface::class)
         );
     }
 
@@ -75,6 +84,32 @@ class ResourceAccessorTest extends \PHPUnit_Framework_TestCase
                     new Query('bar')
                 )
             );
+        $this
+            ->dbal
+            ->expects($this->once())
+            ->method('execute')
+            ->with($this->callback(function(QueryInterface $query) use ($uuid): bool {
+                return $query->cypher() === 'MATCH (host:Web:Host)-[:RESOURCE_OF_HOST]-(resource:Web:Resource) WHERE resource.identity = {identity} RETURN host' &&
+                    $query->parameters()->count() === 1 &&
+                    $query->parameters()->first()->key() === 'identity' &&
+                    $query->parameters()->first()->value() === $uuid;
+            }))
+            ->willReturn(
+                $result = $this->createMock(ResultInterface::class)
+            );
+        $result
+            ->expects($this->once())
+            ->method('rows')
+            ->willReturn(
+                new TypedCollection(
+                    RowInterface::class,
+                    [$row = $this->createMock(RowInterface::class)]
+                )
+            );
+        $row
+            ->expects($this->once())
+            ->method('value')
+            ->willReturn(['name' => 'sub.example.com']);
         $page->specifyLanguages(
             (new Set(Language::class))->add(new Language('fr'))
         );
@@ -97,6 +132,16 @@ class ResourceAccessorTest extends \PHPUnit_Framework_TestCase
                     'identity',
                     new Property(
                         'identity',
+                        $this->createMock(TypeInterface::class),
+                        new Access(new Set('string')),
+                        new Set('string'),
+                        false
+                    )
+                )
+                ->put(
+                    'host',
+                    new Property(
+                        'host',
                         $this->createMock(TypeInterface::class),
                         new Access(new Set('string')),
                         new Set('string'),
@@ -231,6 +276,7 @@ class ResourceAccessorTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertSame($definition, $resource->definition());
         $this->assertSame($uuid, $resource->property('identity')->value());
+        $this->assertSame('sub.example.com', $resource->property('host')->value());
         $this->assertSame('foo', $resource->property('path')->value());
         $this->assertSame('bar', $resource->property('query')->value());
         $this->assertInstanceOf(

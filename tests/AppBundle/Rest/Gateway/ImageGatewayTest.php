@@ -11,6 +11,7 @@ use AppBundle\Rest\Gateway\{
 use Domain\Repository\ImageRepositoryInterface;
 use Innmind\Rest\Server\GatewayInterface;
 use Innmind\CommandBus\CommandBusInterface;
+use Innmind\Neo4j\DBAL\ConnectionInterface;
 
 class ImageGatewayTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,7 +26,8 @@ class ImageGatewayTest extends \PHPUnit_Framework_TestCase
                 $this->createMock(CommandBusInterface::class)
             ),
             $this->accessor = new ResourceAccessor(
-                $this->createMock(ImageRepositoryInterface::class)
+                $this->createMock(ImageRepositoryInterface::class),
+                $this->createMock(ConnectionInterface::class)
             )
         );
     }
