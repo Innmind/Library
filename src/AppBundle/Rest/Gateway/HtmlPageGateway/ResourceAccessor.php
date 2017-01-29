@@ -19,7 +19,8 @@ use Innmind\Rest\Server\{
 };
 use Innmind\Neo4j\DBAL\{
     ConnectionInterface,
-    Query
+    Query,
+    Result\RowInterface
 };
 use Innmind\Immutable\{
     Map,
@@ -53,7 +54,15 @@ final class ResourceAccessor implements ResourceAccessorInterface
                 ->through('RESOURCE_OF_HOST')
                 ->where('resource.identity = {identity}')
                 ->withParameter('identity', (string) $identity)
-                ->return('host')
+                ->with('host', 'resource')
+                ->match('author', ['Person', 'Author'])
+                ->linkedTo('resource')
+                ->through('AUTHOR_OF_RESOURCE')
+                ->with('host', 'resource', 'author')
+                ->match('citation', ['Citation'])
+                ->linkedTo('resource')
+                ->through('CITED_IN_RESOURCE')
+                ->return('host', 'author', 'collect(citation.text) as citations')
         );
         $properties = (new Map('string', Property::class))
             ->put(
@@ -112,6 +121,37 @@ final class ResourceAccessor implements ResourceAccessorInterface
                 'title',
                 new Property('title', $resource->title())
             );
+
+        $authors = $result
+            ->rows()
+            ->filter(function(RowInterface $row): bool {
+                return $row->column() === 'author';
+            });
+        $citations = $result
+            ->rows()
+            ->filter(function(RowInterface $row): bool {
+                return $row->column() === 'citations';
+            });
+
+        if ($authors->count() > 0) {
+            $properties = $properties->put(
+                'author',
+                new Property('author', $authors->first()->value()['name'])
+            );
+        }
+
+        if ($citations->count() > 0) {
+            $set = new Set('string');
+
+            foreach ($citations->first()->value() as $citation) {
+                $set = $set->add($citation);
+            }
+
+            $properties = $properties->put(
+                'citations',
+                new Property('citations', $set)
+            );
+        }
 
         if ($resource->hasCharset()) {
             $properties = $properties->put(

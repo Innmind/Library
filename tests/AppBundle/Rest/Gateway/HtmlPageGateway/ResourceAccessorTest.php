@@ -89,7 +89,7 @@ class ResourceAccessorTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('execute')
             ->with($this->callback(function(QueryInterface $query) use ($uuid): bool {
-                return $query->cypher() === 'MATCH (host:Web:Host)-[:RESOURCE_OF_HOST]-(resource:Web:Resource) WHERE resource.identity = {identity} RETURN host' &&
+                return $query->cypher() === 'MATCH (host:Web:Host)-[:RESOURCE_OF_HOST]-(resource:Web:Resource) WHERE resource.identity = {identity} WITH host, resource MATCH (author:Person:Author)-[:AUTHOR_OF_RESOURCE]-(resource) WITH host, resource, author MATCH (citation:Citation)-[:CITED_IN_RESOURCE]-(resource) RETURN host, author, collect(citation.text) as citations' &&
                     $query->parameters()->count() === 1 &&
                     $query->parameters()->first()->key() === 'identity' &&
                     $query->parameters()->first()->value() === $uuid;
@@ -98,7 +98,7 @@ class ResourceAccessorTest extends \PHPUnit_Framework_TestCase
                 $result = $this->createMock(ResultInterface::class)
             );
         $result
-            ->expects($this->once())
+            ->expects($this->exactly(3))
             ->method('rows')
             ->willReturn(
                 new TypedCollection(

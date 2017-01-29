@@ -77,11 +77,11 @@ web:
                     access: [READ, CREATE]
                 author:
                     type: string
-                    access: [CREATE]
+                    access: [READ, CREATE]
                     optional: true
                 citations:
                     type: set
-                    access: [CREATE]
+                    access: [READ, CREATE]
                     options:
                         inner: string
                     optional: true
