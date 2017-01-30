@@ -27,7 +27,9 @@ web:
                     access: [READ, CREATE]
                     optional: true
             options:
-                actions: [get, create, options]
+                actions: [get, create, link, options]
+            linkable_to:
+                referrer: web.resource
 
         image:
             identity: identity

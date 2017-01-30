@@ -5,7 +5,8 @@ namespace AppBundle\Rest\Gateway;
 
 use AppBundle\Rest\Gateway\HttpResourceGateway\{
     ResourceCreator,
-    ResourceAccessor
+    ResourceAccessor,
+    ResourceLinker
 };
 use Innmind\Rest\Server\{
     GatewayInterface,
@@ -23,13 +24,16 @@ final class HttpResourceGateway implements GatewayInterface
 {
     private $resourceCreator;
     private $resourceAccessor;
+    private $resourceLinker;
 
     public function __construct(
         ResourceCreator $resourceCreator,
-        ResourceAccessor $resourceAccessor
+        ResourceAccessor $resourceAccessor,
+        ResourceLinker $resourceLinker
     ) {
         $this->resourceCreator = $resourceCreator;
         $this->resourceAccessor = $resourceAccessor;
+        $this->resourceLinker = $resourceLinker;
     }
 
     public function resourceListAccessor(): ResourceListAccessorInterface
@@ -58,7 +62,7 @@ final class HttpResourceGateway implements GatewayInterface
 
     public function resourceLinker(): ResourceLinkerInterface
     {
-        throw new ActionNotImplementedException;
+        return $this->resourceLinker;
     }
 
     public function resourceUnlinker(): ResourceUnlinkerInterface

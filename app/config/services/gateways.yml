@@ -4,6 +4,7 @@ services:
         arguments:
             - '@gateway.http_resource.creator'
             - '@gateway.http_resource.accessor'
+            - '@gateway.http_resource.linker'
         tags:
             - { name: innmind_rest_server.gateway, alias: http_resource }
 
@@ -17,6 +18,11 @@ services:
         arguments:
             - '@repository.http_resource'
             - '@innmind_neo4j.connection'
+
+    gateway.http_resource.linker:
+        class: AppBundle\Rest\Gateway\HttpResourceGateway\ResourceLinker
+        arguments:
+            - '@command_bus'
 
     gateway.image:
         class: AppBundle\Rest\Gateway\ImageGateway
