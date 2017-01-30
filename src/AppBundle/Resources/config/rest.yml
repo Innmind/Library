@@ -139,3 +139,4 @@ web:
                 actions: [get, create, link, options]
             linkable_to:
                 alternate: web.html_page
+                canonical: web.html_page

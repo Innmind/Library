@@ -4,13 +4,16 @@ declare(strict_types = 1);
 namespace AppBundle\Rest\Gateway\HtmlPageGateway;
 
 use AppBundle\Entity\{
-    Alternate\Identity,
-    HttpResource\Identity as ResourceIdentity
+    Alternate\Identity as AlternateIdentity,
+    HttpResource\Identity as ResourceIdentity,
+    Canonical\Identity as CanonicalIdentity
 };
 use Domain\{
     Command\RegisterAlternateResource,
+    Command\MakeCanonicalLink,
     Model\Language,
-    Exception\AlternateAlreadyExistException
+    Exception\AlternateAlreadyExistException,
+    Exception\CanonicalAlreadyExistException
 };
 use Innmind\Rest\Server\{
     ResourceLinkerInterface,
@@ -53,6 +56,10 @@ final class ResourceLinker implements ResourceLinkerInterface
                             $parameters->get('language')->value()
                         );
                         break;
+
+                    case 'canonical':
+                        $this->registerCanonical($from, $to);
+                        break;
                 }
             });
     }
@@ -65,13 +72,28 @@ final class ResourceLinker implements ResourceLinkerInterface
         try {
             $this->commandBus->handle(
                 new RegisterAlternateResource(
-                    new Identity((string) Uuid::uuid4()),
+                    new AlternateIdentity((string) Uuid::uuid4()),
                     $from,
                     new ResourceIdentity((string) $to->identity()),
                     new Language($language)
                 )
             );
         } catch (AlternateAlreadyExistException $e) {
+            //pass
+        }
+    }
+
+    private function registerCanonical(ResourceIdentity $from, Reference $to): void
+    {
+        try {
+            $this->commandBus->handle(
+                new MakeCanonicalLink(
+                    new CanonicalIdentity((string) Uuid::uuid4()),
+                    new ResourceIdentity((string) $to->identity()),
+                    $from
+                )
+            );
+        } catch (CanonicalAlreadyExistException $e) {
             //pass
         }
     }

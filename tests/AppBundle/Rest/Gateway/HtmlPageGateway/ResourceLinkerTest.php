@@ -6,11 +6,15 @@ namespace Tests\AppBundle\Rest\Gateway\HtmlPageGateway;
 use AppBundle\Rest\Gateway\HtmlPageGateway\ResourceLinker;
 use Domain\{
     Command\RegisterAlternateResource,
+    Command\MakeCanonicalLink,
     Entity\Alternate,
+    Entity\Canonical,
     Entity\Alternate\IdentityInterface as AlternateIdentity,
+    Entity\Canonical\IdentityInterface as CanonicalIdentity,
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
     Model\Language,
-    Exception\AlternateAlreadyExistException
+    Exception\AlternateAlreadyExistException,
+    Exception\CanonicalAlreadyExistException
 };
 use Innmind\Rest\Server\{
     ResourceLinkerInterface,
@@ -24,6 +28,7 @@ use Innmind\Rest\Server\{
     Link\Parameter
 };
 use Innmind\CommandBus\CommandBusInterface;
+use Innmind\TimeContinuum\PointInTimeInterface;
 use Innmind\Immutable\{
     MapInterface,
     Map
@@ -97,22 +102,30 @@ class ResourceLinkerTest extends \PHPUnit_Framework_TestCase
         );
         $identity = $this->createMock(IdentityInterface::class);
         $identity
-            ->expects($this->exactly(2))
+            ->expects($this->exactly(3))
             ->method('__toString')
             ->willReturn((string) Uuid::uuid4());
         $to = $this->createMock(IdentityInterface::class);
         $to
-            ->expects($this->exactly(2))
+            ->expects($this->exactly(4))
             ->method('__toString')
             ->willReturn((string) Uuid::uuid4());
         $bus
-            ->expects($this->once())
+            ->expects($this->at(0))
             ->method('handle')
             ->with($this->callback(function($command) use ($identity, $to): bool {
                 return $command instanceof RegisterAlternateResource &&
                     (string) $command->resource() === (string) $identity &&
                     (string) $command->alternate() === (string) $to &&
                     (string) $command->language() === 'fr-CA';
+            }));
+        $bus
+            ->expects($this->at(1))
+            ->method('handle')
+            ->with($this->callback(function($command) use ($identity, $to): bool {
+                return $command instanceof MakeCanonicalLink &&
+                    (string) $command->resource() === (string) $identity &&
+                    (string) $command->canonical() === (string) $to;
             }));
 
         $this->assertNull(
@@ -131,11 +144,19 @@ class ResourceLinkerTest extends \PHPUnit_Framework_TestCase
                                 new Parameter('language', 'fr-CA')
                             )
                     )
+                    ->put(
+                        new Reference($def, $to),
+                        (new Map('string', ParameterInterface::class))
+                            ->put(
+                                'rel',
+                                new Parameter('rel', 'canonical')
+                            )
+                    )
             )
         );
     }
 
-    public function testExecuteEventWhenLinkAlreadyExist()
+    public function testExecuteEventWhenAlternateAlreadyExist()
     {
         $linker = new ResourceLinker(
             $bus = $this->createMock(CommandBusInterface::class)
@@ -190,6 +211,63 @@ class ResourceLinkerTest extends \PHPUnit_Framework_TestCase
                             ->put(
                                 'language',
                                 new Parameter('language', 'fr')
+                            )
+                    )
+            )
+        );
+    }
+
+    public function testExecuteEventWhenCanonicalAlreadyExist()
+    {
+        $linker = new ResourceLinker(
+            $bus = $this->createMock(CommandBusInterface::class)
+        );
+        $def = new HttpResource(
+            'foo',
+            new Identity('foo'),
+            new Map('string', Property::class),
+            new Map('scalar', 'variable'),
+            new Map('scalar', 'variable'),
+            new Gateway('foo'),
+            true,
+            new Map('string', 'string')
+        );
+        $identity = $this->createMock(IdentityInterface::class);
+        $identity
+            ->expects($this->once())
+            ->method('__toString')
+            ->willReturn((string) Uuid::uuid4());
+        $to = $this->createMock(IdentityInterface::class);
+        $to
+            ->expects($this->once())
+            ->method('__toString')
+            ->willReturn((string) Uuid::uuid4());
+        $bus
+            ->expects($this->once())
+            ->method('handle')
+            ->will(
+                $this->throwException(
+                    new CanonicalAlreadyExistException(
+                        new Canonical(
+                            $this->createMock(CanonicalIdentity::class),
+                            $this->createMock(ResourceIdentity::class),
+                            $this->createMock(ResourceIdentity::class),
+                            $this->createMock(PointInTimeInterface::class)
+                        )
+                    )
+                )
+            );
+
+        $this->assertNull(
+            $linker(
+                new Reference($def, $identity),
+                (new Map(Reference::class, MapInterface::class))
+                    ->put(
+                        new Reference($def, $to),
+                        (new Map('string', ParameterInterface::class))
+                            ->put(
+                                'rel',
+                                new Parameter('rel', 'canonical')
                             )
                     )
             )
