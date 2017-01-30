@@ -68,6 +68,7 @@ innmind_neo4j:
         AppBundle\Entity\HtmlPage\Identity: neo4j.identity.generator.html_page
         AppBundle\Entity\Alternate\Identity: neo4j.identity.generator.alternate
         AppBundle\Entity\Canonical\Identity: neo4j.identity.generator.canonical
+        AppBundle\Entity\Reference\Identity: neo4j.identity.generator.reference
 
 innmind_command_bus:
     stack:

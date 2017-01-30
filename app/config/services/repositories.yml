@@ -154,3 +154,15 @@ services:
             - 'repository'
         arguments:
             - Domain\Entity\Canonical
+
+    repository.reference:
+        class: AppBundle\Repository\Neo4j\ReferenceRepository
+        arguments:
+            - '@repository.neo4j.reference'
+
+    repository.neo4j.reference:
+        factory:
+            - '@innmind_neo4j.manager'
+            - 'repository'
+        arguments:
+            - Domain\Entity\Reference

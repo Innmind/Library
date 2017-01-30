@@ -87,3 +87,18 @@ Domain\Entity\Canonical:
     properties:
         foundAt:
             type: point_in_time
+
+Domain\Entity\Reference:
+    type: relationship
+    rel_type: RESOURCE_REFERENCED_IN_RESOURCE
+    identity:
+        property: identity
+        type: AppBundle\Entity\Reference\Identity
+    startNode:
+        property: source
+        type: AppBundle\Entity\HttpResource\Identity
+        target: identity
+    endNode:
+        property: target
+        type: AppBundle\Entity\HttpResource\Identity
+        target: identity
