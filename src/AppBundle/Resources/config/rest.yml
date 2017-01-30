@@ -136,4 +136,6 @@ web:
                     access: [CREATE]
                     optional: true
             options:
-                actions: [get, create, options]
+                actions: [get, create, link, options]
+            linkable_to:
+                alternate: web.html_page

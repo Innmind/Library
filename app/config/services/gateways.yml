@@ -42,6 +42,7 @@ services:
         arguments:
             - '@gateway.html_page.creator'
             - '@gateway.html_page.accessor'
+            - '@gateway.html_page.linker'
         tags:
             - { name: innmind_rest_server.gateway, alias: html_page }
 
@@ -55,3 +56,8 @@ services:
         arguments:
             - '@repository.html_page'
             - '@innmind_neo4j.connection'
+
+    gateway.html_page.linker:
+        class: AppBundle\Rest\Gateway\HtmlPageGateway\ResourceLinker
+        arguments:
+            - '@command_bus'

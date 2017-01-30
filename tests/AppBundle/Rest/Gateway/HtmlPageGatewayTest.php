@@ -6,7 +6,8 @@ namespace Tests\AppBundle\Rest\Gateway;
 use AppBundle\Rest\Gateway\{
     HtmlPageGateway,
     HtmlPageGateway\ResourceCreator,
-    HtmlPageGateway\ResourceAccessor
+    HtmlPageGateway\ResourceAccessor,
+    HtmlPageGateway\ResourceLinker
 };
 use Domain\Repository\HtmlPageRepositoryInterface;
 use Innmind\Rest\Server\GatewayInterface;
@@ -18,6 +19,7 @@ class HtmlPageGatewayTest extends \PHPUnit_Framework_TestCase
     private $gateway;
     private $creator;
     private $accessor;
+    private $linker;
 
     public function setUp()
     {
@@ -28,6 +30,9 @@ class HtmlPageGatewayTest extends \PHPUnit_Framework_TestCase
             $this->accessor = new ResourceAccessor(
                 $this->createMock(HtmlPageRepositoryInterface::class),
                 $this->createMock(ConnectionInterface::class)
+            ),
+            $this->linker = new ResourceLinker(
+                $this->createMock(CommandBusInterface::class)
             )
         );
     }
@@ -77,12 +82,12 @@ class HtmlPageGatewayTest extends \PHPUnit_Framework_TestCase
         $this->gateway->resourceRemover();
     }
 
-    /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplementedException
-     */
-    public function testThrowWhenAccessingResourceLinker()
+    public function testResourceLinker()
     {
-        $this->gateway->resourceLinker();
+        $this->assertSame(
+            $this->linker,
+            $this->gateway->resourceLinker()
+        );
     }
 
     /**
