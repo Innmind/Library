@@ -142,3 +142,15 @@ services:
             - 'repository'
         arguments:
             - Domain\Entity\Alternate
+
+    repository.canonical:
+        class: AppBundle\Repository\Neo4j\CanonicalRepository
+        arguments:
+            - '@repository.neo4j.canonical'
+
+    repository.neo4j.canonical:
+        factory:
+            - '@innmind_neo4j.manager'
+            - 'repository'
+        arguments:
+            - Domain\Entity\Canonical

@@ -69,3 +69,18 @@ Domain\Entity\Alternate:
     properties:
         language:
             type: language
+
+Domain\Entity\Canonical:
+    type: relationship
+    rel_type: CANONICAL_OF_RESOURCE
+    identity:
+        properties: identity
+        type: AppBundle\Entity\Canonical\Identity
+    startNode:
+        property: canonical
+        type: AppBundle\Entity\HttpResource\Identity
+        target: identity
+    endNode:
+        property: resource
+        type: AppBundle\Entity\HttpResource\Identity
+        target: identity

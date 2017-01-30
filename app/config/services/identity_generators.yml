@@ -58,3 +58,8 @@ services:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\Alternate\Identity'
+
+    neo4j.identity.generator.canonical:
+        class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        arguments:
+            - 'AppBundle\Entity\Canonical\Identity'
