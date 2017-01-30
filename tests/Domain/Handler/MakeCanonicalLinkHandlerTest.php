@@ -15,6 +15,10 @@ use Domain\{
     Specification\Canonical\Canonical as CanonicalSpec,
     Event\CanonicalCreated
 };
+use Innmind\TimeContinuum\{
+    TimeContinuumInterface,
+    PointInTimeInterface
+};
 use Innmind\Immutable\{
     Set,
     SetInterface
@@ -25,7 +29,8 @@ class MakeCanonicalLinkHandlerTest extends \PHPUnit_Framework_TestCase
     public function testExecution()
     {
         $handler = new MakeCanonicalLinkHandler(
-            $repository = $this->createMock(CanonicalRepositoryInterface::class)
+            $repository = $this->createMock(CanonicalRepositoryInterface::class),
+            $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new MakeCanonicalLink(
             $this->createMock(IdentityInterface::class),
@@ -42,6 +47,12 @@ class MakeCanonicalLinkHandlerTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('__toString')
             ->willReturn('resource uuid');
+        $clock
+            ->expects($this->once())
+            ->method('now')
+            ->willReturn(
+                $now = $this->createMock(PointInTimeInterface::class)
+            );
         $repository
             ->expects($this->once())
             ->method('matching')
@@ -55,10 +66,11 @@ class MakeCanonicalLinkHandlerTest extends \PHPUnit_Framework_TestCase
         $repository
             ->expects($this->once())
             ->method('add')
-            ->with($this->callback(function(Canonical $canonical) use ($command): bool {
+            ->with($this->callback(function(Canonical $canonical) use ($command, $now): bool {
                 return $canonical->identity() === $command->identity() &&
                     $canonical->canonical() === $command->canonical() &&
                     $canonical->resource() === $command->resource() &&
+                    $canonical->foundAt() === $now &&
                     $canonical->recordedEvents()->size() === 1 &&
                     $canonical->recordedEvents()->current() instanceof CanonicalCreated;
             }));
@@ -72,7 +84,8 @@ class MakeCanonicalLinkHandlerTest extends \PHPUnit_Framework_TestCase
     public function testThrowWhenCanonicalLinkAlreadyExist()
     {
         $handler = new MakeCanonicalLinkHandler(
-            $repository = $this->createMock(CanonicalRepositoryInterface::class)
+            $repository = $this->createMock(CanonicalRepositoryInterface::class),
+            $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new MakeCanonicalLink(
             $this->createMock(IdentityInterface::class),
@@ -112,12 +125,16 @@ class MakeCanonicalLinkHandlerTest extends \PHPUnit_Framework_TestCase
                 new Canonical(
                     $this->createMock(IdentityInterface::class),
                     $this->createMock(ResourceIdentity::class),
-                    $this->createMock(ResourceIdentity::class)
+                    $this->createMock(ResourceIdentity::class),
+                    $this->createMock(PointInTimeInterface::class)
                 )
             );
         $repository
             ->expects($this->never())
             ->method('add');
+        $clock
+            ->expects($this->never())
+            ->method('now');
 
         $handler($command);
     }

@@ -14,6 +14,7 @@ use Domain\{
     Entity\HttpResource\IdentityInterface as ResourceIdentity
 };
 use Innmind\Specification\ComparatorInterface;
+use Innmind\TimeContinuum\PointInTimeInterface;
 
 class HttpResourceTest extends \PHPUnit_Framework_TestCase
 {
@@ -44,7 +45,8 @@ class HttpResourceTest extends \PHPUnit_Framework_TestCase
         $canonical = new Entity(
             $this->createMock(IdentityInterface::class),
             $this->createMock(ResourceIdentity::class),
-            $this->createMock(ResourceIdentity::class)
+            $this->createMock(ResourceIdentity::class),
+            $this->createMock(PointInTimeInterface::class)
         );
         $canonical
             ->resource()

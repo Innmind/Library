@@ -10,6 +10,7 @@ use Domain\{
     Event\CanonicalCreated
 };
 use Innmind\EventBus\ContainsRecordedEventsInterface;
+use Innmind\TimeContinuum\PointInTimeInterface;
 
 class CanonicalTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,13 +19,15 @@ class CanonicalTest extends \PHPUnit_Framework_TestCase
         $entity = new Canonical(
             $identity = $this->createMock(IdentityInterface::class),
             $canonical = $this->createMock(ResourceIdentity::class),
-            $resource = $this->createMock(ResourceIdentity::class)
+            $resource = $this->createMock(ResourceIdentity::class),
+            $foundAt = $this->createMock(PointInTimeInterface::class)
         );
 
         $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $entity);
         $this->assertSame($identity, $entity->identity());
         $this->assertSame($canonical, $entity->canonical());
         $this->assertSame($resource, $entity->resource());
+        $this->assertSame($foundAt, $entity->foundAt());
         $this->assertCount(0, $entity->recordedEvents());
     }
 
@@ -33,7 +36,8 @@ class CanonicalTest extends \PHPUnit_Framework_TestCase
         $entity = Canonical::create(
             $identity = $this->createMock(IdentityInterface::class),
             $canonical = $this->createMock(ResourceIdentity::class),
-            $resource = $this->createMock(ResourceIdentity::class)
+            $resource = $this->createMock(ResourceIdentity::class),
+            $foundAt = $this->createMock(PointInTimeInterface::class)
         );
 
         $this->assertInstanceOf(Canonical::class, $entity);
@@ -53,6 +57,10 @@ class CanonicalTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(
             $resource,
             $entity->recordedEvents()->current()->resource()
+        );
+        $this->assertSame(
+            $foundAt,
+            $entity->recordedEvents()->current()->foundAt()
         );
     }
 }

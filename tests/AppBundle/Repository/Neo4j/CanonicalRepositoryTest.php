@@ -14,6 +14,7 @@ use Domain\{
     Specification\Canonical\SpecificationInterface
 };
 use Innmind\Neo4j\ONM\RepositoryInterface;
+use Innmind\TimeContinuum\PointInTimeInterface;
 use Innmind\Immutable\{
     SetInterface,
     Set
@@ -46,7 +47,8 @@ class CanonicalRepositoryTest extends \PHPUnit_Framework_TestCase
                 $expected = new Canonical(
                     $identity,
                     $this->createMock(HttpResourceIdentity::class),
-                    $this->createMock(HttpResourceIdentity::class)
+                    $this->createMock(HttpResourceIdentity::class),
+                    $this->createMock(PointInTimeInterface::class)
                 )
             );
 
@@ -61,7 +63,8 @@ class CanonicalRepositoryTest extends \PHPUnit_Framework_TestCase
         $entity = new Canonical(
             new Identity((string) Uuid::uuid4()),
             $this->createMock(HttpResourceIdentity::class),
-            $this->createMock(HttpResourceIdentity::class)
+            $this->createMock(HttpResourceIdentity::class),
+            $this->createMock(PointInTimeInterface::class)
         );
         $infra
             ->expects($this->once())
@@ -85,7 +88,8 @@ class CanonicalRepositoryTest extends \PHPUnit_Framework_TestCase
                 $entity = new Canonical(
                     $identity,
                     $this->createMock(HttpResourceIdentity::class),
-                    $this->createMock(HttpResourceIdentity::class)
+                    $this->createMock(HttpResourceIdentity::class),
+                    $this->createMock(PointInTimeInterface::class)
                 )
             );
         $infra
@@ -149,7 +153,8 @@ class CanonicalRepositoryTest extends \PHPUnit_Framework_TestCase
                     $entity = new Canonical(
                         new Identity((string) Uuid::uuid4()),
                         $this->createMock(HttpResourceIdentity::class),
-                        $this->createMock(HttpResourceIdentity::class)
+                        $this->createMock(HttpResourceIdentity::class),
+                        $this->createMock(PointInTimeInterface::class)
                     )
                 )
             );
@@ -176,7 +181,8 @@ class CanonicalRepositoryTest extends \PHPUnit_Framework_TestCase
                     $entity = new Canonical(
                         new Identity((string) Uuid::uuid4()),
                         $this->createMock(HttpResourceIdentity::class),
-                        $this->createMock(HttpResourceIdentity::class)
+                        $this->createMock(HttpResourceIdentity::class),
+                        $this->createMock(PointInTimeInterface::class)
                     )
                 )
             );

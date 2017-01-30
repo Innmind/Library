@@ -11,6 +11,7 @@ use Domain\{
     Entity\Canonical\IdentityInterface,
     Entity\HttpResource\IdentityInterface as ResourceIdentity
 };
+use Innmind\TimeContinuum\PointInTimeInterface;
 
 class NotTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,7 +33,8 @@ class NotTest extends \PHPUnit_Framework_TestCase
         $canonical = new Canonical(
             $this->createMock(IdentityInterface::class),
             $this->createMock(ResourceIdentity::class),
-            $this->createMock(ResourceIdentity::class)
+            $this->createMock(ResourceIdentity::class),
+            $this->createMock(PointInTimeInterface::class)
         );
         $spec
             ->specification()

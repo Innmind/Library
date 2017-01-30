@@ -175,5 +175,6 @@ services:
         class: Domain\Handler\MakeCanonicalLinkHandler
         arguments:
             - '@repository.canonical'
+            - '@clock'
         tags:
             - { name: innmind_command_bus.handler, handles: Domain\Command\MakeCanonicalLink }

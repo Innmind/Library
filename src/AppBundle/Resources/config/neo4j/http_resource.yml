@@ -84,3 +84,6 @@ Domain\Entity\Canonical:
         property: resource
         type: AppBundle\Entity\HttpResource\Identity
         target: identity
+    properties:
+        foundAt:
+            type: point_in_time
