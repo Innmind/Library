@@ -74,7 +74,7 @@ Domain\Entity\Canonical:
     type: relationship
     rel_type: CANONICAL_OF_RESOURCE
     identity:
-        properties: identity
+        property: identity
         type: AppBundle\Entity\Canonical\Identity
     startNode:
         property: canonical
