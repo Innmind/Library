@@ -170,3 +170,10 @@ services:
             - '@repository.alternate'
         tags:
             - { name: innmind_command_bus.handler, handles: Domain\Command\RegisterAlternateResource }
+
+    handler.http_resource.make_canonical_link:
+        class: Domain\Handler\MakeCanonicalLinkHandler
+        arguments:
+            - '@repository.canonical'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\MakeCanonicalLink }
