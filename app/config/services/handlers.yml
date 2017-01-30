@@ -178,3 +178,10 @@ services:
             - '@clock'
         tags:
             - { name: innmind_command_bus.handler, handles: Domain\Command\MakeCanonicalLink }
+
+    handler.http_resource.refer:
+        class: Domain\Handler\ReferResourceHandler
+        arguments:
+            - '@repository.reference'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\ReferResource }
