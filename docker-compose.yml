@@ -1,0 +1,15 @@
+version: '2'
+services:
+    web:
+        image: kitpages/symfony:7.1
+        volumes:
+            - .:/var/www
+        ports:
+            - '8080:80'
+        links:
+            - neo4j
+
+    neo4j:
+        image: neo4j:3.1
+        ports:
+            - '7474:7474'
