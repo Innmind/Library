@@ -904,16 +904,16 @@
         },
         {
             "name": "innmind/http",
-            "version": "1.4.1",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Http.git",
-                "reference": "bbad73acba917691fd0084c96ff47c68c9700a77"
+                "reference": "79521bf0c3c4e0386aa21d4c3349ffb280af76ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Http/zipball/bbad73acba917691fd0084c96ff47c68c9700a77",
-                "reference": "bbad73acba917691fd0084c96ff47c68c9700a77",
+                "url": "https://api.github.com/repos/Innmind/Http/zipball/79521bf0c3c4e0386aa21d4c3349ffb280af76ea",
+                "reference": "79521bf0c3c4e0386aa21d4c3349ffb280af76ea",
                 "shasum": ""
             },
             "require": {
@@ -948,7 +948,7 @@
                 "Value Object",
                 "http"
             ],
-            "time": "2016-12-17 16:36:00"
+            "time": "2017-02-01 06:40:17"
         },
         {
             "name": "innmind/immutable",
@@ -1193,16 +1193,16 @@
         },
         {
             "name": "innmind/rest-server",
-            "version": "3.1.2",
+            "version": "3.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/rest-server.git",
-                "reference": "a5fd199062dfe36733e239e3b0f1acdc6f2ad0bd"
+                "reference": "9560736abdc834dd4087d794af7a97412af8c746"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/rest-server/zipball/a5fd199062dfe36733e239e3b0f1acdc6f2ad0bd",
-                "reference": "a5fd199062dfe36733e239e3b0f1acdc6f2ad0bd",
+                "url": "https://api.github.com/repos/Innmind/rest-server/zipball/9560736abdc834dd4087d794af7a97412af8c746",
+                "reference": "9560736abdc834dd4087d794af7a97412af8c746",
                 "shasum": ""
             },
             "require": {
@@ -1242,23 +1242,24 @@
                 "api",
                 "rest"
             ],
-            "time": "2017-01-29 14:56:05"
+            "time": "2017-02-01 07:24:39"
         },
         {
             "name": "innmind/rest-server-bundle",
-            "version": "1.0.7",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/RestServerBundle.git",
-                "reference": "569b703993d7bc416cd137095e112a0ab32e58eb"
+                "reference": "b14b99638a9715fe5302b4cf053e6e9ca6b2635b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/RestServerBundle/zipball/569b703993d7bc416cd137095e112a0ab32e58eb",
-                "reference": "569b703993d7bc416cd137095e112a0ab32e58eb",
+                "url": "https://api.github.com/repos/Innmind/RestServerBundle/zipball/b14b99638a9715fe5302b4cf053e6e9ca6b2635b",
+                "reference": "b14b99638a9715fe5302b4cf053e6e9ca6b2635b",
                 "shasum": ""
             },
             "require": {
+                "innmind/http": "~1.5",
                 "innmind/rest-server": "~3.0",
                 "php": "~7.0",
                 "symfony/dependency-injection": "~3.0",
@@ -1293,7 +1294,7 @@
                 "api",
                 "rest"
             ],
-            "time": "2017-01-29 16:47:09"
+            "time": "2017-02-01 07:03:21"
         },
         {
             "name": "innmind/specification",
