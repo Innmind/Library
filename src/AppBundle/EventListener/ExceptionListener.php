@@ -3,8 +3,8 @@ declare(strict_types = 1);
 
 namespace AppBundle\EventListener;
 
-use Domain\Exception\AuthorAlreadyExistException;
-use Innmind\Http\Exception\Http\ConflictException;
+use AppBundle\Exception\InvalidArgumentException;
+use Innmind\Immutable\MapInterface;
 use Symfony\Component\{
     EventDispatcher\EventSubscriberInterface,
     HttpKernel\KernelEvents,
@@ -13,6 +13,23 @@ use Symfony\Component\{
 
 final class ExceptionListener implements EventSubscriberInterface
 {
+    private $map;
+
+    /**
+     * @param MapInterface<string, string> $map
+     */
+    public function __construct(MapInterface $map)
+    {
+        if (
+            (string) $map->keyType() !== 'string' ||
+            (string) $map->valueType() !== 'string'
+        ) {
+            throw new InvalidArgumentException;
+        }
+
+        $this->map = $map;
+    }
+
     public static function getSubscribedEvents()
     {
         return [
@@ -23,17 +40,13 @@ final class ExceptionListener implements EventSubscriberInterface
     public function transform(GetResponseForExceptionEvent $event): void
     {
         $exception = $event->getException();
+        $class = get_class($exception);
 
-        switch (true) {
-            case $exception instanceof AuthorAlreadyExistException:
-                $event->setException(
-                    new ConflictException(
-                        '',
-                        0,
-                        $exception
-                    )
-                );
-                break;
+        if ($this->map->contains($class)) {
+            $newException = $this->map->get($class);
+            $event->setException(
+                new $newException('', 0, $exception)
+            );
         }
     }
 }

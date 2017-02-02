@@ -1,6 +1,22 @@
 services:
     listener.exception:
         class: AppBundle\EventListener\ExceptionListener
+        arguments:
+            -
+                Domain\Exception\AlternateAlreadyExistException: Innmind\Http\Exception\Http\ConflictException
+                Domain\Exception\AuthorAlreadyExistException: Innmind\Http\Exception\Http\ConflictException
+                Domain\Exception\CanonicalAlreadyExistException: Innmind\Http\Exception\Http\ConflictException
+                Domain\Exception\CitationAlreadyExistException: Innmind\Http\Exception\Http\ConflictException
+                Domain\Exception\CitationAppearanceAlreadyExistException: Innmind\Http\Exception\Http\ConflictException
+                Domain\Exception\DomainAlreadyExistException: Innmind\Http\Exception\Http\ConflictException
+                Domain\Exception\HostAlreadyExistException: Innmind\Http\Exception\Http\ConflictException
+                Domain\Exception\HtmlPageAlreadyExistException: Innmind\Http\Exception\Http\ConflictException
+                Domain\Exception\HttpResourceAlreadyExistException: Innmind\Http\Exception\Http\ConflictException
+                Domain\Exception\ImageAlreadyExistException: Innmind\Http\Exception\Http\ConflictException
+                Domain\Exception\ReferenceAlreadyExistException: Innmind\Http\Exception\Http\ConflictException
+        factory:
+            - AppBundle\Factory\ExceptionListenerFactory
+            - make
         tags:
             - { name: kernel.event_subscriber }
 

@@ -11,6 +11,7 @@ use Domain\{
     Entity\Author\Name
 };
 use Innmind\Http\Exception\Http\ConflictException;
+use Innmind\Immutable\Map;
 use Symfony\Component\{
     HttpKernel\HttpKernelInterface,
     HttpKernel\KernelEvents,
@@ -25,7 +26,7 @@ class ExceptionListenerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(
             EventSubscriberInterface::class,
-            new ExceptionListener
+            new ExceptionListener(new Map('string', 'string'))
         );
     }
 
@@ -39,7 +40,7 @@ class ExceptionListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testDoesntTransform()
     {
-        $listener = new ExceptionListener;
+        $listener = new ExceptionListener(new Map('string', 'string'));
         $event = new GetResponseForExceptionEvent(
             $this->createMock(HttpKernelInterface::class),
             new Request,
@@ -51,9 +52,15 @@ class ExceptionListenerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $event->getException());
     }
 
-    public function testTransformAuthorAlreadyExist()
+    public function testTransformKnownException()
     {
-        $listener = new ExceptionListener;
+        $listener = new ExceptionListener(
+            (new Map('string', 'string'))
+                ->put(
+                    AuthorAlreadyExistException::class,
+                    ConflictException::class
+                )
+        );
         $event = new GetResponseForExceptionEvent(
             $this->createMock(HttpKernelInterface::class),
             new Request,
@@ -72,5 +79,13 @@ class ExceptionListenerTest extends \PHPUnit_Framework_TestCase
             $event->getException()
         );
         $this->assertSame($expected, $event->getException()->getPrevious());
+    }
+
+    /**
+     * @expectedException AppBundle\Exception\InvalidArgumentException
+     */
+    public function testThrowWhenInvalidMap()
+    {
+        new ExceptionListener(new Map('string', 'object'));
     }
 }
