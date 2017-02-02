@@ -12,6 +12,7 @@ final class DomainAlreadyExistException extends LogicException
     public function __construct(Domain $domain)
     {
         $this->domain = $domain;
+        parent::__construct();
     }
 
     /**

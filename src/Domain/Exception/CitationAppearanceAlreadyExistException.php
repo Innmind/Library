@@ -12,6 +12,7 @@ final class CitationAppearanceAlreadyExistException extends LogicException
     public function __construct(CitationAppearance $appearance)
     {
         $this->appearance = $appearance;
+        parent::__construct();
     }
 
     /**

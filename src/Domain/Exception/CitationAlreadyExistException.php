@@ -12,6 +12,7 @@ final class CitationAlreadyExistException extends LogicException
     public function __construct(Citation $citation)
     {
         $this->citation = $citation;
+        parent::__construct();
     }
 
     /**

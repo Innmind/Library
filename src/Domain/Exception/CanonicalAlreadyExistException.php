@@ -12,6 +12,7 @@ final class CanonicalAlreadyExistException extends LogicException
     public function __construct(Canonical $canonical)
     {
         $this->canonical = $canonical;
+        parent::__construct();
     }
 
     /**
