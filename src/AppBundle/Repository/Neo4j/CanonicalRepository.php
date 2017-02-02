@@ -7,9 +7,13 @@ use Domain\{
     Repository\CanonicalRepositoryInterface,
     Entity\Canonical,
     Entity\Canonical\IdentityInterface,
+    Exception\CanonicalNotFoundException,
     Specification\Canonical\SpecificationInterface
 };
-use Innmind\Neo4j\ONM\RepositoryInterface;
+use Innmind\Neo4j\ONM\{
+    RepositoryInterface,
+    Exception\EntityNotFoundException
+};
 use Innmind\Immutable\{
     SetInterface,
     Set
@@ -24,9 +28,16 @@ final class CanonicalRepository implements CanonicalRepositoryInterface
         $this->infrastructure = $infrastructure;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function get(IdentityInterface $identity): Canonical
     {
-        return $this->infrastructure->get($identity);
+        try {
+            return $this->infrastructure->get($identity);
+        } catch (EntityNotFoundException $e) {
+            throw new CanonicalNotFoundException('', 0, $e);
+        }
     }
 
     public function add(Canonical $entity): CanonicalRepositoryInterface
@@ -72,7 +83,7 @@ final class CanonicalRepository implements CanonicalRepositoryInterface
     }
 
     /**
-     * @return SetInterface<Canonical>
+     * {@inheritdoc}
      */
     public function matching(SpecificationInterface $specification): SetInterface
     {

@@ -7,9 +7,13 @@ use Domain\{
     Repository\CitationAppearanceRepositoryInterface,
     Entity\CitationAppearance,
     Entity\CitationAppearance\IdentityInterface,
+    Exception\CitationAppearanceNotFoundException,
     Specification\CitationAppearance\SpecificationInterface
 };
-use Innmind\Neo4j\ONM\RepositoryInterface;
+use Innmind\Neo4j\ONM\{
+    RepositoryInterface,
+    Exception\EntityNotFoundException
+};
 use Innmind\Immutable\{
     SetInterface,
     Set
@@ -24,9 +28,16 @@ final class CitationAppearanceRepository implements CitationAppearanceRepository
         $this->infrastructure = $infrastructure;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function get(IdentityInterface $identity): CitationAppearance
     {
-        return $this->infrastructure->get($identity);
+        try {
+            return $this->infrastructure->get($identity);
+        } catch (EntityNotFoundException $e) {
+            throw new CitationAppearanceNotFoundException('', 0, $e);
+        }
     }
 
     public function add(CitationAppearance $entity): CitationAppearanceRepositoryInterface
@@ -72,7 +83,7 @@ final class CitationAppearanceRepository implements CitationAppearanceRepository
     }
 
     /**
-     * @return SetInterface<CitationAppearance>
+     * {@inheritdoc}
      */
     public function matching(SpecificationInterface $specification): SetInterface
     {

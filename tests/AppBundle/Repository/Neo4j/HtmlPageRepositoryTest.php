@@ -16,7 +16,10 @@ use Innmind\Url\{
     PathInterface,
     QueryInterface
 };
-use Innmind\Neo4j\ONM\RepositoryInterface;
+use Innmind\Neo4j\ONM\{
+    RepositoryInterface,
+    Exception\EntityNotFoundException
+};
 use Innmind\Immutable\{
     SetInterface,
     Set
@@ -54,6 +57,26 @@ class HtmlPageRepositoryTest extends \PHPUnit_Framework_TestCase
             );
 
         $this->assertSame($expected, $repository->get($identity));
+    }
+
+    /**
+     * @expectedException Domain\Exception\HtmlPageNotFoundException
+     */
+    public function testThrowWhenGettingUnknownEntity()
+    {
+        $repository = new HtmlPageRepository(
+            $infra = $this->createMock(RepositoryInterface::class)
+        );
+        $identity = new Identity((string) Uuid::uuid4());
+        $infra
+            ->expects($this->once())
+            ->method('get')
+            ->with($identity)
+            ->will(
+                $this->throwException(new EntityNotFoundException)
+            );
+
+        $repository->get($identity);
     }
 
     public function testAdd()

@@ -12,6 +12,9 @@ use Innmind\Immutable\SetInterface;
 
 interface AlternateRepositoryInterface
 {
+    /**
+     * @throws AlternateNotFoundException
+     */
     public function get(IdentityInterface $identity): Alternate;
     public function add(Alternate $alternate): self;
     public function remove(IdentityInterface $identity): self;

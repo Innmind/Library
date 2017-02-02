@@ -7,9 +7,13 @@ use Domain\{
     Repository\HttpResourceRepositoryInterface,
     Entity\HttpResource,
     Entity\HttpResource\IdentityInterface,
+    Exception\HttpResourceNotFoundException,
     Specification\HttpResource\SpecificationInterface
 };
-use Innmind\Neo4j\ONM\RepositoryInterface;
+use Innmind\Neo4j\ONM\{
+    RepositoryInterface,
+    Exception\EntityNotFoundException
+};
 use Innmind\Immutable\{
     SetInterface,
     Set
@@ -24,9 +28,16 @@ final class HttpResourceRepository implements HttpResourceRepositoryInterface
         $this->infrastructure = $infrastructure;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function get(IdentityInterface $identity): HttpResource
     {
-        return $this->infrastructure->get($identity);
+        try {
+            return $this->infrastructure->get($identity);
+        } catch (EntityNotFoundException $e) {
+            throw new HttpResourceNotFoundException('', 0, $e);
+        }
     }
 
     public function add(HttpResource $resource): HttpResourceRepositoryInterface
@@ -72,7 +83,7 @@ final class HttpResourceRepository implements HttpResourceRepositoryInterface
     }
 
     /**
-     * @return SetInterface<HttpResource>
+     * {@inheritdoc}
      */
     public function matching(SpecificationInterface $specification): SetInterface
     {

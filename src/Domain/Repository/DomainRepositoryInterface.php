@@ -12,6 +12,9 @@ use Innmind\Immutable\SetInterface;
 
 interface DomainRepositoryInterface
 {
+    /**
+     * @throws DomainNotFoundException
+     */
     public function get(IdentityInterface $identity): Domain;
     public function add(Domain $domain): self;
     public function remove(IdentityInterface $identity): self;

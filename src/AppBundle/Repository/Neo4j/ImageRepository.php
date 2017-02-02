@@ -7,9 +7,13 @@ use Domain\{
     Repository\ImageRepositoryInterface,
     Entity\Image,
     Entity\Image\IdentityInterface,
+    Exception\ImageNotFoundException,
     Specification\HttpResource\SpecificationInterface
 };
-use Innmind\Neo4j\ONM\RepositoryInterface;
+use Innmind\Neo4j\ONM\{
+    RepositoryInterface,
+    Exception\EntityNotFoundException
+};
 use Innmind\Immutable\{
     SetInterface,
     Set
@@ -24,9 +28,16 @@ final class ImageRepository implements ImageRepositoryInterface
         $this->infrastructure = $infrastructure;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function get(IdentityInterface $identity): Image
     {
-        return $this->infrastructure->get($identity);
+        try {
+            return $this->infrastructure->get($identity);
+        } catch (EntityNotFoundException $e) {
+            throw new ImageNotFoundException('', 0, $e);
+        }
     }
 
     public function add(Image $image): ImageRepositoryInterface
@@ -72,7 +83,7 @@ final class ImageRepository implements ImageRepositoryInterface
     }
 
     /**
-     * @return SetInterface<Image>
+     * {@inheritdoc}
      */
     public function matching(SpecificationInterface $specification): SetInterface
     {

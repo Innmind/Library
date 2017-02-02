@@ -12,6 +12,9 @@ use Innmind\Immutable\SetInterface;
 
 interface DomainHostRepositoryInterface
 {
+    /**
+     * @throws DomainHostNotFoundException
+     */
     public function get(IdentityInterface $identity): DomainHost;
     public function add(DomainHost $domainHost): self;
     public function remove(IdentityInterface $identity): self;

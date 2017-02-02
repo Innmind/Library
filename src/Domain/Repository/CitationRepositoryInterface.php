@@ -12,6 +12,9 @@ use Innmind\Immutable\SetInterface;
 
 interface CitationRepositoryInterface
 {
+    /**
+     * @throws CitationNotFoundException
+     */
     public function get(IdentityInterface $identity): Citation;
     public function add(Citation $citation): self;
     public function remove(IdentityInterface $identity): self;

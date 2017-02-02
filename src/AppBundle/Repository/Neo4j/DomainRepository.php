@@ -7,9 +7,13 @@ use Domain\{
     Repository\DomainRepositoryInterface,
     Entity\Domain,
     Entity\Domain\IdentityInterface,
+    Exception\DomainNotFoundException,
     Specification\Domain\SpecificationInterface
 };
-use Innmind\Neo4j\ONM\RepositoryInterface;
+use Innmind\Neo4j\ONM\{
+    RepositoryInterface,
+    Exception\EntityNotFoundException
+};
 use Innmind\Immutable\{
     SetInterface,
     Set
@@ -24,9 +28,16 @@ final class DomainRepository implements DomainRepositoryInterface
         $this->infrastructure = $infrastructure;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function get(IdentityInterface $identity): Domain
     {
-        return $this->infrastructure->get($identity);
+        try {
+            return $this->infrastructure->get($identity);
+        } catch (EntityNotFoundException $e) {
+            throw new DomainNotFoundException('', 0, $e);
+        }
     }
 
     public function add(Domain $domain): DomainRepositoryInterface
@@ -72,7 +83,7 @@ final class DomainRepository implements DomainRepositoryInterface
     }
 
     /**
-     * @return SetInterface<Domain>
+     * {@inheritdoc}
      */
     public function matching(SpecificationInterface $specification): SetInterface
     {

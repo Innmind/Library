@@ -7,9 +7,13 @@ use Domain\{
     Repository\HostRepositoryInterface,
     Entity\Host,
     Entity\Host\IdentityInterface,
+    Exception\HostNotFoundException,
     Specification\Host\SpecificationInterface
 };
-use Innmind\Neo4j\ONM\RepositoryInterface;
+use Innmind\Neo4j\ONM\{
+    RepositoryInterface,
+    Exception\EntityNotFoundException
+};
 use Innmind\Immutable\{
     SetInterface,
     Set
@@ -24,9 +28,16 @@ final class HostRepository implements HostRepositoryInterface
         $this->infrastructure = $infrastructure;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function get(IdentityInterface $identity): Host
     {
-        return $this->infrastructure->get($identity);
+        try {
+            return $this->infrastructure->get($identity);
+        } catch (EntityNotFoundException $e) {
+            throw new HostNotFoundException('', 0, $e);
+        }
     }
 
     public function add(Host $host): HostRepositoryInterface
@@ -72,7 +83,7 @@ final class HostRepository implements HostRepositoryInterface
     }
 
     /**
-     * @return SetInterface<Host>
+     * {@inheritdoc}
      */
     public function matching(SpecificationInterface $specification): SetInterface
     {

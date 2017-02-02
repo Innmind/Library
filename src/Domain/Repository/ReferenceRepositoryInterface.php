@@ -12,6 +12,9 @@ use Innmind\Immutable\SetInterface;
 
 interface ReferenceRepositoryInterface
 {
+    /**
+     * @throws ReferenceNotFoundException
+     */
     public function get(IdentityInterface $identity): Reference;
     public function add(Reference $reference): self;
     public function remove(IdentityInterface $identity): self;

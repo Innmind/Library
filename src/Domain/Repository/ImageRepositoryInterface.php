@@ -12,6 +12,9 @@ use Innmind\Immutable\SetInterface;
 
 interface ImageRepositoryInterface
 {
+    /**
+     * @throws ImageNotFoundException
+     */
     public function get(IdentityInterface $identity): Image;
     public function add(Image $image): self;
     public function remove(IdentityInterface $identity): self;

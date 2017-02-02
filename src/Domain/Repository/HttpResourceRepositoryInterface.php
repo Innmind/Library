@@ -12,6 +12,9 @@ use Innmind\Immutable\SetInterface;
 
 interface HttpResourceRepositoryInterface
 {
+    /**
+     * @throws HttpResourceNotFoundException
+     */
     public function get(IdentityInterface $identity): HttpResource;
     public function add(HttpResource $httpResource): self;
     public function remove(IdentityInterface $identity): self;

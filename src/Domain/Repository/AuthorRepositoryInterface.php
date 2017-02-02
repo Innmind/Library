@@ -12,6 +12,9 @@ use Innmind\Immutable\SetInterface;
 
 interface AuthorRepositoryInterface
 {
+    /**
+     * @throws AuthorNotFoundException
+     */
     public function get(IdentityInterface $identity): Author;
     public function add(Author $author): self;
     public function remove(IdentityInterface $identity): self;

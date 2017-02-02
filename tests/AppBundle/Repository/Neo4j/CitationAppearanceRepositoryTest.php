@@ -14,7 +14,10 @@ use Domain\{
     Entity\HttpResource\IdentityInterface as HttpResourceIdentity,
     Specification\CitationAppearance\SpecificationInterface
 };
-use Innmind\Neo4j\ONM\RepositoryInterface;
+use Innmind\Neo4j\ONM\{
+    RepositoryInterface,
+    Exception\EntityNotFoundException
+};
 use Innmind\TimeContinuum\PointInTimeInterface;
 use Innmind\Immutable\{
     SetInterface,
@@ -54,6 +57,26 @@ class CitationAppearanceRepositoryTest extends \PHPUnit_Framework_TestCase
             );
 
         $this->assertSame($expected, $repository->get($identity));
+    }
+
+    /**
+     * @expectedException Domain\Exception\CitationAppearanceNotFoundException
+     */
+    public function testThrowWhenGettingUnknownEntity()
+    {
+        $repository = new CitationAppearanceRepository(
+            $infra = $this->createMock(RepositoryInterface::class)
+        );
+        $identity = new Identity((string) Uuid::uuid4());
+        $infra
+            ->expects($this->once())
+            ->method('get')
+            ->with($identity)
+            ->will(
+                $this->throwException(new EntityNotFoundException)
+            );
+
+        $repository->get($identity);
     }
 
     public function testAdd()

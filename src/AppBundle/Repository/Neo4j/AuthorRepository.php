@@ -7,9 +7,13 @@ use Domain\{
     Repository\AuthorRepositoryInterface,
     Entity\Author,
     Entity\Author\IdentityInterface,
+    Exception\AuthorNotFoundException,
     Specification\Author\SpecificationInterface
 };
-use Innmind\Neo4j\ONM\RepositoryInterface;
+use Innmind\Neo4j\ONM\{
+    RepositoryInterface,
+    Exception\EntityNotFoundException
+};
 use Innmind\Immutable\{
     SetInterface,
     Set
@@ -24,9 +28,16 @@ final class AuthorRepository implements AuthorRepositoryInterface
         $this->infrastructure = $infrastructure;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function get(IdentityInterface $identity): Author
     {
-        return $this->infrastructure->get($identity);
+        try {
+            return $this->infrastructure->get($identity);
+        } catch (EntityNotFoundException $e) {
+            throw new AuthorNotFoundException('', 0, $e);
+        }
     }
 
     public function add(Author $author): AuthorRepositoryInterface
@@ -72,7 +83,7 @@ final class AuthorRepository implements AuthorRepositoryInterface
     }
 
     /**
-     * @return SetInterface<Author>
+     * {@inheritdoc}
      */
     public function matching(SpecificationInterface $specification): SetInterface
     {

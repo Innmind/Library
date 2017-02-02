@@ -12,6 +12,9 @@ use Innmind\Immutable\SetInterface;
 
 interface CanonicalRepositoryInterface
 {
+    /**
+     * @throws CanonicalNotFoundException
+     */
     public function get(IdentityInterface $identity): Canonical;
     public function add(Canonical $canonical): self;
     public function remove(IdentityInterface $identity): self;

@@ -12,6 +12,9 @@ use Innmind\Immutable\SetInterface;
 
 interface HostRepositoryInterface
 {
+    /**
+     * @throws HostNotFoundException
+     */
     public function get(IdentityInterface $identity): Host;
     public function add(Host $host): self;
     public function remove(IdentityInterface $identity): self;

@@ -7,9 +7,13 @@ use Domain\{
     Repository\ReferenceRepositoryInterface,
     Entity\Reference,
     Entity\Reference\IdentityInterface,
+    Exception\ReferenceNotFoundException,
     Specification\Reference\SpecificationInterface
 };
-use Innmind\Neo4j\ONM\RepositoryInterface;
+use Innmind\Neo4j\ONM\{
+    RepositoryInterface,
+    Exception\EntityNotFoundException
+};
 use Innmind\Immutable\{
     SetInterface,
     Set
@@ -24,9 +28,16 @@ final class ReferenceRepository implements ReferenceRepositoryInterface
         $this->infrastructure = $infrastructure;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function get(IdentityInterface $identity): Reference
     {
-        return $this->infrastructure->get($identity);
+        try {
+            return $this->infrastructure->get($identity);
+        } catch (EntityNotFoundException $e) {
+            throw new ReferenceNotFoundException('', 0, $e);
+        }
     }
 
     public function add(Reference $entity): ReferenceRepositoryInterface
@@ -72,7 +83,7 @@ final class ReferenceRepository implements ReferenceRepositoryInterface
     }
 
     /**
-     * @return SetInterface<Reference>
+     * {@inheritdoc}
      */
     public function matching(SpecificationInterface $specification): SetInterface
     {
