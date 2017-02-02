@@ -14,6 +14,17 @@ services:
                 Domain\Exception\HttpResourceAlreadyExistException: Innmind\Http\Exception\Http\ConflictException
                 Domain\Exception\ImageAlreadyExistException: Innmind\Http\Exception\Http\ConflictException
                 Domain\Exception\ReferenceAlreadyExistException: Innmind\Http\Exception\Http\ConflictException
+                Domain\Exception\AlternateNotFoundException: Innmind\Http\Exception\Http\NotFoundException
+                Domain\Exception\AuthorNotFoundException: Innmind\Http\Exception\Http\NotFoundException
+                Domain\Exception\CanonicalNotFoundException: Innmind\Http\Exception\Http\NotFoundException
+                Domain\Exception\CitationNotFoundException: Innmind\Http\Exception\Http\NotFoundException
+                Domain\Exception\CitationAppearanceNotFoundException: Innmind\Http\Exception\Http\NotFoundException
+                Domain\Exception\DomainNotFoundException: Innmind\Http\Exception\Http\NotFoundException
+                Domain\Exception\HostNotFoundException: Innmind\Http\Exception\Http\NotFoundException
+                Domain\Exception\HtmlPageNotFoundException: Innmind\Http\Exception\Http\NotFoundException
+                Domain\Exception\HttpResourceNotFoundException: Innmind\Http\Exception\Http\NotFoundException
+                Domain\Exception\ImageNotFoundException: Innmind\Http\Exception\Http\NotFoundException
+                Domain\Exception\ReferenceNotFoundException: Innmind\Http\Exception\Http\NotFoundException
         factory:
             - AppBundle\Factory\ExceptionListenerFactory
             - make
