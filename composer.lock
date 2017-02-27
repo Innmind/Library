@@ -1159,16 +1159,16 @@
         },
         {
             "name": "innmind/neo4j-onm",
-            "version": "3.0.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/neo4j-onm.git",
-                "reference": "fbc71834d0cac4ee854a783522846ad252316e97"
+                "reference": "213915b207e912563a31c9d49f9233517aeeb1a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/fbc71834d0cac4ee854a783522846ad252316e97",
-                "reference": "fbc71834d0cac4ee854a783522846ad252316e97",
+                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/213915b207e912563a31c9d49f9233517aeeb1a6",
+                "reference": "213915b207e912563a31c9d49f9233517aeeb1a6",
                 "shasum": ""
             },
             "require": {
@@ -1212,7 +1212,7 @@
                 "neo4j",
                 "node"
             ],
-            "time": "2017-02-27 10:30:50"
+            "time": "2017-02-27 15:22:01"
         },
         {
             "name": "innmind/reflection",
