@@ -54,6 +54,8 @@ innmind_neo4j:
         - AppBundle\Neo4j\Type\UrlType
         - AppBundle\Neo4j\Type\ColourType
         - Innmind\Neo4j\ONM\Type\PointInTimeType
+    clock: clock
+    event_bus: event_bus
 
 innmind_command_bus:
     stack:
