@@ -17,7 +17,7 @@ services:
         class: AppBundle\Rest\Gateway\HttpResourceGateway\ResourceAccessor
         arguments:
             - '@repository.http_resource'
-            - '@innmind_neo4j.connection'
+            - '@innmind_neo4j.dbal.connection'
 
     gateway.http_resource.linker:
         class: AppBundle\Rest\Gateway\HttpResourceGateway\ResourceLinker
@@ -41,7 +41,7 @@ services:
         class: AppBundle\Rest\Gateway\ImageGateway\ResourceAccessor
         arguments:
             - '@repository.image'
-            - '@innmind_neo4j.connection'
+            - '@innmind_neo4j.dbal.connection'
 
     gateway.html_page:
         class: AppBundle\Rest\Gateway\HtmlPageGateway
@@ -61,7 +61,7 @@ services:
         class: AppBundle\Rest\Gateway\HtmlPageGateway\ResourceAccessor
         arguments:
             - '@repository.html_page'
-            - '@innmind_neo4j.connection'
+            - '@innmind_neo4j.dbal.connection'
 
     gateway.html_page.linker:
         class: AppBundle\Rest\Gateway\HtmlPageGateway\ResourceLinker

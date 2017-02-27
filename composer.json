@@ -20,22 +20,22 @@
     },
     "require": {
         "php": "~7.1",
-        "innmind/url": "^1.0",
-        "innmind/immutable": "^1.9",
-        "innmind/event-bus": "^1.0",
+        "innmind/url": "~2.0",
+        "innmind/immutable": "~2.0",
+        "innmind/event-bus": "~2.0",
         "innmind/time-continuum": "^1.0",
         "jeremykendall/php-domain-parser": "^3.0",
         "innmind/specification": "^1.0",
-        "innmind/colour": "^1.0",
-        "symfony/symfony": "3.2.*",
+        "innmind/colour": "~2.0",
+        "symfony/symfony": "~3.2",
         "symfony/monolog-bundle": "^3.0",
         "symfony/polyfill-apcu": "^1.0",
         "sensio/distribution-bundle": "^5.0",
         "incenteev/composer-parameter-handler": "^2.0",
-        "innmind/neo4j-bundle": "^2.0",
-        "innmind/command-bus-bundle": "^1.0",
-        "innmind/rest-server-bundle": "^1.0",
-        "innmind/event-bus-bundle": "^1.0"
+        "innmind/neo4j-bundle": "~3.0",
+        "innmind/command-bus-bundle": "~2.0",
+        "innmind/rest-server-bundle": "~2.0",
+        "innmind/event-bus-bundle": "~2.0"
     },
     "config": {
         "bin-dir": "bin"

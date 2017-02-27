@@ -3,24 +3,34 @@ services:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\Author\Identity'
+        tags:
+            - { name: innmind_neo4j.identity.generator, generates: 'AppBundle\Entity\Author\Identity' }
 
     neo4j.identity.generator.resource_author:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\ResourceAuthor\Identity'
+        tags:
+            - { name: innmind_neo4j.identity.generator, generates: 'AppBundle\Entity\ResourceAuthor\Identity' }
 
     neo4j.identity.generator.citation:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\Citation\Identity'
+        tags:
+            - { name: innmind_neo4j.identity.generator, generates: 'AppBundle\Entity\Citation\Identity' }
 
     neo4j.identity.generator.citation_appearance:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\CitationAppearance\Identity'
+        tags:
+            - { name: innmind_neo4j.identity.generator, generates: 'AppBundle\Entity\CitationAppearance\Identity' }
 
     neo4j.identity.generator.domain:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
+        tags:
+            - { name: innmind_neo4j.identity.generator, generates:  Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator }
         arguments:
             - 'AppBundle\Entity\Domain\Identity'
 
@@ -28,43 +38,61 @@ services:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\DomainHost\Identity'
+        tags:
+            - { name: innmind_neo4j.identity.generator, generates: 'AppBundle\Entity\DomainHost\Identity' }
 
     neo4j.identity.generator.host:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\Host\Identity'
+        tags:
+            - { name: innmind_neo4j.identity.generator, generates: 'AppBundle\Entity\Host\Identity' }
 
     neo4j.identity.generator.host_resource:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\HostResource\Identity'
+        tags:
+            - { name: innmind_neo4j.identity.generator, generates: 'AppBundle\Entity\HostResource\Identity' }
 
     neo4j.identity.generator.http_resource:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\HttpResource\Identity'
+        tags:
+            - { name: innmind_neo4j.identity.generator, generates: 'AppBundle\Entity\HttpResource\Identity' }
 
     neo4j.identity.generator.image:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\Image\Identity'
+        tags:
+            - { name: innmind_neo4j.identity.generator, generates: 'AppBundle\Entity\Image\Identity' }
 
     neo4j.identity.generator.html_page:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\HtmlPage\Identity'
+        tags:
+            - { name: innmind_neo4j.identity.generator, generates: 'AppBundle\Entity\HtmlPage\Identity' }
 
     neo4j.identity.generator.alternate:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\Alternate\Identity'
+        tags:
+            - { name: innmind_neo4j.identity.generator, generates: 'AppBundle\Entity\Alternate\Identity' }
 
     neo4j.identity.generator.canonical:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\Canonical\Identity'
+        tags:
+            - { name: innmind_neo4j.identity.generator, generates: 'AppBundle\Entity\Canonical\Identity' }
 
     neo4j.identity.generator.reference:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
         arguments:
             - 'AppBundle\Entity\Reference\Identity'
+        tags:
+            - { name: innmind_neo4j.identity.generator, generates: 'AppBundle\Entity\Reference\Identity' }

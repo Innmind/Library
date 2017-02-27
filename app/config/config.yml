@@ -54,21 +54,6 @@ innmind_neo4j:
         - AppBundle\Neo4j\Type\UrlType
         - AppBundle\Neo4j\Type\ColourType
         - Innmind\Neo4j\ONM\Type\PointInTimeType
-    identity_generators:
-        AppBundle\Entity\Author\Identity: neo4j.identity.generator.author
-        AppBundle\Entity\ResourceAuthor\Identity: neo4j.identity.generator.resource_author
-        AppBundle\Entity\Citation\Identity: neo4j.identity.generator.citation
-        AppBundle\Entity\CitationAppearance\Identity: neo4j.identity.generator.citation_appearance
-        AppBundle\Entity\Domain\Identity: neo4j.identity.generator.domain
-        AppBundle\Entity\DomainHost\Identity: neo4j.identity.generator.domain_host
-        AppBundle\Entity\Host\Identity: neo4j.identity.generator.host
-        AppBundle\Entity\HostResource\Identity: neo4j.identity.generator.host_resource
-        AppBundle\Entity\HttpResource\Identity: neo4j.identity.generator.http_resource
-        AppBundle\Entity\Image\Identity: neo4j.identity.generator.image
-        AppBundle\Entity\HtmlPage\Identity: neo4j.identity.generator.html_page
-        AppBundle\Entity\Alternate\Identity: neo4j.identity.generator.alternate
-        AppBundle\Entity\Canonical\Identity: neo4j.identity.generator.canonical
-        AppBundle\Entity\Reference\Identity: neo4j.identity.generator.reference
 
 innmind_command_bus:
     stack:
