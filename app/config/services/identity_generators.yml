@@ -29,10 +29,10 @@ services:
 
     neo4j.identity.generator.domain:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
-        tags:
-            - { name: innmind_neo4j.identity.generator, generates:  Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator }
         arguments:
             - 'AppBundle\Entity\Domain\Identity'
+        tags:
+            - { name: innmind_neo4j.identity.generator, generates: 'AppBundle\Entity\Domain\Identity' }
 
     neo4j.identity.generator.domain_host:
         class: Innmind\Neo4j\ONM\Identity\Generator\UuidGenerator
