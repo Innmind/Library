@@ -49,11 +49,11 @@ class ConfigureONMDataExtractorPassTest extends \PHPUnit_Framework_TestCase
             $relationship->getArgument(0)
         );
         $this->assertSame(
-            'onm.data_extractor.strategies',
+            'onm.data_extractor.strategy',
             (string) $aggregate->getArgument(0)
         );
         $this->assertSame(
-            'onm.data_extractor.strategies',
+            'onm.data_extractor.strategy',
             (string) $relationship->getArgument(0)
         );
     }

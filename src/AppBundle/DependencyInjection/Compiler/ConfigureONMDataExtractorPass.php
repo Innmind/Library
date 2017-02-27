@@ -20,13 +20,13 @@ final class ConfigureONMDataExtractorPass implements CompilerPassInterface
             ->getDefinition('innmind_neo4j.entity.data_extractor.aggregate')
             ->replaceArgument(
                 0,
-                new Reference('onm.data_extractor.strategies')
+                new Reference('onm.data_extractor.strategy')
             );
         $container
             ->getDefinition('innmind_neo4j.entity.data_extractor.relationship')
             ->replaceArgument(
                 0,
-                new Reference('onm.data_extractor.strategies')
+                new Reference('onm.data_extractor.strategy')
             );
     }
 }
