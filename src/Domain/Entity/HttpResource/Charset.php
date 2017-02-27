@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Domain\Entity\HttpResource;
 
 use Domain\Exception\InvalidArgumentException;
-use Innmind\Immutable\StringPrimitive as Str;
+use Innmind\Immutable\Str;
 
 final class Charset
 {
@@ -12,7 +12,7 @@ final class Charset
 
     public function __construct(string $value)
     {
-        if (!(new Str($value))->match('~^[a-zA-Z0-9\-_:\(\)]+$~')) {
+        if (!(new Str($value))->matches('~^[a-zA-Z0-9\-_:\(\)]+$~')) {
             throw new InvalidArgumentException;
         }
 

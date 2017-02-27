@@ -5,11 +5,13 @@ namespace Tests\AppBundle\Neo4j\Type\HttpResource;
 
 use AppBundle\Neo4j\Type\HttpResource\PathType;
 use Innmind\Url\Path;
-use Innmind\Neo4j\ONM\TypeInterface;
+use Innmind\Neo4j\ONM\{
+    TypeInterface,
+    Types
+};
 use Innmind\Immutable\{
     SetInterface,
-    CollectionInterface,
-    Collection
+    MapInterface
 };
 
 class PathTypeTest extends \PHPUnit_Framework_TestCase
@@ -41,7 +43,8 @@ class PathTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
             PathType::class,
             PathType::fromConfig(
-                $this->createMock(CollectionInterface::class)
+                $this->createMock(MapInterface::class),
+                new Types
             )
         );
     }

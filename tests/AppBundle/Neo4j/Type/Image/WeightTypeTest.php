@@ -5,11 +5,14 @@ namespace Tests\AppBundle\Neo4j\Type\Image;
 
 use AppBundle\Neo4j\Type\Image\WeightType;
 use Domain\Entity\Image\Weight;
-use Innmind\Neo4j\ONM\TypeInterface;
+use Innmind\Neo4j\ONM\{
+    TypeInterface,
+    Types
+};
 use Innmind\Immutable\{
     SetInterface,
-    CollectionInterface,
-    Collection
+    MapInterface,
+    Map
 };
 
 class WeightTypeTest extends \PHPUnit_Framework_TestCase
@@ -41,7 +44,8 @@ class WeightTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
             WeightType::class,
             WeightType::fromConfig(
-                $this->createMock(CollectionInterface::class)
+                $this->createMock(MapInterface::class),
+                new Types
             )
         );
     }
@@ -54,7 +58,9 @@ class WeightTypeTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertNull(
             WeightType::fromConfig(
-                new Collection(['nullable' => null])
+                (new Map('string', 'mixed'))
+                    ->put('nullable', null),
+                new Types
             )->forDatabase(null)
         );
     }

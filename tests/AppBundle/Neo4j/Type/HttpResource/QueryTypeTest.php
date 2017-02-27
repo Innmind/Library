@@ -5,11 +5,13 @@ namespace Tests\AppBundle\Neo4j\Type\HttpResource;
 
 use AppBundle\Neo4j\Type\HttpResource\QueryType;
 use Innmind\Url\Query;
-use Innmind\Neo4j\ONM\TypeInterface;
+use Innmind\Neo4j\ONM\{
+    TypeInterface,
+    Types
+};
 use Innmind\Immutable\{
     SetInterface,
-    CollectionInterface,
-    Collection
+    MapInterface
 };
 
 class QueryTypeTest extends \PHPUnit_Framework_TestCase
@@ -41,7 +43,8 @@ class QueryTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
             QueryType::class,
             QueryType::fromConfig(
-                $this->createMock(CollectionInterface::class)
+                $this->createMock(MapInterface::class),
+                new Types
             )
         );
     }

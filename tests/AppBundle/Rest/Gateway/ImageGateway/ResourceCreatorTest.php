@@ -45,51 +45,51 @@ class ResourceCreatorTest extends \PHPUnit_Framework_TestCase
         $creator = new ResourceCreator(
             $bus = $this->createMock(CommandBusInterface::class)
         );
-        // $bus
-        //     ->expects($this->at(0))
-        //     ->method('handle')
-        //     ->with($this->callback(function($command) {
-        //         return $command instanceof RegisterDomain &&
-        //             (string) $command->host() === 'example.com';
-        //     }));
-        // $bus
-        //     ->expects($this->at(1))
-        //     ->method('handle')
-        //     ->with($this->callback(function($command) {
-        //         return $command instanceof RegisterHost &&
-        //             (string) $command->host() === 'example.com';
-        //     }));
-        // $bus
-        //     ->expects($this->at(2))
-        //     ->method('handle')
-        //     ->with($this->callback(function($command) use (&$expected): bool {
-        //         $expected = $command->identity();
+        $bus
+            ->expects($this->at(0))
+            ->method('handle')
+            ->with($this->callback(function($command) {
+                return $command instanceof RegisterDomain &&
+                    (string) $command->host() === 'example.com';
+            }));
+        $bus
+            ->expects($this->at(1))
+            ->method('handle')
+            ->with($this->callback(function($command) {
+                return $command instanceof RegisterHost &&
+                    (string) $command->host() === 'example.com';
+            }));
+        $bus
+            ->expects($this->at(2))
+            ->method('handle')
+            ->with($this->callback(function($command) use (&$expected): bool {
+                $expected = $command->identity();
 
-        //         return $command instanceof RegisterImage &&
-        //             (string) $command->path() === 'foo' &&
-        //             (string) $command->query() === 'bar';
-        //     }));
-        // $bus
-        //     ->expects($this->at(3))
-        //     ->method('handle')
-        //     ->with($this->callback(function($command) {
-        //         return $command instanceof SpecifyDimension &&
-        //             (string) $command->dimension() === '42x24';
-        //     }));
-        // $bus
-        //     ->expects($this->at(4))
-        //     ->method('handle')
-        //     ->with($this->callback(function($command) {
-        //         return $command instanceof SpecifyWeight &&
-        //             $command->weight()->toInt() === 1337;
-        //     }));
-        // $bus
-        //     ->expects($this->at(5))
-        //     ->method('handle')
-        //     ->with($this->callback(function($command) {
-        //         return $command instanceof AddDescription &&
-        //             (string) $command->description() === 'whatever';
-        //     }));
+                return $command instanceof RegisterImage &&
+                    (string) $command->path() === 'foo' &&
+                    (string) $command->query() === 'bar';
+            }));
+        $bus
+            ->expects($this->at(3))
+            ->method('handle')
+            ->with($this->callback(function($command) {
+                return $command instanceof SpecifyDimension &&
+                    (string) $command->dimension() === '42x24';
+            }));
+        $bus
+            ->expects($this->at(4))
+            ->method('handle')
+            ->with($this->callback(function($command) {
+                return $command instanceof SpecifyWeight &&
+                    $command->weight()->toInt() === 1337;
+            }));
+        $bus
+            ->expects($this->at(5))
+            ->method('handle')
+            ->with($this->callback(function($command) {
+                return $command instanceof AddDescription &&
+                    (string) $command->description() === 'foo';
+            }));
         $definition = new Definition(
             'image',
             new Identity('identity'),
@@ -161,6 +161,6 @@ class ResourceCreatorTest extends \PHPUnit_Framework_TestCase
 
         $identity = $creator($definition, $resource);
 
-        // $this->assertSame($expected, $identity);
+        $this->assertSame($expected, $identity);
     }
 }

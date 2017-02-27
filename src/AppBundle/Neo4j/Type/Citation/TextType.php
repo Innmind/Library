@@ -4,9 +4,12 @@ declare(strict_types = 1);
 namespace AppBundle\Neo4j\Type\Citation;
 
 use Domain\Entity\Citation\Text;
-use Innmind\Neo4j\ONM\TypeInterface;
+use Innmind\Neo4j\ONM\{
+    TypeInterface,
+    Types
+};
 use Innmind\Immutable\{
-    CollectionInterface,
+    MapInterface,
     SetInterface,
     Set
 };
@@ -18,7 +21,7 @@ final class TextType implements TypeInterface
     /**
      * {@inheritdoc}
      */
-    public static function fromConfig(CollectionInterface $config): TypeInterface
+    public static function fromConfig(MapInterface $config, Types $types): TypeInterface
     {
         return new self;
     }

@@ -5,11 +5,14 @@ namespace Tests\AppBundle\Neo4j\Type\HttpResource;
 
 use AppBundle\Neo4j\Type\HttpResource\CharsetType;
 use Domain\Entity\HttpResource\Charset;
-use Innmind\Neo4j\ONM\TypeInterface;
+use Innmind\Neo4j\ONM\{
+    TypeInterface,
+    Types
+};
 use Innmind\Immutable\{
     SetInterface,
-    CollectionInterface,
-    Collection
+    MapInterface,
+    Map
 };
 
 class CharsetTypeTest extends \PHPUnit_Framework_TestCase
@@ -41,7 +44,8 @@ class CharsetTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
             CharsetType::class,
             CharsetType::fromConfig(
-                $this->createMock(CollectionInterface::class)
+                $this->createMock(MapInterface::class),
+                new Types
             )
         );
     }
@@ -54,7 +58,9 @@ class CharsetTypeTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertNull(
             CharsetType::fromConfig(
-                new Collection(['nullable' => null])
+                (new Map('string', 'mixed'))
+                    ->put('nullable', null),
+                new Types
             )
                 ->forDatabase(null)
         );

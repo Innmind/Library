@@ -5,11 +5,14 @@ namespace Tests\AppBundle\Neo4j\Type;
 
 use AppBundle\Neo4j\Type\ColourType;
 use Innmind\Colour\RGBA;
-use Innmind\Neo4j\ONM\TypeInterface;
+use Innmind\Neo4j\ONM\{
+    TypeInterface,
+    Types
+};
 use Innmind\Immutable\{
     SetInterface,
-    CollectionInterface,
-    Collection
+    MapInterface,
+    Map
 };
 
 class ColourTypeTest extends \PHPUnit_Framework_TestCase
@@ -41,7 +44,8 @@ class ColourTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
             ColourType::class,
             ColourType::fromConfig(
-                $this->createMock(CollectionInterface::class)
+                $this->createMock(MapInterface::class),
+                new Types
             )
         );
     }
@@ -54,7 +58,9 @@ class ColourTypeTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertNull(
             ColourType::fromConfig(
-                new Collection(['nullable' => null])
+                (new Map('string', 'mixed'))
+                    ->put('nullable', null),
+                new Types
             )
                 ->forDatabase(null)
         );
@@ -77,7 +83,9 @@ class ColourTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse((new ColourType)->isNullable());
         $this->assertTrue(
             ColourType::fromConfig(
-                new Collection(['nullable' => null])
+                (new Map('string', 'mixed'))
+                    ->put('nullable', null),
+                new Types
             )->isNullable()
         );
     }

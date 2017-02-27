@@ -5,10 +5,13 @@ namespace Tests\AppBundle\Neo4j\Type\Citation;
 
 use AppBundle\Neo4j\Type\Citation\TextType;
 use Domain\Entity\Citation\Text;
-use Innmind\Neo4j\ONM\TypeInterface;
+use Innmind\Neo4j\ONM\{
+    TypeInterface,
+    Types
+};
 use Innmind\Immutable\{
     SetInterface,
-    CollectionInterface
+    MapInterface
 };
 
 class TextTypeTest extends \PHPUnit_Framework_TestCase
@@ -40,7 +43,8 @@ class TextTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
             TextType::class,
             TextType::fromConfig(
-                $this->createMock(CollectionInterface::class)
+                $this->createMock(MapInterface::class),
+                new Types
             )
         );
     }

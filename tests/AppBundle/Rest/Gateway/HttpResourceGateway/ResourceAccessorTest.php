@@ -38,7 +38,7 @@ use Innmind\Immutable\{
     Map,
     Set,
     SetInterface,
-    TypedCollection
+    Stream
 };
 use Ramsey\Uuid\Uuid;
 
@@ -88,8 +88,8 @@ class ResourceAccessorTest extends \PHPUnit_Framework_TestCase
             ->with($this->callback(function(QueryInterface $query) use ($uuid): bool {
                 return $query->cypher() === 'MATCH (host:Web:Host)-[:RESOURCE_OF_HOST]-(resource:Web:Resource) WHERE resource.identity = {identity} RETURN host' &&
                     $query->parameters()->count() === 1 &&
-                    $query->parameters()->first()->key() === 'identity' &&
-                    $query->parameters()->first()->value() === $uuid;
+                    $query->parameters()->current()->key() === 'identity' &&
+                    $query->parameters()->current()->value() === $uuid;
             }))
             ->willReturn(
                 $result = $this->createMock(ResultInterface::class)
@@ -98,10 +98,8 @@ class ResourceAccessorTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('rows')
             ->willReturn(
-                new TypedCollection(
-                    RowInterface::class,
-                    [$row = $this->createMock(RowInterface::class)]
-                )
+                (new Stream(RowInterface::class))
+                    ->add($row = $this->createMock(RowInterface::class))
             );
         $row
             ->expects($this->once())

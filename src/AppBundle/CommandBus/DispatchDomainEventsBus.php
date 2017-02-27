@@ -12,7 +12,7 @@ use Innmind\Neo4j\ONM\{
     Entity\Container,
     IdentityInterface
 };
-use Innmind\Immutable\Sequence;
+use Innmind\Immutable\Stream;
 
 final class DispatchDomainEventsBus implements CommandBusInterface
 {
@@ -43,12 +43,12 @@ final class DispatchDomainEventsBus implements CommandBusInterface
                 return $entity instanceof ContainsRecordedEventsInterface;
             })
             ->reduce(
-                new Sequence,
+                new Stream('object'),
                 function(
-                    Sequence $carry,
+                    Stream $carry,
                     IdentityInterface $identity,
                     ContainsRecordedEventsInterface $entity
-                ): Sequence {
+                ): Stream {
                     return $carry->append($entity->recordedEvents());
                 }
             )

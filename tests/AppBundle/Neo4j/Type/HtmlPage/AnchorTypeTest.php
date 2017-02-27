@@ -5,10 +5,13 @@ namespace Tests\AppBundle\Neo4j\Type\HtmlPage;
 
 use AppBundle\Neo4j\Type\HtmlPage\AnchorType;
 use Domain\Entity\HtmlPage\Anchor;
-use Innmind\Neo4j\ONM\TypeInterface;
+use Innmind\Neo4j\ONM\{
+    TypeInterface,
+    Types
+};
 use Innmind\Immutable\{
     SetInterface,
-    CollectionInterface
+    MapInterface
 };
 
 class AnchorTypeTest extends \PHPUnit_Framework_TestCase
@@ -40,7 +43,8 @@ class AnchorTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
             AnchorType::class,
             AnchorType::fromConfig(
-                $this->createMock(CollectionInterface::class)
+                $this->createMock(MapInterface::class),
+                new Types
             )
         );
     }

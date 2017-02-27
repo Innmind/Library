@@ -5,11 +5,14 @@ namespace Tests\AppBundle\Neo4j\Type\Image;
 
 use AppBundle\Neo4j\Type\Image\DimensionType;
 use Domain\Entity\Image\Dimension;
-use Innmind\Neo4j\ONM\TypeInterface;
+use Innmind\Neo4j\ONM\{
+    TypeInterface,
+    Types
+};
 use Innmind\Immutable\{
     SetInterface,
-    CollectionInterface,
-    Collection
+    MapInterface,
+    Map
 };
 
 class DimensionTypeTest extends \PHPUnit_Framework_TestCase
@@ -41,7 +44,8 @@ class DimensionTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
             DimensionType::class,
             DimensionType::fromConfig(
-                $this->createMock(CollectionInterface::class)
+                $this->createMock(MapInterface::class),
+                new Types
             )
         );
     }
@@ -54,7 +58,9 @@ class DimensionTypeTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertNull(
             DimensionType::fromConfig(
-                new Collection(['nullable' => null])
+                (new Map('string', 'mixed'))
+                    ->put('nullable', null),
+                new Types
             )->forDatabase(null)
         );
     }

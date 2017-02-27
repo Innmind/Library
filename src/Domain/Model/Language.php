@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Domain\Model;
 
 use Domain\Exception\InvalidArgumentException;
-use Innmind\Immutable\StringPrimitive as Str;
+use Innmind\Immutable\Str;
 
 final class Language
 {
@@ -12,7 +12,7 @@ final class Language
 
     public function __construct(string $value)
     {
-        if (!(new Str($value))->match('~^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$~')) {
+        if (!(new Str($value))->matches('~^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$~')) {
             throw new InvalidArgumentException;
         }
 

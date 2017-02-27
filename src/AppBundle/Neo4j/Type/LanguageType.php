@@ -4,9 +4,12 @@ declare(strict_types = 1);
 namespace AppBundle\Neo4j\Type;
 
 use Domain\Model\Language;
-use Innmind\Neo4j\ONM\TypeInterface;
+use Innmind\Neo4j\ONM\{
+    TypeInterface,
+    Types
+};
 use Innmind\Immutable\{
-    CollectionInterface,
+    MapInterface,
     SetInterface,
     Set
 };
@@ -19,11 +22,11 @@ final class LanguageType implements TypeInterface
     /**
      * {@inheritdoc}
      */
-    public static function fromConfig(CollectionInterface $config): TypeInterface
+    public static function fromConfig(MapInterface $config, Types $types): TypeInterface
     {
         $self = new self;
 
-        if ($config->hasKey('nullable')) {
+        if ($config->contains('nullable')) {
             $self->nullable = true;
         }
 

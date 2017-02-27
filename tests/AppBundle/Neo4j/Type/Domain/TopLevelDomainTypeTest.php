@@ -5,10 +5,13 @@ namespace Tests\AppBundle\Neo4j\Type\Domain;
 
 use AppBundle\Neo4j\Type\Domain\TopLevelDomainType;
 use Domain\Entity\Domain\TopLevelDomain;
-use Innmind\Neo4j\ONM\TypeInterface;
+use Innmind\Neo4j\ONM\{
+    TypeInterface,
+    Types
+};
 use Innmind\Immutable\{
     SetInterface,
-    CollectionInterface
+    MapInterface
 };
 
 class TopLevelDomainTypeTest extends \PHPUnit_Framework_TestCase
@@ -40,7 +43,8 @@ class TopLevelDomainTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
             TopLevelDomainType::class,
             TopLevelDomainType::fromConfig(
-                $this->createMock(CollectionInterface::class)
+                $this->createMock(MapInterface::class),
+                new Types
             )
         );
     }

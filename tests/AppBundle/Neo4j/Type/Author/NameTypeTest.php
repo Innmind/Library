@@ -5,10 +5,13 @@ namespace Tests\AppBundle\Neo4j\Type\Author;
 
 use AppBundle\Neo4j\Type\Author\NameType;
 use Domain\Entity\Author\Name;
-use Innmind\Neo4j\ONM\TypeInterface;
+use Innmind\Neo4j\ONM\{
+    TypeInterface,
+    Types
+};
 use Innmind\Immutable\{
     SetInterface,
-    CollectionInterface
+    MapInterface
 };
 
 class NameTypeTest extends \PHPUnit_Framework_TestCase
@@ -40,7 +43,8 @@ class NameTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
             NameType::class,
             NameType::fromConfig(
-                $this->createMock(CollectionInterface::class)
+                $this->createMock(MapInterface::class),
+                new Types
             )
         );
     }

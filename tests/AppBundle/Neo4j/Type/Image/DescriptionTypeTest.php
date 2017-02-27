@@ -5,10 +5,13 @@ namespace Tests\AppBundle\Neo4j\Type\Image;
 
 use AppBundle\Neo4j\Type\Image\DescriptionType;
 use Domain\Entity\Image\Description;
-use Innmind\Neo4j\ONM\TypeInterface;
+use Innmind\Neo4j\ONM\{
+    TypeInterface,
+    Types
+};
 use Innmind\Immutable\{
     SetInterface,
-    CollectionInterface
+    MapInterface
 };
 
 class DescriptionTypeTest extends \PHPUnit_Framework_TestCase
@@ -40,7 +43,8 @@ class DescriptionTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
             DescriptionType::class,
             DescriptionType::fromConfig(
-                $this->createMock(CollectionInterface::class)
+                $this->createMock(MapInterface::class),
+                new Types
             )
         );
     }
