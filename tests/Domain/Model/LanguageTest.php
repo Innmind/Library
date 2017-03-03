@@ -4,8 +4,9 @@ declare(strict_types = 1);
 namespace Tests\Domain\Model;
 
 use Domain\Model\Language;
+use PHPUnit\Framework\TestCase;
 
-class LanguageTest extends \PHPUnit_Framework_TestCase
+class LanguageTest extends TestCase
 {
     /**
      * @dataProvider valid

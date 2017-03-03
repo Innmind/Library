@@ -8,8 +8,9 @@ use Domain\{
     Entity\HttpResource\IdentityInterface,
     Entity\HttpResource\Charset
 };
+use PHPUnit\Framework\TestCase;
 
-class SpecifyCharsetTest extends \PHPUnit_Framework_TestCase
+class SpecifyCharsetTest extends TestCase
 {
     public function testInterface()
     {

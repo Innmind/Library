@@ -14,8 +14,9 @@ use Innmind\Immutable\{
     MapInterface,
     Map
 };
+use PHPUnit\Framework\TestCase;
 
-class ColourTypeTest extends \PHPUnit_Framework_TestCase
+class ColourTypeTest extends TestCase
 {
     public function testInterface()
     {

@@ -18,8 +18,9 @@ use Innmind\Url\{
 };
 use Innmind\EventBus\ContainsRecordedEventsInterface;
 use Innmind\Immutable\Set;
+use PHPUnit\Framework\TestCase;
 
-class HttpResourceTest extends \PHPUnit_Framework_TestCase
+class HttpResourceTest extends TestCase
 {
     public function testInterface()
     {

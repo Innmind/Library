@@ -15,8 +15,9 @@ use Innmind\Url\{
     PathInterface,
     QueryInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class FlagAsJournalHandlerTest extends \PHPUnit_Framework_TestCase
+class FlagAsJournalHandlerTest extends TestCase
 {
     public function testExecution()
     {

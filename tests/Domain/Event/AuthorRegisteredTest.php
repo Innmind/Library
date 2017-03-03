@@ -8,8 +8,9 @@ use Domain\{
     Entity\Author\IdentityInterface,
     Entity\Author\Name
 };
+use PHPUnit\Framework\TestCase;
 
-class AuthorRegisteredTest extends \PHPUnit_Framework_TestCase
+class AuthorRegisteredTest extends TestCase
 {
     public function testInterface()
     {

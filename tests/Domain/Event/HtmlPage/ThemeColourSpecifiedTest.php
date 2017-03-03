@@ -8,8 +8,9 @@ use Domain\{
     Entity\HtmlPage\IdentityInterface
 };
 use Innmind\Colour\RGBA;
+use PHPUnit\Framework\TestCase;
 
-class ThemeColourSpecifiedTest extends \PHPUnit_Framework_TestCase
+class ThemeColourSpecifiedTest extends TestCase
 {
     public function testInterface()
     {

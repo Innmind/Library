@@ -4,8 +4,9 @@ declare(strict_types = 1);
 namespace Tests\Domain\Entity\Image;
 
 use Domain\Entity\Image\Weight;
+use PHPUnit\Framework\TestCase;
 
-class WeightTest extends \PHPUnit_Framework_TestCase
+class WeightTest extends TestCase
 {
     public function testInterface()
     {

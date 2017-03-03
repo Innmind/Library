@@ -8,8 +8,9 @@ use Domain\{
     Entity\Reference\IdentityInterface,
     Entity\HttpResource\IdentityInterface as ResourceIdentity
 };
+use PHPUnit\Framework\TestCase;
 
-class ReferenceCreatedTest extends \PHPUnit_Framework_TestCase
+class ReferenceCreatedTest extends TestCase
 {
     public function testInterface()
     {

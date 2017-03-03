@@ -14,8 +14,9 @@ use Innmind\Immutable\{
     MapInterface,
     Map
 };
+use PHPUnit\Framework\TestCase;
 
-class DimensionTypeTest extends \PHPUnit_Framework_TestCase
+class DimensionTypeTest extends TestCase
 {
     public function testInterface()
     {

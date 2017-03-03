@@ -16,8 +16,9 @@ use Innmind\Url\{
     PathInterface,
     QueryInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class SpecifyCharsetHandlerTest extends \PHPunit_Framework_TestCase
+class SpecifyCharsetHandlerTest extends TestCase
 {
     public function testExecution()
     {

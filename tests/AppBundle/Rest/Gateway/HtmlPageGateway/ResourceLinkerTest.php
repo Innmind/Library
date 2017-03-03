@@ -34,8 +34,9 @@ use Innmind\Immutable\{
     Map
 };
 use Ramsey\Uuid\Uuid;
+use PHPUnit\Framework\TestCase;
 
-class ResourceLinkerTest extends \PHPUnit_Framework_TestCase
+class ResourceLinkerTest extends TestCase
 {
     public function testInterface()
     {

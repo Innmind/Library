@@ -4,8 +4,9 @@ declare(strict_types = 1);
 namespace Tests\Domain\Entity\HtmlPage;
 
 use Domain\Entity\HtmlPage\Anchor;
+use PHPUnit\Framework\TestCase;
 
-class AnchorTest extends \PHPUnit_Framework_TestCase
+class AnchorTest extends TestCase
 {
     public function testInterface()
     {

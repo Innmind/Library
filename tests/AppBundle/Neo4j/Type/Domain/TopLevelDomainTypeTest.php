@@ -13,8 +13,9 @@ use Innmind\Immutable\{
     SetInterface,
     MapInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class TopLevelDomainTypeTest extends \PHPUnit_Framework_TestCase
+class TopLevelDomainTypeTest extends TestCase
 {
     public function testInterface()
     {

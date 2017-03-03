@@ -8,8 +8,9 @@ use Domain\{
     Entity\HtmlPage\IdentityInterface
 };
 use Innmind\Url\UrlInterface;
+use PHPUnit\Framework\TestCase;
 
-class SpecifyAndroidAppLinkTest extends \PHPUnit_Framework_TestCase
+class SpecifyAndroidAppLinkTest extends TestCase
 {
     public function testInterface()
     {

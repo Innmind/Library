@@ -8,8 +8,9 @@ use Domain\{
     Entity\Citation\IdentityInterface,
     Entity\Citation\Text
 };
+use PHPUnit\Framework\TestCase;
 
-class CitationRegisteredTest extends \PHPUnit_Framework_TestCase
+class CitationRegisteredTest extends TestCase
 {
     public function testInterface()
     {

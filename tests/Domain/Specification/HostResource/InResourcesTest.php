@@ -17,8 +17,9 @@ use Domain\{
 use Innmind\Specification\ComparatorInterface;
 use Innmind\Immutable\Set;
 use Innmind\TimeContinuum\PointInTimeInterface;
+use PHPUnit\Framework\TestCase;
 
-class InResourcesTest extends \PHPUnit_Framework_TestCase
+class InResourcesTest extends TestCase
 {
     public function testInterface()
     {

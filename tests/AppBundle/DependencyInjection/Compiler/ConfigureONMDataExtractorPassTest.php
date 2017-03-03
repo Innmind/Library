@@ -10,8 +10,9 @@ use Symfony\Component\DependencyInjection\{
     Definition,
     Compiler\CompilerPassInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class ConfigureONMDataExtractorPassTest extends \PHPUnit_Framework_TestCase
+class ConfigureONMDataExtractorPassTest extends TestCase
 {
     public function testInterface()
     {

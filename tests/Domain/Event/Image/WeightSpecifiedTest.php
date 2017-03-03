@@ -8,8 +8,9 @@ use Domain\{
     Entity\Image\IdentityInterface,
     Entity\Image\Weight
 };
+use PHPUnit\Framework\TestCase;
 
-class WeightSpecifiedTest extends \PHPUnit_Framework_TestCase
+class WeightSpecifiedTest extends TestCase
 {
     public function testInterface()
     {

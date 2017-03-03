@@ -15,8 +15,9 @@ use Domain\{
     Model\Language
 };
 use Innmind\Specification\ComparatorInterface;
+use PHPUnit\Framework\TestCase;
 
-class HttpResourceTest extends \PHPUnit_Framework_TestCase
+class HttpResourceTest extends TestCase
 {
     public function testInterface()
     {

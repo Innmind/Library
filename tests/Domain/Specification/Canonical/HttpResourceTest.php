@@ -15,8 +15,9 @@ use Domain\{
 };
 use Innmind\Specification\ComparatorInterface;
 use Innmind\TimeContinuum\PointInTimeInterface;
+use PHPUnit\Framework\TestCase;
 
-class HttpResourceTest extends \PHPUnit_Framework_TestCase
+class HttpResourceTest extends TestCase
 {
     public function testInterface()
     {

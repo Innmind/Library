@@ -22,8 +22,9 @@ use Innmind\Immutable\{
     Set
 };
 use Ramsey\Uuid\Uuid;
+use PHPUnit\Framework\TestCase;
 
-class CitationRepositoryTest extends \PHPUnit_Framework_TestCase
+class CitationRepositoryTest extends TestCase
 {
     public function testInterface()
     {

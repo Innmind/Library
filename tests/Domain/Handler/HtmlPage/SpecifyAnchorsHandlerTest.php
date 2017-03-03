@@ -17,8 +17,9 @@ use Innmind\Url\{
     QueryInterface
 };
 use Innmind\Immutable\Set;
+use PHPUnit\Framework\TestCase;
 
-class SpecifyAnchorsHandlerTest extends \PHPUnit_Framework_TestCase
+class SpecifyAnchorsHandlerTest extends TestCase
 {
     public function testExecution()
     {

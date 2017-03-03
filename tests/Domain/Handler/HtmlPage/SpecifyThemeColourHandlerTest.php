@@ -16,8 +16,9 @@ use Innmind\Url\{
     QueryInterface
 };
 use Innmind\Colour\RGBA;
+use PHPUnit\Framework\TestCase;
 
-class SpecifyThemeColourHandlerTest extends \PHPUnit_Framework_TestCase
+class SpecifyThemeColourHandlerTest extends TestCase
 {
     public function testExecution()
     {

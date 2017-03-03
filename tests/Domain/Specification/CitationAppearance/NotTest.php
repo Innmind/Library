@@ -13,8 +13,9 @@ use Domain\{
     Entity\HttpResource\IdentityInterface as ResourceIdentity
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
+use PHPUnit\Framework\TestCase;
 
-class NotTest extends \PHPUnit_Framework_TestCase
+class NotTest extends TestCase
 {
     public function testInterface()
     {

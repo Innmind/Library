@@ -14,8 +14,9 @@ use Innmind\Immutable\{
     MapInterface,
     Map
 };
+use PHPUnit\Framework\TestCase;
 
-class WeightTypeTest extends \PHPUnit_Framework_TestCase
+class WeightTypeTest extends TestCase
 {
     public function testInterface()
     {

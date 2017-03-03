@@ -8,8 +8,9 @@ use Domain\{
     Entity\Canonical\IdentityInterface,
     Entity\HttpResource\IdentityInterface as ResourceIdentity
 };
+use PHPUnit\Framework\TestCase;
 
-class MakeCanonicalLinkTest extends \PHPUnit_Framework_TestCase
+class MakeCanonicalLinkTest extends TestCase
 {
     public function testInterface()
     {

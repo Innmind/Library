@@ -12,8 +12,9 @@ use Domain\{
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use Innmind\EventBus\ContainsRecordedEventsInterface;
+use PHPUnit\Framework\TestCase;
 
-class CitationAppearanceTest extends \PHPUnit_Framework_TestCase
+class CitationAppearanceTest extends TestCase
 {
     public function testInstanciation()
     {

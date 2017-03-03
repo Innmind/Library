@@ -14,8 +14,9 @@ use Innmind\Filesystem\{
     Stream\StringStream
 };
 use Ramsey\Uuid\Uuid;
+use PHPUnit\Framework\TestCase;
 
-class StoreDomainEventListenerTest extends \PHPUnit_Framework_TestCase
+class StoreDomainEventListenerTest extends TestCase
 {
     public function testDoesntHandleNonDomainEvent()
     {

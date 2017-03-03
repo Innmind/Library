@@ -25,8 +25,9 @@ use Innmind\Immutable\{
     Map,
     Set
 };
+use PHPUnit\Framework\TestCase;
 
-class ResourceCreatorTest extends \PHPUnit_Framework_TestCase
+class ResourceCreatorTest extends TestCase
 {
     public function testInterface()
     {

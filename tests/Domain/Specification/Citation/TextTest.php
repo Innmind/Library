@@ -14,8 +14,9 @@ use Domain\{
     Entity\Citation\Text as Model
 };
 use Innmind\Specification\ComparatorInterface;
+use PHPUnit\Framework\TestCase;
 
-class TextTest extends \PHPUnit_Framework_TestCase
+class TextTest extends TestCase
 {
     public function testInterface()
     {

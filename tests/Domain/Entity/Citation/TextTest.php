@@ -4,8 +4,9 @@ declare(strict_types = 1);
 namespace Tests\Domain\Entity\Citation;
 
 use Domain\Entity\Citation\Text;
+use PHPUnit\Framework\TestCase;
 
-class TextTest extends \PHPUnit_Framework_TestCase
+class TextTest extends TestCase
 {
     public function testInterface()
     {

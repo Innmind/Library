@@ -31,8 +31,9 @@ use Innmind\Url\{
     QueryInterface
 };
 use Innmind\Immutable\Set;
+use PHPUnit\Framework\TestCase;
 
-class RegisterHtmlPageHandlerTest extends \PHPUnit_Framework_TestCase
+class RegisterHtmlPageHandlerTest extends TestCase
 {
     public function testExecution()
     {

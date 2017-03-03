@@ -12,8 +12,9 @@ use Domain\{
     Entity\Domain\Name,
     Entity\Domain\TopLevelDomain
 };
+use PHPUnit\Framework\TestCase;
 
-class NotTest extends \PHPUnit_Framework_TestCase
+class NotTest extends TestCase
 {
     public function testInterface()
     {

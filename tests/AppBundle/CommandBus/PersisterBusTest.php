@@ -11,8 +11,9 @@ use Innmind\Neo4j\{
     ONM\IdentityInterface,
     DBAL\ConnectionInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class PersisterBusTest extends \PHPUnit_Framework_TestCase
+class PersisterBusTest extends TestCase
 {
     public function testInterface()
     {

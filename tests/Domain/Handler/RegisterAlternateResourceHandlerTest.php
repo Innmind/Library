@@ -21,8 +21,9 @@ use Innmind\Immutable\{
     Set,
     SetInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class RegisterAlternateResourceHandlerTest extends \PHPUnit_Framework_TestCase
+class RegisterAlternateResourceHandlerTest extends TestCase
 {
     public function testExecution()
     {

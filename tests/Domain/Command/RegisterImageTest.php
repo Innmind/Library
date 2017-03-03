@@ -13,8 +13,9 @@ use Innmind\Url\{
     PathInterface,
     QueryInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class RegisterImageTest extends \PHPUnit_Framework_TestCase
+class RegisterImageTest extends TestCase
 {
     public function testInterface()
     {

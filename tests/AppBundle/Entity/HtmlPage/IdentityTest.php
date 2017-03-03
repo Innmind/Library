@@ -10,8 +10,9 @@ use AppBundle\Entity\{
 use Domain\Entity\HtmlPage\IdentityInterface;
 use Innmind\Rest\Server\IdentityInterface as RestIdentity;
 use Ramsey\Uuid\Uuid;
+use PHPUnit\Framework\TestCase;
 
-class IdentityTest extends \PHPUnit_Framework_TestCase
+class IdentityTest extends TestCase
 {
     public function testInterface()
     {

@@ -9,8 +9,9 @@ use Domain\{
     Entity\Citation\IdentityInterface as CitationIdentity,
     Entity\HttpResource\IdentityInterface as ResourceIdentity
 };
+use PHPUnit\Framework\TestCase;
 
-class RegisterAppearanceTest extends \PHPUnit_Framework_TestCase
+class RegisterAppearanceTest extends TestCase
 {
     public function testInterface()
     {

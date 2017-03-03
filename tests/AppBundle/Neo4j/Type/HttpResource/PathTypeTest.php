@@ -13,8 +13,9 @@ use Innmind\Immutable\{
     SetInterface,
     MapInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class PathTypeTest extends \PHPUnit_Framework_TestCase
+class PathTypeTest extends TestCase
 {
     public function testInterface()
     {

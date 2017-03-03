@@ -10,8 +10,9 @@ use Domain\{
     Event\ReferenceCreated
 };
 use Innmind\EventBus\ContainsRecordedEventsInterface;
+use PHPUnit\Framework\TestCase;
 
-class ReferenceTest extends \PHPUnit_Framework_TestCase
+class ReferenceTest extends TestCase
 {
     public function testInstanciation()
     {

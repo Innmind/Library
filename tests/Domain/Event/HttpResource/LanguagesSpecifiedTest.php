@@ -9,8 +9,9 @@ use Domain\{
     Model\Language
 };
 use Innmind\Immutable\Set;
+use PHPUnit\Framework\TestCase;
 
-class LanguagesSpecifiedTest extends \PHPUnit_Framework_TestCase
+class LanguagesSpecifiedTest extends TestCase
 {
     public function testInterface()
     {

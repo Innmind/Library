@@ -14,8 +14,9 @@ use Domain\{
     Entity\HttpResource\IdentityInterface as ResourceIdentity
 };
 use Innmind\Specification\ComparatorInterface;
+use PHPUnit\Framework\TestCase;
 
-class SourceTest extends \PHPUnit_Framework_TestCase
+class SourceTest extends TestCase
 {
     public function testInterface()
     {

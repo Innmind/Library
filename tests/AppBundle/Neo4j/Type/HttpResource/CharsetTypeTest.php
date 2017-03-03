@@ -14,8 +14,9 @@ use Innmind\Immutable\{
     MapInterface,
     Map
 };
+use PHPUnit\Framework\TestCase;
 
-class CharsetTypeTest extends \PHPUnit_Framework_TestCase
+class CharsetTypeTest extends TestCase
 {
     public function testInterface()
     {

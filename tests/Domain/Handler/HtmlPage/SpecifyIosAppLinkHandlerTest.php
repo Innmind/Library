@@ -16,8 +16,9 @@ use Innmind\Url\{
     QueryInterface
 };
 use Innmind\Url\UrlInterface;
+use PHPUnit\Framework\TestCase;
 
-class SpecifyIosAppLinkHandlerTest extends \PHPUnit_Framework_TestCase
+class SpecifyIosAppLinkHandlerTest extends TestCase
 {
     public function testExecution()
     {

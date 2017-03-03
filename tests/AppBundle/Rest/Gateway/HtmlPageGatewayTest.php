@@ -13,8 +13,9 @@ use Domain\Repository\HtmlPageRepositoryInterface;
 use Innmind\Rest\Server\GatewayInterface;
 use Innmind\CommandBus\CommandBusInterface;
 use Innmind\Neo4j\DBAL\ConnectionInterface;
+use PHPUnit\Framework\TestCase;
 
-class HtmlPageGatewayTest extends \PHPUnit_Framework_TestCase
+class HtmlPageGatewayTest extends TestCase
 {
     private $gateway;
     private $creator;

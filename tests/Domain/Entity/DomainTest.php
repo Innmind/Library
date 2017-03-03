@@ -11,8 +11,9 @@ use Domain\{
     Event\DomainRegistered
 };
 use Innmind\EventBus\ContainsRecordedEventsInterface;
+use PHPUnit\Framework\TestCase;
 
-class DomainTest extends \PHPUnit_Framework_TestCase
+class DomainTest extends TestCase
 {
     public function testInstanciation()
     {

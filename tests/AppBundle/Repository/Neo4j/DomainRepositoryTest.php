@@ -23,8 +23,9 @@ use Innmind\Immutable\{
     Set
 };
 use Ramsey\Uuid\Uuid;
+use PHPUnit\Framework\TestCase;
 
-class DomainRepositoryTest extends \PHPUnit_Framework_TestCase
+class DomainRepositoryTest extends TestCase
 {
     public function testInterface()
     {

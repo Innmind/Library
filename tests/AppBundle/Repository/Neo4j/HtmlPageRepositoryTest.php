@@ -25,8 +25,9 @@ use Innmind\Immutable\{
     Set
 };
 use Ramsey\Uuid\Uuid;
+use PHPUnit\Framework\TestCase;
 
-class HtmlPageRepositoryTest extends \PHPUnit_Framework_TestCase
+class HtmlPageRepositoryTest extends TestCase
 {
     public function testInterface()
     {

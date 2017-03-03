@@ -10,8 +10,9 @@ use Domain\{
     Entity\HttpResource\IdentityInterface as ResourceIdentity
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
+use PHPUnit\Framework\TestCase;
 
-class CitationAppearanceRegisteredTest extends \PHPUnit_Framework_TestCase
+class CitationAppearanceRegisteredTest extends TestCase
 {
     public function testInterface()
     {

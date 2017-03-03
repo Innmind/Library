@@ -10,8 +10,9 @@ use Domain\{
     Event\CitationRegistered
 };
 use Innmind\EventBus\ContainsRecordedEventsInterface;
+use PHPUnit\Framework\TestCase;
 
-class CitationTest extends \PHPUnit_Framework_TestCase
+class CitationTest extends TestCase
 {
     public function testInstanciation()
     {

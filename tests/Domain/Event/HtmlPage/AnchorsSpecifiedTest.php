@@ -9,8 +9,9 @@ use Domain\{
     Entity\HtmlPage\Anchor
 };
 use Innmind\Immutable\Set;
+use PHPUnit\Framework\TestCase;
 
-class AnchorsSpecifiedTest extends \PHPUnit_Framework_TestCase
+class AnchorsSpecifiedTest extends TestCase
 {
     public function testInterface()
     {

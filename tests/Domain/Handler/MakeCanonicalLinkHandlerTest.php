@@ -23,8 +23,9 @@ use Innmind\Immutable\{
     Set,
     SetInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class MakeCanonicalLinkHandlerTest extends \PHPUnit_Framework_TestCase
+class MakeCanonicalLinkHandlerTest extends TestCase
 {
     public function testExecution()
     {

@@ -10,8 +10,9 @@ use Domain\{
     Entity\DomainHost\IdentityInterface as RelationIdentity
 };
 use Innmind\Url\Authority\HostInterface;
+use PHPUnit\Framework\TestCase;
 
-class RegisterHostTest extends \PHPUnit_Framework_TestCase
+class RegisterHostTest extends TestCase
 {
     public function testInterface()
     {

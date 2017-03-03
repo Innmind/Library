@@ -9,8 +9,9 @@ use Domain\{
     Entity\Author\IdentityInterface as AuthorIdentity,
     Entity\HttpResource\IdentityInterface as ResourceIdentity
 };
+use PHPUnit\Framework\TestCase;
 
-class RegisterAuthorTest extends \PHPUnit_Framework_TestCase
+class RegisterAuthorTest extends TestCase
 {
     public function testInterface()
     {

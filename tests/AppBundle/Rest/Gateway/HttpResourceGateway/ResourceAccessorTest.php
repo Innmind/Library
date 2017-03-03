@@ -41,8 +41,9 @@ use Innmind\Immutable\{
     Stream
 };
 use Ramsey\Uuid\Uuid;
+use PHPUnit\Framework\TestCase;
 
-class ResourceAccessorTest extends \PHPUnit_Framework_TestCase
+class ResourceAccessorTest extends TestCase
 {
     private $accessor;
     private $repository;

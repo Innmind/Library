@@ -9,8 +9,9 @@ use Domain\{
     Entity\HttpResource\IdentityInterface as ResourceIdentity,
     Model\Language
 };
+use PHPUnit\Framework\TestCase;
 
-class AlternateCreatedTest extends \PHPUnit_Framework_TestCase
+class AlternateCreatedTest extends TestCase
 {
     public function testInterface()
     {

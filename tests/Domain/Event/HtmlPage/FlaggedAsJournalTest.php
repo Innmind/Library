@@ -7,8 +7,9 @@ use Domain\{
     Event\HtmlPage\FlaggedAsJournal,
     Entity\HtmlPage\IdentityInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class FlaggedAsJournalTest extends \PHPUnit_Framework_TestCase
+class FlaggedAsJournalTest extends TestCase
 {
     public function testInterface()
     {

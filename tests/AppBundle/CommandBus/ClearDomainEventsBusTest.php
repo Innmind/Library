@@ -13,8 +13,9 @@ use Innmind\Neo4j\ONM\{
     Entity\Container,
     IdentityInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class ClearDomainEventsBusTest extends \PHPUnit_Framework_TestCase
+class ClearDomainEventsBusTest extends TestCase
 {
     public function testInterface()
     {

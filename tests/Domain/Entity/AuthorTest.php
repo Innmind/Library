@@ -10,8 +10,9 @@ use Domain\{
     Event\AuthorRegistered
 };
 use Innmind\EventBus\ContainsRecordedEventsInterface;
+use PHPUnit\Framework\TestCase;
 
-class AuthorTest extends \PHPUnit_Framework_TestCase
+class AuthorTest extends TestCase
 {
     public function testInstanciation()
     {

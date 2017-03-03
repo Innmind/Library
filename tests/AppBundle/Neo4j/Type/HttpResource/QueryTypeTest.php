@@ -13,8 +13,9 @@ use Innmind\Immutable\{
     SetInterface,
     MapInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class QueryTypeTest extends \PHPUnit_Framework_TestCase
+class QueryTypeTest extends TestCase
 {
     public function testInterface()
     {

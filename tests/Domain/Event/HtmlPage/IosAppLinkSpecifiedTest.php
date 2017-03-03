@@ -8,8 +8,9 @@ use Domain\{
     Entity\HtmlPage\IdentityInterface
 };
 use Innmind\Url\UrlInterface;
+use PHPUnit\Framework\TestCase;
 
-class IosAppLinkSpecifiedTest extends \PHPUnit_Framework_TestCase
+class IosAppLinkSpecifiedTest extends TestCase
 {
     public function testInterface()
     {

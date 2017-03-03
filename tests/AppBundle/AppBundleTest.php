@@ -8,8 +8,9 @@ use AppBundle\{
     DependencyInjection\Compiler\ConfigureONMDataExtractorPass
 };
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\TestCase;
 
-class AppBundleTest extends \PHPUnit_Framework_TestCase
+class AppBundleTest extends TestCase
 {
     public function testBuild()
     {

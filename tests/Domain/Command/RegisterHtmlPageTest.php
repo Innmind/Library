@@ -13,8 +13,9 @@ use Innmind\Url\{
     PathInterface,
     QueryInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class RegisterHtmlPageTest extends \PHPUnit_Framework_TestCase
+class RegisterHtmlPageTest extends TestCase
 {
     public function testInterface()
     {

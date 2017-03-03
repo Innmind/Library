@@ -27,8 +27,9 @@ use Innmind\Immutable\{
     Set,
     SetInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class RegisterHostHandlerTest extends \PHPUnit_Framework_TestCase
+class RegisterHostHandlerTest extends TestCase
 {
     public function testExecution()
     {

@@ -13,8 +13,9 @@ use Innmind\Immutable\{
     SetInterface,
     MapInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class AnchorTypeTest extends \PHPUnit_Framework_TestCase
+class AnchorTypeTest extends TestCase
 {
     public function testInterface()
     {

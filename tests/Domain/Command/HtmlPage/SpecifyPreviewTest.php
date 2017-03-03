@@ -8,8 +8,9 @@ use Domain\{
     Entity\HtmlPage\IdentityInterface
 };
 use Innmind\Url\UrlInterface;
+use PHPUnit\Framework\TestCase;
 
-class SpecifyPreviewTest extends \PHPUnit_Framework_TestCase
+class SpecifyPreviewTest extends TestCase
 {
     public function testInterface()
     {

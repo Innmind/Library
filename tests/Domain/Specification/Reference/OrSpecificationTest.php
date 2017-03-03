@@ -11,8 +11,9 @@ use Domain\{
     Entity\Reference\IdentityInterface,
     Entity\HttpResource\IdentityInterface as ResourceIdentity
 };
+use PHPUnit\Framework\TestCase;
 
-class OrSpecificationTest extends \PHPUnit_Framework_TestCase
+class OrSpecificationTest extends TestCase
 {
     public function testInterface()
     {

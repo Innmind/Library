@@ -27,8 +27,9 @@ use Innmind\Url\{
 };
 use Innmind\Colour\RGBA;
 use Innmind\Immutable\Set;
+use PHPUnit\Framework\TestCase;
 
-class HtmlPageTest extends \PHPUnit_Framework_TestCase
+class HtmlPageTest extends TestCase
 {
     public function testInterface()
     {

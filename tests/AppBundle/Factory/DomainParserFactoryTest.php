@@ -5,8 +5,9 @@ namespace Tests\AppBundle\Factory;
 
 use AppBundle\Factory\DomainParserFactory;
 use Pdp\Parser;
+use PHPUnit\Framework\TestCase;
 
-class DomainParserFactoryTest extends \PHPUnit_Framework_TestCase
+class DomainParserFactoryTest extends TestCase
 {
     public function testMake()
     {

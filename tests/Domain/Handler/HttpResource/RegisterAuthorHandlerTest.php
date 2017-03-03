@@ -17,8 +17,9 @@ use Innmind\TimeContinuum\{
     TimeContinuumInterface,
     PointInTimeInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class RegisterAuthorHandlerTest extends \PHPUnit_Framework_TestCase
+class RegisterAuthorHandlerTest extends TestCase
 {
     public function testExecution()
     {

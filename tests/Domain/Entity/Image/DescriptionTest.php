@@ -4,8 +4,9 @@ declare(strict_types = 1);
 namespace Tests\Domain\Entity\Image;
 
 use Domain\Entity\Image\Description;
+use PHPUnit\Framework\TestCase;
 
-class DescriptionTest extends \PHPUnit_Framework_TestCase
+class DescriptionTest extends TestCase
 {
     public function testInterface()
     {

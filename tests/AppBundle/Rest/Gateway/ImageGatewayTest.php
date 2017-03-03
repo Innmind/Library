@@ -12,8 +12,9 @@ use Domain\Repository\ImageRepositoryInterface;
 use Innmind\Rest\Server\GatewayInterface;
 use Innmind\CommandBus\CommandBusInterface;
 use Innmind\Neo4j\DBAL\ConnectionInterface;
+use PHPUnit\Framework\TestCase;
 
-class ImageGatewayTest extends \PHPUnit_Framework_TestCase
+class ImageGatewayTest extends TestCase
 {
     private $gateway;
     private $creator;

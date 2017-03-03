@@ -8,8 +8,9 @@ use Domain\{
     Entity\Image\IdentityInterface,
     Entity\Image\Description
 };
+use PHPUnit\Framework\TestCase;
 
-class AddDescriptionTest extends \PHPUnit_Framework_TestCase
+class AddDescriptionTest extends TestCase
 {
     public function testInterface()
     {

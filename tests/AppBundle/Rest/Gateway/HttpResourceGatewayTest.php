@@ -13,8 +13,9 @@ use Domain\Repository\HttpResourceRepositoryInterface;
 use Innmind\Rest\Server\GatewayInterface;
 use Innmind\CommandBus\CommandBusInterface;
 use Innmind\Neo4j\DBAL\ConnectionInterface;
+use PHPUnit\Framework\TestCase;
 
-class HttpResourceGatewayTest extends \PHPUnit_Framework_TestCase
+class HttpResourceGatewayTest extends TestCase
 {
     private $gateway;
     private $creator;

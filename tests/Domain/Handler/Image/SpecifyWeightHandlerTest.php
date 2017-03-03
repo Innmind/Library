@@ -16,8 +16,9 @@ use Innmind\Url\{
     PathInterface,
     QueryInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class SpecifyWeightHandlerTest extends \PHPUnit_Framework_TestCase
+class SpecifyWeightHandlerTest extends TestCase
 {
     public function testExecution()
     {

@@ -7,8 +7,9 @@ use AppBundle\{
     Factory\ExceptionListenerFactory,
     EventListener\ExceptionListener
 };
+use PHPUnit\Framework\TestCase;
 
-class ExceptionListenerFactoryTest extends \PHPUnit_Framework_TestCase
+class ExceptionListenerFactoryTest extends TestCase
 {
     public function testMake()
     {

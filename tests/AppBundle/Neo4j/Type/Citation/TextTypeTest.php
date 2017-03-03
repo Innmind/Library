@@ -13,8 +13,9 @@ use Innmind\Immutable\{
     SetInterface,
     MapInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class TextTypeTest extends \PHPUnit_Framework_TestCase
+class TextTypeTest extends TestCase
 {
     public function testInterface()
     {

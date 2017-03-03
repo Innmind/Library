@@ -25,8 +25,9 @@ use Pdp\{
     Parser,
     PublicSuffixListManager
 };
+use PHPUnit\Framework\TestCase;
 
-class RegisterDomainHandlerTest extends \PHPUnit_Framework_TestCase
+class RegisterDomainHandlerTest extends TestCase
 {
     public function testCreateDomain()
     {

@@ -8,8 +8,9 @@ use Domain\{
     Entity\Image\IdentityInterface,
     Entity\Image\Dimension
 };
+use PHPUnit\Framework\TestCase;
 
-class DimensionSpecifiedTest extends \PHPUnit_Framework_TestCase
+class DimensionSpecifiedTest extends TestCase
 {
     public function testInterface()
     {

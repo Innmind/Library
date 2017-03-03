@@ -17,8 +17,9 @@ use Innmind\Url\{
     QueryInterface
 };
 use Innmind\Immutable\Set;
+use PHPUnit\Framework\TestCase;
 
-class SpecifyLanguagesHandlerTest extends \PHPunit_Framework_TestCase
+class SpecifyLanguagesHandlerTest extends TestCase
 {
     public function testExecution()
     {

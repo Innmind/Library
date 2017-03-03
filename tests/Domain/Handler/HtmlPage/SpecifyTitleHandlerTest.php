@@ -15,8 +15,9 @@ use Innmind\Url\{
     PathInterface,
     QueryInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class SpecifyTitleHandlerTest extends \PHPUnit_Framework_TestCase
+class SpecifyTitleHandlerTest extends TestCase
 {
     public function testExecution()
     {

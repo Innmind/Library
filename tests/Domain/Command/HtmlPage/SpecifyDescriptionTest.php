@@ -7,8 +7,9 @@ use Domain\{
     Command\HtmlPage\SpecifyDescription,
     Entity\HtmlPage\IdentityInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class SpecifyDescriptionTest extends \PHPUnit_Framework_TestCase
+class SpecifyDescriptionTest extends TestCase
 {
     public function testInterface()
     {

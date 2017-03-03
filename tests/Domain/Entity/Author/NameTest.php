@@ -4,8 +4,9 @@ declare(strict_types = 1);
 namespace Tests\Domain\Entity\Author;
 
 use Domain\Entity\Author\Name;
+use PHPUnit\Framework\TestCase;
 
-class NameTest extends \PHPUnit_Framework_TestCase
+class NameTest extends TestCase
 {
     public function testInterface()
     {

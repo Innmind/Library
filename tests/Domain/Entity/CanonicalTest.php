@@ -11,8 +11,9 @@ use Domain\{
 };
 use Innmind\EventBus\ContainsRecordedEventsInterface;
 use Innmind\TimeContinuum\PointInTimeInterface;
+use PHPUnit\Framework\TestCase;
 
-class CanonicalTest extends \PHPUnit_Framework_TestCase
+class CanonicalTest extends TestCase
 {
     public function testInstanciation()
     {

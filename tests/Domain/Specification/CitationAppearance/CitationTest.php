@@ -16,8 +16,9 @@ use Domain\{
 };
 use Innmind\Specification\ComparatorInterface;
 use Innmind\TimeContinuum\PointInTimeInterface;
+use PHPUnit\Framework\TestCase;
 
-class CitationTest extends \PHPUnit_Framework_TestCase
+class CitationTest extends TestCase
 {
     public function testInterface()
     {

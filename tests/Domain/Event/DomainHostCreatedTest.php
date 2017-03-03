@@ -8,8 +8,9 @@ use Domain\{
     Entity\Host\IdentityInterface as HostIdentity
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
+use PHPUnit\Framework\TestCase;
 
-class DomainHostCreatedTest extends \PHPUnit_Framework_TestCase
+class DomainHostCreatedTest extends TestCase
 {
     public function testInterface()
     {

@@ -8,8 +8,9 @@ use Domain\{
     Entity\Domain\IdentityInterface
 };
 use Innmind\Url\Authority\HostInterface;
+use PHPUnit\Framework\TestCase;
 
-class RegisterDomainTest extends \PHPUnit_Framework_TestCase
+class RegisterDomainTest extends TestCase
 {
     public function testInterface()
     {

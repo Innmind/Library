@@ -4,8 +4,9 @@ declare(strict_types = 1);
 namespace Tests\Domain\Entity\Domain;
 
 use Domain\Entity\Domain\TopLevelDomain;
+use PHPUnit\Framework\TestCase;
 
-class TopLevelDomainTest extends \PHPUnit_Framework_TestCase
+class TopLevelDomainTest extends TestCase
 {
     public function testInterface()
     {

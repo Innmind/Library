@@ -4,8 +4,9 @@ declare(strict_types = 1);
 namespace Tests\Domain\Entity\HttpResource;
 
 use Domain\Entity\HttpResource\Charset;
+use PHPUnit\Framework\TestCase;
 
-class CharsetTest extends \PHPUnit_Framework_TestCase
+class CharsetTest extends TestCase
 {
     /**
      * @dataProvider valid

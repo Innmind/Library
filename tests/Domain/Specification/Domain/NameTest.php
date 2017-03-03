@@ -15,8 +15,9 @@ use Domain\{
     Entity\Domain\TopLevelDomain
 };
 use Innmind\Specification\ComparatorInterface;
+use PHPUnit\Framework\TestCase;
 
-class NameTest extends \PHPUnit_Framework_TestCase
+class NameTest extends TestCase
 {
     public function testInterface()
     {

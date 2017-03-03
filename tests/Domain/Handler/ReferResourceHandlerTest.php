@@ -19,8 +19,9 @@ use Innmind\Immutable\{
     Set,
     SetInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class ReferResourceHandlerTest extends \PHPUnit_Framework_TestCase
+class ReferResourceHandlerTest extends TestCase
 {
     public function testExecution()
     {

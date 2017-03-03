@@ -7,8 +7,9 @@ use Domain\{
     Event\HtmlPage\MainContentSpecified,
     Entity\HtmlPage\IdentityInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class MainContentSpecifiedTest extends \PHPUnit_Framework_TestCase
+class MainContentSpecifiedTest extends TestCase
 {
     public function testInterface()
     {

@@ -13,8 +13,9 @@ use Innmind\Immutable\{
     SetInterface,
     MapInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class DescriptionTypeTest extends \PHPUnit_Framework_TestCase
+class DescriptionTypeTest extends TestCase
 {
     public function testInterface()
     {

@@ -14,8 +14,9 @@ use Innmind\Immutable\{
     MapInterface,
     Map
 };
+use PHPUnit\Framework\TestCase;
 
-class UrlTypeTest extends \PHPUnit_Framework_TestCase
+class UrlTypeTest extends TestCase
 {
     public function testInterface()
     {

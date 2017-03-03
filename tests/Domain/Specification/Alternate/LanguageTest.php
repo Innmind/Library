@@ -15,8 +15,9 @@ use Domain\{
     Model\Language as Model
 };
 use Innmind\Specification\ComparatorInterface;
+use PHPUnit\Framework\TestCase;
 
-class LanguageTest extends \PHPUnit_Framework_TestCase
+class LanguageTest extends TestCase
 {
     public function testInterface()
     {

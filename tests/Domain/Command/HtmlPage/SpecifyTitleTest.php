@@ -7,8 +7,9 @@ use Domain\{
     Command\HtmlPage\SpecifyTitle,
     Entity\HtmlPage\IdentityInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class SpecifyTitleTest extends \PHPUnit_Framework_TestCase
+class SpecifyTitleTest extends TestCase
 {
     public function testInterface()
     {

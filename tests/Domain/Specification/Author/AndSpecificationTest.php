@@ -11,8 +11,9 @@ use Domain\{
     Entity\Author\IdentityInterface,
     Entity\Author\Name
 };
+use PHPUnit\Framework\TestCase;
 
-class AndSpecificationTest extends \PHPUnit_Framework_TestCase
+class AndSpecificationTest extends TestCase
 {
     public function testInterface()
     {
