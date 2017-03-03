@@ -16,6 +16,7 @@ use Domain\{
     Event\HtmlPage\TitleSpecified,
     Event\HtmlPage\AndroidAppLinkSpecified,
     Event\HtmlPage\IosAppLinkSpecified,
+    Event\HtmlPage\PreviewSpecified,
     Exception\InvalidArgumentException
 };
 use Innmind\Url\{
@@ -39,6 +40,7 @@ final class HtmlPage extends HttpResource
     private $title = '';
     private $android;
     private $ios;
+    private $preview;
 
     public function __construct(
         ResourceIdentity $identity,
@@ -188,5 +190,23 @@ final class HtmlPage extends HttpResource
     public function iosAppLink(): UrlInterface
     {
         return $this->ios;
+    }
+
+    public function usePreview(UrlInterface $preview): self
+    {
+        $this->preview = $preview;
+        $this->record(new PreviewSpecified($this->identity(), $preview));
+
+        return $this;
+    }
+
+    public function hasPreview(): bool
+    {
+        return $this->preview instanceof UrlInterface;
+    }
+
+    public function preview(): UrlInterface
+    {
+        return $this->preview;
     }
 }

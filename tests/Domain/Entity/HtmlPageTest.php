@@ -17,7 +17,8 @@ use Domain\{
     Event\HtmlPage\ThemeColourSpecified,
     Event\HtmlPage\TitleSpecified,
     Event\HtmlPage\AndroidAppLinkSpecified,
-    Event\HtmlPage\IosAppLinkSpecified
+    Event\HtmlPage\IosAppLinkSpecified,
+    Event\HtmlPage\PreviewSpecified
 };
 use Innmind\Url\{
     PathInterface,
@@ -333,6 +334,36 @@ class HtmlPageTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertSame(
             $htmlPage->iosAppLink(),
+            $htmlPage->recordedEvents()->current()->url()
+        );
+    }
+
+    public function testUsePreview()
+    {
+        $htmlPage = new HtmlPage(
+            $this->createMock(IdentityInterface::class),
+            $this->createMock(PathInterface::class),
+            $this->createMock(QueryInterface::class)
+        );
+
+        $this->assertFalse($htmlPage->hasPreview());
+        $this->assertSame(
+            $htmlPage,
+            $htmlPage->usePreview($url = $this->createMock(UrlInterface::class))
+        );
+        $this->assertTrue($htmlPage->hasPreview());
+        $this->assertSame($url, $htmlPage->preview());
+        $this->assertCount(1, $htmlPage->recordedEvents());
+        $this->assertInstanceOf(
+            PreviewSpecified::class,
+            $htmlPage->recordedEvents()->current()
+        );
+        $this->assertSame(
+            $htmlPage->identity(),
+            $htmlPage->recordedEvents()->current()->identity()
+        );
+        $this->assertSame(
+            $htmlPage->preview(),
             $htmlPage->recordedEvents()->current()->url()
         );
     }
