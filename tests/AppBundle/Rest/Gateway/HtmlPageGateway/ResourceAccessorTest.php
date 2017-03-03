@@ -90,7 +90,7 @@ class ResourceAccessorTest extends TestCase
             ->expects($this->once())
             ->method('execute')
             ->with($this->callback(function(QueryInterface $query) use ($uuid): bool {
-                return $query->cypher() === 'MATCH (host:Web:Host)-[:RESOURCE_OF_HOST]-(resource:Web:Resource) WHERE resource.identity = {identity} WITH host, resource MATCH (author:Person:Author)-[:AUTHOR_OF_RESOURCE]-(resource) WITH host, resource, author MATCH (citation:Citation)-[:CITED_IN_RESOURCE]-(resource) RETURN host, author, collect(citation.text) as citations' &&
+                return $query->cypher() === 'MATCH (host:Web:Host)-[:RESOURCE_OF_HOST]-(resource:Web:Resource) WHERE resource.identity = {identity} WITH host, resource OPTIONAL MATCH (author:Person:Author)-[:AUTHOR_OF_RESOURCE]-(resource) WITH host, resource, author OPTIONAL MATCH (citation:Citation)-[:CITED_IN_RESOURCE]-(resource) RETURN host, author, collect(citation.text) as citations' &&
                     $query->parameters()->count() === 1 &&
                     $query->parameters()->current()->key() === 'identity' &&
                     $query->parameters()->current()->value() === $uuid;
