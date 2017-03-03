@@ -4,7 +4,10 @@ declare(strict_types = 1);
 namespace Tests\AppBundle\Neo4j\Type\HttpResource;
 
 use AppBundle\Neo4j\Type\HttpResource\QueryType;
-use Innmind\Url\Query;
+use Innmind\Url\{
+    Query,
+    NullQuery
+};
 use Innmind\Neo4j\ONM\{
     TypeInterface,
     Types
@@ -63,6 +66,14 @@ class QueryTypeTest extends TestCase
         $this->assertInstanceOf(
             Query::class,
             (new QueryType)->fromDatabase('foo')
+        );
+        $this->assertInstanceOf(
+            NullQuery::class,
+            (new QueryType)->fromDatabase('')
+        );
+        $this->assertInstanceOf(
+            NullQuery::class,
+            (new QueryType)->fromDatabase(null)
         );
         $this->assertSame(
             'foo',

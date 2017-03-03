@@ -3,7 +3,10 @@ declare(strict_types = 1);
 
 namespace AppBundle\Neo4j\Type\HttpResource;
 
-use Innmind\Url\Query;
+use Innmind\Url\{
+    Query,
+    NullQuery
+};
 use Innmind\Neo4j\ONM\{
     TypeInterface,
     Types
@@ -39,7 +42,9 @@ final class QueryType implements TypeInterface
      */
     public function fromDatabase($value)
     {
-        return new Query((string) $value);
+        $value = (string) $value;
+
+        return empty($value) ? new NullQuery : new Query($value);
     }
 
     /**
