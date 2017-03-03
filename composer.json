@@ -59,7 +59,7 @@
         "post-update-cmd": [
             "@symfony-scripts"
         ],
-        "test" : "bin/simple-phpunit"
+        "test" : "bin/phpunit --colors=always"
     },
     "extra": {
         "symfony-app-dir": "app",
