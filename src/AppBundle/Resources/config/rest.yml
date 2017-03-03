@@ -137,6 +137,10 @@ web:
                     type: string
                     access: [READ, CREATE]
                     optional: true
+                preview:
+                    type: string
+                    access: [READ, CREATE]
+                    optional: true
                 is_journal:
                     type: boolean
                     access: [CREATE]

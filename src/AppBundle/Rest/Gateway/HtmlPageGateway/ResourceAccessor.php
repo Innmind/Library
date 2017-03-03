@@ -181,6 +181,13 @@ final class ResourceAccessor implements ResourceAccessorInterface
             );
         }
 
+        if ($resource->hasPreview()) {
+            $properties = $properties->put(
+                'preview',
+                new Property('preview', (string) $resource->preview())
+            );
+        }
+
         return new HttpResource($definition, $properties);
     }
 }

@@ -19,6 +19,7 @@ use Domain\Command\{
     HtmlPage\SpecifyMainContent,
     HtmlPage\SpecifyThemeColour,
     HtmlPage\SpecifyTitle,
+    HtmlPage\SpecifyPreview,
     RegisterAuthor,
     RegisterCitation,
     Citation\RegisterAppearance
@@ -177,6 +178,13 @@ class ResourceCreatorTest extends \PHPUnit_Framework_TestCase
                 return $command instanceof SpecifyTitle &&
                     $command->title() === 'some title';
             }));
+        $bus
+            ->expects($this->at(17))
+            ->method('handle')
+            ->with($this->callback(function($command) {
+                return $command instanceof SpecifyPreview &&
+                    (string) $command->url() === 'http://some.photo/url';
+            }));
         $definition = new Definition(
             'html_page',
             new Identity('identity'),
@@ -318,6 +326,16 @@ class ResourceCreatorTest extends \PHPUnit_Framework_TestCase
             ->method('property')
             ->with('title')
             ->willReturn(new Property('title', 'some title'));
+        $resource
+            ->expects($this->at(26))
+            ->method('has')
+            ->with('preview')
+            ->willReturn(true);
+        $resource
+            ->expects($this->at(27))
+            ->method('property')
+            ->with('preview')
+            ->willReturn(new Property('preview', 'http://some.photo/url'));
 
         $identity = $creator($definition, $resource);
 

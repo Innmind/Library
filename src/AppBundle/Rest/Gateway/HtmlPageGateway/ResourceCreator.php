@@ -28,6 +28,7 @@ use Domain\{
     Command\HtmlPage\SpecifyMainContent,
     Command\HtmlPage\SpecifyThemeColour,
     Command\HtmlPage\SpecifyTitle,
+    Command\HtmlPage\SpecifyPreview,
     Command\HttpResource\SpecifyCharset,
     Command\HttpResource\SpecifyLanguages,
     Command\HttpResource\RegisterAuthor as RegisterResourceAuthor,
@@ -86,6 +87,7 @@ final class ResourceCreator implements ResourceCreatorInterface
         $this->specifyMainContent($resource, $identity);
         $this->specifyThemeColour($resource, $identity);
         $this->specifyTitle($resource, $identity);
+        $this->specifyPreview($resource, $identity);
 
         return $identity;
     }
@@ -381,6 +383,24 @@ final class ResourceCreator implements ResourceCreatorInterface
             new SpecifyTitle(
                 $identity,
                 $resource->property('title')->value()
+            )
+        );
+    }
+
+    private function specifyPreview(
+        HttpResourceInterface $resource,
+        Identity $identity
+    ): void {
+        if (!$resource->has('preview')) {
+            return;
+        }
+
+        $this->commandBus->handle(
+            new SpecifyPreview(
+                $identity,
+                Url::fromString(
+                    $resource->property('preview')->value()
+                )
             )
         );
     }

@@ -136,6 +136,13 @@ services:
         tags:
             - { name: innmind_command_bus.handler, handles: Domain\Command\HtmlPage\SpecifyIosAppLink }
 
+    handler.html_page.specify_preview:
+        class: Domain\Handler\HtmlPage\SpecifyPreviewHandler
+        arguments:
+            - '@repository.html_page'
+        tags:
+            - { name: innmind_command_bus.handler, handles: Domain\Command\HtmlPage\SpecifyPreview }
+
     handler.html_page.specify_description:
         class: Domain\Handler\HtmlPage\SpecifyDescriptionHandler
         arguments:

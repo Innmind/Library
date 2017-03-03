@@ -122,6 +122,7 @@ class ResourceAccessorTest extends \PHPUnit_Framework_TestCase
         $page->specifyMainContent('content');
         $page->specifyThemeColour(RGBA::fromString('39f'));
         $page->specifyTitle('title');
+        $page->usePreview(Url::fromString('http://some.photo/url'));
         $definition = new Definition(
             'html_page',
             new IdentityDefinition('identity'),
@@ -255,6 +256,16 @@ class ResourceAccessorTest extends \PHPUnit_Framework_TestCase
                         new Set('string'),
                         false
                     )
+                )
+                ->put(
+                    'preview',
+                    new Property(
+                        'preview',
+                        $this->createMock(TypeInterface::class),
+                        new Access(new Set('string')),
+                        new Set('string'),
+                        false
+                    )
                 ),
             new Map('scalar', 'variable'),
             new Map('scalar', 'variable'),
@@ -304,5 +315,6 @@ class ResourceAccessorTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('title', $resource->property('title')->value());
         $this->assertSame('android://foo/', $resource->property('android_app_link')->value());
         $this->assertSame('ios://foo/', $resource->property('ios_app_link')->value());
+        $this->assertSame('http://some.photo/url', $resource->property('preview')->value());
     }
 }
