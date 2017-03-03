@@ -34,5 +34,8 @@ Domain\Entity\HtmlPage:
         ios:
             type: url
             nullable: true
+        preview:
+            type: url
+            nullable: true
         isJournal:
             type: bool
