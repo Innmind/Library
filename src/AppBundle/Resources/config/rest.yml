@@ -30,6 +30,8 @@ web:
                 actions: [get, create, link, options]
             linkable_to:
                 referrer: web.resource
+            metas:
+                allowed_media_types: ['*/*; q=0.1']
 
         image:
             identity: identity
@@ -66,6 +68,8 @@ web:
                     optional: true
             options:
                 actions: [get, create, options]
+            metas:
+                allowed_media_types: ['image/*; q=1']
 
         html_page:
             identity: identity
@@ -142,3 +146,9 @@ web:
             linkable_to:
                 alternate: web.html_page
                 canonical: web.html_page
+            metas:
+                allowed_media_types:
+                    - 'text/html; q=1'
+                    - 'text/xml; q=1'
+                    - 'application/xml; q=1'
+                    - 'application/xhtml+xml; q=1'
