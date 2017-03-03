@@ -47,6 +47,7 @@ use Innmind\Url\{
     Authority\Host,
     Path,
     Query,
+    NullQuery,
     Url
 };
 use Innmind\Colour\Colour;
@@ -125,13 +126,15 @@ final class ResourceCreator implements ResourceCreatorInterface
         HttpResourceInterface $resource,
         HostIdentity $host
     ): Identity {
+        $query = $resource->property('query')->value();
+
         $this->commandBus->handle(
             new RegisterHtmlPage(
                 $identity = new Identity((string) Uuid::uuid4()),
                 $host,
                 new HostResourceIdentity((string) Uuid::uuid4()),
                 new Path($resource->property('path')->value()),
-                new Query($resource->property('query')->value())
+                empty($query) ? new NullQuery : new Query($query)
             )
         );
 

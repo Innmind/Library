@@ -24,7 +24,8 @@ use Domain\{
 use Innmind\Url\{
     Authority\Host,
     Path,
-    Query
+    Query,
+    NullQuery
 };
 use Innmind\Rest\Server\{
     ResourceCreatorInterface,
@@ -90,13 +91,15 @@ final class ResourceCreator implements ResourceCreatorInterface
         HttpResourceInterface $resource,
         HostIdentity $host
     ): Identity {
+        $query = $resource->property('query')->value();
+
         $this->commandBus->handle(
             new RegisterHttpResource(
                 $identity = new Identity((string) Uuid::uuid4()),
                 $host,
                 new HostResourceIdentity((string) Uuid::uuid4()),
                 new Path($resource->property('path')->value()),
-                new Query($resource->property('query')->value())
+                empty($query) ? new NullQuery : new Query($query)
             )
         );
 

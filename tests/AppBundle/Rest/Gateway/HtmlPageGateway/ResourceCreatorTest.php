@@ -205,13 +205,13 @@ class ResourceCreatorTest extends TestCase
         $resource
             ->expects($this->at(1))
             ->method('property')
-            ->with('path')
-            ->willReturn(new Property('path', 'foo'));
+            ->with('query')
+            ->willReturn(new Property('query', 'bar'));
         $resource
             ->expects($this->at(2))
             ->method('property')
-            ->with('query')
-            ->willReturn(new Property('query', 'bar'));
+            ->with('path')
+            ->willReturn(new Property('path', 'foo'));
         $resource
             ->expects($this->at(3))
             ->method('has')
