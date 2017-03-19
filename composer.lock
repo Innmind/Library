@@ -919,16 +919,16 @@
         },
         {
             "name": "innmind/http",
-            "version": "2.0.0",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Http.git",
-                "reference": "99ba8b4faed0e300a90f2da646162424332cb8a2"
+                "reference": "a389fd85b582b1abe3303d72ebca2ed371618c74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Http/zipball/99ba8b4faed0e300a90f2da646162424332cb8a2",
-                "reference": "99ba8b4faed0e300a90f2da646162424332cb8a2",
+                "url": "https://api.github.com/repos/Innmind/Http/zipball/a389fd85b582b1abe3303d72ebca2ed371618c74",
+                "reference": "a389fd85b582b1abe3303d72ebca2ed371618c74",
                 "shasum": ""
             },
             "require": {
@@ -963,7 +963,7 @@
                 "Value Object",
                 "http"
             ],
-            "time": "2017-02-14 07:08:30"
+            "time": "2017-03-19 16:13:20"
         },
         {
             "name": "innmind/http-transport",
