@@ -5,7 +5,7 @@ namespace AppBundle\Entity\HtmlPage;
 
 use AppBundle\Entity\HttpResource\Identity as HttpResourceIdentity;
 use Domain\Entity\HtmlPage\IdentityInterface;
-use Innmind\Rest\Server\IdentityInterface as RestIdentity;
+use Innmind\Rest\Server\Identity as RestIdentity;
 
 final class Identity extends HttpResourceIdentity implements IdentityInterface, RestIdentity
 {

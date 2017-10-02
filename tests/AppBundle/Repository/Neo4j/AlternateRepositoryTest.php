@@ -15,8 +15,8 @@ use Domain\{
     Model\Language
 };
 use Innmind\Neo4j\ONM\{
-    RepositoryInterface,
-    Exception\EntityNotFoundException
+    Repository,
+    Exception\EntityNotFound
 };
 use Innmind\Immutable\{
     SetInterface,
@@ -32,7 +32,7 @@ class AlternateRepositoryTest extends TestCase
         $this->assertInstanceOf(
             AlternateRepositoryInterface::class,
             new AlternateRepository(
-                $this->createMock(RepositoryInterface::class)
+                $this->createMock(Repository::class)
             )
         );
     }
@@ -40,7 +40,7 @@ class AlternateRepositoryTest extends TestCase
     public function testGet()
     {
         $repository = new AlternateRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -65,7 +65,7 @@ class AlternateRepositoryTest extends TestCase
     public function testThrowWhenGettingUnknownEntity()
     {
         $repository = new AlternateRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -73,7 +73,7 @@ class AlternateRepositoryTest extends TestCase
             ->method('get')
             ->with($identity)
             ->will(
-                $this->throwException(new EntityNotFoundException)
+                $this->throwException(new EntityNotFound)
             );
 
         $repository->get($identity);
@@ -82,7 +82,7 @@ class AlternateRepositoryTest extends TestCase
     public function testAdd()
     {
         $repository = new AlternateRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $entity = new Alternate(
             new Identity((string) Uuid::uuid4()),
@@ -101,7 +101,7 @@ class AlternateRepositoryTest extends TestCase
     public function testRemove()
     {
         $repository = new AlternateRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -127,7 +127,7 @@ class AlternateRepositoryTest extends TestCase
     public function testHas()
     {
         $repository = new AlternateRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -148,7 +148,7 @@ class AlternateRepositoryTest extends TestCase
     public function testCount()
     {
         $repository = new AlternateRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $infra
             ->expects($this->once())
@@ -167,7 +167,7 @@ class AlternateRepositoryTest extends TestCase
     public function testAll()
     {
         $repository = new AlternateRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $infra
             ->expects($this->once())
@@ -193,7 +193,7 @@ class AlternateRepositoryTest extends TestCase
     public function testMatching()
     {
         $repository = new AlternateRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $specification = $this->createMock(SpecificationInterface::class);
         $infra

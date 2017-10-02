@@ -17,8 +17,8 @@ use Innmind\Url\{
     QueryInterface
 };
 use Innmind\Neo4j\ONM\{
-    RepositoryInterface,
-    Exception\EntityNotFoundException
+    Repository,
+    Exception\EntityNotFound
 };
 use Innmind\Immutable\{
     SetInterface,
@@ -34,7 +34,7 @@ class ImageRepositoryTest extends TestCase
         $this->assertInstanceOf(
             ImageRepositoryInterface::class,
             new ImageRepository(
-                $this->createMock(RepositoryInterface::class)
+                $this->createMock(Repository::class)
             )
         );
     }
@@ -42,7 +42,7 @@ class ImageRepositoryTest extends TestCase
     public function testGet()
     {
         $repository = new ImageRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -66,7 +66,7 @@ class ImageRepositoryTest extends TestCase
     public function testThrowWhenGettingUnknownEntity()
     {
         $repository = new ImageRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -74,7 +74,7 @@ class ImageRepositoryTest extends TestCase
             ->method('get')
             ->with($identity)
             ->will(
-                $this->throwException(new EntityNotFoundException)
+                $this->throwException(new EntityNotFound)
             );
 
         $repository->get($identity);
@@ -83,7 +83,7 @@ class ImageRepositoryTest extends TestCase
     public function testAdd()
     {
         $repository = new ImageRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $image = new Image(
             new Identity((string) Uuid::uuid4()),
@@ -101,7 +101,7 @@ class ImageRepositoryTest extends TestCase
     public function testRemove()
     {
         $repository = new ImageRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -126,7 +126,7 @@ class ImageRepositoryTest extends TestCase
     public function testHas()
     {
         $repository = new ImageRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -147,7 +147,7 @@ class ImageRepositoryTest extends TestCase
     public function testCount()
     {
         $repository = new ImageRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $infra
             ->expects($this->once())
@@ -166,7 +166,7 @@ class ImageRepositoryTest extends TestCase
     public function testAll()
     {
         $repository = new ImageRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $infra
             ->expects($this->once())
@@ -191,7 +191,7 @@ class ImageRepositoryTest extends TestCase
     public function testMatching()
     {
         $repository = new ImageRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $specification = $this->createMock(SpecificationInterface::class);
         $infra

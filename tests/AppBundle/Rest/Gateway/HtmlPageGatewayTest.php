@@ -10,9 +10,9 @@ use AppBundle\Rest\Gateway\{
     HtmlPageGateway\ResourceLinker
 };
 use Domain\Repository\HtmlPageRepositoryInterface;
-use Innmind\Rest\Server\GatewayInterface;
+use Innmind\Rest\Server\Gateway;
 use Innmind\CommandBus\CommandBusInterface;
-use Innmind\Neo4j\DBAL\ConnectionInterface;
+use Innmind\Neo4j\DBAL\Connection;
 use PHPUnit\Framework\TestCase;
 
 class HtmlPageGatewayTest extends TestCase
@@ -30,7 +30,7 @@ class HtmlPageGatewayTest extends TestCase
             ),
             $this->accessor = new ResourceAccessor(
                 $this->createMock(HtmlPageRepositoryInterface::class),
-                $this->createMock(ConnectionInterface::class)
+                $this->createMock(Connection::class)
             ),
             $this->linker = new ResourceLinker(
                 $this->createMock(CommandBusInterface::class)
@@ -41,7 +41,7 @@ class HtmlPageGatewayTest extends TestCase
     public function testInterface()
     {
         $this->assertInstanceOf(
-            GatewayInterface::class,
+            Gateway::class,
             $this->gateway
         );
     }
@@ -52,7 +52,7 @@ class HtmlPageGatewayTest extends TestCase
     }
 
     /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplementedException
+     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
      */
     public function testThrowWhenAccessingResourceListAccessor()
     {
@@ -68,7 +68,7 @@ class HtmlPageGatewayTest extends TestCase
     }
 
     /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplementedException
+     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
      */
     public function testThrowWhenAccessingResourceUpdater()
     {
@@ -76,7 +76,7 @@ class HtmlPageGatewayTest extends TestCase
     }
 
     /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplementedException
+     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
      */
     public function testThrowWhenAccessingResourceRemover()
     {
@@ -92,7 +92,7 @@ class HtmlPageGatewayTest extends TestCase
     }
 
     /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplementedException
+     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
      */
     public function testThrowWhenAccessingResourceUnlinker()
     {

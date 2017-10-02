@@ -5,7 +5,7 @@ namespace AppBundle\Neo4j\Type\HttpResource;
 
 use Domain\Entity\HttpResource\Charset;
 use Innmind\Neo4j\ONM\{
-    TypeInterface,
+    Type,
     Types
 };
 use Innmind\Immutable\{
@@ -14,14 +14,14 @@ use Innmind\Immutable\{
     Set
 };
 
-final class CharsetType implements TypeInterface
+final class CharsetType implements Type
 {
     private static $identifiers;
 
     /**
      * {@inheritdoc}
      */
-    public static function fromConfig(MapInterface $config, Types $types): TypeInterface
+    public static function fromConfig(MapInterface $config, Types $types): Type
     {
         return new self;
     }

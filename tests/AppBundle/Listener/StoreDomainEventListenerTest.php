@@ -9,8 +9,8 @@ use AppBundle\{
 };
 use Domain\Event\HtmlPage\TitleSpecified;
 use Innmind\Filesystem\{
-    AdapterInterface,
-    File,
+    Adapter,
+    File\File,
     Stream\StringStream
 };
 use Ramsey\Uuid\Uuid;
@@ -21,7 +21,7 @@ class StoreDomainEventListenerTest extends TestCase
     public function testDoesntHandleNonDomainEvent()
     {
         $listener = new StoreDomainEventListener(
-            $filesystem = $this->createMock(AdapterInterface::class)
+            $filesystem = $this->createMock(Adapter::class)
         );
         $filesystem
             ->expects($this->never())
@@ -33,7 +33,7 @@ class StoreDomainEventListenerTest extends TestCase
     public function testStoreFirstEvent()
     {
         $listener = new StoreDomainEventListener(
-            $filesystem = $this->createMock(AdapterInterface::class)
+            $filesystem = $this->createMock(Adapter::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $filesystem
@@ -62,7 +62,7 @@ class StoreDomainEventListenerTest extends TestCase
     public function testStoreNewEvent()
     {
         $listener = new StoreDomainEventListener(
-            $filesystem = $this->createMock(AdapterInterface::class)
+            $filesystem = $this->createMock(Adapter::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $filesystem

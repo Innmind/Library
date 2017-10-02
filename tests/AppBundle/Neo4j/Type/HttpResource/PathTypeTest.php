@@ -6,7 +6,7 @@ namespace Tests\AppBundle\Neo4j\Type\HttpResource;
 use AppBundle\Neo4j\Type\HttpResource\PathType;
 use Innmind\Url\Path;
 use Innmind\Neo4j\ONM\{
-    TypeInterface,
+    Type,
     Types
 };
 use Innmind\Immutable\{
@@ -20,7 +20,7 @@ class PathTypeTest extends TestCase
     public function testInterface()
     {
         $this->assertInstanceOf(
-            TypeInterface::class,
+            Type::class,
             new PathType
         );
     }

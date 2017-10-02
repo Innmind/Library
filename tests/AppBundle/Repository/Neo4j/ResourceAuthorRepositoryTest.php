@@ -15,8 +15,8 @@ use Domain\{
     Specification\ResourceAuthor\SpecificationInterface
 };
 use Innmind\Neo4j\ONM\{
-    RepositoryInterface,
-    Exception\EntityNotFoundException
+    Repository,
+    Exception\EntityNotFound
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use Innmind\Immutable\{
@@ -33,7 +33,7 @@ class ResourceAuthorRepositoryTest extends TestCase
         $this->assertInstanceOf(
             ResourceAuthorRepositoryInterface::class,
             new ResourceAuthorRepository(
-                $this->createMock(RepositoryInterface::class)
+                $this->createMock(Repository::class)
             )
         );
     }
@@ -41,7 +41,7 @@ class ResourceAuthorRepositoryTest extends TestCase
     public function testGet()
     {
         $repository = new ResourceAuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -66,7 +66,7 @@ class ResourceAuthorRepositoryTest extends TestCase
     public function testThrowWhenGettingUnknownEntity()
     {
         $repository = new ResourceAuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -74,7 +74,7 @@ class ResourceAuthorRepositoryTest extends TestCase
             ->method('get')
             ->with($identity)
             ->will(
-                $this->throwException(new EntityNotFoundException)
+                $this->throwException(new EntityNotFound)
             );
 
         $repository->get($identity);
@@ -83,7 +83,7 @@ class ResourceAuthorRepositoryTest extends TestCase
     public function testAdd()
     {
         $repository = new ResourceAuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $entity = new ResourceAuthor(
             new Identity((string) Uuid::uuid4()),
@@ -102,7 +102,7 @@ class ResourceAuthorRepositoryTest extends TestCase
     public function testRemove()
     {
         $repository = new ResourceAuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -128,7 +128,7 @@ class ResourceAuthorRepositoryTest extends TestCase
     public function testHas()
     {
         $repository = new ResourceAuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -149,7 +149,7 @@ class ResourceAuthorRepositoryTest extends TestCase
     public function testCount()
     {
         $repository = new ResourceAuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $infra
             ->expects($this->once())
@@ -168,7 +168,7 @@ class ResourceAuthorRepositoryTest extends TestCase
     public function testAll()
     {
         $repository = new ResourceAuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $infra
             ->expects($this->once())
@@ -194,7 +194,7 @@ class ResourceAuthorRepositoryTest extends TestCase
     public function testMatching()
     {
         $repository = new ResourceAuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $specification = $this->createMock(SpecificationInterface::class);
         $infra

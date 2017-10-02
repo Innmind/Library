@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace AppBundle\CommandBus;
 
 use Innmind\CommandBus\CommandBusInterface;
-use Innmind\Neo4j\ONM\ManagerInterface;
+use Innmind\Neo4j\ONM\Manager;
 
 final class PersisterBus implements CommandBusInterface
 {
@@ -13,7 +13,7 @@ final class PersisterBus implements CommandBusInterface
 
     public function __construct(
         CommandBusInterface $commandBus,
-        ManagerInterface $manager
+        Manager $manager
     ) {
         $this->commandBus = $commandBus;
         $this->manager = $manager;

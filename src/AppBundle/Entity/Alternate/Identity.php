@@ -5,7 +5,7 @@ namespace AppBundle\Entity\Alternate;
 
 use Domain\Entity\Alternate\IdentityInterface;
 use Innmind\Neo4j\ONM\Identity\Uuid;
-use Innmind\Rest\Server\IdentityInterface as RestIdentity;
+use Innmind\Rest\Server\Identity as RestIdentity;
 
 final class Identity extends Uuid implements IdentityInterface, RestIdentity
 {

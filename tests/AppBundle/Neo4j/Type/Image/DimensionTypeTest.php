@@ -6,7 +6,7 @@ namespace Tests\AppBundle\Neo4j\Type\Image;
 use AppBundle\Neo4j\Type\Image\DimensionType;
 use Domain\Entity\Image\Dimension;
 use Innmind\Neo4j\ONM\{
-    TypeInterface,
+    Type,
     Types
 };
 use Innmind\Immutable\{
@@ -21,7 +21,7 @@ class DimensionTypeTest extends TestCase
     public function testInterface()
     {
         $this->assertInstanceOf(
-            TypeInterface::class,
+            Type::class,
             new DimensionType
         );
     }

@@ -5,7 +5,7 @@ namespace AppBundle\Neo4j\Type\Image;
 
 use Domain\Entity\Image\Weight;
 use Innmind\Neo4j\ONM\{
-    TypeInterface,
+    Type,
     Types
 };
 use Innmind\Immutable\{
@@ -14,14 +14,14 @@ use Innmind\Immutable\{
     Set
 };
 
-final class WeightType implements TypeInterface
+final class WeightType implements Type
 {
     private static $identifiers;
 
     /**
      * {@inheritdoc}
      */
-    public static function fromConfig(MapInterface $config, Types $types): TypeInterface
+    public static function fromConfig(MapInterface $config, Types $types): Type
     {
         return new self;
     }

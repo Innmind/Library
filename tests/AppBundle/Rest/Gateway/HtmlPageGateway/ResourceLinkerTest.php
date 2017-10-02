@@ -17,14 +17,13 @@ use Domain\{
     Exception\CanonicalAlreadyExistException
 };
 use Innmind\Rest\Server\{
-    ResourceLinkerInterface,
+    ResourceLinker as ResourceLinkerInterface,
     Definition\HttpResource,
     Definition\Identity,
     Definition\Gateway,
     Definition\Property,
-    IdentityInterface,
+    Identity as IdentityInterface,
     Reference,
-    Link\ParameterInterface,
     Link\Parameter
 };
 use Innmind\CommandBus\CommandBusInterface;
@@ -49,7 +48,7 @@ class ResourceLinkerTest extends TestCase
     }
 
     /**
-     * @expectedException Innmind\Http\Exception\Http\BadRequestException
+     * @expectedException Innmind\Http\Exception\Http\BadRequest
      */
     public function testThrowWhenInvalidDefinition()
     {
@@ -81,7 +80,7 @@ class ResourceLinkerTest extends TestCase
                         $def2,
                         $this->createMock(IdentityInterface::class)
                     ),
-                    new Map('string', ParameterInterface::class)
+                    new Map('string', Parameter::class)
                 )
         );
     }
@@ -135,22 +134,22 @@ class ResourceLinkerTest extends TestCase
                 (new Map(Reference::class, MapInterface::class))
                     ->put(
                         new Reference($def, $to),
-                        (new Map('string', ParameterInterface::class))
+                        (new Map('string', Parameter::class))
                             ->put(
                                 'rel',
-                                new Parameter('rel', 'alternate')
+                                new Parameter\Parameter('rel', 'alternate')
                             )
                             ->put(
                                 'language',
-                                new Parameter('language', 'fr-CA')
+                                new Parameter\Parameter('language', 'fr-CA')
                             )
                     )
                     ->put(
                         new Reference($def, $to),
-                        (new Map('string', ParameterInterface::class))
+                        (new Map('string', Parameter::class))
                             ->put(
                                 'rel',
-                                new Parameter('rel', 'canonical')
+                                new Parameter\Parameter('rel', 'canonical')
                             )
                     )
             )
@@ -204,14 +203,14 @@ class ResourceLinkerTest extends TestCase
                 (new Map(Reference::class, MapInterface::class))
                     ->put(
                         new Reference($def, $to),
-                        (new Map('string', ParameterInterface::class))
+                        (new Map('string', Parameter::class))
                             ->put(
                                 'rel',
-                                new Parameter('rel', 'alternate')
+                                new Parameter\Parameter('rel', 'alternate')
                             )
                             ->put(
                                 'language',
-                                new Parameter('language', 'fr')
+                                new Parameter\Parameter('language', 'fr')
                             )
                     )
             )
@@ -265,10 +264,10 @@ class ResourceLinkerTest extends TestCase
                 (new Map(Reference::class, MapInterface::class))
                     ->put(
                         new Reference($def, $to),
-                        (new Map('string', ParameterInterface::class))
+                        (new Map('string', Parameter::class))
                             ->put(
                                 'rel',
-                                new Parameter('rel', 'canonical')
+                                new Parameter\Parameter('rel', 'canonical')
                             )
                     )
             )

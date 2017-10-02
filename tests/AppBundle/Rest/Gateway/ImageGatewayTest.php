@@ -9,9 +9,9 @@ use AppBundle\Rest\Gateway\{
     ImageGateway\ResourceAccessor
 };
 use Domain\Repository\ImageRepositoryInterface;
-use Innmind\Rest\Server\GatewayInterface;
+use Innmind\Rest\Server\Gateway;
 use Innmind\CommandBus\CommandBusInterface;
-use Innmind\Neo4j\DBAL\ConnectionInterface;
+use Innmind\Neo4j\DBAL\Connection;
 use PHPUnit\Framework\TestCase;
 
 class ImageGatewayTest extends TestCase
@@ -28,7 +28,7 @@ class ImageGatewayTest extends TestCase
             ),
             $this->accessor = new ResourceAccessor(
                 $this->createMock(ImageRepositoryInterface::class),
-                $this->createMock(ConnectionInterface::class)
+                $this->createMock(Connection::class)
             )
         );
     }
@@ -36,7 +36,7 @@ class ImageGatewayTest extends TestCase
     public function testInterface()
     {
         $this->assertInstanceOf(
-            GatewayInterface::class,
+            Gateway::class,
             $this->gateway
         );
     }
@@ -47,7 +47,7 @@ class ImageGatewayTest extends TestCase
     }
 
     /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplementedException
+     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
      */
     public function testThrowWhenAccessingResourceListAccessor()
     {
@@ -63,7 +63,7 @@ class ImageGatewayTest extends TestCase
     }
 
     /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplementedException
+     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
      */
     public function testThrowWhenAccessingResourceUpdater()
     {
@@ -71,7 +71,7 @@ class ImageGatewayTest extends TestCase
     }
 
     /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplementedException
+     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
      */
     public function testThrowWhenAccessingResourceRemover()
     {
@@ -79,7 +79,7 @@ class ImageGatewayTest extends TestCase
     }
 
     /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplementedException
+     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
      */
     public function testThrowWhenAccessingResourceLinker()
     {
@@ -87,7 +87,7 @@ class ImageGatewayTest extends TestCase
     }
 
     /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplementedException
+     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
      */
     public function testThrowWhenAccessingResourceUnlinker()
     {

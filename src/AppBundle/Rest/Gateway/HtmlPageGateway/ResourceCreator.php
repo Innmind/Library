@@ -52,10 +52,10 @@ use Innmind\Url\{
 };
 use Innmind\Colour\Colour;
 use Innmind\Rest\Server\{
-    ResourceCreatorInterface,
+    ResourceCreator as ResourceCreatorInterface,
     Definition\HttpResource as ResourceDefinition,
-    HttpResourceInterface,
-    IdentityInterface
+    HttpResource,
+    Identity as IdentityInterface
 };
 use Innmind\CommandBus\CommandBusInterface;
 use Innmind\Immutable\Set;
@@ -72,7 +72,7 @@ final class ResourceCreator implements ResourceCreatorInterface
 
     public function __invoke(
         ResourceDefinition $definition,
-        HttpResourceInterface $resource
+        HttpResource $resource
     ): IdentityInterface {
         $host = $this->registerHost($resource);
         $identity = $this->registerResource($resource, $host);
@@ -93,7 +93,7 @@ final class ResourceCreator implements ResourceCreatorInterface
         return $identity;
     }
 
-    private function registerHost(HttpResourceInterface $resource): HostIdentity
+    private function registerHost(HttpResource $resource): HostIdentity
     {
         try {
             $this->commandBus->handle(
@@ -123,7 +123,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function registerResource(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         HostIdentity $host
     ): Identity {
         $query = $resource->property('query')->value();
@@ -142,7 +142,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function specifyCharset(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         Identity $identity
     ): void {
         if (!$resource->has('charset')) {
@@ -158,7 +158,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function specifyLanguages(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         Identity $identity
     ): void {
         if (!$resource->has('languages')) {
@@ -180,7 +180,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function registerAuthor(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         Identity $identity
     ): void {
         if (!$resource->has('author')) {
@@ -210,7 +210,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function registerCitations(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         Identity $identity
     ): void {
         if (!$resource->has('citations')) {
@@ -248,7 +248,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function flagAsJournal(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         Identity $identity
     ): void {
         if (!$resource->has('is_journal')) {
@@ -263,7 +263,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function specifyAnchors(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         Identity $identity
     ): void {
         if (!$resource->has('anchors')) {
@@ -287,7 +287,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function specifyAndroidAppLink(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         Identity $identity
     ): void {
         if (!$resource->has('android_app_link')) {
@@ -305,7 +305,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function specifyDescription(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         Identity $identity
     ): void {
         if (!$resource->has('description')) {
@@ -321,7 +321,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function specifyIosAppLink(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         Identity $identity
     ): void {
         if (!$resource->has('ios_app_link')) {
@@ -339,7 +339,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function specifyMainContent(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         Identity $identity
     ): void {
         if (!$resource->has('main_content')) {
@@ -355,7 +355,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function specifyThemeColour(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         Identity $identity
     ): void {
         if (!$resource->has('theme_colour')) {
@@ -375,7 +375,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function specifyTitle(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         Identity $identity
     ): void {
         if (!$resource->has('title')) {
@@ -391,7 +391,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function specifyPreview(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         Identity $identity
     ): void {
         if (!$resource->has('preview')) {

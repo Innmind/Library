@@ -9,7 +9,7 @@ use Innmind\Url\{
     NullQuery
 };
 use Innmind\Neo4j\ONM\{
-    TypeInterface,
+    Type,
     Types
 };
 use Innmind\Immutable\{
@@ -23,7 +23,7 @@ class QueryTypeTest extends TestCase
     public function testInterface()
     {
         $this->assertInstanceOf(
-            TypeInterface::class,
+            Type::class,
             new QueryType
         );
     }

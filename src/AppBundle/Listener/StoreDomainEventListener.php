@@ -4,8 +4,8 @@ declare(strict_types = 1);
 namespace AppBundle\Listener;
 
 use Innmind\Filesystem\{
-    AdapterInterface,
-    File,
+    Adapter,
+    File\File,
     Stream\StringStream
 };
 
@@ -13,7 +13,7 @@ final class StoreDomainEventListener
 {
     private $filesystem;
 
-    public function __construct(AdapterInterface $filesystem)
+    public function __construct(Adapter $filesystem)
     {
         $this->filesystem = $filesystem;
     }

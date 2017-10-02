@@ -6,10 +6,10 @@ namespace Tests\AppBundle\CommandBus;
 use AppBundle\CommandBus\PersisterBus;
 use Innmind\CommandBus\CommandBusInterface;
 use Innmind\Neo4j\{
-    ONM\ManagerInterface,
-    ONM\RepositoryInterface,
-    ONM\IdentityInterface,
-    DBAL\ConnectionInterface
+    ONM\Manager,
+    ONM\Repository,
+    ONM\Identity\Generators,
+    DBAL\Connection
 };
 use PHPUnit\Framework\TestCase;
 
@@ -21,7 +21,7 @@ class PersisterBusTest extends TestCase
             CommandBusInterface::class,
             new PersisterBus(
                 $this->createMock(CommandBusInterface::class),
-                $this->createMock(ManagerInterface::class)
+                $this->createMock(Manager::class)
             )
         );
     }
@@ -39,7 +39,7 @@ class PersisterBusTest extends TestCase
 
                 return $innerCommand === $command;
             }));
-        $manager = new class($handled) implements ManagerInterface {
+        $manager = new class($handled) implements Manager {
             private $handled;
             public $persisted = false;
 
@@ -48,15 +48,15 @@ class PersisterBusTest extends TestCase
                 $this->handled = &$handled;
             }
 
-            public function connection(): ConnectionInterface
+            public function connection(): Connection
             {
             }
 
-            public function repository(string $class): RepositoryInterface
+            public function repository(string $class): Repository
             {
             }
 
-            public function flush(): ManagerInterface
+            public function flush(): Manager
             {
                 if ($this->handled) {
                     $this->persisted = true;
@@ -65,7 +65,7 @@ class PersisterBusTest extends TestCase
                 return $this;
             }
 
-            public function new(string $class): IdentityInterface
+            public function identities(): Generators
             {
             }
         };

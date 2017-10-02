@@ -14,8 +14,8 @@ use Domain\{
     Specification\Citation\SpecificationInterface
 };
 use Innmind\Neo4j\ONM\{
-    RepositoryInterface,
-    Exception\EntityNotFoundException
+    Repository,
+    Exception\EntityNotFound
 };
 use Innmind\Immutable\{
     SetInterface,
@@ -31,7 +31,7 @@ class CitationRepositoryTest extends TestCase
         $this->assertInstanceOf(
             CitationRepositoryInterface::class,
             new CitationRepository(
-                $this->createMock(RepositoryInterface::class)
+                $this->createMock(Repository::class)
             )
         );
     }
@@ -39,7 +39,7 @@ class CitationRepositoryTest extends TestCase
     public function testGet()
     {
         $repository = new CitationRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -62,7 +62,7 @@ class CitationRepositoryTest extends TestCase
     public function testThrowWhenGettingUnknownEntity()
     {
         $repository = new CitationRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -70,7 +70,7 @@ class CitationRepositoryTest extends TestCase
             ->method('get')
             ->with($identity)
             ->will(
-                $this->throwException(new EntityNotFoundException)
+                $this->throwException(new EntityNotFound)
             );
 
         $repository->get($identity);
@@ -79,7 +79,7 @@ class CitationRepositoryTest extends TestCase
     public function testAdd()
     {
         $repository = new CitationRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $citation = new Citation(
             new Identity((string) Uuid::uuid4()),
@@ -96,7 +96,7 @@ class CitationRepositoryTest extends TestCase
     public function testRemove()
     {
         $repository = new CitationRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -120,7 +120,7 @@ class CitationRepositoryTest extends TestCase
     public function testHas()
     {
         $repository = new CitationRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -141,7 +141,7 @@ class CitationRepositoryTest extends TestCase
     public function testCount()
     {
         $repository = new CitationRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $infra
             ->expects($this->once())
@@ -160,7 +160,7 @@ class CitationRepositoryTest extends TestCase
     public function testAll()
     {
         $repository = new CitationRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $infra
             ->expects($this->once())
@@ -184,7 +184,7 @@ class CitationRepositoryTest extends TestCase
     public function testMatching()
     {
         $repository = new CitationRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $specification = $this->createMock(SpecificationInterface::class);
         $infra

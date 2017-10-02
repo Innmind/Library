@@ -6,7 +6,7 @@ namespace Tests\AppBundle\Neo4j\Type\HtmlPage;
 use AppBundle\Neo4j\Type\HtmlPage\AnchorType;
 use Domain\Entity\HtmlPage\Anchor;
 use Innmind\Neo4j\ONM\{
-    TypeInterface,
+    Type,
     Types
 };
 use Innmind\Immutable\{
@@ -20,7 +20,7 @@ class AnchorTypeTest extends TestCase
     public function testInterface()
     {
         $this->assertInstanceOf(
-            TypeInterface::class,
+            Type::class,
             new AnchorType
         );
     }

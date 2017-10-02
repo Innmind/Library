@@ -11,8 +11,8 @@ use Domain\{
     Specification\Host\SpecificationInterface
 };
 use Innmind\Neo4j\ONM\{
-    RepositoryInterface,
-    Exception\EntityNotFoundException
+    Repository,
+    Exception\EntityNotFound
 };
 use Innmind\Immutable\{
     SetInterface,
@@ -23,7 +23,7 @@ final class HostRepository implements HostRepositoryInterface
 {
     private $infrastructure;
 
-    public function __construct(RepositoryInterface $infrastructure)
+    public function __construct(Repository $infrastructure)
     {
         $this->infrastructure = $infrastructure;
     }
@@ -35,7 +35,7 @@ final class HostRepository implements HostRepositoryInterface
     {
         try {
             return $this->infrastructure->get($identity);
-        } catch (EntityNotFoundException $e) {
+        } catch (EntityNotFound $e) {
             throw new HostNotFoundException('', 0, $e);
         }
     }

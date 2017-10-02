@@ -6,7 +6,7 @@ namespace Tests\AppBundle\Neo4j\Type\Domain;
 use AppBundle\Neo4j\Type\Domain\TopLevelDomainType;
 use Domain\Entity\Domain\TopLevelDomain;
 use Innmind\Neo4j\ONM\{
-    TypeInterface,
+    Type,
     Types
 };
 use Innmind\Immutable\{
@@ -20,7 +20,7 @@ class TopLevelDomainTypeTest extends TestCase
     public function testInterface()
     {
         $this->assertInstanceOf(
-            TypeInterface::class,
+            Type::class,
             new TopLevelDomainType
         );
     }

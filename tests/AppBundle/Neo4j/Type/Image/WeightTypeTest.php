@@ -6,7 +6,7 @@ namespace Tests\AppBundle\Neo4j\Type\Image;
 use AppBundle\Neo4j\Type\Image\WeightType;
 use Domain\Entity\Image\Weight;
 use Innmind\Neo4j\ONM\{
-    TypeInterface,
+    Type,
     Types
 };
 use Innmind\Immutable\{
@@ -21,7 +21,7 @@ class WeightTypeTest extends TestCase
     public function testInterface()
     {
         $this->assertInstanceOf(
-            TypeInterface::class,
+            Type::class,
             new WeightType
         );
     }

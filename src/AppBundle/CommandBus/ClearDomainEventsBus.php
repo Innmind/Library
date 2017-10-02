@@ -7,7 +7,8 @@ use Innmind\CommandBus\CommandBusInterface;
 use Innmind\EventBus\ContainsRecordedEventsInterface;
 use Innmind\Neo4j\ONM\{
     Entity\Container,
-    IdentityInterface
+    Entity\Container\State,
+    Identity
 };
 
 final class ClearDomainEventsBus implements CommandBusInterface
@@ -28,15 +29,15 @@ final class ClearDomainEventsBus implements CommandBusInterface
         $this->commandBus->handle($command);
         $this
             ->entityContainer
-            ->state(Container::STATE_NEW)
-            ->merge($this->entityContainer->state(Container::STATE_MANAGED))
-            ->merge($this->entityContainer->state(Container::STATE_TO_BE_REMOVED))
-            ->merge($this->entityContainer->state(Container::STATE_REMOVED))
-            ->filter(function(IdentityInterface $identity, $entity): bool {
+            ->state(State::new())
+            ->merge($this->entityContainer->state(State::managed()))
+            ->merge($this->entityContainer->state(State::toBeRemoved()))
+            ->merge($this->entityContainer->state(State::removed()))
+            ->filter(function(Identity $identity, $entity): bool {
                 return $entity instanceof ContainsRecordedEventsInterface;
             })
             ->foreach(function(
-                IdentityInterface $identity,
+                Identity $identity,
                 ContainsRecordedEventsInterface $entity
             ): void {
                 $entity->clearEvents();

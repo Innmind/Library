@@ -9,16 +9,15 @@ use Domain\{
     Entity\Image\Description
 };
 use Innmind\Rest\Server\{
-    ResourceAccessorInterface,
-    IdentityInterface,
-    HttpResourceInterface,
+    ResourceAccessor as ResourceAccessorInterface,
+    Identity as RestIdentity,
     HttpResource,
-    Property,
+    HttpResource\Property,
     Definition\HttpResource as ResourceDefinition
 };
 use Innmind\Neo4j\DBAL\{
-    ConnectionInterface,
-    Query
+    Connection,
+    Query\Query
 };
 use Innmind\Immutable\{
     Map,
@@ -32,7 +31,7 @@ final class ResourceAccessor implements ResourceAccessorInterface
 
     public function __construct(
         ImageRepositoryInterface $repository,
-        ConnectionInterface $dbal
+        Connection $dbal
     ) {
         $this->repository = $repository;
         $this->dbal = $dbal;
@@ -40,8 +39,8 @@ final class ResourceAccessor implements ResourceAccessorInterface
 
     public function __invoke(
         ResourceDefinition $definition,
-        IdentityInterface $identity
-    ): HttpResourceInterface {
+        RestIdentity $identity
+    ): HttpResource {
         $image = $this->repository->get(
             new Identity((string) $identity)
         );
@@ -105,6 +104,6 @@ final class ResourceAccessor implements ResourceAccessorInterface
             );
         }
 
-        return new HttpResource($definition, $properties);
+        return new HttpResource\HttpResource($definition, $properties);
     }
 }

@@ -14,8 +14,8 @@ use Domain\{
     Specification\Author\SpecificationInterface
 };
 use Innmind\Neo4j\ONM\{
-    RepositoryInterface,
-    Exception\EntityNotFoundException
+    Repository,
+    Exception\EntityNotFound
 };
 use Innmind\Immutable\{
     SetInterface,
@@ -31,7 +31,7 @@ class AuthorRepositoryTest extends TestCase
         $this->assertInstanceOf(
             AuthorRepositoryInterface::class,
             new AuthorRepository(
-                $this->createMock(RepositoryInterface::class)
+                $this->createMock(Repository::class)
             )
         );
     }
@@ -39,7 +39,7 @@ class AuthorRepositoryTest extends TestCase
     public function testGet()
     {
         $repository = new AuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -62,7 +62,7 @@ class AuthorRepositoryTest extends TestCase
     public function testThrowWhenGettingUnknownEntity()
     {
         $repository = new AuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -70,7 +70,7 @@ class AuthorRepositoryTest extends TestCase
             ->method('get')
             ->with($identity)
             ->will(
-                $this->throwException(new EntityNotFoundException)
+                $this->throwException(new EntityNotFound)
             );
 
         $repository->get($identity);
@@ -79,7 +79,7 @@ class AuthorRepositoryTest extends TestCase
     public function testAdd()
     {
         $repository = new AuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $author = new Author(
             new Identity((string) Uuid::uuid4()),
@@ -96,7 +96,7 @@ class AuthorRepositoryTest extends TestCase
     public function testRemove()
     {
         $repository = new AuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -120,7 +120,7 @@ class AuthorRepositoryTest extends TestCase
     public function testHas()
     {
         $repository = new AuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $identity = new Identity((string) Uuid::uuid4());
         $infra
@@ -141,7 +141,7 @@ class AuthorRepositoryTest extends TestCase
     public function testCount()
     {
         $repository = new AuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $infra
             ->expects($this->once())
@@ -160,7 +160,7 @@ class AuthorRepositoryTest extends TestCase
     public function testAll()
     {
         $repository = new AuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $infra
             ->expects($this->once())
@@ -184,7 +184,7 @@ class AuthorRepositoryTest extends TestCase
     public function testMatching()
     {
         $repository = new AuthorRepository(
-            $infra = $this->createMock(RepositoryInterface::class)
+            $infra = $this->createMock(Repository::class)
         );
         $specification = $this->createMock(SpecificationInterface::class);
         $infra

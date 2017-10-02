@@ -6,7 +6,7 @@ namespace Tests\AppBundle\Neo4j\Type\Domain;
 use AppBundle\Neo4j\Type\Domain\NameType;
 use Domain\Entity\Domain\Name;
 use Innmind\Neo4j\ONM\{
-    TypeInterface,
+    Type,
     Types
 };
 use Innmind\Immutable\{
@@ -20,7 +20,7 @@ class NameTypeTest extends TestCase
     public function testInterface()
     {
         $this->assertInstanceOf(
-            TypeInterface::class,
+            Type::class,
             new NameType
         );
     }

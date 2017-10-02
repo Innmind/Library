@@ -21,21 +21,21 @@ use Innmind\Url\{
 };
 use Innmind\Colour\RGBA;
 use Innmind\Rest\Server\{
-    ResourceAccessorInterface,
-    Identity as RestIdentity,
-    HttpResource,
+    ResourceAccessor as ResourceAccessorInterface,
+    Identity\Identity as RestIdentity,
+    HttpResource\HttpResource,
     Definition\HttpResource as Definition,
     Definition\Identity as IdentityDefinition,
     Definition\Gateway,
     Definition\Property,
-    Definition\TypeInterface,
+    Definition\Type,
     Definition\Access
 };
 use Innmind\Neo4j\DBAL\{
-    ConnectionInterface,
-    QueryInterface,
-    ResultInterface,
-    Result\RowInterface
+    Connection,
+    Query as DBALQuery,
+    Result,
+    Result\Row
 };
 use Innmind\Immutable\{
     Map,
@@ -56,7 +56,7 @@ class ResourceAccessorTest extends TestCase
     {
         $this->accessor = new ResourceAccessor(
             $this->repository = $this->createMock(HtmlPageRepositoryInterface::class),
-            $this->dbal = $this->createMock(ConnectionInterface::class)
+            $this->dbal = $this->createMock(Connection::class)
         );
     }
 
@@ -89,21 +89,21 @@ class ResourceAccessorTest extends TestCase
             ->dbal
             ->expects($this->once())
             ->method('execute')
-            ->with($this->callback(function(QueryInterface $query) use ($uuid): bool {
+            ->with($this->callback(function(DBALQuery $query) use ($uuid): bool {
                 return $query->cypher() === 'MATCH (host:Web:Host)-[:RESOURCE_OF_HOST]-(resource:Web:Resource) WHERE resource.identity = {identity} WITH host, resource OPTIONAL MATCH (author:Person:Author)-[:AUTHOR_OF_RESOURCE]-(resource) WITH host, resource, author OPTIONAL MATCH (citation:Citation)-[:CITED_IN_RESOURCE]-(resource) RETURN host, author, collect(citation.text) as citations' &&
                     $query->parameters()->count() === 1 &&
                     $query->parameters()->current()->key() === 'identity' &&
                     $query->parameters()->current()->value() === $uuid;
             }))
             ->willReturn(
-                $result = $this->createMock(ResultInterface::class)
+                $result = $this->createMock(Result::class)
             );
         $result
             ->expects($this->exactly(3))
             ->method('rows')
             ->willReturn(
-                (new Stream(RowInterface::class))
-                    ->add($row = $this->createMock(RowInterface::class))
+                (new Stream(Row::class))
+                    ->add($row = $this->createMock(Row::class))
             );
         $row
             ->expects($this->once())
@@ -132,8 +132,8 @@ class ResourceAccessorTest extends TestCase
                     'identity',
                     new Property(
                         'identity',
-                        $this->createMock(TypeInterface::class),
-                        new Access(new Set('string')),
+                        $this->createMock(Type::class),
+                        new Access,
                         new Set('string'),
                         false
                     )
@@ -142,8 +142,8 @@ class ResourceAccessorTest extends TestCase
                     'host',
                     new Property(
                         'host',
-                        $this->createMock(TypeInterface::class),
-                        new Access(new Set('string')),
+                        $this->createMock(Type::class),
+                        new Access,
                         new Set('string'),
                         false
                     )
@@ -152,8 +152,8 @@ class ResourceAccessorTest extends TestCase
                     'path',
                     new Property(
                         'path',
-                        $this->createMock(TypeInterface::class),
-                        new Access(new Set('string')),
+                        $this->createMock(Type::class),
+                        new Access,
                         new Set('string'),
                         false
                     )
@@ -162,8 +162,8 @@ class ResourceAccessorTest extends TestCase
                     'query',
                     new Property(
                         'query',
-                        $this->createMock(TypeInterface::class),
-                        new Access(new Set('string')),
+                        $this->createMock(Type::class),
+                        new Access,
                         new Set('string'),
                         false
                     )
@@ -172,8 +172,8 @@ class ResourceAccessorTest extends TestCase
                     'languages',
                     new Property(
                         'languages',
-                        $this->createMock(TypeInterface::class),
-                        new Access(new Set('string')),
+                        $this->createMock(Type::class),
+                        new Access,
                         new Set('string'),
                         false
                     )
@@ -182,8 +182,8 @@ class ResourceAccessorTest extends TestCase
                     'charset',
                     new Property(
                         'charset',
-                        $this->createMock(TypeInterface::class),
-                        new Access(new Set('string')),
+                        $this->createMock(Type::class),
+                        new Access,
                         new Set('string'),
                         false
                     )
@@ -192,8 +192,8 @@ class ResourceAccessorTest extends TestCase
                     'main_content',
                     new Property(
                         'main_content',
-                        $this->createMock(TypeInterface::class),
-                        new Access(new Set('string')),
+                        $this->createMock(Type::class),
+                        new Access,
                         new Set('string'),
                         false
                     )
@@ -202,8 +202,8 @@ class ResourceAccessorTest extends TestCase
                     'description',
                     new Property(
                         'description',
-                        $this->createMock(TypeInterface::class),
-                        new Access(new Set('string')),
+                        $this->createMock(Type::class),
+                        new Access,
                         new Set('string'),
                         false
                     )
@@ -212,8 +212,8 @@ class ResourceAccessorTest extends TestCase
                     'anchors',
                     new Property(
                         'anchors',
-                        $this->createMock(TypeInterface::class),
-                        new Access(new Set('string')),
+                        $this->createMock(Type::class),
+                        new Access,
                         new Set('string'),
                         false
                     )
@@ -222,8 +222,8 @@ class ResourceAccessorTest extends TestCase
                     'theme_colour',
                     new Property(
                         'theme_colour',
-                        $this->createMock(TypeInterface::class),
-                        new Access(new Set('string')),
+                        $this->createMock(Type::class),
+                        new Access,
                         new Set('string'),
                         false
                     )
@@ -232,8 +232,8 @@ class ResourceAccessorTest extends TestCase
                     'title',
                     new Property(
                         'title',
-                        $this->createMock(TypeInterface::class),
-                        new Access(new Set('string')),
+                        $this->createMock(Type::class),
+                        new Access,
                         new Set('string'),
                         false
                     )
@@ -242,8 +242,8 @@ class ResourceAccessorTest extends TestCase
                     'android_app_link',
                     new Property(
                         'android_app_link',
-                        $this->createMock(TypeInterface::class),
-                        new Access(new Set('string')),
+                        $this->createMock(Type::class),
+                        new Access,
                         new Set('string'),
                         false
                     )
@@ -252,8 +252,8 @@ class ResourceAccessorTest extends TestCase
                     'ios_app_link',
                     new Property(
                         'ios_app_link',
-                        $this->createMock(TypeInterface::class),
-                        new Access(new Set('string')),
+                        $this->createMock(Type::class),
+                        new Access,
                         new Set('string'),
                         false
                     )
@@ -262,8 +262,8 @@ class ResourceAccessorTest extends TestCase
                     'preview',
                     new Property(
                         'preview',
-                        $this->createMock(TypeInterface::class),
-                        new Access(new Set('string')),
+                        $this->createMock(Type::class),
+                        new Access,
                         new Set('string'),
                         false
                     )

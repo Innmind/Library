@@ -5,7 +5,7 @@ namespace AppBundle\Neo4j\Type;
 
 use Domain\Model\Language;
 use Innmind\Neo4j\ONM\{
-    TypeInterface,
+    Type,
     Types
 };
 use Innmind\Immutable\{
@@ -14,7 +14,7 @@ use Innmind\Immutable\{
     Set
 };
 
-final class LanguageType implements TypeInterface
+final class LanguageType implements Type
 {
     private static $identifiers;
     private $nullable = false;
@@ -22,7 +22,7 @@ final class LanguageType implements TypeInterface
     /**
      * {@inheritdoc}
      */
-    public static function fromConfig(MapInterface $config, Types $types): TypeInterface
+    public static function fromConfig(MapInterface $config, Types $types): Type
     {
         $self = new self;
 

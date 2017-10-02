@@ -11,8 +11,8 @@ use Domain\{
     Specification\HttpResource\SpecificationInterface
 };
 use Innmind\Neo4j\ONM\{
-    RepositoryInterface,
-    Exception\EntityNotFoundException
+    Repository,
+    Exception\EntityNotFound
 };
 use Innmind\Immutable\{
     SetInterface,
@@ -23,7 +23,7 @@ final class ImageRepository implements ImageRepositoryInterface
 {
     private $infrastructure;
 
-    public function __construct(RepositoryInterface $infrastructure)
+    public function __construct(Repository $infrastructure)
     {
         $this->infrastructure = $infrastructure;
     }
@@ -35,7 +35,7 @@ final class ImageRepository implements ImageRepositoryInterface
     {
         try {
             return $this->infrastructure->get($identity);
-        } catch (EntityNotFoundException $e) {
+        } catch (EntityNotFound $e) {
             throw new ImageNotFoundException('', 0, $e);
         }
     }

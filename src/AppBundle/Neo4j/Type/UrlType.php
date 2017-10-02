@@ -5,7 +5,7 @@ namespace AppBundle\Neo4j\Type;
 
 use Innmind\Url\Url;
 use Innmind\Neo4j\ONM\{
-    TypeInterface,
+    Type,
     Types
 };
 use Innmind\Immutable\{
@@ -14,7 +14,7 @@ use Innmind\Immutable\{
     Set
 };
 
-final class UrlType implements TypeInterface
+final class UrlType implements Type
 {
     private static $identifiers;
     private $nullable = false;
@@ -22,7 +22,7 @@ final class UrlType implements TypeInterface
     /**
      * {@inheritdoc}
      */
-    public static function fromConfig(MapInterface $config, Types $types): TypeInterface
+    public static function fromConfig(MapInterface $config, Types $types): Type
     {
         $self = new self;
 

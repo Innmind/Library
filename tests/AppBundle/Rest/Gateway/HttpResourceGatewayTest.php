@@ -10,9 +10,9 @@ use AppBundle\Rest\Gateway\{
     HttpResourceGateway\ResourceLinker
 };
 use Domain\Repository\HttpResourceRepositoryInterface;
-use Innmind\Rest\Server\GatewayInterface;
+use Innmind\Rest\Server\Gateway;
 use Innmind\CommandBus\CommandBusInterface;
-use Innmind\Neo4j\DBAL\ConnectionInterface;
+use Innmind\Neo4j\DBAL\Connection;
 use PHPUnit\Framework\TestCase;
 
 class HttpResourceGatewayTest extends TestCase
@@ -30,7 +30,7 @@ class HttpResourceGatewayTest extends TestCase
             ),
             $this->accessor = new ResourceAccessor(
                 $this->createMock(HttpResourceRepositoryInterface::class),
-                $this->createMock(ConnectionInterface::class)
+                $this->createMock(Connection::class)
             ),
             $this->linker = new ResourceLinker(
                 $this->createMock(CommandBusInterface::class)
@@ -41,7 +41,7 @@ class HttpResourceGatewayTest extends TestCase
     public function testInterface()
     {
         $this->assertInstanceOf(
-            GatewayInterface::class,
+            Gateway::class,
             $this->gateway
         );
     }
@@ -52,7 +52,7 @@ class HttpResourceGatewayTest extends TestCase
     }
 
     /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplementedException
+     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
      */
     public function testThrowWhenAccessingResourceListAccessor()
     {
@@ -68,7 +68,7 @@ class HttpResourceGatewayTest extends TestCase
     }
 
     /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplementedException
+     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
      */
     public function testThrowWhenAccessingResourceUpdater()
     {
@@ -76,7 +76,7 @@ class HttpResourceGatewayTest extends TestCase
     }
 
     /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplementedException
+     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
      */
     public function testThrowWhenAccessingResourceRemover()
     {
@@ -92,7 +92,7 @@ class HttpResourceGatewayTest extends TestCase
     }
 
     /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplementedException
+     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
      */
     public function testThrowWhenAccessingResourceUnlinker()
     {

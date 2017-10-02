@@ -6,7 +6,7 @@ namespace Tests\AppBundle\Neo4j\Type\Image;
 use AppBundle\Neo4j\Type\Image\DescriptionType;
 use Domain\Entity\Image\Description;
 use Innmind\Neo4j\ONM\{
-    TypeInterface,
+    Type,
     Types
 };
 use Innmind\Immutable\{
@@ -20,7 +20,7 @@ class DescriptionTypeTest extends TestCase
     public function testInterface()
     {
         $this->assertInstanceOf(
-            TypeInterface::class,
+            Type::class,
             new DescriptionType
         );
     }

@@ -28,10 +28,10 @@ use Innmind\Url\{
     NullQuery
 };
 use Innmind\Rest\Server\{
-    ResourceCreatorInterface,
+    ResourceCreator as ResourceCreatorInterface,
     Definition\HttpResource as ResourceDefinition,
-    HttpResourceInterface,
-    IdentityInterface
+    HttpResource,
+    Identity as IdentityInterface
 };
 use Innmind\CommandBus\CommandBusInterface;
 use Innmind\Immutable\Set;
@@ -48,7 +48,7 @@ final class ResourceCreator implements ResourceCreatorInterface
 
     public function __invoke(
         ResourceDefinition $definition,
-        HttpResourceInterface $resource
+        HttpResource $resource
     ): IdentityInterface {
         $host = $this->registerHost($resource);
         $identity = $this->registerResource($resource, $host);
@@ -58,7 +58,7 @@ final class ResourceCreator implements ResourceCreatorInterface
         return $identity;
     }
 
-    private function registerHost(HttpResourceInterface $resource): HostIdentity
+    private function registerHost(HttpResource $resource): HostIdentity
     {
         try {
             $this->commandBus->handle(
@@ -88,7 +88,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function registerResource(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         HostIdentity $host
     ): Identity {
         $query = $resource->property('query')->value();
@@ -107,7 +107,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function specifyCharset(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         Identity $identity
     ): void {
         if (!$resource->has('charset')) {
@@ -123,7 +123,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     }
 
     private function specifyLanguages(
-        HttpResourceInterface $resource,
+        HttpResource $resource,
         Identity $identity
     ): void {
         if (!$resource->has('languages')) {

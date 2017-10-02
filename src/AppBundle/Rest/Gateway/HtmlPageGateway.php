@@ -3,70 +3,65 @@ declare(strict_types = 1);
 
 namespace AppBundle\Rest\Gateway;
 
-use AppBundle\Rest\Gateway\HtmlPageGateway\{
-    ResourceCreator,
-    ResourceAccessor,
-    ResourceLinker
-};
 use Innmind\Rest\Server\{
-    GatewayInterface,
-    ResourceListAccessorInterface,
-    ResourceAccessorInterface,
-    ResourceCreatorInterface,
-    ResourceUpdaterInterface,
-    ResourceRemoverInterface,
-    ResourceLinkerInterface,
-    ResourceUnlinkerInterface,
-    Exception\ActionNotImplementedException
+    Gateway,
+    ResourceListAccessor,
+    ResourceAccessor,
+    ResourceCreator,
+    ResourceUpdater,
+    ResourceRemover,
+    ResourceLinker,
+    ResourceUnlinker,
+    Exception\ActionNotImplemented
 };
 
-final class HtmlPageGateway implements GatewayInterface
+final class HtmlPageGateway implements Gateway
 {
     private $resourceCreator;
     private $resourceAccessor;
     private $resourceLinker;
 
     public function __construct(
-        ResourceCreator $resourceCreator,
-        ResourceAccessor $resourceAccessor,
-        ResourceLinker $resourceLinker
+        HtmlPageGateway\ResourceCreator $resourceCreator,
+        HtmlPageGateway\ResourceAccessor $resourceAccessor,
+        HtmlPageGateway\ResourceLinker $resourceLinker
     ) {
         $this->resourceCreator = $resourceCreator;
         $this->resourceAccessor = $resourceAccessor;
         $this->resourceLinker = $resourceLinker;
     }
 
-    public function resourceListAccessor(): ResourceListAccessorInterface
+    public function resourceListAccessor(): ResourceListAccessor
     {
-        throw new ActionNotImplementedException;
+        throw new ActionNotImplemented;
     }
 
-    public function resourceAccessor(): ResourceAccessorInterface
+    public function resourceAccessor(): ResourceAccessor
     {
         return $this->resourceAccessor;
     }
-    public function resourceCreator(): ResourceCreatorInterface
+    public function resourceCreator(): ResourceCreator
     {
         return $this->resourceCreator;
     }
 
-    public function resourceUpdater(): ResourceUpdaterInterface
+    public function resourceUpdater(): ResourceUpdater
     {
-        throw new ActionNotImplementedException;
+        throw new ActionNotImplemented;
     }
 
-    public function resourceRemover(): ResourceRemoverInterface
+    public function resourceRemover(): ResourceRemover
     {
-        throw new ActionNotImplementedException;
+        throw new ActionNotImplemented;
     }
 
-    public function resourceLinker(): ResourceLinkerInterface
+    public function resourceLinker(): ResourceLinker
     {
         return $this->resourceLinker;
     }
 
-    public function resourceUnlinker(): ResourceUnlinkerInterface
+    public function resourceUnlinker(): ResourceUnlinker
     {
-        throw new ActionNotImplementedException;
+        throw new ActionNotImplemented;
     }
 }

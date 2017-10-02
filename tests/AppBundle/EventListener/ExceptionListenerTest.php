@@ -10,7 +10,7 @@ use Domain\{
     Entity\Author\IdentityInterface as AuthorIdentity,
     Entity\Author\Name
 };
-use Innmind\Http\Exception\Http\ConflictException;
+use Innmind\Http\Exception\Http\Conflict;
 use Innmind\Immutable\Map;
 use Symfony\Component\{
     HttpKernel\HttpKernelInterface,
@@ -59,7 +59,7 @@ class ExceptionListenerTest extends TestCase
             (new Map('string', 'string'))
                 ->put(
                     AuthorAlreadyExistException::class,
-                    ConflictException::class
+                    Conflict::class
                 )
         );
         $event = new GetResponseForExceptionEvent(
@@ -76,7 +76,7 @@ class ExceptionListenerTest extends TestCase
 
         $this->assertNull($listener->transform($event));
         $this->assertInstanceOf(
-            ConflictException::class,
+            Conflict::class,
             $event->getException()
         );
         $this->assertSame($expected, $event->getException()->getPrevious());

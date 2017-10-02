@@ -12,7 +12,8 @@ use Innmind\EventBus\{
 };
 use Innmind\Neo4j\ONM\{
     Entity\Container,
-    IdentityInterface
+    Entity\Container\State,
+    Identity
 };
 use PHPUnit\Framework\TestCase;
 
@@ -48,12 +49,12 @@ class DispatchDomainEventsBusTest extends TestCase
         $container = new Container;
         $container
             ->push(
-                $this->createMock(IdentityInterface::class),
+                $this->createMock(Identity::class),
                 new class {},
-                Container::STATE_NEW
+                State::new()
             )
             ->push(
-                $this->createMock(IdentityInterface::class),
+                $this->createMock(Identity::class),
                 new class implements ContainsRecordedEventsInterface {
                     use EventRecorder;
 
@@ -62,15 +63,15 @@ class DispatchDomainEventsBusTest extends TestCase
                         $this->record(new \stdClass);
                     }
                 },
-                Container::STATE_NEW
+                State::new()
             )
             ->push(
-                $this->createMock(IdentityInterface::class),
+                $this->createMock(Identity::class),
                 new class {},
-                Container::STATE_MANAGED
+                State::managed()
             )
             ->push(
-                $this->createMock(IdentityInterface::class),
+                $this->createMock(Identity::class),
                 new class implements ContainsRecordedEventsInterface {
                     use EventRecorder;
 
@@ -79,15 +80,15 @@ class DispatchDomainEventsBusTest extends TestCase
                         $this->record(new \stdClass);
                     }
                 },
-                Container::STATE_MANAGED
+                State::managed()
             )
             ->push(
-                $this->createMock(IdentityInterface::class),
+                $this->createMock(Identity::class),
                 new class {},
-                Container::STATE_TO_BE_REMOVED
+                State::toBeRemoved()
             )
             ->push(
-                $this->createMock(IdentityInterface::class),
+                $this->createMock(Identity::class),
                 new class implements ContainsRecordedEventsInterface {
                     use EventRecorder;
 
@@ -96,15 +97,15 @@ class DispatchDomainEventsBusTest extends TestCase
                         $this->record(new \stdClass);
                     }
                 },
-                Container::STATE_TO_BE_REMOVED
+                State::toBeRemoved()
             )
             ->push(
-                $this->createMock(IdentityInterface::class),
+                $this->createMock(Identity::class),
                 new class {},
-                Container::STATE_REMOVED
+                State::removed()
             )
             ->push(
-                $this->createMock(IdentityInterface::class),
+                $this->createMock(Identity::class),
                 new class implements ContainsRecordedEventsInterface {
                     use EventRecorder;
 
@@ -113,7 +114,7 @@ class DispatchDomainEventsBusTest extends TestCase
                         $this->record(new \stdClass);
                     }
                 },
-                Container::STATE_REMOVED
+                State::removed()
             );
         $bus = new DispatchDomainEventsBus($commandBus, $eventBus, $container);
 

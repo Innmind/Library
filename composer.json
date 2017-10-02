@@ -32,9 +32,9 @@
         "symfony/polyfill-apcu": "^1.0",
         "sensio/distribution-bundle": "^5.0",
         "incenteev/composer-parameter-handler": "^2.0",
-        "innmind/neo4j-bundle": "~3.0",
+        "innmind/neo4j-bundle": "~4.0",
         "innmind/command-bus-bundle": "~2.0",
-        "innmind/rest-server-bundle": "~2.0",
+        "innmind/rest-server-bundle": "~3.0",
         "innmind/event-bus-bundle": "~2.0"
     },
     "config": {

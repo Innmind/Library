@@ -6,7 +6,7 @@ namespace Tests\AppBundle\Entity\CitationAppearance;
 use AppBundle\Entity\CitationAppearance\Identity;
 use Domain\Entity\CitationAppearance\IdentityInterface;
 use Innmind\Neo4j\ONM\Identity\Uuid as UuidIdentity;
-use Innmind\Rest\Server\IdentityInterface as RestIdentity;
+use Innmind\Rest\Server\Identity as RestIdentity;
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 

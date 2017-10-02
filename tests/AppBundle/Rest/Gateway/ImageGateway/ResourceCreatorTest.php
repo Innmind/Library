@@ -13,13 +13,13 @@ use Domain\Command\{
     Image\AddDescription
 };
 use Innmind\Rest\Server\{
-    ResourceCreatorInterface,
+    ResourceCreator as ResourceCreatorInterface,
     Definition\HttpResource as Definition,
     Definition\Identity,
     Definition\Gateway,
     Definition\Property as PropertyDefinition,
-    HttpResourceInterface,
-    Property
+    HttpResource,
+    HttpResource\Property
 };
 use Innmind\CommandBus\CommandBusInterface;
 use Innmind\Immutable\{
@@ -101,7 +101,7 @@ class ResourceCreatorTest extends TestCase
             false,
             new Map('string', 'string')
         );
-        $resource = $this->createMock(HttpResourceInterface::class);
+        $resource = $this->createMock(HttpResource::class);
         $resource
             ->expects($this->at(0))
             ->method('property')

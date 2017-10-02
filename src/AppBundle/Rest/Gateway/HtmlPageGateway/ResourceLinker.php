@@ -16,11 +16,11 @@ use Domain\{
     Exception\CanonicalAlreadyExistException
 };
 use Innmind\Rest\Server\{
-    ResourceLinkerInterface,
+    ResourceLinker as ResourceLinkerInterface,
     Reference
 };
 use Innmind\CommandBus\CommandBusInterface;
-use Innmind\Http\Exception\Http\BadRequestException;
+use Innmind\Http\Exception\Http\BadRequest;
 use Innmind\Immutable\MapInterface;
 use Ramsey\Uuid\Uuid;
 
@@ -36,7 +36,7 @@ final class ResourceLinker implements ResourceLinkerInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(Reference $from, MapInterface $tos)
+    public function __invoke(Reference $from, MapInterface $tos): void
     {
         $definition = $from->definition();
         $from = new ResourceIdentity((string) $from->identity());
@@ -44,7 +44,7 @@ final class ResourceLinker implements ResourceLinkerInterface
         $tos
             ->foreach(function(Reference $to, MapInterface $parameters) use ($definition) {
                 if ($to->definition() !== $definition) {
-                    throw new BadRequestException;
+                    throw new BadRequest;
                 }
             })
             ->foreach(function(Reference $to, MapInterface $parameters) use ($from) {
