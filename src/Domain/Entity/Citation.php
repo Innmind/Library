@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Domain\Entity;
 
 use Domain\{
-    Entity\Citation\IdentityInterface,
+    Entity\Citation\Identity,
     Entity\Citation\Text,
     Event\CitationRegistered
 };
@@ -20,23 +20,21 @@ final class Citation implements ContainsRecordedEventsInterface
     private $identity;
     private $text;
 
-    public function __construct(IdentityInterface $identity, Text $text)
+    public function __construct(Identity $identity, Text $text)
     {
         $this->identity = $identity;
         $this->text = $text;
     }
 
-    public static function register(
-        IdentityInterface $identity,
-        Text $text
-    ): self {
+    public static function register(Identity $identity, Text $text): self
+    {
         $self = new self($identity, $text);
         $self->record(new CitationRegistered($identity, $text));
 
         return $self;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

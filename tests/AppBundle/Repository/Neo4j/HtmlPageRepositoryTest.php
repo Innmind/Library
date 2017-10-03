@@ -8,9 +8,9 @@ use AppBundle\{
     Entity\HtmlPage\Identity
 };
 use Domain\{
-    Repository\HtmlPageRepositoryInterface,
+    Repository\HtmlPageRepository as HtmlPageRepositoryInterface,
     Entity\HtmlPage,
-    Specification\HttpResource\SpecificationInterface
+    Specification\HttpResource\Specification
 };
 use Innmind\Url\{
     PathInterface,
@@ -193,7 +193,7 @@ class HtmlPageRepositoryTest extends TestCase
         $repository = new HtmlPageRepository(
             $infra = $this->createMock(Repository::class)
         );
-        $specification = $this->createMock(SpecificationInterface::class);
+        $specification = $this->createMock(Specification::class);
         $infra
             ->expects($this->once())
             ->method('matching')

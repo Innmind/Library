@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace AppBundle\Entity\CitationAppearance;
 
-use Domain\Entity\CitationAppearance\IdentityInterface;
+use Domain\Entity\CitationAppearance\Identity as IdentityInterface;
 use Innmind\Neo4j\ONM\Identity\Uuid;
 use Innmind\Rest\Server\Identity as RestIdentity;
 

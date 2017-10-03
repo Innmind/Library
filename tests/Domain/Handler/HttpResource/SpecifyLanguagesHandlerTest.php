@@ -6,9 +6,9 @@ namespace Tests\Domain\Handler\HttpResource;
 use Domain\{
     Handler\HttpResource\SpecifyLanguagesHandler,
     Command\HttpResource\SpecifyLanguages,
-    Repository\HttpResourceRepositoryInterface,
+    Repository\HttpResourceRepository,
     Entity\HttpResource,
-    Entity\HttpResource\IdentityInterface,
+    Entity\HttpResource\Identity,
     Event\HttpResource\LanguagesSpecified,
     Model\Language
 };
@@ -24,9 +24,9 @@ class SpecifyLanguagesHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new SpecifyLanguagesHandler(
-            $repository = $this->createMock(HttpResourceRepositoryInterface::class)
+            $repository = $this->createMock(HttpResourceRepository::class)
         );
-        $identity = $this->createMock(IdentityInterface::class);
+        $identity = $this->createMock(Identity::class);
         $repository
             ->expects($this->once())
             ->method('get')

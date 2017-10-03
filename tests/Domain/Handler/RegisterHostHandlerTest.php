@@ -6,12 +6,12 @@ namespace Tests\Domain\Handler;
 use Domain\{
     Handler\RegisterHostHandler,
     Command\RegisterHost,
-    Repository\HostRepositoryInterface,
-    Repository\DomainHostRepositoryInterface,
-    Entity\Host\IdentityInterface,
+    Repository\HostRepository,
+    Repository\DomainHostRepository,
+    Entity\Host\Identity,
     Entity\Host\Name as NameModel,
-    Entity\Domain\IdentityInterface as DomainIdentity,
-    Entity\DomainHost\IdentityInterface as RelationIdentity,
+    Entity\Domain\Identity as DomainIdentity,
+    Entity\DomainHost\Identity as RelationIdentity,
     Specification\Host\Name,
     Entity\Host as HostEntity,
     Entity\DomainHost,
@@ -34,12 +34,12 @@ class RegisterHostHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new RegisterHostHandler(
-            $hostRepository = $this->createMock(HostRepositoryInterface::class),
-            $domainHostRepository = $this->createMock(DomainHostRepositoryInterface::class),
+            $hostRepository = $this->createMock(HostRepository::class),
+            $domainHostRepository = $this->createMock(DomainHostRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new RegisterHost(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(DomainIdentity::class),
             $this->createMock(RelationIdentity::class),
             new Host('www.example.com')
@@ -87,12 +87,12 @@ class RegisterHostHandlerTest extends TestCase
     public function testThrowWhenHostAlreadyExist()
     {
         $handler = new RegisterHostHandler(
-            $hostRepository = $this->createMock(HostRepositoryInterface::class),
-            $domainHostRepository = $this->createMock(DomainHostRepositoryInterface::class),
+            $hostRepository = $this->createMock(HostRepository::class),
+            $domainHostRepository = $this->createMock(DomainHostRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new RegisterHost(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(DomainIdentity::class),
             $this->createMock(RelationIdentity::class),
             new Host('www.example.com')
@@ -115,7 +115,7 @@ class RegisterHostHandlerTest extends TestCase
             ->method('current')
             ->willReturn(
                 new HostEntity(
-                    $this->createMock(IdentityInterface::class),
+                    $this->createMock(Identity::class),
                     new NameModel('example.com')
                 )
             );

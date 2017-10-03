@@ -5,9 +5,9 @@ namespace Tests\Domain\Command;
 
 use Domain\{
     Command\RegisterHtmlPage,
-    Entity\HtmlPage\IdentityInterface,
-    Entity\Host\IdentityInterface as HostIdentity,
-    Entity\HostResource\IdentityInterface as RelationIdentity
+    Entity\HtmlPage\Identity,
+    Entity\Host\Identity as HostIdentity,
+    Entity\HostResource\Identity as RelationIdentity
 };
 use Innmind\Url\{
     PathInterface,
@@ -20,7 +20,7 @@ class RegisterHtmlPageTest extends TestCase
     public function testInterface()
     {
         $command = new RegisterHtmlPage(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $host = $this->createMock(HostIdentity::class),
             $relation = $this->createMock(RelationIdentity::class),
             $path = $this->createMock(PathInterface::class),

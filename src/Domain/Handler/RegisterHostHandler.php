@@ -4,8 +4,8 @@ declare(strict_types = 1);
 namespace Domain\Handler;
 
 use Domain\{
-    Repository\HostRepositoryInterface,
-    Repository\DomainHostRepositoryInterface,
+    Repository\HostRepository,
+    Repository\DomainHostRepository,
     Command\RegisterHost,
     Specification\Host\Name,
     Entity\Host,
@@ -22,8 +22,8 @@ final class RegisterHostHandler
     private $clock;
 
     public function __construct(
-        HostRepositoryInterface $hostRepository,
-        DomainHostRepositoryInterface $domainHostRepository,
+        HostRepository $hostRepository,
+        DomainHostRepository $domainHostRepository,
         TimeContinuumInterface $clock
     ) {
         $this->hostRepository = $hostRepository;

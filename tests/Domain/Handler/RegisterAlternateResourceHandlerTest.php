@@ -6,10 +6,10 @@ namespace Tests\Domain\Handler;
 use Domain\{
     Handler\RegisterAlternateResourceHandler,
     Command\RegisterAlternateResource,
-    Repository\AlternateRepositoryInterface,
+    Repository\AlternateRepository,
     Entity\Alternate,
-    Entity\Alternate\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Alternate\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\AlternateCreated,
     Specification\AndSpecification,
     Specification\Alternate\HttpResource,
@@ -28,10 +28,10 @@ class RegisterAlternateResourceHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new RegisterAlternateResourceHandler(
-            $repository = $this->createMock(AlternateRepositoryInterface::class)
+            $repository = $this->createMock(AlternateRepository::class)
         );
         $command = new RegisterAlternateResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class),
             new Model('fr')
@@ -80,10 +80,10 @@ class RegisterAlternateResourceHandlerTest extends TestCase
     public function testThrowWhenAlternateAlreadyExist()
     {
         $handler = new RegisterAlternateResourceHandler(
-            $repository = $this->createMock(AlternateRepositoryInterface::class)
+            $repository = $this->createMock(AlternateRepository::class)
         );
         $command = new RegisterAlternateResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class),
             new Model('fr')
@@ -122,7 +122,7 @@ class RegisterAlternateResourceHandlerTest extends TestCase
             ->method('current')
             ->willReturn(
                 new Alternate(
-                    $this->createMock(IdentityInterface::class),
+                    $this->createMock(Identity::class),
                     $this->createMock(ResourceIdentity::class),
                     $this->createMock(ResourceIdentity::class),
                     new Model('fr')

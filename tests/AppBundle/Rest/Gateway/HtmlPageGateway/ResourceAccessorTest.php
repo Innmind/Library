@@ -8,7 +8,7 @@ use AppBundle\{
     Entity\HtmlPage\Identity
 };
 use Domain\{
-    Repository\HtmlPageRepositoryInterface,
+    Repository\HtmlPageRepository,
     Entity\HtmlPage,
     Entity\HtmlPage\Anchor,
     Entity\HttpResource\Charset,
@@ -55,7 +55,7 @@ class ResourceAccessorTest extends TestCase
     public function setUp()
     {
         $this->accessor = new ResourceAccessor(
-            $this->repository = $this->createMock(HtmlPageRepositoryInterface::class),
+            $this->repository = $this->createMock(HtmlPageRepository::class),
             $this->dbal = $this->createMock(Connection::class)
         );
     }

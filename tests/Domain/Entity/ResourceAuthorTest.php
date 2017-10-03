@@ -5,9 +5,9 @@ namespace Tests\Domain\Entity;
 
 use Domain\{
     Entity\ResourceAuthor,
-    Entity\ResourceAuthor\IdentityInterface,
-    Entity\Author\IdentityInterface as AuthorIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\ResourceAuthor\Identity,
+    Entity\Author\Identity as AuthorIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\ResourceAuthorRegistered
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
@@ -19,7 +19,7 @@ class ResourceAuthorTest extends TestCase
     public function testInstanciation()
     {
         $entity = new ResourceAuthor(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $author = $this->createMock(AuthorIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $asOf = $this->createMock(PointInTimeInterface::class)
@@ -36,7 +36,7 @@ class ResourceAuthorTest extends TestCase
     public function testRegister()
     {
         $entity = ResourceAuthor::register(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $author = $this->createMock(AuthorIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $asOf = $this->createMock(PointInTimeInterface::class)

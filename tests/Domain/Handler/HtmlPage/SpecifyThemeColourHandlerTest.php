@@ -6,9 +6,9 @@ namespace Tests\Domain\Handler\HtmlPage;
 use Domain\{
     Handler\HtmlPage\SpecifyThemeColourHandler,
     Command\HtmlPage\SpecifyThemeColour,
-    Repository\HtmlPageRepositoryInterface,
+    Repository\HtmlPageRepository,
     Entity\HtmlPage,
-    Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Identity,
     Event\HtmlPage\ThemeColourSpecified
 };
 use Innmind\Url\{
@@ -23,10 +23,10 @@ class SpecifyThemeColourHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new SpecifyThemeColourHandler(
-            $repository = $this->createMock(HtmlPageRepositoryInterface::class)
+            $repository = $this->createMock(HtmlPageRepository::class)
         );
         $command = new SpecifyThemeColour(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             RGBA::fromString('39f')
         );
         $repository

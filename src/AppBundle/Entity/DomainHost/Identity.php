@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace AppBundle\Entity\DomainHost;
 
-use Domain\Entity\DomainHost\IdentityInterface;
+use Domain\Entity\DomainHost\Identity as IdentityInterface;
 use Innmind\Neo4j\ONM\Identity\Uuid;
 use Innmind\Rest\Server\Identity as RestIdentity;
 

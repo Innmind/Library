@@ -5,7 +5,7 @@ namespace Tests\Domain\Command\HtmlPage;
 
 use Domain\{
     Command\HtmlPage\SpecifyDescription,
-    Entity\HtmlPage\IdentityInterface
+    Entity\HtmlPage\Identity
 };
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +14,7 @@ class SpecifyDescriptionTest extends TestCase
     public function testInterface()
     {
         $command = new SpecifyDescription(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             'foo'
         );
 

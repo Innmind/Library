@@ -5,14 +5,14 @@ namespace Domain\Handler\HtmlPage;
 
 use Domain\{
     Command\HtmlPage\SpecifyAndroidAppLink,
-    Repository\HtmlPageRepositoryInterface
+    Repository\HtmlPageRepository
 };
 
 final class SpecifyAndroidAppLinkHandler
 {
     private $repository;
 
-    public function __construct(HtmlPageRepositoryInterface $repository)
+    public function __construct(HtmlPageRepository $repository)
     {
         $this->repository = $repository;
     }

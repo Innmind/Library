@@ -5,9 +5,9 @@ namespace Tests\Domain\Entity;
 
 use Domain\{
     Entity\HostResource,
-    Entity\HostResource\IdentityInterface,
-    Entity\Host\IdentityInterface as HostIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\HostResource\Identity,
+    Entity\Host\Identity as HostIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\HostResourceCreated
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
@@ -19,7 +19,7 @@ class HostResourceTest extends TestCase
     public function testInstanciation()
     {
         $entity = new HostResource(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $host = $this->createMock(HostIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $foundAt = $this->createMock(PointInTimeInterface::class)
@@ -36,7 +36,7 @@ class HostResourceTest extends TestCase
     public function testCreate()
     {
         $entity = HostResource::create(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $host = $this->createMock(HostIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $foundAt = $this->createMock(PointInTimeInterface::class)

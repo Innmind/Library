@@ -5,7 +5,7 @@ namespace Domain\Handler;
 
 use Domain\{
     Command\ReferResource,
-    Repository\ReferenceRepositoryInterface,
+    Repository\ReferenceRepository,
     Entity\Reference,
     Specification\Reference\Source,
     Specification\Reference\Target,
@@ -16,7 +16,7 @@ final class ReferResourceHandler
 {
     private $repository;
 
-    public function __construct(ReferenceRepositoryInterface $repository)
+    public function __construct(ReferenceRepository $repository)
     {
         $this->repository = $repository;
     }

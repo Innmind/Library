@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Tests\AppBundle\Entity\Author;
 
 use AppBundle\Entity\Author\Identity;
-use Domain\Entity\Author\IdentityInterface;
+use Domain\Entity\Author\Identity as IdentityInterface;
 use Innmind\Neo4j\ONM\Identity\Uuid as UuidIdentity;
 use Innmind\Rest\Server\Identity as RestIdentity;
 use Ramsey\Uuid\Uuid;

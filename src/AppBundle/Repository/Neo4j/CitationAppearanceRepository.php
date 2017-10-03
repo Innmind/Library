@@ -4,11 +4,11 @@ declare(strict_types = 1);
 namespace AppBundle\Repository\Neo4j;
 
 use Domain\{
-    Repository\CitationAppearanceRepositoryInterface,
+    Repository\CitationAppearanceRepository as CitationAppearanceRepositoryInterface,
     Entity\CitationAppearance,
-    Entity\CitationAppearance\IdentityInterface,
+    Entity\CitationAppearance\Identity,
     Exception\CitationAppearanceNotFoundException,
-    Specification\CitationAppearance\SpecificationInterface
+    Specification\CitationAppearance\Specification
 };
 use Innmind\Neo4j\ONM\{
     Repository,
@@ -31,7 +31,7 @@ final class CitationAppearanceRepository implements CitationAppearanceRepository
     /**
      * {@inheritdoc}
      */
-    public function get(IdentityInterface $identity): CitationAppearance
+    public function get(Identity $identity): CitationAppearance
     {
         try {
             return $this->infrastructure->get($identity);
@@ -47,7 +47,7 @@ final class CitationAppearanceRepository implements CitationAppearanceRepository
         return $this;
     }
 
-    public function remove(IdentityInterface $identity): CitationAppearanceRepositoryInterface
+    public function remove(Identity $identity): CitationAppearanceRepositoryInterface
     {
         $this->infrastructure->remove(
             $this->get($identity)
@@ -56,7 +56,7 @@ final class CitationAppearanceRepository implements CitationAppearanceRepository
         return $this;
     }
 
-    public function has(IdentityInterface $identity): bool
+    public function has(Identity $identity): bool
     {
         return $this->infrastructure->has($identity);
     }
@@ -85,7 +85,7 @@ final class CitationAppearanceRepository implements CitationAppearanceRepository
     /**
      * {@inheritdoc}
      */
-    public function matching(SpecificationInterface $specification): SetInterface
+    public function matching(Specification $specification): SetInterface
     {
         return $this
             ->infrastructure

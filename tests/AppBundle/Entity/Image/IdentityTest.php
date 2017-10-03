@@ -7,7 +7,7 @@ use AppBundle\Entity\{
     Image\Identity,
     HttpResource\Identity as HttpResourceIdentity
 };
-use Domain\Entity\Image\IdentityInterface;
+use Domain\Entity\Image\Identity as IdentityInterface;
 use Innmind\Rest\Server\Identity as RestIdentity;
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;

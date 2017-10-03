@@ -7,10 +7,9 @@ use Domain\{
     Command\RegisterHtmlPage,
     Entity\HtmlPage,
     Entity\HostResource,
-    Entity\HtmlPage\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
-    Repository\HtmlPageRepositoryInterface,
-    Repository\HostResourceRepositoryInterface,
+    Entity\HttpResource\Identity as ResourceIdentity,
+    Repository\HtmlPageRepository,
+    Repository\HostResourceRepository,
     Specification\HttpResource\Path,
     Specification\HttpResource\Query,
     Specification\HostResource\InResources,
@@ -27,8 +26,8 @@ final class RegisterHtmlPageHandler
     private $clock;
 
     public function __construct(
-        HtmlPageRepositoryInterface $htmlPageRepository,
-        HostResourceRepositoryInterface $relationRepository,
+        HtmlPageRepository $htmlPageRepository,
+        HostResourceRepository $relationRepository,
         TimeContinuumInterface $clock
     ) {
         $this->htmlPageRepository = $htmlPageRepository;

@@ -6,14 +6,14 @@ namespace Tests\Domain\Handler;
 use Domain\{
     Handler\RegisterHtmlPageHandler,
     Command\RegisterHtmlPage,
-    Repository\HtmlPageRepositoryInterface,
-    Repository\HostResourceRepositoryInterface,
+    Repository\HtmlPageRepository,
+    Repository\HostResourceRepository,
     Entity\HtmlPage,
     Entity\HostResource,
     Entity\Host,
-    Entity\HtmlPage\IdentityInterface,
-    Entity\HostResource\IdentityInterface as RelationIdentity,
-    Entity\Host\IdentityInterface as HostIdentity,
+    Entity\HtmlPage\Identity,
+    Entity\HostResource\Identity as RelationIdentity,
+    Entity\Host\Identity as HostIdentity,
     Entity\Host\Name,
     Specification\AndSpecification,
     Specification\HttpResource\Path,
@@ -38,12 +38,12 @@ class RegisterHtmlPageHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new RegisterHtmlPageHandler(
-            $htmlPageRepository = $this->createMock(HtmlPageRepositoryInterface::class),
-            $relationRepository = $this->createMock(HostResourceRepositoryInterface::class),
+            $htmlPageRepository = $this->createMock(HtmlPageRepository::class),
+            $relationRepository = $this->createMock(HostResourceRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new RegisterHtmlPage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(RelationIdentity::class),
             $this->createMock(PathInterface::class),
@@ -105,12 +105,12 @@ class RegisterHtmlPageHandlerTest extends TestCase
     public function testLookForRelations()
     {
         $handler = new RegisterHtmlPageHandler(
-            $htmlPageRepository = $this->createMock(HtmlPageRepositoryInterface::class),
-            $relationRepository = $this->createMock(HostResourceRepositoryInterface::class),
+            $htmlPageRepository = $this->createMock(HtmlPageRepository::class),
+            $relationRepository = $this->createMock(HostResourceRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new RegisterHtmlPage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(RelationIdentity::class),
             $this->createMock(PathInterface::class),
@@ -150,7 +150,7 @@ class RegisterHtmlPageHandlerTest extends TestCase
             ->willReturn(
                 (new Set(HtmlPage::class))->add(
                     new HtmlPage(
-                        $identity = $this->createMock(IdentityInterface::class),
+                        $identity = $this->createMock(Identity::class),
                         $this->createMock(PathInterface::class),
                         $this->createMock(QueryInterface::class)
                     )
@@ -196,12 +196,12 @@ class RegisterHtmlPageHandlerTest extends TestCase
     public function testThrowWhenResourceAlreadyExist()
     {
         $handler = new RegisterHtmlPageHandler(
-            $htmlPageRepository = $this->createMock(HtmlPageRepositoryInterface::class),
-            $relationRepository = $this->createMock(HostResourceRepositoryInterface::class),
+            $htmlPageRepository = $this->createMock(HtmlPageRepository::class),
+            $relationRepository = $this->createMock(HostResourceRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new RegisterHtmlPage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(RelationIdentity::class),
             $this->createMock(PathInterface::class),
@@ -238,7 +238,7 @@ class RegisterHtmlPageHandlerTest extends TestCase
             ->willReturn(
                 (new Set(HtmlPage::class))->add(
                     new HtmlPage(
-                        $identity = $this->createMock(IdentityInterface::class),
+                        $identity = $this->createMock(Identity::class),
                         $this->createMock(PathInterface::class),
                         $this->createMock(QueryInterface::class)
                     )

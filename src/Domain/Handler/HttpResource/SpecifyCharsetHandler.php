@@ -5,14 +5,14 @@ namespace Domain\Handler\HttpResource;
 
 use Domain\{
     Command\HttpResource\SpecifyCharset,
-    Repository\HttpResourceRepositoryInterface
+    Repository\HttpResourceRepository
 };
 
 final class SpecifyCharsetHandler
 {
     private $repository;
 
-    public function __construct(HttpResourceRepositoryInterface $repository)
+    public function __construct(HttpResourceRepository $repository)
     {
         $this->repository = $repository;
     }

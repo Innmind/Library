@@ -4,11 +4,11 @@ declare(strict_types = 1);
 namespace AppBundle\Repository\Neo4j;
 
 use Domain\{
-    Repository\ImageRepositoryInterface,
+    Repository\ImageRepository as ImageRepositoryInterface,
     Entity\Image,
-    Entity\Image\IdentityInterface,
+    Entity\Image\Identity,
     Exception\ImageNotFoundException,
-    Specification\HttpResource\SpecificationInterface
+    Specification\HttpResource\Specification
 };
 use Innmind\Neo4j\ONM\{
     Repository,
@@ -31,7 +31,7 @@ final class ImageRepository implements ImageRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function get(IdentityInterface $identity): Image
+    public function get(Identity $identity): Image
     {
         try {
             return $this->infrastructure->get($identity);
@@ -47,7 +47,7 @@ final class ImageRepository implements ImageRepositoryInterface
         return $this;
     }
 
-    public function remove(IdentityInterface $identity): ImageRepositoryInterface
+    public function remove(Identity $identity): ImageRepositoryInterface
     {
         $this->infrastructure->remove(
             $this->get($identity)
@@ -56,7 +56,7 @@ final class ImageRepository implements ImageRepositoryInterface
         return $this;
     }
 
-    public function has(IdentityInterface $identity): bool
+    public function has(Identity $identity): bool
     {
         return $this->infrastructure->has($identity);
     }
@@ -85,7 +85,7 @@ final class ImageRepository implements ImageRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function matching(SpecificationInterface $specification): SetInterface
+    public function matching(Specification $specification): SetInterface
     {
         return $this
             ->infrastructure

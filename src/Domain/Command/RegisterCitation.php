@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Domain\Command;
 
 use Domain\Entity\Citation\{
-    IdentityInterface,
+    Identity,
     Text
 };
 
@@ -13,13 +13,13 @@ final class RegisterCitation
     private $identity;
     private $text;
 
-    public function __construct(IdentityInterface $identity, Text $text)
+    public function __construct(Identity $identity, Text $text)
     {
         $this->identity = $identity;
         $this->text = $text;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

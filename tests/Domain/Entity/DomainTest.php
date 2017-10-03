@@ -5,7 +5,7 @@ namespace Tests\Domain\Entity;
 
 use Domain\{
     Entity\Domain,
-    Entity\Domain\IdentityInterface,
+    Entity\Domain\Identity,
     Entity\Domain\Name,
     Entity\Domain\TopLevelDomain,
     Event\DomainRegistered
@@ -18,7 +18,7 @@ class DomainTest extends TestCase
     public function testInstanciation()
     {
         $domain = new Domain(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $name = new Name('example'),
             $tld = new TopLevelDomain('com')
         );
@@ -34,7 +34,7 @@ class DomainTest extends TestCase
     public function testRegister()
     {
         $domain = Domain::register(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $name = new Name('example'),
             $tld = new TopLevelDomain('com')
         );

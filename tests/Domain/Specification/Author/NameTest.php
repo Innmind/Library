@@ -5,13 +5,13 @@ namespace Tests\Domain\Specification\Author;
 
 use Domain\{
     Specification\Author\Name,
-    Specification\Author\SpecificationInterface,
+    Specification\Author\Specification,
     Specification\Author\AndSpecification,
     Specification\Author\OrSpecification,
     Specification\Author\Not,
     Entity\Author\Name as Model,
     Entity\Author,
-    Entity\Author\IdentityInterface
+    Entity\Author\Identity
 };
 use Innmind\Specification\ComparatorInterface;
 use PHPUnit\Framework\TestCase;
@@ -23,7 +23,7 @@ class NameTest extends TestCase
         $spec = new Name(new Model('foo'));
 
         $this->assertInstanceOf(ComparatorInterface::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('name', $spec->property());
         $this->assertSame('=', $spec->sign());
         $this->assertSame('foo', $spec->value());
@@ -33,14 +33,14 @@ class NameTest extends TestCase
     {
         $spec = new Name(new Model('foo'));
         $author = new Author(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Model('foo')
         );
 
         $this->assertTrue($spec->isSatisfiedBy($author));
 
         $author = new Author(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Model('bar')
         );
 

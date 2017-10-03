@@ -6,9 +6,9 @@ namespace Tests\Domain\Handler\HtmlPage;
 use Domain\{
     Handler\HtmlPage\SpecifyAnchorsHandler,
     Command\HtmlPage\SpecifyAnchors,
-    Repository\HtmlPageRepositoryInterface,
+    Repository\HtmlPageRepository,
     Entity\HtmlPage,
-    Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Identity,
     Entity\HtmlPage\Anchor,
     Event\HtmlPage\AnchorsSpecified
 };
@@ -24,10 +24,10 @@ class SpecifyAnchorsHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new SpecifyAnchorsHandler(
-            $repository = $this->createMock(HtmlPageRepositoryInterface::class)
+            $repository = $this->createMock(HtmlPageRepository::class)
         );
         $command = new SpecifyAnchors(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Set(Anchor::class)
         );
         $repository

@@ -4,8 +4,8 @@ declare(strict_types = 1);
 namespace Domain\Entity;
 
 use Domain\{
-    Entity\Reference\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Reference\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\ReferenceCreated
 };
 use Innmind\EventBus\{
@@ -22,7 +22,7 @@ final class Reference implements ContainsRecordedEventsInterface
     private $target;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         ResourceIdentity $source,
         ResourceIdentity $target
     ) {
@@ -32,7 +32,7 @@ final class Reference implements ContainsRecordedEventsInterface
     }
 
     public static function create(
-        IdentityInterface $identity,
+        Identity $identity,
         ResourceIdentity $source,
         ResourceIdentity $target
     ): self {
@@ -46,7 +46,7 @@ final class Reference implements ContainsRecordedEventsInterface
         return $self;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

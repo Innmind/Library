@@ -6,9 +6,9 @@ namespace Tests\Domain\Handler\Image;
 use Domain\{
     Handler\Image\SpecifyWeightHandler,
     Command\Image\SpecifyWeight,
-    Repository\ImageRepositoryInterface,
+    Repository\ImageRepository,
     Entity\Image,
-    Entity\Image\IdentityInterface,
+    Entity\Image\Identity,
     Entity\Image\Weight,
     Event\Image\WeightSpecified
 };
@@ -23,10 +23,10 @@ class SpecifyWeightHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new SpecifyWeightHandler(
-            $repository = $this->createMock(ImageRepositoryInterface::class)
+            $repository = $this->createMock(ImageRepository::class)
         );
         $command = new SpecifyWeight(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Weight(12, 21)
         );
         $repository

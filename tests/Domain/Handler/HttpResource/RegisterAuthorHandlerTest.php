@@ -6,11 +6,11 @@ namespace Tests\Domain\Handler\HttpResource;
 use Domain\{
     Handler\HttpResource\RegisterAuthorHandler,
     Command\HttpResource\RegisterAuthor,
-    Repository\ResourceAuthorRepositoryInterface,
+    Repository\ResourceAuthorRepository,
     Entity\ResourceAuthor,
-    Entity\ResourceAuthor\IdentityInterface,
-    Entity\Author\IdentityInterface as AuthorIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\ResourceAuthor\Identity,
+    Entity\Author\Identity as AuthorIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\ResourceAuthorRegistered
 };
 use Innmind\TimeContinuum\{
@@ -24,11 +24,11 @@ class RegisterAuthorHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new RegisterAuthorHandler(
-            $repository = $this->createMock(ResourceAuthorRepositoryInterface::class),
+            $repository = $this->createMock(ResourceAuthorRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new RegisterAuthor(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(AuthorIdentity::class),
             $this->createMock(ResourceIdentity::class)
         );

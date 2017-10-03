@@ -8,7 +8,7 @@ use AppBundle\{
     Entity\Image\Identity
 };
 use Domain\{
-    Repository\ImageRepositoryInterface,
+    Repository\ImageRepository,
     Entity\Image,
     Entity\Image\Dimension,
     Entity\Image\Weight,
@@ -54,7 +54,7 @@ class ResourceAccessorTest extends TestCase
     public function setUp()
     {
         $this->accessor = new ResourceAccessor(
-            $this->repository = $this->createMock(ImageRepositoryInterface::class),
+            $this->repository = $this->createMock(ImageRepository::class),
             $this->dbal = $this->createMock(Connection::class)
         );
     }

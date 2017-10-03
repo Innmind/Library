@@ -5,7 +5,7 @@ namespace Tests\Domain\Event;
 
 use Domain\{
     Event\CitationRegistered,
-    Entity\Citation\IdentityInterface,
+    Entity\Citation\Identity,
     Entity\Citation\Text
 };
 use PHPUnit\Framework\TestCase;
@@ -15,7 +15,7 @@ class CitationRegisteredTest extends TestCase
     public function testInterface()
     {
         $event = new CitationRegistered(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $text = new Text('foo')
         );
 

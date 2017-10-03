@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Domain\Entity;
 
 use Domain\{
-    Entity\Domain\IdentityInterface,
+    Entity\Domain\Identity,
     Entity\Domain\Name,
     Entity\Domain\TopLevelDomain,
     Event\DomainRegistered
@@ -23,7 +23,7 @@ final class Domain implements ContainsRecordedEventsInterface
     private $tld;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         Name $name,
         TopLevelDomain $tld
     ) {
@@ -33,7 +33,7 @@ final class Domain implements ContainsRecordedEventsInterface
     }
 
     public static function register(
-        IdentityInterface $identity,
+        Identity $identity,
         Name $name,
         TopLevelDomain $tld
     ): self {
@@ -43,7 +43,7 @@ final class Domain implements ContainsRecordedEventsInterface
         return $self;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

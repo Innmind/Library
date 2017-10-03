@@ -5,13 +5,13 @@ namespace Tests\Domain\Specification\Reference;
 
 use Domain\{
     Specification\Reference\Target,
-    Specification\Reference\SpecificationInterface,
+    Specification\Reference\Specification,
     Specification\Reference\AndSpecification,
     Specification\Reference\OrSpecification,
     Specification\Reference\Not,
     Entity\Reference as Entity,
-    Entity\Reference\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\Reference\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use Innmind\Specification\ComparatorInterface;
 use PHPUnit\Framework\TestCase;
@@ -28,7 +28,7 @@ class TargetTest extends TestCase
         $spec = new Target($identity);
 
         $this->assertInstanceOf(ComparatorInterface::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('target', $spec->property());
         $this->assertSame('=', $spec->sign());
         $this->assertSame('uuid', $spec->value());
@@ -43,7 +43,7 @@ class TargetTest extends TestCase
             ->willReturn('uuid');
         $spec = new Target($identity);
         $reference = new Entity(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class)
         );

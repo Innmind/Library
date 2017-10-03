@@ -5,7 +5,7 @@ namespace Tests\Domain\Event\HtmlPage;
 
 use Domain\{
     Event\HtmlPage\AnchorsSpecified,
-    Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Identity,
     Entity\HtmlPage\Anchor
 };
 use Innmind\Immutable\Set;
@@ -16,7 +16,7 @@ class AnchorsSpecifiedTest extends TestCase
     public function testInterface()
     {
         $event = new AnchorsSpecified(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $anchors = new Set(Anchor::class)
         );
 
@@ -30,7 +30,7 @@ class AnchorsSpecifiedTest extends TestCase
     public function testThrowWhenInvalidAnchorSet()
     {
         new AnchorsSpecified(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Set('string')
         );
     }

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Domain\Event;
 
 use Domain\Entity\Domain\{
-    IdentityInterface,
+    Identity,
     Name,
     TopLevelDomain
 };
@@ -16,7 +16,7 @@ final class DomainRegistered
     private $tld;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         Name $name,
         TopLevelDomain $tld
     ) {
@@ -25,7 +25,7 @@ final class DomainRegistered
         $this->tld = $tld;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

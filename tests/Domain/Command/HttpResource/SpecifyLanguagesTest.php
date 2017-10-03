@@ -5,7 +5,7 @@ namespace Tests\Domain\Command\HttpResource;
 
 use Domain\{
     Command\HttpResource\SpecifyLanguages,
-    Entity\HttpResource\IdentityInterface,
+    Entity\HttpResource\Identity,
     Model\Language
 };
 use Innmind\Immutable\Set;
@@ -16,7 +16,7 @@ class SpecifyLanguagesTest extends TestCase
     public function testInterface()
     {
         $command = new SpecifyLanguages(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $languages = (new Set(Language::class))
                 ->add(new Language('fr'))
         );
@@ -31,7 +31,7 @@ class SpecifyLanguagesTest extends TestCase
     public function testThrowWhenInvalidSetOfLanguages()
     {
         new SpecifyLanguages(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Set('string')
         );
     }

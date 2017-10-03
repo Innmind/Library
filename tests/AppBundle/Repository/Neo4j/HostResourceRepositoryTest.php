@@ -8,11 +8,11 @@ use AppBundle\{
     Entity\HostResource\Identity
 };
 use Domain\{
-    Repository\HostResourceRepositoryInterface,
+    Repository\HostResourceRepository as HostResourceRepositoryInterface,
     Entity\HostResource,
-    Entity\Host\IdentityInterface as HostIdentity,
-    Entity\HttpResource\IdentityInterface as HttpResourceIdentity,
-    Specification\HostResource\SpecificationInterface
+    Entity\Host\Identity as HostIdentity,
+    Entity\HttpResource\Identity as HttpResourceIdentity,
+    Specification\HostResource\Specification
 };
 use Innmind\Neo4j\ONM\{
     Repository,
@@ -196,7 +196,7 @@ class HostResourceRepositoryTest extends TestCase
         $repository = new HostResourceRepository(
             $infra = $this->createMock(Repository::class)
         );
-        $specification = $this->createMock(SpecificationInterface::class);
+        $specification = $this->createMock(Specification::class);
         $infra
             ->expects($this->once())
             ->method('matching')

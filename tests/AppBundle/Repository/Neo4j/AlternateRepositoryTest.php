@@ -8,10 +8,10 @@ use AppBundle\{
     Entity\Alternate\Identity
 };
 use Domain\{
-    Repository\AlternateRepositoryInterface,
+    Repository\AlternateRepository as AlternateRepositoryInterface,
     Entity\Alternate,
-    Entity\HttpResource\IdentityInterface as HttpResourceIdentity,
-    Specification\Alternate\SpecificationInterface,
+    Entity\HttpResource\Identity as HttpResourceIdentity,
+    Specification\Alternate\Specification,
     Model\Language
 };
 use Innmind\Neo4j\ONM\{
@@ -195,7 +195,7 @@ class AlternateRepositoryTest extends TestCase
         $repository = new AlternateRepository(
             $infra = $this->createMock(Repository::class)
         );
-        $specification = $this->createMock(SpecificationInterface::class);
+        $specification = $this->createMock(Specification::class);
         $infra
             ->expects($this->once())
             ->method('matching')

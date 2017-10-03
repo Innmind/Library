@@ -5,11 +5,11 @@ namespace Tests\Domain\Specification\Reference;
 
 use Domain\{
     Specification\Reference\OrSpecification,
-    Specification\Reference\SpecificationInterface,
+    Specification\Reference\Specification,
     Specification\OrSpecification as ParentSpec,
     Entity\Reference,
-    Entity\Reference\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\Reference\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use PHPUnit\Framework\TestCase;
 
@@ -18,22 +18,22 @@ class OrSpecificationTest extends TestCase
     public function testInterface()
     {
         $spec = new OrSpecification(
-            $this->createMock(SpecificationInterface::class),
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class),
+            $this->createMock(Specification::class)
         );
 
         $this->assertInstanceOf(ParentSpec::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
     }
 
     public function testIsSatisfiedBy()
     {
         $spec = new OrSpecification(
-            $this->createMock(SpecificationInterface::class),
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class),
+            $this->createMock(Specification::class)
         );
         $reference = new Reference(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class)
         );

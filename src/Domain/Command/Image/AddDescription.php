@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Domain\Command\Image;
 
 use Domain\Entity\Image\{
-    IdentityInterface,
+    Identity,
     Description
 };
 
@@ -14,14 +14,14 @@ final class AddDescription
     private $description;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         Description $description
     ) {
         $this->identity = $identity;
         $this->description = $description;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

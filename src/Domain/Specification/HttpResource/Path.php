@@ -7,7 +7,7 @@ use Domain\Entity\HttpResource;
 use Innmind\Specification\ComparatorInterface;
 use Innmind\Url\PathInterface;
 
-final class Path implements ComparatorInterface, SpecificationInterface
+final class Path implements ComparatorInterface, Specification
 {
     use Composable;
 

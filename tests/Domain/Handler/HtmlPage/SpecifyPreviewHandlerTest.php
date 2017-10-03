@@ -6,9 +6,9 @@ namespace Tests\Domain\Handler\HtmlPage;
 use Domain\{
     Handler\HtmlPage\SpecifyPreviewHandler,
     Command\HtmlPage\SpecifyPreview,
-    Repository\HtmlPageRepositoryInterface,
+    Repository\HtmlPageRepository,
     Entity\HtmlPage,
-    Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Identity,
     Event\HtmlPage\PreviewSpecified
 };
 use Innmind\Url\{
@@ -23,10 +23,10 @@ class SpecifyPreviewHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new SpecifyPreviewHandler(
-            $repository = $this->createMock(HtmlPageRepositoryInterface::class)
+            $repository = $this->createMock(HtmlPageRepository::class)
         );
         $command = new SpecifyPreview(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(UrlInterface::class)
         );
         $repository

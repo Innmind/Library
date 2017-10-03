@@ -4,8 +4,8 @@ declare(strict_types = 1);
 namespace Domain\Event;
 
 use Domain\{
-    Entity\Alternate\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Alternate\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Model\Language
 };
 
@@ -17,7 +17,7 @@ final class AlternateCreated
     private $language;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         ResourceIdentity $resource,
         ResourceIdentity $alternate,
         Language $language
@@ -28,7 +28,7 @@ final class AlternateCreated
         $this->language = $language;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

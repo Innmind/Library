@@ -9,7 +9,7 @@ use AppBundle\Rest\Gateway\{
     HttpResourceGateway\ResourceAccessor,
     HttpResourceGateway\ResourceLinker
 };
-use Domain\Repository\HttpResourceRepositoryInterface;
+use Domain\Repository\HttpResourceRepository;
 use Innmind\Rest\Server\Gateway;
 use Innmind\CommandBus\CommandBusInterface;
 use Innmind\Neo4j\DBAL\Connection;
@@ -29,7 +29,7 @@ class HttpResourceGatewayTest extends TestCase
                 $this->createMock(CommandBusInterface::class)
             ),
             $this->accessor = new ResourceAccessor(
-                $this->createMock(HttpResourceRepositoryInterface::class),
+                $this->createMock(HttpResourceRepository::class),
                 $this->createMock(Connection::class)
             ),
             $this->linker = new ResourceLinker(

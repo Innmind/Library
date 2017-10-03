@@ -9,9 +9,9 @@ use Domain\{
     Command\MakeCanonicalLink,
     Entity\Alternate,
     Entity\Canonical,
-    Entity\Alternate\IdentityInterface as AlternateIdentity,
-    Entity\Canonical\IdentityInterface as CanonicalIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Alternate\Identity as AlternateIdentity,
+    Entity\Canonical\Identity as CanonicalIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Model\Language,
     Exception\AlternateAlreadyExistException,
     Exception\CanonicalAlreadyExistException

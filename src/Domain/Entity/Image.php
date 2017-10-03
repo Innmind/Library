@@ -4,11 +4,11 @@ declare(strict_types = 1);
 namespace Domain\Entity;
 
 use Domain\{
-    Entity\Image\IdentityInterface,
+    Entity\Image\Identity,
     Entity\Image\Description,
     Entity\Image\Weight,
     Entity\Image\Dimension,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\ImageRegistered,
     Event\Image\DimensionSpecified,
     Event\Image\WeightSpecified,
@@ -35,7 +35,7 @@ final class Image extends HttpResource
         PathInterface $path,
         QueryInterface $query
     ) {
-        if (!$identity instanceof IdentityInterface) {
+        if (!$identity instanceof Identity) {
             throw new InvalidArgumentException;
         }
 

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Domain\Command\HttpResource;
 
 use Domain\Entity\HttpResource\{
-    IdentityInterface,
+    Identity,
     Charset
 };
 
@@ -13,13 +13,13 @@ final class SpecifyCharset
     private $identity;
     private $charset;
 
-    public function __construct(IdentityInterface $identity, Charset $charset)
+    public function __construct(Identity $identity, Charset $charset)
     {
         $this->identity = $identity;
         $this->charset = $charset;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

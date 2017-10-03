@@ -5,7 +5,7 @@ namespace Tests\Domain\Entity;
 
 use Domain\{
     Entity\Host,
-    Entity\Host\IdentityInterface,
+    Entity\Host\Identity,
     Entity\Host\Name,
     Event\HostRegistered
 };
@@ -17,7 +17,7 @@ class HostTest extends TestCase
     public function testInstanciation()
     {
         $host = new Host(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $name = new Name('www.example.com')
         );
 
@@ -31,7 +31,7 @@ class HostTest extends TestCase
     public function testRegister()
     {
         $host = Host::register(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $name = new Name('www.example.com')
         );
 

@@ -5,7 +5,7 @@ namespace Domain\Handler\HttpResource;
 
 use Domain\{
     Command\HttpResource\RegisterAuthor,
-    Repository\ResourceAuthorRepositoryInterface,
+    Repository\ResourceAuthorRepository,
     Entity\ResourceAuthor
 };
 use Innmind\TimeContinuum\TimeContinuumInterface;
@@ -16,7 +16,7 @@ final class RegisterAuthorHandler
     private $clock;
 
     public function __construct(
-        ResourceAuthorRepositoryInterface $repository,
+        ResourceAuthorRepository $repository,
         TimeContinuumInterface $clock
     ) {
         $this->repository = $repository;

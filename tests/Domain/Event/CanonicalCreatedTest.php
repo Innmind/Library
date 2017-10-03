@@ -5,8 +5,8 @@ namespace Tests\Domain\Event;
 
 use Domain\{
     Event\CanonicalCreated,
-    Entity\Canonical\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\Canonical\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use PHPUnit\Framework\TestCase;
@@ -16,7 +16,7 @@ class CanonicalCreatedTest extends TestCase
     public function testInterface()
     {
         $event = new CanonicalCreated(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $canonical = $this->createMock(ResourceIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $foundAt = $this->createMock(PointInTimeInterface::class)

@@ -4,11 +4,11 @@ declare(strict_types = 1);
 namespace AppBundle\Repository\Neo4j;
 
 use Domain\{
-    Repository\AlternateRepositoryInterface,
+    Repository\AlternateRepository as AlternateRepositoryInterface,
     Entity\Alternate,
-    Entity\Alternate\IdentityInterface,
+    Entity\Alternate\Identity,
     Exception\AlternateNotFoundException,
-    Specification\Alternate\SpecificationInterface
+    Specification\Alternate\Specification
 };
 use Innmind\Neo4j\ONM\{
     Repository,
@@ -31,7 +31,7 @@ final class AlternateRepository implements AlternateRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function get(IdentityInterface $identity): Alternate
+    public function get(Identity $identity): Alternate
     {
         try {
             return $this->infrastructure->get($identity);
@@ -47,7 +47,7 @@ final class AlternateRepository implements AlternateRepositoryInterface
         return $this;
     }
 
-    public function remove(IdentityInterface $identity): AlternateRepositoryInterface
+    public function remove(Identity $identity): AlternateRepositoryInterface
     {
         $this->infrastructure->remove(
             $this->get($identity)
@@ -56,7 +56,7 @@ final class AlternateRepository implements AlternateRepositoryInterface
         return $this;
     }
 
-    public function has(IdentityInterface $identity): bool
+    public function has(Identity $identity): bool
     {
         return $this->infrastructure->has($identity);
     }
@@ -85,7 +85,7 @@ final class AlternateRepository implements AlternateRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function matching(SpecificationInterface $specification): SetInterface
+    public function matching(Specification $specification): SetInterface
     {
         return $this
             ->infrastructure

@@ -5,12 +5,12 @@ namespace Tests\Domain\Specification\HostResource;
 
 use Domain\{
     Specification\HostResource\Not,
-    Specification\HostResource\SpecificationInterface,
+    Specification\HostResource\Specification,
     Specification\Not as ParentSpec,
     Entity\HostResource,
-    Entity\HostResource\IdentityInterface,
-    Entity\Host\IdentityInterface as HostIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\HostResource\Identity,
+    Entity\Host\Identity as HostIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use PHPUnit\Framework\TestCase;
@@ -20,20 +20,20 @@ class NotTest extends TestCase
     public function testInterface()
     {
         $spec = new Not(
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class)
         );
 
         $this->assertInstanceOf(ParentSpec::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
     }
 
     public function testIsSatisfiedBy()
     {
         $spec = new Not(
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class)
         );
         $relation = new HostResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(PointInTimeInterface::class)

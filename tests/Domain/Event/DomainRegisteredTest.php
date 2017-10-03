@@ -5,7 +5,7 @@ namespace Tests\Domain\Event;
 
 use Domain\{
     Event\DomainRegistered,
-    Entity\Domain\IdentityInterface,
+    Entity\Domain\Identity,
     Entity\Domain\Name,
     Entity\Domain\TopLevelDomain
 };
@@ -16,7 +16,7 @@ class DomainRegisteredTest extends TestCase
     public function testInterface()
     {
         $event = new DomainRegistered(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $name = new Name('example'),
             $tld = new TopLevelDomain('com')
         );

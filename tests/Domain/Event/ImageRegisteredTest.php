@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Tests\Dommain\Event;
 
 use Domain\{
-    Entity\Image\IdentityInterface,
+    Entity\Image\Identity,
     Event\ImageRegistered
 };
 use Innmind\Url\{
@@ -18,7 +18,7 @@ class ImageRegisteredTest extends TestCase
     public function testInterface()
     {
         $event = new ImageRegistered(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $path = $this->createMock(PathInterface::class),
             $query = $this->createMock(QueryInterface::class)
         );

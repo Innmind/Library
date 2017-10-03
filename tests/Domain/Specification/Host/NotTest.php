@@ -5,10 +5,10 @@ namespace Tests\Domain\Specification\Host;
 
 use Domain\{
     Specification\Host\Not,
-    Specification\Host\SpecificationInterface,
+    Specification\Host\Specification,
     Specification\Not as ParentSpec,
     Entity\Host,
-    Entity\Host\IdentityInterface,
+    Entity\Host\Identity,
     Entity\Host\Name
 };
 use PHPUnit\Framework\TestCase;
@@ -18,20 +18,20 @@ class NotTest extends TestCase
     public function testInterface()
     {
         $spec = new Not(
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class)
         );
 
         $this->assertInstanceOf(ParentSpec::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
     }
 
     public function testIsSatisfiedBy()
     {
         $spec = new Not(
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class)
         );
         $host = new Host(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Name('foo')
         );
         $spec

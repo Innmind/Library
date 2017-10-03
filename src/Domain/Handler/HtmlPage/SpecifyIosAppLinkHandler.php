@@ -5,14 +5,14 @@ namespace Domain\Handler\HtmlPage;
 
 use Domain\{
     Command\HtmlPage\SpecifyIosAppLink,
-    Repository\HtmlPageRepositoryInterface
+    Repository\HtmlPageRepository
 };
 
 final class SpecifyIosAppLinkHandler
 {
     private $repository;
 
-    public function __construct(HtmlPageRepositoryInterface $repository)
+    public function __construct(HtmlPageRepository $repository)
     {
         $this->repository = $repository;
     }

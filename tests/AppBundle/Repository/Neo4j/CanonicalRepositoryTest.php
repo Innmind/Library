@@ -8,10 +8,10 @@ use AppBundle\{
     Entity\Canonical\Identity
 };
 use Domain\{
-    Repository\CanonicalRepositoryInterface,
+    Repository\CanonicalRepository as CanonicalRepositoryInterface,
     Entity\Canonical,
-    Entity\HttpResource\IdentityInterface as HttpResourceIdentity,
-    Specification\Canonical\SpecificationInterface
+    Entity\HttpResource\Identity as HttpResourceIdentity,
+    Specification\Canonical\Specification
 };
 use Innmind\Neo4j\ONM\{
     Repository,
@@ -195,7 +195,7 @@ class CanonicalRepositoryTest extends TestCase
         $repository = new CanonicalRepository(
             $infra = $this->createMock(Repository::class)
         );
-        $specification = $this->createMock(SpecificationInterface::class);
+        $specification = $this->createMock(Specification::class);
         $infra
             ->expects($this->once())
             ->method('matching')

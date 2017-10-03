@@ -5,7 +5,7 @@ namespace Domain\Handler;
 
 use Domain\{
     Command\RegisterAlternateResource,
-    Repository\AlternateRepositoryInterface,
+    Repository\AlternateRepository,
     Entity\Alternate,
     Specification\Alternate\HttpResource,
     Specification\Alternate\Alternate as AlternateSpec,
@@ -17,7 +17,7 @@ final class RegisterAlternateResourceHandler
 {
     private $repository;
 
-    public function __construct(AlternateRepositoryInterface $repository)
+    public function __construct(AlternateRepository $repository)
     {
         $this->repository = $repository;
     }

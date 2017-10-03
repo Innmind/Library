@@ -4,11 +4,11 @@ declare(strict_types = 1);
 namespace AppBundle\Repository\Neo4j;
 
 use Domain\{
-    Repository\ResourceAuthorRepositoryInterface,
+    Repository\ResourceAuthorRepository as ResourceAuthorRepositoryInterface,
     Entity\ResourceAuthor,
-    Entity\ResourceAuthor\IdentityInterface,
+    Entity\ResourceAuthor\Identity,
     Exception\ResourceAuthorNotFoundException,
-    Specification\ResourceAuthor\SpecificationInterface
+    Specification\ResourceAuthor\Specification
 };
 use Innmind\Neo4j\ONM\{
     Repository,
@@ -31,7 +31,7 @@ final class ResourceAuthorRepository implements ResourceAuthorRepositoryInterfac
     /**
      * {@inheritdoc}
      */
-    public function get(IdentityInterface $identity): ResourceAuthor
+    public function get(Identity $identity): ResourceAuthor
     {
         try {
             return $this->infrastructure->get($identity);
@@ -47,7 +47,7 @@ final class ResourceAuthorRepository implements ResourceAuthorRepositoryInterfac
         return $this;
     }
 
-    public function remove(IdentityInterface $identity): ResourceAuthorRepositoryInterface
+    public function remove(Identity $identity): ResourceAuthorRepositoryInterface
     {
         $this->infrastructure->remove(
             $this->get($identity)
@@ -56,7 +56,7 @@ final class ResourceAuthorRepository implements ResourceAuthorRepositoryInterfac
         return $this;
     }
 
-    public function has(IdentityInterface $identity): bool
+    public function has(Identity $identity): bool
     {
         return $this->infrastructure->has($identity);
     }
@@ -85,7 +85,7 @@ final class ResourceAuthorRepository implements ResourceAuthorRepositoryInterfac
     /**
      * {@inheritdoc}
      */
-    public function matching(SpecificationInterface $specification): SetInterface
+    public function matching(Specification $specification): SetInterface
     {
         return $this
             ->infrastructure

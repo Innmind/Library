@@ -8,9 +8,9 @@ use AppBundle\{
     Entity\HttpResource\Identity
 };
 use Domain\{
-    Repository\HttpResourceRepositoryInterface,
+    Repository\HttpResourceRepository as HttpResourceRepositoryInterface,
     Entity\HttpResource,
-    Specification\HttpResource\SpecificationInterface
+    Specification\HttpResource\Specification
 };
 use Innmind\Url\{
     PathInterface,
@@ -193,7 +193,7 @@ class HttpResourceRepositoryTest extends TestCase
         $repository = new HttpResourceRepository(
             $infra = $this->createMock(Repository::class)
         );
-        $specification = $this->createMock(SpecificationInterface::class);
+        $specification = $this->createMock(Specification::class);
         $infra
             ->expects($this->once())
             ->method('matching')

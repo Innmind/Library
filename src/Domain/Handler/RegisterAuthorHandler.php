@@ -5,7 +5,7 @@ namespace Domain\Handler;
 
 use Domain\{
     Command\RegisterAuthor,
-    Repository\AuthorRepositoryInterface,
+    Repository\AuthorRepository,
     Entity\Author,
     Specification\Author\Name,
     Exception\AuthorAlreadyExistException
@@ -15,7 +15,7 @@ final class RegisterAuthorHandler
 {
     private $repository;
 
-    public function __construct(AuthorRepositoryInterface $repository)
+    public function __construct(AuthorRepository $repository)
     {
         $this->repository = $repository;
     }

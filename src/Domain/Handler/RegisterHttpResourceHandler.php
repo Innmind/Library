@@ -7,9 +7,9 @@ use Domain\{
     Command\RegisterHttpResource,
     Entity\HttpResource,
     Entity\HostResource,
-    Entity\HttpResource\IdentityInterface,
-    Repository\HttpResourceRepositoryInterface,
-    Repository\HostResourceRepositoryInterface,
+    Entity\HttpResource\Identity,
+    Repository\HttpResourceRepository,
+    Repository\HostResourceRepository,
     Specification\HttpResource\Path,
     Specification\HttpResource\Query,
     Specification\HostResource\InResources,
@@ -26,8 +26,8 @@ final class RegisterHttpResourceHandler
     private $clock;
 
     public function __construct(
-        HttpResourceRepositoryInterface $resourceRepository,
-        HostResourceRepositoryInterface $relationRepository,
+        HttpResourceRepository $resourceRepository,
+        HostResourceRepository $relationRepository,
         TimeContinuumInterface $clock
     ) {
         $this->resourceRepository = $resourceRepository;
@@ -70,7 +70,7 @@ final class RegisterHttpResourceHandler
         }
 
         $identities = $resources->reduce(
-            new Set(IdentityInterface::class),
+            new Set(Identity::class),
             function(Set $identities, HttpResource $resource): Set {
                 return $identities->add($resource->identity());
             }

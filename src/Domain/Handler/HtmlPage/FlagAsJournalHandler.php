@@ -5,14 +5,14 @@ namespace Domain\Handler\HtmlPage;
 
 use Domain\{
     Command\HtmlPage\FlagAsJournal,
-    Repository\HtmlPageRepositoryInterface
+    Repository\HtmlPageRepository
 };
 
 final class FlagAsJournalHandler
 {
     private $repository;
 
-    public function __construct(HtmlPageRepositoryInterface $repository)
+    public function __construct(HtmlPageRepository $repository)
     {
         $this->repository = $repository;
     }

@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Domain\Command\HtmlPage;
 
-use Domain\Entity\HtmlPage\IdentityInterface;
+use Domain\Entity\HtmlPage\Identity;
 use Innmind\Url\UrlInterface;
 
 final class SpecifyPreview
@@ -12,14 +12,14 @@ final class SpecifyPreview
     private $url;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         UrlInterface $url
     ) {
         $this->identity = $identity;
         $this->url = $url;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

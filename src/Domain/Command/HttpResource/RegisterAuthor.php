@@ -4,9 +4,9 @@ declare(strict_types = 1);
 namespace Domain\Command\HttpResource;
 
 use Domain\Entity\{
-    ResourceAuthor\IdentityInterface,
-    Author\IdentityInterface as AuthorIdentity,
-    HttpResource\IdentityInterface as ResourceIdentity
+    ResourceAuthor\Identity,
+    Author\Identity as AuthorIdentity,
+    HttpResource\Identity as ResourceIdentity
 };
 
 final class RegisterAuthor
@@ -16,7 +16,7 @@ final class RegisterAuthor
     private $resource;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         AuthorIdentity $author,
         ResourceIdentity $resource
     ) {
@@ -25,7 +25,7 @@ final class RegisterAuthor
         $this->resource = $resource;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

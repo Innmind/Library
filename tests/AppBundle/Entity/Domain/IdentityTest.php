@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Tests\AppBundle\Entity\Domain;
 
 use AppBundle\Entity\Domain\Identity;
-use Domain\Entity\Domain\IdentityInterface;
+use Domain\Entity\Domain\Identity as IdentityInterface;
 use Innmind\Neo4j\ONM\Identity\Uuid as UuidIdentity;
 use Innmind\Rest\Server\Identity as RestIdentity;
 use Ramsey\Uuid\Uuid;

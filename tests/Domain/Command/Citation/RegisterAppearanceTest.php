@@ -5,9 +5,9 @@ namespace Tests\Domain\Command\Citation;
 
 use Domain\{
     Command\Citation\RegisterAppearance,
-    Entity\CitationAppearance\IdentityInterface,
-    Entity\Citation\IdentityInterface as CitationIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\CitationAppearance\Identity,
+    Entity\Citation\Identity as CitationIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use PHPUnit\Framework\TestCase;
 
@@ -16,7 +16,7 @@ class RegisterAppearanceTest extends TestCase
     public function testInterface()
     {
         $command = new RegisterAppearance(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $citation = $this->createMock(CitationIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class)
         );

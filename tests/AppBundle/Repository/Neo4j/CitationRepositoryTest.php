@@ -8,10 +8,10 @@ use AppBundle\{
     Entity\Citation\Identity
 };
 use Domain\{
-    Repository\CitationRepositoryInterface,
+    Repository\CitationRepository as CitationRepositoryInterface,
     Entity\Citation,
     Entity\Citation\Text,
-    Specification\Citation\SpecificationInterface
+    Specification\Citation\Specification
 };
 use Innmind\Neo4j\ONM\{
     Repository,
@@ -186,7 +186,7 @@ class CitationRepositoryTest extends TestCase
         $repository = new CitationRepository(
             $infra = $this->createMock(Repository::class)
         );
-        $specification = $this->createMock(SpecificationInterface::class);
+        $specification = $this->createMock(Specification::class);
         $infra
             ->expects($this->once())
             ->method('matching')

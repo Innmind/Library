@@ -5,10 +5,10 @@ namespace Tests\Domain\Specification\Domain;
 
 use Domain\{
     Specification\Domain\AndSpecification,
-    Specification\Domain\SpecificationInterface,
+    Specification\Domain\Specification,
     Specification\AndSpecification as ParentSpec,
     Entity\Domain,
-    Entity\Domain\IdentityInterface,
+    Entity\Domain\Identity,
     Entity\Domain\Name,
     Entity\Domain\TopLevelDomain
 };
@@ -19,22 +19,22 @@ class AndSpecificationTest extends TestCase
     public function testInterface()
     {
         $spec = new AndSpecification(
-            $this->createMock(SpecificationInterface::class),
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class),
+            $this->createMock(Specification::class)
         );
 
         $this->assertInstanceOf(ParentSpec::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
     }
 
     public function testIsSatisfiedBy()
     {
         $spec = new AndSpecification(
-            $this->createMock(SpecificationInterface::class),
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class),
+            $this->createMock(Specification::class)
         );
         $domain = new Domain(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Name('foo'),
             new TopLevelDomain('fr')
         );

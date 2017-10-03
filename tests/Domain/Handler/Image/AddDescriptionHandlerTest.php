@@ -6,9 +6,9 @@ namespace Tests\Domain\Handler\Image;
 use Domain\{
     Handler\Image\AddDescriptionHandler,
     Command\Image\AddDescription,
-    Repository\ImageRepositoryInterface,
+    Repository\ImageRepository,
     Entity\Image,
-    Entity\Image\IdentityInterface,
+    Entity\Image\Identity,
     Entity\Image\Description,
     Event\Image\DescriptionAdded
 };
@@ -23,10 +23,10 @@ class AddDescriptionHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new AddDescriptionHandler(
-            $repository = $this->createMock(ImageRepositoryInterface::class)
+            $repository = $this->createMock(ImageRepository::class)
         );
         $command = new AddDescription(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Description('foobar')
         );
         $repository

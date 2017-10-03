@@ -6,9 +6,9 @@ namespace Tests\Domain\Handler\HtmlPage;
 use Domain\{
     Handler\HtmlPage\SpecifyTitleHandler,
     Command\HtmlPage\SpecifyTitle,
-    Repository\HtmlPageRepositoryInterface,
+    Repository\HtmlPageRepository,
     Entity\HtmlPage,
-    Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Identity,
     Event\HtmlPage\TitleSpecified
 };
 use Innmind\Url\{
@@ -22,10 +22,10 @@ class SpecifyTitleHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new SpecifyTitleHandler(
-            $repository = $this->createMock(HtmlPageRepositoryInterface::class)
+            $repository = $this->createMock(HtmlPageRepository::class)
         );
         $command = new SpecifyTitle(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             'foo'
         );
         $repository

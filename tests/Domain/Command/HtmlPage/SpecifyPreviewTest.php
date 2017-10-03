@@ -5,7 +5,7 @@ namespace Tests\Domain\Command\HtmlPage;
 
 use Domain\{
     Command\HtmlPage\SpecifyPreview,
-    Entity\HtmlPage\IdentityInterface
+    Entity\HtmlPage\Identity
 };
 use Innmind\Url\UrlInterface;
 use PHPUnit\Framework\TestCase;
@@ -15,7 +15,7 @@ class SpecifyPreviewTest extends TestCase
     public function testInterface()
     {
         $command = new SpecifyPreview(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $url = $this->createMock(UrlInterface::class)
         );
 

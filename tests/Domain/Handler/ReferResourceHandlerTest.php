@@ -6,10 +6,10 @@ namespace Tests\Domain\Handler;
 use Domain\{
     Handler\ReferResourceHandler,
     Command\ReferResource,
-    Repository\ReferenceRepositoryInterface,
+    Repository\ReferenceRepository,
     Entity\Reference,
-    Entity\Reference\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Reference\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Specification\AndSpecification,
     Specification\Reference\Source,
     Specification\Reference\Target,
@@ -26,10 +26,10 @@ class ReferResourceHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new ReferResourceHandler(
-            $repository = $this->createMock(ReferenceRepositoryInterface::class)
+            $repository = $this->createMock(ReferenceRepository::class)
         );
         $command = new ReferResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class)
         );
@@ -73,10 +73,10 @@ class ReferResourceHandlerTest extends TestCase
     public function testThrowWhenReferenceAlreadyExist()
     {
         $handler = new ReferResourceHandler(
-            $repository = $this->createMock(ReferenceRepositoryInterface::class)
+            $repository = $this->createMock(ReferenceRepository::class)
         );
         $command = new ReferResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class)
         );
@@ -111,7 +111,7 @@ class ReferResourceHandlerTest extends TestCase
             ->method('current')
             ->willReturn(
                 new Reference(
-                    $this->createMock(IdentityInterface::class),
+                    $this->createMock(Identity::class),
                     $this->createMock(ResourceIdentity::class),
                     $this->createMock(ResourceIdentity::class)
                 )

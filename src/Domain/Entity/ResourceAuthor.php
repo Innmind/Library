@@ -4,9 +4,9 @@ declare(strict_types = 1);
 namespace Domain\Entity;
 
 use Domain\{
-    Entity\ResourceAuthor\IdentityInterface,
-    Entity\Author\IdentityInterface as AuthorIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\ResourceAuthor\Identity,
+    Entity\Author\Identity as AuthorIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\ResourceAuthorRegistered
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
@@ -25,7 +25,7 @@ final class ResourceAuthor implements ContainsRecordedEventsInterface
     private $asOf;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         AuthorIdentity $author,
         ResourceIdentity $resource,
         PointInTimeInterface $asOf
@@ -37,7 +37,7 @@ final class ResourceAuthor implements ContainsRecordedEventsInterface
     }
 
     public static function register(
-        IdentityInterface $identity,
+        Identity $identity,
         AuthorIdentity $author,
         ResourceIdentity $resource,
         PointInTimeInterface $asOf
@@ -53,7 +53,7 @@ final class ResourceAuthor implements ContainsRecordedEventsInterface
         return $self;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

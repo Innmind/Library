@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Domain\Command;
 
-use Domain\Entity\Domain\IdentityInterface;
+use Domain\Entity\Domain\Identity;
 use Innmind\Url\Authority\HostInterface;
 
 final class RegisterDomain
@@ -11,13 +11,13 @@ final class RegisterDomain
     private $identity;
     private $host;
 
-    public function __construct(IdentityInterface $identity, HostInterface $host)
+    public function __construct(Identity $identity, HostInterface $host)
     {
         $this->identity = $identity;
         $this->host = $host;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

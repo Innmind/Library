@@ -8,7 +8,7 @@ use AppBundle\{
     Entity\HttpResource\Identity
 };
 use Domain\{
-    Repository\HttpResourceRepositoryInterface,
+    Repository\HttpResourceRepository,
     Entity\HttpResource as Entity,
     Entity\HttpResource\Charset,
     Model\Language
@@ -52,7 +52,7 @@ class ResourceAccessorTest extends TestCase
     public function setUp()
     {
         $this->accessor = new ResourceAccessor(
-            $this->repository = $this->createMock(HttpResourceRepositoryInterface::class),
+            $this->repository = $this->createMock(HttpResourceRepository::class),
             $this->dbal = $this->createMock(Connection::class)
         );
     }

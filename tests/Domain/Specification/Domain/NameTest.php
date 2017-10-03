@@ -5,12 +5,12 @@ namespace Tests\Domain\Specification\Domain;
 
 use Domain\{
     Specification\Domain\Name,
-    Specification\Domain\SpecificationInterface,
+    Specification\Domain\Specification,
     Specification\Domain\AndSpecification,
     Specification\Domain\OrSpecification,
     Specification\Domain\Not,
     Entity\Domain,
-    Entity\Domain\IdentityInterface,
+    Entity\Domain\Identity,
     Entity\Domain\Name as Model,
     Entity\Domain\TopLevelDomain
 };
@@ -24,7 +24,7 @@ class NameTest extends TestCase
         $spec = new Name(new Model('foo'));
 
         $this->assertInstanceOf(ComparatorInterface::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('name', $spec->property());
         $this->assertSame('=', $spec->sign());
         $this->assertSame('foo', $spec->value());
@@ -34,7 +34,7 @@ class NameTest extends TestCase
     {
         $spec = new Name(new Model('foo'));
         $domain = new Domain(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Model('foo'),
             new TopLevelDomain('fr')
         );
@@ -42,7 +42,7 @@ class NameTest extends TestCase
         $this->assertTrue($spec->isSatisfiedBy($domain));
 
         $domain = new Domain(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Model('bar'),
             new TopLevelDomain('fr')
         );

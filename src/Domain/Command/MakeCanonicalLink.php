@@ -4,8 +4,8 @@ declare(strict_types = 1);
 namespace Domain\Command;
 
 use Domain\Entity\{
-    Canonical\IdentityInterface,
-    HttpResource\IdentityInterface as ResourceIdentity
+    Canonical\Identity,
+    HttpResource\Identity as ResourceIdentity
 };
 
 final class MakeCanonicalLink
@@ -15,7 +15,7 @@ final class MakeCanonicalLink
     private $resource;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         ResourceIdentity $canonical,
         ResourceIdentity $resource
     ) {
@@ -24,7 +24,7 @@ final class MakeCanonicalLink
         $this->resource = $resource;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

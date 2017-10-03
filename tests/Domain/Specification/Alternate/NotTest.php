@@ -5,11 +5,11 @@ namespace Tests\Domain\Specification\Alternate;
 
 use Domain\{
     Specification\Alternate\Not,
-    Specification\Alternate\SpecificationInterface,
+    Specification\Alternate\Specification,
     Specification\Not as ParentSpec,
     Entity\Alternate,
-    Entity\Alternate\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Alternate\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Model\Language
 };
 use PHPUnit\Framework\TestCase;
@@ -19,20 +19,20 @@ class NotTest extends TestCase
     public function testInterface()
     {
         $spec = new Not(
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class)
         );
 
         $this->assertInstanceOf(ParentSpec::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
     }
 
     public function testIsSatisfiedBy()
     {
         $spec = new Not(
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class)
         );
         $alternate = new Alternate(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class),
             new Language('fr')

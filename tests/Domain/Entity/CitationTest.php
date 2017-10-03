@@ -5,7 +5,7 @@ namespace Tests\Domain\Entity;
 
 use Domain\{
     Entity\Citation,
-    Entity\Citation\IdentityInterface,
+    Entity\Citation\Identity,
     Entity\Citation\Text,
     Event\CitationRegistered
 };
@@ -17,7 +17,7 @@ class CitationTest extends TestCase
     public function testInstanciation()
     {
         $entity = new Citation(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $text = new Text('foo')
         );
 
@@ -31,7 +31,7 @@ class CitationTest extends TestCase
     public function testRegister()
     {
         $entity = Citation::register(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $text = new Text('foo')
         );
 

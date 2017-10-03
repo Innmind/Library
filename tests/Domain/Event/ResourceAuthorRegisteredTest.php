@@ -5,9 +5,9 @@ namespace Tests\Domain\Event;
 
 use Domain\{
     Event\ResourceAuthorRegistered,
-    Entity\ResourceAuthor\IdentityInterface,
-    Entity\Author\IdentityInterface as AuthorIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\ResourceAuthor\Identity,
+    Entity\Author\Identity as AuthorIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use PHPUnit\Framework\TestCase;
@@ -17,7 +17,7 @@ class ResourceAuthorRegisteredTest extends TestCase
     public function testInterface()
     {
         $event = new ResourceAuthorRegistered(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $author = $this->createMock(AuthorIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $asOf = $this->createMock(PointInTimeInterface::class)

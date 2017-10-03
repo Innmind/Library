@@ -5,7 +5,7 @@ namespace Tests\Domain\Event\HttpResource;
 
 use Domain\{
     Event\HttpResource\LanguagesSpecified,
-    Entity\HttpResource\IdentityInterface,
+    Entity\HttpResource\Identity,
     Model\Language
 };
 use Innmind\Immutable\Set;
@@ -16,7 +16,7 @@ class LanguagesSpecifiedTest extends TestCase
     public function testInterface()
     {
         $event = new LanguagesSpecified(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $languages = new Set(Language::class)
         );
 
@@ -30,7 +30,7 @@ class LanguagesSpecifiedTest extends TestCase
     public function testThrowWhenInvalidSetOfLanguages()
     {
         new LanguagesSpecified(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Set('string')
         );
     }

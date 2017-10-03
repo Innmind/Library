@@ -5,14 +5,14 @@ namespace Domain\Handler\HtmlPage;
 
 use Domain\{
     Command\HtmlPage\SpecifyThemeColour,
-    Repository\HtmlPageRepositoryInterface
+    Repository\HtmlPageRepository
 };
 
 final class SpecifyThemeColourHandler
 {
     private $repository;
 
-    public function __construct(HtmlPageRepositoryInterface $repository)
+    public function __construct(HtmlPageRepository $repository)
     {
         $this->repository = $repository;
     }

@@ -6,9 +6,9 @@ namespace Tests\Domain\Handler\HtmlPage;
 use Domain\{
     Handler\HtmlPage\SpecifyDescriptionHandler,
     Command\HtmlPage\SpecifyDescription,
-    Repository\HtmlPageRepositoryInterface,
+    Repository\HtmlPageRepository,
     Entity\HtmlPage,
-    Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Identity,
     Event\HtmlPage\DescriptionSpecified
 };
 use Innmind\Url\{
@@ -22,10 +22,10 @@ class SpecifyDescriptionHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new SpecifyDescriptionHandler(
-            $repository = $this->createMock(HtmlPageRepositoryInterface::class)
+            $repository = $this->createMock(HtmlPageRepository::class)
         );
         $command = new SpecifyDescription(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             'foo'
         );
         $repository

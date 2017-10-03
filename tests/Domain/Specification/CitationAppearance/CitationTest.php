@@ -5,14 +5,14 @@ namespace Tests\Domain\Specification\CitationAppearance;
 
 use Domain\{
     Specification\CitationAppearance\Citation,
-    Specification\CitationAppearance\SpecificationInterface,
+    Specification\CitationAppearance\Specification,
     Specification\CitationAppearance\AndSpecification,
     Specification\CitationAppearance\OrSpecification,
     Specification\CitationAppearance\Not,
     Entity\CitationAppearance as Entity,
-    Entity\CitationAppearance\IdentityInterface,
-    Entity\Citation\IdentityInterface as CitationIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\CitationAppearance\Identity,
+    Entity\Citation\Identity as CitationIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use Innmind\Specification\ComparatorInterface;
 use Innmind\TimeContinuum\PointInTimeInterface;
@@ -30,7 +30,7 @@ class CitationTest extends TestCase
         $spec = new Citation($identity);
 
         $this->assertInstanceOf(ComparatorInterface::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('citation', $spec->property());
         $this->assertSame('=', $spec->sign());
         $this->assertSame('uuid', $spec->value());
@@ -45,7 +45,7 @@ class CitationTest extends TestCase
             ->willReturn('uuid');
         $spec = new Citation($identity);
         $appearance = new Entity(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(CitationIdentity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(PointInTimeInterface::class)

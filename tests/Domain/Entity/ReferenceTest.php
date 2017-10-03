@@ -5,8 +5,8 @@ namespace Tests\Domain\Entity;
 
 use Domain\{
     Entity\Reference,
-    Entity\Reference\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Reference\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\ReferenceCreated
 };
 use Innmind\EventBus\ContainsRecordedEventsInterface;
@@ -17,7 +17,7 @@ class ReferenceTest extends TestCase
     public function testInstanciation()
     {
         $entity = new Reference(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $source = $this->createMock(ResourceIdentity::class),
             $target = $this->createMock(ResourceIdentity::class)
         );
@@ -32,7 +32,7 @@ class ReferenceTest extends TestCase
     public function testCreate()
     {
         $entity = Reference::create(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $source = $this->createMock(ResourceIdentity::class),
             $target = $this->createMock(ResourceIdentity::class)
         );

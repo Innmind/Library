@@ -4,9 +4,9 @@ declare(strict_types = 1);
 namespace Domain\Entity;
 
 use Domain\{
-    Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Identity,
     Entity\HtmlPage\Anchor,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\HtmlPageRegistered,
     Event\HtmlPage\MainContentSpecified,
     Event\HtmlPage\DescriptionSpecified,
@@ -47,7 +47,7 @@ final class HtmlPage extends HttpResource
         PathInterface $path,
         QueryInterface $query
     ) {
-        if (!$identity instanceof IdentityInterface) {
+        if (!$identity instanceof Identity) {
             throw new InvalidArgumentException;
         }
 

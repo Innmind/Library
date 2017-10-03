@@ -5,12 +5,12 @@ namespace Tests\Domain\Specification\HttpResource;
 
 use Domain\{
     Specification\HttpResource\Query,
-    Specification\HttpResource\SpecificationInterface,
+    Specification\HttpResource\Specification,
     Specification\HttpResource\AndSpecification,
     Specification\HttpResource\OrSpecification,
     Specification\HttpResource\Not,
     Entity\HttpResource,
-    Entity\HttpResource\IdentityInterface
+    Entity\HttpResource\Identity
 };
 use Innmind\Specification\ComparatorInterface;
 use Innmind\Url\{
@@ -31,7 +31,7 @@ class QueryTest extends TestCase
         $spec = new Query($query);
 
         $this->assertInstanceOf(ComparatorInterface::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('query', $spec->property());
         $this->assertSame('=', $spec->sign());
         $this->assertSame('?foo', $spec->value());
@@ -46,7 +46,7 @@ class QueryTest extends TestCase
             ->willReturn('?foo');
         $spec = new Query($query);
         $resource = new HttpResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $query = $this->createMock(QueryInterface::class)
         );

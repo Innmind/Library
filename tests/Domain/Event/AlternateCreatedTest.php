@@ -5,8 +5,8 @@ namespace Tests\Domain\Event;
 
 use Domain\{
     Event\AlternateCreated,
-    Entity\Alternate\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Alternate\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Model\Language
 };
 use PHPUnit\Framework\TestCase;
@@ -16,7 +16,7 @@ class AlternateCreatedTest extends TestCase
     public function testInterface()
     {
         $event = new AlternateCreated(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $alternate = $this->createMock(ResourceIdentity::class),
             $language = new Language('fr')

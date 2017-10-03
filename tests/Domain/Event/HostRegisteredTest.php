@@ -5,7 +5,7 @@ namespace Tests\Domain\Event;
 
 use Domain\{
     Event\HostRegistered,
-    Entity\Host\IdentityInterface,
+    Entity\Host\Identity,
     Entity\Host\Name
 };
 use PHPUnit\Framework\TestCase;
@@ -15,7 +15,7 @@ class HostRegisteredTest extends TestCase
     public function testInterface()
     {
         $event = new HostRegistered(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $name = new Name('www.example.com')
         );
 

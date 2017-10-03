@@ -6,11 +6,11 @@ namespace Tests\Domain\Entity;
 use Domain\{
     Entity\Image,
     Entity\HttpResource,
-    Entity\Image\IdentityInterface,
+    Entity\Image\Identity,
     Entity\Image\Description,
     Entity\Image\Weight,
     Entity\Image\Dimension,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\ImageRegistered,
     Event\Image\DimensionSpecified,
     Event\Image\WeightSpecified,
@@ -27,7 +27,7 @@ class ImageTest extends TestCase
     public function testInterface()
     {
         $image = new Image(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $path = $this->createMock(PathInterface::class),
             $query = $this->createMock(QueryInterface::class)
         );
@@ -57,7 +57,7 @@ class ImageTest extends TestCase
     public function testRegister()
     {
         $image = Image::register(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $path = $this->createMock(PathInterface::class),
             $query = $this->createMock(QueryInterface::class)
         );
@@ -85,7 +85,7 @@ class ImageTest extends TestCase
     public function testSpecifyDimension()
     {
         $image = new Image(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );
@@ -116,7 +116,7 @@ class ImageTest extends TestCase
     public function testSpecifyWeight()
     {
         $image = new Image(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );
@@ -145,7 +145,7 @@ class ImageTest extends TestCase
     public function testAddDescription()
     {
         $image = new Image(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );
@@ -177,7 +177,7 @@ class ImageTest extends TestCase
     public function testDoesntRecordEventWhenDescriptionAlreadyInSet()
     {
         $image = new Image(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );

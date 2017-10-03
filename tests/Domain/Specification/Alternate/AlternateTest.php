@@ -5,13 +5,13 @@ namespace Tests\Domain\Specification\Alternate;
 
 use Domain\{
     Specification\Alternate\Alternate,
-    Specification\Alternate\SpecificationInterface,
+    Specification\Alternate\Specification,
     Specification\Alternate\AndSpecification,
     Specification\Alternate\OrSpecification,
     Specification\Alternate\Not,
-    Entity\Alternate\IdentityInterface,
+    Entity\Alternate\Identity,
     Entity\Alternate as Entity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Model\Language
 };
 use Innmind\Specification\ComparatorInterface;
@@ -29,7 +29,7 @@ class AlternateTest extends TestCase
         $spec = new Alternate($identity);
 
         $this->assertInstanceOf(ComparatorInterface::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('alternate', $spec->property());
         $this->assertSame('=', $spec->sign());
         $this->assertSame('uuid', $spec->value());
@@ -44,7 +44,7 @@ class AlternateTest extends TestCase
             ->willReturn('uuid');
         $spec = new Alternate($identity);
         $alternate = new Entity(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class),
             new Language('fr')

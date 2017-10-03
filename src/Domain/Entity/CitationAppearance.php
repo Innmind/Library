@@ -4,9 +4,9 @@ declare(strict_types = 1);
 namespace Domain\Entity;
 
 use Domain\{
-    Entity\CitationAppearance\IdentityInterface,
-    Entity\Citation\IdentityInterface as CitationIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\CitationAppearance\Identity,
+    Entity\Citation\Identity as CitationIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\CitationAppearanceRegistered
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
@@ -25,7 +25,7 @@ final class CitationAppearance implements ContainsRecordedEventsInterface
     private $foundAt;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         CitationIdentity $citation,
         ResourceIdentity $resource,
         PointInTimeInterface $foundAt
@@ -37,7 +37,7 @@ final class CitationAppearance implements ContainsRecordedEventsInterface
     }
 
     public static function register(
-        IdentityInterface $identity,
+        Identity $identity,
         CitationIdentity $citation,
         ResourceIdentity $resource,
         PointInTimeInterface $foundAt
@@ -53,7 +53,7 @@ final class CitationAppearance implements ContainsRecordedEventsInterface
         return $self;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

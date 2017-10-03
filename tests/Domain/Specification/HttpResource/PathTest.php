@@ -5,12 +5,12 @@ namespace Tests\Domain\Specification\HttpResource;
 
 use Domain\{
     Specification\HttpResource\Path,
-    Specification\HttpResource\SpecificationInterface,
+    Specification\HttpResource\Specification,
     Specification\HttpResource\AndSpecification,
     Specification\HttpResource\OrSpecification,
     Specification\HttpResource\Not,
     Entity\HttpResource,
-    Entity\HttpResource\IdentityInterface
+    Entity\HttpResource\Identity
 };
 use Innmind\Specification\ComparatorInterface;
 use Innmind\Url\{
@@ -31,7 +31,7 @@ class PathTest extends TestCase
         $spec = new Path($path);
 
         $this->assertInstanceOf(ComparatorInterface::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('path', $spec->property());
         $this->assertSame('=', $spec->sign());
         $this->assertSame('/foo', $spec->value());
@@ -46,7 +46,7 @@ class PathTest extends TestCase
             ->willReturn('/foo');
         $spec = new Path($path);
         $resource = new HttpResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $path = $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );

@@ -5,14 +5,14 @@ namespace Tests\Domain\Specification\HostResource;
 
 use Domain\{
     Specification\HostResource\InResources,
-    Specification\HostResource\SpecificationInterface,
+    Specification\HostResource\Specification,
     Specification\HostResource\AndSpecification,
     Specification\HostResource\OrSpecification,
     Specification\HostResource\Not,
     Entity\HostResource as Entity,
-    Entity\HostResource\IdentityInterface,
-    Entity\Host\IdentityInterface as HostIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\HostResource\Identity,
+    Entity\Host\Identity as HostIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use Innmind\Specification\ComparatorInterface;
 use Innmind\Immutable\Set;
@@ -33,7 +33,7 @@ class InResourcesTest extends TestCase
         $spec = new InResources($set);
 
         $this->assertInstanceOf(ComparatorInterface::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('resource', $spec->property());
         $this->assertSame('in', $spec->sign());
         $this->assertSame(['uuid'], $spec->value());
@@ -58,7 +58,7 @@ class InResourcesTest extends TestCase
             ->add($identity);
         $spec = new InResources($set);
         $relation = new Entity(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(PointInTimeInterface::class)

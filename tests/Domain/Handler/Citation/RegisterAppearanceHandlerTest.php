@@ -6,11 +6,11 @@ namespace Tests\Domain\Handler\Citation;
 use Domain\{
     Handler\Citation\RegisterAppearanceHandler,
     Command\Citation\RegisterAppearance,
-    Repository\CitationAppearanceRepositoryInterface,
+    Repository\CitationAppearanceRepository,
     Entity\CitationAppearance,
-    Entity\CitationAppearance\IdentityInterface,
-    Entity\Citation\IdentityInterface as CitationIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\CitationAppearance\Identity,
+    Entity\Citation\Identity as CitationIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Specification\AndSpecification,
     Specification\CitationAppearance\Citation,
     Specification\CitationAppearance\HttpResource,
@@ -31,11 +31,11 @@ class RegisterAppearanceHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new RegisterAppearanceHandler(
-            $repository = $this->createMock(CitationAppearanceRepositoryInterface::class),
+            $repository = $this->createMock(CitationAppearanceRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new RegisterAppearance(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(CitationIdentity::class),
             $this->createMock(ResourceIdentity::class)
         );
@@ -86,11 +86,11 @@ class RegisterAppearanceHandlerTest extends TestCase
     public function testThrowWhenAppearanceAlreadyRegistered()
     {
         $handler = new RegisterAppearanceHandler(
-            $repository = $this->createMock(CitationAppearanceRepositoryInterface::class),
+            $repository = $this->createMock(CitationAppearanceRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new RegisterAppearance(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(CitationIdentity::class),
             $this->createMock(ResourceIdentity::class)
         );
@@ -128,7 +128,7 @@ class RegisterAppearanceHandlerTest extends TestCase
             ->method('current')
             ->willReturn(
                 new CitationAppearance(
-                    $this->createMock(IdentityInterface::class),
+                    $this->createMock(Identity::class),
                     $this->createMock(CitationIdentity::class),
                     $this->createMock(ResourceIdentity::class),
                     $this->createMock(PointInTimeInterface::class)

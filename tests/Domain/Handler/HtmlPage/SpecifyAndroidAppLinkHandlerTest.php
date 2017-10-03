@@ -6,9 +6,9 @@ namespace Tests\Domain\Handler\HtmlPage;
 use Domain\{
     Handler\HtmlPage\SpecifyAndroidAppLinkHandler,
     Command\HtmlPage\SpecifyAndroidAppLink,
-    Repository\HtmlPageRepositoryInterface,
+    Repository\HtmlPageRepository,
     Entity\HtmlPage,
-    Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Identity,
     Event\HtmlPage\AndroidAppLinkSpecified
 };
 use Innmind\Url\{
@@ -23,10 +23,10 @@ class SpecifyAndroidAppLinkHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new SpecifyAndroidAppLinkHandler(
-            $repository = $this->createMock(HtmlPageRepositoryInterface::class)
+            $repository = $this->createMock(HtmlPageRepository::class)
         );
         $command = new SpecifyAndroidAppLink(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(UrlInterface::class)
         );
         $repository

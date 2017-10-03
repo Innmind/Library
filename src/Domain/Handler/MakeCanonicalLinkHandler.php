@@ -5,7 +5,7 @@ namespace Domain\Handler;
 
 use Domain\{
     Command\MakeCanonicalLink,
-    Repository\CanonicalRepositoryInterface,
+    Repository\CanonicalRepository,
     Entity\Canonical,
     Specification\Canonical\HttpResource,
     Specification\Canonical\Canonical as CanonicalSpec,
@@ -19,7 +19,7 @@ final class MakeCanonicalLinkHandler
     private $clock;
 
     public function __construct(
-        CanonicalRepositoryInterface $repository,
+        CanonicalRepository $repository,
         TimeContinuumInterface $clock
     ) {
         $this->repository = $repository;

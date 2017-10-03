@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Domain\Event;
 
-use Domain\Entity\HttpResource\IdentityInterface;
+use Domain\Entity\HttpResource\Identity;
 use Innmind\Url\{
     PathInterface,
     QueryInterface
@@ -16,7 +16,7 @@ final class HttpResourceRegistered
     private $query;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         PathInterface $path,
         QueryInterface $query
     ) {
@@ -25,7 +25,7 @@ final class HttpResourceRegistered
         $this->query = $query;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

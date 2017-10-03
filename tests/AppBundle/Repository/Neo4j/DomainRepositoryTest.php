@@ -8,11 +8,11 @@ use AppBundle\{
     Entity\Domain\Identity
 };
 use Domain\{
-    Repository\DomainRepositoryInterface,
+    Repository\DomainRepository as DomainRepositoryInterface,
     Entity\Domain,
     Entity\Domain\Name,
     Entity\Domain\TopLevelDomain,
-    Specification\Domain\SpecificationInterface
+    Specification\Domain\Specification
 };
 use Innmind\Neo4j\ONM\{
     Repository,
@@ -191,7 +191,7 @@ class DomainRepositoryTest extends TestCase
         $repository = new DomainRepository(
             $infra = $this->createMock(Repository::class)
         );
-        $specification = $this->createMock(SpecificationInterface::class);
+        $specification = $this->createMock(Specification::class);
         $infra
             ->expects($this->once())
             ->method('matching')

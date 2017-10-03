@@ -5,8 +5,8 @@ namespace Tests\Domain\Entity;
 
 use Domain\{
     Entity\Canonical,
-    Entity\Canonical\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Canonical\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\CanonicalCreated
 };
 use Innmind\EventBus\ContainsRecordedEventsInterface;
@@ -18,7 +18,7 @@ class CanonicalTest extends TestCase
     public function testInstanciation()
     {
         $entity = new Canonical(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $canonical = $this->createMock(ResourceIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $foundAt = $this->createMock(PointInTimeInterface::class)
@@ -35,7 +35,7 @@ class CanonicalTest extends TestCase
     public function testCreate()
     {
         $entity = Canonical::create(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $canonical = $this->createMock(ResourceIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $foundAt = $this->createMock(PointInTimeInterface::class)

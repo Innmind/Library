@@ -4,11 +4,11 @@ declare(strict_types = 1);
 namespace AppBundle\Repository\Neo4j;
 
 use Domain\{
-    Repository\HttpResourceRepositoryInterface,
+    Repository\HttpResourceRepository as HttpResourceRepositoryInterface,
     Entity\HttpResource,
-    Entity\HttpResource\IdentityInterface,
+    Entity\HttpResource\Identity,
     Exception\HttpResourceNotFoundException,
-    Specification\HttpResource\SpecificationInterface
+    Specification\HttpResource\Specification
 };
 use Innmind\Neo4j\ONM\{
     Repository,
@@ -31,7 +31,7 @@ final class HttpResourceRepository implements HttpResourceRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function get(IdentityInterface $identity): HttpResource
+    public function get(Identity $identity): HttpResource
     {
         try {
             return $this->infrastructure->get($identity);
@@ -47,7 +47,7 @@ final class HttpResourceRepository implements HttpResourceRepositoryInterface
         return $this;
     }
 
-    public function remove(IdentityInterface $identity): HttpResourceRepositoryInterface
+    public function remove(Identity $identity): HttpResourceRepositoryInterface
     {
         $this->infrastructure->remove(
             $this->get($identity)
@@ -56,7 +56,7 @@ final class HttpResourceRepository implements HttpResourceRepositoryInterface
         return $this;
     }
 
-    public function has(IdentityInterface $identity): bool
+    public function has(Identity $identity): bool
     {
         return $this->infrastructure->has($identity);
     }
@@ -85,7 +85,7 @@ final class HttpResourceRepository implements HttpResourceRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function matching(SpecificationInterface $specification): SetInterface
+    public function matching(Specification $specification): SetInterface
     {
         return $this
             ->infrastructure

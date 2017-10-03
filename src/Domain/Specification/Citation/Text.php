@@ -9,7 +9,7 @@ use Domain\Entity\{
 };
 use Innmind\Specification\ComparatorInterface;
 
-final class Text implements ComparatorInterface, SpecificationInterface
+final class Text implements ComparatorInterface, Specification
 {
     use Composable;
 

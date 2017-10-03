@@ -5,17 +5,17 @@ namespace Domain\Specification\CitationAppearance;
 
 use Domain\Entity\{
     CitationAppearance,
-    Citation\IdentityInterface
+    Citation\Identity
 };
 use Innmind\Specification\ComparatorInterface;
 
-final class Citation implements ComparatorInterface, SpecificationInterface
+final class Citation implements ComparatorInterface, Specification
 {
     use Composable;
 
     private $value;
 
-    public function __construct(IdentityInterface $value)
+    public function __construct(Identity $value)
     {
         $this->value = (string) $value;
     }

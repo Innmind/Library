@@ -6,10 +6,10 @@ namespace Tests\Domain\Handler;
 use Domain\{
     Handler\MakeCanonicalLinkHandler,
     Command\MakeCanonicalLink,
-    Repository\CanonicalRepositoryInterface,
+    Repository\CanonicalRepository,
     Entity\Canonical,
-    Entity\Canonical\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Canonical\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Specification\AndSpecification,
     Specification\Canonical\HttpResource,
     Specification\Canonical\Canonical as CanonicalSpec,
@@ -30,11 +30,11 @@ class MakeCanonicalLinkHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new MakeCanonicalLinkHandler(
-            $repository = $this->createMock(CanonicalRepositoryInterface::class),
+            $repository = $this->createMock(CanonicalRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new MakeCanonicalLink(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class)
         );
@@ -85,11 +85,11 @@ class MakeCanonicalLinkHandlerTest extends TestCase
     public function testThrowWhenCanonicalLinkAlreadyExist()
     {
         $handler = new MakeCanonicalLinkHandler(
-            $repository = $this->createMock(CanonicalRepositoryInterface::class),
+            $repository = $this->createMock(CanonicalRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new MakeCanonicalLink(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class)
         );
@@ -124,7 +124,7 @@ class MakeCanonicalLinkHandlerTest extends TestCase
             ->method('current')
             ->willReturn(
                 new Canonical(
-                    $this->createMock(IdentityInterface::class),
+                    $this->createMock(Identity::class),
                     $this->createMock(ResourceIdentity::class),
                     $this->createMock(ResourceIdentity::class),
                     $this->createMock(PointInTimeInterface::class)

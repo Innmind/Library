@@ -5,12 +5,12 @@ namespace Tests\Domain\Specification\CitationAppearance;
 
 use Domain\{
     Specification\CitationAppearance\AndSpecification,
-    Specification\CitationAppearance\SpecificationInterface,
+    Specification\CitationAppearance\Specification,
     Specification\AndSpecification as ParentSpec,
     Entity\CitationAppearance,
-    Entity\CitationAppearance\IdentityInterface,
-    Entity\Citation\IdentityInterface as CitationIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\CitationAppearance\Identity,
+    Entity\Citation\Identity as CitationIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use PHPUnit\Framework\TestCase;
@@ -20,22 +20,22 @@ class AndSpecificationTest extends TestCase
     public function testInterface()
     {
         $spec = new AndSpecification(
-            $this->createMock(SpecificationInterface::class),
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class),
+            $this->createMock(Specification::class)
         );
 
         $this->assertInstanceOf(ParentSpec::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
     }
 
     public function testIsSatisfiedBy()
     {
         $spec = new AndSpecification(
-            $this->createMock(SpecificationInterface::class),
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class),
+            $this->createMock(Specification::class)
         );
         $appearance = new CitationAppearance(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(CitationIdentity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(PointInTimeInterface::class)

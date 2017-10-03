@@ -6,9 +6,9 @@ namespace Tests\Domain\Handler\HtmlPage;
 use Domain\{
     Handler\HtmlPage\FlagAsJournalHandler,
     Command\HtmlPage\FlagAsJournal,
-    Repository\HtmlPageRepositoryInterface,
+    Repository\HtmlPageRepository,
     Entity\HtmlPage,
-    Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Identity,
     Event\HtmlPage\FlaggedAsJournal
 };
 use Innmind\Url\{
@@ -22,10 +22,10 @@ class FlagAsJournalHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new FlagAsJournalHandler(
-            $repository = $this->createMock(HtmlPageRepositoryInterface::class)
+            $repository = $this->createMock(HtmlPageRepository::class)
         );
         $command = new FlagAsJournal(
-            $this->createMock(IdentityInterface::class)
+            $this->createMock(Identity::class)
         );
         $repository
             ->expects($this->once())

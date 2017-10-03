@@ -5,17 +5,17 @@ namespace Domain\Specification\Reference;
 
 use Domain\Entity\{
     Reference,
-    HttpResource\IdentityInterface
+    HttpResource\Identity
 };
 use Innmind\Specification\ComparatorInterface;
 
-final class Target implements ComparatorInterface, SpecificationInterface
+final class Target implements ComparatorInterface, Specification
 {
     use Composable;
 
     private $value;
 
-    public function __construct(IdentityInterface $value)
+    public function __construct(Identity $value)
     {
         $this->value = (string) $value;
     }

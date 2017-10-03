@@ -6,9 +6,9 @@ namespace Tests\Domain\Handler;
 use Domain\{
     Handler\RegisterCitationHandler,
     Command\RegisterCitation,
-    Repository\CitationRepositoryInterface,
+    Repository\CitationRepository,
     Entity\Citation,
-    Entity\Citation\IdentityInterface,
+    Entity\Citation\Identity,
     Entity\Citation\Text as Model,
     Specification\Citation\Text,
     Event\CitationRegistered
@@ -24,10 +24,10 @@ class RegisterCitationHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new RegisterCitationHandler(
-            $repository = $this->createMock(CitationRepositoryInterface::class)
+            $repository = $this->createMock(CitationRepository::class)
         );
         $command = new RegisterCitation(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Model('foo')
         );
         $repository
@@ -56,10 +56,10 @@ class RegisterCitationHandlerTest extends TestCase
     public function testThrowWhenCitationAlreadyExist()
     {
         $handler = new RegisterCitationHandler(
-            $repository = $this->createMock(CitationRepositoryInterface::class)
+            $repository = $this->createMock(CitationRepository::class)
         );
         $command = new RegisterCitation(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Model('foo')
         );
         $repository
@@ -80,7 +80,7 @@ class RegisterCitationHandlerTest extends TestCase
             ->method('current')
             ->willReturn(
                 new Citation(
-                    $this->createMock(IdentityInterface::class),
+                    $this->createMock(Identity::class),
                     new Model('foo')
                 )
             );

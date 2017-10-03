@@ -5,7 +5,7 @@ namespace Tests\Domain\Event\HtmlPage;
 
 use Domain\{
     Event\HtmlPage\ThemeColourSpecified,
-    Entity\HtmlPage\IdentityInterface
+    Entity\HtmlPage\Identity
 };
 use Innmind\Colour\RGBA;
 use PHPUnit\Framework\TestCase;
@@ -15,7 +15,7 @@ class ThemeColourSpecifiedTest extends TestCase
     public function testInterface()
     {
         $event = new ThemeColourSpecified(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $colour = RGBA::fromString('39f')
         );
 

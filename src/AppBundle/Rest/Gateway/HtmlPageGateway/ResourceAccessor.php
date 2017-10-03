@@ -5,7 +5,7 @@ namespace AppBundle\Rest\Gateway\HtmlPageGateway;
 
 use AppBundle\Entity\HtmlPage\Identity;
 use Domain\{
-    Repository\HtmlPageRepositoryInterface,
+    Repository\HtmlPageRepository,
     Model\Language,
     Entity\HtmlPage\Anchor
 };
@@ -32,7 +32,7 @@ final class ResourceAccessor implements ResourceAccessorInterface
     private $dbal;
 
     public function __construct(
-        HtmlPageRepositoryInterface $repository,
+        HtmlPageRepository $repository,
         Connection $dbal
     ) {
         $this->repository = $repository;

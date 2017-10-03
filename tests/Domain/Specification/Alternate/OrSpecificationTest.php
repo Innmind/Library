@@ -5,11 +5,11 @@ namespace Tests\Domain\Specification\Alternate;
 
 use Domain\{
     Specification\Alternate\OrSpecification,
-    Specification\Alternate\SpecificationInterface,
+    Specification\Alternate\Specification,
     Specification\OrSpecification as ParentSpec,
     Entity\Alternate,
-    Entity\Alternate\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Alternate\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Model\Language
 };
 use PHPUnit\Framework\TestCase;
@@ -19,22 +19,22 @@ class OrSpecificationTest extends TestCase
     public function testInterface()
     {
         $spec = new OrSpecification(
-            $this->createMock(SpecificationInterface::class),
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class),
+            $this->createMock(Specification::class)
         );
 
         $this->assertInstanceOf(ParentSpec::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
     }
 
     public function testIsSatisfiedBy()
     {
         $spec = new OrSpecification(
-            $this->createMock(SpecificationInterface::class),
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class),
+            $this->createMock(Specification::class)
         );
         $alternate = new Alternate(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class),
             new Language('fr')

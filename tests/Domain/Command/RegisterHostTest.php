@@ -5,9 +5,9 @@ namespace Tests\Domain\Command;
 
 use Domain\{
     Command\RegisterHost,
-    Entity\Host\IdentityInterface,
-    Entity\Domain\IdentityInterface as DomainIdentity,
-    Entity\DomainHost\IdentityInterface as RelationIdentity
+    Entity\Host\Identity,
+    Entity\Domain\Identity as DomainIdentity,
+    Entity\DomainHost\Identity as RelationIdentity
 };
 use Innmind\Url\Authority\HostInterface;
 use PHPUnit\Framework\TestCase;
@@ -17,7 +17,7 @@ class RegisterHostTest extends TestCase
     public function testInterface()
     {
         $command = new RegisterHost(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $domain = $this->createMock(DomainIdentity::class),
             $relation = $this->createMock(RelationIdentity::class),
             $host = $this->createMock(HostInterface::class)

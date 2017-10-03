@@ -5,13 +5,13 @@ namespace Tests\Domain\Specification\Canonical;
 
 use Domain\{
     Specification\Canonical\HttpResource,
-    Specification\Canonical\SpecificationInterface,
+    Specification\Canonical\Specification,
     Specification\Canonical\AndSpecification,
     Specification\Canonical\OrSpecification,
     Specification\Canonical\Not,
     Entity\Canonical as Entity,
-    Entity\Canonical\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\Canonical\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use Innmind\Specification\ComparatorInterface;
 use Innmind\TimeContinuum\PointInTimeInterface;
@@ -29,7 +29,7 @@ class HttpResourceTest extends TestCase
         $spec = new HttpResource($identity);
 
         $this->assertInstanceOf(ComparatorInterface::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('resource', $spec->property());
         $this->assertSame('=', $spec->sign());
         $this->assertSame('uuid', $spec->value());
@@ -44,7 +44,7 @@ class HttpResourceTest extends TestCase
             ->willReturn('uuid');
         $spec = new HttpResource($identity);
         $canonical = new Entity(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(PointInTimeInterface::class)

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Tests\Dommain\Event;
 
 use Domain\{
-    Entity\HttpResource\IdentityInterface,
+    Entity\HttpResource\Identity,
     Event\HttpResourceRegistered
 };
 use Innmind\Url\{
@@ -18,7 +18,7 @@ class HttpResourceRegisteredTest extends TestCase
     public function testInterface()
     {
         $event = new HttpResourceRegistered(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $path = $this->createMock(PathInterface::class),
             $query = $this->createMock(QueryInterface::class)
         );

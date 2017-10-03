@@ -6,9 +6,9 @@ namespace Tests\Domain\Handler\HtmlPage;
 use Domain\{
     Handler\HtmlPage\SpecifyMainContentHandler,
     Command\HtmlPage\SpecifyMainContent,
-    Repository\HtmlPageRepositoryInterface,
+    Repository\HtmlPageRepository,
     Entity\HtmlPage,
-    Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Identity,
     Event\HtmlPage\MainContentSpecified
 };
 use Innmind\Url\{
@@ -22,10 +22,10 @@ class SpecifyMainContentHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new SpecifyMainContentHandler(
-            $repository = $this->createMock(HtmlPageRepositoryInterface::class)
+            $repository = $this->createMock(HtmlPageRepository::class)
         );
         $command = new SpecifyMainContent(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             'foo'
         );
         $repository

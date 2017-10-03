@@ -5,7 +5,7 @@ namespace Tests\Domain\Command\Image;
 
 use Domain\{
     Command\Image\SpecifyDimension,
-    Entity\Image\IdentityInterface,
+    Entity\Image\Identity,
     Entity\Image\Dimension
 };
 use PHPUnit\Framework\TestCase;
@@ -15,7 +15,7 @@ class SpecifyDimensionTest extends TestCase
     public function testInterface()
     {
         $command = new SpecifyDimension(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $dimension = new Dimension(12, 21)
         );
 

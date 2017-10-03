@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Domain\Event\HttpResource;
 
 use Domain\{
-    Entity\HttpResource\IdentityInterface,
+    Entity\HttpResource\Identity,
     Model\Language,
     Exception\InvalidArgumentException
 };
@@ -16,7 +16,7 @@ final class LanguagesSpecified
     private $languages;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         SetInterface $languages
     ) {
         if ((string) $languages->type() !== Language::class) {
@@ -27,7 +27,7 @@ final class LanguagesSpecified
         $this->languages = $languages;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

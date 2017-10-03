@@ -8,9 +8,9 @@ use AppBundle\{
     Entity\Image\Identity
 };
 use Domain\{
-    Repository\ImageRepositoryInterface,
+    Repository\ImageRepository as ImageRepositoryInterface,
     Entity\Image,
-    Specification\HttpResource\SpecificationInterface
+    Specification\HttpResource\Specification
 };
 use Innmind\Url\{
     PathInterface,
@@ -193,7 +193,7 @@ class ImageRepositoryTest extends TestCase
         $repository = new ImageRepository(
             $infra = $this->createMock(Repository::class)
         );
-        $specification = $this->createMock(SpecificationInterface::class);
+        $specification = $this->createMock(Specification::class);
         $infra
             ->expects($this->once())
             ->method('matching')

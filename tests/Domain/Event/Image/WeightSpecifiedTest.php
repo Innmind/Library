@@ -5,7 +5,7 @@ namespace Tests\Domain\Event\Image;
 
 use Domain\{
     Event\Image\WeightSpecified,
-    Entity\Image\IdentityInterface,
+    Entity\Image\Identity,
     Entity\Image\Weight
 };
 use PHPUnit\Framework\TestCase;
@@ -15,7 +15,7 @@ class WeightSpecifiedTest extends TestCase
     public function testInterface()
     {
         $event = new WeightSpecified(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $weight = new Weight(42)
         );
 

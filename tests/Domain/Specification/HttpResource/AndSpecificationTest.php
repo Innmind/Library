@@ -5,10 +5,10 @@ namespace Tests\Domain\Specification\HttpResource;
 
 use Domain\{
     Specification\HttpResource\AndSpecification,
-    Specification\HttpResource\SpecificationInterface,
+    Specification\HttpResource\Specification,
     Specification\AndSpecification as ParentSpec,
     Entity\HttpResource,
-    Entity\HttpResource\IdentityInterface
+    Entity\HttpResource\Identity
 };
 use Innmind\Url\{
     PathInterface,
@@ -21,22 +21,22 @@ class AndSpecificationTest extends TestCase
     public function testInterface()
     {
         $spec = new AndSpecification(
-            $this->createMock(SpecificationInterface::class),
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class),
+            $this->createMock(Specification::class)
         );
 
         $this->assertInstanceOf(ParentSpec::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
     }
 
     public function testIsSatisfiedBy()
     {
         $spec = new AndSpecification(
-            $this->createMock(SpecificationInterface::class),
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class),
+            $this->createMock(Specification::class)
         );
         $resource = new HttpResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );

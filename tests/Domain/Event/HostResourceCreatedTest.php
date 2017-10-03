@@ -5,9 +5,9 @@ namespace Tests\Domain\Event;
 
 use Domain\{
     Event\HostResourceCreated,
-    Entity\HostResource\IdentityInterface,
-    Entity\Host\IdentityInterface as HostIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\HostResource\Identity,
+    Entity\Host\Identity as HostIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use PHPUnit\Framework\TestCase;
@@ -17,7 +17,7 @@ class HostResourceCreatedTest extends TestCase
     public function testInterface()
     {
         $event = new HostResourceCreated(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $host = $this->createMock(HostIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $foundAt = $this->createMock(PointInTimeInterface::class)

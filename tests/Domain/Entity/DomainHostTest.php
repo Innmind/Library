@@ -5,9 +5,9 @@ namespace Tests\Domain\Entity;
 
 use Domain\{
     Entity\DomainHost,
-    Entity\DomainHost\IdentityInterface,
-    Entity\Domain\IdentityInterface as DomainIdentity,
-    Entity\Host\IdentityInterface as HostIdentity,
+    Entity\DomainHost\Identity,
+    Entity\Domain\Identity as DomainIdentity,
+    Entity\Host\Identity as HostIdentity,
     Event\DomainHostCreated
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
@@ -19,7 +19,7 @@ class DomainHostTest extends TestCase
     public function testInstanciation()
     {
         $entity = new DomainHost(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $domain = $this->createMock(DomainIdentity::class),
             $host = $this->createMock(HostIdentity::class),
             $foundAt = $this->createMock(PointInTimeInterface::class)
@@ -36,7 +36,7 @@ class DomainHostTest extends TestCase
     public function testCreate()
     {
         $entity = DomainHost::create(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $domain = $this->createMock(DomainIdentity::class),
             $host = $this->createMock(HostIdentity::class),
             $foundAt = $this->createMock(PointInTimeInterface::class)

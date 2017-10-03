@@ -4,8 +4,8 @@ declare(strict_types = 1);
 namespace Domain\Entity;
 
 use Domain\{
-    Entity\Alternate\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Alternate\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\AlternateCreated,
     Model\Language
 };
@@ -24,7 +24,7 @@ final class Alternate implements ContainsRecordedEventsInterface
     private $language;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         ResourceIdentity $resource,
         ResourceIdentity $alternate,
         Language $language
@@ -36,7 +36,7 @@ final class Alternate implements ContainsRecordedEventsInterface
     }
 
     public static function create(
-        IdentityInterface $identity,
+        Identity $identity,
         ResourceIdentity $resource,
         ResourceIdentity $alternate,
         Language $language
@@ -52,7 +52,7 @@ final class Alternate implements ContainsRecordedEventsInterface
         return $self;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

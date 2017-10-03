@@ -5,7 +5,7 @@ namespace Tests\Domain\Entity;
 
 use Domain\{
     Entity\Author,
-    Entity\Author\IdentityInterface,
+    Entity\Author\Identity,
     Entity\Author\Name,
     Event\AuthorRegistered
 };
@@ -17,7 +17,7 @@ class AuthorTest extends TestCase
     public function testInstanciation()
     {
         $entity = new Author(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $name = new Name('John Doe')
         );
 
@@ -31,7 +31,7 @@ class AuthorTest extends TestCase
     public function testRegister()
     {
         $entity = Author::register(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $name = new Name('John Doe')
         );
 

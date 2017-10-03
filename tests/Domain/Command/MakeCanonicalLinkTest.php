@@ -5,8 +5,8 @@ namespace Tests\Domain\Command;
 
 use Domain\{
     Command\MakeCanonicalLink,
-    Entity\Canonical\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\Canonical\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +15,7 @@ class MakeCanonicalLinkTest extends TestCase
     public function testInterface()
     {
         $command = new MakeCanonicalLink(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $canonical = $this->createMock(ResourceIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class)
         );

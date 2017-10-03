@@ -5,10 +5,10 @@ namespace Tests\Domain\Specification\Author;
 
 use Domain\{
     Specification\Author\OrSpecification,
-    Specification\Author\SpecificationInterface,
+    Specification\Author\Specification,
     Specification\OrSpecification as ParentSpec,
     Entity\Author,
-    Entity\Author\IdentityInterface,
+    Entity\Author\Identity,
     Entity\Author\Name
 };
 use PHPUnit\Framework\TestCase;
@@ -18,22 +18,22 @@ class OrSpecificationTest extends TestCase
     public function testInterface()
     {
         $spec = new OrSpecification(
-            $this->createMock(SpecificationInterface::class),
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class),
+            $this->createMock(Specification::class)
         );
 
         $this->assertInstanceOf(ParentSpec::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
     }
 
     public function testIsSatisfiedBy()
     {
         $spec = new OrSpecification(
-            $this->createMock(SpecificationInterface::class),
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class),
+            $this->createMock(Specification::class)
         );
         $author = new Author(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Name('foo')
         );
         $spec

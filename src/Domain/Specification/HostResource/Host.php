@@ -5,17 +5,17 @@ namespace Domain\Specification\HostResource;
 
 use Domain\Entity\{
     HostResource,
-    Host\IdentityInterface
+    Host\Identity
 };
 use Innmind\Specification\ComparatorInterface;
 
-final class Host implements ComparatorInterface, SpecificationInterface
+final class Host implements ComparatorInterface, Specification
 {
     use Composable;
 
     private $value;
 
-    public function __construct(IdentityInterface $value)
+    public function __construct(Identity $value)
     {
         $this->value = (string) $value;
     }

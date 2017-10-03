@@ -6,9 +6,9 @@ namespace Tests\Domain\Entity;
 use Domain\{
     Entity\HtmlPage,
     Entity\HttpResource,
-    Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Identity,
     Entity\HtmlPage\Anchor,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\HtmlPageRegistered,
     Event\HtmlPage\MainContentSpecified,
     Event\HtmlPage\DescriptionSpecified,
@@ -34,7 +34,7 @@ class HtmlPageTest extends TestCase
     public function testInterface()
     {
         $htmlPage = new HtmlPage(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $path = $this->createMock(PathInterface::class),
             $query = $this->createMock(QueryInterface::class)
         );
@@ -65,7 +65,7 @@ class HtmlPageTest extends TestCase
     public function testRegister()
     {
         $htmlPage = HtmlPage::register(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $path = $this->createMock(PathInterface::class),
             $query = $this->createMock(QueryInterface::class)
         );
@@ -93,7 +93,7 @@ class HtmlPageTest extends TestCase
     public function testSpecifyMainContent()
     {
         $htmlPage = new HtmlPage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );
@@ -122,7 +122,7 @@ class HtmlPageTest extends TestCase
     public function testSpecifyDescription()
     {
         $htmlPage = new HtmlPage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );
@@ -151,7 +151,7 @@ class HtmlPageTest extends TestCase
     public function testSpecifyAnchors()
     {
         $htmlPage = new HtmlPage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );
@@ -187,7 +187,7 @@ class HtmlPageTest extends TestCase
     public function testThrowWhenInvalidAnchorsSet()
     {
         $htmlPage = new HtmlPage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );
@@ -198,7 +198,7 @@ class HtmlPageTest extends TestCase
     public function testFlagAsJournal()
     {
         $htmlPage = new HtmlPage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );
@@ -223,7 +223,7 @@ class HtmlPageTest extends TestCase
     public function testSpecifyThemeColour()
     {
         $htmlPage = new HtmlPage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );
@@ -253,7 +253,7 @@ class HtmlPageTest extends TestCase
     public function testSpecifyTitle()
     {
         $htmlPage = new HtmlPage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );
@@ -282,7 +282,7 @@ class HtmlPageTest extends TestCase
     public function testSpecifyAndroidAppLink()
     {
         $htmlPage = new HtmlPage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );
@@ -312,7 +312,7 @@ class HtmlPageTest extends TestCase
     public function testSpecifyIosAppLink()
     {
         $htmlPage = new HtmlPage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );
@@ -342,7 +342,7 @@ class HtmlPageTest extends TestCase
     public function testUsePreview()
     {
         $htmlPage = new HtmlPage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );

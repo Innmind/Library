@@ -5,9 +5,9 @@ namespace Tests\Domain\Entity;
 
 use Domain\{
     Entity\CitationAppearance,
-    Entity\CitationAppearance\IdentityInterface,
-    Entity\Citation\IdentityInterface as CitationIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\CitationAppearance\Identity,
+    Entity\Citation\Identity as CitationIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\CitationAppearanceRegistered
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
@@ -19,7 +19,7 @@ class CitationAppearanceTest extends TestCase
     public function testInstanciation()
     {
         $entity = new CitationAppearance(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $citation = $this->createMock(CitationIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $foundAt = $this->createMock(PointInTimeInterface::class)
@@ -36,7 +36,7 @@ class CitationAppearanceTest extends TestCase
     public function testRegister()
     {
         $entity = CitationAppearance::register(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $citation = $this->createMock(CitationIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $foundAt = $this->createMock(PointInTimeInterface::class)

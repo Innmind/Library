@@ -5,14 +5,14 @@ namespace Domain\Handler\Image;
 
 use Domain\{
     Command\Image\SpecifyWeight,
-    Repository\ImageRepositoryInterface
+    Repository\ImageRepository
 };
 
 final class SpecifyWeightHandler
 {
     private $repository;
 
-    public function __construct(ImageRepositoryInterface $repository)
+    public function __construct(ImageRepository $repository)
     {
         $this->repository = $repository;
     }

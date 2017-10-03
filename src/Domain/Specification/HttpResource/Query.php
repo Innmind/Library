@@ -7,7 +7,7 @@ use Domain\Entity\HttpResource;
 use Innmind\Specification\ComparatorInterface;
 use Innmind\Url\QueryInterface;
 
-final class Query implements ComparatorInterface, SpecificationInterface
+final class Query implements ComparatorInterface, Specification
 {
     use Composable;
 

@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Domain\Event\HtmlPage;
 
-use Domain\Entity\HtmlPage\IdentityInterface;
+use Domain\Entity\HtmlPage\Identity;
 use Innmind\Url\UrlInterface;
 
 final class PreviewSpecified
@@ -11,13 +11,13 @@ final class PreviewSpecified
     private $identity;
     private $url;
 
-    public function __construct(IdentityInterface $identity, UrlInterface $url)
+    public function __construct(Identity $identity, UrlInterface $url)
     {
         $this->identity = $identity;
         $this->url = $url;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

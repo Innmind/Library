@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Domain\Command\HtmlPage;
 
 use Domain\{
-    Entity\HtmlPage\IdentityInterface,
+    Entity\HtmlPage\Identity,
     Entity\HtmlPage\Anchor,
     Exception\InvalidArgumentException
 };
@@ -16,7 +16,7 @@ final class SpecifyAnchors
     private $anchors;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         SetInterface $anchors
     ) {
         if ((string) $anchors->type() !== Anchor::class) {
@@ -27,7 +27,7 @@ final class SpecifyAnchors
         $this->anchors = $anchors;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

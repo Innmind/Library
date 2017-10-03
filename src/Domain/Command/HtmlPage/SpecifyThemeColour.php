@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Domain\Command\HtmlPage;
 
-use Domain\Entity\HtmlPage\IdentityInterface;
+use Domain\Entity\HtmlPage\Identity;
 use Innmind\Colour\RGBA;
 
 final class SpecifyThemeColour
@@ -12,14 +12,14 @@ final class SpecifyThemeColour
     private $colour;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         RGBA $colour
     ) {
         $this->identity = $identity;
         $this->colour = $colour;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

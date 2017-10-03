@@ -5,10 +5,10 @@ namespace Tests\Domain\Specification\HttpResource;
 
 use Domain\{
     Specification\HttpResource\Not,
-    Specification\HttpResource\SpecificationInterface,
+    Specification\HttpResource\Specification,
     Specification\Not as ParentSpec,
     Entity\HttpResource,
-    Entity\HttpResource\IdentityInterface
+    Entity\HttpResource\Identity
 };
 use Innmind\Url\{
     PathInterface,
@@ -21,20 +21,20 @@ class NotTest extends TestCase
     public function testInterface()
     {
         $spec = new Not(
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class)
         );
 
         $this->assertInstanceOf(ParentSpec::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
     }
 
     public function testIsSatisfiedBy()
     {
         $spec = new Not(
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class)
         );
         $resource = new HttpResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );

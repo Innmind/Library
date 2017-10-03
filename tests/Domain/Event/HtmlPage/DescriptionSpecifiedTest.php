@@ -5,7 +5,7 @@ namespace Tests\Domain\Event\HtmlPage;
 
 use Domain\{
     Event\HtmlPage\DescriptionSpecified,
-    Entity\HtmlPage\IdentityInterface
+    Entity\HtmlPage\Identity
 };
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +14,7 @@ class DescriptionSpecifiedTest extends TestCase
     public function testInterface()
     {
         $event = new DescriptionSpecified(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $description = 'foo'
         );
 

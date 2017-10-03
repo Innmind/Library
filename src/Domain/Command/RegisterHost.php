@@ -4,9 +4,9 @@ declare(strict_types = 1);
 namespace Domain\Command;
 
 use Domain\Entity\{
-    Host\IdentityInterface,
-    Domain\IdentityInterface as DomainIdentity,
-    DomainHost\IdentityInterface as RelationIdentity
+    Host\Identity,
+    Domain\Identity as DomainIdentity,
+    DomainHost\Identity as RelationIdentity
 };
 use Innmind\Url\Authority\HostInterface;
 
@@ -18,7 +18,7 @@ final class RegisterHost
     private $host;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         DomainIdentity $domain,
         RelationIdentity $relation,
         HostInterface $host
@@ -29,7 +29,7 @@ final class RegisterHost
         $this->host = $host;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

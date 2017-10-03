@@ -8,7 +8,7 @@ use Domain\{
     Entity\Domain,
     Entity\Domain\Name,
     Entity\Domain\TopLevelDomain,
-    Repository\DomainRepositoryInterface,
+    Repository\DomainRepository,
     Specification\Domain\Name as NameSpec,
     Specification\Domain\TopLevelDomain as TopLevelDomainSpec,
     Exception\DomainAlreadyExistException
@@ -21,7 +21,7 @@ final class RegisterDomainHandler
     private $parser;
 
     public function __construct(
-        DomainRepositoryInterface $repository,
+        DomainRepository $repository,
         Parser $parser
     ) {
         $this->repository = $repository;

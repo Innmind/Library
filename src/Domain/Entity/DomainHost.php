@@ -4,9 +4,9 @@ declare(strict_types = 1);
 namespace Domain\Entity;
 
 use Domain\{
-    Entity\DomainHost\IdentityInterface,
-    Entity\Domain\IdentityInterface as DomainIdentity,
-    Entity\Host\IdentityInterface as HostIdentity,
+    Entity\DomainHost\Identity,
+    Entity\Domain\Identity as DomainIdentity,
+    Entity\Host\Identity as HostIdentity,
     Event\DomainHostCreated
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
@@ -25,7 +25,7 @@ final class DomainHost implements ContainsRecordedEventsInterface
     private $foundAt;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         DomainIdentity $domain,
         HostIdentity $host,
         PointInTimeInterface $foundAt
@@ -37,7 +37,7 @@ final class DomainHost implements ContainsRecordedEventsInterface
     }
 
     public static function create(
-        IdentityInterface $identity,
+        Identity $identity,
         DomainIdentity $domain,
         HostIdentity $host,
         PointInTimeInterface $foundAt
@@ -53,7 +53,7 @@ final class DomainHost implements ContainsRecordedEventsInterface
         return $self;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

@@ -5,13 +5,13 @@ namespace Domain\Specification\HostResource;
 
 use Domain\{
     Entity\HostResource,
-    Entity\HttpResource\IdentityInterface,
+    Entity\HttpResource\Identity,
     Exception\InvalidArgumentException
 };
 use Innmind\Specification\ComparatorInterface;
 use Innmind\Immutable\SetInterface;
 
-final class InResources implements ComparatorInterface, SpecificationInterface
+final class InResources implements ComparatorInterface, Specification
 {
     use Composable;
 
@@ -19,13 +19,13 @@ final class InResources implements ComparatorInterface, SpecificationInterface
 
     public function __construct(SetInterface $value)
     {
-        if ((string) $value->type() !== IdentityInterface::class) {
+        if ((string) $value->type() !== Identity::class) {
             throw new InvalidArgumentException;
         }
 
         $this->value = $value->reduce(
             [],
-            function(array $value, IdentityInterface $identity): array {
+            function(array $value, Identity $identity): array {
                 $value[] = (string) $identity;
 
                 return $value;

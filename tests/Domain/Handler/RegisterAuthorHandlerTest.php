@@ -6,9 +6,9 @@ namespace Tests\Domain\Handler;
 use Domain\{
     Handler\RegisterAuthorHandler,
     Command\RegisterAuthor,
-    Repository\AuthorRepositoryInterface,
+    Repository\AuthorRepository,
     Entity\Author,
-    Entity\Author\IdentityInterface,
+    Entity\Author\Identity,
     Entity\Author\Name as Model,
     Specification\Author\Name
 };
@@ -23,10 +23,10 @@ class RegisterAuthorHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new RegisterAuthorHandler(
-            $repository = $this->createMock(AuthorRepositoryInterface::class)
+            $repository = $this->createMock(AuthorRepository::class)
         );
         $command = new RegisterAuthor(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Model('John Doe')
         );
         $repository
@@ -53,10 +53,10 @@ class RegisterAuthorHandlerTest extends TestCase
     public function testThrowWhenAuthorAlreadyExist()
     {
         $handler = new RegisterAuthorHandler(
-            $repository = $this->createMock(AuthorRepositoryInterface::class)
+            $repository = $this->createMock(AuthorRepository::class)
         );
         $command = new RegisterAuthor(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Model('John Doe')
         );
         $repository
@@ -77,7 +77,7 @@ class RegisterAuthorHandlerTest extends TestCase
             ->method('current')
             ->willReturn(
                 new Author(
-                    $this->createMock(IdentityInterface::class),
+                    $this->createMock(Identity::class),
                     new Model('foo')
                 )
             );

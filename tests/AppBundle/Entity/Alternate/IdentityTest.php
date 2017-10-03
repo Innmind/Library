@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Tests\AppBundle\Entity\Alternate;
 
 use AppBundle\Entity\Alternate\Identity;
-use Domain\Entity\Alternate\IdentityInterface;
+use Domain\Entity\Alternate\Identity as IdentityInterface;
 use Innmind\Neo4j\ONM\Identity\Uuid as UuidIdentity;
 use Innmind\Rest\Server\Identity as RestIdentity;
 use Ramsey\Uuid\Uuid;

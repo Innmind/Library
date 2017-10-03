@@ -3,20 +3,20 @@ declare(strict_types = 1);
 
 namespace Domain\Event\HtmlPage;
 
-use Domain\Entity\HtmlPage\IdentityInterface;
+use Domain\Entity\HtmlPage\Identity;
 
 final class MainContentSpecified
 {
     private $identity;
     private $mainContent;
 
-    public function __construct(IdentityInterface $identity, string $mainContent)
+    public function __construct(Identity $identity, string $mainContent)
     {
         $this->identity = $identity;
         $this->mainContent = $mainContent;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

@@ -7,10 +7,9 @@ use Domain\{
     Command\RegisterImage,
     Entity\Image,
     Entity\HostResource,
-    Entity\Image\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
-    Repository\ImageRepositoryInterface,
-    Repository\HostResourceRepositoryInterface,
+    Entity\HttpResource\Identity as ResourceIdentity,
+    Repository\ImageRepository,
+    Repository\HostResourceRepository,
     Specification\HttpResource\Path,
     Specification\HttpResource\Query,
     Specification\HostResource\InResources,
@@ -27,8 +26,8 @@ final class RegisterImageHandler
     private $clock;
 
     public function __construct(
-        ImageRepositoryInterface $imageRepository,
-        HostResourceRepositoryInterface $relationRepository,
+        ImageRepository $imageRepository,
+        HostResourceRepository $relationRepository,
         TimeContinuumInterface $clock
     ) {
         $this->imageRepository = $imageRepository;

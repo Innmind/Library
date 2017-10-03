@@ -4,8 +4,8 @@ declare(strict_types = 1);
 namespace Domain\Event;
 
 use Domain\{
-    Entity\Reference\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\Reference\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 
 final class ReferenceCreated
@@ -15,7 +15,7 @@ final class ReferenceCreated
     private $target;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         ResourceIdentity $source,
         ResourceIdentity $target
     ) {
@@ -24,7 +24,7 @@ final class ReferenceCreated
         $this->target = $target;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

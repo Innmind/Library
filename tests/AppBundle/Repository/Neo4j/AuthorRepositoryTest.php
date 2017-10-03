@@ -8,10 +8,10 @@ use AppBundle\{
     Entity\Author\Identity
 };
 use Domain\{
-    Repository\AuthorRepositoryInterface,
+    Repository\AuthorRepository as AuthorRepositoryInterface,
     Entity\Author,
     Entity\Author\Name,
-    Specification\Author\SpecificationInterface
+    Specification\Author\Specification
 };
 use Innmind\Neo4j\ONM\{
     Repository,
@@ -186,7 +186,7 @@ class AuthorRepositoryTest extends TestCase
         $repository = new AuthorRepository(
             $infra = $this->createMock(Repository::class)
         );
-        $specification = $this->createMock(SpecificationInterface::class);
+        $specification = $this->createMock(Specification::class);
         $infra
             ->expects($this->once())
             ->method('matching')

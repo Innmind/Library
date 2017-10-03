@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Domain\Event\Image;
 
 use Domain\Entity\Image\{
-    IdentityInterface,
+    Identity,
     Weight
 };
 
@@ -13,13 +13,13 @@ final class WeightSpecified
     private $identity;
     private $weight;
 
-    public function __construct(IdentityInterface $identity, Weight $weight)
+    public function __construct(Identity $identity, Weight $weight)
     {
         $this->identity = $identity;
         $this->weight = $weight;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

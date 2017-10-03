@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Domain\Event;
 
 use Domain\Entity\Host\{
-    IdentityInterface,
+    Identity,
     Name
 };
 
@@ -14,14 +14,14 @@ final class HostRegistered
     private $name;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         Name $name
     ) {
         $this->identity = $identity;
         $this->name = $name;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

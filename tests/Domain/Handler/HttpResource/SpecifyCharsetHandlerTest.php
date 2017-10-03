@@ -6,9 +6,9 @@ namespace Tests\Domain\Handler\HttpResource;
 use Domain\{
     Handler\HttpResource\SpecifyCharsetHandler,
     Command\HttpResource\SpecifyCharset,
-    Repository\HttpResourceRepositoryInterface,
+    Repository\HttpResourceRepository,
     Entity\HttpResource,
-    Entity\HttpResource\IdentityInterface,
+    Entity\HttpResource\Identity,
     Entity\HttpResource\Charset,
     Event\HttpResource\CharsetSpecified
 };
@@ -23,9 +23,9 @@ class SpecifyCharsetHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new SpecifyCharsetHandler(
-            $repository = $this->createMock(HttpResourceRepositoryInterface::class)
+            $repository = $this->createMock(HttpResourceRepository::class)
         );
-        $identity = $this->createMock(IdentityInterface::class);
+        $identity = $this->createMock(Identity::class);
         $repository
             ->expects($this->once())
             ->method('get')

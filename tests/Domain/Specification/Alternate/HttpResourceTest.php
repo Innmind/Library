@@ -5,13 +5,13 @@ namespace Tests\Domain\Specification\Alternate;
 
 use Domain\{
     Specification\Alternate\HttpResource,
-    Specification\Alternate\SpecificationInterface,
+    Specification\Alternate\Specification,
     Specification\Alternate\AndSpecification,
     Specification\Alternate\OrSpecification,
     Specification\Alternate\Not,
     Entity\Alternate,
-    Entity\Alternate\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Alternate\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Model\Language
 };
 use Innmind\Specification\ComparatorInterface;
@@ -29,7 +29,7 @@ class HttpResourceTest extends TestCase
         $spec = new HttpResource($identity);
 
         $this->assertInstanceOf(ComparatorInterface::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('resource', $spec->property());
         $this->assertSame('=', $spec->sign());
         $this->assertSame('uuid', $spec->value());
@@ -44,7 +44,7 @@ class HttpResourceTest extends TestCase
             ->willReturn('uuid');
         $spec = new HttpResource($identity);
         $alternate = new Alternate(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class),
             new Language('fr')

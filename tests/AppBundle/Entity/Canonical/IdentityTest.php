@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Tests\AppBundle\Entity\Canonical;
 
 use AppBundle\Entity\Canonical\Identity;
-use Domain\Entity\Canonical\IdentityInterface;
+use Domain\Entity\Canonical\Identity as IdentityInterface;
 use Innmind\Neo4j\ONM\Identity\Uuid as UuidIdentity;
 use Innmind\Rest\Server\Identity as RestIdentity;
 use Ramsey\Uuid\Uuid;

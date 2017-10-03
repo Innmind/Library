@@ -8,11 +8,11 @@ use Domain\{
     Entity\Domain as Entity
 };
 
-final class Not extends ParentSpec implements SpecificationInterface
+final class Not extends ParentSpec implements Specification
 {
     use Composable;
 
-    public function __construct(SpecificationInterface $specification)
+    public function __construct(Specification $specification)
     {
         parent::__construct($specification);
     }

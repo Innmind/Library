@@ -5,7 +5,7 @@ namespace Tests\Domain\Event\HtmlPage;
 
 use Domain\{
     Event\HtmlPage\IosAppLinkSpecified,
-    Entity\HtmlPage\IdentityInterface
+    Entity\HtmlPage\Identity
 };
 use Innmind\Url\UrlInterface;
 use PHPUnit\Framework\TestCase;
@@ -15,7 +15,7 @@ class IosAppLinkSpecifiedTest extends TestCase
     public function testInterface()
     {
         $event = new IosAppLinkSpecified(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $url = $this->createMock(UrlInterface::class)
         );
 

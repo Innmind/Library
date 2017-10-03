@@ -5,7 +5,7 @@ namespace AppBundle\Rest\Gateway\HttpResourceGateway;
 
 use AppBundle\Entity\HttpResource\Identity;
 use Domain\{
-    Repository\HttpResourceRepositoryInterface,
+    Repository\HttpResourceRepository,
     Model\Language
 };
 use Innmind\Rest\Server\{
@@ -30,7 +30,7 @@ final class ResourceAccessor implements ResourceAccessorInterface
     private $dbal;
 
     public function __construct(
-        HttpResourceRepositoryInterface $repository,
+        HttpResourceRepository $repository,
         Connection $dbal
     ) {
         $this->repository = $repository;

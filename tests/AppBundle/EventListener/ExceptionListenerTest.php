@@ -7,7 +7,7 @@ use AppBundle\EventListener\ExceptionListener;
 use Domain\{
     Exception\AuthorAlreadyExistException,
     Entity\Author,
-    Entity\Author\IdentityInterface as AuthorIdentity,
+    Entity\Author\Identity as AuthorIdentity,
     Entity\Author\Name
 };
 use Innmind\Http\Exception\Http\Conflict;

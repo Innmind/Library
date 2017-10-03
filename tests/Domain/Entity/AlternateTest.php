@@ -5,8 +5,8 @@ namespace Tests\Domain\Entity;
 
 use Domain\{
     Entity\Alternate,
-    Entity\Alternate\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Alternate\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\AlternateCreated,
     Model\Language
 };
@@ -18,7 +18,7 @@ class AlternateTest extends TestCase
     public function testInstanciation()
     {
         $entity = new Alternate(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $alternate = $this->createMock(ResourceIdentity::class),
             $language = new Language('fr')
@@ -35,7 +35,7 @@ class AlternateTest extends TestCase
     public function testCreate()
     {
         $entity = Alternate::create(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $resource = $this->createMock(ResourceIdentity::class),
             $alternate = $this->createMock(ResourceIdentity::class),
             $language = new Language('fr')

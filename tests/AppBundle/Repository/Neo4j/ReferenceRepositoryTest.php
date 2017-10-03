@@ -8,10 +8,10 @@ use AppBundle\{
     Entity\Reference\Identity
 };
 use Domain\{
-    Repository\ReferenceRepositoryInterface,
+    Repository\ReferenceRepository as ReferenceRepositoryInterface,
     Entity\Reference,
-    Entity\HttpResource\IdentityInterface as HttpResourceIdentity,
-    Specification\Reference\SpecificationInterface
+    Entity\HttpResource\Identity as HttpResourceIdentity,
+    Specification\Reference\Specification
 };
 use Innmind\Neo4j\ONM\{
     Repository,
@@ -190,7 +190,7 @@ class ReferenceRepositoryTest extends TestCase
         $repository = new ReferenceRepository(
             $infra = $this->createMock(Repository::class)
         );
-        $specification = $this->createMock(SpecificationInterface::class);
+        $specification = $this->createMock(Specification::class);
         $infra
             ->expects($this->once())
             ->method('matching')

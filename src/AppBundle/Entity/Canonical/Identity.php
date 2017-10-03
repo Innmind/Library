@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace AppBundle\Entity\Canonical;
 
-use Domain\Entity\Canonical\IdentityInterface;
+use Domain\Entity\Canonical\Identity as IdentityInterface;
 use Innmind\Neo4j\ONM\Identity\Uuid;
 use Innmind\Rest\Server\Identity as RestIdentity;
 

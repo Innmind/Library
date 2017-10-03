@@ -5,8 +5,8 @@ namespace Tests\Domain\Command;
 
 use Domain\{
     Command\ReferResource,
-    Entity\Reference\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\Reference\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +15,7 @@ class ReferResourceTest extends TestCase
     public function testInterface()
     {
         $command = new ReferResource(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $source = $this->createMock(ResourceIdentity::class),
             $target = $this->createMock(ResourceIdentity::class)
         );

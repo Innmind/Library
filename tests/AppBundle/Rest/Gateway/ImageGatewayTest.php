@@ -8,7 +8,7 @@ use AppBundle\Rest\Gateway\{
     ImageGateway\ResourceCreator,
     ImageGateway\ResourceAccessor
 };
-use Domain\Repository\ImageRepositoryInterface;
+use Domain\Repository\ImageRepository;
 use Innmind\Rest\Server\Gateway;
 use Innmind\CommandBus\CommandBusInterface;
 use Innmind\Neo4j\DBAL\Connection;
@@ -27,7 +27,7 @@ class ImageGatewayTest extends TestCase
                 $this->createMock(CommandBusInterface::class)
             ),
             $this->accessor = new ResourceAccessor(
-                $this->createMock(ImageRepositoryInterface::class),
+                $this->createMock(ImageRepository::class),
                 $this->createMock(Connection::class)
             )
         );

@@ -5,7 +5,7 @@ namespace Domain\Handler;
 
 use Domain\{
     Command\RegisterCitation,
-    Repository\CitationRepositoryInterface,
+    Repository\CitationRepository,
     Entity\Citation,
     Exception\CitationAlreadyExistException,
     Specification\Citation\Text
@@ -15,7 +15,7 @@ final class RegisterCitationHandler
 {
     private $repository;
 
-    public function __construct(CitationRepositoryInterface $repository)
+    public function __construct(CitationRepository $repository)
     {
         $this->repository = $repository;
     }

@@ -4,9 +4,9 @@ declare(strict_types = 1);
 namespace Domain\Command;
 
 use Domain\Entity\{
-    HtmlPage\IdentityInterface,
-    HostResource\IdentityInterface as RelationIdentity,
-    Host\IdentityInterface as HostIdentity
+    HtmlPage\Identity,
+    HostResource\Identity as RelationIdentity,
+    Host\Identity as HostIdentity
 };
 use Innmind\Url\{
     PathInterface,
@@ -22,7 +22,7 @@ final class RegisterHtmlPage
     private $query;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         HostIdentity $host,
         RelationIdentity $relation,
         PathInterface $path,
@@ -35,7 +35,7 @@ final class RegisterHtmlPage
         $this->query = $query;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

@@ -4,11 +4,11 @@ declare(strict_types = 1);
 namespace AppBundle\Repository\Neo4j;
 
 use Domain\{
-    Repository\DomainHostRepositoryInterface,
+    Repository\DomainHostRepository as DomainHostRepositoryInterface,
     Entity\DomainHost,
-    Entity\DomainHost\IdentityInterface,
+    Entity\DomainHost\Identity,
     Exception\DomainHostNotFoundException,
-    Specification\DomainHost\SpecificationInterface
+    Specification\DomainHost\Specification
 };
 use Innmind\Neo4j\ONM\{
     Repository,
@@ -31,7 +31,7 @@ final class DomainHostRepository implements DomainHostRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function get(IdentityInterface $identity): DomainHost
+    public function get(Identity $identity): DomainHost
     {
         try {
             return $this->infrastructure->get($identity);
@@ -47,7 +47,7 @@ final class DomainHostRepository implements DomainHostRepositoryInterface
         return $this;
     }
 
-    public function remove(IdentityInterface $identity): DomainHostRepositoryInterface
+    public function remove(Identity $identity): DomainHostRepositoryInterface
     {
         $this->infrastructure->remove(
             $this->get($identity)
@@ -56,7 +56,7 @@ final class DomainHostRepository implements DomainHostRepositoryInterface
         return $this;
     }
 
-    public function has(IdentityInterface $identity): bool
+    public function has(Identity $identity): bool
     {
         return $this->infrastructure->has($identity);
     }
@@ -85,7 +85,7 @@ final class DomainHostRepository implements DomainHostRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function matching(SpecificationInterface $specification): SetInterface
+    public function matching(Specification $specification): SetInterface
     {
         return $this
             ->infrastructure

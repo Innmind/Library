@@ -5,7 +5,7 @@ namespace Tests\Domain\Entity;
 
 use Domain\{
     Entity\HttpResource,
-    Entity\HttpResource\IdentityInterface,
+    Entity\HttpResource\Identity,
     Entity\HttpResource\Charset,
     Event\HttpResourceRegistered,
     Event\HttpResource\LanguagesSpecified,
@@ -25,7 +25,7 @@ class HttpResourceTest extends TestCase
     public function testInterface()
     {
         $resource = new HttpResource(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $path = $this->createMock(PathInterface::class),
             $query = $this->createMock(QueryInterface::class)
         );
@@ -40,7 +40,7 @@ class HttpResourceTest extends TestCase
     public function testRegister()
     {
         $resource = HttpResource::register(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $path = $this->createMock(PathInterface::class),
             $query = $this->createMock(QueryInterface::class)
         );
@@ -62,7 +62,7 @@ class HttpResourceTest extends TestCase
     public function testSpecifyLanguages()
     {
         $resource = new HttpResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );
@@ -101,7 +101,7 @@ class HttpResourceTest extends TestCase
     public function testThrowWhenInvalidLanguagesType()
     {
         (new HttpResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         ))->specifyLanguages((new Set('int'))->add(42));
@@ -113,7 +113,7 @@ class HttpResourceTest extends TestCase
     public function testThrowWhenEmptyLanguagesSet()
     {
         (new HttpResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         ))->specifyLanguages(new Set('string'));
@@ -122,7 +122,7 @@ class HttpResourceTest extends TestCase
     public function testSpecifyCharset()
     {
         $resource = new HttpResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
         );

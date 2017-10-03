@@ -5,7 +5,7 @@ namespace Domain\Handler\Citation;
 
 use Domain\{
     Command\Citation\RegisterAppearance,
-    Repository\CitationAppearanceRepositoryInterface,
+    Repository\CitationAppearanceRepository,
     Entity\CitationAppearance,
     Specification\CitationAppearance\Citation,
     Specification\CitationAppearance\HttpResource,
@@ -19,7 +19,7 @@ final class RegisterAppearanceHandler
     private $clock;
 
     public function __construct(
-        CitationAppearanceRepositoryInterface $repository,
+        CitationAppearanceRepository $repository,
         TimeContinuumInterface $clock
     ) {
         $this->repository = $repository;

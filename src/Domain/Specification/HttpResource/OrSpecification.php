@@ -8,13 +8,13 @@ use Domain\{
     Entity\HttpResource as Entity
 };
 
-final class OrSpecification extends ParentSpec implements SpecificationInterface
+final class OrSpecification extends ParentSpec implements Specification
 {
     use Composable;
 
     public function __construct(
-        SpecificationInterface $left,
-        SpecificationInterface $right
+        Specification $left,
+        Specification $right
     ) {
         parent::__construct($left, $right);
     }

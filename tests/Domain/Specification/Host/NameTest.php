@@ -5,12 +5,12 @@ namespace Tests\Domain\Specification\Host;
 
 use Domain\{
     Specification\Host\Name,
-    Specification\Host\SpecificationInterface,
+    Specification\Host\Specification,
     Specification\Host\AndSpecification,
     Specification\Host\OrSpecification,
     Specification\Host\Not,
     Entity\Host,
-    Entity\Host\IdentityInterface,
+    Entity\Host\Identity,
     Entity\Host\Name as Model
 };
 use Innmind\Specification\ComparatorInterface;
@@ -23,7 +23,7 @@ class NameTest extends TestCase
         $spec = new Name(new Model('foo'));
 
         $this->assertInstanceOf(ComparatorInterface::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('name', $spec->property());
         $this->assertSame('=', $spec->sign());
         $this->assertSame('foo', $spec->value());
@@ -33,14 +33,14 @@ class NameTest extends TestCase
     {
         $spec = new Name(new Model('foo'));
         $host = new Host(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Model('foo')
         );
 
         $this->assertTrue($spec->isSatisfiedBy($host));
 
         $host = new Host(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Model('bar')
         );
 

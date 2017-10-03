@@ -7,8 +7,8 @@ use AppBundle\Rest\Gateway\HttpResourceGateway\ResourceLinker;
 use Domain\{
     Command\ReferResource,
     Entity\Reference as Entity,
-    Entity\Reference\IdentityInterface as ReferenceIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Reference\Identity as ReferenceIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Exception\ReferenceAlreadyExistException
 };
 use Innmind\Rest\Server\{

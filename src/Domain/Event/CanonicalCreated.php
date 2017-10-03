@@ -4,8 +4,8 @@ declare(strict_types = 1);
 namespace Domain\Event;
 
 use Domain\{
-    Entity\Canonical\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\Canonical\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 
@@ -17,7 +17,7 @@ final class CanonicalCreated
     private $foundAt;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         ResourceIdentity $canonical,
         ResourceIdentity $resource,
         PointInTimeInterface $foundAt
@@ -28,7 +28,7 @@ final class CanonicalCreated
         $this->foundAt = $foundAt;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

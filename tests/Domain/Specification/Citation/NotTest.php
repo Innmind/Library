@@ -5,10 +5,10 @@ namespace Tests\Domain\Specification\Citation;
 
 use Domain\{
     Specification\Citation\Not,
-    Specification\Citation\SpecificationInterface,
+    Specification\Citation\Specification,
     Specification\Not as ParentSpec,
     Entity\Citation,
-    Entity\Citation\IdentityInterface,
+    Entity\Citation\Identity,
     Entity\Citation\Text
 };
 use PHPUnit\Framework\TestCase;
@@ -18,20 +18,20 @@ class NotTest extends TestCase
     public function testInterface()
     {
         $spec = new Not(
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class)
         );
 
         $this->assertInstanceOf(ParentSpec::class, $spec);
-        $this->assertInstanceOf(SpecificationInterface::class, $spec);
+        $this->assertInstanceOf(Specification::class, $spec);
     }
 
     public function testIsSatisfiedBy()
     {
         $spec = new Not(
-            $this->createMock(SpecificationInterface::class)
+            $this->createMock(Specification::class)
         );
         $citation = new Citation(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Text('foo')
         );
         $spec

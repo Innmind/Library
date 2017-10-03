@@ -6,14 +6,14 @@ namespace Tests\Domain\Handler;
 use Domain\{
     Handler\RegisterHttpResourceHandler,
     Command\RegisterHttpResource,
-    Repository\HttpResourceRepositoryInterface,
-    Repository\HostResourceRepositoryInterface,
+    Repository\HttpResourceRepository,
+    Repository\HostResourceRepository,
     Entity\HttpResource,
     Entity\HostResource,
     Entity\Host,
-    Entity\HttpResource\IdentityInterface,
-    Entity\HostResource\IdentityInterface as RelationIdentity,
-    Entity\Host\IdentityInterface as HostIdentity,
+    Entity\HttpResource\Identity,
+    Entity\HostResource\Identity as RelationIdentity,
+    Entity\Host\Identity as HostIdentity,
     Entity\Host\Name,
     Specification\AndSpecification,
     Specification\HttpResource\Path,
@@ -37,12 +37,12 @@ class RegisterHttpResourceHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new RegisterHttpResourceHandler(
-            $resourceRepository = $this->createMock(HttpResourceRepositoryInterface::class),
-            $relationRepository = $this->createMock(HostResourceRepositoryInterface::class),
+            $resourceRepository = $this->createMock(HttpResourceRepository::class),
+            $relationRepository = $this->createMock(HostResourceRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new RegisterHttpResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(RelationIdentity::class),
             $this->createMock(PathInterface::class),
@@ -103,12 +103,12 @@ class RegisterHttpResourceHandlerTest extends TestCase
     public function testLookForRelations()
     {
         $handler = new RegisterHttpResourceHandler(
-            $resourceRepository = $this->createMock(HttpResourceRepositoryInterface::class),
-            $relationRepository = $this->createMock(HostResourceRepositoryInterface::class),
+            $resourceRepository = $this->createMock(HttpResourceRepository::class),
+            $relationRepository = $this->createMock(HostResourceRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new RegisterHttpResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(RelationIdentity::class),
             $this->createMock(PathInterface::class),
@@ -148,7 +148,7 @@ class RegisterHttpResourceHandlerTest extends TestCase
             ->willReturn(
                 (new Set(HttpResource::class))->add(
                     new HttpResource(
-                        $identity = $this->createMock(IdentityInterface::class),
+                        $identity = $this->createMock(Identity::class),
                         $this->createMock(PathInterface::class),
                         $this->createMock(QueryInterface::class)
                     )
@@ -194,12 +194,12 @@ class RegisterHttpResourceHandlerTest extends TestCase
     public function testThrowWhenResourceAlreadyExist()
     {
         $handler = new RegisterHttpResourceHandler(
-            $resourceRepository = $this->createMock(HttpResourceRepositoryInterface::class),
-            $relationRepository = $this->createMock(HostResourceRepositoryInterface::class),
+            $resourceRepository = $this->createMock(HttpResourceRepository::class),
+            $relationRepository = $this->createMock(HostResourceRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new RegisterHttpResource(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(RelationIdentity::class),
             $this->createMock(PathInterface::class),
@@ -236,7 +236,7 @@ class RegisterHttpResourceHandlerTest extends TestCase
             ->willReturn(
                 (new Set(HttpResource::class))->add(
                     new HttpResource(
-                        $identity = $this->createMock(IdentityInterface::class),
+                        $identity = $this->createMock(Identity::class),
                         $this->createMock(PathInterface::class),
                         $this->createMock(QueryInterface::class)
                     )

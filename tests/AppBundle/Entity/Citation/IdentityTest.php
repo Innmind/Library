@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Tests\AppBundle\Entity\Citation;
 
 use AppBundle\Entity\Citation\Identity;
-use Domain\Entity\Citation\IdentityInterface;
+use Domain\Entity\Citation\Identity as IdentityInterface;
 use Innmind\Neo4j\ONM\Identity\Uuid as UuidIdentity;
 use Innmind\Rest\Server\Identity as RestIdentity;
 use Ramsey\Uuid\Uuid;

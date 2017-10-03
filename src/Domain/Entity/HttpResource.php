@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Domain\Entity;
 
 use Domain\{
-    Entity\HttpResource\IdentityInterface,
+    Entity\HttpResource\Identity,
     Entity\HttpResource\Charset,
     Event\HttpResourceRegistered,
     Event\HttpResource\LanguagesSpecified,
@@ -36,7 +36,7 @@ class HttpResource implements ContainsRecordedEventsInterface
     private $charset;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         PathInterface $path,
         QueryInterface $query
     ) {
@@ -47,7 +47,7 @@ class HttpResource implements ContainsRecordedEventsInterface
     }
 
     public static function register(
-        IdentityInterface $identity,
+        Identity $identity,
         PathInterface $path,
         QueryInterface $query
     ): self {
@@ -57,7 +57,7 @@ class HttpResource implements ContainsRecordedEventsInterface
         return $self;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

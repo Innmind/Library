@@ -4,9 +4,9 @@ declare(strict_types = 1);
 namespace Domain\Command\Citation;
 
 use Domain\Entity\{
-    CitationAppearance\IdentityInterface,
-    Citation\IdentityInterface as CitationIdentity,
-    HttpResource\IdentityInterface as ResourceIdentity
+    CitationAppearance\Identity,
+    Citation\Identity as CitationIdentity,
+    HttpResource\Identity as ResourceIdentity
 };
 
 final class RegisterAppearance
@@ -16,7 +16,7 @@ final class RegisterAppearance
     private $resource;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         CitationIdentity $citation,
         ResourceIdentity $resource
     ) {
@@ -25,7 +25,7 @@ final class RegisterAppearance
         $this->resource = $resource;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

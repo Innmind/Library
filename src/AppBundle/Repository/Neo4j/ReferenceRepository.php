@@ -4,11 +4,11 @@ declare(strict_types = 1);
 namespace AppBundle\Repository\Neo4j;
 
 use Domain\{
-    Repository\ReferenceRepositoryInterface,
+    Repository\ReferenceRepository as ReferenceRepositoryInterface,
     Entity\Reference,
-    Entity\Reference\IdentityInterface,
+    Entity\Reference\Identity,
     Exception\ReferenceNotFoundException,
-    Specification\Reference\SpecificationInterface
+    Specification\Reference\Specification
 };
 use Innmind\Neo4j\ONM\{
     Repository,
@@ -31,7 +31,7 @@ final class ReferenceRepository implements ReferenceRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function get(IdentityInterface $identity): Reference
+    public function get(Identity $identity): Reference
     {
         try {
             return $this->infrastructure->get($identity);
@@ -47,7 +47,7 @@ final class ReferenceRepository implements ReferenceRepositoryInterface
         return $this;
     }
 
-    public function remove(IdentityInterface $identity): ReferenceRepositoryInterface
+    public function remove(Identity $identity): ReferenceRepositoryInterface
     {
         $this->infrastructure->remove(
             $this->get($identity)
@@ -56,7 +56,7 @@ final class ReferenceRepository implements ReferenceRepositoryInterface
         return $this;
     }
 
-    public function has(IdentityInterface $identity): bool
+    public function has(Identity $identity): bool
     {
         return $this->infrastructure->has($identity);
     }
@@ -85,7 +85,7 @@ final class ReferenceRepository implements ReferenceRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function matching(SpecificationInterface $specification): SetInterface
+    public function matching(Specification $specification): SetInterface
     {
         return $this
             ->infrastructure

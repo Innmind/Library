@@ -5,7 +5,7 @@ namespace Tests\Domain\Event\HttpResource;
 
 use Domain\{
     Event\HttpResource\CharsetSpecified,
-    Entity\HttpResource\IdentityInterface,
+    Entity\HttpResource\Identity,
     Entity\HttpResource\Charset
 };
 use PHPUnit\Framework\TestCase;
@@ -15,7 +15,7 @@ class CharsetSpecifiedTest extends TestCase
     public function testInterface()
     {
         $event = new CharsetSpecified(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $charset = new Charset('utf-8')
         );
 

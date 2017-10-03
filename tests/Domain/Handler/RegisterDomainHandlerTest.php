@@ -7,10 +7,10 @@ use Domain\{
     Handler\RegisterDomainHandler,
     Command\RegisterDomain,
     Entity\Domain,
-    Entity\Domain\IdentityInterface,
+    Entity\Domain\Identity,
     Entity\Domain\Name as NameModel,
     Entity\Domain\TopLevelDomain as TLD,
-    Repository\DomainRepositoryInterface,
+    Repository\DomainRepository,
     Specification\AndSpecification,
     Specification\Domain\Name,
     Specification\Domain\TopLevelDomain
@@ -32,13 +32,13 @@ class RegisterDomainHandlerTest extends TestCase
     public function testCreateDomain()
     {
         $handler = new RegisterDomainHandler(
-            $repository = $this->createMock(DomainRepositoryInterface::class),
+            $repository = $this->createMock(DomainRepository::class),
             new Parser(
                 (new PublicSuffixListManager)->getList()
             )
         );
         $command = new RegisterDomain(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Host('www.example.co.uk')
         );
 
@@ -69,13 +69,13 @@ class RegisterDomainHandlerTest extends TestCase
     public function testThrowWhenDomainAlreadyExist()
     {
         $handler = new RegisterDomainHandler(
-            $repository = $this->createMock(DomainRepositoryInterface::class),
+            $repository = $this->createMock(DomainRepository::class),
             new Parser(
                 (new PublicSuffixListManager)->getList()
             )
         );
         $command = new RegisterDomain(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Host('www.example.co.uk')
         );
 
@@ -103,7 +103,7 @@ class RegisterDomainHandlerTest extends TestCase
             ->method('current')
             ->willReturn(
                 new Domain(
-                    $this->createMock(IdentityInterface::class),
+                    $this->createMock(Identity::class),
                     new NameModel('foo'),
                     new TLD('fr')
                 )

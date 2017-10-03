@@ -4,8 +4,8 @@ declare(strict_types = 1);
 namespace Domain\Command;
 
 use Domain\Entity\{
-    Reference\IdentityInterface,
-    HttpResource\IdentityInterface as ResourceIdentity
+    Reference\Identity,
+    HttpResource\Identity as ResourceIdentity
 };
 
 final class ReferResource
@@ -15,7 +15,7 @@ final class ReferResource
     private $target;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         ResourceIdentity $source,
         ResourceIdentity $target
     ) {
@@ -24,7 +24,7 @@ final class ReferResource
         $this->target = $target;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

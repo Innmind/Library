@@ -4,9 +4,9 @@ declare(strict_types = 1);
 namespace Domain\Event;
 
 use Domain\{
-    Entity\ResourceAuthor\IdentityInterface,
-    Entity\Author\IdentityInterface as AuthorIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\ResourceAuthor\Identity,
+    Entity\Author\Identity as AuthorIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 
@@ -18,7 +18,7 @@ final class ResourceAuthorRegistered
     private $asOf;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         AuthorIdentity $author,
         ResourceIdentity $resource,
         PointInTimeInterface $asOf
@@ -29,7 +29,7 @@ final class ResourceAuthorRegistered
         $this->asOf = $asOf;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

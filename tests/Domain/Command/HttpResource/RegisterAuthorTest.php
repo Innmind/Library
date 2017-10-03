@@ -5,9 +5,9 @@ namespace Tests\Domain\Command\HttpResource;
 
 use Domain\{
     Command\HttpResource\RegisterAuthor,
-    Entity\ResourceAuthor\IdentityInterface,
-    Entity\Author\IdentityInterface as AuthorIdentity,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity
+    Entity\ResourceAuthor\Identity,
+    Entity\Author\Identity as AuthorIdentity,
+    Entity\HttpResource\Identity as ResourceIdentity
 };
 use PHPUnit\Framework\TestCase;
 
@@ -16,7 +16,7 @@ class RegisterAuthorTest extends TestCase
     public function testInterface()
     {
         $command = new RegisterAuthor(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $author = $this->createMock(AuthorIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class)
         );

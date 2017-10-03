@@ -9,7 +9,7 @@ use AppBundle\Rest\Gateway\{
     HtmlPageGateway\ResourceAccessor,
     HtmlPageGateway\ResourceLinker
 };
-use Domain\Repository\HtmlPageRepositoryInterface;
+use Domain\Repository\HtmlPageRepository;
 use Innmind\Rest\Server\Gateway;
 use Innmind\CommandBus\CommandBusInterface;
 use Innmind\Neo4j\DBAL\Connection;
@@ -29,7 +29,7 @@ class HtmlPageGatewayTest extends TestCase
                 $this->createMock(CommandBusInterface::class)
             ),
             $this->accessor = new ResourceAccessor(
-                $this->createMock(HtmlPageRepositoryInterface::class),
+                $this->createMock(HtmlPageRepository::class),
                 $this->createMock(Connection::class)
             ),
             $this->linker = new ResourceLinker(

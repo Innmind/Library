@@ -5,7 +5,7 @@ namespace Tests\Domain\Command\Image;
 
 use Domain\{
     Command\Image\AddDescription,
-    Entity\Image\IdentityInterface,
+    Entity\Image\Identity,
     Entity\Image\Description
 };
 use PHPUnit\Framework\TestCase;
@@ -15,7 +15,7 @@ class AddDescriptionTest extends TestCase
     public function testInterface()
     {
         $command = new AddDescription(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $description = new Description('foobar')
         );
 

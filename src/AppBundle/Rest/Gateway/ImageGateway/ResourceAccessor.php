@@ -5,7 +5,7 @@ namespace AppBundle\Rest\Gateway\ImageGateway;
 
 use AppBundle\Entity\Image\Identity;
 use Domain\{
-    Repository\ImageRepositoryInterface,
+    Repository\ImageRepository,
     Entity\Image\Description
 };
 use Innmind\Rest\Server\{
@@ -30,7 +30,7 @@ final class ResourceAccessor implements ResourceAccessorInterface
     private $dbal;
 
     public function __construct(
-        ImageRepositoryInterface $repository,
+        ImageRepository $repository,
         Connection $dbal
     ) {
         $this->repository = $repository;

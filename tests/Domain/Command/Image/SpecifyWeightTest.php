@@ -5,7 +5,7 @@ namespace Tests\Domain\Command\Image;
 
 use Domain\{
     Command\Image\SpecifyWeight,
-    Entity\Image\IdentityInterface,
+    Entity\Image\Identity,
     Entity\Image\Weight
 };
 use PHPUnit\Framework\TestCase;
@@ -15,7 +15,7 @@ class SpecifyWeightTest extends TestCase
     public function testInterface()
     {
         $command = new SpecifyWeight(
-            $identity = $this->createMock(IdentityInterface::class),
+            $identity = $this->createMock(Identity::class),
             $weight = new Weight(12, 21)
         );
 

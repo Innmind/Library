@@ -6,9 +6,9 @@ namespace Tests\Domain\Handler\Image;
 use Domain\{
     Handler\Image\SpecifyDimensionHandler,
     Command\Image\SpecifyDimension,
-    Repository\ImageRepositoryInterface,
+    Repository\ImageRepository,
     Entity\Image,
-    Entity\Image\IdentityInterface,
+    Entity\Image\Identity,
     Entity\Image\Dimension,
     Event\Image\DimensionSpecified
 };
@@ -23,10 +23,10 @@ class SpecifyDimensionHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new SpecifyDimensionHandler(
-            $repository = $this->createMock(ImageRepositoryInterface::class)
+            $repository = $this->createMock(ImageRepository::class)
         );
         $command = new SpecifyDimension(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             new Dimension(12, 21)
         );
         $repository

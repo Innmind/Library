@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Domain\Event;
 
-use Domain\Entity\Image\IdentityInterface;
+use Domain\Entity\Image\Identity;
 use Innmind\Url\{
     PathInterface,
     QueryInterface
@@ -16,7 +16,7 @@ final class ImageRegistered
     private $query;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         PathInterface $path,
         QueryInterface $query
     ) {
@@ -25,7 +25,7 @@ final class ImageRegistered
         $this->query = $query;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

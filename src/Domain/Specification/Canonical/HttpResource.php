@@ -5,17 +5,17 @@ namespace Domain\Specification\Canonical;
 
 use Domain\Entity\{
     Canonical as Entity,
-    HttpResource\IdentityInterface
+    HttpResource\Identity
 };
 use Innmind\Specification\ComparatorInterface;
 
-final class HttpResource implements ComparatorInterface, SpecificationInterface
+final class HttpResource implements ComparatorInterface, Specification
 {
     use Composable;
 
     private $value;
 
-    public function __construct(IdentityInterface $value)
+    public function __construct(Identity $value)
     {
         $this->value = (string) $value;
     }

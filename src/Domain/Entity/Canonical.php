@@ -4,8 +4,8 @@ declare(strict_types = 1);
 namespace Domain\Entity;
 
 use Domain\{
-    Entity\Canonical\IdentityInterface,
-    Entity\HttpResource\IdentityInterface as ResourceIdentity,
+    Entity\Canonical\Identity,
+    Entity\HttpResource\Identity as ResourceIdentity,
     Event\CanonicalCreated
 };
 use Innmind\EventBus\{
@@ -24,7 +24,7 @@ final class Canonical implements ContainsRecordedEventsInterface
     private $foundAt;
 
     public function __construct(
-        IdentityInterface $identity,
+        Identity $identity,
         ResourceIdentity $canonical,
         ResourceIdentity $resource,
         PointInTimeInterface $foundAt
@@ -36,7 +36,7 @@ final class Canonical implements ContainsRecordedEventsInterface
     }
 
     public static function create(
-        IdentityInterface $identity,
+        Identity $identity,
         ResourceIdentity $canonical,
         ResourceIdentity $resource,
         PointInTimeInterface $foundAt
@@ -52,7 +52,7 @@ final class Canonical implements ContainsRecordedEventsInterface
         return $self;
     }
 
-    public function identity(): IdentityInterface
+    public function identity(): Identity
     {
         return $this->identity;
     }

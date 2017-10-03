@@ -6,14 +6,14 @@ namespace Tests\Domain\Handler;
 use Domain\{
     Handler\RegisterImageHandler,
     Command\RegisterImage,
-    Repository\ImageRepositoryInterface,
-    Repository\HostResourceRepositoryInterface,
+    Repository\ImageRepository,
+    Repository\HostResourceRepository,
     Entity\Image,
     Entity\HostResource,
     Entity\Host,
-    Entity\Image\IdentityInterface,
-    Entity\HostResource\IdentityInterface as RelationIdentity,
-    Entity\Host\IdentityInterface as HostIdentity,
+    Entity\Image\Identity,
+    Entity\HostResource\Identity as RelationIdentity,
+    Entity\Host\Identity as HostIdentity,
     Entity\Host\Name,
     Specification\AndSpecification,
     Specification\HttpResource\Path,
@@ -38,12 +38,12 @@ class RegisterImageHandlerTest extends TestCase
     public function testExecution()
     {
         $handler = new RegisterImageHandler(
-            $imageRepository = $this->createMock(ImageRepositoryInterface::class),
-            $relationRepository = $this->createMock(HostResourceRepositoryInterface::class),
+            $imageRepository = $this->createMock(ImageRepository::class),
+            $relationRepository = $this->createMock(HostResourceRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new RegisterImage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(RelationIdentity::class),
             $this->createMock(PathInterface::class),
@@ -105,12 +105,12 @@ class RegisterImageHandlerTest extends TestCase
     public function testLookForRelations()
     {
         $handler = new RegisterImageHandler(
-            $imageRepository = $this->createMock(ImageRepositoryInterface::class),
-            $relationRepository = $this->createMock(HostResourceRepositoryInterface::class),
+            $imageRepository = $this->createMock(ImageRepository::class),
+            $relationRepository = $this->createMock(HostResourceRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new RegisterImage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(RelationIdentity::class),
             $this->createMock(PathInterface::class),
@@ -150,7 +150,7 @@ class RegisterImageHandlerTest extends TestCase
             ->willReturn(
                 (new Set(Image::class))->add(
                     new Image(
-                        $identity = $this->createMock(IdentityInterface::class),
+                        $identity = $this->createMock(Identity::class),
                         $this->createMock(PathInterface::class),
                         $this->createMock(QueryInterface::class)
                     )
@@ -196,12 +196,12 @@ class RegisterImageHandlerTest extends TestCase
     public function testThrowWhenResourceAlreadyExist()
     {
         $handler = new RegisterImageHandler(
-            $imageRepository = $this->createMock(ImageRepositoryInterface::class),
-            $relationRepository = $this->createMock(HostResourceRepositoryInterface::class),
+            $imageRepository = $this->createMock(ImageRepository::class),
+            $relationRepository = $this->createMock(HostResourceRepository::class),
             $clock = $this->createMock(TimeContinuumInterface::class)
         );
         $command = new RegisterImage(
-            $this->createMock(IdentityInterface::class),
+            $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(RelationIdentity::class),
             $this->createMock(PathInterface::class),
@@ -238,7 +238,7 @@ class RegisterImageHandlerTest extends TestCase
             ->willReturn(
                 (new Set(Image::class))->add(
                     new Image(
-                        $identity = $this->createMock(IdentityInterface::class),
+                        $identity = $this->createMock(Identity::class),
                         $this->createMock(PathInterface::class),
                         $this->createMock(QueryInterface::class)
                     )
