@@ -18,7 +18,7 @@ class LanguageTest extends TestCase
 
     /**
      * @dataProvider invalid
-     * @expectedException Domain\Exception\InvalidArgumentException
+     * @expectedException Domain\Exception\DomainException
      */
     public function testThrowOnInvalidValue(string $value)
     {

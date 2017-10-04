@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Domain\Entity\HtmlPage;
 
-use Domain\Exception\InvalidArgumentException;
+use Domain\Exception\DomainException;
 
 final class Anchor
 {
@@ -14,7 +14,7 @@ final class Anchor
         $value = ltrim($value, '#');
 
         if (empty($value)) {
-            throw new InvalidArgumentException;
+            throw new DomainException;
         }
 
         $this->value = $value;

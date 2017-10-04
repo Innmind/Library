@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Domain\Entity\Image;
 
-use Domain\Exception\InvalidArgumentException;
+use Domain\Exception\DomainException;
 
 final class Description
 {
@@ -12,7 +12,7 @@ final class Description
     public function __construct(string $value)
     {
         if (empty($value)) {
-            throw new InvalidArgumentException;
+            throw new DomainException;
         }
 
         $this->value = $value;

@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Domain\Entity\Image;
 
-use Domain\Exception\InvalidArgumentException;
+use Domain\Exception\DomainException;
 
 final class Weight
 {
@@ -12,7 +12,7 @@ final class Weight
     public function __construct(int $value)
     {
         if ($value < 0) {
-            throw new InvalidArgumentException;
+            throw new DomainException;
         }
 
         $this->value = $value;

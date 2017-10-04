@@ -18,7 +18,7 @@ class CharsetTest extends TestCase
 
     /**
      * @dataProvider invalid
-     * @expectedException Domain\Exception\InvalidArgumentException
+     * @expectedException Domain\Exception\DomainException
      */
     public function testThrowWhenInvalidString(string $value)
     {

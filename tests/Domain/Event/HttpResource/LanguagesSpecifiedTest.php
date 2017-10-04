@@ -25,7 +25,8 @@ class LanguagesSpecifiedTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\InvalidArgumentException
+     * @expectedException TypeError
+     * @expectedExceptionMessage Argument 2 must be of type SetInterface<Domain\Model\Language>
      */
     public function testThrowWhenInvalidSetOfLanguages()
     {

@@ -14,7 +14,7 @@ class NameTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\InvalidArgumentException
+     * @expectedException Domain\Exception\DomainException
      */
     public function testThrowWhenEmptyName()
     {

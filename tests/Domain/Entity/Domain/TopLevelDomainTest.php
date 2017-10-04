@@ -14,7 +14,7 @@ class TopLevelDomainTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\InvalidArgumentException
+     * @expectedException Domain\Exception\DomainException
      */
     public function testThrowWhenEmptyTopLevelDomain()
     {

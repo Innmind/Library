@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Domain\Entity\Domain;
 
-use Domain\Exception\InvalidArgumentException;
+use Domain\Exception\DomainException;
 
 final class Name
 {
@@ -12,7 +12,7 @@ final class Name
     public function __construct(string $value)
     {
         if (empty($value)) {
-            throw new InvalidArgumentException;
+            throw new DomainException;
         }
 
         $this->value = $value;

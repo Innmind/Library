@@ -95,7 +95,10 @@ final class HtmlPage extends HttpResource
     public function specifyAnchors(SetInterface $anchors): self
     {
         if ((string) $anchors->type() !== Anchor::class) {
-            throw new InvalidArgumentException;
+            throw new \TypeError(sprintf(
+                'Argument 1 must be of type SetInterface<%s>',
+                Anchor::class
+            ));
         }
 
         $this->anchors = $anchors;

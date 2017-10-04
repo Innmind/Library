@@ -96,7 +96,8 @@ class HttpResourceTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\InvalidArgumentException
+     * @expectedException TypeError
+     * @expectedExceptionMessage Argument 1 must be of type SetInterface<Domain\Model\Language>
      */
     public function testThrowWhenInvalidLanguagesType()
     {
@@ -108,7 +109,7 @@ class HttpResourceTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\InvalidArgumentException
+     * @expectedException Domain\Exception\DomainException
      */
     public function testThrowWhenEmptyLanguagesSet()
     {
@@ -116,7 +117,7 @@ class HttpResourceTest extends TestCase
             $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
             $this->createMock(QueryInterface::class)
-        ))->specifyLanguages(new Set('string'));
+        ))->specifyLanguages(new Set(Language::class));
     }
 
     public function testSpecifyCharset()

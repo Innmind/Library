@@ -18,7 +18,7 @@ class DimensionTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\InvalidArgumentException
+     * @expectedException Domain\Exception\DomainException
      */
     public function testThrowWhenNegativeHeight()
     {
@@ -26,7 +26,7 @@ class DimensionTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\InvalidArgumentException
+     * @expectedException Domain\Exception\DomainException
      */
     public function testThrowWhenNegativeWidth()
     {

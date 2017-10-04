@@ -182,7 +182,8 @@ class HtmlPageTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\InvalidArgumentException
+     * @expectedException TypeError
+     * @expectedExceptionMessage Argument 1 must be of type SetInterface<Domain\Entity\HtmlPage\Anchor>
      */
     public function testThrowWhenInvalidAnchorsSet()
     {

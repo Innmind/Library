@@ -5,8 +5,7 @@ namespace Domain\Event\HttpResource;
 
 use Domain\{
     Entity\HttpResource\Identity,
-    Model\Language,
-    Exception\InvalidArgumentException
+    Model\Language
 };
 use Innmind\Immutable\SetInterface;
 
@@ -20,7 +19,10 @@ final class LanguagesSpecified
         SetInterface $languages
     ) {
         if ((string) $languages->type() !== Language::class) {
-            throw new InvalidArgumentException;
+            throw new \TypeError(sprintf(
+                'Argument 2 must be of type SetInterface<%s>',
+                Language::class
+            ));
         }
 
         $this->identity = $identity;

@@ -25,7 +25,8 @@ class SpecifyAnchorsTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\InvalidArgumentException
+     * @expectedException TypeError
+     * @expectedExceptionMessage Argument 2 must be of type SetInterface<Domain\Entity\HtmlPage\Anchor>
      */
     public function testThrowWhenInvalidAnchorSet()
     {

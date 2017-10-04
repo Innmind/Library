@@ -10,7 +10,7 @@ use Domain\{
     Event\HttpResource\LanguagesSpecified,
     Event\HttpResource\CharsetSpecified,
     Model\Language,
-    Exception\InvalidArgumentException
+    Exception\DomainException
 };
 use Innmind\EventBus\{
     ContainsRecordedEventsInterface,
@@ -74,11 +74,15 @@ class HttpResource implements ContainsRecordedEventsInterface
 
     public function specifyLanguages(SetInterface $languages): self
     {
-        if (
-            (string) $languages->type() !== Language::class ||
-            $languages->size() === 0
-        ) {
-            throw new InvalidArgumentException;
+        if ((string) $languages->type() !== Language::class) {
+            throw new \TypeError(sprintf(
+                'Argument 1 must be of type SetInterface<%s>',
+                Language::class
+            ));
+        }
+
+        if ($languages->size() === 0) {
+            throw new DomainException;
         }
 
         $this->languages = $languages;

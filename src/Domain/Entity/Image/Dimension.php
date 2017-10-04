@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Domain\Entity\Image;
 
-use Domain\Exception\InvalidArgumentException;
+use Domain\Exception\DomainException;
 
 final class Dimension
 {
@@ -14,7 +14,7 @@ final class Dimension
     public function __construct(int $width, int $height)
     {
         if ($height < 0 || $width < 0) {
-            throw new InvalidArgumentException;
+            throw new DomainException;
         }
 
         $this->height = $height;
