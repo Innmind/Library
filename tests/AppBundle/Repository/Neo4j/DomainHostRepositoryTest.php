@@ -61,7 +61,7 @@ class DomainHostRepositoryTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\DomainHostNotFoundException
+     * @expectedException Domain\Exception\DomainHostNotFound
      */
     public function testThrowWhenGettingUnknownEntity()
     {

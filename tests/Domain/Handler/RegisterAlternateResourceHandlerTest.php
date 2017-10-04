@@ -75,7 +75,7 @@ class RegisterAlternateResourceHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\AlternateAlreadyExistException
+     * @expectedException Domain\Exception\AlternateAlreadyExist
      */
     public function testThrowWhenAlternateAlreadyExist()
     {

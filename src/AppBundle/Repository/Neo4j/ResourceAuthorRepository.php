@@ -7,7 +7,7 @@ use Domain\{
     Repository\ResourceAuthorRepository as ResourceAuthorRepositoryInterface,
     Entity\ResourceAuthor,
     Entity\ResourceAuthor\Identity,
-    Exception\ResourceAuthorNotFoundException,
+    Exception\ResourceAuthorNotFound,
     Specification\ResourceAuthor\Specification
 };
 use Innmind\Neo4j\ONM\{
@@ -36,7 +36,7 @@ final class ResourceAuthorRepository implements ResourceAuthorRepositoryInterfac
         try {
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
-            throw new ResourceAuthorNotFoundException('', 0, $e);
+            throw new ResourceAuthorNotFound('', 0, $e);
         }
     }
 

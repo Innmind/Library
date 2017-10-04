@@ -5,7 +5,7 @@ namespace Domain\Exception;
 
 use Domain\Entity\Host;
 
-final class HostAlreadyExistException extends LogicException
+final class HostAlreadyExist extends LogicException
 {
     private $host;
 

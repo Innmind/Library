@@ -11,7 +11,7 @@ use Domain\{
     Entity\Host,
     Entity\Host\Name as Model,
     Entity\DomainHost,
-    Exception\HostAlreadyExistException
+    Exception\HostAlreadyExist
 };
 use Innmind\TimeContinuum\TimeContinuumInterface;
 
@@ -39,7 +39,7 @@ final class RegisterHostHandler
         );
 
         if ($hosts->size() > 0) {
-            throw new HostAlreadyExistException($hosts->current());
+            throw new HostAlreadyExist($hosts->current());
         }
 
         $host = Host::register(

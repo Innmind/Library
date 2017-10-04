@@ -61,7 +61,7 @@ class ResourceAuthorRepositoryTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\ResourceAuthorNotFoundException
+     * @expectedException Domain\Exception\ResourceAuthorNotFound
      */
     public function testThrowWhenGettingUnknownEntity()
     {

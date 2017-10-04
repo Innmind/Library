@@ -61,7 +61,7 @@ class HtmlPageRepositoryTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\HtmlPageNotFoundException
+     * @expectedException Domain\Exception\HtmlPageNotFound
      */
     public function testThrowWhenGettingUnknownEntity()
     {

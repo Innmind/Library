@@ -3,28 +3,28 @@ services:
         class: AppBundle\EventListener\ExceptionListener
         arguments:
             -
-                Domain\Exception\AlternateAlreadyExistException: Innmind\Http\Exception\Http\Conflict
-                Domain\Exception\AuthorAlreadyExistException: Innmind\Http\Exception\Http\Conflict
-                Domain\Exception\CanonicalAlreadyExistException: Innmind\Http\Exception\Http\Conflict
-                Domain\Exception\CitationAlreadyExistException: Innmind\Http\Exception\Http\Conflict
-                Domain\Exception\CitationAppearanceAlreadyExistException: Innmind\Http\Exception\Http\Conflict
-                Domain\Exception\DomainAlreadyExistException: Innmind\Http\Exception\Http\Conflict
-                Domain\Exception\HostAlreadyExistException: Innmind\Http\Exception\Http\Conflict
-                Domain\Exception\HtmlPageAlreadyExistException: Innmind\Http\Exception\Http\Conflict
-                Domain\Exception\HttpResourceAlreadyExistException: Innmind\Http\Exception\Http\Conflict
-                Domain\Exception\ImageAlreadyExistException: Innmind\Http\Exception\Http\Conflict
-                Domain\Exception\ReferenceAlreadyExistException: Innmind\Http\Exception\Http\Conflict
-                Domain\Exception\AlternateNotFoundException: Innmind\Http\Exception\Http\NotFound
-                Domain\Exception\AuthorNotFoundException: Innmind\Http\Exception\Http\NotFound
-                Domain\Exception\CanonicalNotFoundException: Innmind\Http\Exception\Http\NotFound
-                Domain\Exception\CitationNotFoundException: Innmind\Http\Exception\Http\NotFound
-                Domain\Exception\CitationAppearanceNotFoundException: Innmind\Http\Exception\Http\NotFound
-                Domain\Exception\DomainNotFoundException: Innmind\Http\Exception\Http\NotFound
-                Domain\Exception\HostNotFoundException: Innmind\Http\Exception\Http\NotFound
-                Domain\Exception\HtmlPageNotFoundException: Innmind\Http\Exception\Http\NotFound
-                Domain\Exception\HttpResourceNotFoundException: Innmind\Http\Exception\Http\NotFound
-                Domain\Exception\ImageNotFoundException: Innmind\Http\Exception\Http\NotFound
-                Domain\Exception\ReferenceNotFoundException: Innmind\Http\Exception\Http\NotFound
+                Domain\Exception\AlternateAlreadyExist: Innmind\Http\Exception\Http\Conflict
+                Domain\Exception\AuthorAlreadyExist: Innmind\Http\Exception\Http\Conflict
+                Domain\Exception\CanonicalAlreadyExist: Innmind\Http\Exception\Http\Conflict
+                Domain\Exception\CitationAlreadyExist: Innmind\Http\Exception\Http\Conflict
+                Domain\Exception\CitationAppearanceAlreadyExist: Innmind\Http\Exception\Http\Conflict
+                Domain\Exception\DomainAlreadyExist: Innmind\Http\Exception\Http\Conflict
+                Domain\Exception\HostAlreadyExist: Innmind\Http\Exception\Http\Conflict
+                Domain\Exception\HtmlPageAlreadyExist: Innmind\Http\Exception\Http\Conflict
+                Domain\Exception\HttpResourceAlreadyExist: Innmind\Http\Exception\Http\Conflict
+                Domain\Exception\ImageAlreadyExist: Innmind\Http\Exception\Http\Conflict
+                Domain\Exception\ReferenceAlreadyExist: Innmind\Http\Exception\Http\Conflict
+                Domain\Exception\AlternateNotFound: Innmind\Http\Exception\Http\NotFound
+                Domain\Exception\AuthorNotFound: Innmind\Http\Exception\Http\NotFound
+                Domain\Exception\CanonicalNotFound: Innmind\Http\Exception\Http\NotFound
+                Domain\Exception\CitationNotFound: Innmind\Http\Exception\Http\NotFound
+                Domain\Exception\CitationAppearanceNotFound: Innmind\Http\Exception\Http\NotFound
+                Domain\Exception\DomainNotFound: Innmind\Http\Exception\Http\NotFound
+                Domain\Exception\HostNotFound: Innmind\Http\Exception\Http\NotFound
+                Domain\Exception\HtmlPageNotFound: Innmind\Http\Exception\Http\NotFound
+                Domain\Exception\HttpResourceNotFound: Innmind\Http\Exception\Http\NotFound
+                Domain\Exception\ImageNotFound: Innmind\Http\Exception\Http\NotFound
+                Domain\Exception\ReferenceNotFound: Innmind\Http\Exception\Http\NotFound
         factory:
             - AppBundle\Factory\ExceptionListenerFactory
             - make

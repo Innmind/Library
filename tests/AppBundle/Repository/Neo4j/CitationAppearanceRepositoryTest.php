@@ -61,7 +61,7 @@ class CitationAppearanceRepositoryTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\CitationAppearanceNotFoundException
+     * @expectedException Domain\Exception\CitationAppearanceNotFound
      */
     public function testThrowWhenGettingUnknownEntity()
     {

@@ -9,7 +9,7 @@ use Domain\{
     Entity\Reference,
     Specification\Reference\Source,
     Specification\Reference\Target,
-    Exception\ReferenceAlreadyExistException
+    Exception\ReferenceAlreadyExist
 };
 
 final class ReferResourceHandler
@@ -29,7 +29,7 @@ final class ReferResourceHandler
         );
 
         if ($references->size() > 0) {
-            throw new ReferenceAlreadyExistException($references->current());
+            throw new ReferenceAlreadyExist($references->current());
         }
 
         $this->repository->add(

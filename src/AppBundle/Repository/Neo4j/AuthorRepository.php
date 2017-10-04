@@ -7,7 +7,7 @@ use Domain\{
     Repository\AuthorRepository as AuthorRepositoryInterface,
     Entity\Author,
     Entity\Author\Identity,
-    Exception\AuthorNotFoundException,
+    Exception\AuthorNotFound,
     Specification\Author\Specification
 };
 use Innmind\Neo4j\ONM\{
@@ -36,7 +36,7 @@ final class AuthorRepository implements AuthorRepositoryInterface
         try {
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
-            throw new AuthorNotFoundException('', 0, $e);
+            throw new AuthorNotFound('', 0, $e);
         }
     }
 

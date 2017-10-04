@@ -9,7 +9,7 @@ use AppBundle\Entity\{
 };
 use Domain\{
     Command\ReferResource,
-    Exception\ReferenceAlreadyExistException
+    Exception\ReferenceAlreadyExist
 };
 use Innmind\Rest\Server\{
     ResourceLinker as ResourceLinkerInterface,
@@ -62,7 +62,7 @@ final class ResourceLinker implements ResourceLinkerInterface
                     new ResourceIdentity((string) $to->identity())
                 )
             );
-        } catch (ReferenceAlreadyExistException $e) {
+        } catch (ReferenceAlreadyExist $e) {
             //pass
         }
     }

@@ -7,7 +7,7 @@ use Domain\{
     Repository\HttpResourceRepository as HttpResourceRepositoryInterface,
     Entity\HttpResource,
     Entity\HttpResource\Identity,
-    Exception\HttpResourceNotFoundException,
+    Exception\HttpResourceNotFound,
     Specification\HttpResource\Specification
 };
 use Innmind\Neo4j\ONM\{
@@ -36,7 +36,7 @@ final class HttpResourceRepository implements HttpResourceRepositoryInterface
         try {
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
-            throw new HttpResourceNotFoundException('', 0, $e);
+            throw new HttpResourceNotFound('', 0, $e);
         }
     }
 

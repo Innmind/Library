@@ -60,7 +60,7 @@ class CanonicalRepositoryTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\CanonicalNotFoundException
+     * @expectedException Domain\Exception\CanonicalNotFound
      */
     public function testThrowWhenGettingUnknownEntity()
     {

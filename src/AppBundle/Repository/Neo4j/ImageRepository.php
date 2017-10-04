@@ -7,7 +7,7 @@ use Domain\{
     Repository\ImageRepository as ImageRepositoryInterface,
     Entity\Image,
     Entity\Image\Identity,
-    Exception\ImageNotFoundException,
+    Exception\ImageNotFound,
     Specification\HttpResource\Specification
 };
 use Innmind\Neo4j\ONM\{
@@ -36,7 +36,7 @@ final class ImageRepository implements ImageRepositoryInterface
         try {
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
-            throw new ImageNotFoundException('', 0, $e);
+            throw new ImageNotFound('', 0, $e);
         }
     }
 

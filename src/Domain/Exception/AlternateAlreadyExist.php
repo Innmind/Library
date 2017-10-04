@@ -5,7 +5,7 @@ namespace Domain\Exception;
 
 use Domain\Entity\Alternate;
 
-final class AlternateAlreadyExistException extends LogicException
+final class AlternateAlreadyExist extends LogicException
 {
     private $alternate;
 

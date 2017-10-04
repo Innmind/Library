@@ -9,7 +9,7 @@ use Domain\{
     Entity\CitationAppearance,
     Specification\CitationAppearance\Citation,
     Specification\CitationAppearance\HttpResource,
-    Exception\CitationAppearanceAlreadyExistException
+    Exception\CitationAppearanceAlreadyExist
 };
 use Innmind\TimeContinuum\TimeContinuumInterface;
 
@@ -34,7 +34,7 @@ final class RegisterAppearanceHandler
         );
 
         if ($appearances->size() > 0) {
-            throw new CitationAppearanceAlreadyExistException(
+            throw new CitationAppearanceAlreadyExist(
                 $appearances->current()
             );
         }

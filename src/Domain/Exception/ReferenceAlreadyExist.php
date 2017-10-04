@@ -5,7 +5,7 @@ namespace Domain\Exception;
 
 use Domain\Entity\Reference;
 
-final class ReferenceAlreadyExistException extends LogicException
+final class ReferenceAlreadyExist extends LogicException
 {
     private $reference;
 

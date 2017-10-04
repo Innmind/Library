@@ -3,6 +3,6 @@ declare(strict_types = 1);
 
 namespace Domain\Exception;
 
-final class AuthorNotFoundException extends RuntimeException
+final class ResourceAuthorNotFound extends RuntimeException
 {
 }

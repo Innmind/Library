@@ -8,7 +8,7 @@ use Domain\{
     Repository\AuthorRepository,
     Entity\Author,
     Specification\Author\Name,
-    Exception\AuthorAlreadyExistException
+    Exception\AuthorAlreadyExist
 };
 
 final class RegisterAuthorHandler
@@ -25,7 +25,7 @@ final class RegisterAuthorHandler
         $authors = $this->repository->matching(new Name($wished->name()));
 
         if ($authors->size() > 0) {
-            throw new AuthorAlreadyExistException($authors->current());
+            throw new AuthorAlreadyExist($authors->current());
         }
 
         $this->repository->add(

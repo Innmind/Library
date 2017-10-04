@@ -5,7 +5,7 @@ namespace Domain\Exception;
 
 use Domain\Entity\Domain;
 
-final class DomainAlreadyExistException extends LogicException
+final class DomainAlreadyExist extends LogicException
 {
     private $domain;
 

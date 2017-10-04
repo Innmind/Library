@@ -81,7 +81,7 @@ class RegisterAppearanceHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\CitationAppearanceAlreadyExistException
+     * @expectedException Domain\Exception\CitationAppearanceAlreadyExist
      */
     public function testThrowWhenAppearanceAlreadyRegistered()
     {

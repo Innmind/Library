@@ -3,6 +3,6 @@ declare(strict_types = 1);
 
 namespace Domain\Exception;
 
-final class HostResourceNotFoundException extends RuntimeException
+final class DomainHostNotFound extends RuntimeException
 {
 }

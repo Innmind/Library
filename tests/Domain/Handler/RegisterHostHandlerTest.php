@@ -82,7 +82,7 @@ class RegisterHostHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\HostAlreadyExistException
+     * @expectedException Domain\Exception\HostAlreadyExist
      */
     public function testThrowWhenHostAlreadyExist()
     {

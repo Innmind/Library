@@ -7,7 +7,7 @@ use Domain\{
     Repository\AlternateRepository as AlternateRepositoryInterface,
     Entity\Alternate,
     Entity\Alternate\Identity,
-    Exception\AlternateNotFoundException,
+    Exception\AlternateNotFound,
     Specification\Alternate\Specification
 };
 use Innmind\Neo4j\ONM\{
@@ -36,7 +36,7 @@ final class AlternateRepository implements AlternateRepositoryInterface
         try {
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
-            throw new AlternateNotFoundException('', 0, $e);
+            throw new AlternateNotFound('', 0, $e);
         }
     }
 

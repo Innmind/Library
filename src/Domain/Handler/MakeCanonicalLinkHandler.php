@@ -9,7 +9,7 @@ use Domain\{
     Entity\Canonical,
     Specification\Canonical\HttpResource,
     Specification\Canonical\Canonical as CanonicalSpec,
-    Exception\CanonicalAlreadyExistException
+    Exception\CanonicalAlreadyExist
 };
 use Innmind\TimeContinuum\TimeContinuumInterface;
 
@@ -34,7 +34,7 @@ final class MakeCanonicalLinkHandler
         );
 
         if ($canonicals->size() > 0) {
-            throw new CanonicalAlreadyExistException($canonicals->current());
+            throw new CanonicalAlreadyExist($canonicals->current());
         }
 
         $this->repository->add(

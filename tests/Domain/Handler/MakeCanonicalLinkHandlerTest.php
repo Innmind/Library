@@ -80,7 +80,7 @@ class MakeCanonicalLinkHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\CanonicalAlreadyExistException
+     * @expectedException Domain\Exception\CanonicalAlreadyExist
      */
     public function testThrowWhenCanonicalLinkAlreadyExist()
     {

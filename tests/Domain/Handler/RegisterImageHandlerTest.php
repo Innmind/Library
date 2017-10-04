@@ -191,7 +191,7 @@ class RegisterImageHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\ImageAlreadyExistException
+     * @expectedException Domain\Exception\ImageAlreadyExist
      */
     public function testThrowWhenResourceAlreadyExist()
     {

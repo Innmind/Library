@@ -64,7 +64,7 @@ class RegisterDomainHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\DomainAlreadyExistException
+     * @expectedException Domain\Exception\DomainAlreadyExist
      */
     public function testThrowWhenDomainAlreadyExist()
     {

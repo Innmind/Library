@@ -68,7 +68,7 @@ class ReferResourceHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\ReferenceAlreadyExistException
+     * @expectedException Domain\Exception\ReferenceAlreadyExist
      */
     public function testThrowWhenReferenceAlreadyExist()
     {

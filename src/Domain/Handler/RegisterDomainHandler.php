@@ -11,7 +11,7 @@ use Domain\{
     Repository\DomainRepository,
     Specification\Domain\Name as NameSpec,
     Specification\Domain\TopLevelDomain as TopLevelDomainSpec,
-    Exception\DomainAlreadyExistException
+    Exception\DomainAlreadyExist
 };
 use Pdp\Parser;
 
@@ -45,7 +45,7 @@ final class RegisterDomainHandler
         );
 
         if ($existing->size() !== 0) {
-            throw new DomainAlreadyExistException($existing->current());
+            throw new DomainAlreadyExist($existing->current());
         }
 
         $this->repository->add(

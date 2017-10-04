@@ -12,8 +12,8 @@ use Domain\{
     Command\RegisterAlternateResource,
     Command\MakeCanonicalLink,
     Model\Language,
-    Exception\AlternateAlreadyExistException,
-    Exception\CanonicalAlreadyExistException
+    Exception\AlternateAlreadyExist,
+    Exception\CanonicalAlreadyExist
 };
 use Innmind\Rest\Server\{
     ResourceLinker as ResourceLinkerInterface,
@@ -78,7 +78,7 @@ final class ResourceLinker implements ResourceLinkerInterface
                     new Language($language)
                 )
             );
-        } catch (AlternateAlreadyExistException $e) {
+        } catch (AlternateAlreadyExist $e) {
             //pass
         }
     }
@@ -93,7 +93,7 @@ final class ResourceLinker implements ResourceLinkerInterface
                     $from
                 )
             );
-        } catch (CanonicalAlreadyExistException $e) {
+        } catch (CanonicalAlreadyExist $e) {
             //pass
         }
     }

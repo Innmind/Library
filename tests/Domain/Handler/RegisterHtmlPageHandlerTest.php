@@ -191,7 +191,7 @@ class RegisterHtmlPageHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\HtmlPageAlreadyExistException
+     * @expectedException Domain\Exception\HtmlPageAlreadyExist
      */
     public function testThrowWhenResourceAlreadyExist()
     {

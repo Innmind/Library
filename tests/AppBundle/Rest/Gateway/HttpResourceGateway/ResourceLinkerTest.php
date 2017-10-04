@@ -9,7 +9,7 @@ use Domain\{
     Entity\Reference as Entity,
     Entity\Reference\Identity as ReferenceIdentity,
     Entity\HttpResource\Identity as ResourceIdentity,
-    Exception\ReferenceAlreadyExistException
+    Exception\ReferenceAlreadyExist
 };
 use Innmind\Rest\Server\{
     ResourceLinker as ResourceLinkerInterface,
@@ -159,7 +159,7 @@ class ResourceLinkerTest extends TestCase
             ->method('handle')
             ->will(
                 $this->throwException(
-                    new ReferenceAlreadyExistException(
+                    new ReferenceAlreadyExist(
                         new Entity(
                             $this->createMock(ReferenceIdentity::class),
                             $this->createMock(ResourceIdentity::class),

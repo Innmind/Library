@@ -5,7 +5,7 @@ namespace Tests\AppBundle\EventListener;
 
 use AppBundle\EventListener\ExceptionListener;
 use Domain\{
-    Exception\AuthorAlreadyExistException,
+    Exception\AuthorAlreadyExist,
     Entity\Author,
     Entity\Author\Identity as AuthorIdentity,
     Entity\Author\Name
@@ -58,7 +58,7 @@ class ExceptionListenerTest extends TestCase
         $listener = new ExceptionListener(
             (new Map('string', 'string'))
                 ->put(
-                    AuthorAlreadyExistException::class,
+                    AuthorAlreadyExist::class,
                     Conflict::class
                 )
         );
@@ -66,7 +66,7 @@ class ExceptionListenerTest extends TestCase
             $this->createMock(HttpKernelInterface::class),
             new Request,
             HttpKernelInterface::MASTER_REQUEST,
-            $expected = new AuthorAlreadyExistException(
+            $expected = new AuthorAlreadyExist(
                 new Author(
                     $this->createMock(AuthorIdentity::class),
                     new Name('foo')

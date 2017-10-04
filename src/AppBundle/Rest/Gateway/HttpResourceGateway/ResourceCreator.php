@@ -16,8 +16,8 @@ use Domain\{
     Command\RegisterHttpResource,
     Command\HttpResource\SpecifyCharset,
     Command\HttpResource\SpecifyLanguages,
-    Exception\DomainAlreadyExistException,
-    Exception\HostAlreadyExistException,
+    Exception\DomainAlreadyExist,
+    Exception\HostAlreadyExist,
     Entity\HttpResource\Charset,
     Model\Language
 };
@@ -67,7 +67,7 @@ final class ResourceCreator implements ResourceCreatorInterface
                     $host = new Host($resource->property('host')->value())
                 )
             );
-        } catch (DomainAlreadyExistException $e) {
+        } catch (DomainAlreadyExist $e) {
             $domain = $e->domain()->identity();
         }
 
@@ -80,7 +80,7 @@ final class ResourceCreator implements ResourceCreatorInterface
                     $host
                 )
             );
-        } catch (HostAlreadyExistException $e) {
+        } catch (HostAlreadyExist $e) {
             $identity = $e->host()->identity();
         }
 

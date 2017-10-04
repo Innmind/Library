@@ -3,6 +3,6 @@ declare(strict_types = 1);
 
 namespace Domain\Exception;
 
-final class DomainNotFoundException extends RuntimeException
+final class AlternateNotFound extends RuntimeException
 {
 }

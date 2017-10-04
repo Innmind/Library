@@ -7,7 +7,7 @@ use Domain\{
     Repository\CitationRepository as CitationRepositoryInterface,
     Entity\Citation,
     Entity\Citation\Identity,
-    Exception\CitationNotFoundException,
+    Exception\CitationNotFound,
     Specification\Citation\Specification
 };
 use Innmind\Neo4j\ONM\{
@@ -36,7 +36,7 @@ final class CitationRepository implements CitationRepositoryInterface
         try {
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
-            throw new CitationNotFoundException('', 0, $e);
+            throw new CitationNotFound('', 0, $e);
         }
     }
 

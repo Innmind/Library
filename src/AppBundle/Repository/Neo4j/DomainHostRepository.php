@@ -7,7 +7,7 @@ use Domain\{
     Repository\DomainHostRepository as DomainHostRepositoryInterface,
     Entity\DomainHost,
     Entity\DomainHost\Identity,
-    Exception\DomainHostNotFoundException,
+    Exception\DomainHostNotFound,
     Specification\DomainHost\Specification
 };
 use Innmind\Neo4j\ONM\{
@@ -36,7 +36,7 @@ final class DomainHostRepository implements DomainHostRepositoryInterface
         try {
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
-            throw new DomainHostNotFoundException('', 0, $e);
+            throw new DomainHostNotFound('', 0, $e);
         }
     }
 

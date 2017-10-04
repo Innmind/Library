@@ -7,7 +7,7 @@ use Domain\{
     Repository\DomainRepository as DomainRepositoryInterface,
     Entity\Domain,
     Entity\Domain\Identity,
-    Exception\DomainNotFoundException,
+    Exception\DomainNotFound,
     Specification\Domain\Specification
 };
 use Innmind\Neo4j\ONM\{
@@ -36,7 +36,7 @@ final class DomainRepository implements DomainRepositoryInterface
         try {
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
-            throw new DomainNotFoundException('', 0, $e);
+            throw new DomainNotFound('', 0, $e);
         }
     }
 

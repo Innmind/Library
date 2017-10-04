@@ -5,7 +5,7 @@ namespace Domain\Exception;
 
 use Domain\Entity\Author;
 
-final class AuthorAlreadyExistException extends LogicException
+final class AuthorAlreadyExist extends LogicException
 {
     private $author;
 

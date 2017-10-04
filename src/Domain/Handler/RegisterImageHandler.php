@@ -14,7 +14,7 @@ use Domain\{
     Specification\HttpResource\Query,
     Specification\HostResource\InResources,
     Specification\HostResource\Host,
-    Exception\ImageAlreadyExistException
+    Exception\ImageAlreadyExist
 };
 use Innmind\TimeContinuum\TimeContinuumInterface;
 use Innmind\Immutable\Set;
@@ -56,7 +56,7 @@ final class RegisterImageHandler
     }
 
     /**
-     * @throws ImageAlreadyExistException
+     * @throws ImageAlreadyExist
      */
     private function verifyResourceDoesntExist(RegisterImage $wished): void
     {
@@ -81,7 +81,7 @@ final class RegisterImageHandler
         );
 
         if ($relations->size() > 0) {
-            throw new ImageAlreadyExistException;
+            throw new ImageAlreadyExist;
         }
     }
 }

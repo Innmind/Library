@@ -17,8 +17,8 @@ use Domain\{
     Command\Image\SpecifyDimension,
     Command\Image\SpecifyWeight,
     Command\Image\AddDescription,
-    Exception\DomainAlreadyExistException,
-    Exception\HostAlreadyExistException,
+    Exception\DomainAlreadyExist,
+    Exception\HostAlreadyExist,
     Entity\Image\Dimension,
     Entity\Image\Weight,
     Entity\Image\Description
@@ -70,7 +70,7 @@ final class ResourceCreator implements ResourceCreatorInterface
                     $host = new Host($resource->property('host')->value())
                 )
             );
-        } catch (DomainAlreadyExistException $e) {
+        } catch (DomainAlreadyExist $e) {
             $domain = $e->domain()->identity();
         }
 
@@ -83,7 +83,7 @@ final class ResourceCreator implements ResourceCreatorInterface
                     $host
                 )
             );
-        } catch (HostAlreadyExistException $e) {
+        } catch (HostAlreadyExist $e) {
             $identity = $e->host()->identity();
         }
 

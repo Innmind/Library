@@ -189,7 +189,7 @@ class RegisterHttpResourceHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\HttpResourceAlreadyExistException
+     * @expectedException Domain\Exception\HttpResourceAlreadyExist
      */
     public function testThrowWhenResourceAlreadyExist()
     {

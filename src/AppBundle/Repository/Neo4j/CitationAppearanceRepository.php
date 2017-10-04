@@ -7,7 +7,7 @@ use Domain\{
     Repository\CitationAppearanceRepository as CitationAppearanceRepositoryInterface,
     Entity\CitationAppearance,
     Entity\CitationAppearance\Identity,
-    Exception\CitationAppearanceNotFoundException,
+    Exception\CitationAppearanceNotFound,
     Specification\CitationAppearance\Specification
 };
 use Innmind\Neo4j\ONM\{
@@ -36,7 +36,7 @@ final class CitationAppearanceRepository implements CitationAppearanceRepository
         try {
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
-            throw new CitationAppearanceNotFoundException('', 0, $e);
+            throw new CitationAppearanceNotFound('', 0, $e);
         }
     }
 

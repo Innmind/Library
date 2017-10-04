@@ -48,7 +48,7 @@ class RegisterAuthorHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\AuthorAlreadyExistException
+     * @expectedException Domain\Exception\AuthorAlreadyExist
      */
     public function testThrowWhenAuthorAlreadyExist()
     {

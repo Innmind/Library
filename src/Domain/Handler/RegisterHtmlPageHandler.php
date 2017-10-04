@@ -14,7 +14,7 @@ use Domain\{
     Specification\HttpResource\Query,
     Specification\HostResource\InResources,
     Specification\HostResource\Host,
-    Exception\HtmlPageAlreadyExistException
+    Exception\HtmlPageAlreadyExist
 };
 use Innmind\TimeContinuum\TimeContinuumInterface;
 use Innmind\Immutable\Set;
@@ -56,7 +56,7 @@ final class RegisterHtmlPageHandler
     }
 
     /**
-     * @throws HtmlPageAlreadyExistException
+     * @throws HtmlPageAlreadyExist
      */
     private function verifyResourceDoesntExist(RegisterHtmlPage $wished): void
     {
@@ -81,7 +81,7 @@ final class RegisterHtmlPageHandler
         );
 
         if ($relations->size() > 0) {
-            throw new HtmlPageAlreadyExistException;
+            throw new HtmlPageAlreadyExist;
         }
     }
 }

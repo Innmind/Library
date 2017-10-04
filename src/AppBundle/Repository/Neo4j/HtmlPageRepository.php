@@ -7,7 +7,7 @@ use Domain\{
     Repository\HtmlPageRepository as HtmlPageRepositoryInterface,
     Entity\HtmlPage,
     Entity\HtmlPage\Identity,
-    Exception\HtmlPageNotFoundException,
+    Exception\HtmlPageNotFound,
     Specification\HttpResource\Specification
 };
 use Innmind\Neo4j\ONM\{
@@ -36,7 +36,7 @@ final class HtmlPageRepository implements HtmlPageRepositoryInterface
         try {
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
-            throw new HtmlPageNotFoundException('', 0, $e);
+            throw new HtmlPageNotFound('', 0, $e);
         }
     }
 

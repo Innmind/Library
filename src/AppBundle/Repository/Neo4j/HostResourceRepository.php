@@ -7,7 +7,7 @@ use Domain\{
     Repository\HostResourceRepository as HostResourceRepositoryInterface,
     Entity\HostResource,
     Entity\HostResource\Identity,
-    Exception\HostResourceNotFoundException,
+    Exception\HostResourceNotFound,
     Specification\HostResource\Specification
 };
 use Innmind\Neo4j\ONM\{
@@ -36,7 +36,7 @@ final class HostResourceRepository implements HostResourceRepositoryInterface
         try {
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
-            throw new HostResourceNotFoundException('', 0, $e);
+            throw new HostResourceNotFound('', 0, $e);
         }
     }
 

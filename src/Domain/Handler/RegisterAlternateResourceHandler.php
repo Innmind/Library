@@ -10,7 +10,7 @@ use Domain\{
     Specification\Alternate\HttpResource,
     Specification\Alternate\Alternate as AlternateSpec,
     Specification\Alternate\Language,
-    Exception\AlternateAlreadyExistException
+    Exception\AlternateAlreadyExist
 };
 
 final class RegisterAlternateResourceHandler
@@ -31,7 +31,7 @@ final class RegisterAlternateResourceHandler
         );
 
         if ($alternates->size() > 0) {
-            throw new AlternateAlreadyExistException($alternates->current());
+            throw new AlternateAlreadyExist($alternates->current());
         }
 
         $this->repository->add(

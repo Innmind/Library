@@ -5,7 +5,7 @@ namespace Domain\Exception;
 
 use Domain\Entity\Canonical;
 
-final class CanonicalAlreadyExistException extends LogicException
+final class CanonicalAlreadyExist extends LogicException
 {
     private $canonical;
 

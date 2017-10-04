@@ -5,7 +5,7 @@ namespace Domain\Exception;
 
 use Domain\Entity\Citation;
 
-final class CitationAlreadyExistException extends LogicException
+final class CitationAlreadyExist extends LogicException
 {
     private $citation;
 

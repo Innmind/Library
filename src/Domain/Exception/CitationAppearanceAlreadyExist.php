@@ -5,7 +5,7 @@ namespace Domain\Exception;
 
 use Domain\Entity\CitationAppearance;
 
-final class CitationAppearanceAlreadyExistException extends LogicException
+final class CitationAppearanceAlreadyExist extends LogicException
 {
     private $appearance;
 

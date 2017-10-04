@@ -7,7 +7,7 @@ use Domain\{
     Command\RegisterCitation,
     Repository\CitationRepository,
     Entity\Citation,
-    Exception\CitationAlreadyExistException,
+    Exception\CitationAlreadyExist,
     Specification\Citation\Text
 };
 
@@ -25,7 +25,7 @@ final class RegisterCitationHandler
         $citations = $this->repository->matching(new Text($wished->text()));
 
         if ($citations->size() > 0) {
-            throw new CitationAlreadyExistException($citations->current());
+            throw new CitationAlreadyExist($citations->current());
         }
 
         $this->repository->add(

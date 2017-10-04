@@ -7,7 +7,7 @@ use Domain\{
     Repository\CanonicalRepository as CanonicalRepositoryInterface,
     Entity\Canonical,
     Entity\Canonical\Identity,
-    Exception\CanonicalNotFoundException,
+    Exception\CanonicalNotFound,
     Specification\Canonical\Specification
 };
 use Innmind\Neo4j\ONM\{
@@ -36,7 +36,7 @@ final class CanonicalRepository implements CanonicalRepositoryInterface
         try {
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
-            throw new CanonicalNotFoundException('', 0, $e);
+            throw new CanonicalNotFound('', 0, $e);
         }
     }
 

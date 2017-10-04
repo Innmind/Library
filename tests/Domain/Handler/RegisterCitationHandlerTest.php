@@ -51,7 +51,7 @@ class RegisterCitationHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException Domain\Exception\CitationAlreadyExistException
+     * @expectedException Domain\Exception\CitationAlreadyExist
      */
     public function testThrowWhenCitationAlreadyExist()
     {

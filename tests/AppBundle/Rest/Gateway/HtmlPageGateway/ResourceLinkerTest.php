@@ -13,8 +13,8 @@ use Domain\{
     Entity\Canonical\Identity as CanonicalIdentity,
     Entity\HttpResource\Identity as ResourceIdentity,
     Model\Language,
-    Exception\AlternateAlreadyExistException,
-    Exception\CanonicalAlreadyExistException
+    Exception\AlternateAlreadyExist,
+    Exception\CanonicalAlreadyExist
 };
 use Innmind\Rest\Server\{
     ResourceLinker as ResourceLinkerInterface,
@@ -186,7 +186,7 @@ class ResourceLinkerTest extends TestCase
             ->method('handle')
             ->will(
                 $this->throwException(
-                    new AlternateAlreadyExistException(
+                    new AlternateAlreadyExist(
                         new Alternate(
                             $this->createMock(AlternateIdentity::class),
                             $this->createMock(ResourceIdentity::class),
@@ -247,7 +247,7 @@ class ResourceLinkerTest extends TestCase
             ->method('handle')
             ->will(
                 $this->throwException(
-                    new CanonicalAlreadyExistException(
+                    new CanonicalAlreadyExist(
                         new Canonical(
                             $this->createMock(CanonicalIdentity::class),
                             $this->createMock(ResourceIdentity::class),

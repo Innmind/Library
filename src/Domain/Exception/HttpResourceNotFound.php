@@ -3,6 +3,6 @@ declare(strict_types = 1);
 
 namespace Domain\Exception;
 
-final class ImageNotFoundException extends RuntimeException
+final class HttpResourceNotFound extends RuntimeException
 {
 }

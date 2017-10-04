@@ -7,7 +7,7 @@ use Domain\{
     Repository\ReferenceRepository as ReferenceRepositoryInterface,
     Entity\Reference,
     Entity\Reference\Identity,
-    Exception\ReferenceNotFoundException,
+    Exception\ReferenceNotFound,
     Specification\Reference\Specification
 };
 use Innmind\Neo4j\ONM\{
@@ -36,7 +36,7 @@ final class ReferenceRepository implements ReferenceRepositoryInterface
         try {
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
-            throw new ReferenceNotFoundException('', 0, $e);
+            throw new ReferenceNotFound('', 0, $e);
         }
     }
 
