@@ -62,6 +62,8 @@ class ImageRepositoryTest extends TestCase
 
     /**
      * @expectedException Domain\Exception\ImageNotFound
+     * @expectedExceptionMessage
+     * @expectedExceptionCode 0
      */
     public function testThrowWhenGettingUnknownEntity()
     {

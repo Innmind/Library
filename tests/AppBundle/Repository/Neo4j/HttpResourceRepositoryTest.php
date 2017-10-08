@@ -62,6 +62,8 @@ class HttpResourceRepositoryTest extends TestCase
 
     /**
      * @expectedException Domain\Exception\HttpResourceNotFound
+     * @expectedExceptionMessage
+     * @expectedExceptionCode 0
      */
     public function testThrowWhenGettingUnknownEntity()
     {

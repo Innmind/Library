@@ -59,6 +59,8 @@ class ReferenceRepositoryTest extends TestCase
 
     /**
      * @expectedException Domain\Exception\ReferenceNotFound
+     * @expectedExceptionMessage
+     * @expectedExceptionCode 0
      */
     public function testThrowWhenGettingUnknownEntity()
     {

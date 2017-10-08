@@ -58,6 +58,8 @@ class AuthorRepositoryTest extends TestCase
 
     /**
      * @expectedException Domain\Exception\AuthorNotFound
+     * @expectedExceptionMessage
+     * @expectedExceptionCode 0
      */
     public function testThrowWhenGettingUnknownEntity()
     {

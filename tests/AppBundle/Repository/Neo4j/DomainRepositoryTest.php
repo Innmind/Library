@@ -60,6 +60,8 @@ class DomainRepositoryTest extends TestCase
 
     /**
      * @expectedException Domain\Exception\DomainNotFound
+     * @expectedExceptionMessage
+     * @expectedExceptionCode 0
      */
     public function testThrowWhenGettingUnknownEntity()
     {

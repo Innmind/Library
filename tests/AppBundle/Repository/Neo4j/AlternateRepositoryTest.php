@@ -61,6 +61,8 @@ class AlternateRepositoryTest extends TestCase
 
     /**
      * @expectedException Domain\Exception\AlternateNotFound
+     * @expectedExceptionMessage
+     * @expectedExceptionCode 0
      */
     public function testThrowWhenGettingUnknownEntity()
     {

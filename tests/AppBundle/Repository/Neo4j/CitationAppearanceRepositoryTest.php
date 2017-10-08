@@ -62,6 +62,8 @@ class CitationAppearanceRepositoryTest extends TestCase
 
     /**
      * @expectedException Domain\Exception\CitationAppearanceNotFound
+     * @expectedExceptionMessage
+     * @expectedExceptionCode 0
      */
     public function testThrowWhenGettingUnknownEntity()
     {
