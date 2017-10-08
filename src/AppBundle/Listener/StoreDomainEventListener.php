@@ -31,7 +31,7 @@ final class StoreDomainEventListener
 
         if ($this->filesystem->has($identity)) {
             $file = $this->filesystem->get($identity);
-            $content = json_decode((string) $file->content(), true);
+            $content = json_decode((string) $file->content());
         }
 
         $content[] = serialize($event);
