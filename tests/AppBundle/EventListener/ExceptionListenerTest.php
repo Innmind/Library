@@ -80,6 +80,8 @@ class ExceptionListenerTest extends TestCase
             $event->getException()
         );
         $this->assertSame($expected, $event->getException()->getPrevious());
+        $this->assertSame('', $event->getException()->getMessage());
+        $this->assertSame(0, $event->getException()->getCode());
     }
 
     /**
