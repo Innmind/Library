@@ -11,6 +11,7 @@ class WeightTest extends TestCase
     public function testInterface()
     {
         $this->assertSame(42, (new Weight(42))->toInt());
+        $this->assertSame(0, (new Weight(0))->toInt());
     }
 
     /**
