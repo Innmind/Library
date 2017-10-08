@@ -17,6 +17,15 @@ class DimensionTest extends TestCase
         $this->assertSame('24x42', (string) $dimension);
     }
 
+    public function testBoundsAllowed()
+    {
+        $dimension = new Dimension(0, 0);
+
+        $this->assertSame(0, $dimension->height());
+        $this->assertSame(0, $dimension->width());
+        $this->assertSame('0x0', (string) $dimension);
+    }
+
     /**
      * @expectedException Domain\Exception\DomainException
      */
