@@ -49,13 +49,19 @@ class InResourcesTest extends TestCase
 
     public function testIsSatisfiedBy()
     {
-        $identity = $this->createMock(ResourceIdentity::class);
-        $identity
+        $identity1 = $this->createMock(ResourceIdentity::class);
+        $identity1
             ->expects($this->once())
             ->method('__toString')
             ->willReturn('uuid');
+        $identity2 = $this->createMock(ResourceIdentity::class);
+        $identity2
+            ->expects($this->once())
+            ->method('__toString')
+            ->willReturn('0');
         $set = (new Set(ResourceIdentity::class))
-            ->add($identity);
+            ->add($identity1)
+            ->add($identity2);
         $spec = new InResources($set);
         $relation = new Entity(
             $this->createMock(Identity::class),
@@ -72,7 +78,7 @@ class InResourcesTest extends TestCase
             ->resource()
             ->expects($this->at(1))
             ->method('__toString')
-            ->willReturn('foo');
+            ->willReturn('');
 
         $this->assertTrue($spec->isSatisfiedBy($relation));
         $this->assertFalse($spec->isSatisfiedBy($relation));

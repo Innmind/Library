@@ -9,7 +9,10 @@ use Domain\{
     Exception\InvalidArgumentException
 };
 use Innmind\Specification\ComparatorInterface;
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\{
+    SetInterface,
+    Set
+};
 
 final class InResources implements ComparatorInterface, Specification
 {
@@ -24,11 +27,9 @@ final class InResources implements ComparatorInterface, Specification
         }
 
         $this->value = $value->reduce(
-            [],
-            function(array $value, Identity $identity): array {
-                $value[] = (string) $identity;
-
-                return $value;
+            new Set('string'),
+            static function(Set $carry, Identity $identity): Set {
+                return $carry->add((string) $identity);
             }
         );
     }
@@ -54,11 +55,11 @@ final class InResources implements ComparatorInterface, Specification
      */
     public function value()
     {
-        return $this->value;
+        return $this->value->toPrimitive();
     }
 
     public function isSatisfiedBy(HostResource $relation): bool
     {
-        return in_array((string) $relation->resource(), $this->value, true);
+        return $this->value->contains((string) $relation->resource());
     }
 }
