@@ -7,8 +7,13 @@ matrix:
   allow_failures:
   - php: nightly
   - php: 7.2
-before_script: composer install --prefer-source
-script: bin/phpunit --coverage-clover=coverage.clover
+before_script:
+  - export PATH=~/.composer/vendor/bin:$PATH
+  - composer global require infection/infection
+  - composer install --prefer-source
+script:
+  - bin/phpunit --coverage-clover=coverage.clover
+  - infection
 after_script:
     - if [ "$TRAVIS_PHP_VERSION" = "7.1" ]; then wget https://scrutinizer-ci.com/ocular.phar; fi
     - if [ "$TRAVIS_PHP_VERSION" = "7.1" ]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
