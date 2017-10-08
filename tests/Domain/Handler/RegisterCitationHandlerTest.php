@@ -74,7 +74,7 @@ class RegisterCitationHandlerTest extends TestCase
         $set
             ->expects($this->once())
             ->method('size')
-            ->willReturn(2);
+            ->willReturn(1);
         $set
             ->expects($this->once())
             ->method('current')
