@@ -67,6 +67,18 @@ class UrlTypeTest extends TestCase
         );
     }
 
+    /**
+     * @expectedException LogicException
+     */
+    public function testThrowWhenNullValueOnNonNullableType()
+    {
+        UrlType::fromConfig(
+            new Map('string', 'mixed'),
+            new Types
+        )
+            ->forDatabase(null);
+    }
+
     public function testFromDatabase()
     {
         $this->assertInstanceOf(

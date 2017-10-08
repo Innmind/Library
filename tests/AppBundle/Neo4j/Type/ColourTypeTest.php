@@ -67,6 +67,18 @@ class ColourTypeTest extends TestCase
         );
     }
 
+    /**
+     * @expectedException Error
+     */
+    public function testThrowWhenNullValueOnNonNullableType()
+    {
+        ColourType::fromConfig(
+            new Map('string', 'mixed'),
+            new Types
+        )
+            ->forDatabase(null);
+    }
+
     public function testFromDatabase()
     {
         $this->assertInstanceOf(

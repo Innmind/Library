@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace AppBundle\Neo4j\Type;
 
+use AppBundle\Exception\InvalidArgumentException;
 use Innmind\Url\Url;
 use Innmind\Neo4j\ONM\{
     Type,
@@ -40,6 +41,10 @@ final class UrlType implements Type
     {
         if ($this->isNullable() && $value === null) {
             return;
+        }
+
+        if ($value === null) {
+            throw new InvalidArgumentException;
         }
 
         return (string) $value;

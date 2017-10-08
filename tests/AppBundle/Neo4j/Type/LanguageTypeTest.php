@@ -67,6 +67,18 @@ class LanguageTypeTest extends TestCase
         );
     }
 
+    /**
+     * @expectedException LogicException
+     */
+    public function testThrowWhenNullValueOnNonNullableType()
+    {
+        LanguageType::fromConfig(
+            new Map('string', 'mixed'),
+            new Types
+        )
+            ->forDatabase(null);
+    }
+
     public function testFromDatabase()
     {
         $this->assertInstanceOf(
