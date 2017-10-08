@@ -1138,16 +1138,16 @@
         },
         {
             "name": "innmind/immutable",
-            "version": "2.4.1",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Immutable.git",
-                "reference": "e38df27d5d083578c471b4371ae74124b6119747"
+                "reference": "e4b1ebe01cdd321527d21cab6b2c7c23a1f762bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Immutable/zipball/e38df27d5d083578c471b4371ae74124b6119747",
-                "reference": "e38df27d5d083578c471b4371ae74124b6119747",
+                "url": "https://api.github.com/repos/Innmind/Immutable/zipball/e4b1ebe01cdd321527d21cab6b2c7c23a1f762bb",
+                "reference": "e4b1ebe01cdd321527d21cab6b2c7c23a1f762bb",
                 "shasum": ""
             },
             "require": {
@@ -1178,7 +1178,7 @@
                 "immutable",
                 "wrapper"
             ],
-            "time": "2017-09-30 10:56:33"
+            "time": "2017-10-07 15:48:00"
         },
         {
             "name": "innmind/neo4j-bundle",
@@ -1282,16 +1282,16 @@
         },
         {
             "name": "innmind/neo4j-onm",
-            "version": "4.0.0",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/neo4j-onm.git",
-                "reference": "a4c87676d2417bce95122a74444bb4d5d3d5f4d5"
+                "reference": "5ffb51fea3d2d53ecd4aef8f0e4889bd95ac933c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/a4c87676d2417bce95122a74444bb4d5d3d5f4d5",
-                "reference": "a4c87676d2417bce95122a74444bb4d5d3d5f4d5",
+                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/5ffb51fea3d2d53ecd4aef8f0e4889bd95ac933c",
+                "reference": "5ffb51fea3d2d53ecd4aef8f0e4889bd95ac933c",
                 "shasum": ""
             },
             "require": {
@@ -1335,7 +1335,7 @@
                 "neo4j",
                 "node"
             ],
-            "time": "2017-09-24 15:29:08"
+            "time": "2017-10-08 16:41:38"
         },
         {
             "name": "innmind/reflection",
@@ -3094,16 +3094,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.3.9",
+            "version": "v3.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "a9d2f68ae9946000e2bcc3403d218ec0124f992a"
+                "reference": "cfef3b2d505ae4375b17032bd03ed9a3da4b7b43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/a9d2f68ae9946000e2bcc3403d218ec0124f992a",
-                "reference": "a9d2f68ae9946000e2bcc3403d218ec0124f992a",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/cfef3b2d505ae4375b17032bd03ed9a3da4b7b43",
+                "reference": "cfef3b2d505ae4375b17032bd03ed9a3da4b7b43",
                 "shasum": ""
             },
             "require": {
@@ -3243,7 +3243,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-09-11 16:13:42"
+            "time": "2017-10-05 23:40:32"
         },
         {
             "name": "twig/twig",
@@ -4024,16 +4024,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "6.3.1",
+            "version": "6.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c0ff817b36a827e64bf5f57bc72278150cf30a77"
+                "reference": "b770d8ba7e60295ee91d69d5a5e01ae833cac220"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c0ff817b36a827e64bf5f57bc72278150cf30a77",
-                "reference": "c0ff817b36a827e64bf5f57bc72278150cf30a77",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b770d8ba7e60295ee91d69d5a5e01ae833cac220",
+                "reference": "b770d8ba7e60295ee91d69d5a5e01ae833cac220",
                 "shasum": ""
             },
             "require": {
@@ -4078,7 +4078,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.3.x-dev"
+                    "dev-master": "6.4.x-dev"
                 }
             },
             "autoload": {
@@ -4104,7 +4104,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-09-24 07:25:54"
+            "time": "2017-10-07 17:53:53"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
