@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6de08355ad6aae33fdb17c76c2f5518f",
+    "hash": "09e19b3c83017b0f99617a2376d31f83",
     "content-hash": "f5f238594af0c209de3005ba2a09c56c",
     "packages": [
         {
@@ -801,16 +801,16 @@
         },
         {
             "name": "innmind/command-bus",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/CommandBus.git",
-                "reference": "b20b3a5d4dde5a2e6d12b0694d75ab96facb10a4"
+                "reference": "2a25a8fdfe363cc1c2dc881075da3a8e7a5185b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/CommandBus/zipball/b20b3a5d4dde5a2e6d12b0694d75ab96facb10a4",
-                "reference": "b20b3a5d4dde5a2e6d12b0694d75ab96facb10a4",
+                "url": "https://api.github.com/repos/Innmind/CommandBus/zipball/2a25a8fdfe363cc1c2dc881075da3a8e7a5185b7",
+                "reference": "2a25a8fdfe363cc1c2dc881075da3a8e7a5185b7",
                 "shasum": ""
             },
             "require": {
@@ -845,7 +845,7 @@
                 "command bus",
                 "ddd"
             ],
-            "time": "2017-02-19 16:21:28"
+            "time": "2017-10-12 16:56:17"
         },
         {
             "name": "innmind/command-bus-bundle",
