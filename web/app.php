@@ -9,7 +9,6 @@ use Symfony\Component\{
 $loader = require __DIR__.'/../app/autoload.php';
 
 $env = getenv('SYMFONY_ENV') ?: 'prod';
-$env = 'prod';
 
 if ($env === 'dev') {
     Debug::enable();
