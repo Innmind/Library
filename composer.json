@@ -42,7 +42,8 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "phpunit/phpunit": "~6.0"
+        "phpunit/phpunit": "~6.0",
+        "infection/infection": "^0.7.1"
     },
     "scripts": {
         "symfony-scripts": [
