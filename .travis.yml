@@ -8,7 +8,7 @@ matrix:
 before_script:
   - export PATH=~/.composer/vendor/bin:$PATH
   - composer global require infection/infection
-  - composer install --prefer-source
+  - composer install
 script:
   - bin/phpunit --coverage-clover=coverage.clover
   - if [ "$TRAVIS_PHP_VERSION" != "nightly" ]; then infection -s --only-covered --min-msi=100; fi
