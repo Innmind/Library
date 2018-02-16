@@ -16,3 +16,4 @@
 /web/bundles/
 docker-compose.override.yml
 infection-log.txt
+bin/
