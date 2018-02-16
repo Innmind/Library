@@ -22,8 +22,10 @@ use Innmind\Immutable\{
     SetInterface
 };
 use Pdp\{
-    Parser,
-    PublicSuffixListManager
+    Rules,
+    Manager,
+    Cache,
+    CurlHttpClient
 };
 use PHPUnit\Framework\TestCase;
 
@@ -33,9 +35,7 @@ class RegisterDomainHandlerTest extends TestCase
     {
         $handler = new RegisterDomainHandler(
             $repository = $this->createMock(DomainRepository::class),
-            new Parser(
-                (new PublicSuffixListManager)->getList()
-            )
+            (new Manager(new Cache, new CurlHttpClient))->getRules()
         );
         $command = new RegisterDomain(
             $this->createMock(Identity::class),
@@ -70,9 +70,7 @@ class RegisterDomainHandlerTest extends TestCase
     {
         $handler = new RegisterDomainHandler(
             $repository = $this->createMock(DomainRepository::class),
-            new Parser(
-                (new PublicSuffixListManager)->getList()
-            )
+            (new Manager(new Cache, new CurlHttpClient))->getRules()
         );
         $command = new RegisterDomain(
             $this->createMock(Identity::class),

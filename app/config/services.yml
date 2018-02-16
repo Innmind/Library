@@ -36,7 +36,7 @@ services:
             - { name: innmind_command_bus, alias: clear_domain_events }
 
     domain_parser:
-        class: Pdp\Parser
+        class: Pdp\Rules
         factory:
             - AppBundle\Factory\DomainParserFactory
             - make

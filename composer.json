@@ -24,7 +24,7 @@
         "innmind/immutable": "~2.0",
         "innmind/event-bus": "~2.0",
         "innmind/time-continuum": "^1.0",
-        "jeremykendall/php-domain-parser": "^3.0",
+        "jeremykendall/php-domain-parser": "~5.0",
         "innmind/specification": "^1.0",
         "innmind/colour": "~2.0",
         "symfony/symfony": "~3.2",

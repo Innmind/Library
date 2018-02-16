@@ -13,27 +13,27 @@ use Domain\{
     Specification\Domain\TopLevelDomain as TopLevelDomainSpec,
     Exception\DomainAlreadyExist
 };
-use Pdp\Parser;
+use Pdp\Rules;
 
 final class RegisterDomainHandler
 {
     private $repository;
-    private $parser;
+    private $rules;
 
     public function __construct(
         DomainRepository $repository,
-        Parser $parser
+        Rules $rules
     ) {
         $this->repository = $repository;
-        $this->parser = $parser;
+        $this->rules = $rules;
     }
 
     public function __invoke(RegisterDomain $wished): void
     {
-        $parsed = $this->parser->parseUrl((string) $wished->host());
+        $domain = $this->rules->resolve((string) $wished->host());
         [$name, $tld] = explode(
             '.',
-            (string) $parsed->host->registerableDomain,
+            (string) $domain->getRegistrableDomain(),
             2
         );
         $name = new Name($name);
