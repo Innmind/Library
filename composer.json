@@ -1,5 +1,5 @@
 {
-    "name": "innmind/api",
+    "name": "innmind/library",
     "license": "MIT",
     "description": "Holds crawled page data",
     "type": "project",
