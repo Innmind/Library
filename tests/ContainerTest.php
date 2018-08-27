@@ -26,7 +26,7 @@ class ContainerTest extends TestCase
         }
 
         $container = (new ContainerBuilder)(
-            new Path('config/container.yml'),
+            new Path('config/container/app.yml'),
             (new Map('string', 'mixed'))
                 ->put('entities', $entities)
                 ->put('logger', new NullLogger)
