@@ -7,11 +7,7 @@
         "psr-4": {
             "Domain\\": "src/Domain/",
             "AppBundle\\": "src/AppBundle/"
-        },
-        "classmap": [
-            "app/AppKernel.php",
-            "app/AppCache.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
