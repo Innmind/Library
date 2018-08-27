@@ -22,15 +22,14 @@
         "php": "~7.2",
         "innmind/url": "~2.0",
         "innmind/immutable": "~2.0",
-        "innmind/event-bus": "~2.0",
+        "innmind/event-bus": "^2.1",
         "innmind/time-continuum": "^1.0",
         "jeremykendall/php-domain-parser": "~5.0",
         "innmind/specification": "^1.0",
         "innmind/colour": "~2.0",
-        "innmind/neo4j-bundle": "~4.0",
-        "innmind/command-bus-bundle": "~2.0",
-        "innmind/rest-server-bundle": "~3.0",
-        "innmind/event-bus-bundle": "~2.0"
+        "innmind/command-bus": "^2.1",
+        "innmind/rest-server": "^6.0",
+        "innmind/neo4j-onm": "^4.4"
     },
     "config": {
         "bin-dir": "bin"
