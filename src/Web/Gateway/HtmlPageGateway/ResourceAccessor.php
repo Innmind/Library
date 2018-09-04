@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Web\Gateway\HtmlPageGateway;
 
-use Web\Entity\HtmlPage\Identity;
+use App\Entity\HtmlPage\Identity;
 use Domain\{
     Repository\HtmlPageRepository,
     Model\Language,

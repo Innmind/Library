@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Web\Gateway\ImageGateway;
 
-use Web\Entity\{
+use App\Entity\{
     Image\Identity,
     HostResource\Identity as HostResourceIdentity,
     Domain\Identity as DomainIdentity,

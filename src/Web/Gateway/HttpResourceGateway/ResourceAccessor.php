@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Web\Gateway\HttpResourceGateway;
 
-use Web\Entity\HttpResource\Identity;
+use App\Entity\HttpResource\Identity;
 use Domain\{
     Repository\HttpResourceRepository,
     Model\Language

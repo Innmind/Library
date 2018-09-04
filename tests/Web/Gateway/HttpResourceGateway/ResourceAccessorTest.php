@@ -3,10 +3,8 @@ declare(strict_types = 1);
 
 namespace Tests\Web\Gateway\HttpResourceGateway;
 
-use Web\{
-    Gateway\HttpResourceGateway\ResourceAccessor,
-    Entity\HttpResource\Identity
-};
+use Web\Gateway\HttpResourceGateway\ResourceAccessor;
+use App\Entity\HttpResource\Identity;
 use Domain\{
     Repository\HttpResourceRepository,
     Entity\HttpResource as Entity,

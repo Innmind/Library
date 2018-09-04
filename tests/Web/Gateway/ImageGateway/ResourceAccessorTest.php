@@ -3,10 +3,8 @@ declare(strict_types = 1);
 
 namespace Tests\Web\Gateway\ImageGateway;
 
-use Web\{
-    Gateway\ImageGateway\ResourceAccessor,
-    Entity\Image\Identity
-};
+use Web\Gateway\ImageGateway\ResourceAccessor;
+use App\Entity\Image\Identity;
 use Domain\{
     Repository\ImageRepository,
     Entity\Image,

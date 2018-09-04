@@ -3,10 +3,8 @@ declare(strict_types = 1);
 
 namespace Tests\Web\Gateway\HtmlPageGateway;
 
-use Web\{
-    Gateway\HtmlPageGateway\ResourceAccessor,
-    Entity\HtmlPage\Identity
-};
+use Web\Gateway\HtmlPageGateway\ResourceAccessor;
+use App\Entity\HtmlPage\Identity;
 use Domain\{
     Repository\HtmlPageRepository,
     Entity\HtmlPage,

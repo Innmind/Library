@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Web\Gateway\HtmlPageGateway;
 
-use Web\Entity\{
+use App\Entity\{
     HtmlPage\Identity,
     HostResource\Identity as HostResourceIdentity,
     Domain\Identity as DomainIdentity,

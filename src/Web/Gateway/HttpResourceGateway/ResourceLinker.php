@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Web\Gateway\HttpResourceGateway;
 
-use Web\Entity\{
+use App\Entity\{
     Reference\Identity as ReferenceIdentity,
     HttpResource\Identity as ResourceIdentity
 };

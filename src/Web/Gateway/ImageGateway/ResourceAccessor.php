@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Web\Gateway\ImageGateway;
 
-use Web\Entity\Image\Identity;
+use App\Entity\Image\Identity;
 use Domain\{
     Repository\ImageRepository,
     Entity\Image\Description
