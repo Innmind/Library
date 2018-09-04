@@ -6,7 +6,7 @@
     "autoload": {
         "psr-4": {
             "Domain\\": "src/Domain/",
-            "AppBundle\\": "src/AppBundle/"
+            "Web\\": "src/Web/"
         }
     },
     "autoload-dev": {
