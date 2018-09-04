@@ -8,7 +8,10 @@
             "Domain\\": "src/Domain/",
             "App\\": "src/App/",
             "Web\\": "src/Web/"
-        }
+        },
+        "files": [
+            "src/App/bootstrap.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

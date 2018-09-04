@@ -233,20 +233,19 @@
         },
         {
             "name": "innmind/command-bus",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/CommandBus.git",
-                "reference": "6090796935a136c0f8de3884c05d58248ceebe57"
+                "reference": "dd1aa487e58b3706f8774dbe6470b8832a6f3c5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/CommandBus/zipball/6090796935a136c0f8de3884c05d58248ceebe57",
-                "reference": "6090796935a136c0f8de3884c05d58248ceebe57",
+                "url": "https://api.github.com/repos/Innmind/CommandBus/zipball/dd1aa487e58b3706f8774dbe6470b8832a6f3c5e",
+                "reference": "dd1aa487e58b3706f8774dbe6470b8832a6f3c5e",
                 "shasum": ""
             },
             "require": {
-                "innmind/compose": "^1.3",
                 "innmind/immutable": "~2.0",
                 "innmind/reflection": "~2.0",
                 "php": "~7.2",
@@ -254,13 +253,17 @@
                 "ramsey/uuid": "^3.5"
             },
             "require-dev": {
+                "innmind/compose": "^1.3",
                 "phpunit/phpunit": "~6.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "Innmind\\CommandBus\\": "src/"
-                }
+                },
+                "files": [
+                    "src/bootstrap.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -278,103 +281,38 @@
                 "command bus",
                 "ddd"
             ],
-            "time": "2018-02-25T12:07:49+00:00"
-        },
-        {
-            "name": "innmind/compose",
-            "version": "1.7.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Innmind/Compose.git",
-                "reference": "4a296e97896ebe7ee20d22dec41c5001fa7b53e0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Compose/zipball/4a296e97896ebe7ee20d22dec41c5001fa7b53e0",
-                "reference": "4a296e97896ebe7ee20d22dec41c5001fa7b53e0",
-                "shasum": ""
-            },
-            "require": {
-                "innmind/immutable": "~2.7",
-                "innmind/url": "^2.0",
-                "innmind/url-resolver": "^3.0",
-                "php": "~7.2",
-                "psr/container": "^1.0",
-                "symfony/config": "~3.0|^4.0",
-                "symfony/options-resolver": "~3.0|^4.0",
-                "symfony/yaml": "~3.0|~4.0"
-            },
-            "require-dev": {
-                "giorgiosironi/eris": "^0.9.0",
-                "innmind/graphviz": "^1.1",
-                "innmind/server-control": "^2.1",
-                "innmind/stream": "^1.3",
-                "mnapoli/silly": "^1.7",
-                "phpunit/phpunit": "~6.0"
-            },
-            "suggest": {
-                "innmind/graphviz": "To be able to use the compose binary",
-                "innmind/server-control": "To be able to use the compose binary",
-                "innmind/stream": "To be able to use the compose binary",
-                "mnapoli/silly": "To be able to use the compose binary"
-            },
-            "bin": [
-                "bin/compose"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Innmind\\Compose\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Baptiste Langlade",
-                    "email": "langlade.baptiste@gmail.com"
-                }
-            ],
-            "description": "Service locator",
-            "homepage": "http://github.com/Innmind/Compose",
-            "keywords": [
-                "PSR-11",
-                "dependency",
-                "injection",
-                "locator",
-                "service"
-            ],
-            "time": "2018-08-13T05:49:45+00:00"
+            "time": "2018-09-03T18:40:10+00:00"
         },
         {
             "name": "innmind/event-bus",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/EventBus.git",
-                "reference": "b6ba4c14e62c75785fd4a6ce47167b2b3bc4e488"
+                "reference": "429fcfdfdb71a3a4c34c7a4e63ad66a06fa71e93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/EventBus/zipball/b6ba4c14e62c75785fd4a6ce47167b2b3bc4e488",
-                "reference": "b6ba4c14e62c75785fd4a6ce47167b2b3bc4e488",
+                "url": "https://api.github.com/repos/Innmind/EventBus/zipball/429fcfdfdb71a3a4c34c7a4e63ad66a06fa71e93",
+                "reference": "429fcfdfdb71a3a4c34c7a4e63ad66a06fa71e93",
                 "shasum": ""
             },
             "require": {
-                "innmind/compose": "^1.0",
                 "innmind/immutable": "~2.0",
                 "php": "~7.2"
             },
             "require-dev": {
+                "innmind/compose": "^1.0",
                 "phpunit/phpunit": "~6.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "Innmind\\EventBus\\": "src/"
-                }
+                },
+                "files": [
+                    "src/bootstrap.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -392,7 +330,7 @@
                 "dispatcher",
                 "event"
             ],
-            "time": "2018-02-25T11:53:24+00:00"
+            "time": "2018-09-03T17:38:38+00:00"
         },
         {
             "name": "innmind/filesystem",
@@ -495,34 +433,37 @@
         },
         {
             "name": "innmind/http-transport",
-            "version": "3.2.1",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/HttpTransport.git",
-                "reference": "fb8c5cc9feafbcf13ae4abbec04bfce628e42ce1"
+                "reference": "b4adb2d539761ca96ebd2410ef302e05424f3e3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/HttpTransport/zipball/fb8c5cc9feafbcf13ae4abbec04bfce628e42ce1",
-                "reference": "fb8c5cc9feafbcf13ae4abbec04bfce628e42ce1",
+                "url": "https://api.github.com/repos/Innmind/HttpTransport/zipball/b4adb2d539761ca96ebd2410ef302e05424f3e3f",
+                "reference": "b4adb2d539761ca96ebd2410ef302e05424f3e3f",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.2",
-                "innmind/compose": "^1.0",
                 "innmind/http": "~3.0",
                 "php": "~7.2",
                 "psr/log": "^1.0",
                 "ramsey/uuid": "^3.5"
             },
             "require-dev": {
+                "innmind/compose": "^1.0",
                 "phpunit/phpunit": "~6.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "Innmind\\HttpTransport\\": "src/"
-                }
+                },
+                "files": [
+                    "src/bootstrap.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -540,26 +481,27 @@
                 "client",
                 "http"
             ],
-            "time": "2018-04-14T12:53:18+00:00"
+            "time": "2018-09-04T18:53:40+00:00"
         },
         {
             "name": "innmind/immutable",
-            "version": "2.8.0",
+            "version": "2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Immutable.git",
-                "reference": "5205fec6fd223c50b52b9b277cbb7a30ea38677a"
+                "reference": "5906b84a5e5c8641fb399280a278a5bc4939157b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Immutable/zipball/5205fec6fd223c50b52b9b277cbb7a30ea38677a",
-                "reference": "5205fec6fd223c50b52b9b277cbb7a30ea38677a",
+                "url": "https://api.github.com/repos/Innmind/Immutable/zipball/5906b84a5e5c8641fb399280a278a5bc4939157b",
+                "reference": "5906b84a5e5c8641fb399280a278a5bc4939157b",
                 "shasum": ""
             },
             "require": {
-                "php": "~7.0"
+                "php": "~7.1"
             },
             "require-dev": {
+                "phpbench/phpbench": "^0.14.0",
                 "phpunit/phpunit": "~6.0"
             },
             "type": "library",
@@ -584,7 +526,7 @@
                 "immutable",
                 "wrapper"
             ],
-            "time": "2018-02-25T11:18:49+00:00"
+            "time": "2018-09-01T10:20:17+00:00"
         },
         {
             "name": "innmind/json",
@@ -632,20 +574,19 @@
         },
         {
             "name": "innmind/neo4j-dbal",
-            "version": "4.2.1",
+            "version": "4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/neo4j-dbal.git",
-                "reference": "2ab748a65b23d432092c92db94f39b34e0a21de5"
+                "reference": "8bf204baffe02f2b04c9605e0a06fd8d326e72b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/neo4j-dbal/zipball/2ab748a65b23d432092c92db94f39b34e0a21de5",
-                "reference": "2ab748a65b23d432092c92db94f39b34e0a21de5",
+                "url": "https://api.github.com/repos/Innmind/neo4j-dbal/zipball/8bf204baffe02f2b04c9605e0a06fd8d326e72b6",
+                "reference": "8bf204baffe02f2b04c9605e0a06fd8d326e72b6",
                 "shasum": ""
             },
             "require": {
-                "innmind/compose": "^1.0",
                 "innmind/http-transport": "~3.0",
                 "innmind/immutable": "~2.0",
                 "innmind/time-continuum": "~1.0",
@@ -654,13 +595,17 @@
             },
             "require-dev": {
                 "giorgiosironi/eris": "^0.10.0",
+                "innmind/compose": "^1.0",
                 "phpunit/phpunit": "~6.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "Innmind\\Neo4j\\DBAL\\": "src/"
-                }
+                },
+                "files": [
+                    "src/bootstrap.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -678,24 +623,23 @@
                 "neo4j",
                 "wrapper"
             ],
-            "time": "2018-07-28T14:38:59+00:00"
+            "time": "2018-09-02T14:24:33+00:00"
         },
         {
             "name": "innmind/neo4j-onm",
-            "version": "4.4.0",
+            "version": "4.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/neo4j-onm.git",
-                "reference": "f786ac3eb372babc1c09a4b1a0dc0843badea54e"
+                "reference": "41eb0e951be425cb242322072ca0945479d63f04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/f786ac3eb372babc1c09a4b1a0dc0843badea54e",
-                "reference": "f786ac3eb372babc1c09a4b1a0dc0843badea54e",
+                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/41eb0e951be425cb242322072ca0945479d63f04",
+                "reference": "41eb0e951be425cb242322072ca0945479d63f04",
                 "shasum": ""
             },
             "require": {
-                "innmind/compose": "^1.0",
                 "innmind/event-bus": "~2.0",
                 "innmind/immutable": "~2.0",
                 "innmind/neo4j-dbal": "~4.0",
@@ -707,6 +651,7 @@
             },
             "require-dev": {
                 "innmind/command-bus": "^2.1",
+                "innmind/compose": "^1.0",
                 "innmind/time-continuum": "^1.0",
                 "phpunit/phpunit": "~6.0",
                 "symfony/yaml": "~3.0|~4.0"
@@ -719,7 +664,10 @@
             "autoload": {
                 "psr-4": {
                     "Innmind\\Neo4j\\ONM\\": "src/"
-                }
+                },
+                "files": [
+                    "src/bootstrap.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -738,7 +686,7 @@
                 "neo4j",
                 "node"
             ],
-            "time": "2018-07-22T15:12:41+00:00"
+            "time": "2018-09-04T19:30:29+00:00"
         },
         {
             "name": "innmind/reflection",
@@ -786,20 +734,19 @@
         },
         {
             "name": "innmind/rest-server",
-            "version": "6.0.0",
+            "version": "6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/rest-server.git",
-                "reference": "b81ab67779601c79ec2f4abfdd77c425791f1315"
+                "reference": "6291f470d6e69f9d141060c9194b366d1841a6bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/rest-server/zipball/b81ab67779601c79ec2f4abfdd77c425791f1315",
-                "reference": "b81ab67779601c79ec2f4abfdd77c425791f1315",
+                "url": "https://api.github.com/repos/Innmind/rest-server/zipball/6291f470d6e69f9d141060c9194b366d1841a6bc",
+                "reference": "6291f470d6e69f9d141060c9194b366d1841a6bc",
                 "shasum": ""
             },
             "require": {
-                "innmind/compose": "^1.6",
                 "innmind/filesystem": "~3.0",
                 "innmind/http": "~3.0",
                 "innmind/immutable": "~2.8",
@@ -813,17 +760,17 @@
             },
             "require-dev": {
                 "giorgiosironi/eris": "^0.10.0",
-                "innmind/graphviz": "^1.1",
-                "innmind/server-control": "^2.5",
-                "innmind/stream": "^1.4",
-                "mnapoli/silly": "^1.7",
+                "innmind/compose": "^1.6",
                 "phpunit/phpunit": "~7.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "Innmind\\Rest\\Server\\": "src/"
-                }
+                },
+                "files": [
+                    "src/bootstrap.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -841,7 +788,7 @@
                 "api",
                 "rest"
             ],
-            "time": "2018-08-27T15:30:53+00:00"
+            "time": "2018-09-02T11:14:58+00:00"
         },
         {
             "name": "innmind/specification",
@@ -1018,53 +965,6 @@
                 "url"
             ],
             "time": "2017-11-30T07:16:59+00:00"
-        },
-        {
-            "name": "innmind/url-resolver",
-            "version": "3.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Innmind/url-resolver.git",
-                "reference": "83a6a2477165490242087fd1850501f2af213ca3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/url-resolver/zipball/83a6a2477165490242087fd1850501f2af213ca3",
-                "reference": "83a6a2477165490242087fd1850501f2af213ca3",
-                "shasum": ""
-            },
-            "require": {
-                "innmind/immutable": "~2.0",
-                "innmind/url": "^2.0",
-                "php": "~7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~6.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Innmind\\UrlResolver\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Baptiste Langlade",
-                    "email": "langlade.baptiste@gmail.com"
-                }
-            ],
-            "description": "Library to resolve relative urls to absolute ones",
-            "homepage": "http://github.com/Innmind/url-resolver",
-            "keywords": [
-                "resolver",
-                "uri",
-                "url"
-            ],
-            "time": "2018-02-15T11:06:26+00:00"
         },
         {
             "name": "innmind/url-template",
@@ -1712,55 +1612,6 @@
             "time": "2018-07-02T15:55:56+00:00"
         },
         {
-            "name": "psr/container",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/container.git",
-                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
-                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Container\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common Container Interface (PHP FIG PSR-11)",
-            "homepage": "https://github.com/php-fig/container",
-            "keywords": [
-                "PSR-11",
-                "container",
-                "container-interface",
-                "container-interop",
-                "psr"
-            ],
-            "time": "2017-02-14T16:28:37+00:00"
-        },
-        {
             "name": "psr/http-message",
             "version": "1.0.1",
             "source": {
@@ -1989,16 +1840,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v4.1.3",
+            "version": "v4.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "c868972ac26e4e19860ce11b300bb74145246ff9"
+                "reference": "76015a3cc372b14d00040ff58e18e29f69eba717"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/c868972ac26e4e19860ce11b300bb74145246ff9",
-                "reference": "c868972ac26e4e19860ce11b300bb74145246ff9",
+                "url": "https://api.github.com/repos/symfony/config/zipball/76015a3cc372b14d00040ff58e18e29f69eba717",
+                "reference": "76015a3cc372b14d00040ff58e18e29f69eba717",
                 "shasum": ""
             },
             "require": {
@@ -2048,20 +1899,20 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2018-07-26T11:24:31+00:00"
+            "time": "2018-08-08T06:37:38+00:00"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v4.1.3",
+            "version": "v4.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "2e30335e0aafeaa86645555959572fe7cea22b43"
+                "reference": "c0f5f62db218fa72195b8b8700e4b9b9cf52eb5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/2e30335e0aafeaa86645555959572fe7cea22b43",
-                "reference": "2e30335e0aafeaa86645555959572fe7cea22b43",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/c0f5f62db218fa72195b8b8700e4b9b9cf52eb5e",
+                "reference": "c0f5f62db218fa72195b8b8700e4b9b9cf52eb5e",
                 "shasum": ""
             },
             "require": {
@@ -2098,11 +1949,11 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2018-07-26T11:24:31+00:00"
+            "time": "2018-08-18T16:52:46+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v4.1.3",
+            "version": "v4.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -2148,60 +1999,6 @@
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
             "time": "2018-07-26T11:24:31+00:00"
-        },
-        {
-            "name": "symfony/options-resolver",
-            "version": "v4.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "1913f1962477cdbb13df951f8147d5da1fe2412c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/1913f1962477cdbb13df951f8147d5da1fe2412c",
-                "reference": "1913f1962477cdbb13df951f8147d5da1fe2412c",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\OptionsResolver\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony OptionsResolver Component",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "config",
-                "configuration",
-                "options"
-            ],
-            "time": "2018-07-26T08:55:25+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -2263,16 +2060,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v4.1.3",
+            "version": "v4.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "46bc69aa91fc4ab78a96ce67873a6b0c148fd48c"
+                "reference": "b832cc289608b6d305f62149df91529a2ab3c314"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/46bc69aa91fc4ab78a96ce67873a6b0c148fd48c",
-                "reference": "46bc69aa91fc4ab78a96ce67873a6b0c148fd48c",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/b832cc289608b6d305f62149df91529a2ab3c314",
+                "reference": "b832cc289608b6d305f62149df91529a2ab3c314",
                 "shasum": ""
             },
             "require": {
@@ -2318,7 +2115,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2018-07-26T11:24:31+00:00"
+            "time": "2018-08-18T16:52:46+00:00"
         },
         {
             "name": "willdurand/negotiation",
@@ -3704,6 +3501,55 @@
             "time": "2018-01-21T07:42:36+00:00"
         },
         {
+            "name": "psr/container",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/container.git",
+                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Container\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common Container Interface (PHP FIG PSR-11)",
+            "homepage": "https://github.com/php-fig/container",
+            "keywords": [
+                "PSR-11",
+                "container",
+                "container-interface",
+                "container-interop",
+                "psr"
+            ],
+            "time": "2017-02-14T16:28:37+00:00"
+        },
+        {
             "name": "sebastian/code-unit-reverse-lookup",
             "version": "1.0.1",
             "source": {
@@ -4264,7 +4110,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.1.3",
+            "version": "v4.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -4391,16 +4237,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v4.1.3",
+            "version": "v4.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "f01fc7a4493572f7f506c49dcb50ad01fb3a2f56"
+                "reference": "86cdb930a6a855b0ab35fb60c1504cb36184f843"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/f01fc7a4493572f7f506c49dcb50ad01fb3a2f56",
-                "reference": "f01fc7a4493572f7f506c49dcb50ad01fb3a2f56",
+                "url": "https://api.github.com/repos/symfony/process/zipball/86cdb930a6a855b0ab35fb60c1504cb36184f843",
+                "reference": "86cdb930a6a855b0ab35fb60c1504cb36184f843",
                 "shasum": ""
             },
             "require": {
@@ -4436,7 +4282,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2018-07-26T11:24:31+00:00"
+            "time": "2018-08-03T11:13:38+00:00"
         },
         {
             "name": "theseer/tokenizer",
