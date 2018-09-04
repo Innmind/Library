@@ -6,6 +6,7 @@
     "autoload": {
         "psr-4": {
             "Domain\\": "src/Domain/",
+            "App\\": "src/App/",
             "Web\\": "src/Web/"
         }
     },
