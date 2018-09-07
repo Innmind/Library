@@ -70,6 +70,23 @@ class CatchNotFoundTest extends TestCase
         $this->assertSame(404, $response->statusCode()->value());
     }
 
+    public function testDoesntCatch()
+    {
+        $handle = new CatchNotFound(
+            $inner = $this->createMock(RequestHandler::class)
+        );
+        $request = $this->createMock(ServerRequest::class);
+        $inner
+            ->expects($this->once())
+            ->method('__invoke')
+            ->with($request)
+            ->will($this->throwException(new \Exception));
+
+        $this->expectException(\Exception::class);
+
+        $handle($request);
+    }
+
     public function exceptions(): array
     {
         return [
