@@ -4,6 +4,11 @@ declare(strict_types = 1);
 namespace Tests\App;
 
 use function App\bootstrap;
+use Domain\Repository\{
+    HttpResourceRepository,
+    ImageRepository,
+    HtmlPageRepository,
+};
 use Innmind\Url\Url;
 use Innmind\Filesystem\Adapter\MemoryAdapter;
 use Innmind\CommandBus\CommandBusInterface;
@@ -19,5 +24,8 @@ class BootstrapTest extends TestCase
         );
 
         $this->assertInstanceOf(CommandBusInterface::class, $app['command_bus']);
+        $this->assertInstanceOf(HttpResourceRepository::class, $app['repository']['http_resource']);
+        $this->assertInstanceOf(ImageRepository::class, $app['repository']['image']);
+        $this->assertInstanceOf(HtmlPageRepository::class, $app['repository']['html_page']);
     }
 }

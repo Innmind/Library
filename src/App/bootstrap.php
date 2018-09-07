@@ -310,5 +310,12 @@ function bootstrap(
 
     return [
         'command_bus' => $commandBus,
+        // those repositories will be needed for the rest gateways, these should
+        // not be exposed and replaced instead by a query bus
+        'repository' => [
+            'http_resource' => $httpResourceRepository,
+            'image' => $imageRepository,
+            'html_page' => $htmlPageRepository,
+        ],
     ];
 }
