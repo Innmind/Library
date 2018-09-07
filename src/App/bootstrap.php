@@ -30,14 +30,15 @@ use Innmind\Immutable\{
     Set,
 };
 use Symfony\Component\Yaml\Yaml;
+use Pdp;
 
 function bootstrap(
     UrlInterface $neo4j,
     Adapter $domainEventStore
 ): array {
-    $domainParser = (new \Pdp\Manager(
-        new \Pdp\Cache,
-        new class implements \Pdp\HttpClient {
+    $domainParser = (new Pdp\Manager(
+        new Pdp\Cache,
+        new class implements Pdp\HttpClient {
             public function getContent(string $url): string
             {
                 return file_get_contents($url);
