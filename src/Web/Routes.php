@@ -58,7 +58,7 @@ final class Routes
 
             $map = $map->put(
                 new Route(
-                    new Route\Name((string) $route->name()),
+                    new Route\Name($route->name().'.'.$route->action()),
                     $route->template(),
                     $method
                 ),
