@@ -10,7 +10,8 @@
             "Web\\": "src/Web/"
         },
         "files": [
-            "src/App/bootstrap.php"
+            "src/App/bootstrap.php",
+            "src/Web/bootstrap.php"
         ]
     },
     "autoload-dev": {
