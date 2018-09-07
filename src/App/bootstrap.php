@@ -73,13 +73,13 @@ function bootstrap(
     $onm = onm(
         $dbal,
         [
-            Yaml::parseFile(__DIR__.'/Resources/config/neo4j/author.yml'),
-            Yaml::parseFile(__DIR__.'/Resources/config/neo4j/citation.yml'),
-            Yaml::parseFile(__DIR__.'/Resources/config/neo4j/domain.yml'),
-            Yaml::parseFile(__DIR__.'/Resources/config/neo4j/host.yml'),
-            Yaml::parseFile(__DIR__.'/Resources/config/neo4j/html_page.yml'),
-            Yaml::parseFile(__DIR__.'/Resources/config/neo4j/http_resource.yml'),
-            Yaml::parseFile(__DIR__.'/Resources/config/neo4j/image.yml'),
+            Yaml::parseFile(__DIR__.'/config/neo4j/author.yml'),
+            Yaml::parseFile(__DIR__.'/config/neo4j/citation.yml'),
+            Yaml::parseFile(__DIR__.'/config/neo4j/domain.yml'),
+            Yaml::parseFile(__DIR__.'/config/neo4j/host.yml'),
+            Yaml::parseFile(__DIR__.'/config/neo4j/html_page.yml'),
+            Yaml::parseFile(__DIR__.'/config/neo4j/http_resource.yml'),
+            Yaml::parseFile(__DIR__.'/config/neo4j/image.yml'),
         ],
         Set::of(
             'string',
