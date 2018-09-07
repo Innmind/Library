@@ -12,6 +12,7 @@ use Domain\Repository\{
 use Innmind\Url\Url;
 use Innmind\Filesystem\Adapter\MemoryAdapter;
 use Innmind\CommandBus\CommandBusInterface;
+use Innmind\Neo4j\DBAL\Connection;
 use PHPUnit\Framework\TestCase;
 
 class BootstrapTest extends TestCase
@@ -27,5 +28,6 @@ class BootstrapTest extends TestCase
         $this->assertInstanceOf(HttpResourceRepository::class, $app['repository']['http_resource']);
         $this->assertInstanceOf(ImageRepository::class, $app['repository']['image']);
         $this->assertInstanceOf(HtmlPageRepository::class, $app['repository']['html_page']);
+        $this->assertInstanceOf(Connection::class, $app['dbal']);
     }
 }

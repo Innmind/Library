@@ -317,5 +317,6 @@ function bootstrap(
             'image' => $imageRepository,
             'html_page' => $htmlPageRepository,
         ],
+        'dbal' => $dbal,
     ];
 }
