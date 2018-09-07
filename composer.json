@@ -29,7 +29,8 @@
         "innmind/colour": "~2.0",
         "innmind/command-bus": "^2.1",
         "innmind/rest-server": "^6.0",
-        "innmind/neo4j-onm": "^4.4"
+        "innmind/neo4j-onm": "^4.4",
+        "innmind/http-framework": "^1.2"
     },
     "config": {
         "bin-dir": "bin"

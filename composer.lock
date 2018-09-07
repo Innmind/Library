@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c0bbee50628b3f4ffc5168a2d2e27f9",
+    "content-hash": "fc4c6a0c821088f4af2e8939eac5ceee",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -432,6 +432,109 @@
             "time": "2018-08-15T09:27:53+00:00"
         },
         {
+            "name": "innmind/http-authentication",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/HttpAuthentication.git",
+                "reference": "3ad1f72d8929a05e270405c0a5be67772146753f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/HttpAuthentication/zipball/3ad1f72d8929a05e270405c0a5be67772146753f",
+                "reference": "3ad1f72d8929a05e270405c0a5be67772146753f",
+                "shasum": ""
+            },
+            "require": {
+                "innmind/http": "^3.6",
+                "php": "~7.2"
+            },
+            "require-dev": {
+                "giorgiosironi/eris": "^0.10.0",
+                "innmind/compose": "^1.7",
+                "phpunit/phpunit": "~7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Innmind\\HttpAuthentication\\": "src/"
+                },
+                "files": [
+                    "src/bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "HTTP authentication",
+            "homepage": "http://github.com/Innmind/HttpAuthentication",
+            "keywords": [
+                "Authentication",
+                "http"
+            ],
+            "time": "2018-09-02T15:35:26+00:00"
+        },
+        {
+            "name": "innmind/http-framework",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/HttpFramework.git",
+                "reference": "61c6c256109bdb0484d5905576471301fe9a0296"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/HttpFramework/zipball/61c6c256109bdb0484d5905576471301fe9a0296",
+                "reference": "61c6c256109bdb0484d5905576471301fe9a0296",
+                "shasum": ""
+            },
+            "require": {
+                "innmind/http": "^3.8",
+                "innmind/http-authentication": "^1.1",
+                "innmind/router": "^1.0",
+                "php": "~7.2",
+                "symfony/dotenv": "^4.1"
+            },
+            "require-dev": {
+                "giorgiosironi/eris": "^0.10.0",
+                "innmind/compose": "^1.7",
+                "phpunit/phpunit": "~7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Innmind\\HttpFramework\\": "src/"
+                },
+                "files": [
+                    "src/bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "HTTP framework",
+            "homepage": "http://github.com/Innmind/HttpFramework",
+            "keywords": [
+                "framework",
+                "http"
+            ],
+            "time": "2018-09-02T15:13:47+00:00"
+        },
+        {
             "name": "innmind/http-transport",
             "version": "3.3.1",
             "source": {
@@ -789,6 +892,60 @@
                 "rest"
             ],
             "time": "2018-09-02T11:14:58+00:00"
+        },
+        {
+            "name": "innmind/router",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/Router.git",
+                "reference": "1f83e7c60d0123bd0708cb6748a1aae1daba45c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/Router/zipball/1f83e7c60d0123bd0708cb6748a1aae1daba45c5",
+                "reference": "1f83e7c60d0123bd0708cb6748a1aae1daba45c5",
+                "shasum": ""
+            },
+            "require": {
+                "innmind/http": "^3.6",
+                "innmind/immutable": "^2.8",
+                "innmind/url": "^2.0",
+                "innmind/url-template": "^1.2",
+                "php": "~7.2",
+                "symfony/yaml": "^4.1"
+            },
+            "require-dev": {
+                "giorgiosironi/eris": "^0.10.0",
+                "innmind/compose": "^1.7",
+                "phpunit/phpunit": "~7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Innmind\\Router\\": "src/"
+                },
+                "files": [
+                    "src/bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "HTTP router",
+            "homepage": "http://github.com/Innmind/Router",
+            "keywords": [
+                "http",
+                "router"
+            ],
+            "time": "2018-09-02T10:04:11+00:00"
         },
         {
             "name": "innmind/specification",
@@ -1900,6 +2057,63 @@
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
             "time": "2018-08-08T06:37:38+00:00"
+        },
+        {
+            "name": "symfony/dotenv",
+            "version": "v4.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dotenv.git",
+                "reference": "22ca63c46e252b8a8f37b8f9e6da66bff5b3d3e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dotenv/zipball/22ca63c46e252b8a8f37b8f9e6da66bff5b3d3e7",
+                "reference": "22ca63c46e252b8a8f37b8f9e6da66bff5b3d3e7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3"
+            },
+            "require-dev": {
+                "symfony/process": "~3.4|~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Dotenv\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Registers environment variables from a .env file",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "dotenv",
+                "env",
+                "environment"
+            ],
+            "time": "2018-07-26T11:24:31+00:00"
         },
         {
             "name": "symfony/filesystem",
