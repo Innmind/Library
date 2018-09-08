@@ -31,14 +31,16 @@
         "innmind/command-bus": "^2.1",
         "innmind/rest-server": "^6.0",
         "innmind/neo4j-onm": "^4.4",
-        "innmind/http-framework": "^1.2"
+        "innmind/http-framework": "^1.2",
+        "innmind/http-server": "^1.1"
     },
     "config": {
         "bin-dir": "bin"
     },
     "require-dev": {
         "phpunit/phpunit": "~6.0",
-        "infection/infection": "^0.7.1"
+        "infection/infection": "^0.7.1",
+        "symfony/var-dumper": "^4.1"
     },
     "scripts": {
         "test" : "bin/phpunit --colors=always"
