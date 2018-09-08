@@ -81,7 +81,7 @@ function bootstrap(
     $routesToDefinitions = Routes::from($rest['routes']);
     $capabilities = Route::of(
         new Route\Name('capabilities'),
-        Str::of('OPTIONS /*')
+        Str::of('OPTIONS /\*')
     );
 
     $controllers = Controllers::from(
