@@ -1172,16 +1172,16 @@
         },
         {
             "name": "innmind/url-template",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/UrlTemplate.git",
-                "reference": "d4f2337fa34be3ecd1abe9411ef4296a8bfb4cd6"
+                "reference": "b47e2138945c6242b3c5f9ec605c1fb86909108f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/UrlTemplate/zipball/d4f2337fa34be3ecd1abe9411ef4296a8bfb4cd6",
-                "reference": "d4f2337fa34be3ecd1abe9411ef4296a8bfb4cd6",
+                "url": "https://api.github.com/repos/Innmind/UrlTemplate/zipball/b47e2138945c6242b3c5f9ec605c1fb86909108f",
+                "reference": "b47e2138945c6242b3c5f9ec605c1fb86909108f",
                 "shasum": ""
             },
             "require": {
@@ -1215,7 +1215,7 @@
                 "rfc6570",
                 "url template"
             ],
-            "time": "2018-08-05T08:32:30+00:00"
+            "time": "2018-09-09T09:06:11+00:00"
         },
         {
             "name": "jeremykendall/php-domain-parser",
