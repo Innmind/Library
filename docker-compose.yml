@@ -1,15 +1,29 @@
 version: '2'
 services:
     web:
-        image: kitpages/symfony:7.1
-        volumes:
-            - .:/var/www
+        image: nginx:1
         ports:
             - '8080:80'
-        links:
-            - neo4j
+        volumes:
+            - .:/var/www
+            - ./docker/nginx/site.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            - library-network
+
+    php:
+        image: php:7.2-fpm
+        volumes:
+            - .:/var/www
+        networks:
+            - library-network
 
     neo4j:
         image: neo4j:3.1
         ports:
             - '7474:7474'
+        networks:
+            - library-network
+
+networks:
+    library-network:
+        driver: bridge

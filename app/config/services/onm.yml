@@ -1,4 +1,0 @@
-services:
-    onm.data_extractor.strategy:
-        class: Innmind\Reflection\ExtractionStrategy\ReflectionStrategy
-        public: false

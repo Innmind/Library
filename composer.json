@@ -6,11 +6,12 @@
     "autoload": {
         "psr-4": {
             "Domain\\": "src/Domain/",
-            "AppBundle\\": "src/AppBundle/"
+            "App\\": "src/App/",
+            "Web\\": "src/Web/"
         },
-        "classmap": [
-            "app/AppKernel.php",
-            "app/AppCache.php"
+        "files": [
+            "src/App/bootstrap.php",
+            "src/Web/bootstrap.php"
         ]
     },
     "autoload-dev": {
@@ -22,55 +23,26 @@
         "php": "~7.2",
         "innmind/url": "~2.0",
         "innmind/immutable": "~2.0",
-        "innmind/event-bus": "~2.0",
+        "innmind/event-bus": "^2.1",
         "innmind/time-continuum": "^1.0",
         "jeremykendall/php-domain-parser": "~5.0",
         "innmind/specification": "^1.0",
         "innmind/colour": "~2.0",
-        "symfony/symfony": "~3.2",
-        "symfony/monolog-bundle": "^3.0",
-        "symfony/polyfill-apcu": "^1.0",
-        "sensio/distribution-bundle": "^5.0",
-        "incenteev/composer-parameter-handler": "^2.0",
-        "innmind/neo4j-bundle": "~4.0",
-        "innmind/command-bus-bundle": "~2.0",
-        "innmind/rest-server-bundle": "~3.0",
-        "innmind/event-bus-bundle": "~2.0"
+        "innmind/command-bus": "^2.1",
+        "innmind/rest-server": "^6.0",
+        "innmind/neo4j-onm": "^4.4",
+        "innmind/http-framework": "^1.2",
+        "innmind/http-server": "^1.1"
     },
     "config": {
         "bin-dir": "bin"
     },
     "require-dev": {
-        "sensio/generator-bundle": "^3.0",
         "phpunit/phpunit": "~6.0",
-        "infection/infection": "^0.7.1"
+        "infection/infection": "^0.7.1",
+        "symfony/var-dumper": "^4.1"
     },
     "scripts": {
-        "symfony-scripts": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
-        ],
-        "post-install-cmd": [
-            "@symfony-scripts"
-        ],
-        "post-update-cmd": [
-            "@symfony-scripts"
-        ],
         "test" : "bin/phpunit --colors=always"
-    },
-    "extra": {
-        "symfony-app-dir": "app",
-        "symfony-bin-dir": "bin",
-        "symfony-var-dir": "var",
-        "symfony-web-dir": "web",
-        "symfony-tests-dir": "tests",
-        "symfony-assets-install": "relative",
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        },
-        "branch-alias": null
     }
 }
