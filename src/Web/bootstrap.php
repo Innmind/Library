@@ -6,6 +6,7 @@ namespace Web;
 use Web\{
     RequestHandler\CatchConflicts,
     RequestHandler\CatchNotFound,
+    RequestHandler\Debug,
     Controller\Capabilities,
     Controller\RestBridge,
     Gateway\HttpResourceGateway,
@@ -45,7 +46,8 @@ function bootstrap(
     Connection $dbal,
     HttpResourceRepository $httpResourceRepository,
     ImageRepository $imageRepository,
-    HtmlPageRepository $htmlPageRepository
+    HtmlPageRepository $htmlPageRepository,
+    bool $debug = false
 ): RequestHandler {
     $rest = rest(
         (new Map('string', Gateway::class))
@@ -99,17 +101,20 @@ function bootstrap(
         }
     );
 
-    return new CatchConflicts(
-        new CatchNotFound(
-            new Router(
-                new RequestMatcher(
-                    $routesToDefinitions->keys()->add($capabilities)
-                ),
-                $controllers->put(
-                    'capabilities',
-                    new Capabilities($rest['controller']['capabilities'])
+    return new Debug(
+        new CatchConflicts(
+            new CatchNotFound(
+                new Router(
+                    new RequestMatcher(
+                        $routesToDefinitions->keys()->add($capabilities)
+                    ),
+                    $controllers->put(
+                        'capabilities',
+                        new Capabilities($rest['controller']['capabilities'])
+                    )
                 )
             )
-        )
+        ),
+        $debug
     );
 }

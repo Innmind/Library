@@ -49,7 +49,8 @@ new class extends Main
             $app['dbal'],
             $app['repository']['http_resource'],
             $app['repository']['image'],
-            $app['repository']['html_page']
+            $app['repository']['html_page'],
+            $environment->contains('debug')
         );
 
         return $handle($request);
