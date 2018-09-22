@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c91d50dd2a1263df575916797827c717",
+    "content-hash": "c2478158504db0e2fe331c27ad8cb4aa",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -233,16 +233,16 @@
         },
         {
             "name": "innmind/command-bus",
-            "version": "2.2.0",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/CommandBus.git",
-                "reference": "dd1aa487e58b3706f8774dbe6470b8832a6f3c5e"
+                "reference": "598bf6bf1a0baabd8bb3e157ca610df6d2e9e1a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/CommandBus/zipball/dd1aa487e58b3706f8774dbe6470b8832a6f3c5e",
-                "reference": "dd1aa487e58b3706f8774dbe6470b8832a6f3c5e",
+                "url": "https://api.github.com/repos/Innmind/CommandBus/zipball/598bf6bf1a0baabd8bb3e157ca610df6d2e9e1a3",
+                "reference": "598bf6bf1a0baabd8bb3e157ca610df6d2e9e1a3",
                 "shasum": ""
             },
             "require": {
@@ -281,7 +281,7 @@
                 "command bus",
                 "ddd"
             ],
-            "time": "2018-09-03T18:40:10+00:00"
+            "time": "2018-09-22T13:05:04+00:00"
         },
         {
             "name": "innmind/event-bus",
@@ -721,6 +721,58 @@
                 "json"
             ],
             "time": "2018-05-08T08:55:27+00:00"
+        },
+        {
+            "name": "innmind/logger",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/Logger.git",
+                "reference": "12acb964d7a508daf7afea51b851a9a47d006aca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/Logger/zipball/12acb964d7a508daf7afea51b851a9a47d006aca",
+                "reference": "12acb964d7a508daf7afea51b851a9a47d006aca",
+                "shasum": ""
+            },
+            "require": {
+                "innmind/url": "^2.0",
+                "monolog/monolog": "^1.23",
+                "php": "~7.2",
+                "psr/log": "^1.0"
+            },
+            "require-dev": {
+                "giorgiosironi/eris": "^0.10.0",
+                "phpunit/phpunit": "~7.0",
+                "sentry/sentry": "^1.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Innmind\\Logger\\": "src/"
+                },
+                "files": [
+                    "src/bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "Logger",
+            "homepage": "http://github.com/Innmind/Logger",
+            "keywords": [
+                "logger",
+                "psr-3"
+            ],
+            "time": "2018-09-22T15:20:35+00:00"
         },
         {
             "name": "innmind/neo4j-dbal",
@@ -1769,6 +1821,84 @@
                 "wss"
             ],
             "time": "2018-03-14T08:33:20+00:00"
+        },
+        {
+            "name": "monolog/monolog",
+            "version": "1.23.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/monolog.git",
+                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
+                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/log": "~1.0"
+            },
+            "provide": {
+                "psr/log-implementation": "1.0.0"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": "^2.4.9 || ^3.0",
+                "doctrine/couchdb": "~1.0@dev",
+                "graylog2/gelf-php": "~1.0",
+                "jakub-onderka/php-parallel-lint": "0.9",
+                "php-amqplib/php-amqplib": "~2.4",
+                "php-console/php-console": "^3.1.3",
+                "phpunit/phpunit": "~4.5",
+                "phpunit/phpunit-mock-objects": "2.3.0",
+                "ruflin/elastica": ">=0.90 <3.0",
+                "sentry/sentry": "^0.13",
+                "swiftmailer/swiftmailer": "^5.3|^6.0"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
+                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
+                "ext-mongo": "Allow sending log messages to a MongoDB server",
+                "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
+                "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
+                "php-console/php-console": "Allow sending log messages to Google Chrome",
+                "rollbar/rollbar": "Allow sending log messages to Rollbar",
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
+                "sentry/sentry": "Allow sending log messages to a Sentry server"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Monolog\\": "src/Monolog"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
+            "homepage": "http://github.com/Seldaek/monolog",
+            "keywords": [
+                "log",
+                "logging",
+                "psr-3"
+            ],
+            "time": "2017-06-19T01:22:40+00:00"
         },
         {
             "name": "paragonie/random_compat",

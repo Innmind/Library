@@ -10,10 +10,16 @@ use Innmind\Http\Message\{
     ServerRequest,
     Response,
 };
-use Innmind\Url\Url;
+use Innmind\Url\{
+    UrlInterface,
+    Url,
+};
 use Innmind\HttpFramework\Environment;
 use Innmind\Filesystem\Adapter\FilesystemAdapter;
-use Innmind\Immutable\MapInterface;
+use Innmind\Immutable\{
+    MapInterface,
+    Set,
+};
 
 new class extends Main
 {
@@ -40,9 +46,24 @@ new class extends Main
      */
     private function handle(ServerRequest $request, MapInterface $environment): Response
     {
+        $debug = $environment->contains('debug');
+
+        $dsns = Set::of(
+            UrlInterface::class,
+            Url::fromString('file://'.__DIR__.'/../var/log.txt')
+        );
+
+        if ($environment->contains('sentry')) {
+            $dsns = $dsns->add(
+                Url::fromString('sentry://'.$environment->get('sentry'))
+            );
+        }
+
         $app = app(
             Url::fromString($environment->get('neo4j')),
-            new FilesystemAdapter(__DIR__.'/../var/innmind/domain_events')
+            new FilesystemAdapter(__DIR__.'/../var/innmind/domain_events'),
+            $dsns,
+            $debug ? null : 'error'
         );
         $handle = web(
             $app['command_bus'],
@@ -50,7 +71,7 @@ new class extends Main
             $app['repository']['http_resource'],
             $app['repository']['image'],
             $app['repository']['html_page'],
-            $environment->contains('debug')
+            $debug
         );
 
         return $handle($request);

@@ -8,6 +8,7 @@ use function Innmind\Neo4j\DBAL\bootstrap as dbal;
 use function Innmind\Neo4j\ONM\bootstrap as onm;
 use function Innmind\CommandBus\bootstrap as commandBus;
 use function Innmind\EventBus\bootstrap as eventBus;
+use function Innmind\Logger\bootstrap as logger;
 use Innmind\Neo4j\ONM\{
     Identity\Generator\UuidGenerator,
     Identity\Generator,
@@ -31,11 +32,21 @@ use Innmind\Immutable\{
 };
 use Symfony\Component\Yaml\Yaml;
 use Pdp;
+use Psr\Log\{
+    LoggerInterface,
+    NullLogger,
+};
 
+/**
+ * @param SetInterface<UrlInterface>|null $dsns
+ */
 function bootstrap(
     UrlInterface $neo4j,
-    Adapter $domainEventStore
+    Adapter $domainEventStore,
+    SetInterface $dsns = null,
+    string $activationLevel = null
 ): array {
+    $dsns = $dsns ?? Set::of(UrlInterface::class);
     $domainParser = (new Pdp\Manager(
         new Pdp\Cache,
         new class implements Pdp\HttpClient {
@@ -48,8 +59,11 @@ function bootstrap(
 
     $clock = new Earth(new UTC);
     $http = http();
-    $httpTransport = $http['catch_guzzle_exceptions'](
-        $http['guzzle']()
+    $log = $http['logger'](logger('http', ...$dsns)($activationLevel));
+    $httpTransport = $log(
+        $http['catch_guzzle_exceptions'](
+            $http['guzzle']()
+        )
     );
 
     $eventBuses = eventBus();
@@ -299,11 +313,16 @@ function bootstrap(
         );
 
     $commandBuses = commandBus();
+    $log = $commandBuses['logger'](
+        logger('app', ...$dsns)($activationLevel)
+    );
 
-    $commandBus = $onm['command_bus']['clear_domain_events'](
-        $onm['command_bus']['dispatch_domain_events'](
-            $onm['command_bus']['flush'](
-                $commandBuses['bus']($handlers)
+    $commandBus = $log(
+        $onm['command_bus']['clear_domain_events'](
+            $onm['command_bus']['dispatch_domain_events'](
+                $onm['command_bus']['flush'](
+                    $commandBuses['bus']($handlers)
+                )
             )
         )
     );
