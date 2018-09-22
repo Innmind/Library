@@ -33,7 +33,8 @@
         "innmind/neo4j-onm": "^4.4",
         "innmind/http-framework": "^1.2",
         "innmind/http-server": "^1.1",
-        "innmind/logger": "^1.0"
+        "innmind/logger": "^1.0",
+        "innmind/http-authentication": "^1.4"
     },
     "config": {
         "bin-dir": "bin"

@@ -23,7 +23,8 @@ class BootstrapTest extends TestCase
             $this->createMock(Connection::class),
             $this->createMock(HttpResourceRepository::class),
             $this->createMock(ImageRepository::class),
-            $this->createMock(HtmlPageRepository::class)
+            $this->createMock(HtmlPageRepository::class),
+            'api key'
         );
 
         $this->assertInstanceOf(RequestHandler::class, $handler);

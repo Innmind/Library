@@ -12,16 +12,23 @@ use Web\{
     Gateway\HttpResourceGateway,
     Gateway\ImageGateway,
     Gateway\HtmlPageGateway,
+    Authentication\ViaAuthorization\ApiKey,
+    Exception\InvalidApiKey,
 };
 use Domain\Repository\{
     HttpResourceRepository,
     ImageRepository,
     HtmlPageRepository,
 };
+use function Innmind\HttpAuthentication\bootstrap as auth;
+use function Innmind\HttpFramework\bootstrap as framework;
 use Innmind\HttpFramework\{
     RequestHandler,
     Router,
     Controller,
+    Authenticate\Condition,
+    Authenticate\Fallback,
+    Authenticate\Unauthorized,
 };
 use Innmind\Router\{
     Route,
@@ -47,6 +54,7 @@ function bootstrap(
     HttpResourceRepository $httpResourceRepository,
     ImageRepository $imageRepository,
     HtmlPageRepository $htmlPageRepository,
+    string $apiKey,
     bool $debug = false
 ): RequestHandler {
     $rest = rest(
@@ -101,20 +109,37 @@ function bootstrap(
         }
     );
 
-    return new Debug(
-        new CatchConflicts(
-            new CatchNotFound(
-                new Router(
-                    new RequestMatcher(
-                        $routesToDefinitions->keys()->add($capabilities)
-                    ),
-                    $controllers->put(
-                        'capabilities',
-                        new Capabilities($rest['controller']['capabilities'])
-                    )
+    $auth = auth();
+    $framework = framework();
+    $authenticate = $framework['authenticate'](
+        $auth['validate_authorization_header'](
+            $auth['any'](
+                $auth['via_authorization'](
+                    new ApiKey($apiKey)
                 )
             )
         ),
-        $debug
+        new Condition('~^/~'),
+        (new Map('string', Fallback::class))
+            ->put(InvalidApiKey::class, new Unauthorized)
+    );
+
+    return $authenticate(
+        new Debug(
+            new CatchConflicts(
+                new CatchNotFound(
+                    new Router(
+                        new RequestMatcher(
+                            $routesToDefinitions->keys()->add($capabilities)
+                        ),
+                        $controllers->put(
+                            'capabilities',
+                            new Capabilities($rest['controller']['capabilities'])
+                        )
+                    )
+                )
+            ),
+            $debug
+        )
     );
 }

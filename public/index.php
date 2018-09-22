@@ -71,6 +71,7 @@ new class extends Main
             $app['repository']['http_resource'],
             $app['repository']['image'],
             $app['repository']['html_page'],
+            $environment->get('apiKey'),
             $debug
         );
 

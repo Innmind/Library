@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c2478158504db0e2fe331c27ad8cb4aa",
+    "content-hash": "4f5bbedcccfa522d3d229ae3aa147489",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -433,16 +433,16 @@
         },
         {
             "name": "innmind/http-authentication",
-            "version": "1.3.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/HttpAuthentication.git",
-                "reference": "3ad1f72d8929a05e270405c0a5be67772146753f"
+                "reference": "e40d05e8546956aab270b72f4357bd4bdb1770b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/HttpAuthentication/zipball/3ad1f72d8929a05e270405c0a5be67772146753f",
-                "reference": "3ad1f72d8929a05e270405c0a5be67772146753f",
+                "url": "https://api.github.com/repos/Innmind/HttpAuthentication/zipball/e40d05e8546956aab270b72f4357bd4bdb1770b9",
+                "reference": "e40d05e8546956aab270b72f4357bd4bdb1770b9",
                 "shasum": ""
             },
             "require": {
@@ -479,7 +479,7 @@
                 "Authentication",
                 "http"
             ],
-            "time": "2018-09-02T15:35:26+00:00"
+            "time": "2018-09-22T16:31:28+00:00"
         },
         {
             "name": "innmind/http-framework",

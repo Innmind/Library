@@ -20,6 +20,8 @@ use Innmind\Http\{
     Headers\Headers,
     Header\Accept,
     Header\AcceptValue,
+    Header\Authorization,
+    Header\AuthorizationValue,
 };
 use Innmind\Url\Url;
 use PHPUnit\Framework\TestCase;
@@ -33,7 +35,8 @@ class ImageTest extends TestCase
             $this->createMock(Connection::class),
             $this->createMock(HttpResourceRepository::class),
             $repository = $this->createMock(ImageRepository::class),
-            $this->createMock(HtmlPageRepository::class)
+            $this->createMock(HtmlPageRepository::class),
+            'api_key'
         );
         $repository
             ->expects($this->once())
@@ -47,12 +50,42 @@ class ImageTest extends TestCase
             Headers::of(
                 new Accept(
                     new AcceptValue('application', 'json')
+                ),
+                new Authorization(
+                    new AuthorizationValue('Bearer', 'api_key')
                 )
             )
         ));
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(404, $response->statusCode()->value());
+        $this->assertSame('', (string) $response->body());
+    }
+
+    public function testErrorWhenNoAuth()
+    {
+        $handle = web(
+            $this->createMock(CommandBusInterface::class),
+            $this->createMock(Connection::class),
+            $this->createMock(HttpResourceRepository::class),
+            $this->createMock(ImageRepository::class),
+            $this->createMock(HtmlPageRepository::class),
+            'api_key'
+        );
+
+        $response = $handle(new ServerRequest(
+            Url::fromString('http://localhost/api/web/image/fc1cc2b4-2c09-43b1-8c19-3499068950ed'),
+            Method::get(),
+            new ProtocolVersion(1, 1),
+            Headers::of(
+                new Accept(
+                    new AcceptValue('application', 'json')
+                )
+            )
+        ));
+
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertSame(401, $response->statusCode()->value());
         $this->assertSame('', (string) $response->body());
     }
 
@@ -63,7 +96,8 @@ class ImageTest extends TestCase
             $this->createMock(Connection::class),
             $this->createMock(HttpResourceRepository::class),
             $this->createMock(ImageRepository::class),
-            $this->createMock(HtmlPageRepository::class)
+            $this->createMock(HtmlPageRepository::class),
+            'api_key'
         );
 
         $response = $handle(new ServerRequest(
@@ -73,6 +107,9 @@ class ImageTest extends TestCase
             Headers::of(
                 new Accept(
                     new AcceptValue('application', 'json')
+                ),
+                new Authorization(
+                    new AuthorizationValue('Bearer', 'api_key')
                 )
             )
         ));
