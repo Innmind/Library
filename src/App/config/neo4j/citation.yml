@@ -3,7 +3,7 @@ Domain\Entity\Citation:
     labels: [Citation]
     identity:
         property: identity
-        type: AppBundle\Entity\Citation\Identity
+        type: App\Entity\Citation\Identity
     properties:
         text:
             type: citation_text
@@ -13,14 +13,14 @@ Domain\Entity\CitationAppearance:
     rel_type: CITED_IN_RESOURCE
     identity:
         property: identity
-        type: AppBundle\Entity\CitationAppearance\Identity
+        type: App\Entity\CitationAppearance\Identity
     startNode:
         property: citation
-        type: AppBundle\Entity\Citation\Identity
+        type: App\Entity\Citation\Identity
         target: identity
     endNode:
         property: resource
-        type: AppBundle\Entity\HttpResource\Identity
+        type: App\Entity\HttpResource\Identity
         target: identity
     properties:
         foundAt:

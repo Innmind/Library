@@ -3,7 +3,7 @@ Domain\Entity\Domain:
     labels: [Web, Domain]
     identity:
         property: identity
-        type: AppBundle\Entity\Domain\Identity
+        type: App\Entity\Domain\Identity
     properties:
         name:
             type: domain_name

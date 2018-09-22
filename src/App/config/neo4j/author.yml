@@ -3,7 +3,7 @@ Domain\Entity\Author:
     labels: [Person, Author]
     identity:
         property: identity
-        type: AppBundle\Entity\Author\Identity
+        type: App\Entity\Author\Identity
     properties:
         name:
             type: author_name

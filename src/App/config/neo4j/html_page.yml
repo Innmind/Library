@@ -3,7 +3,7 @@ Domain\Entity\HtmlPage:
     labels: [Web, Resource, Html]
     identity:
         property: identity
-        type: AppBundle\Entity\HtmlPage\Identity
+        type: App\Entity\HtmlPage\Identity
     properties:
         path:
             type: http_resource_path

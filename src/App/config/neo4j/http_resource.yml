@@ -3,7 +3,7 @@ Domain\Entity\HttpResource:
     labels: [Web, Resource]
     identity:
         property: identity
-        type: AppBundle\Entity\HttpResource\Identity
+        type: App\Entity\HttpResource\Identity
     properties:
         path:
             type: http_resource_path
@@ -21,14 +21,14 @@ Domain\Entity\HostResource:
     rel_type: RESOURCE_OF_HOST
     identity:
         property: identity
-        type: AppBundle\Entity\HostResource\Identity
+        type: App\Entity\HostResource\Identity
     startNode:
         property: resource
-        type: AppBundle\Entity\HttpResource\Identity
+        type: App\Entity\HttpResource\Identity
         target: identity
     endNode:
         property: host
-        type: AppBundle\Entity\Host\Identity
+        type: App\Entity\Host\Identity
         target: identity
     properties:
         foundAt:
@@ -39,14 +39,14 @@ Domain\Entity\ResourceAuthor:
     rel_type: AUTHOR_OF_RESOURCE
     identity:
         property: identity
-        type: AppBundle\Entity\ResourceAuthor\Identity
+        type: App\Entity\ResourceAuthor\Identity
     startNode:
         property: author
-        type: AppBundle\Entity\Author\Identity
+        type: App\Entity\Author\Identity
         target: identity
     endNode:
         property: resource
-        type: AppBundle\Entity\HttpResource\Identity
+        type: App\Entity\HttpResource\Identity
         target: identity
     properties:
         asOf:
@@ -57,14 +57,14 @@ Domain\Entity\Alternate:
     rel_type: ALTERNATE_OF_RESOURCE
     identity:
         property: identity
-        type: AppBundle\Entity\Alternate\Identity
+        type: App\Entity\Alternate\Identity
     startNode:
         property: alternate
-        type: AppBundle\Entity\HttpResource\Identity
+        type: App\Entity\HttpResource\Identity
         target: identity
     endNode:
         property: resource
-        type: AppBundle\Entity\HttpResource\Identity
+        type: App\Entity\HttpResource\Identity
         target: identity
     properties:
         language:
@@ -75,14 +75,14 @@ Domain\Entity\Canonical:
     rel_type: CANONICAL_OF_RESOURCE
     identity:
         property: identity
-        type: AppBundle\Entity\Canonical\Identity
+        type: App\Entity\Canonical\Identity
     startNode:
         property: canonical
-        type: AppBundle\Entity\HttpResource\Identity
+        type: App\Entity\HttpResource\Identity
         target: identity
     endNode:
         property: resource
-        type: AppBundle\Entity\HttpResource\Identity
+        type: App\Entity\HttpResource\Identity
         target: identity
     properties:
         foundAt:
@@ -93,12 +93,12 @@ Domain\Entity\Reference:
     rel_type: RESOURCE_REFERENCED_IN_RESOURCE
     identity:
         property: identity
-        type: AppBundle\Entity\Reference\Identity
+        type: App\Entity\Reference\Identity
     startNode:
         property: source
-        type: AppBundle\Entity\HttpResource\Identity
+        type: App\Entity\HttpResource\Identity
         target: identity
     endNode:
         property: target
-        type: AppBundle\Entity\HttpResource\Identity
+        type: App\Entity\HttpResource\Identity
         target: identity

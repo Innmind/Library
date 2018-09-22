@@ -3,7 +3,7 @@ Domain\Entity\Host:
     labels: [Web, Host]
     identity:
         property: identity
-        type: AppBundle\Entity\Host\Identity
+        type: App\Entity\Host\Identity
     properties:
         name:
             type: host_name
@@ -13,14 +13,14 @@ Domain\Entity\DomainHost:
     rel_type: HOST_OF_DOMAIN
     identity:
         property: identity
-        type: AppBundle\Entity\DomainHost\Identity
+        type: App\Entity\DomainHost\Identity
     startNode:
         property: host
-        type: AppBundle\Entity\Host\Identity
+        type: App\Entity\Host\Identity
         target: identity
     endNode:
         property: domain
-        type: AppBundle\Entity\Domain\Identity
+        type: App\Entity\Domain\Identity
         target: identity
     properties:
         foundAt:

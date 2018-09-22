@@ -3,7 +3,7 @@ Domain\Entity\Image:
     labels: [Web, Resource, Image]
     identity:
         property: identity
-        type: AppBundle\Entity\Image\Identity
+        type: App\Entity\Image\Identity
     properties:
         path:
             type: http_resource_path
