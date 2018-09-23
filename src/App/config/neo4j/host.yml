@@ -1,0 +1,27 @@
+Domain\Entity\Host:
+    type: aggregate
+    labels: [Web, Host]
+    identity:
+        property: identity
+        type: App\Entity\Host\Identity
+    properties:
+        name:
+            type: host_name
+
+Domain\Entity\DomainHost:
+    type: relationship
+    rel_type: HOST_OF_DOMAIN
+    identity:
+        property: identity
+        type: App\Entity\DomainHost\Identity
+    startNode:
+        property: host
+        type: App\Entity\Host\Identity
+        target: identity
+    endNode:
+        property: domain
+        type: App\Entity\Domain\Identity
+        target: identity
+    properties:
+        foundAt:
+            type: point_in_time

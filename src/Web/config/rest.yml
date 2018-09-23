@@ -1,0 +1,158 @@
+web:
+    resources:
+        resource:
+            identity: identity
+            gateway: http_resource
+            properties:
+                identity:
+                    type: string
+                    access: [READ]
+                host:
+                    type: string
+                    access: [READ, CREATE]
+                path:
+                    type: string
+                    access: [READ, CREATE]
+                query:
+                    type: string
+                    access: [READ, CREATE]
+                languages:
+                    type: set
+                    access: [READ, CREATE]
+                    options:
+                        inner: string
+                    optional: true
+                charset:
+                    type: string
+                    access: [READ, CREATE]
+                    optional: true
+            options:
+                actions: [get, create, link, options]
+            linkable_to:
+                referrer: web.resource
+            metas:
+                allowed_media_types: ['*/*; q=0.1']
+
+        image:
+            identity: identity
+            gateway: image
+            properties:
+                identity:
+                    type: string
+                    access: [READ]
+                host:
+                    type: string
+                    access: [READ, CREATE]
+                path:
+                    type: string
+                    access: [READ, CREATE]
+                query:
+                    type: string
+                    access: [READ, CREATE]
+                descriptions:
+                    type: set
+                    access: [READ, CREATE]
+                    optional: true
+                    options:
+                        inner: string
+                dimension:
+                    type: map
+                    access: [READ, CREATE]
+                    optional: true
+                    options:
+                        key: string
+                        inner: int
+                weight:
+                    type: int
+                    access: [READ, CREATE]
+                    optional: true
+            options:
+                actions: [get, create, options]
+            metas:
+                allowed_media_types: ['image/*']
+
+        html_page:
+            identity: identity
+            gateway: html_page
+            properties:
+                identity:
+                    type: string
+                    access: [READ]
+                host:
+                    type: string
+                    access: [READ, CREATE]
+                author:
+                    type: string
+                    access: [READ, CREATE]
+                    optional: true
+                citations:
+                    type: set
+                    access: [READ, CREATE]
+                    options:
+                        inner: string
+                    optional: true
+                path:
+                    type: string
+                    access: [READ, CREATE]
+                query:
+                    type: string
+                    access: [READ, CREATE]
+                languages:
+                    type: set
+                    access: [READ, CREATE]
+                    options:
+                        inner: string
+                    optional: true
+                charset:
+                    type: string
+                    access: [READ, CREATE]
+                    optional: true
+                main_content:
+                    type: string
+                    access: [CREATE]
+                    optional: true
+                description:
+                    type: string
+                    access: [READ, CREATE]
+                    optional: true
+                anchors:
+                    type: set
+                    access: [READ, CREATE]
+                    optional: true
+                    options:
+                        inner: string
+                theme_colour:
+                    type: string
+                    access: [READ, CREATE]
+                    optional: true
+                title:
+                    type: string
+                    access: [READ, CREATE]
+                    optional: true
+                android_app_link:
+                    type: string
+                    access: [READ, CREATE]
+                    optional: true
+                ios_app_link:
+                    type: string
+                    access: [READ, CREATE]
+                    optional: true
+                preview:
+                    type: string
+                    access: [READ, CREATE]
+                    optional: true
+                is_journal:
+                    type: boolean
+                    access: [CREATE]
+                    optional: true
+            options:
+                actions: [get, create, link, options]
+            linkable_to:
+                alternate: web.html_page
+                canonical: web.html_page
+            metas:
+                allowed_media_types:
+                    - 'text/html'
+                    - 'text/xml'
+                    - 'application/xml'
+                    - 'application/xhtml+xml'

@@ -1,0 +1,27 @@
+Domain\Entity\Citation:
+    type: aggregate
+    labels: [Citation]
+    identity:
+        property: identity
+        type: App\Entity\Citation\Identity
+    properties:
+        text:
+            type: citation_text
+
+Domain\Entity\CitationAppearance:
+    type: relationship
+    rel_type: CITED_IN_RESOURCE
+    identity:
+        property: identity
+        type: App\Entity\CitationAppearance\Identity
+    startNode:
+        property: citation
+        type: App\Entity\Citation\Identity
+        target: identity
+    endNode:
+        property: resource
+        type: App\Entity\HttpResource\Identity
+        target: identity
+    properties:
+        foundAt:
+            type: point_in_time

@@ -1,0 +1,51 @@
+{
+    "name": "innmind/library",
+    "license": "MIT",
+    "description": "Holds crawled page data",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Domain\\": "src/Domain/",
+            "App\\": "src/App/",
+            "Web\\": "src/Web/"
+        },
+        "files": [
+            "src/App/bootstrap.php",
+            "src/Web/bootstrap.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Domain\\": "tests/Domain"
+        }
+    },
+    "require": {
+        "php": "~7.2",
+        "innmind/url": "~2.0",
+        "innmind/immutable": "~2.0",
+        "innmind/event-bus": "^2.1",
+        "innmind/time-continuum": "^1.0",
+        "jeremykendall/php-domain-parser": "~5.0",
+        "innmind/specification": "^1.0",
+        "innmind/colour": "~2.0",
+        "innmind/command-bus": "^2.1",
+        "innmind/rest-server": "^6.0",
+        "innmind/neo4j-onm": "^4.4",
+        "innmind/http-framework": "^1.2",
+        "innmind/http-server": "^1.1",
+        "innmind/logger": "^1.0",
+        "innmind/http-authentication": "^1.4"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0",
+        "infection/infection": "^0.7.1",
+        "symfony/var-dumper": "^4.1",
+        "filp/whoops": "^2.2"
+    },
+    "scripts": {
+        "test" : "bin/phpunit --colors=always"
+    }
+}

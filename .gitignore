@@ -1,0 +1,6 @@
+/vendor
+/config/.env
+/var
+/bin
+/docker-compose.override.yml
+/infection-log.txt
