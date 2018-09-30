@@ -12,7 +12,8 @@
         },
         "files": [
             "src/App/bootstrap.php",
-            "src/Web/bootstrap.php"
+            "src/Web/bootstrap.php",
+            "src/CLI/bootstrap.php"
         ]
     },
     "autoload-dev": {
