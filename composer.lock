@@ -729,16 +729,16 @@
         },
         {
             "name": "innmind/installation-monitor",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/InstallationMonitor.git",
-                "reference": "94b3328c7ef73d179da49d48835f9fdb35da2534"
+                "reference": "1e8ae1ed592fcc5c30388e8932dc901973260556"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/InstallationMonitor/zipball/94b3328c7ef73d179da49d48835f9fdb35da2534",
-                "reference": "94b3328c7ef73d179da49d48835f9fdb35da2534",
+                "url": "https://api.github.com/repos/Innmind/InstallationMonitor/zipball/1e8ae1ed592fcc5c30388e8932dc901973260556",
+                "reference": "1e8ae1ed592fcc5c30388e8932dc901973260556",
                 "shasum": ""
             },
             "require": {
@@ -777,7 +777,7 @@
             ],
             "description": "Simple socket to accumulate and dispatch system events",
             "homepage": "http://github.com/Innmind/InstallationMonitor",
-            "time": "2018-09-29T15:09:12+00:00"
+            "time": "2018-09-30T09:22:55+00:00"
         },
         {
             "name": "innmind/ip",
