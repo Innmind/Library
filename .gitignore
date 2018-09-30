@@ -2,5 +2,6 @@
 /config/.env
 /var
 /bin
+!/bin/library
 /docker-compose.override.yml
 /infection-log.txt
