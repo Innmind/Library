@@ -82,11 +82,18 @@ USAGE;
         $client
             ->expects($this->once())
             ->method('send')
-            ->with(new Event(
-                new Event\Name('website_available'),
-                (new Map('string', 'variable'))
-                    ->put('path', '/tmp/public')
-            ));
+            ->with(
+                new Event(
+                    new Event\Name('website_available'),
+                    (new Map('string', 'variable'))
+                        ->put('path', '/tmp/public')
+                ),
+                $this->callback(static function(Event $event): bool {
+                    return (string) $event->name() === 'library_installed' &&
+                        $event->payload()->contains('apiKey') &&
+                        strlen($event->payload()->get('apiKey')) === 40;
+                })
+            );
         $env = $this->createMock(Environment::class);
         $env
             ->expects($this->any())

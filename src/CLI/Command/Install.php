@@ -86,11 +86,18 @@ final class Install implements Command
                 ->join("\n")
         );
 
-        $this->client->send(new Event(
-            new Event\Name('website_available'),
-            (new Map('string', 'variable'))
-                ->put('path', $env->workingDirectory().'/public')
-        ));
+        $this->client->send(
+            new Event(
+                new Event\Name('website_available'), // useful for infrastructure-nginx
+                (new Map('string', 'variable'))
+                    ->put('path', $env->workingDirectory().'/public')
+            ),
+            new Event(
+                new Event\Name('library_installed'), // useful for crawler-app
+                (new Map('string', 'variable'))
+                    ->put('apiKey', $envVars->get('API_KEY'))
+            )
+        );
     }
 
     public function __toString(): string
