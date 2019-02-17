@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace App;
 
+use function Domain\bootstrap as domain;
 use function Innmind\HttpTransport\bootstrap as http;
 use function Innmind\Neo4j\DBAL\bootstrap as dbal;
 use function Innmind\Neo4j\ONM\bootstrap as onm;
@@ -178,139 +179,24 @@ function bootstrap(
         $onm['manager']->repository(\Domain\Entity\Reference::class)
     );
 
-    $handlers = (new Map('string', 'callable'))
-        ->put(
-            \Domain\Command\RegisterAuthor::class,
-            new \Domain\Handler\RegisterAuthorHandler($authorRepository)
-        )
-        ->put(
-            \Domain\Command\RegisterCitation::class,
-            new \Domain\Handler\RegisterCitationHandler($citationRepository)
-        )
-        ->put(
-            \Domain\Command\Citation\RegisterAppearance::class,
-            new \Domain\Handler\Citation\RegisterAppearanceHandler(
-                $citationAppearanceRepository,
-                $clock
-            )
-        )
-        ->put(
-            \Domain\Command\RegisterDomain::class,
-            new \Domain\Handler\RegisterDomainHandler(
-                $domainRepository,
-                $domainParser
-            )
-        )
-        ->put(
-            \Domain\Command\RegisterHost::class,
-            new \Domain\Handler\RegisterHostHandler(
-                $hostRepository,
-                $domainHostRepository,
-                $clock
-            )
-        )
-        ->put(
-            \Domain\Command\RegisterHttpResource::class,
-            new \Domain\Handler\RegisterHttpResourceHandler(
-                $httpResourceRepository,
-                $hostResourceRepository,
-                $clock
-            )
-        )
-        ->put(
-            \Domain\Command\HttpResource\SpecifyCharset::class,
-            new \Domain\Handler\HttpResource\SpecifyCharsetHandler($httpResourceRepository)
-        )
-        ->put(
-            \Domain\Command\HttpResource\SpecifyLanguages::class,
-            new \Domain\Handler\HttpResource\SpecifyLanguagesHandler($httpResourceRepository)
-        )
-        ->put(
-            \Domain\Command\HttpResource\RegisterAuthor::class,
-            new \Domain\Handler\HttpResource\RegisterAuthorHandler(
-                $resourceAuthorRepository,
-                $clock
-            )
-        )
-        ->put(
-            \Domain\Command\RegisterImage::class,
-            new \Domain\Handler\RegisterImageHandler(
-                $imageRepository,
-                $hostResourceRepository,
-                $clock
-            )
-        )
-        ->put(
-            \Domain\Command\Image\SpecifyDimension::class,
-            new \Domain\Handler\Image\SpecifyDimensionHandler($imageRepository)
-        )
-        ->put(
-            \Domain\Command\Image\SpecifyWeight::class,
-            new \Domain\Handler\Image\SpecifyWeightHandler($imageRepository)
-        )
-        ->put(
-            \Domain\Command\Image\AddDescription::class,
-            new \Domain\Handler\Image\AddDescriptionHandler($imageRepository)
-        )
-        ->put(
-            \Domain\Command\RegisterHtmlPage::class,
-            new \Domain\Handler\RegisterHtmlPageHandler(
-                $htmlPageRepository,
-                $hostResourceRepository,
-                $clock
-            )
-        )
-        ->put(
-            \Domain\Command\HtmlPage\FlagAsJournal::class,
-            new \Domain\Handler\HtmlPage\FlagAsJournalHandler($htmlPageRepository)
-        )
-        ->put(
-            \Domain\Command\HtmlPage\SpecifyAnchors::class,
-            new \Domain\Handler\HtmlPage\SpecifyAnchorsHandler($htmlPageRepository)
-        )
-        ->put(
-            \Domain\Command\HtmlPage\SpecifyAndroidAppLink::class,
-            new \Domain\Handler\HtmlPage\SpecifyAndroidAppLinkHandler($htmlPageRepository)
-        )
-        ->put(
-            \Domain\Command\HtmlPage\SpecifyIosAppLink::class,
-            new \Domain\Handler\HtmlPage\SpecifyIosAppLinkHandler($htmlPageRepository)
-        )
-        ->put(
-            \Domain\Command\HtmlPage\SpecifyPreview::class,
-            new \Domain\Handler\HtmlPage\SpecifyPreviewHandler($htmlPageRepository)
-        )
-        ->put(
-            \Domain\Command\HtmlPage\SpecifyDescription::class,
-            new \Domain\Handler\HtmlPage\SpecifyDescriptionHandler($htmlPageRepository)
-        )
-        ->put(
-            \Domain\Command\HtmlPage\SpecifyMainContent::class,
-            new \Domain\Handler\HtmlPage\SpecifyMainContentHandler($htmlPageRepository)
-        )
-        ->put(
-            \Domain\Command\HtmlPage\SpecifyThemeColour::class,
-            new \Domain\Handler\HtmlPage\SpecifyThemeColourHandler($htmlPageRepository)
-        )
-        ->put(
-            \Domain\Command\HtmlPage\SpecifyTitle::class,
-            new \Domain\Handler\HtmlPage\SpecifyTitleHandler($htmlPageRepository)
-        )
-        ->put(
-            \Domain\Command\RegisterAlternateResource::class,
-            new \Domain\Handler\RegisterAlternateResourceHandler($alternateRepository)
-        )
-        ->put(
-            \Domain\Command\MakeCanonicalLink::class,
-            new \Domain\Handler\MakeCanonicalLinkHandler(
-                $canonicalRepository,
-                $clock
-            )
-        )
-        ->put(
-            \Domain\Command\ReferResource::class,
-            new \Domain\Handler\ReferResourceHandler($referenceRepository)
-        );
+    $handlers = domain(
+        $authorRepository,
+        $citationRepository,
+        $citationAppearanceRepository,
+        $domainRepository,
+        $hostRepository,
+        $domainHostRepository,
+        $hostResourceRepository,
+        $httpResourceRepository,
+        $resourceAuthorRepository,
+        $imageRepository,
+        $htmlPageRepository,
+        $alternateRepository,
+        $canonicalRepository,
+        $referenceRepository,
+        $domainParser,
+        $clock
+    );
 
     $commandBuses = commandBus();
     $log = $commandBuses['logger'](
