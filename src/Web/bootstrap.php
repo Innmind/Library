@@ -50,8 +50,7 @@ function bootstrap(
     HttpResourceRepository $httpResourceRepository,
     ImageRepository $imageRepository,
     HtmlPageRepository $htmlPageRepository,
-    string $apiKey,
-    bool $debug = false
+    string $apiKey
 ): RequestHandler {
     $framework = framework();
     $rest = $framework['bridge']['rest_server'](
@@ -102,18 +101,15 @@ function bootstrap(
     );
 
     return $authenticate(
-        new Debug(
-            new CatchConflicts(
-                new CatchNotFound(
-                    new Router(
-                        new RequestMatcher(
-                            $rest['routes']
-                        ),
-                        $rest['controllers']
-                    )
+        new CatchConflicts(
+            new CatchNotFound(
+                new Router(
+                    new RequestMatcher(
+                        $rest['routes']
+                    ),
+                    $rest['controllers']
                 )
-            ),
-            $debug
+            )
         )
     );
 }
