@@ -4,28 +4,10 @@ declare(strict_types = 1);
 namespace App\Neo4j\Type\Host;
 
 use Domain\Entity\Host\Name;
-use Innmind\Neo4j\ONM\{
-    Type,
-    Types
-};
-use Innmind\Immutable\{
-    MapInterface,
-    SetInterface,
-    Set
-};
+use Innmind\Neo4j\ONM\Type;
 
 final class NameType implements Type
 {
-    private static $identifiers;
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function fromConfig(MapInterface $config, Types $types): Type
-    {
-        return new self;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -48,17 +30,5 @@ final class NameType implements Type
     public function isNullable(): bool
     {
         return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function identifiers(): SetInterface
-    {
-        if (self::$identifiers === null) {
-            self::$identifiers = (new Set('string'))->add('host_name');
-        }
-
-        return self::$identifiers;
     }
 }

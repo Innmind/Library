@@ -9,7 +9,7 @@ use Domain\{
     Specification\AndSpecification as ParentSpec,
     Entity\Canonical,
     Entity\Canonical\Identity,
-    Entity\HttpResource\Identity as ResourceIdentity
+    Entity\HttpResource\Identity as ResourceIdentity,
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use PHPUnit\Framework\TestCase;

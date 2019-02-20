@@ -12,9 +12,9 @@ use Domain\{
     Entity\HostResource as Entity,
     Entity\HostResource\Identity,
     Entity\Host\Identity as HostIdentity,
-    Entity\HttpResource\Identity as ResourceIdentity
+    Entity\HttpResource\Identity as ResourceIdentity,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\Comparator;
 use Innmind\Immutable\Set;
 use Innmind\TimeContinuum\PointInTimeInterface;
 use PHPUnit\Framework\TestCase;
@@ -32,10 +32,10 @@ class InResourcesTest extends TestCase
             ->add($identity);
         $spec = new InResources($set);
 
-        $this->assertInstanceOf(ComparatorInterface::class, $spec);
+        $this->assertInstanceOf(Comparator::class, $spec);
         $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('resource', $spec->property());
-        $this->assertSame('in', $spec->sign());
+        $this->assertSame('IN', (string) $spec->sign());
         $this->assertSame(['uuid'], $spec->value());
     }
 

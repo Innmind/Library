@@ -7,11 +7,11 @@ use Web\Gateway\{
     HttpResourceGateway,
     HttpResourceGateway\ResourceCreator,
     HttpResourceGateway\ResourceAccessor,
-    HttpResourceGateway\ResourceLinker
+    HttpResourceGateway\ResourceLinker,
 };
 use Domain\Repository\HttpResourceRepository;
 use Innmind\Rest\Server\Gateway;
-use Innmind\CommandBus\CommandBusInterface;
+use Innmind\CommandBus\CommandBus;
 use Innmind\Neo4j\DBAL\Connection;
 use PHPUnit\Framework\TestCase;
 
@@ -26,14 +26,14 @@ class HttpResourceGatewayTest extends TestCase
     {
         $this->gateway = new HttpResourceGateway(
             $this->creator = new ResourceCreator(
-                $this->createMock(CommandBusInterface::class)
+                $this->createMock(CommandBus::class)
             ),
             $this->accessor = new ResourceAccessor(
                 $this->createMock(HttpResourceRepository::class),
                 $this->createMock(Connection::class)
             ),
             $this->linker = new ResourceLinker(
-                $this->createMock(CommandBusInterface::class)
+                $this->createMock(CommandBus::class)
             )
         );
     }

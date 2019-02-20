@@ -11,9 +11,9 @@ use Domain\{
     Specification\Reference\Not,
     Entity\Reference as Entity,
     Entity\Reference\Identity,
-    Entity\HttpResource\Identity as ResourceIdentity
+    Entity\HttpResource\Identity as ResourceIdentity,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\Comparator;
 use PHPUnit\Framework\TestCase;
 
 class SourceTest extends TestCase
@@ -27,10 +27,10 @@ class SourceTest extends TestCase
             ->willReturn('uuid');
         $spec = new Source($identity);
 
-        $this->assertInstanceOf(ComparatorInterface::class, $spec);
+        $this->assertInstanceOf(Comparator::class, $spec);
         $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('source', $spec->property());
-        $this->assertSame('=', $spec->sign());
+        $this->assertSame('=', (string) $spec->sign());
         $this->assertSame('uuid', $spec->value());
     }
 

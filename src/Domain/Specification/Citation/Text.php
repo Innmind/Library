@@ -5,11 +5,14 @@ namespace Domain\Specification\Citation;
 
 use Domain\Entity\{
     Citation,
-    Citation\Text as Model
+    Citation\Text as Model,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\{
+    Comparator,
+    Sign,
+};
 
-final class Text implements ComparatorInterface, Specification
+final class Text implements Comparator, Specification
 {
     use Composable;
 
@@ -31,9 +34,9 @@ final class Text implements ComparatorInterface, Specification
     /**
      * {@inheritdoc}
      */
-    public function sign(): string
+    public function sign(): Sign
     {
-        return '=';
+        return Sign::equality();
     }
 
     /**

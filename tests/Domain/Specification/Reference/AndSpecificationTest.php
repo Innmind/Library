@@ -9,7 +9,7 @@ use Domain\{
     Specification\AndSpecification as ParentSpec,
     Entity\Reference,
     Entity\Reference\Identity,
-    Entity\HttpResource\Identity as ResourceIdentity
+    Entity\HttpResource\Identity as ResourceIdentity,
 };
 use PHPUnit\Framework\TestCase;
 

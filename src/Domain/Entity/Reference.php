@@ -6,14 +6,14 @@ namespace Domain\Entity;
 use Domain\{
     Entity\Reference\Identity,
     Entity\HttpResource\Identity as ResourceIdentity,
-    Event\ReferenceCreated
+    Event\ReferenceCreated,
 };
 use Innmind\EventBus\{
-    ContainsRecordedEventsInterface,
-    EventRecorder
+    ContainsRecordedEvents,
+    EventRecorder,
 };
 
-final class Reference implements ContainsRecordedEventsInterface
+final class Reference implements ContainsRecordedEvents
 {
     use EventRecorder;
 

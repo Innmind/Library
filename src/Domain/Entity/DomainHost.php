@@ -7,15 +7,15 @@ use Domain\{
     Entity\DomainHost\Identity,
     Entity\Domain\Identity as DomainIdentity,
     Entity\Host\Identity as HostIdentity,
-    Event\DomainHostCreated
+    Event\DomainHostCreated,
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use Innmind\EventBus\{
-    ContainsRecordedEventsInterface,
-    EventRecorder
+    ContainsRecordedEvents,
+    EventRecorder,
 };
 
-final class DomainHost implements ContainsRecordedEventsInterface
+final class DomainHost implements ContainsRecordedEvents
 {
     use EventRecorder;
 

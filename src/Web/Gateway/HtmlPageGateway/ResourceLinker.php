@@ -6,62 +6,55 @@ namespace Web\Gateway\HtmlPageGateway;
 use App\Entity\{
     Alternate\Identity as AlternateIdentity,
     HttpResource\Identity as ResourceIdentity,
-    Canonical\Identity as CanonicalIdentity
+    Canonical\Identity as CanonicalIdentity,
 };
 use Domain\{
     Command\RegisterAlternateResource,
     Command\MakeCanonicalLink,
     Model\Language,
     Exception\AlternateAlreadyExist,
-    Exception\CanonicalAlreadyExist
+    Exception\CanonicalAlreadyExist,
 };
 use Innmind\Rest\Server\{
     ResourceLinker as ResourceLinkerInterface,
-    Reference
+    Reference,
+    Link,
 };
-use Innmind\CommandBus\CommandBusInterface;
-use Innmind\Http\Exception\Http\BadRequest;
-use Innmind\Immutable\MapInterface;
+use Innmind\CommandBus\CommandBus;
 use Ramsey\Uuid\Uuid;
 
 final class ResourceLinker implements ResourceLinkerInterface
 {
-    private $commandBus;
+    private $handle;
 
-    public function __construct(CommandBusInterface $commandBus)
+    public function __construct(CommandBus $handle)
     {
-        $this->commandBus = $commandBus;
+        $this->handle = $handle;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function __invoke(Reference $from, MapInterface $tos): void
+    public function __invoke(Reference $from, Link ...$links): void
     {
         $definition = $from->definition();
         $from = new ResourceIdentity((string) $from->identity());
 
-        $tos
-            ->foreach(function(Reference $to, MapInterface $parameters) use ($definition) {
-                if ($to->definition() !== $definition) {
-                    throw new BadRequest;
-                }
-            })
-            ->foreach(function(Reference $to, MapInterface $parameters) use ($from) {
-                switch ($parameters->get('rel')->value()) {
-                    case 'alternate':
-                        $this->registerAlternate(
-                            $from,
-                            $to,
-                            $parameters->get('language')->value()
-                        );
-                        break;
+        foreach ($links as $link) {
+            switch ($link->relationship()) {
+                case 'alternate':
+                    $this->registerAlternate(
+                        $from,
+                        $link->reference(),
+                        $link->get('language')->value()
+                    );
+                    break;
 
-                    case 'canonical':
-                        $this->registerCanonical($from, $to);
-                        break;
-                }
-            });
+                case 'canonical':
+                    $this->registerCanonical($from, $link->reference());
+                    break;
+            }
+        }
     }
 
     private function registerAlternate(
@@ -70,7 +63,7 @@ final class ResourceLinker implements ResourceLinkerInterface
         string $language
     ): void {
         try {
-            $this->commandBus->handle(
+            ($this->handle)(
                 new RegisterAlternateResource(
                     new AlternateIdentity((string) Uuid::uuid4()),
                     $from,
@@ -86,7 +79,7 @@ final class ResourceLinker implements ResourceLinkerInterface
     private function registerCanonical(ResourceIdentity $from, Reference $to): void
     {
         try {
-            $this->commandBus->handle(
+            ($this->handle)(
                 new MakeCanonicalLink(
                     new CanonicalIdentity((string) Uuid::uuid4()),
                     new ResourceIdentity((string) $to->identity()),

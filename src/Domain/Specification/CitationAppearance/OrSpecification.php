@@ -5,7 +5,7 @@ namespace Domain\Specification\CitationAppearance;
 
 use Domain\{
     Specification\OrSpecification as ParentSpec,
-    Entity\CitationAppearance as Entity
+    Entity\CitationAppearance as Entity,
 };
 
 final class OrSpecification extends ParentSpec implements Specification

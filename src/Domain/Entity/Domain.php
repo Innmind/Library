@@ -7,14 +7,14 @@ use Domain\{
     Entity\Domain\Identity,
     Entity\Domain\Name,
     Entity\Domain\TopLevelDomain,
-    Event\DomainRegistered
+    Event\DomainRegistered,
 };
 use Innmind\EventBus\{
-    ContainsRecordedEventsInterface,
-    EventRecorder
+    ContainsRecordedEvents,
+    EventRecorder,
 };
 
-final class Domain implements ContainsRecordedEventsInterface
+final class Domain implements ContainsRecordedEvents
 {
     use EventRecorder;
 

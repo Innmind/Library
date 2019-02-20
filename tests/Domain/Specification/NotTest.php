@@ -5,8 +5,8 @@ namespace Tests\Domain\Specification;
 
 use Domain\Specification\Not;
 use Innmind\Specification\{
-    SpecificationInterface,
-    NotInterface
+    Specification,
+    Not as NotInterface,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +15,7 @@ class NotTest extends TestCase
     public function testInterface()
     {
         $not = new Not(
-            $spec = $this->createMock(SpecificationInterface::class)
+            $spec = $this->createMock(Specification::class)
         );
 
         $this->assertInstanceOf(NotInterface::class, $not);

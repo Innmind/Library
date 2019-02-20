@@ -9,7 +9,7 @@ use Domain\{
     Entity\Reference as Entity,
     Entity\Reference\Identity as ReferenceIdentity,
     Entity\HttpResource\Identity as ResourceIdentity,
-    Exception\ReferenceAlreadyExist
+    Exception\ReferenceAlreadyExist,
 };
 use Innmind\Rest\Server\{
     ResourceLinker as ResourceLinkerInterface,
@@ -19,12 +19,14 @@ use Innmind\Rest\Server\{
     Definition\Property,
     Identity as IdentityInterface,
     Reference,
-    Link\Parameter
+    Link,
+    Link\Parameter,
 };
-use Innmind\CommandBus\CommandBusInterface;
+use Innmind\CommandBus\CommandBus;
 use Innmind\Immutable\{
     MapInterface,
-    Map
+    Map,
+    Set,
 };
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
@@ -36,63 +38,21 @@ class ResourceLinkerTest extends TestCase
         $this->assertInstanceOf(
             ResourceLinkerInterface::class,
             new ResourceLinker(
-                $this->createMock(CommandBusInterface::class)
+                $this->createMock(CommandBus::class)
             )
-        );
-    }
-
-    /**
-     * @expectedException Innmind\Http\Exception\Http\BadRequest
-     */
-    public function testThrowWhenInvalidDefinition()
-    {
-        $linker = new ResourceLinker(
-            $this->createMock(CommandBusInterface::class)
-        );
-        $def1 = new HttpResource(
-            'foo',
-            new Identity('foo'),
-            new Map('string', Property::class),
-            new Map('scalar', 'variable'),
-            new Map('scalar', 'variable'),
-            new Gateway('foo'),
-            true,
-            new Map('string', 'string')
-        );
-        $def2 = clone $def1;
-        $identity = $this->createMock(IdentityInterface::class);
-        $identity
-            ->expects($this->once())
-            ->method('__toString')
-            ->willReturn((string) Uuid::uuid4());
-
-        $linker(
-            new Reference($def1, $identity),
-            (new Map(Reference::class, MapInterface::class))
-                ->put(
-                    new Reference(
-                        $def2,
-                        $this->createMock(IdentityInterface::class)
-                    ),
-                    new Map('string', Parameter::class)
-                )
         );
     }
 
     public function testExecution()
     {
         $linker = new ResourceLinker(
-            $bus = $this->createMock(CommandBusInterface::class)
+            $bus = $this->createMock(CommandBus::class)
         );
-        $def = new HttpResource(
+        $def = HttpResource::rangeable(
             'foo',
-            new Identity('foo'),
-            new Map('string', Property::class),
-            new Map('scalar', 'variable'),
-            new Map('scalar', 'variable'),
             new Gateway('foo'),
-            true,
-            new Map('string', 'string')
+            new Identity('foo'),
+            Set::of(Property::class)
         );
         $identity = $this->createMock(IdentityInterface::class);
         $identity
@@ -106,7 +66,7 @@ class ResourceLinkerTest extends TestCase
             ->willReturn((string) Uuid::uuid4());
         $bus
             ->expects($this->once())
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) use ($identity, $to): bool {
                 return $command instanceof ReferResource &&
                     (string) $command->source() === (string) $identity &&
@@ -116,15 +76,10 @@ class ResourceLinkerTest extends TestCase
         $this->assertNull(
             $linker(
                 new Reference($def, $identity),
-                (new Map(Reference::class, MapInterface::class))
-                    ->put(
-                        new Reference($def, $to),
-                        (new Map('string', Parameter::class))
-                            ->put(
-                                'rel',
-                                new Parameter\Parameter('rel', 'referrer')
-                            )
-                    )
+                new Link(
+                    new Reference($def, $to),
+                    'referrer'
+                )
             )
         );
     }
@@ -132,17 +87,13 @@ class ResourceLinkerTest extends TestCase
     public function testExecuteEventWhenReferenceAlreadyExist()
     {
         $linker = new ResourceLinker(
-            $bus = $this->createMock(CommandBusInterface::class)
+            $bus = $this->createMock(CommandBus::class)
         );
-        $def = new HttpResource(
+        $def = HttpResource::rangeable(
             'foo',
-            new Identity('foo'),
-            new Map('string', Property::class),
-            new Map('scalar', 'variable'),
-            new Map('scalar', 'variable'),
             new Gateway('foo'),
-            true,
-            new Map('string', 'string')
+            new Identity('foo'),
+            Set::of(Property::class)
         );
         $identity = $this->createMock(IdentityInterface::class);
         $identity
@@ -156,7 +107,7 @@ class ResourceLinkerTest extends TestCase
             ->willReturn((string) Uuid::uuid4());
         $bus
             ->expects($this->once())
-            ->method('handle')
+            ->method('__invoke')
             ->will(
                 $this->throwException(
                     new ReferenceAlreadyExist(
@@ -172,15 +123,10 @@ class ResourceLinkerTest extends TestCase
         $this->assertNull(
             $linker(
                 new Reference($def, $identity),
-                (new Map(Reference::class, MapInterface::class))
-                    ->put(
-                        new Reference($def, $to),
-                        (new Map('string', Parameter::class))
-                            ->put(
-                                'rel',
-                                new Parameter\Parameter('rel', 'referrer')
-                            )
-                    )
+                new Link(
+                    new Reference($def, $to),
+                    'referrer'
+                )
             )
         );
     }

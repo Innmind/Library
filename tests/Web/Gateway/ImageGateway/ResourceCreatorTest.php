@@ -10,7 +10,7 @@ use Domain\Command\{
     RegisterHost,
     Image\SpecifyDimension,
     Image\SpecifyWeight,
-    Image\AddDescription
+    Image\AddDescription,
 };
 use Innmind\Rest\Server\{
     ResourceCreator as ResourceCreatorInterface,
@@ -19,12 +19,12 @@ use Innmind\Rest\Server\{
     Definition\Gateway,
     Definition\Property as PropertyDefinition,
     HttpResource,
-    HttpResource\Property
+    HttpResource\Property,
 };
-use Innmind\CommandBus\CommandBusInterface;
+use Innmind\CommandBus\CommandBus;
 use Innmind\Immutable\{
     Map,
-    Set
+    Set,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -35,7 +35,7 @@ class ResourceCreatorTest extends TestCase
         $this->assertInstanceOf(
             ResourceCreatorInterface::class,
             new ResourceCreator(
-                $this->createMock(CommandBusInterface::class)
+                $this->createMock(CommandBus::class)
             )
         );
     }
@@ -44,25 +44,25 @@ class ResourceCreatorTest extends TestCase
     {
         $expected = null;
         $creator = new ResourceCreator(
-            $bus = $this->createMock(CommandBusInterface::class)
+            $bus = $this->createMock(CommandBus::class)
         );
         $bus
             ->expects($this->at(0))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof RegisterDomain &&
                     (string) $command->host() === 'example.com';
             }));
         $bus
             ->expects($this->at(1))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof RegisterHost &&
                     (string) $command->host() === 'example.com';
             }));
         $bus
             ->expects($this->at(2))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) use (&$expected): bool {
                 $expected = $command->identity();
 
@@ -72,34 +72,30 @@ class ResourceCreatorTest extends TestCase
             }));
         $bus
             ->expects($this->at(3))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyDimension &&
                     (string) $command->dimension() === '42x24';
             }));
         $bus
             ->expects($this->at(4))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyWeight &&
                     $command->weight()->toInt() === 1337;
             }));
         $bus
             ->expects($this->at(5))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof AddDescription &&
                     (string) $command->description() === 'foo';
             }));
         $definition = new Definition(
             'image',
-            new Identity('identity'),
-            new Map('string', PropertyDefinition::class),
-            new Map('scalar', 'variable'),
-            new Map('scalar', 'variable'),
             new Gateway('image'),
-            false,
-            new Map('string', 'string')
+            new Identity('identity'),
+            Set::of(PropertyDefinition::class)
         );
         $resource = $this->createMock(HttpResource::class);
         $resource

@@ -5,11 +5,14 @@ namespace Domain\Specification\Canonical;
 
 use Domain\Entity\{
     Canonical as Entity,
-    HttpResource\Identity
+    HttpResource\Identity,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\{
+    Comparator,
+    Sign,
+};
 
-final class Canonical implements ComparatorInterface, Specification
+final class Canonical implements Comparator, Specification
 {
     use Composable;
 
@@ -31,9 +34,9 @@ final class Canonical implements ComparatorInterface, Specification
     /**
      * {@inheritdoc}
      */
-    public function sign(): string
+    public function sign(): Sign
     {
-        return '=';
+        return Sign::equality();
     }
 
     /**

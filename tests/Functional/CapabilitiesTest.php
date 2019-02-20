@@ -9,7 +9,7 @@ use Domain\Repository\{
     ImageRepository,
     HtmlPageRepository,
 };
-use Innmind\CommandBus\CommandBusInterface;
+use Innmind\CommandBus\CommandBus;
 use Innmind\Neo4j\DBAL\Connection;
 use Innmind\Http\{
     Message\ServerRequest\ServerRequest,
@@ -28,7 +28,7 @@ class CapabilitiesTest extends TestCase
     public function testLoad()
     {
         $handle = web(
-            $this->createMock(CommandBusInterface::class),
+            $this->createMock(CommandBus::class),
             $this->createMock(Connection::class),
             $this->createMock(HttpResourceRepository::class),
             $this->createMock(ImageRepository::class),
@@ -59,7 +59,7 @@ class CapabilitiesTest extends TestCase
     public function testErrorWhenNoAuth()
     {
         $handle = web(
-            $this->createMock(CommandBusInterface::class),
+            $this->createMock(CommandBus::class),
             $this->createMock(Connection::class),
             $this->createMock(HttpResourceRepository::class),
             $this->createMock(ImageRepository::class),

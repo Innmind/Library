@@ -5,7 +5,7 @@ namespace Domain\Specification\Reference;
 
 use Domain\{
     Specification\AndSpecification as ParentSpec,
-    Entity\Reference as Entity
+    Entity\Reference as Entity,
 };
 
 final class AndSpecification extends ParentSpec implements Specification

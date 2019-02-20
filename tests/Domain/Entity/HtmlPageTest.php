@@ -18,12 +18,12 @@ use Domain\{
     Event\HtmlPage\TitleSpecified,
     Event\HtmlPage\AndroidAppLinkSpecified,
     Event\HtmlPage\IosAppLinkSpecified,
-    Event\HtmlPage\PreviewSpecified
+    Event\HtmlPage\PreviewSpecified,
 };
 use Innmind\Url\{
     PathInterface,
     QueryInterface,
-    UrlInterface
+    UrlInterface,
 };
 use Innmind\Colour\RGBA;
 use Innmind\Immutable\Set;

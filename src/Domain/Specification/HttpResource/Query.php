@@ -4,10 +4,13 @@ declare(strict_types = 1);
 namespace Domain\Specification\HttpResource;
 
 use Domain\Entity\HttpResource;
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\{
+    Comparator,
+    Sign,
+};
 use Innmind\Url\QueryInterface;
 
-final class Query implements ComparatorInterface, Specification
+final class Query implements Comparator, Specification
 {
     use Composable;
 
@@ -29,9 +32,9 @@ final class Query implements ComparatorInterface, Specification
     /**
      * {@inheritdoc}
      */
-    public function sign(): string
+    public function sign(): Sign
     {
-        return '=';
+        return Sign::equality();
     }
 
     /**

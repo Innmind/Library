@@ -8,10 +8,10 @@ use Domain\{
     Entity\DomainHost\Identity,
     Entity\Domain\Identity as DomainIdentity,
     Entity\Host\Identity as HostIdentity,
-    Event\DomainHostCreated
+    Event\DomainHostCreated,
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
-use Innmind\EventBus\ContainsRecordedEventsInterface;
+use Innmind\EventBus\ContainsRecordedEvents;
 use PHPUnit\Framework\TestCase;
 
 class DomainHostTest extends TestCase
@@ -25,7 +25,7 @@ class DomainHostTest extends TestCase
             $foundAt = $this->createMock(PointInTimeInterface::class)
         );
 
-        $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $entity);
+        $this->assertInstanceOf(ContainsRecordedEvents::class, $entity);
         $this->assertSame($identity, $entity->identity());
         $this->assertSame($domain, $entity->domain());
         $this->assertSame($host, $entity->host());

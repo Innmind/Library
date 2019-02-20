@@ -5,7 +5,7 @@ namespace Domain\Specification\Alternate;
 
 use Domain\{
     Specification\AndSpecification as ParentSpec,
-    Entity\Alternate as Entity
+    Entity\Alternate as Entity,
 };
 
 final class AndSpecification extends ParentSpec implements Specification

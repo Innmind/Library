@@ -10,13 +10,13 @@ use Domain\{
     Event\HttpResourceRegistered,
     Event\HttpResource\LanguagesSpecified,
     Event\HttpResource\CharsetSpecified,
-    Model\Language
+    Model\Language,
 };
 use Innmind\Url\{
     PathInterface,
-    QueryInterface
+    QueryInterface,
 };
-use Innmind\EventBus\ContainsRecordedEventsInterface;
+use Innmind\EventBus\ContainsRecordedEvents;
 use Innmind\Immutable\Set;
 use PHPUnit\Framework\TestCase;
 
@@ -30,7 +30,7 @@ class HttpResourceTest extends TestCase
             $query = $this->createMock(QueryInterface::class)
         );
 
-        $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $resource);
+        $this->assertInstanceOf(ContainsRecordedEvents::class, $resource);
         $this->assertSame($identity, $resource->identity());
         $this->assertSame($path, $resource->path());
         $this->assertSame($query, $resource->query());

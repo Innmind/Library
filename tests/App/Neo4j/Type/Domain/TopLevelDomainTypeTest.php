@@ -5,14 +5,7 @@ namespace Tests\App\Neo4j\Type\Domain;
 
 use App\Neo4j\Type\Domain\TopLevelDomainType;
 use Domain\Entity\Domain\TopLevelDomain;
-use Innmind\Neo4j\ONM\{
-    Type,
-    Types
-};
-use Innmind\Immutable\{
-    SetInterface,
-    MapInterface
-};
+use Innmind\Neo4j\ONM\Type;
 use PHPUnit\Framework\TestCase;
 
 class TopLevelDomainTypeTest extends TestCase
@@ -22,31 +15,6 @@ class TopLevelDomainTypeTest extends TestCase
         $this->assertInstanceOf(
             Type::class,
             new TopLevelDomainType
-        );
-    }
-
-    public function testIdentifiers()
-    {
-        $this->assertInstanceOf(
-            SetInterface::class,
-            TopLevelDomainType::identifiers()
-        );
-        $this->assertSame('string', (string) TopLevelDomainType::identifiers()->type());
-        $this->assertSame(TopLevelDomainType::identifiers(), TopLevelDomainType::identifiers());
-        $this->assertSame(
-            ['domain_tld'],
-            TopLevelDomainType::identifiers()->toPrimitive()
-        );
-    }
-
-    public function testFromConfig()
-    {
-        $this->assertInstanceOf(
-            TopLevelDomainType::class,
-            TopLevelDomainType::fromConfig(
-                $this->createMock(MapInterface::class),
-                new Types
-            )
         );
     }
 

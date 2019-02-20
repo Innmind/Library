@@ -6,14 +6,14 @@ namespace Domain\Entity;
 use Domain\{
     Entity\Author\Identity,
     Entity\Author\Name,
-    Event\AuthorRegistered
+    Event\AuthorRegistered,
 };
 use Innmind\EventBus\{
-    ContainsRecordedEventsInterface,
-    EventRecorder
+    ContainsRecordedEvents,
+    EventRecorder,
 };
 
-final class Author implements ContainsRecordedEventsInterface
+final class Author implements ContainsRecordedEvents
 {
     use EventRecorder;
 

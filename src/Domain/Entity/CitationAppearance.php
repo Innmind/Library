@@ -7,15 +7,15 @@ use Domain\{
     Entity\CitationAppearance\Identity,
     Entity\Citation\Identity as CitationIdentity,
     Entity\HttpResource\Identity as ResourceIdentity,
-    Event\CitationAppearanceRegistered
+    Event\CitationAppearanceRegistered,
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use Innmind\EventBus\{
-    ContainsRecordedEventsInterface,
-    EventRecorder
+    ContainsRecordedEvents,
+    EventRecorder,
 };
 
-final class CitationAppearance implements ContainsRecordedEventsInterface
+final class CitationAppearance implements ContainsRecordedEvents
 {
     use EventRecorder;
 

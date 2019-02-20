@@ -5,11 +5,14 @@ namespace Domain\Specification\Alternate;
 
 use Domain\{
     Entity\HttpResource\Identity,
-    Entity\Alternate as Entity
+    Entity\Alternate as Entity,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\{
+    Comparator,
+    Sign,
+};
 
-final class HttpResource implements ComparatorInterface, Specification
+final class HttpResource implements Comparator, Specification
 {
     use Composable;
 
@@ -31,9 +34,9 @@ final class HttpResource implements ComparatorInterface, Specification
     /**
      * {@inheritdoc}
      */
-    public function sign(): string
+    public function sign(): Sign
     {
-        return '=';
+        return Sign::equality();
     }
 
     /**

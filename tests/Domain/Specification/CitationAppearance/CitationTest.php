@@ -12,9 +12,9 @@ use Domain\{
     Entity\CitationAppearance as Entity,
     Entity\CitationAppearance\Identity,
     Entity\Citation\Identity as CitationIdentity,
-    Entity\HttpResource\Identity as ResourceIdentity
+    Entity\HttpResource\Identity as ResourceIdentity,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\Comparator;
 use Innmind\TimeContinuum\PointInTimeInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -29,10 +29,10 @@ class CitationTest extends TestCase
             ->willReturn('uuid');
         $spec = new Citation($identity);
 
-        $this->assertInstanceOf(ComparatorInterface::class, $spec);
+        $this->assertInstanceOf(Comparator::class, $spec);
         $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('citation', $spec->property());
-        $this->assertSame('=', $spec->sign());
+        $this->assertSame('=', (string) $spec->sign());
         $this->assertSame('uuid', $spec->value());
     }
 

@@ -7,9 +7,9 @@ use Domain\{
     Entity\Reference,
     Entity\Reference\Identity,
     Entity\HttpResource\Identity as ResourceIdentity,
-    Event\ReferenceCreated
+    Event\ReferenceCreated,
 };
-use Innmind\EventBus\ContainsRecordedEventsInterface;
+use Innmind\EventBus\ContainsRecordedEvents;
 use PHPUnit\Framework\TestCase;
 
 class ReferenceTest extends TestCase
@@ -22,7 +22,7 @@ class ReferenceTest extends TestCase
             $target = $this->createMock(ResourceIdentity::class)
         );
 
-        $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $entity);
+        $this->assertInstanceOf(ContainsRecordedEvents::class, $entity);
         $this->assertSame($identity, $entity->identity());
         $this->assertSame($source, $entity->source());
         $this->assertSame($target, $entity->target());

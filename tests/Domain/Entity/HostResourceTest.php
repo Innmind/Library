@@ -8,10 +8,10 @@ use Domain\{
     Entity\HostResource\Identity,
     Entity\Host\Identity as HostIdentity,
     Entity\HttpResource\Identity as ResourceIdentity,
-    Event\HostResourceCreated
+    Event\HostResourceCreated,
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
-use Innmind\EventBus\ContainsRecordedEventsInterface;
+use Innmind\EventBus\ContainsRecordedEvents;
 use PHPUnit\Framework\TestCase;
 
 class HostResourceTest extends TestCase
@@ -25,7 +25,7 @@ class HostResourceTest extends TestCase
             $foundAt = $this->createMock(PointInTimeInterface::class)
         );
 
-        $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $entity);
+        $this->assertInstanceOf(ContainsRecordedEvents::class, $entity);
         $this->assertSame($identity, $entity->identity());
         $this->assertSame($host, $entity->host());
         $this->assertSame($resource, $entity->resource());

@@ -4,24 +4,24 @@ declare(strict_types = 1);
 namespace Domain\Specification;
 
 use Innmind\Specification\{
-    SpecificationInterface,
-    CompositeInterface,
-    NotInterface
+    Specification,
+    Composite,
+    Not,
 };
 
 trait Composable
 {
-    public function and(SpecificationInterface $specification): CompositeInterface
+    public function and(Specification $specification): Composite
     {
         return new AndSpecification($this, $specification);
     }
 
-    public function or(SpecificationInterface $specification): CompositeInterface
+    public function or(Specification $specification): Composite
     {
         return new OrSpecification($this, $specification);
     }
 
-    public function not(): NotInterface
+    public function not(): Not
     {
         return new Not($this);
     }

@@ -10,7 +10,7 @@ use Domain\{
     Repository\HtmlPageRepository,
     Exception\HttpResourceNotFound,
 };
-use Innmind\CommandBus\CommandBusInterface;
+use Innmind\CommandBus\CommandBus;
 use Innmind\Neo4j\DBAL\Connection;
 use Innmind\Http\{
     Message\ServerRequest\ServerRequest,
@@ -31,7 +31,7 @@ class HttpResourceTest extends TestCase
     public function testNotFound()
     {
         $handle = web(
-            $this->createMock(CommandBusInterface::class),
+            $this->createMock(CommandBus::class),
             $this->createMock(Connection::class),
             $repository = $this->createMock(HttpResourceRepository::class),
             $this->createMock(ImageRepository::class),
@@ -65,7 +65,7 @@ class HttpResourceTest extends TestCase
     public function testErrorWhenNoAuth()
     {
         $handle = web(
-            $this->createMock(CommandBusInterface::class),
+            $this->createMock(CommandBus::class),
             $this->createMock(Connection::class),
             $this->createMock(HttpResourceRepository::class),
             $this->createMock(ImageRepository::class),
@@ -92,7 +92,7 @@ class HttpResourceTest extends TestCase
     public function testOptions()
     {
         $handle = web(
-            $this->createMock(CommandBusInterface::class),
+            $this->createMock(CommandBus::class),
             $this->createMock(Connection::class),
             $this->createMock(HttpResourceRepository::class),
             $this->createMock(ImageRepository::class),
@@ -121,7 +121,7 @@ class HttpResourceTest extends TestCase
             (string) $response->headers()->get('content-type')
         );
         $this->assertSame(
-            '{"identity":"identity","properties":{"identity":{"type":"string","access":["READ"],"variants":[],"optional":false},"host":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"path":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"query":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"languages":{"type":"set<string>","access":["READ","CREATE"],"variants":[],"optional":true},"charset":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true}},"metas":{"allowed_media_types":["*\/*; q=0.1"]},"rangeable":true,"linkable_to":{"referrer":"web.resource"}}',
+            '{"identity":"identity","properties":{"identity":{"type":"string","access":["READ"],"variants":[],"optional":false},"host":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"path":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"query":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"languages":{"type":"set<string>","access":["READ","CREATE"],"variants":[],"optional":true},"charset":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true}},"metas":{"allowed_media_types":["*\/*; q=0.1"]},"rangeable":true,"linkable_to":[{"relationship":"referrer","resource_path":"web.resource","parameters":[]}]}',
             (string) $response->body()
         );
     }

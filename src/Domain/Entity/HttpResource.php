@@ -10,22 +10,22 @@ use Domain\{
     Event\HttpResource\LanguagesSpecified,
     Event\HttpResource\CharsetSpecified,
     Model\Language,
-    Exception\DomainException
+    Exception\DomainException,
 };
 use Innmind\EventBus\{
-    ContainsRecordedEventsInterface,
-    EventRecorder
+    ContainsRecordedEvents,
+    EventRecorder,
 };
 use Innmind\Url\{
     PathInterface,
-    QueryInterface
+    QueryInterface,
 };
 use Innmind\Immutable\{
     Set,
-    SetInterface
+    SetInterface,
 };
 
-class HttpResource implements ContainsRecordedEventsInterface
+class HttpResource implements ContainsRecordedEvents
 {
     use EventRecorder;
 

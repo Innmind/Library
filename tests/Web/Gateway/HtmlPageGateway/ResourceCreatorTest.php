@@ -22,7 +22,7 @@ use Domain\Command\{
     HtmlPage\SpecifyPreview,
     RegisterAuthor,
     RegisterCitation,
-    Citation\RegisterAppearance
+    Citation\RegisterAppearance,
 };
 use Innmind\Rest\Server\{
     ResourceCreator as ResourceCreatorInterface,
@@ -31,12 +31,12 @@ use Innmind\Rest\Server\{
     Definition\Gateway,
     Definition\Property as PropertyDefinition,
     HttpResource,
-    HttpResource\Property
+    HttpResource\Property,
 };
-use Innmind\CommandBus\CommandBusInterface;
+use Innmind\CommandBus\CommandBus;
 use Innmind\Immutable\{
     Map,
-    Set
+    Set,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -47,7 +47,7 @@ class ResourceCreatorTest extends TestCase
         $this->assertInstanceOf(
             ResourceCreatorInterface::class,
             new ResourceCreator(
-                $this->createMock(CommandBusInterface::class)
+                $this->createMock(CommandBus::class)
             )
         );
     }
@@ -56,25 +56,25 @@ class ResourceCreatorTest extends TestCase
     {
         $expected = null;
         $creator = new ResourceCreator(
-            $bus = $this->createMock(CommandBusInterface::class)
+            $bus = $this->createMock(CommandBus::class)
         );
         $bus
             ->expects($this->at(0))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof RegisterDomain &&
                     (string) $command->host() === 'example.com';
             }));
         $bus
             ->expects($this->at(1))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof RegisterHost &&
                     (string) $command->host() === 'example.com';
             }));
         $bus
             ->expects($this->at(2))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) use (&$expected): bool {
                 $expected = $command->identity();
 
@@ -84,14 +84,14 @@ class ResourceCreatorTest extends TestCase
             }));
         $bus
             ->expects($this->at(3))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyCharset &&
                     (string) $command->charset() === 'UTF-8';
             }));
         $bus
             ->expects($this->at(4))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyLanguages &&
                     $command->languages()->size() === 1 &&
@@ -99,39 +99,39 @@ class ResourceCreatorTest extends TestCase
             }));
         $bus
             ->expects($this->at(5))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof RegisterAuthor &&
                     (string) $command->name() === 'author name';
             }));
         $bus
             ->expects($this->at(6))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof RegisterResourceAuthor;
             }));
         $bus
             ->expects($this->at(7))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof RegisterCitation &&
                     (string) $command->text() === 'cite';
             }));
         $bus
             ->expects($this->at(8))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof RegisterAppearance;
             }));
         $bus
             ->expects($this->at(9))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof FlagAsJournal;
             }));
         $bus
             ->expects($this->at(10))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyAnchors &&
                     $command->anchors()->size() === 1 &&
@@ -139,62 +139,58 @@ class ResourceCreatorTest extends TestCase
             }));
         $bus
             ->expects($this->at(11))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyAndroidAppLink &&
                     (string) $command->url() === 'android://foo/';
             }));
         $bus
             ->expects($this->at(12))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyDescription &&
                     $command->description() === 'desc';
             }));
         $bus
             ->expects($this->at(13))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyIosAppLink &&
                     (string) $command->url() === 'ios://foo/';
             }));
         $bus
             ->expects($this->at(14))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyMainContent &&
                     $command->mainContent() === 'main content';
             }));
         $bus
             ->expects($this->at(15))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyThemeColour &&
                     (string) $command->colour() === '#3399ff';
             }));
         $bus
             ->expects($this->at(16))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyTitle &&
                     $command->title() === 'some title';
             }));
         $bus
             ->expects($this->at(17))
-            ->method('handle')
+            ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyPreview &&
                     (string) $command->url() === 'http://some.photo/url';
             }));
         $definition = new Definition(
             'html_page',
-            new Identity('identity'),
-            new Map('string', PropertyDefinition::class),
-            new Map('scalar', 'variable'),
-            new Map('scalar', 'variable'),
             new Gateway('html_page'),
-            false,
-            new Map('string', 'string')
+            new Identity('identity'),
+            Set::of(PropertyDefinition::class)
         );
         $resource = $this->createMock(HttpResource::class);
         $resource

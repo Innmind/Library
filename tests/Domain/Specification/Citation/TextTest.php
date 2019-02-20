@@ -11,9 +11,9 @@ use Domain\{
     Specification\Citation\Not,
     Entity\Citation,
     Entity\Citation\Identity,
-    Entity\Citation\Text as Model
+    Entity\Citation\Text as Model,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\Comparator;
 use PHPUnit\Framework\TestCase;
 
 class TextTest extends TestCase
@@ -22,10 +22,10 @@ class TextTest extends TestCase
     {
         $spec = new Text(new Model('foo'));
 
-        $this->assertInstanceOf(ComparatorInterface::class, $spec);
+        $this->assertInstanceOf(Comparator::class, $spec);
         $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('text', $spec->property());
-        $this->assertSame('=', $spec->sign());
+        $this->assertSame('=', (string) $spec->sign());
         $this->assertSame('foo', $spec->value());
     }
 

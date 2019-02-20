@@ -8,11 +8,11 @@ use Domain\{
     Specification\HttpResource\Specification,
     Specification\OrSpecification as ParentSpec,
     Entity\HttpResource,
-    Entity\HttpResource\Identity
+    Entity\HttpResource\Identity,
 };
 use Innmind\Url\{
     PathInterface,
-    QueryInterface
+    QueryInterface,
 };
 use PHPUnit\Framework\TestCase;
 

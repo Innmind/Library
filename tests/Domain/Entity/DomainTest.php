@@ -8,9 +8,9 @@ use Domain\{
     Entity\Domain\Identity,
     Entity\Domain\Name,
     Entity\Domain\TopLevelDomain,
-    Event\DomainRegistered
+    Event\DomainRegistered,
 };
-use Innmind\EventBus\ContainsRecordedEventsInterface;
+use Innmind\EventBus\ContainsRecordedEvents;
 use PHPUnit\Framework\TestCase;
 
 class DomainTest extends TestCase
@@ -23,7 +23,7 @@ class DomainTest extends TestCase
             $tld = new TopLevelDomain('com')
         );
 
-        $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $domain);
+        $this->assertInstanceOf(ContainsRecordedEvents::class, $domain);
         $this->assertSame($identity, $domain->identity());
         $this->assertSame($name, $domain->name());
         $this->assertSame($tld, $domain->tld());

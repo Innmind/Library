@@ -4,19 +4,19 @@ declare(strict_types = 1);
 namespace Domain\Specification\Canonical;
 
 use Innmind\Specification\{
-    SpecificationInterface as MasterSpec,
-    CompositeInterface,
-    NotInterface
+    Specification as MasterSpec,
+    Composite,
+    Not as NotInterface,
 };
 
 trait Composable
 {
-    public function and(MasterSpec $specification): CompositeInterface
+    public function and(MasterSpec $specification): Composite
     {
         return new AndSpecification($this, $specification);
     }
 
-    public function or(MasterSpec $specification): CompositeInterface
+    public function or(MasterSpec $specification): Composite
     {
         return new OrSpecification($this, $specification);
     }

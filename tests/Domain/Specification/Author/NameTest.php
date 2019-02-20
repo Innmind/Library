@@ -11,9 +11,9 @@ use Domain\{
     Specification\Author\Not,
     Entity\Author\Name as Model,
     Entity\Author,
-    Entity\Author\Identity
+    Entity\Author\Identity,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\Comparator;
 use PHPUnit\Framework\TestCase;
 
 class NameTest extends TestCase
@@ -22,10 +22,10 @@ class NameTest extends TestCase
     {
         $spec = new Name(new Model('foo'));
 
-        $this->assertInstanceOf(ComparatorInterface::class, $spec);
+        $this->assertInstanceOf(Comparator::class, $spec);
         $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('name', $spec->property());
-        $this->assertSame('=', $spec->sign());
+        $this->assertSame('=', (string) $spec->sign());
         $this->assertSame('foo', $spec->value());
     }
 

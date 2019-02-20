@@ -6,15 +6,15 @@ namespace Domain\Entity;
 use Domain\{
     Entity\Canonical\Identity,
     Entity\HttpResource\Identity as ResourceIdentity,
-    Event\CanonicalCreated
+    Event\CanonicalCreated,
 };
 use Innmind\EventBus\{
-    ContainsRecordedEventsInterface,
-    EventRecorder
+    ContainsRecordedEvents,
+    EventRecorder,
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 
-final class Canonical implements ContainsRecordedEventsInterface
+final class Canonical implements ContainsRecordedEvents
 {
     use EventRecorder;
 

@@ -5,15 +5,7 @@ namespace Tests\App\Neo4j\Type\Image;
 
 use App\Neo4j\Type\Image\WeightType;
 use Domain\Entity\Image\Weight;
-use Innmind\Neo4j\ONM\{
-    Type,
-    Types
-};
-use Innmind\Immutable\{
-    SetInterface,
-    MapInterface,
-    Map
-};
+use Innmind\Neo4j\ONM\Type;
 use PHPUnit\Framework\TestCase;
 
 class WeightTypeTest extends TestCase
@@ -26,31 +18,6 @@ class WeightTypeTest extends TestCase
         );
     }
 
-    public function testIdentifiers()
-    {
-        $this->assertInstanceOf(
-            SetInterface::class,
-            WeightType::identifiers()
-        );
-        $this->assertSame('string', (string) WeightType::identifiers()->type());
-        $this->assertSame(WeightType::identifiers(), WeightType::identifiers());
-        $this->assertSame(
-            ['image_weight'],
-            WeightType::identifiers()->toPrimitive()
-        );
-    }
-
-    public function testFromConfig()
-    {
-        $this->assertInstanceOf(
-            WeightType::class,
-            WeightType::fromConfig(
-                $this->createMock(MapInterface::class),
-                new Types
-            )
-        );
-    }
-
     public function testForDatabase()
     {
         $this->assertSame(
@@ -58,11 +25,7 @@ class WeightTypeTest extends TestCase
             (new WeightType)->forDatabase(new Weight(42))
         );
         $this->assertNull(
-            WeightType::fromConfig(
-                (new Map('string', 'mixed'))
-                    ->put('nullable', null),
-                new Types
-            )->forDatabase(null)
+            (new WeightType)->forDatabase(null)
         );
     }
 

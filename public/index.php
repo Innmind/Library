@@ -13,9 +13,11 @@ use Innmind\Http\Message\{
 use Innmind\Url\{
     UrlInterface,
     Url,
+    Path,
 };
-use Innmind\HttpFramework\Environment;
-use Innmind\Filesystem\Adapter\FilesystemAdapter;
+use function Innmind\HttpFramework\env;
+use Innmind\HttpFramework\RequestHandler;
+use Innmind\OperatingSystem\OperatingSystem;
 use Innmind\Immutable\{
     MapInterface,
     Set,
@@ -23,29 +25,20 @@ use Innmind\Immutable\{
 
 new class extends Main
 {
-    protected function main(ServerRequest $request): Response
+    protected function main(ServerRequest $request, OperatingSystem $os): Response
     {
-        $environment = $this->environment($request);
+        $handle = $this->buildApp($request, $os);
 
-        return $this->handle($request, $environment);
+        return $handle($request);
     }
 
-    /**
-     * @return MapInterface<string, mixed>
-     */
-    private function environment(ServerRequest $request): MapInterface
+    private function buildApp(ServerRequest $request, OperatingSystem $os): RequestHandler
     {
-        return Environment::camelize(
-            __DIR__.'/../config/.env',
-            $request->environment()
+        $environment = env(
+            $request->environment(),
+            $os->filesystem()->mount(new Path(__DIR__.'/../config'))
         );
-    }
 
-    /**
-     * @param MapInterface<string, mixed> $environment
-     */
-    private function handle(ServerRequest $request, MapInterface $environment): Response
-    {
         $debug = $environment->contains('debug');
 
         $dsns = Set::of(
@@ -61,11 +54,12 @@ new class extends Main
 
         $app = app(
             Url::fromString($environment->get('neo4j')),
-            new FilesystemAdapter(__DIR__.'/../var/innmind/domain_events'),
+            $os->filesystem()->mount(new Path(__DIR__.'/../var/innmind/domain_events')),
             $dsns,
             $debug ? null : 'error'
         );
-        $handle = web(
+
+        return web(
             $app['command_bus'],
             $app['dbal'],
             $app['repository']['http_resource'],
@@ -74,7 +68,5 @@ new class extends Main
             $environment->get('apiKey'),
             $debug
         );
-
-        return $handle($request);
     }
 };

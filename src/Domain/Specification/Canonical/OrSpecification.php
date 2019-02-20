@@ -5,7 +5,7 @@ namespace Domain\Specification\Canonical;
 
 use Domain\{
     Specification\OrSpecification as ParentSpec,
-    Entity\Canonical as Entity
+    Entity\Canonical as Entity,
 };
 
 final class OrSpecification extends ParentSpec implements Specification

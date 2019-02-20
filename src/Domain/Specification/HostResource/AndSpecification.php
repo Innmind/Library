@@ -5,7 +5,7 @@ namespace Domain\Specification\HostResource;
 
 use Domain\{
     Specification\AndSpecification as ParentSpec,
-    Entity\HostResource as Entity
+    Entity\HostResource as Entity,
 };
 
 final class AndSpecification extends ParentSpec implements Specification

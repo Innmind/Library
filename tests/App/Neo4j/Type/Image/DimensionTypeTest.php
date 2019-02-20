@@ -5,15 +5,7 @@ namespace Tests\App\Neo4j\Type\Image;
 
 use App\Neo4j\Type\Image\DimensionType;
 use Domain\Entity\Image\Dimension;
-use Innmind\Neo4j\ONM\{
-    Type,
-    Types
-};
-use Innmind\Immutable\{
-    SetInterface,
-    MapInterface,
-    Map
-};
+use Innmind\Neo4j\ONM\Type;
 use PHPUnit\Framework\TestCase;
 
 class DimensionTypeTest extends TestCase
@@ -26,31 +18,6 @@ class DimensionTypeTest extends TestCase
         );
     }
 
-    public function testIdentifiers()
-    {
-        $this->assertInstanceOf(
-            SetInterface::class,
-            DimensionType::identifiers()
-        );
-        $this->assertSame('string', (string) DimensionType::identifiers()->type());
-        $this->assertSame(DimensionType::identifiers(), DimensionType::identifiers());
-        $this->assertSame(
-            ['image_dimension'],
-            DimensionType::identifiers()->toPrimitive()
-        );
-    }
-
-    public function testFromConfig()
-    {
-        $this->assertInstanceOf(
-            DimensionType::class,
-            DimensionType::fromConfig(
-                $this->createMock(MapInterface::class),
-                new Types
-            )
-        );
-    }
-
     public function testForDatabase()
     {
         $this->assertSame(
@@ -58,11 +25,7 @@ class DimensionTypeTest extends TestCase
             (new DimensionType)->forDatabase(new Dimension(24, 42))
         );
         $this->assertNull(
-            DimensionType::fromConfig(
-                (new Map('string', 'mixed'))
-                    ->put('nullable', null),
-                new Types
-            )->forDatabase(null)
+            (new DimensionType)->forDatabase(null)
         );
     }
 

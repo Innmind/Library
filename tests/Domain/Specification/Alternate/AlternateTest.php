@@ -12,9 +12,9 @@ use Domain\{
     Entity\Alternate\Identity,
     Entity\Alternate as Entity,
     Entity\HttpResource\Identity as ResourceIdentity,
-    Model\Language
+    Model\Language,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\Comparator;
 use PHPUnit\Framework\TestCase;
 
 class AlternateTest extends TestCase
@@ -28,10 +28,10 @@ class AlternateTest extends TestCase
             ->willReturn('uuid');
         $spec = new Alternate($identity);
 
-        $this->assertInstanceOf(ComparatorInterface::class, $spec);
+        $this->assertInstanceOf(Comparator::class, $spec);
         $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('alternate', $spec->property());
-        $this->assertSame('=', $spec->sign());
+        $this->assertSame('=', (string) $spec->sign());
         $this->assertSame('uuid', $spec->value());
     }
 

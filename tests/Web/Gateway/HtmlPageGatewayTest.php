@@ -7,11 +7,11 @@ use Web\Gateway\{
     HtmlPageGateway,
     HtmlPageGateway\ResourceCreator,
     HtmlPageGateway\ResourceAccessor,
-    HtmlPageGateway\ResourceLinker
+    HtmlPageGateway\ResourceLinker,
 };
 use Domain\Repository\HtmlPageRepository;
 use Innmind\Rest\Server\Gateway;
-use Innmind\CommandBus\CommandBusInterface;
+use Innmind\CommandBus\CommandBus;
 use Innmind\Neo4j\DBAL\Connection;
 use PHPUnit\Framework\TestCase;
 
@@ -26,14 +26,14 @@ class HtmlPageGatewayTest extends TestCase
     {
         $this->gateway = new HtmlPageGateway(
             $this->creator = new ResourceCreator(
-                $this->createMock(CommandBusInterface::class)
+                $this->createMock(CommandBus::class)
             ),
             $this->accessor = new ResourceAccessor(
                 $this->createMock(HtmlPageRepository::class),
                 $this->createMock(Connection::class)
             ),
             $this->linker = new ResourceLinker(
-                $this->createMock(CommandBusInterface::class)
+                $this->createMock(CommandBus::class)
             )
         );
     }

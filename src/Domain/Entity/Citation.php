@@ -6,14 +6,14 @@ namespace Domain\Entity;
 use Domain\{
     Entity\Citation\Identity,
     Entity\Citation\Text,
-    Event\CitationRegistered
+    Event\CitationRegistered,
 };
 use Innmind\EventBus\{
-    ContainsRecordedEventsInterface,
-    EventRecorder
+    ContainsRecordedEvents,
+    EventRecorder,
 };
 
-final class Citation implements ContainsRecordedEventsInterface
+final class Citation implements ContainsRecordedEvents
 {
     use EventRecorder;
 

@@ -12,9 +12,9 @@ use Domain\{
     Entity\Alternate,
     Entity\Alternate\Identity,
     Entity\HttpResource\Identity as ResourceIdentity,
-    Model\Language as Model
+    Model\Language as Model,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\Comparator;
 use PHPUnit\Framework\TestCase;
 
 class LanguageTest extends TestCase
@@ -23,10 +23,10 @@ class LanguageTest extends TestCase
     {
         $spec = new Language(new Model('fr'));
 
-        $this->assertInstanceOf(ComparatorInterface::class, $spec);
+        $this->assertInstanceOf(Comparator::class, $spec);
         $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('language', $spec->property());
-        $this->assertSame('=', $spec->sign());
+        $this->assertSame('=', (string) $spec->sign());
         $this->assertSame('fr', $spec->value());
     }
 

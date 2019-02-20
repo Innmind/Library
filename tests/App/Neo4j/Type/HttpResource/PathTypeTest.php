@@ -5,14 +5,7 @@ namespace Tests\App\Neo4j\Type\HttpResource;
 
 use App\Neo4j\Type\HttpResource\PathType;
 use Innmind\Url\Path;
-use Innmind\Neo4j\ONM\{
-    Type,
-    Types
-};
-use Innmind\Immutable\{
-    SetInterface,
-    MapInterface
-};
+use Innmind\Neo4j\ONM\Type;
 use PHPUnit\Framework\TestCase;
 
 class PathTypeTest extends TestCase
@@ -22,31 +15,6 @@ class PathTypeTest extends TestCase
         $this->assertInstanceOf(
             Type::class,
             new PathType
-        );
-    }
-
-    public function testIdentifiers()
-    {
-        $this->assertInstanceOf(
-            SetInterface::class,
-            PathType::identifiers()
-        );
-        $this->assertSame('string', (string) PathType::identifiers()->type());
-        $this->assertSame(PathType::identifiers(), PathType::identifiers());
-        $this->assertSame(
-            ['http_resource_path'],
-            PathType::identifiers()->toPrimitive()
-        );
-    }
-
-    public function testFromConfig()
-    {
-        $this->assertInstanceOf(
-            PathType::class,
-            PathType::fromConfig(
-                $this->createMock(MapInterface::class),
-                new Types
-            )
         );
     }
 

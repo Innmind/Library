@@ -5,11 +5,14 @@ namespace Domain\Specification\HostResource;
 
 use Domain\Entity\{
     HostResource,
-    Host\Identity
+    Host\Identity,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\{
+    Comparator,
+    Sign,
+};
 
-final class Host implements ComparatorInterface, Specification
+final class Host implements Comparator, Specification
 {
     use Composable;
 
@@ -31,9 +34,9 @@ final class Host implements ComparatorInterface, Specification
     /**
      * {@inheritdoc}
      */
-    public function sign(): string
+    public function sign(): Sign
     {
-        return '=';
+        return Sign::equality();
     }
 
     /**

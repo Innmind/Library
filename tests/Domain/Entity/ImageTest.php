@@ -14,11 +14,11 @@ use Domain\{
     Event\ImageRegistered,
     Event\Image\DimensionSpecified,
     Event\Image\WeightSpecified,
-    Event\Image\DescriptionAdded
+    Event\Image\DescriptionAdded,
 };
 use Innmind\Url\{
     PathInterface,
-    QueryInterface
+    QueryInterface,
 };
 use PHPUnit\Framework\TestCase;
 

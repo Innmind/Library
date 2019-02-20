@@ -5,7 +5,7 @@ namespace Domain\Specification\Alternate;
 
 use Domain\{
     Specification\Not as ParentSpec,
-    Entity\Alternate as Entity
+    Entity\Alternate as Entity,
 };
 
 final class Not extends ParentSpec implements Specification

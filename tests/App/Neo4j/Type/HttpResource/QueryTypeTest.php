@@ -6,16 +6,9 @@ namespace Tests\App\Neo4j\Type\HttpResource;
 use App\Neo4j\Type\HttpResource\QueryType;
 use Innmind\Url\{
     Query,
-    NullQuery
+    NullQuery,
 };
-use Innmind\Neo4j\ONM\{
-    Type,
-    Types
-};
-use Innmind\Immutable\{
-    SetInterface,
-    MapInterface
-};
+use Innmind\Neo4j\ONM\Type;
 use PHPUnit\Framework\TestCase;
 
 class QueryTypeTest extends TestCase
@@ -25,31 +18,6 @@ class QueryTypeTest extends TestCase
         $this->assertInstanceOf(
             Type::class,
             new QueryType
-        );
-    }
-
-    public function testIdentifiers()
-    {
-        $this->assertInstanceOf(
-            SetInterface::class,
-            QueryType::identifiers()
-        );
-        $this->assertSame('string', (string) QueryType::identifiers()->type());
-        $this->assertSame(QueryType::identifiers(), QueryType::identifiers());
-        $this->assertSame(
-            ['http_resource_query'],
-            QueryType::identifiers()->toPrimitive()
-        );
-    }
-
-    public function testFromConfig()
-    {
-        $this->assertInstanceOf(
-            QueryType::class,
-            QueryType::fromConfig(
-                $this->createMock(MapInterface::class),
-                new Types
-            )
         );
     }
 

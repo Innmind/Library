@@ -6,22 +6,22 @@ namespace Web\Gateway\ImageGateway;
 use App\Entity\Image\Identity;
 use Domain\{
     Repository\ImageRepository,
-    Entity\Image\Description
+    Entity\Image\Description,
 };
 use Innmind\Rest\Server\{
     ResourceAccessor as ResourceAccessorInterface,
     Identity as RestIdentity,
     HttpResource,
     HttpResource\Property,
-    Definition\HttpResource as ResourceDefinition
+    Definition\HttpResource as ResourceDefinition,
 };
 use Innmind\Neo4j\DBAL\{
     Connection,
-    Query\Query
+    Query\Query,
 };
 use Innmind\Immutable\{
     Map,
-    Set
+    Set,
 };
 
 final class ResourceAccessor implements ResourceAccessorInterface

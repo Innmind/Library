@@ -5,7 +5,7 @@ namespace Domain\Specification\Domain;
 
 use Domain\{
     Specification\OrSpecification as ParentSpec,
-    Entity\Domain as Entity
+    Entity\Domain as Entity,
 };
 
 final class OrSpecification extends ParentSpec implements Specification

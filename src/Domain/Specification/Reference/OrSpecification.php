@@ -5,7 +5,7 @@ namespace Domain\Specification\Reference;
 
 use Domain\{
     Specification\OrSpecification as ParentSpec,
-    Entity\Reference as Entity
+    Entity\Reference as Entity,
 };
 
 final class OrSpecification extends ParentSpec implements Specification

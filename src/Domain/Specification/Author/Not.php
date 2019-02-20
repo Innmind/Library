@@ -5,7 +5,7 @@ namespace Domain\Specification\Author;
 
 use Domain\{
     Specification\Not as ParentSpec,
-    Entity\Author
+    Entity\Author,
 };
 
 final class Not extends ParentSpec implements Specification

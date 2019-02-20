@@ -12,9 +12,9 @@ use Domain\{
     Entity\Domain,
     Entity\Domain\Identity,
     Entity\Domain\Name,
-    Entity\Domain\TopLevelDomain as Model
+    Entity\Domain\TopLevelDomain as Model,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\Comparator;
 use PHPUnit\Framework\TestCase;
 
 class TopLevelDomainTest extends TestCase
@@ -23,10 +23,10 @@ class TopLevelDomainTest extends TestCase
     {
         $spec = new TopLevelDomain(new Model('foo'));
 
-        $this->assertInstanceOf(ComparatorInterface::class, $spec);
+        $this->assertInstanceOf(Comparator::class, $spec);
         $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('tld', $spec->property());
-        $this->assertSame('=', $spec->sign());
+        $this->assertSame('=', (string) $spec->sign());
         $this->assertSame('foo', $spec->value());
     }
 

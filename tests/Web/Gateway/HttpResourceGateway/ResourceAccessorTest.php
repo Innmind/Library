@@ -9,11 +9,11 @@ use Domain\{
     Repository\HttpResourceRepository,
     Entity\HttpResource as Entity,
     Entity\HttpResource\Charset,
-    Model\Language
+    Model\Language,
 };
 use Innmind\Url\{
     Path,
-    Query
+    Query,
 };
 use Innmind\Rest\Server\{
     ResourceAccessor as ResourceAccessorInterface,
@@ -24,19 +24,19 @@ use Innmind\Rest\Server\{
     Definition\Gateway,
     Definition\Property,
     Definition\Type,
-    Definition\Access
+    Definition\Access,
 };
 use Innmind\Neo4j\DBAL\{
     Connection,
     Query as DBALQuery,
     Result,
-    Result\Row
+    Result\Row,
 };
 use Innmind\Immutable\{
     Map,
     Set,
     SetInterface,
-    Stream
+    Stream,
 };
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
@@ -110,73 +110,41 @@ class ResourceAccessorTest extends TestCase
         $resource->specifyCharset(new Charset('UTF-8'));
         $definition = new Definition(
             'http_resource',
-            new IdentityDefinition('identity'),
-            (new Map('string', Property::class))
-                ->put(
-                    'identity',
-                    new Property(
-                        'identity',
-                        $this->createMock(Type::class),
-                        new Access,
-                        new Set('string'),
-                        false
-                    )
-                )
-                ->put(
-                    'host',
-                    new Property(
-                        'host',
-                        $this->createMock(Type::class),
-                        new Access,
-                        new Set('string'),
-                        false
-                    )
-                )
-                ->put(
-                    'path',
-                    new Property(
-                        'path',
-                        $this->createMock(Type::class),
-                        new Access,
-                        new Set('string'),
-                        false
-                    )
-                )
-                ->put(
-                    'query',
-                    new Property(
-                        'query',
-                        $this->createMock(Type::class),
-                        new Access,
-                        new Set('string'),
-                        false
-                    )
-                )
-                ->put(
-                    'languages',
-                    new Property(
-                        'languages',
-                        $this->createMock(Type::class),
-                        new Access,
-                        new Set('string'),
-                        false
-                    )
-                )
-                ->put(
-                    'charset',
-                    new Property(
-                        'charset',
-                        $this->createMock(Type::class),
-                        new Access,
-                        new Set('string'),
-                        false
-                    )
-                ),
-            new Map('scalar', 'variable'),
-            new Map('scalar', 'variable'),
             new Gateway('http_resource'),
-            false,
-            new Map('string', 'string')
+            new IdentityDefinition('identity'),
+            Set::of(
+                Property::class,
+                Property::required(
+                    'identity',
+                    $this->createMock(Type::class),
+                    new Access(Access::CREATE)
+                ),
+                Property::required(
+                    'host',
+                    $this->createMock(Type::class),
+                    new Access(Access::CREATE)
+                ),
+                Property::required(
+                    'path',
+                    $this->createMock(Type::class),
+                    new Access(Access::CREATE)
+                ),
+                Property::required(
+                    'query',
+                    $this->createMock(Type::class),
+                    new Access(Access::CREATE)
+                ),
+                Property::required(
+                    'languages',
+                    $this->createMock(Type::class),
+                    new Access(Access::CREATE)
+                ),
+                Property::required(
+                    'charset',
+                    $this->createMock(Type::class),
+                    new Access(Access::CREATE)
+                )
+            )
         );
 
         $resource = ($this->accessor)(
