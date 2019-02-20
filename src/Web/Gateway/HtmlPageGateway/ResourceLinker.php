@@ -37,7 +37,6 @@ final class ResourceLinker implements ResourceLinkerInterface
      */
     public function __invoke(Reference $from, Link ...$links): void
     {
-        $definition = $from->definition();
         $from = new ResourceIdentity((string) $from->identity());
 
         foreach ($links as $link) {
