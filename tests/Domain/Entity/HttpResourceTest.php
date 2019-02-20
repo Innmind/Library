@@ -11,6 +11,7 @@ use Domain\{
     Event\HttpResource\LanguagesSpecified,
     Event\HttpResource\CharsetSpecified,
     Model\Language,
+    Exception\DomainException,
 };
 use Innmind\Url\{
     PathInterface,
@@ -95,12 +96,11 @@ class HttpResourceTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException TypeError
-     * @expectedExceptionMessage Argument 1 must be of type SetInterface<Domain\Model\Language>
-     */
     public function testThrowWhenInvalidLanguagesType()
     {
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessage('Argument 1 must be of type SetInterface<Domain\Model\Language>');
+
         (new HttpResource(
             $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
@@ -108,11 +108,10 @@ class HttpResourceTest extends TestCase
         ))->specifyLanguages((new Set('int'))->add(42));
     }
 
-    /**
-     * @expectedException Domain\Exception\DomainException
-     */
     public function testThrowWhenEmptyLanguagesSet()
     {
+        $this->expectException(DomainException::class);
+
         (new HttpResource(
             $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),

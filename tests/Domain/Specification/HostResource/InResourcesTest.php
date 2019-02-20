@@ -13,6 +13,7 @@ use Domain\{
     Entity\HostResource\Identity,
     Entity\Host\Identity as HostIdentity,
     Entity\HttpResource\Identity as ResourceIdentity,
+    Exception\InvalidArgumentException,
 };
 use Innmind\Specification\Comparator;
 use Innmind\Immutable\Set;
@@ -39,11 +40,10 @@ class InResourcesTest extends TestCase
         $this->assertSame(['uuid'], $spec->value());
     }
 
-    /**
-     * @expectedException Domain\Exception\InvalidArgumentException
-     */
     public function testThrowWhenInvalidSet()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         new InResources(new Set('string'));
     }
 

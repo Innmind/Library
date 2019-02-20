@@ -50,7 +50,7 @@ class ResourceAccessorTest extends TestCase
     private $repository;
     private $dbal;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->accessor = new ResourceAccessor(
             $this->repository = $this->createMock(HtmlPageRepository::class),

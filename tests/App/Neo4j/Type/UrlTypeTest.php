@@ -29,11 +29,10 @@ class UrlTypeTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException LogicException
-     */
     public function testThrowWhenNullValueOnNonNullableType()
     {
+        $this->expectException(\LogicException::class);
+
         (new UrlType)->forDatabase(null);
     }
 

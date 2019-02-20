@@ -29,11 +29,10 @@ class ColourTypeTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException Error
-     */
     public function testThrowWhenNullValueOnNonNullableType()
     {
+        $this->expectException(\Error::class);
+
         (new ColourType)->forDatabase(null);
     }
 

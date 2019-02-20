@@ -29,11 +29,10 @@ class LanguageTypeTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException LogicException
-     */
     public function testThrowWhenNullValueOnNonNullableType()
     {
+        $this->expectException(\LogicException::class);
+
         (new LanguageType)->forDatabase(null);
     }
 

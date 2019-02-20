@@ -14,15 +14,16 @@ use Domain\{
     Specification\AndSpecification,
     Specification\CitationAppearance\Citation,
     Specification\CitationAppearance\HttpResource,
-    Event\CitationAppearanceRegistered
+    Event\CitationAppearanceRegistered,
+    Exception\CitationAppearanceAlreadyExist,
 };
 use Innmind\TimeContinuum\{
     TimeContinuumInterface,
-    PointInTimeInterface
+    PointInTimeInterface,
 };
 use Innmind\Immutable\{
     Set,
-    SetInterface
+    SetInterface,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -80,9 +81,6 @@ class RegisterAppearanceHandlerTest extends TestCase
         $this->assertNull($handler($command));
     }
 
-    /**
-     * @expectedException Domain\Exception\CitationAppearanceAlreadyExist
-     */
     public function testThrowWhenAppearanceAlreadyRegistered()
     {
         $handler = new RegisterAppearanceHandler(
@@ -137,6 +135,8 @@ class RegisterAppearanceHandlerTest extends TestCase
         $repository
             ->expects($this->never())
             ->method('add');
+
+        $this->expectException(CitationAppearanceAlreadyExist::class);
 
         $handler($command);
     }

@@ -25,12 +25,12 @@ use PHPUnit\Framework\TestCase;
 
 class InstallTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         @mkdir('/tmp/config');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         @unlink('/tmp/config/.env');
         @rmdir('/tmp/config');

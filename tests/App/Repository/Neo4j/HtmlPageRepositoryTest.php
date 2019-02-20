@@ -5,24 +5,25 @@ namespace Tests\App\Repository\Neo4j;
 
 use App\{
     Repository\Neo4j\HtmlPageRepository,
-    Entity\HtmlPage\Identity
+    Entity\HtmlPage\Identity,
 };
 use Domain\{
     Repository\HtmlPageRepository as HtmlPageRepositoryInterface,
     Entity\HtmlPage,
-    Specification\HttpResource\Specification
+    Specification\HttpResource\Specification,
+    Exception\HtmlPageNotFound,
 };
 use Innmind\Url\{
     PathInterface,
-    QueryInterface
+    QueryInterface,
 };
 use Innmind\Neo4j\ONM\{
     Repository,
-    Exception\EntityNotFound
+    Exception\EntityNotFound,
 };
 use Innmind\Immutable\{
     SetInterface,
-    Set
+    Set,
 };
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
@@ -60,11 +61,6 @@ class HtmlPageRepositoryTest extends TestCase
         $this->assertSame($expected, $repository->get($identity));
     }
 
-    /**
-     * @expectedException Domain\Exception\HtmlPageNotFound
-     * @expectedExceptionMessage
-     * @expectedExceptionCode 0
-     */
     public function testThrowWhenGettingUnknownEntity()
     {
         $repository = new HtmlPageRepository(
@@ -78,6 +74,10 @@ class HtmlPageRepositoryTest extends TestCase
             ->will(
                 $this->throwException(new EntityNotFound)
             );
+
+        $this->expectException(HtmlPageNotFound::class);
+        $this->expectExceptionMessage('');
+        $this->expectExceptionCode(0);
 
         $repository->get($identity);
     }

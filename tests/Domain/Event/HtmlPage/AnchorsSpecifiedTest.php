@@ -24,12 +24,11 @@ class AnchorsSpecifiedTest extends TestCase
         $this->assertSame($anchors, $event->anchors());
     }
 
-    /**
-     * @expectedException TypeError
-     * @expectedExceptionMessage Argument 2 must be of type SetInterface<Domain\Entity\HtmlPage\Anchor>
-     */
     public function testThrowWhenInvalidAnchorSet()
     {
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessage('Argument 2 must be of type SetInterface<Domain\Entity\HtmlPage\Anchor>');
+
         new AnchorsSpecified(
             $this->createMock(Identity::class),
             new Set('string')

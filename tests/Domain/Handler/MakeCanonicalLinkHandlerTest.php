@@ -13,15 +13,16 @@ use Domain\{
     Specification\AndSpecification,
     Specification\Canonical\HttpResource,
     Specification\Canonical\Canonical as CanonicalSpec,
-    Event\CanonicalCreated
+    Event\CanonicalCreated,
+    Exception\CanonicalAlreadyExist,
 };
 use Innmind\TimeContinuum\{
     TimeContinuumInterface,
-    PointInTimeInterface
+    PointInTimeInterface,
 };
 use Innmind\Immutable\{
     Set,
-    SetInterface
+    SetInterface,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -79,9 +80,6 @@ class MakeCanonicalLinkHandlerTest extends TestCase
         $this->assertNull($handler($command));
     }
 
-    /**
-     * @expectedException Domain\Exception\CanonicalAlreadyExist
-     */
     public function testThrowWhenCanonicalLinkAlreadyExist()
     {
         $handler = new MakeCanonicalLinkHandler(
@@ -136,6 +134,8 @@ class MakeCanonicalLinkHandlerTest extends TestCase
         $clock
             ->expects($this->never())
             ->method('now');
+
+        $this->expectException(CanonicalAlreadyExist::class);
 
         $handler($command);
     }

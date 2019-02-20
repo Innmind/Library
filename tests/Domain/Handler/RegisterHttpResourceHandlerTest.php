@@ -19,15 +19,16 @@ use Domain\{
     Specification\HttpResource\Path,
     Specification\HttpResource\Query,
     Specification\HostResource\InResources,
-    Specification\HostResource\Host as HostSpec
+    Specification\HostResource\Host as HostSpec,
+    Exception\HttpResourceAlreadyExist,
 };
 use Innmind\TimeContinuum\{
     TimeContinuumInterface,
-    PointInTimeInterface
+    PointInTimeInterface,
 };
 use Innmind\Url\{
     PathInterface,
-    QueryInterface
+    QueryInterface,
 };
 use Innmind\Immutable\Set;
 use PHPUnit\Framework\TestCase;
@@ -188,9 +189,6 @@ class RegisterHttpResourceHandlerTest extends TestCase
         $this->assertNull($handler($command));
     }
 
-    /**
-     * @expectedException Domain\Exception\HttpResourceAlreadyExist
-     */
     public function testThrowWhenResourceAlreadyExist()
     {
         $handler = new RegisterHttpResourceHandler(
@@ -269,6 +267,8 @@ class RegisterHttpResourceHandlerTest extends TestCase
         $relationRepository
             ->expects($this->never())
             ->method('add');
+
+        $this->expectException(HttpResourceAlreadyExist::class);
 
         $handler($command);
     }

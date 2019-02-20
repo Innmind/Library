@@ -11,11 +11,12 @@ use Domain\{
     Entity\Citation\Identity,
     Entity\Citation\Text as Model,
     Specification\Citation\Text,
-    Event\CitationRegistered
+    Event\CitationRegistered,
+    Exception\CitationAlreadyExist,
 };
 use Innmind\Immutable\{
     Set,
-    SetInterface
+    SetInterface,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -50,9 +51,6 @@ class RegisterCitationHandlerTest extends TestCase
         $this->assertNull($handler($command));
     }
 
-    /**
-     * @expectedException Domain\Exception\CitationAlreadyExist
-     */
     public function testThrowWhenCitationAlreadyExist()
     {
         $handler = new RegisterCitationHandler(
@@ -87,6 +85,8 @@ class RegisterCitationHandlerTest extends TestCase
         $repository
             ->expects($this->never())
             ->method('add');
+
+        $this->expectException(CitationAlreadyExist::class);
 
         $handler($command);
     }

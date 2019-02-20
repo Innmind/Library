@@ -6,7 +6,7 @@ namespace Tests\Domain\Command\HttpResource;
 use Domain\{
     Command\HttpResource\SpecifyLanguages,
     Entity\HttpResource\Identity,
-    Model\Language
+    Model\Language,
 };
 use Innmind\Immutable\Set;
 use PHPUnit\Framework\TestCase;
@@ -25,12 +25,11 @@ class SpecifyLanguagesTest extends TestCase
         $this->assertSame($languages, $command->languages());
     }
 
-    /**
-     * @expectedException TypeError
-     * @expectedExceptionMessage Argument 2 must be of type SetInterface<Domain\Model\Language>
-     */
     public function testThrowWhenInvalidSetOfLanguages()
     {
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessage('Argument 2 must be of type SetInterface<Domain\Model\Language>');
+
         new SpecifyLanguages(
             $this->createMock(Identity::class),
             new Set('string')

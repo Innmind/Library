@@ -15,11 +15,12 @@ use Domain\{
     Specification\Alternate\HttpResource,
     Specification\Alternate\Alternate as AlternateSpec,
     Specification\Alternate\Language,
-    Model\Language as Model
+    Model\Language as Model,
+    Exception\AlternateAlreadyExist,
 };
 use Innmind\Immutable\{
     Set,
-    SetInterface
+    SetInterface,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -74,9 +75,6 @@ class RegisterAlternateResourceHandlerTest extends TestCase
         $this->assertNull($handler($command));
     }
 
-    /**
-     * @expectedException Domain\Exception\AlternateAlreadyExist
-     */
     public function testThrowWhenAlternateAlreadyExist()
     {
         $handler = new RegisterAlternateResourceHandler(
@@ -131,6 +129,8 @@ class RegisterAlternateResourceHandlerTest extends TestCase
         $repository
             ->expects($this->never())
             ->method('add');
+
+        $this->expectException(AlternateAlreadyExist::class);
 
         $handler($command);
     }

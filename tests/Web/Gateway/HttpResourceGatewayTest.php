@@ -10,7 +10,10 @@ use Web\Gateway\{
     HttpResourceGateway\ResourceLinker,
 };
 use Domain\Repository\HttpResourceRepository;
-use Innmind\Rest\Server\Gateway;
+use Innmind\Rest\Server\{
+    Gateway,
+    Exception\ActionNotImplemented,
+};
 use Innmind\CommandBus\CommandBus;
 use Innmind\Neo4j\DBAL\Connection;
 use PHPUnit\Framework\TestCase;
@@ -22,7 +25,7 @@ class HttpResourceGatewayTest extends TestCase
     private $accessor;
     private $linker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->gateway = new HttpResourceGateway(
             $this->creator = new ResourceCreator(
@@ -51,11 +54,10 @@ class HttpResourceGatewayTest extends TestCase
         $this->assertSame($this->creator, $this->gateway->resourceCreator());
     }
 
-    /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
-     */
     public function testThrowWhenAccessingResourceListAccessor()
     {
+        $this->expectException(ActionNotImplemented::class);
+
         $this->gateway->resourceListAccessor();
     }
 
@@ -67,19 +69,17 @@ class HttpResourceGatewayTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
-     */
     public function testThrowWhenAccessingResourceUpdater()
     {
+        $this->expectException(ActionNotImplemented::class);
+
         $this->gateway->resourceUpdater();
     }
 
-    /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
-     */
     public function testThrowWhenAccessingResourceRemover()
     {
+        $this->expectException(ActionNotImplemented::class);
+
         $this->gateway->resourceRemover();
     }
 
@@ -91,11 +91,10 @@ class HttpResourceGatewayTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
-     */
     public function testThrowWhenAccessingResourceUnlinker()
     {
+        $this->expectException(ActionNotImplemented::class);
+
         $this->gateway->resourceUnlinker();
     }
 }

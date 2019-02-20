@@ -15,6 +15,7 @@ use Domain\{
     Event\Image\DimensionSpecified,
     Event\Image\WeightSpecified,
     Event\Image\DescriptionAdded,
+    Exception\InvalidArgumentException,
 };
 use Innmind\Url\{
     PathInterface,
@@ -42,11 +43,10 @@ class ImageTest extends TestCase
         $this->assertCount(0, $image->recordedEvents());
     }
 
-    /**
-     * @expectedException Domain\Exception\InvalidArgumentException
-     */
     public function testThrowWhenInvalidIdentity()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         new Image(
             $this->createMock(ResourceIdentity::class),
             $this->createMock(PathInterface::class),

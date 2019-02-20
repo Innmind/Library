@@ -13,19 +13,20 @@ use Domain\{
     Repository\DomainRepository,
     Specification\AndSpecification,
     Specification\Domain\Name,
-    Specification\Domain\TopLevelDomain
+    Specification\Domain\TopLevelDomain,
+    Exception\DomainAlreadyExist,
 };
 use Domain\Specification;
 use Innmind\Url\Authority\Host;
 use Innmind\Immutable\{
     Set,
-    SetInterface
+    SetInterface,
 };
 use Pdp\{
     Rules,
     Manager,
     Cache,
-    CurlHttpClient
+    CurlHttpClient,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -63,9 +64,6 @@ class RegisterDomainHandlerTest extends TestCase
         $this->assertNull($handler($command));
     }
 
-    /**
-     * @expectedException Domain\Exception\DomainAlreadyExist
-     */
     public function testThrowWhenDomainAlreadyExist()
     {
         $handler = new RegisterDomainHandler(
@@ -106,6 +104,8 @@ class RegisterDomainHandlerTest extends TestCase
                     new TLD('fr')
                 )
             );
+
+        $this->expectException(DomainAlreadyExist::class);
 
         $handler($command);
     }

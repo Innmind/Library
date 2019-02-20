@@ -5,3 +5,4 @@
 !/bin/library
 /docker-compose.override.yml
 /infection-log.txt
+.phpunit.result.cache

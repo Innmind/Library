@@ -5,24 +5,25 @@ namespace Tests\App\Repository\Neo4j;
 
 use App\{
     Repository\Neo4j\ImageRepository,
-    Entity\Image\Identity
+    Entity\Image\Identity,
 };
 use Domain\{
     Repository\ImageRepository as ImageRepositoryInterface,
     Entity\Image,
-    Specification\HttpResource\Specification
+    Specification\HttpResource\Specification,
+    Exception\ImageNotFound,
 };
 use Innmind\Url\{
     PathInterface,
-    QueryInterface
+    QueryInterface,
 };
 use Innmind\Neo4j\ONM\{
     Repository,
-    Exception\EntityNotFound
+    Exception\EntityNotFound,
 };
 use Innmind\Immutable\{
     SetInterface,
-    Set
+    Set,
 };
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
@@ -60,11 +61,6 @@ class ImageRepositoryTest extends TestCase
         $this->assertSame($expected, $repository->get($identity));
     }
 
-    /**
-     * @expectedException Domain\Exception\ImageNotFound
-     * @expectedExceptionMessage
-     * @expectedExceptionCode 0
-     */
     public function testThrowWhenGettingUnknownEntity()
     {
         $repository = new ImageRepository(
@@ -78,6 +74,10 @@ class ImageRepositoryTest extends TestCase
             ->will(
                 $this->throwException(new EntityNotFound)
             );
+
+        $this->expectException(ImageNotFound::class);
+        $this->expectExceptionMessage('');
+        $this->expectExceptionCode(0);
 
         $repository->get($identity);
     }

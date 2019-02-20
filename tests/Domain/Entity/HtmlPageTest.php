@@ -19,6 +19,7 @@ use Domain\{
     Event\HtmlPage\AndroidAppLinkSpecified,
     Event\HtmlPage\IosAppLinkSpecified,
     Event\HtmlPage\PreviewSpecified,
+    Exception\InvalidArgumentException,
 };
 use Innmind\Url\{
     PathInterface,
@@ -50,11 +51,10 @@ class HtmlPageTest extends TestCase
         $this->assertCount(0, $htmlPage->recordedEvents());
     }
 
-    /**
-     * @expectedException Domain\Exception\InvalidArgumentException
-     */
     public function testThrowWhenInvalidIdentity()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         new HtmlPage(
             $this->createMock(ResourceIdentity::class),
             $this->createMock(PathInterface::class),
@@ -181,12 +181,11 @@ class HtmlPageTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException TypeError
-     * @expectedExceptionMessage Argument 1 must be of type SetInterface<Domain\Entity\HtmlPage\Anchor>
-     */
     public function testThrowWhenInvalidAnchorsSet()
     {
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessage('Argument 1 must be of type SetInterface<Domain\Entity\HtmlPage\Anchor>');
+
         $htmlPage = new HtmlPage(
             $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
