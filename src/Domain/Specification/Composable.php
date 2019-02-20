@@ -6,7 +6,7 @@ namespace Domain\Specification;
 use Innmind\Specification\{
     Specification,
     Composite,
-    Not,
+    Not as NotInterface,
 };
 
 trait Composable
@@ -21,7 +21,7 @@ trait Composable
         return new OrSpecification($this, $specification);
     }
 
-    public function not(): Not
+    public function not(): NotInterface
     {
         return new Not($this);
     }
