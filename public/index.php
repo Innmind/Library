@@ -17,6 +17,7 @@ use Innmind\Url\{
     Path,
 };
 use function Innmind\HttpFramework\env;
+use function Innmind\Debug\bootstrap as debug;
 use Innmind\HttpFramework\RequestHandler;
 use Innmind\OperatingSystem\OperatingSystem;
 use Innmind\Immutable\{
@@ -52,6 +53,11 @@ new class extends Main
             );
         }
 
+        if ($debug) {
+            $debugger = debug($os, Url::fromString($environment->get('profiler')));
+            $os = $debugger['os']();
+        }
+
         $app = app(
             $os->remote()->http(),
             Url::fromString($environment->get('neo4j')),
@@ -59,9 +65,14 @@ new class extends Main
             $dsns,
             $debug ? null : 'error'
         );
+        $commandBus = $app['command_bus'];
+
+        if ($debug) {
+            $commandBus = $debugger['command_bus']($commandBus);
+        }
 
         $this->handle = web(
-            $app['command_bus'],
+            $commandBus,
             $app['dbal'],
             $app['repository']['http_resource'],
             $app['repository']['image'],
@@ -69,6 +80,10 @@ new class extends Main
             $environment->get('apiKey'),
             $debug
         );
+
+        if ($debug) {
+            $this->handle = $debugger['http']($this->handle);
+        }
     }
     protected function main(ServerRequest $request, OperatingSystem $os): Response
     {

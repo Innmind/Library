@@ -48,7 +48,8 @@
         "phpunit/phpunit": "~6.0",
         "infection/infection": "^0.7.1",
         "symfony/var-dumper": "^4.1",
-        "filp/whoops": "^2.2"
+        "filp/whoops": "^2.2",
+        "innmind/debug": "^1.0"
     },
     "scripts": {
         "test" : "bin/phpunit --colors=always"
