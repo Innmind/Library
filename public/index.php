@@ -74,5 +74,4 @@ new class extends Main
     {
         return ($this->handle)($request);
     }
-
 };
