@@ -6,7 +6,6 @@ namespace Web;
 use Web\{
     RequestHandler\CatchConflicts,
     RequestHandler\CatchNotFound,
-    RequestHandler\Debug,
     Gateway\HttpResourceGateway,
     Gateway\ImageGateway,
     Gateway\HtmlPageGateway,
