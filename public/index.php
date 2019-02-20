@@ -9,6 +9,7 @@ use Innmind\HttpServer\Main;
 use Innmind\Http\Message\{
     ServerRequest,
     Response,
+    Environment,
 };
 use Innmind\Url\{
     UrlInterface,
@@ -25,17 +26,16 @@ use Innmind\Immutable\{
 
 new class extends Main
 {
-    protected function main(ServerRequest $request, OperatingSystem $os): Response
-    {
-        $handle = $this->buildApp($request, $os);
+    private $handle;
 
-        return $handle($request);
-    }
-
-    private function buildApp(ServerRequest $request, OperatingSystem $os): RequestHandler
+    protected function preload(OperatingSystem $os, Environment $environment): void
     {
+        if ($this->handle) {
+            return;
+        }
+
         $environment = env(
-            $request->environment(),
+            $environment,
             $os->filesystem()->mount(new Path(__DIR__.'/../config'))
         );
 
@@ -59,7 +59,7 @@ new class extends Main
             $debug ? null : 'error'
         );
 
-        return web(
+        $this->handle = web(
             $app['command_bus'],
             $app['dbal'],
             $app['repository']['http_resource'],
@@ -69,4 +69,9 @@ new class extends Main
             $debug
         );
     }
+    protected function main(ServerRequest $request, OperatingSystem $os): Response
+    {
+        return ($this->handle)($request);
+    }
+
 };

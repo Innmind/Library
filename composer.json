@@ -35,7 +35,7 @@
         "innmind/rest-server": "~7.0",
         "innmind/neo4j-onm": "~6.0",
         "innmind/http-framework": "^1.2",
-        "innmind/http-server": "^1.1",
+        "innmind/http-server": "^1.4",
         "innmind/logger": "^1.0",
         "innmind/http-authentication": "^1.4",
         "innmind/installation-monitor": "~2.0",
