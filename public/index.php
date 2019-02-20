@@ -53,6 +53,7 @@ new class extends Main
         }
 
         $app = app(
+            $os->remote()->http(),
             Url::fromString($environment->get('neo4j')),
             $os->filesystem()->mount(new Path(__DIR__.'/../var/innmind/domain_events')),
             $dsns,

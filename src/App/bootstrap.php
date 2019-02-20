@@ -21,6 +21,7 @@ use Innmind\TimeContinuum\{
 };
 use Innmind\Url\UrlInterface;
 use Innmind\Filesystem\Adapter;
+use Innmind\HttpTransport\Transport;
 use Innmind\Immutable\{
     Map,
     SetInterface,
@@ -32,6 +33,7 @@ use Pdp;
  * @param SetInterface<UrlInterface>|null $dsns
  */
 function bootstrap(
+    Transport $http,
     UrlInterface $neo4j,
     Adapter $domainEventStore,
     SetInterface $dsns = null,
@@ -49,11 +51,8 @@ function bootstrap(
     ))->getRules();
 
     $clock = new Earth(new UTC);
-    $http = http();
-    $log = $http['logger'](logger('http', ...$dsns)($activationLevel));
-    $httpTransport = $log(
-        $http['default']()
-    );
+    $log = http()['logger'](logger('http', ...$dsns)($activationLevel));
+    $httpTransport = $log($http);
 
     $eventBuses = eventBus();
     $eventBus = $eventBuses['bus'](
