@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d5bd9f9bfa762ac27b2dc1730774c85a",
+    "content-hash": "e24946292fec6dc2abc65c598b034287",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -3328,16 +3328,16 @@
         },
         {
             "name": "innmind/debug",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Debug.git",
-                "reference": "73478fa4ec995c4186f03f0f7c3c5f5aaf3f6c0d"
+                "reference": "f858319fabbec2f65bddda7fc46c7fd82034cbb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Debug/zipball/73478fa4ec995c4186f03f0f7c3c5f5aaf3f6c0d",
-                "reference": "73478fa4ec995c4186f03f0f7c3c5f5aaf3f6c0d",
+                "url": "https://api.github.com/repos/Innmind/Debug/zipball/f858319fabbec2f65bddda7fc46c7fd82034cbb4",
+                "reference": "f858319fabbec2f65bddda7fc46c7fd82034cbb4",
                 "shasum": ""
             },
             "require": {
@@ -3388,7 +3388,7 @@
                 "debug",
                 "http"
             ],
-            "time": "2019-02-09T14:28:42+00:00"
+            "time": "2019-02-21T17:31:10+00:00"
         },
         {
             "name": "innmind/object-graph",
