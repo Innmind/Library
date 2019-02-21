@@ -20,6 +20,7 @@ use function Innmind\HttpFramework\env;
 use function Innmind\Debug\bootstrap as debug;
 use Innmind\HttpFramework\RequestHandler;
 use Innmind\OperatingSystem\OperatingSystem;
+use Innmind\Debug\CodeEditor;
 use Innmind\Immutable\{
     MapInterface,
     Set,
@@ -54,7 +55,12 @@ new class extends Main
         }
 
         if ($debug) {
-            $debugger = debug($os, Url::fromString($environment->get('profiler')));
+            $debugger = debug(
+                $os,
+                Url::fromString($environment->get('profiler')),
+                $environment,
+                CodeEditor::sublimeText()
+            );
             $os = $debugger['os']();
         }
 
