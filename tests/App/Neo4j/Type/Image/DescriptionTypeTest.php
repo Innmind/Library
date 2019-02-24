@@ -5,14 +5,7 @@ namespace Tests\App\Neo4j\Type\Image;
 
 use App\Neo4j\Type\Image\DescriptionType;
 use Domain\Entity\Image\Description;
-use Innmind\Neo4j\ONM\{
-    Type,
-    Types
-};
-use Innmind\Immutable\{
-    SetInterface,
-    MapInterface
-};
+use Innmind\Neo4j\ONM\Type;
 use PHPUnit\Framework\TestCase;
 
 class DescriptionTypeTest extends TestCase
@@ -22,31 +15,6 @@ class DescriptionTypeTest extends TestCase
         $this->assertInstanceOf(
             Type::class,
             new DescriptionType
-        );
-    }
-
-    public function testIdentifiers()
-    {
-        $this->assertInstanceOf(
-            SetInterface::class,
-            DescriptionType::identifiers()
-        );
-        $this->assertSame('string', (string) DescriptionType::identifiers()->type());
-        $this->assertSame(DescriptionType::identifiers(), DescriptionType::identifiers());
-        $this->assertSame(
-            ['image_description'],
-            DescriptionType::identifiers()->toPrimitive()
-        );
-    }
-
-    public function testFromConfig()
-    {
-        $this->assertInstanceOf(
-            DescriptionType::class,
-            DescriptionType::fromConfig(
-                $this->createMock(MapInterface::class),
-                new Types
-            )
         );
     }
 

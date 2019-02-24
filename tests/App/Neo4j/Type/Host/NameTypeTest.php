@@ -5,14 +5,7 @@ namespace Tests\App\Neo4j\Type\Host;
 
 use App\Neo4j\Type\Host\NameType;
 use Domain\Entity\Host\Name;
-use Innmind\Neo4j\ONM\{
-    Type,
-    Types
-};
-use Innmind\Immutable\{
-    SetInterface,
-    MapInterface
-};
+use Innmind\Neo4j\ONM\Type;
 use PHPUnit\Framework\TestCase;
 
 class NameTypeTest extends TestCase
@@ -22,31 +15,6 @@ class NameTypeTest extends TestCase
         $this->assertInstanceOf(
             Type::class,
             new NameType
-        );
-    }
-
-    public function testIdentifiers()
-    {
-        $this->assertInstanceOf(
-            SetInterface::class,
-            NameType::identifiers()
-        );
-        $this->assertSame('string', (string) NameType::identifiers()->type());
-        $this->assertSame(NameType::identifiers(), NameType::identifiers());
-        $this->assertSame(
-            ['host_name'],
-            NameType::identifiers()->toPrimitive()
-        );
-    }
-
-    public function testFromConfig()
-    {
-        $this->assertInstanceOf(
-            NameType::class,
-            NameType::fromConfig(
-                $this->createMock(MapInterface::class),
-                new Types
-            )
         );
     }
 

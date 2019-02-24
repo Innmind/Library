@@ -20,15 +20,16 @@ use Domain\{
     Specification\HttpResource\Query,
     Specification\HostResource\InResources,
     Specification\HostResource\Host as HostSpec,
-    Event\HtmlPageRegistered
+    Event\HtmlPageRegistered,
+    Exception\HtmlPageAlreadyExist,
 };
 use Innmind\TimeContinuum\{
     TimeContinuumInterface,
-    PointInTimeInterface
+    PointInTimeInterface,
 };
 use Innmind\Url\{
     PathInterface,
-    QueryInterface
+    QueryInterface,
 };
 use Innmind\Immutable\Set;
 use PHPUnit\Framework\TestCase;
@@ -190,9 +191,6 @@ class RegisterHtmlPageHandlerTest extends TestCase
         $this->assertNull($handler($command));
     }
 
-    /**
-     * @expectedException Domain\Exception\HtmlPageAlreadyExist
-     */
     public function testThrowWhenResourceAlreadyExist()
     {
         $handler = new RegisterHtmlPageHandler(
@@ -271,6 +269,8 @@ class RegisterHtmlPageHandlerTest extends TestCase
         $relationRepository
             ->expects($this->never())
             ->method('add');
+
+        $this->expectException(HtmlPageAlreadyExist::class);
 
         $handler($command);
     }

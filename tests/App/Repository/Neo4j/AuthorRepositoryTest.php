@@ -5,21 +5,22 @@ namespace Tests\App\Repository\Neo4j;
 
 use App\{
     Repository\Neo4j\AuthorRepository,
-    Entity\Author\Identity
+    Entity\Author\Identity,
 };
 use Domain\{
     Repository\AuthorRepository as AuthorRepositoryInterface,
     Entity\Author,
     Entity\Author\Name,
-    Specification\Author\Specification
+    Specification\Author\Specification,
+    Exception\AuthorNotFound,
 };
 use Innmind\Neo4j\ONM\{
     Repository,
-    Exception\EntityNotFound
+    Exception\EntityNotFound,
 };
 use Innmind\Immutable\{
     SetInterface,
-    Set
+    Set,
 };
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
@@ -56,11 +57,6 @@ class AuthorRepositoryTest extends TestCase
         $this->assertSame($expected, $repository->get($identity));
     }
 
-    /**
-     * @expectedException Domain\Exception\AuthorNotFound
-     * @expectedExceptionMessage
-     * @expectedExceptionCode 0
-     */
     public function testThrowWhenGettingUnknownEntity()
     {
         $repository = new AuthorRepository(
@@ -74,6 +70,10 @@ class AuthorRepositoryTest extends TestCase
             ->will(
                 $this->throwException(new EntityNotFound)
             );
+
+        $this->expectException(AuthorNotFound::class);
+        $this->expectExceptionMessage('');
+        $this->expectExceptionCode(0);
 
         $repository->get($identity);
     }

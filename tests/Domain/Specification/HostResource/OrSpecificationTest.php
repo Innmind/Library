@@ -10,7 +10,7 @@ use Domain\{
     Entity\HostResource,
     Entity\HostResource\Identity,
     Entity\Host\Identity as HostIdentity,
-    Entity\HttpResource\Identity as ResourceIdentity
+    Entity\HttpResource\Identity as ResourceIdentity,
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use PHPUnit\Framework\TestCase;

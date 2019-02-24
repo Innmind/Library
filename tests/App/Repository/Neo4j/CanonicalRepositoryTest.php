@@ -5,22 +5,23 @@ namespace Tests\App\Repository\Neo4j;
 
 use App\{
     Repository\Neo4j\CanonicalRepository,
-    Entity\Canonical\Identity
+    Entity\Canonical\Identity,
 };
 use Domain\{
     Repository\CanonicalRepository as CanonicalRepositoryInterface,
     Entity\Canonical,
     Entity\HttpResource\Identity as HttpResourceIdentity,
-    Specification\Canonical\Specification
+    Specification\Canonical\Specification,
+    Exception\CanonicalNotFound,
 };
 use Innmind\Neo4j\ONM\{
     Repository,
-    Exception\EntityNotFound
+    Exception\EntityNotFound,
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use Innmind\Immutable\{
     SetInterface,
-    Set
+    Set,
 };
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
@@ -59,11 +60,6 @@ class CanonicalRepositoryTest extends TestCase
         $this->assertSame($expected, $repository->get($identity));
     }
 
-    /**
-     * @expectedException Domain\Exception\CanonicalNotFound
-     * @expectedExceptionMessage
-     * @expectedExceptionCode 0
-     */
     public function testThrowWhenGettingUnknownEntity()
     {
         $repository = new CanonicalRepository(
@@ -77,6 +73,10 @@ class CanonicalRepositoryTest extends TestCase
             ->will(
                 $this->throwException(new EntityNotFound)
             );
+
+        $this->expectException(CanonicalNotFound::class);
+        $this->expectExceptionMessage('');
+        $this->expectExceptionCode(0);
 
         $repository->get($identity);
     }

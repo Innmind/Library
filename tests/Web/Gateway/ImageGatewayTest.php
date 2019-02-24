@@ -6,11 +6,14 @@ namespace Tests\Web\Gateway;
 use Web\Gateway\{
     ImageGateway,
     ImageGateway\ResourceCreator,
-    ImageGateway\ResourceAccessor
+    ImageGateway\ResourceAccessor,
 };
 use Domain\Repository\ImageRepository;
-use Innmind\Rest\Server\Gateway;
-use Innmind\CommandBus\CommandBusInterface;
+use Innmind\Rest\Server\{
+    Gateway,
+    Exception\ActionNotImplemented,
+};
+use Innmind\CommandBus\CommandBus;
 use Innmind\Neo4j\DBAL\Connection;
 use PHPUnit\Framework\TestCase;
 
@@ -20,11 +23,11 @@ class ImageGatewayTest extends TestCase
     private $creator;
     private $accessor;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->gateway = new ImageGateway(
             $this->creator = new ResourceCreator(
-                $this->createMock(CommandBusInterface::class)
+                $this->createMock(CommandBus::class)
             ),
             $this->accessor = new ResourceAccessor(
                 $this->createMock(ImageRepository::class),
@@ -46,11 +49,10 @@ class ImageGatewayTest extends TestCase
         $this->assertSame($this->creator, $this->gateway->resourceCreator());
     }
 
-    /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
-     */
     public function testThrowWhenAccessingResourceListAccessor()
     {
+        $this->expectException(ActionNotImplemented::class);
+
         $this->gateway->resourceListAccessor();
     }
 
@@ -62,35 +64,31 @@ class ImageGatewayTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
-     */
     public function testThrowWhenAccessingResourceUpdater()
     {
+        $this->expectException(ActionNotImplemented::class);
+
         $this->gateway->resourceUpdater();
     }
 
-    /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
-     */
     public function testThrowWhenAccessingResourceRemover()
     {
+        $this->expectException(ActionNotImplemented::class);
+
         $this->gateway->resourceRemover();
     }
 
-    /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
-     */
     public function testThrowWhenAccessingResourceLinker()
     {
+        $this->expectException(ActionNotImplemented::class);
+
         $this->gateway->resourceLinker();
     }
 
-    /**
-     * @expectedException Innmind\Rest\Server\Exception\ActionNotImplemented
-     */
     public function testThrowWhenAccessingResourceUnlinker()
     {
+        $this->expectException(ActionNotImplemented::class);
+
         $this->gateway->resourceUnlinker();
     }
 }

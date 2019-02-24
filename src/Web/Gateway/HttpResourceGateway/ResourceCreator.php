@@ -8,7 +8,7 @@ use App\Entity\{
     HostResource\Identity as HostResourceIdentity,
     Domain\Identity as DomainIdentity,
     Host\Identity as HostIdentity,
-    DomainHost\Identity as DomainHostIdentity
+    DomainHost\Identity as DomainHostIdentity,
 };
 use Domain\{
     Command\RegisterDomain,
@@ -19,31 +19,31 @@ use Domain\{
     Exception\DomainAlreadyExist,
     Exception\HostAlreadyExist,
     Entity\HttpResource\Charset,
-    Model\Language
+    Model\Language,
 };
 use Innmind\Url\{
     Authority\Host,
     Path,
     Query,
-    NullQuery
+    NullQuery,
 };
 use Innmind\Rest\Server\{
     ResourceCreator as ResourceCreatorInterface,
     Definition\HttpResource as ResourceDefinition,
     HttpResource,
-    Identity as IdentityInterface
+    Identity as IdentityInterface,
 };
-use Innmind\CommandBus\CommandBusInterface;
+use Innmind\CommandBus\CommandBus;
 use Innmind\Immutable\Set;
 use Ramsey\Uuid\Uuid;
 
 final class ResourceCreator implements ResourceCreatorInterface
 {
-    private $commandBus;
+    private $handle;
 
-    public function __construct(CommandBusInterface $commandBus)
+    public function __construct(CommandBus $handle)
     {
-        $this->commandBus = $commandBus;
+        $this->handle = $handle;
     }
 
     public function __invoke(
@@ -61,7 +61,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     private function registerHost(HttpResource $resource): HostIdentity
     {
         try {
-            $this->commandBus->handle(
+            ($this->handle)(
                 new RegisterDomain(
                     $domain = new DomainIdentity((string) Uuid::uuid4()),
                     $host = new Host($resource->property('host')->value())
@@ -72,7 +72,7 @@ final class ResourceCreator implements ResourceCreatorInterface
         }
 
         try {
-            $this->commandBus->handle(
+            ($this->handle)(
                 new RegisterHost(
                     $identity = new HostIdentity((string) Uuid::uuid4()),
                     $domain,
@@ -93,7 +93,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     ): Identity {
         $query = $resource->property('query')->value();
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new RegisterHttpResource(
                 $identity = new Identity((string) Uuid::uuid4()),
                 $host,
@@ -114,7 +114,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new SpecifyCharset(
                 $identity,
                 new Charset($resource->property('charset')->value())
@@ -136,7 +136,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             $languages = $languages->add(new Language($language));
         }
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new SpecifyLanguages(
                 $identity,
                 $languages

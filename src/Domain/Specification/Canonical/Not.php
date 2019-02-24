@@ -5,7 +5,7 @@ namespace Domain\Specification\Canonical;
 
 use Domain\{
     Specification\Not as ParentSpec,
-    Entity\Canonical as Entity
+    Entity\Canonical as Entity,
 };
 
 final class Not extends ParentSpec implements Specification

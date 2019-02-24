@@ -5,15 +5,7 @@ namespace Tests\App\Neo4j\Type\HttpResource;
 
 use App\Neo4j\Type\HttpResource\CharsetType;
 use Domain\Entity\HttpResource\Charset;
-use Innmind\Neo4j\ONM\{
-    Type,
-    Types
-};
-use Innmind\Immutable\{
-    SetInterface,
-    MapInterface,
-    Map
-};
+use Innmind\Neo4j\ONM\Type;
 use PHPUnit\Framework\TestCase;
 
 class CharsetTypeTest extends TestCase
@@ -26,31 +18,6 @@ class CharsetTypeTest extends TestCase
         );
     }
 
-    public function testIdentifiers()
-    {
-        $this->assertInstanceOf(
-            SetInterface::class,
-            CharsetType::identifiers()
-        );
-        $this->assertSame('string', (string) CharsetType::identifiers()->type());
-        $this->assertSame(CharsetType::identifiers(), CharsetType::identifiers());
-        $this->assertSame(
-            ['http_resource_charset'],
-            CharsetType::identifiers()->toPrimitive()
-        );
-    }
-
-    public function testFromConfig()
-    {
-        $this->assertInstanceOf(
-            CharsetType::class,
-            CharsetType::fromConfig(
-                $this->createMock(MapInterface::class),
-                new Types
-            )
-        );
-    }
-
     public function testForDatabase()
     {
         $this->assertSame(
@@ -58,12 +25,7 @@ class CharsetTypeTest extends TestCase
             (new CharsetType)->forDatabase(new Charset('foo'))
         );
         $this->assertNull(
-            CharsetType::fromConfig(
-                (new Map('string', 'mixed'))
-                    ->put('nullable', null),
-                new Types
-            )
-                ->forDatabase(null)
+            (new CharsetType)->forDatabase(null)
         );
     }
 

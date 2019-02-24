@@ -10,7 +10,7 @@ use Domain\{
     Entity\CitationAppearance,
     Entity\CitationAppearance\Identity,
     Entity\Citation\Identity as CitationIdentity,
-    Entity\HttpResource\Identity as ResourceIdentity
+    Entity\HttpResource\Identity as ResourceIdentity,
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use PHPUnit\Framework\TestCase;

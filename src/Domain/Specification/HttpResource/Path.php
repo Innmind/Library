@@ -4,10 +4,13 @@ declare(strict_types = 1);
 namespace Domain\Specification\HttpResource;
 
 use Domain\Entity\HttpResource;
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\{
+    Comparator,
+    Sign,
+};
 use Innmind\Url\PathInterface;
 
-final class Path implements ComparatorInterface, Specification
+final class Path implements Comparator, Specification
 {
     use Composable;
 
@@ -29,9 +32,9 @@ final class Path implements ComparatorInterface, Specification
     /**
      * {@inheritdoc}
      */
-    public function sign(): string
+    public function sign(): Sign
     {
-        return '=';
+        return Sign::equality();
     }
 
     /**

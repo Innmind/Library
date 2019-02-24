@@ -5,23 +5,24 @@ namespace Tests\App\Repository\Neo4j;
 
 use App\{
     Repository\Neo4j\HostResourceRepository,
-    Entity\HostResource\Identity
+    Entity\HostResource\Identity,
 };
 use Domain\{
     Repository\HostResourceRepository as HostResourceRepositoryInterface,
     Entity\HostResource,
     Entity\Host\Identity as HostIdentity,
     Entity\HttpResource\Identity as HttpResourceIdentity,
-    Specification\HostResource\Specification
+    Specification\HostResource\Specification,
+    Exception\HostResourceNotFound,
 };
 use Innmind\Neo4j\ONM\{
     Repository,
-    Exception\EntityNotFound
+    Exception\EntityNotFound,
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use Innmind\Immutable\{
     SetInterface,
-    Set
+    Set,
 };
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
@@ -60,11 +61,6 @@ class HostResourceRepositoryTest extends TestCase
         $this->assertSame($expected, $repository->get($identity));
     }
 
-    /**
-     * @expectedException Domain\Exception\HostResourceNotFound
-     * @expectedExceptionMessage
-     * @expectedExceptionCode 0
-     */
     public function testThrowWhenGettingUnknownEntity()
     {
         $repository = new HostResourceRepository(
@@ -78,6 +74,10 @@ class HostResourceRepositoryTest extends TestCase
             ->will(
                 $this->throwException(new EntityNotFound)
             );
+
+        $this->expectException(HostResourceNotFound::class);
+        $this->expectExceptionMessage('');
+        $this->expectExceptionCode(0);
 
         $repository->get($identity);
     }

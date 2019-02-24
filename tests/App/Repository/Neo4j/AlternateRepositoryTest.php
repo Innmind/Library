@@ -5,22 +5,23 @@ namespace Tests\App\Repository\Neo4j;
 
 use App\{
     Repository\Neo4j\AlternateRepository,
-    Entity\Alternate\Identity
+    Entity\Alternate\Identity,
 };
 use Domain\{
     Repository\AlternateRepository as AlternateRepositoryInterface,
     Entity\Alternate,
     Entity\HttpResource\Identity as HttpResourceIdentity,
     Specification\Alternate\Specification,
-    Model\Language
+    Model\Language,
+    Exception\AlternateNotFound,
 };
 use Innmind\Neo4j\ONM\{
     Repository,
-    Exception\EntityNotFound
+    Exception\EntityNotFound,
 };
 use Innmind\Immutable\{
     SetInterface,
-    Set
+    Set,
 };
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
@@ -59,11 +60,6 @@ class AlternateRepositoryTest extends TestCase
         $this->assertSame($expected, $repository->get($identity));
     }
 
-    /**
-     * @expectedException Domain\Exception\AlternateNotFound
-     * @expectedExceptionMessage
-     * @expectedExceptionCode 0
-     */
     public function testThrowWhenGettingUnknownEntity()
     {
         $repository = new AlternateRepository(
@@ -77,6 +73,10 @@ class AlternateRepositoryTest extends TestCase
             ->will(
                 $this->throwException(new EntityNotFound)
             );
+
+        $this->expectException(AlternateNotFound::class);
+        $this->expectExceptionMessage('');
+        $this->expectExceptionCode(0);
 
         $repository->get($identity);
     }

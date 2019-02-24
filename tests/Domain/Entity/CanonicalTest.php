@@ -7,9 +7,9 @@ use Domain\{
     Entity\Canonical,
     Entity\Canonical\Identity,
     Entity\HttpResource\Identity as ResourceIdentity,
-    Event\CanonicalCreated
+    Event\CanonicalCreated,
 };
-use Innmind\EventBus\ContainsRecordedEventsInterface;
+use Innmind\EventBus\ContainsRecordedEvents;
 use Innmind\TimeContinuum\PointInTimeInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -24,7 +24,7 @@ class CanonicalTest extends TestCase
             $foundAt = $this->createMock(PointInTimeInterface::class)
         );
 
-        $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $entity);
+        $this->assertInstanceOf(ContainsRecordedEvents::class, $entity);
         $this->assertSame($identity, $entity->identity());
         $this->assertSame($canonical, $entity->canonical());
         $this->assertSame($resource, $entity->resource());

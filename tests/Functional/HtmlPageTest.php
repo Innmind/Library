@@ -10,7 +10,7 @@ use Domain\{
     Repository\HtmlPageRepository,
     Exception\HtmlPageNotFound,
 };
-use Innmind\CommandBus\CommandBusInterface;
+use Innmind\CommandBus\CommandBus;
 use Innmind\Neo4j\DBAL\Connection;
 use Innmind\Http\{
     Message\ServerRequest\ServerRequest,
@@ -31,7 +31,7 @@ class HtmlPageTest extends TestCase
     public function testNotFound()
     {
         $handle = web(
-            $this->createMock(CommandBusInterface::class),
+            $this->createMock(CommandBus::class),
             $this->createMock(Connection::class),
             $this->createMock(HttpResourceRepository::class),
             $this->createMock(ImageRepository::class),
@@ -65,7 +65,7 @@ class HtmlPageTest extends TestCase
     public function testErrorWhenNoAuth()
     {
         $handle = web(
-            $this->createMock(CommandBusInterface::class),
+            $this->createMock(CommandBus::class),
             $this->createMock(Connection::class),
             $this->createMock(HttpResourceRepository::class),
             $this->createMock(ImageRepository::class),
@@ -92,7 +92,7 @@ class HtmlPageTest extends TestCase
     public function testOptions()
     {
         $handle = web(
-            $this->createMock(CommandBusInterface::class),
+            $this->createMock(CommandBus::class),
             $this->createMock(Connection::class),
             $this->createMock(HttpResourceRepository::class),
             $this->createMock(ImageRepository::class),
@@ -121,7 +121,7 @@ class HtmlPageTest extends TestCase
             (string) $response->headers()->get('content-type')
         );
         $this->assertSame(
-            '{"identity":"identity","properties":{"identity":{"type":"string","access":["READ"],"variants":[],"optional":false},"host":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"author":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"citations":{"type":"set<string>","access":["READ","CREATE"],"variants":[],"optional":true},"path":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"query":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"languages":{"type":"set<string>","access":["READ","CREATE"],"variants":[],"optional":true},"charset":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"main_content":{"type":"string","access":["CREATE"],"variants":[],"optional":true},"description":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"anchors":{"type":"set<string>","access":["READ","CREATE"],"variants":[],"optional":true},"theme_colour":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"title":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"android_app_link":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"ios_app_link":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"preview":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"is_journal":{"type":"bool","access":["CREATE"],"variants":[],"optional":true}},"metas":{"allowed_media_types":["text\/html","text\/xml","application\/xml","application\/xhtml+xml"]},"rangeable":true,"linkable_to":{"alternate":"web.html_page","canonical":"web.html_page"}}',
+            '{"identity":"identity","properties":{"identity":{"type":"string","access":["READ"],"variants":[],"optional":false},"host":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"author":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"citations":{"type":"set<string>","access":["READ","CREATE"],"variants":[],"optional":true},"path":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"query":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"languages":{"type":"set<string>","access":["READ","CREATE"],"variants":[],"optional":true},"charset":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"main_content":{"type":"string","access":["CREATE"],"variants":[],"optional":true},"description":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"anchors":{"type":"set<string>","access":["READ","CREATE"],"variants":[],"optional":true},"theme_colour":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"title":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"android_app_link":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"ios_app_link":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"preview":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"is_journal":{"type":"bool","access":["CREATE"],"variants":[],"optional":true}},"metas":{"allowed_media_types":["text\/html","text\/xml","application\/xml","application\/xhtml+xml"]},"rangeable":true,"linkable_to":[{"relationship":"alternate","resource_path":"web.html_page","parameters":["language"]},{"relationship":"canonical","resource_path":"web.html_page","parameters":[]}]}',
             (string) $response->body()
         );
     }

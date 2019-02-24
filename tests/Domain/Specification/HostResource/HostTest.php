@@ -12,9 +12,9 @@ use Domain\{
     Entity\HostResource as Entity,
     Entity\HostResource\Identity,
     Entity\Host\Identity as HostIdentity,
-    Entity\HttpResource\Identity as ResourceIdentity
+    Entity\HttpResource\Identity as ResourceIdentity,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\Comparator;
 use Innmind\TimeContinuum\PointInTimeInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -29,10 +29,10 @@ class HostTest extends TestCase
             ->willReturn('uuid');
         $spec = new Host($identity);
 
-        $this->assertInstanceOf(ComparatorInterface::class, $spec);
+        $this->assertInstanceOf(Comparator::class, $spec);
         $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('host', $spec->property());
-        $this->assertSame('=', $spec->sign());
+        $this->assertSame('=', (string) $spec->sign());
         $this->assertSame('uuid', $spec->value());
     }
 

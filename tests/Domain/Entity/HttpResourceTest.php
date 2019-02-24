@@ -10,13 +10,14 @@ use Domain\{
     Event\HttpResourceRegistered,
     Event\HttpResource\LanguagesSpecified,
     Event\HttpResource\CharsetSpecified,
-    Model\Language
+    Model\Language,
+    Exception\DomainException,
 };
 use Innmind\Url\{
     PathInterface,
-    QueryInterface
+    QueryInterface,
 };
-use Innmind\EventBus\ContainsRecordedEventsInterface;
+use Innmind\EventBus\ContainsRecordedEvents;
 use Innmind\Immutable\Set;
 use PHPUnit\Framework\TestCase;
 
@@ -30,7 +31,7 @@ class HttpResourceTest extends TestCase
             $query = $this->createMock(QueryInterface::class)
         );
 
-        $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $resource);
+        $this->assertInstanceOf(ContainsRecordedEvents::class, $resource);
         $this->assertSame($identity, $resource->identity());
         $this->assertSame($path, $resource->path());
         $this->assertSame($query, $resource->query());
@@ -95,12 +96,11 @@ class HttpResourceTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException TypeError
-     * @expectedExceptionMessage Argument 1 must be of type SetInterface<Domain\Model\Language>
-     */
     public function testThrowWhenInvalidLanguagesType()
     {
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessage('Argument 1 must be of type SetInterface<Domain\Model\Language>');
+
         (new HttpResource(
             $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),
@@ -108,11 +108,10 @@ class HttpResourceTest extends TestCase
         ))->specifyLanguages((new Set('int'))->add(42));
     }
 
-    /**
-     * @expectedException Domain\Exception\DomainException
-     */
     public function testThrowWhenEmptyLanguagesSet()
     {
+        $this->expectException(DomainException::class);
+
         (new HttpResource(
             $this->createMock(Identity::class),
             $this->createMock(PathInterface::class),

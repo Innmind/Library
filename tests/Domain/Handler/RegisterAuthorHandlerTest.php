@@ -10,11 +10,12 @@ use Domain\{
     Entity\Author,
     Entity\Author\Identity,
     Entity\Author\Name as Model,
-    Specification\Author\Name
+    Specification\Author\Name,
+    Exception\AuthorAlreadyExist,
 };
 use Innmind\Immutable\{
     Set,
-    SetInterface
+    SetInterface,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -47,9 +48,6 @@ class RegisterAuthorHandlerTest extends TestCase
         $this->assertNull($handler($command));
     }
 
-    /**
-     * @expectedException Domain\Exception\AuthorAlreadyExist
-     */
     public function testThrowWhenAuthorAlreadyExist()
     {
         $handler = new RegisterAuthorHandler(
@@ -85,6 +83,8 @@ class RegisterAuthorHandlerTest extends TestCase
             ->expects($this->never())
             ->method('add');
 
-        $this->assertNull($handler($command));
+        $this->expectException(AuthorAlreadyExist::class);
+
+        $handler($command);
     }
 }

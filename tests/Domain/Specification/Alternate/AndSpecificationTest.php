@@ -10,7 +10,7 @@ use Domain\{
     Entity\Alternate,
     Entity\Alternate\Identity,
     Entity\HttpResource\Identity as ResourceIdentity,
-    Model\Language
+    Model\Language,
 };
 use PHPUnit\Framework\TestCase;
 

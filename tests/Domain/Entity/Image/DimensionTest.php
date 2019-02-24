@@ -3,7 +3,10 @@ declare(strict_types = 1);
 
 namespace Tests\Domain\Entity\Image;
 
-use Domain\Entity\Image\Dimension;
+use Domain\{
+    Entity\Image\Dimension,
+    Exception\DomainException,
+};
 use PHPUnit\Framework\TestCase;
 
 class DimensionTest extends TestCase
@@ -26,19 +29,17 @@ class DimensionTest extends TestCase
         $this->assertSame('0x0', (string) $dimension);
     }
 
-    /**
-     * @expectedException Domain\Exception\DomainException
-     */
     public function testThrowWhenNegativeHeight()
     {
+        $this->expectException(DomainException::class);
+
         new Dimension(-1, 24);
     }
 
-    /**
-     * @expectedException Domain\Exception\DomainException
-     */
     public function testThrowWhenNegativeWidth()
     {
+        $this->expectException(DomainException::class);
+
         new Dimension(42, -1);
     }
 }

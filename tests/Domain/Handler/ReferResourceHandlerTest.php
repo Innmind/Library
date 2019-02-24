@@ -13,11 +13,12 @@ use Domain\{
     Specification\AndSpecification,
     Specification\Reference\Source,
     Specification\Reference\Target,
-    Event\ReferenceCreated
+    Event\ReferenceCreated,
+    Exception\ReferenceAlreadyExist,
 };
 use Innmind\Immutable\{
     Set,
-    SetInterface
+    SetInterface,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -67,9 +68,6 @@ class ReferResourceHandlerTest extends TestCase
         $this->assertNull($handler($command));
     }
 
-    /**
-     * @expectedException Domain\Exception\ReferenceAlreadyExist
-     */
     public function testThrowWhenReferenceAlreadyExist()
     {
         $handler = new ReferResourceHandler(
@@ -119,6 +117,8 @@ class ReferResourceHandlerTest extends TestCase
         $repository
             ->expects($this->never())
             ->method('add');
+
+        $this->expectException(ReferenceAlreadyExist::class);
 
         $handler($command);
     }

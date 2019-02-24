@@ -3,7 +3,10 @@ declare(strict_types = 1);
 
 namespace Tests\Domain\Entity\Citation;
 
-use Domain\Entity\Citation\Text;
+use Domain\{
+    Entity\Citation\Text,
+    Exception\DomainException,
+};
 use PHPUnit\Framework\TestCase;
 
 class TextTest extends TestCase
@@ -13,11 +16,10 @@ class TextTest extends TestCase
         $this->assertSame('foo', (string) new Text('foo'));
     }
 
-    /**
-     * @expectedException Domain\Exception\DomainException
-     */
     public function testThrowWhenEmptyText()
     {
+        $this->expectException(DomainException::class);
+
         new Text('');
     }
 }

@@ -5,57 +5,49 @@ namespace Web\Gateway\HttpResourceGateway;
 
 use App\Entity\{
     Reference\Identity as ReferenceIdentity,
-    HttpResource\Identity as ResourceIdentity
+    HttpResource\Identity as ResourceIdentity,
 };
 use Domain\{
     Command\ReferResource,
-    Exception\ReferenceAlreadyExist
+    Exception\ReferenceAlreadyExist,
 };
 use Innmind\Rest\Server\{
     ResourceLinker as ResourceLinkerInterface,
-    Reference
+    Reference,
+    Link,
 };
-use Innmind\CommandBus\CommandBusInterface;
-use Innmind\Http\Exception\Http\BadRequest;
-use Innmind\Immutable\MapInterface;
+use Innmind\CommandBus\CommandBus;
 use Ramsey\Uuid\Uuid;
 
 final class ResourceLinker implements ResourceLinkerInterface
 {
-    private $commandBus;
+    private $handle;
 
-    public function __construct(CommandBusInterface $commandBus)
+    public function __construct(CommandBus $handle)
     {
-        $this->commandBus = $commandBus;
+        $this->handle = $handle;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function __invoke(Reference $from, MapInterface $tos): void
+    public function __invoke(Reference $from, Link ...$links): void
     {
-        $definition = $from->definition();
         $from = new ResourceIdentity((string) $from->identity());
 
-        $tos
-            ->foreach(function(Reference $to, MapInterface $parameters) use ($definition) {
-                if ($to->definition() !== $definition) {
-                    throw new BadRequest;
-                }
-            })
-            ->foreach(function(Reference $to, MapInterface $parameters) use ($from) {
-                switch ($parameters->get('rel')->value()) {
-                    case 'referrer':
-                        $this->refer($from, $to);
-                        break;
-                }
-            });
+        foreach ($links as $link) {
+            switch ($link->relationship()) {
+                case 'referrer':
+                    $this->refer($from, $link->reference());
+                    break;
+            }
+        }
     }
 
     private function refer(ResourceIdentity $from, Reference $to): void
     {
         try {
-            $this->commandBus->handle(
+            ($this->handle)(
                 new ReferResource(
                     new ReferenceIdentity((string) Uuid::uuid4()),
                     $from,

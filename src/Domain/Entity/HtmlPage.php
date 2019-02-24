@@ -17,17 +17,17 @@ use Domain\{
     Event\HtmlPage\AndroidAppLinkSpecified,
     Event\HtmlPage\IosAppLinkSpecified,
     Event\HtmlPage\PreviewSpecified,
-    Exception\InvalidArgumentException
+    Exception\InvalidArgumentException,
 };
 use Innmind\Url\{
     PathInterface,
     QueryInterface,
-    UrlInterface
+    UrlInterface,
 };
 use Innmind\Colour\RGBA;
 use Innmind\Immutable\{
     Set,
-    SetInterface
+    SetInterface,
 };
 
 final class HtmlPage extends HttpResource

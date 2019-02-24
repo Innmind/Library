@@ -5,11 +5,14 @@ namespace Domain\Specification\Reference;
 
 use Domain\Entity\{
     Reference,
-    HttpResource\Identity
+    HttpResource\Identity,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\{
+    Comparator,
+    Sign,
+};
 
-final class Target implements ComparatorInterface, Specification
+final class Target implements Comparator, Specification
 {
     use Composable;
 
@@ -31,9 +34,9 @@ final class Target implements ComparatorInterface, Specification
     /**
      * {@inheritdoc}
      */
-    public function sign(): string
+    public function sign(): Sign
     {
-        return '=';
+        return Sign::equality();
     }
 
     /**

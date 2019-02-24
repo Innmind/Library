@@ -3,7 +3,10 @@ declare(strict_types = 1);
 
 namespace Tests\Domain\Entity\HttpResource;
 
-use Domain\Entity\HttpResource\Charset;
+use Domain\{
+    Entity\HttpResource\Charset,
+    Exception\DomainException,
+};
 use PHPUnit\Framework\TestCase;
 
 class CharsetTest extends TestCase
@@ -18,10 +21,11 @@ class CharsetTest extends TestCase
 
     /**
      * @dataProvider invalid
-     * @expectedException Domain\Exception\DomainException
      */
     public function testThrowWhenInvalidString(string $value)
     {
+        $this->expectException(DomainException::class);
+
         new Charset($value);
     }
 

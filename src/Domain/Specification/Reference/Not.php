@@ -5,7 +5,7 @@ namespace Domain\Specification\Reference;
 
 use Domain\{
     Specification\Not as ParentSpec,
-    Entity\Reference as Entity
+    Entity\Reference as Entity,
 };
 
 final class Not extends ParentSpec implements Specification

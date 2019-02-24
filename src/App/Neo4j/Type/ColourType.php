@@ -4,31 +4,16 @@ declare(strict_types = 1);
 namespace App\Neo4j\Type;
 
 use Innmind\Colour\RGBA;
-use Innmind\Neo4j\ONM\{
-    Type,
-    Types
-};
-use Innmind\Immutable\{
-    MapInterface,
-    SetInterface,
-    Set
-};
+use Innmind\Neo4j\ONM\Type;
 
 final class ColourType implements Type
 {
-    private static $identifiers;
     private $nullable = false;
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function fromConfig(MapInterface $config, Types $types): Type
+    public static function nullable(): self
     {
         $self = new self;
-
-        if ($config->contains('nullable')) {
-            $self->nullable = true;
-        }
+        $self->nullable = true;
 
         return $self;
     }
@@ -59,17 +44,5 @@ final class ColourType implements Type
     public function isNullable(): bool
     {
         return $this->nullable;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function identifiers(): SetInterface
-    {
-        if (self::$identifiers === null) {
-            self::$identifiers = (new Set('string'))->add('colour');
-        }
-
-        return self::$identifiers;
     }
 }

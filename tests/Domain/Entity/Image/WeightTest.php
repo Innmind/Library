@@ -3,7 +3,10 @@ declare(strict_types = 1);
 
 namespace Tests\Domain\Entity\Image;
 
-use Domain\Entity\Image\Weight;
+use Domain\{
+    Entity\Image\Weight,
+    Exception\DomainException,
+};
 use PHPUnit\Framework\TestCase;
 
 class WeightTest extends TestCase
@@ -14,11 +17,10 @@ class WeightTest extends TestCase
         $this->assertSame(0, (new Weight(0))->toInt());
     }
 
-    /**
-     * @expectedException Domain\Exception\DomainException
-     */
     public function testThrowWhenValueBelowZero()
     {
+        $this->expectException(DomainException::class);
+
         new Weight(-1);
     }
 }

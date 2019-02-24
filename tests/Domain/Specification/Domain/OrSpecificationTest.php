@@ -10,7 +10,7 @@ use Domain\{
     Entity\Domain,
     Entity\Domain\Identity,
     Entity\Domain\Name,
-    Entity\Domain\TopLevelDomain
+    Entity\Domain\TopLevelDomain,
 };
 use PHPUnit\Framework\TestCase;
 

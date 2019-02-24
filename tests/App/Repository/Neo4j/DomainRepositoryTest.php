@@ -5,22 +5,23 @@ namespace Tests\App\Repository\Neo4j;
 
 use App\{
     Repository\Neo4j\DomainRepository,
-    Entity\Domain\Identity
+    Entity\Domain\Identity,
 };
 use Domain\{
     Repository\DomainRepository as DomainRepositoryInterface,
     Entity\Domain,
     Entity\Domain\Name,
     Entity\Domain\TopLevelDomain,
-    Specification\Domain\Specification
+    Specification\Domain\Specification,
+    Exception\DomainNotFound,
 };
 use Innmind\Neo4j\ONM\{
     Repository,
-    Exception\EntityNotFound
+    Exception\EntityNotFound,
 };
 use Innmind\Immutable\{
     SetInterface,
-    Set
+    Set,
 };
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
@@ -58,11 +59,6 @@ class DomainRepositoryTest extends TestCase
         $this->assertSame($expected, $repository->get($identity));
     }
 
-    /**
-     * @expectedException Domain\Exception\DomainNotFound
-     * @expectedExceptionMessage
-     * @expectedExceptionCode 0
-     */
     public function testThrowWhenGettingUnknownEntity()
     {
         $repository = new DomainRepository(
@@ -76,6 +72,10 @@ class DomainRepositoryTest extends TestCase
             ->will(
                 $this->throwException(new EntityNotFound)
             );
+
+        $this->expectException(DomainNotFound::class);
+        $this->expectExceptionMessage('');
+        $this->expectExceptionCode(0);
 
         $repository->get($identity);
     }

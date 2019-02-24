@@ -7,9 +7,9 @@ use Domain\{
     Entity\Author,
     Entity\Author\Identity,
     Entity\Author\Name,
-    Event\AuthorRegistered
+    Event\AuthorRegistered,
 };
-use Innmind\EventBus\ContainsRecordedEventsInterface;
+use Innmind\EventBus\ContainsRecordedEvents;
 use PHPUnit\Framework\TestCase;
 
 class AuthorTest extends TestCase
@@ -21,7 +21,7 @@ class AuthorTest extends TestCase
             $name = new Name('John Doe')
         );
 
-        $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $entity);
+        $this->assertInstanceOf(ContainsRecordedEvents::class, $entity);
         $this->assertSame($identity, $entity->identity());
         $this->assertSame($name, $entity->name());
         $this->assertSame('John Doe', (string) $entity);

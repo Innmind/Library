@@ -10,12 +10,12 @@ use Domain\{
     Specification\HttpResource\OrSpecification,
     Specification\HttpResource\Not,
     Entity\HttpResource,
-    Entity\HttpResource\Identity
+    Entity\HttpResource\Identity,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\Comparator;
 use Innmind\Url\{
     QueryInterface,
-    PathInterface
+    PathInterface,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -30,10 +30,10 @@ class QueryTest extends TestCase
             ->willReturn('?foo');
         $spec = new Query($query);
 
-        $this->assertInstanceOf(ComparatorInterface::class, $spec);
+        $this->assertInstanceOf(Comparator::class, $spec);
         $this->assertInstanceOf(Specification::class, $spec);
         $this->assertSame('query', $spec->property());
-        $this->assertSame('=', $spec->sign());
+        $this->assertSame('=', (string) $spec->sign());
         $this->assertSame('?foo', $spec->value());
     }
 

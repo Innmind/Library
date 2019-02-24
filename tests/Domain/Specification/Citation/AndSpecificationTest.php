@@ -9,7 +9,7 @@ use Domain\{
     Specification\AndSpecification as ParentSpec,
     Entity\Citation,
     Entity\Citation\Identity,
-    Entity\Citation\Text
+    Entity\Citation\Text,
 };
 use PHPUnit\Framework\TestCase;
 

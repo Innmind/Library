@@ -5,11 +5,14 @@ namespace Domain\Specification\Domain;
 
 use Domain\Entity\{
     Domain,
-    Domain\TopLevelDomain as Model
+    Domain\TopLevelDomain as Model,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\{
+    Comparator,
+    Sign,
+};
 
-final class TopLevelDomain implements ComparatorInterface, Specification
+final class TopLevelDomain implements Comparator, Specification
 {
     use Composable;
 
@@ -31,9 +34,9 @@ final class TopLevelDomain implements ComparatorInterface, Specification
     /**
      * {@inheritdoc}
      */
-    public function sign(): string
+    public function sign(): Sign
     {
-        return '=';
+        return Sign::equality();
     }
 
     /**

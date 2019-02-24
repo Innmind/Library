@@ -5,7 +5,7 @@ namespace Domain\Specification\Domain;
 
 use Domain\{
     Specification\AndSpecification as ParentSpec,
-    Entity\Domain as Entity
+    Entity\Domain as Entity,
 };
 
 final class AndSpecification extends ParentSpec implements Specification

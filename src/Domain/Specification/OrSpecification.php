@@ -4,12 +4,12 @@ declare(strict_types = 1);
 namespace Domain\Specification;
 
 use Innmind\Specification\{
-    SpecificationInterface,
-    CompositeInterface,
-    Operator
+    Specification,
+    Composite,
+    Operator,
 };
 
-class OrSpecification implements CompositeInterface
+class OrSpecification implements Composite
 {
     use Composable;
 
@@ -18,18 +18,18 @@ class OrSpecification implements CompositeInterface
     private $operator;
 
     public function __construct(
-        SpecificationInterface $left,
-        SpecificationInterface $right
+        Specification $left,
+        Specification $right
     ) {
         $this->left = $left;
         $this->right = $right;
-        $this->operator = new Operator(Operator::OR);
+        $this->operator = Operator::or();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function left(): SpecificationInterface
+    public function left(): Specification
     {
         return $this->left;
     }
@@ -37,7 +37,7 @@ class OrSpecification implements CompositeInterface
     /**
      * {@inheritdoc}
      */
-    public function right(): SpecificationInterface
+    public function right(): Specification
     {
         return $this->right;
     }

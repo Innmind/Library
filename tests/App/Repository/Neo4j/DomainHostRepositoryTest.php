@@ -5,23 +5,24 @@ namespace Tests\App\Repository\Neo4j;
 
 use App\{
     Repository\Neo4j\DomainHostRepository,
-    Entity\DomainHost\Identity
+    Entity\DomainHost\Identity,
 };
 use Domain\{
     Repository\DomainHostRepository as DomainHostRepositoryInterface,
     Entity\DomainHost,
     Entity\Domain\Identity as DomainIdentity,
     Entity\Host\Identity as HostIdentity,
-    Specification\DomainHost\Specification
+    Specification\DomainHost\Specification,
+    Exception\DomainHostNotFound,
 };
 use Innmind\Neo4j\ONM\{
     Repository,
-    Exception\EntityNotFound
+    Exception\EntityNotFound,
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use Innmind\Immutable\{
     SetInterface,
-    Set
+    Set,
 };
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
@@ -60,11 +61,6 @@ class DomainHostRepositoryTest extends TestCase
         $this->assertSame($expected, $repository->get($identity));
     }
 
-    /**
-     * @expectedException Domain\Exception\DomainHostNotFound
-     * @expectedExceptionMessage
-     * @expectedExceptionCode 0
-     */
     public function testThrowWhenGettingUnknownEntity()
     {
         $repository = new DomainHostRepository(
@@ -78,6 +74,10 @@ class DomainHostRepositoryTest extends TestCase
             ->will(
                 $this->throwException(new EntityNotFound)
             );
+
+        $this->expectException(DomainHostNotFound::class);
+        $this->expectExceptionMessage('');
+        $this->expectExceptionCode(0);
 
         $repository->get($identity);
     }

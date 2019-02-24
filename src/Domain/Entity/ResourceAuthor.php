@@ -7,15 +7,15 @@ use Domain\{
     Entity\ResourceAuthor\Identity,
     Entity\Author\Identity as AuthorIdentity,
     Entity\HttpResource\Identity as ResourceIdentity,
-    Event\ResourceAuthorRegistered
+    Event\ResourceAuthorRegistered,
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use Innmind\EventBus\{
-    ContainsRecordedEventsInterface,
-    EventRecorder
+    ContainsRecordedEvents,
+    EventRecorder,
 };
 
-final class ResourceAuthor implements ContainsRecordedEventsInterface
+final class ResourceAuthor implements ContainsRecordedEvents
 {
     use EventRecorder;
 

@@ -14,11 +14,12 @@ use Domain\{
     Event\ImageRegistered,
     Event\Image\DimensionSpecified,
     Event\Image\WeightSpecified,
-    Event\Image\DescriptionAdded
+    Event\Image\DescriptionAdded,
+    Exception\InvalidArgumentException,
 };
 use Innmind\Url\{
     PathInterface,
-    QueryInterface
+    QueryInterface,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -42,11 +43,10 @@ class ImageTest extends TestCase
         $this->assertCount(0, $image->recordedEvents());
     }
 
-    /**
-     * @expectedException Domain\Exception\InvalidArgumentException
-     */
     public function testThrowWhenInvalidIdentity()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         new Image(
             $this->createMock(ResourceIdentity::class),
             $this->createMock(PathInterface::class),

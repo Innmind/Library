@@ -5,15 +5,16 @@ namespace CLI;
 
 use function Innmind\InstallationMonitor\bootstrap as monitor;
 use Innmind\CLI\Commands;
+use Innmind\OperatingSystem\OperatingSystem;
 
-function bootstrap(): Commands
+function bootstrap(OperatingSystem $os): Commands
 {
-    $monitor = monitor();
+    $monitor = monitor($os);
 
     return new Commands(
         new Command\Install(
             $monitor['client']['silence'](
-                $monitor['client']['socket']()
+                $monitor['client']['ipc']()
             )
         )
     );

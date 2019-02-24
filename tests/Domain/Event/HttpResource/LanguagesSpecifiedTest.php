@@ -24,12 +24,11 @@ class LanguagesSpecifiedTest extends TestCase
         $this->assertSame($languages, $event->languages());
     }
 
-    /**
-     * @expectedException TypeError
-     * @expectedExceptionMessage Argument 2 must be of type SetInterface<Domain\Model\Language>
-     */
     public function testThrowWhenInvalidSetOfLanguages()
     {
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessage('Argument 2 must be of type SetInterface<Domain\Model\Language>');
+
         new LanguagesSpecified(
             $this->createMock(Identity::class),
             new Set('string')

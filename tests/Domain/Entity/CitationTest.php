@@ -7,9 +7,9 @@ use Domain\{
     Entity\Citation,
     Entity\Citation\Identity,
     Entity\Citation\Text,
-    Event\CitationRegistered
+    Event\CitationRegistered,
 };
-use Innmind\EventBus\ContainsRecordedEventsInterface;
+use Innmind\EventBus\ContainsRecordedEvents;
 use PHPUnit\Framework\TestCase;
 
 class CitationTest extends TestCase
@@ -21,7 +21,7 @@ class CitationTest extends TestCase
             $text = new Text('foo')
         );
 
-        $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $entity);
+        $this->assertInstanceOf(ContainsRecordedEvents::class, $entity);
         $this->assertSame($identity, $entity->identity());
         $this->assertSame($text, $entity->text());
         $this->assertSame('foo', (string) $entity);

@@ -13,15 +13,15 @@ use Domain\{
     Event\Image\DimensionSpecified,
     Event\Image\WeightSpecified,
     Event\Image\DescriptionAdded,
-    Exception\InvalidArgumentException
+    Exception\InvalidArgumentException,
 };
 use Innmind\Url\{
     PathInterface,
-    QueryInterface
+    QueryInterface,
 };
 use Innmind\Immutable\{
     Set,
-    SetInterface
+    SetInterface,
 };
 
 final class Image extends HttpResource

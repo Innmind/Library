@@ -5,7 +5,7 @@ namespace Domain\Specification\HttpResource;
 
 use Domain\{
     Specification\Not as ParentSpec,
-    Entity\HttpResource as Entity
+    Entity\HttpResource as Entity,
 };
 
 final class Not extends ParentSpec implements Specification

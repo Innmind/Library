@@ -5,11 +5,14 @@ namespace Domain\Specification\Alternate;
 
 use Domain\{
     Entity\Alternate as Entity,
-    Model\Language as Model
+    Model\Language as Model,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\{
+    Comparator,
+    Sign,
+};
 
-final class Language implements ComparatorInterface, Specification
+final class Language implements Comparator, Specification
 {
     use Composable;
 
@@ -31,9 +34,9 @@ final class Language implements ComparatorInterface, Specification
     /**
      * {@inheritdoc}
      */
-    public function sign(): string
+    public function sign(): Sign
     {
-        return '=';
+        return Sign::equality();
     }
 
     /**

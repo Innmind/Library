@@ -7,14 +7,14 @@ use Domain\{
     Entity\Alternate\Identity,
     Entity\HttpResource\Identity as ResourceIdentity,
     Event\AlternateCreated,
-    Model\Language
+    Model\Language,
 };
 use Innmind\EventBus\{
-    ContainsRecordedEventsInterface,
-    EventRecorder
+    ContainsRecordedEvents,
+    EventRecorder,
 };
 
-final class Alternate implements ContainsRecordedEventsInterface
+final class Alternate implements ContainsRecordedEvents
 {
     use EventRecorder;
 

@@ -8,7 +8,7 @@ use App\Entity\{
     HostResource\Identity as HostResourceIdentity,
     Domain\Identity as DomainIdentity,
     Host\Identity as HostIdentity,
-    DomainHost\Identity as DomainHostIdentity
+    DomainHost\Identity as DomainHostIdentity,
 };
 use Domain\{
     Command\RegisterDomain,
@@ -21,31 +21,31 @@ use Domain\{
     Exception\HostAlreadyExist,
     Entity\Image\Dimension,
     Entity\Image\Weight,
-    Entity\Image\Description
+    Entity\Image\Description,
 };
 use Innmind\Url\{
     Authority\Host,
     Path,
     Query,
-    NullQuery
+    NullQuery,
 };
 use Innmind\Rest\Server\{
     ResourceCreator as ResourceCreatorInterface,
     Definition\HttpResource as ResourceDefinition,
     HttpResource,
-    Identity as IdentityInterface
+    Identity as IdentityInterface,
 };
-use Innmind\CommandBus\CommandBusInterface;
+use Innmind\CommandBus\CommandBus;
 use Innmind\Immutable\Set;
 use Ramsey\Uuid\Uuid;
 
 final class ResourceCreator implements ResourceCreatorInterface
 {
-    private $commandBus;
+    private $handle;
 
-    public function __construct(CommandBusInterface $commandBus)
+    public function __construct(CommandBus $handle)
     {
-        $this->commandBus = $commandBus;
+        $this->handle = $handle;
     }
 
     public function __invoke(
@@ -64,7 +64,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     private function registerHost(HttpResource $resource): HostIdentity
     {
         try {
-            $this->commandBus->handle(
+            ($this->handle)(
                 new RegisterDomain(
                     $domain = new DomainIdentity((string) Uuid::uuid4()),
                     $host = new Host($resource->property('host')->value())
@@ -75,7 +75,7 @@ final class ResourceCreator implements ResourceCreatorInterface
         }
 
         try {
-            $this->commandBus->handle(
+            ($this->handle)(
                 new RegisterHost(
                     $identity = new HostIdentity((string) Uuid::uuid4()),
                     $domain,
@@ -96,7 +96,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     ): Identity {
         $query = $resource->property('query')->value();
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new RegisterImage(
                 $identity = new Identity((string) Uuid::uuid4()),
                 $host,
@@ -119,7 +119,7 @@ final class ResourceCreator implements ResourceCreatorInterface
 
         $dimension = $resource->property('dimension')->value();
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new SpecifyDimension(
                 $identity,
                 new Dimension(
@@ -138,7 +138,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new SpecifyWeight(
                 $identity,
                 new Weight($resource->property('weight')->value())
@@ -158,7 +158,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             ->property('descriptions')
             ->value()
             ->foreach(function(string $description) use ($identity): void {
-                $this->commandBus->handle(
+                ($this->handle)(
                     new AddDescription(
                         $identity,
                         new Description($description)

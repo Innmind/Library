@@ -3,7 +3,10 @@ declare(strict_types = 1);
 
 namespace Tests\Domain\Entity\Image;
 
-use Domain\Entity\Image\Description;
+use Domain\{
+    Entity\Image\Description,
+    Exception\DomainException,
+};
 use PHPUnit\Framework\TestCase;
 
 class DescriptionTest extends TestCase
@@ -23,11 +26,10 @@ class DescriptionTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException Domain\Exception\DomainException
-     */
     public function testThrowWhenEmptyValue()
     {
+        $this->expectException(DomainException::class);
+
         new Description('');
     }
 }

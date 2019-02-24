@@ -5,23 +5,24 @@ namespace Tests\App\Repository\Neo4j;
 
 use App\{
     Repository\Neo4j\CitationAppearanceRepository,
-    Entity\CitationAppearance\Identity
+    Entity\CitationAppearance\Identity,
 };
 use Domain\{
     Repository\CitationAppearanceRepository as CitationAppearanceRepositoryInterface,
     Entity\CitationAppearance,
     Entity\Citation\Identity as CitationIdentity,
     Entity\HttpResource\Identity as HttpResourceIdentity,
-    Specification\CitationAppearance\Specification
+    Specification\CitationAppearance\Specification,
+    Exception\CitationAppearanceNotFound,
 };
 use Innmind\Neo4j\ONM\{
     Repository,
-    Exception\EntityNotFound
+    Exception\EntityNotFound,
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
 use Innmind\Immutable\{
     SetInterface,
-    Set
+    Set,
 };
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
@@ -60,11 +61,6 @@ class CitationAppearanceRepositoryTest extends TestCase
         $this->assertSame($expected, $repository->get($identity));
     }
 
-    /**
-     * @expectedException Domain\Exception\CitationAppearanceNotFound
-     * @expectedExceptionMessage
-     * @expectedExceptionCode 0
-     */
     public function testThrowWhenGettingUnknownEntity()
     {
         $repository = new CitationAppearanceRepository(
@@ -78,6 +74,10 @@ class CitationAppearanceRepositoryTest extends TestCase
             ->will(
                 $this->throwException(new EntityNotFound)
             );
+
+        $this->expectException(CitationAppearanceNotFound::class);
+        $this->expectExceptionMessage('');
+        $this->expectExceptionCode(0);
 
         $repository->get($identity);
     }

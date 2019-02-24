@@ -5,7 +5,7 @@ namespace Domain\Specification\CitationAppearance;
 
 use Domain\{
     Specification\Not as ParentSpec,
-    Entity\CitationAppearance as Entity
+    Entity\CitationAppearance as Entity,
 };
 
 final class Not extends ParentSpec implements Specification

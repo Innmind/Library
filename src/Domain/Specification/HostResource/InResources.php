@@ -6,15 +6,18 @@ namespace Domain\Specification\HostResource;
 use Domain\{
     Entity\HostResource,
     Entity\HttpResource\Identity,
-    Exception\InvalidArgumentException
+    Exception\InvalidArgumentException,
 };
-use Innmind\Specification\ComparatorInterface;
+use Innmind\Specification\{
+    Comparator,
+    Sign,
+};
 use Innmind\Immutable\{
     SetInterface,
-    Set
+    Set,
 };
 
-final class InResources implements ComparatorInterface, Specification
+final class InResources implements Comparator, Specification
 {
     use Composable;
 
@@ -45,9 +48,9 @@ final class InResources implements ComparatorInterface, Specification
     /**
      * {@inheritdoc}
      */
-    public function sign(): string
+    public function sign(): Sign
     {
-        return 'in';
+        return Sign::in();
     }
 
     /**

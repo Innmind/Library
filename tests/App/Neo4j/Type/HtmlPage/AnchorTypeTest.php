@@ -5,14 +5,7 @@ namespace Tests\App\Neo4j\Type\HtmlPage;
 
 use App\Neo4j\Type\HtmlPage\AnchorType;
 use Domain\Entity\HtmlPage\Anchor;
-use Innmind\Neo4j\ONM\{
-    Type,
-    Types
-};
-use Innmind\Immutable\{
-    SetInterface,
-    MapInterface
-};
+use Innmind\Neo4j\ONM\Type;
 use PHPUnit\Framework\TestCase;
 
 class AnchorTypeTest extends TestCase
@@ -22,31 +15,6 @@ class AnchorTypeTest extends TestCase
         $this->assertInstanceOf(
             Type::class,
             new AnchorType
-        );
-    }
-
-    public function testIdentifiers()
-    {
-        $this->assertInstanceOf(
-            SetInterface::class,
-            AnchorType::identifiers()
-        );
-        $this->assertSame('string', (string) AnchorType::identifiers()->type());
-        $this->assertSame(AnchorType::identifiers(), AnchorType::identifiers());
-        $this->assertSame(
-            ['html_page_anchor'],
-            AnchorType::identifiers()->toPrimitive()
-        );
-    }
-
-    public function testFromConfig()
-    {
-        $this->assertInstanceOf(
-            AnchorType::class,
-            AnchorType::fromConfig(
-                $this->createMock(MapInterface::class),
-                new Types
-            )
         );
     }
 

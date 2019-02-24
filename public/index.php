@@ -9,13 +9,21 @@ use Innmind\HttpServer\Main;
 use Innmind\Http\Message\{
     ServerRequest,
     Response,
+    Environment,
 };
 use Innmind\Url\{
     UrlInterface,
     Url,
+    Path,
 };
-use Innmind\HttpFramework\Environment;
-use Innmind\Filesystem\Adapter\FilesystemAdapter;
+use function Innmind\HttpFramework\env;
+use function Innmind\Debug\bootstrap as debug;
+use Innmind\HttpFramework\RequestHandler;
+use Innmind\OperatingSystem\OperatingSystem;
+use Innmind\Debug\{
+    CodeEditor,
+    Profiler\Section\CaptureAppGraph,
+};
 use Innmind\Immutable\{
     MapInterface,
     Set,
@@ -23,29 +31,19 @@ use Innmind\Immutable\{
 
 new class extends Main
 {
-    protected function main(ServerRequest $request): Response
-    {
-        $environment = $this->environment($request);
+    private $handle;
 
-        return $this->handle($request, $environment);
-    }
-
-    /**
-     * @return MapInterface<string, mixed>
-     */
-    private function environment(ServerRequest $request): MapInterface
+    protected function preload(OperatingSystem $os, Environment $environment): void
     {
-        return Environment::camelize(
-            __DIR__.'/../config/.env',
-            $request->environment()
+        if ($this->handle) {
+            return;
+        }
+
+        $environment = env(
+            $environment,
+            $os->filesystem()->mount(new Path(__DIR__.'/../config'))
         );
-    }
 
-    /**
-     * @param MapInterface<string, mixed> $environment
-     */
-    private function handle(ServerRequest $request, MapInterface $environment): Response
-    {
         $debug = $environment->contains('debug');
 
         $dsns = Set::of(
@@ -59,22 +57,45 @@ new class extends Main
             );
         }
 
+        if ($debug) {
+            $debugger = debug(
+                $os,
+                Url::fromString($environment->get('profiler')),
+                $environment,
+                CodeEditor::sublimeText(),
+                Set::of('string', CaptureAppGraph::class)
+            );
+            $os = $debugger['os']();
+        }
+
         $app = app(
+            $os->remote()->http(),
             Url::fromString($environment->get('neo4j')),
-            new FilesystemAdapter(__DIR__.'/../var/innmind/domain_events'),
+            $os->filesystem()->mount(new Path(__DIR__.'/../var/innmind/domain_events')),
             $dsns,
             $debug ? null : 'error'
         );
-        $handle = web(
-            $app['command_bus'],
+        $commandBus = $app['command_bus'];
+
+        if ($debug) {
+            $commandBus = $debugger['command_bus']($commandBus);
+        }
+
+        $this->handle = web(
+            $commandBus,
             $app['dbal'],
             $app['repository']['http_resource'],
             $app['repository']['image'],
             $app['repository']['html_page'],
-            $environment->get('apiKey'),
-            $debug
+            $environment->get('apiKey')
         );
 
-        return $handle($request);
+        if ($debug) {
+            $this->handle = $debugger['http']($this->handle);
+        }
+    }
+    protected function main(ServerRequest $request, OperatingSystem $os): Response
+    {
+        return ($this->handle)($request);
     }
 };

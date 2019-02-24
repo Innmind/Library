@@ -9,7 +9,7 @@ use Domain\{
     Specification\OrSpecification as ParentSpec,
     Entity\Author,
     Entity\Author\Identity,
-    Entity\Author\Name
+    Entity\Author\Name,
 };
 use PHPUnit\Framework\TestCase;
 

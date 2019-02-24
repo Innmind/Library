@@ -8,9 +8,9 @@ use Domain\{
     Entity\Alternate\Identity,
     Entity\HttpResource\Identity as ResourceIdentity,
     Event\AlternateCreated,
-    Model\Language
+    Model\Language,
 };
-use Innmind\EventBus\ContainsRecordedEventsInterface;
+use Innmind\EventBus\ContainsRecordedEvents;
 use PHPUnit\Framework\TestCase;
 
 class AlternateTest extends TestCase
@@ -24,7 +24,7 @@ class AlternateTest extends TestCase
             $language = new Language('fr')
         );
 
-        $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $entity);
+        $this->assertInstanceOf(ContainsRecordedEvents::class, $entity);
         $this->assertSame($identity, $entity->identity());
         $this->assertSame($resource, $entity->resource());
         $this->assertSame($alternate, $entity->alternate());

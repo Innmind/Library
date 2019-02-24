@@ -5,15 +5,7 @@ namespace Tests\App\Neo4j\Type;
 
 use App\Neo4j\Type\ColourType;
 use Innmind\Colour\RGBA;
-use Innmind\Neo4j\ONM\{
-    Type,
-    Types
-};
-use Innmind\Immutable\{
-    SetInterface,
-    MapInterface,
-    Map
-};
+use Innmind\Neo4j\ONM\Type;
 use PHPUnit\Framework\TestCase;
 
 class ColourTypeTest extends TestCase
@@ -26,31 +18,6 @@ class ColourTypeTest extends TestCase
         );
     }
 
-    public function testIdentifiers()
-    {
-        $this->assertInstanceOf(
-            SetInterface::class,
-            ColourType::identifiers()
-        );
-        $this->assertSame('string', (string) ColourType::identifiers()->type());
-        $this->assertSame(ColourType::identifiers(), ColourType::identifiers());
-        $this->assertSame(
-            ['colour'],
-            ColourType::identifiers()->toPrimitive()
-        );
-    }
-
-    public function testFromConfig()
-    {
-        $this->assertInstanceOf(
-            ColourType::class,
-            ColourType::fromConfig(
-                $this->createMock(MapInterface::class),
-                new Types
-            )
-        );
-    }
-
     public function testForDatabase()
     {
         $this->assertSame(
@@ -58,25 +25,15 @@ class ColourTypeTest extends TestCase
             (new ColourType)->forDatabase(RGBA::fromString('39F'))
         );
         $this->assertNull(
-            ColourType::fromConfig(
-                (new Map('string', 'mixed'))
-                    ->put('nullable', null),
-                new Types
-            )
-                ->forDatabase(null)
+            ColourType::nullable()->forDatabase(null)
         );
     }
 
-    /**
-     * @expectedException Error
-     */
     public function testThrowWhenNullValueOnNonNullableType()
     {
-        ColourType::fromConfig(
-            new Map('string', 'mixed'),
-            new Types
-        )
-            ->forDatabase(null);
+        $this->expectException(\Error::class);
+
+        (new ColourType)->forDatabase(null);
     }
 
     public function testFromDatabase()
@@ -95,11 +52,7 @@ class ColourTypeTest extends TestCase
     {
         $this->assertFalse((new ColourType)->isNullable());
         $this->assertTrue(
-            ColourType::fromConfig(
-                (new Map('string', 'mixed'))
-                    ->put('nullable', null),
-                new Types
-            )->isNullable()
+            ColourType::nullable()->isNullable()
         );
     }
 }

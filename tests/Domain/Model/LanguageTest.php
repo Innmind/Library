@@ -3,7 +3,10 @@ declare(strict_types = 1);
 
 namespace Tests\Domain\Model;
 
-use Domain\Model\Language;
+use Domain\{
+    Model\Language,
+    Exception\DomainException,
+};
 use PHPUnit\Framework\TestCase;
 
 class LanguageTest extends TestCase
@@ -18,10 +21,11 @@ class LanguageTest extends TestCase
 
     /**
      * @dataProvider invalid
-     * @expectedException Domain\Exception\DomainException
      */
     public function testThrowOnInvalidValue(string $value)
     {
+        $this->expectException(DomainException::class);
+
         new Language($value);
     }
 

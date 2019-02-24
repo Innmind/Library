@@ -5,7 +5,7 @@ namespace Domain\Specification\HttpResource;
 
 use Domain\{
     Specification\OrSpecification as ParentSpec,
-    Entity\HttpResource as Entity
+    Entity\HttpResource as Entity,
 };
 
 final class OrSpecification extends ParentSpec implements Specification

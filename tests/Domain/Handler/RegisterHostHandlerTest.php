@@ -16,16 +16,17 @@ use Domain\{
     Entity\Host as HostEntity,
     Entity\DomainHost,
     Event\HostRegistered,
-    Event\DomainHostCreated
+    Event\DomainHostCreated,
+    Exception\HostAlreadyExist,
 };
 use Innmind\TimeContinuum\{
     TimeContinuumInterface,
-    PointInTimeInterface
+    PointInTimeInterface,
 };
 use Innmind\Url\Authority\Host;
 use Innmind\Immutable\{
     Set,
-    SetInterface
+    SetInterface,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -81,9 +82,6 @@ class RegisterHostHandlerTest extends TestCase
         $this->assertNull($handler($command));
     }
 
-    /**
-     * @expectedException Domain\Exception\HostAlreadyExist
-     */
     public function testThrowWhenHostAlreadyExist()
     {
         $handler = new RegisterHostHandler(
@@ -128,6 +126,8 @@ class RegisterHostHandlerTest extends TestCase
         $domainHostRepository
             ->expects($this->never())
             ->method('add');
+
+        $this->expectException(HostAlreadyExist::class);
 
         $handler($command);
     }

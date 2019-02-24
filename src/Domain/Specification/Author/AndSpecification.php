@@ -5,7 +5,7 @@ namespace Domain\Specification\Author;
 
 use Domain\{
     Specification\AndSpecification as ParentSpec,
-    Entity\Author
+    Entity\Author,
 };
 
 final class AndSpecification extends ParentSpec implements Specification

@@ -8,10 +8,10 @@ use Domain\{
     Entity\CitationAppearance\Identity,
     Entity\Citation\Identity as CitationIdentity,
     Entity\HttpResource\Identity as ResourceIdentity,
-    Event\CitationAppearanceRegistered
+    Event\CitationAppearanceRegistered,
 };
 use Innmind\TimeContinuum\PointInTimeInterface;
-use Innmind\EventBus\ContainsRecordedEventsInterface;
+use Innmind\EventBus\ContainsRecordedEvents;
 use PHPUnit\Framework\TestCase;
 
 class CitationAppearanceTest extends TestCase
@@ -25,7 +25,7 @@ class CitationAppearanceTest extends TestCase
             $foundAt = $this->createMock(PointInTimeInterface::class)
         );
 
-        $this->assertInstanceOf(ContainsRecordedEventsInterface::class, $entity);
+        $this->assertInstanceOf(ContainsRecordedEvents::class, $entity);
         $this->assertSame($identity, $entity->identity());
         $this->assertSame($citation, $entity->citation());
         $this->assertSame($resource, $entity->resource());

@@ -1,9 +1,0 @@
-Domain\Entity\Author:
-    type: aggregate
-    labels: [Person, Author]
-    identity:
-        property: identity
-        type: App\Entity\Author\Identity
-    properties:
-        name:
-            type: author_name

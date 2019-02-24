@@ -3,7 +3,10 @@ declare(strict_types = 1);
 
 namespace Tests\Domain\Entity\Domain;
 
-use Domain\Entity\Domain\Name;
+use Domain\{
+    Entity\Domain\Name,
+    Exception\DomainException,
+};
 use PHPUnit\Framework\TestCase;
 
 class NameTest extends TestCase
@@ -13,11 +16,10 @@ class NameTest extends TestCase
         $this->assertSame('foo', (string) new Name('foo'));
     }
 
-    /**
-     * @expectedException Domain\Exception\DomainException
-     */
     public function testThrowWhenEmptyName()
     {
+        $this->expectException(DomainException::class);
+
         new Name('');
     }
 }

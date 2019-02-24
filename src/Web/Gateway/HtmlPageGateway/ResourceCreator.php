@@ -12,7 +12,7 @@ use App\Entity\{
     Author\Identity as AuthorIdentity,
     ResourceAuthor\Identity as ResourceAuthorIdentity,
     Citation\Identity as CitationIdentity,
-    CitationAppearance\Identity as CitationAppearanceIdentity
+    CitationAppearance\Identity as CitationAppearanceIdentity,
 };
 use Domain\{
     Command\RegisterDomain,
@@ -41,33 +41,33 @@ use Domain\{
     Entity\HtmlPage\Anchor,
     Entity\Author\Name as AuthorName,
     Entity\Citation\Text as CitationText,
-    Model\Language
+    Model\Language,
 };
 use Innmind\Url\{
     Authority\Host,
     Path,
     Query,
     NullQuery,
-    Url
+    Url,
 };
 use Innmind\Colour\Colour;
 use Innmind\Rest\Server\{
     ResourceCreator as ResourceCreatorInterface,
     Definition\HttpResource as ResourceDefinition,
     HttpResource,
-    Identity as IdentityInterface
+    Identity as IdentityInterface,
 };
-use Innmind\CommandBus\CommandBusInterface;
+use Innmind\CommandBus\CommandBus;
 use Innmind\Immutable\Set;
 use Ramsey\Uuid\Uuid;
 
 final class ResourceCreator implements ResourceCreatorInterface
 {
-    private $commandBus;
+    private $handle;
 
-    public function __construct(CommandBusInterface $commandBus)
+    public function __construct(CommandBus $handle)
     {
-        $this->commandBus = $commandBus;
+        $this->handle = $handle;
     }
 
     public function __invoke(
@@ -96,7 +96,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     private function registerHost(HttpResource $resource): HostIdentity
     {
         try {
-            $this->commandBus->handle(
+            ($this->handle)(
                 new RegisterDomain(
                     $domain = new DomainIdentity((string) Uuid::uuid4()),
                     $host = new Host($resource->property('host')->value())
@@ -107,7 +107,7 @@ final class ResourceCreator implements ResourceCreatorInterface
         }
 
         try {
-            $this->commandBus->handle(
+            ($this->handle)(
                 new RegisterHost(
                     $identity = new HostIdentity((string) Uuid::uuid4()),
                     $domain,
@@ -128,7 +128,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     ): Identity {
         $query = $resource->property('query')->value();
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new RegisterHtmlPage(
                 $identity = new Identity((string) Uuid::uuid4()),
                 $host,
@@ -149,7 +149,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new SpecifyCharset(
                 $identity,
                 new Charset($resource->property('charset')->value())
@@ -171,7 +171,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             $languages = $languages->add(new Language($language));
         }
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new SpecifyLanguages(
                 $identity,
                 $languages
@@ -188,7 +188,7 @@ final class ResourceCreator implements ResourceCreatorInterface
         }
 
         try {
-            $this->commandBus->handle(
+            ($this->handle)(
                 new RegisterAuthor(
                     $author = new AuthorIdentity((string) Uuid::uuid4()),
                     new AuthorName(
@@ -200,7 +200,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             $author = $e->author()->identity();
         }
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new RegisterResourceAuthor(
                 new ResourceAuthorIdentity((string) Uuid::uuid4()),
                 $author,
@@ -228,7 +228,7 @@ final class ResourceCreator implements ResourceCreatorInterface
     private function registerCitation(string $citation, Identity $identity): void
     {
         try {
-            $this->commandBus->handle(
+            ($this->handle)(
                 new RegisterCitation(
                     $citationIdentity = new CitationIdentity((string) Uuid::uuid4()),
                     new CitationText($citation)
@@ -238,7 +238,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             $citationIdentity = $e->citation()->identity();
         }
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new RegisterAppearance(
                 new CitationAppearanceIdentity((string) Uuid::uuid4()),
                 $citationIdentity,
@@ -255,7 +255,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new FlagAsJournal(
                 $identity
             )
@@ -270,7 +270,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new SpecifyAnchors(
                 $identity,
                 $resource
@@ -294,7 +294,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new SpecifyAndroidAppLink(
                 $identity,
                 Url::fromString(
@@ -312,7 +312,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new SpecifyDescription(
                 $identity,
                 $resource->property('description')->value()
@@ -328,7 +328,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new SpecifyIosAppLink(
                 $identity,
                 Url::fromString(
@@ -346,7 +346,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new SpecifyMainContent(
                 $identity,
                 $resource->property('main_content')->value()
@@ -366,7 +366,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             $resource->property('theme_colour')->value()
         );
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new SpecifyThemeColour(
                 $identity,
                 $colour->toRGBA()
@@ -382,7 +382,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new SpecifyTitle(
                 $identity,
                 $resource->property('title')->value()
@@ -398,7 +398,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $this->commandBus->handle(
+        ($this->handle)(
             new SpecifyPreview(
                 $identity,
                 Url::fromString(
