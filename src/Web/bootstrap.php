@@ -95,8 +95,8 @@ function bootstrap(
             )
         ),
         new Condition('~^/~'),
-        (new Map('string', Fallback::class))
-            ->put(InvalidApiKey::class, new Unauthorized)
+        Map::of('string', Fallback::class)
+            (InvalidApiKey::class, new Unauthorized)
     );
 
     return $authenticate(

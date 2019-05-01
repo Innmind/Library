@@ -123,7 +123,7 @@ return [
         new RelationshipEdge('author', App\Entity\Author\Identity::class, 'identity'),
         new RelationshipEdge('resource', App\Entity\HttpResource\Identity::class, 'identity'),
         Map::of('string', Type::class)
-            ('foundAt', new PointInTimeType)
+            ('asOf', new PointInTimeType)
     ),
     Relationship::of(
         new ClassName(Entity\Alternate::class),

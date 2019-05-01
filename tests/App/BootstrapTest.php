@@ -14,6 +14,7 @@ use Innmind\Filesystem\Adapter\MemoryAdapter;
 use Innmind\CommandBus\CommandBus;
 use Innmind\Neo4j\DBAL\Connection;
 use Innmind\HttpTransport\Transport;
+use Innmind\Immutable\Map;
 use PHPUnit\Framework\TestCase;
 
 class BootstrapTest extends TestCase
@@ -21,6 +22,9 @@ class BootstrapTest extends TestCase
     public function testBootstrap()
     {
         $app = bootstrap(
+            static function() {
+                return Map::of('string', 'callable');
+            },
             $this->createMock(Transport::class),
             Url::fromString('http://neo4j:ci@neo4j:7474/'),
             new MemoryAdapter

@@ -3,13 +3,13 @@ declare(strict_types = 1);
 
 namespace App;
 
-use function Domain\bootstrap as domain;
 use function Innmind\HttpTransport\bootstrap as http;
 use function Innmind\Neo4j\DBAL\bootstrap as dbal;
 use function Innmind\Neo4j\ONM\bootstrap as onm;
 use function Innmind\CommandBus\bootstrap as commandBus;
 use function Innmind\EventBus\bootstrap as eventBus;
 use function Innmind\Logger\bootstrap as logger;
+use function Innmind\Stack\stack;
 use Innmind\Neo4j\ONM\{
     Metadata,
     Identity\Generator\UuidGenerator,
@@ -30,9 +30,11 @@ use Innmind\Immutable\{
 use Pdp;
 
 /**
+ * @param callable:MapInterface<string, callable> $domain
  * @param SetInterface<UrlInterface>|null $dsns
  */
 function bootstrap(
+    callable $domain,
     Transport $http,
     UrlInterface $neo4j,
     Adapter $domainEventStore,
@@ -132,7 +134,7 @@ function bootstrap(
         $onm['manager']->repository(\Domain\Entity\Reference::class)
     );
 
-    $handlers = domain(
+    $handlers = $domain(
         $authorRepository,
         $citationRepository,
         $citationAppearanceRepository,
@@ -156,15 +158,13 @@ function bootstrap(
         logger('app', ...$dsns)($activationLevel)
     );
 
-    $commandBus = $log(
-        $onm['command_bus']['clear_domain_events'](
-            $onm['command_bus']['dispatch_domain_events'](
-                $onm['command_bus']['flush'](
-                    $commandBuses['bus']($handlers)
-                )
-            )
-        )
-    );
+    $commandBus = stack(
+        $log,
+        $onm['command_bus']['clear_domain_events'],
+        $onm['command_bus']['dispatch_domain_events'],
+        $onm['command_bus']['flush'],
+        $commandBuses['bus']
+    )($handlers);
 
     return [
         'command_bus' => $commandBus,

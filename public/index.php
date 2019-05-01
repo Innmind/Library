@@ -18,6 +18,8 @@ use Innmind\Url\{
 };
 use function Innmind\HttpFramework\env;
 use function Innmind\Debug\bootstrap as debug;
+use function Innmind\SilentCartographer\bootstrap as cartographer;
+use function Innmind\Stack\curry;
 use Innmind\HttpFramework\RequestHandler;
 use Innmind\OperatingSystem\OperatingSystem;
 use Innmind\Debug\{
@@ -35,6 +37,8 @@ new class extends Main
 
     protected function preload(OperatingSystem $os, Environment $environment): void
     {
+        $os = cartographer($os)['http_server'](Url::fromString(__DIR__));
+
         if ($this->handle) {
             return;
         }
@@ -57,6 +61,8 @@ new class extends Main
             );
         }
 
+        $domain = curry('Domain\bootstrap');
+
         if ($debug) {
             $debugger = debug(
                 $os,
@@ -66,9 +72,15 @@ new class extends Main
                 Set::of('string', CaptureAppGraph::class)
             );
             $os = $debugger['os']();
+            $domain = static function(...$arguments) use ($domain, $debugger) {
+                return $domain(...$arguments)->map(static function(string $command, callable $handler) use ($debugger) {
+                    return $debugger['callable']($handler);
+                });
+            };
         }
 
         $app = app(
+            $domain,
             $os->remote()->http(),
             Url::fromString($environment->get('neo4j')),
             $os->filesystem()->mount(new Path(__DIR__.'/../var/innmind/domain_events')),
