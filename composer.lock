@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e24946292fec6dc2abc65c598b034287",
+    "content-hash": "7edd4b6c9664cca820d358b11bb674f7",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -1593,6 +1593,53 @@
                 "specification"
             ],
             "time": "2019-01-06T08:25:50+00:00"
+        },
+        {
+            "name": "innmind/stack",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/Stack.git",
+                "reference": "b7137df8c77bbdfd34d8c34666b0af5a7eb444ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/Stack/zipball/b7137df8c77bbdfd34d8c34666b0af5a7eb444ee",
+                "reference": "b7137df8c77bbdfd34d8c34666b0af5a7eb444ee",
+                "shasum": ""
+            },
+            "require": {
+                "innmind/immutable": "^2.13",
+                "php": "~7.2"
+            },
+            "require-dev": {
+                "giorgiosironi/eris": "^0.11.0",
+                "phpunit/phpunit": "~8.0",
+                "symfony/var-dumper": "^4.2"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "Helper to build stacks",
+            "homepage": "http://github.com/Innmind/Stack",
+            "keywords": [
+                "builder",
+                "stack"
+            ],
+            "time": "2019-04-27T08:34:32+00:00"
         },
         {
             "name": "innmind/stack-trace",

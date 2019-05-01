@@ -10,6 +10,7 @@ use function Innmind\Neo4j\ONM\bootstrap as onm;
 use function Innmind\CommandBus\bootstrap as commandBus;
 use function Innmind\EventBus\bootstrap as eventBus;
 use function Innmind\Logger\bootstrap as logger;
+use function Innmind\Stack\stack;
 use Innmind\Neo4j\ONM\{
     Metadata,
     Identity\Generator\UuidGenerator,
@@ -156,15 +157,13 @@ function bootstrap(
         logger('app', ...$dsns)($activationLevel)
     );
 
-    $commandBus = $log(
-        $onm['command_bus']['clear_domain_events'](
-            $onm['command_bus']['dispatch_domain_events'](
-                $onm['command_bus']['flush'](
-                    $commandBuses['bus']($handlers)
-                )
-            )
-        )
-    );
+    $commandBus = stack(
+        $log,
+        $onm['command_bus']['clear_domain_events'],
+        $onm['command_bus']['dispatch_domain_events'],
+        $onm['command_bus']['flush'],
+        $commandBuses['bus']
+    )($handlers);
 
     return [
         'command_bus' => $commandBus,
