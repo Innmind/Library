@@ -18,6 +18,7 @@ use Innmind\Url\{
 };
 use function Innmind\HttpFramework\env;
 use function Innmind\Debug\bootstrap as debug;
+use function Innmind\SilentCartographer\bootstrap as cartographer;
 use Innmind\HttpFramework\RequestHandler;
 use Innmind\OperatingSystem\OperatingSystem;
 use Innmind\Debug\{
@@ -35,6 +36,8 @@ new class extends Main
 
     protected function preload(OperatingSystem $os, Environment $environment): void
     {
+        $os = cartographer($os)['http_server'](Url::fromString(__DIR__));
+
         if ($this->handle) {
             return;
         }
