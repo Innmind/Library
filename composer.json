@@ -52,5 +52,10 @@
     "scripts": {
         "test" : "bin/phpunit --colors=always"
     },
-    "bin": ["bin/library"]
+    "bin": ["bin/library"],
+    "extra": {
+        "gene": {
+            "expression": ["bin/library install"]
+        }
+    }
 }
