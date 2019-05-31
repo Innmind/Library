@@ -784,16 +784,16 @@
         },
         {
             "name": "innmind/installation-monitor",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/InstallationMonitor.git",
-                "reference": "a681eecbf0f6fc5ba74d43b0db7009f132d57cdb"
+                "reference": "18dfd007bf10bf3f33745b89d5b0e0cff81f5147"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/InstallationMonitor/zipball/a681eecbf0f6fc5ba74d43b0db7009f132d57cdb",
-                "reference": "a681eecbf0f6fc5ba74d43b0db7009f132d57cdb",
+                "url": "https://api.github.com/repos/Innmind/InstallationMonitor/zipball/18dfd007bf10bf3f33745b89d5b0e0cff81f5147",
+                "reference": "18dfd007bf10bf3f33745b89d5b0e0cff81f5147",
                 "shasum": ""
             },
             "require": {
@@ -804,6 +804,7 @@
                 "innmind/operating-system": "^1.0",
                 "innmind/server-control": "^2.5",
                 "innmind/server-status": "^1.1",
+                "innmind/silent-cartographer": "^1.1",
                 "php": "~7.2"
             },
             "require-dev": {
@@ -814,6 +815,16 @@
                 "installation-monitor"
             ],
             "type": "library",
+            "extra": {
+                "gene": {
+                    "expression": [
+                        "installation-monitor oversee --daemon"
+                    ],
+                    "suppression": [
+                        "installation-monitor kill"
+                    ]
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Innmind\\InstallationMonitor\\": "src/"
@@ -834,7 +845,7 @@
             ],
             "description": "Simple socket to accumulate and dispatch system events",
             "homepage": "http://github.com/Innmind/InstallationMonitor",
-            "time": "2019-02-23T12:35:14+00:00"
+            "time": "2019-05-04T11:32:30+00:00"
         },
         {
             "name": "innmind/ip",
@@ -2975,16 +2986,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v4.2.7",
+            "version": "v4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "e16b9e471703b2c60b95f14d31c1239f68f11601"
+                "reference": "988ab7d70c267c34efa85772ca20de3fad11c74b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/e16b9e471703b2c60b95f14d31c1239f68f11601",
-                "reference": "e16b9e471703b2c60b95f14d31c1239f68f11601",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/988ab7d70c267c34efa85772ca20de3fad11c74b",
+                "reference": "988ab7d70c267c34efa85772ca20de3fad11c74b",
                 "shasum": ""
             },
             "require": {
@@ -2994,7 +3005,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.2-dev"
+                    "dev-master": "4.3-dev"
                 }
             },
             "autoload": {
@@ -3021,20 +3032,20 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2019-02-07T11:40:08+00:00"
+            "time": "2019-05-24T12:50:04+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v4.2.7",
+            "version": "v4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "e45135658bd6c14b61850bf131c4f09a55133f69"
+                "reference": "b3d4f4c0e4eadfdd8b296af9ca637cfbf51d8176"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/e45135658bd6c14b61850bf131c4f09a55133f69",
-                "reference": "e45135658bd6c14b61850bf131c4f09a55133f69",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/b3d4f4c0e4eadfdd8b296af9ca637cfbf51d8176",
+                "reference": "b3d4f4c0e4eadfdd8b296af9ca637cfbf51d8176",
                 "shasum": ""
             },
             "require": {
@@ -3043,7 +3054,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.2-dev"
+                    "dev-master": "4.3-dev"
                 }
             },
             "autoload": {
@@ -3070,7 +3081,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2019-04-06T13:51:08+00:00"
+            "time": "2019-05-26T20:47:49+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -3132,16 +3143,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v4.2.7",
+            "version": "v4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "8cf39fb4ccff793340c258ee7760fd40bfe745fe"
+                "reference": "a5e3dd4e93a364668034a3cb6efa963d0b33ab45"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/8cf39fb4ccff793340c258ee7760fd40bfe745fe",
-                "reference": "8cf39fb4ccff793340c258ee7760fd40bfe745fe",
+                "url": "https://api.github.com/repos/symfony/process/zipball/a5e3dd4e93a364668034a3cb6efa963d0b33ab45",
+                "reference": "a5e3dd4e93a364668034a3cb6efa963d0b33ab45",
                 "shasum": ""
             },
             "require": {
@@ -3150,7 +3161,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.2-dev"
+                    "dev-master": "4.3-dev"
                 }
             },
             "autoload": {
@@ -3177,7 +3188,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2019-04-10T16:20:36+00:00"
+            "time": "2019-05-26T20:47:49+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -3839,7 +3850,7 @@
                     "homepage": "http://blog.astrumfutura.com"
                 },
                 {
-                    "name": "Théo FIDRY",
+                    "name": "Théo Fidry",
                     "email": "theo.fidry@gmail.com"
                 }
             ],
