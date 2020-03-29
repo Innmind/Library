@@ -7,20 +7,20 @@ use Domain\{
     Entity\HttpResource\Identity,
     Model\Language
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 final class SpecifyLanguages
 {
     private Identity $identity;
-    private SetInterface $languages;
+    private Set $languages;
 
     public function __construct(
         Identity $identity,
-        SetInterface $languages
+        Set $languages
     ) {
         if ((string) $languages->type() !== Language::class) {
             throw new \TypeError(sprintf(
-                'Argument 2 must be of type SetInterface<%s>',
+                'Argument 2 must be of type Set<%s>',
                 Language::class
             ));
         }
@@ -34,7 +34,7 @@ final class SpecifyLanguages
         return $this->identity;
     }
 
-    public function languages(): SetInterface
+    public function languages(): Set
     {
         return $this->languages;
     }

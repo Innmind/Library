@@ -10,6 +10,7 @@ use Domain\{
     Exception\CitationAlreadyExist,
     Specification\Citation\Text
 };
+use function Innmind\Immutable\first;
 
 final class RegisterCitationHandler
 {
@@ -25,7 +26,7 @@ final class RegisterCitationHandler
         $citations = $this->repository->matching(new Text($wished->text()));
 
         if ($citations->size() > 0) {
-            throw new CitationAlreadyExist($citations->current());
+            throw new CitationAlreadyExist(first($citations));
         }
 
         $this->repository->add(

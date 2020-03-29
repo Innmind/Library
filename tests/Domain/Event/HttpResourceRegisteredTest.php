@@ -8,8 +8,8 @@ use Domain\{
     Event\HttpResourceRegistered
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query
 };
 use PHPUnit\Framework\TestCase;
 
@@ -19,8 +19,8 @@ class HttpResourceRegisteredTest extends TestCase
     {
         $event = new HttpResourceRegistered(
             $identity = $this->createMock(Identity::class),
-            $path = $this->createMock(PathInterface::class),
-            $query = $this->createMock(QueryInterface::class)
+            $path = Path::none(),
+            $query = Query::none()
         );
 
         $this->assertSame($identity, $event->identity());

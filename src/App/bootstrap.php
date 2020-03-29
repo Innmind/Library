@@ -15,33 +15,33 @@ use Innmind\Neo4j\ONM\{
     Identity\Generator\UuidGenerator,
     Identity\Generator,
 };
-use Innmind\TimeContinuum\{
-    TimeContinuum\Earth,
-    Timezone\Earth\UTC,
+use Innmind\TimeContinuum\Earth\{
+    Clock as Earth,
+    Timezone\UTC,
 };
-use Innmind\Url\UrlInterface;
+use Innmind\Url\Url;
 use Innmind\Filesystem\Adapter;
 use Innmind\HttpTransport\Transport;
 use Innmind\Immutable\{
     Map,
-    SetInterface,
     Set,
 };
+use function Innmind\Immutable\unwrap;
 use Pdp;
 
 /**
  * @param callable:MapInterface<string, callable> $domain
- * @param SetInterface<UrlInterface>|null $dsns
+ * @param Set<Url>|null $dsns
  */
 function bootstrap(
     callable $domain,
     Transport $http,
-    UrlInterface $neo4j,
+    Url $neo4j,
     Adapter $domainEventStore,
-    SetInterface $dsns = null,
+    Set $dsns = null,
     string $activationLevel = null
 ): array {
-    $dsns = $dsns ?? Set::of(UrlInterface::class);
+    $dsns = $dsns ?? Set::of(Url::class);
     $domainParser = (new Pdp\Manager(
         new Pdp\Cache,
         new class implements Pdp\HttpClient {
@@ -53,7 +53,7 @@ function bootstrap(
     ))->getRules();
 
     $clock = new Earth(new UTC);
-    $log = http()['logger'](logger('http', ...$dsns)($activationLevel));
+    $log = http()['logger'](logger('http', ...unwrap($dsns))($activationLevel));
     $httpTransport = $log($http);
 
     $eventBuses = eventBus();
@@ -155,7 +155,7 @@ function bootstrap(
 
     $commandBuses = commandBus();
     $log = $commandBuses['logger'](
-        logger('app', ...$dsns)($activationLevel)
+        logger('app', ...unwrap($dsns))($activationLevel)
     );
 
     $commandBus = stack(

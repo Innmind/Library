@@ -11,6 +11,7 @@ use Domain\{
     Specification\Reference\Target,
     Exception\ReferenceAlreadyExist
 };
+use function Innmind\Immutable\first;
 
 final class ReferResourceHandler
 {
@@ -29,7 +30,7 @@ final class ReferResourceHandler
         );
 
         if ($references->size() > 0) {
-            throw new ReferenceAlreadyExist($references->current());
+            throw new ReferenceAlreadyExist(first($references));
         }
 
         $this->repository->add(

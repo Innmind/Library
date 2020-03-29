@@ -7,7 +7,7 @@ use Domain\{
     Command\RegisterDomain,
     Entity\Domain\Identity
 };
-use Innmind\Url\Authority\HostInterface;
+use Innmind\Url\Authority\Host;
 use PHPUnit\Framework\TestCase;
 
 class RegisterDomainTest extends TestCase
@@ -16,7 +16,7 @@ class RegisterDomainTest extends TestCase
     {
         $command = new RegisterDomain(
             $identity = $this->createMock(Identity::class),
-            $host = $this->createMock(HostInterface::class)
+            $host = Host::none()
         );
 
         $this->assertSame($identity, $command->identity());

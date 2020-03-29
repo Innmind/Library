@@ -13,8 +13,8 @@ use Domain\{
     Event\Image\DimensionSpecified
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query
 };
 use PHPUnit\Framework\TestCase;
 
@@ -36,8 +36,8 @@ class SpecifyDimensionHandlerTest extends TestCase
             ->willReturn(
                 $image = new Image(
                     $command->identity(),
-                    $this->createMock(PathInterface::class),
-                    $this->createMock(QueryInterface::class)
+                    Path::none(),
+                    Query::none()
                 )
             );
 
@@ -45,7 +45,7 @@ class SpecifyDimensionHandlerTest extends TestCase
         $this->assertCount(1, $image->recordedEvents());
         $this->assertInstanceOf(
             DimensionSpecified::class,
-            $image->recordedEvents()->current()
+            $image->recordedEvents()->first()
         );
         $this->assertSame($command->dimension(), $image->dimension());
     }

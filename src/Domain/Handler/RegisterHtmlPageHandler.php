@@ -16,19 +16,19 @@ use Domain\{
     Specification\HostResource\Host,
     Exception\HtmlPageAlreadyExist
 };
-use Innmind\TimeContinuum\TimeContinuumInterface;
+use Innmind\TimeContinuum\Clock;
 use Innmind\Immutable\Set;
 
 final class RegisterHtmlPageHandler
 {
     private HtmlPageRepository $htmlPageRepository;
     private HostResourceRepository $relationRepository;
-    private TimeContinuumInterface $clock;
+    private Clock $clock;
 
     public function __construct(
         HtmlPageRepository $htmlPageRepository,
         HostResourceRepository $relationRepository,
-        TimeContinuumInterface $clock
+        Clock $clock
     ) {
         $this->htmlPageRepository = $htmlPageRepository;
         $this->relationRepository = $relationRepository;
@@ -70,7 +70,7 @@ final class RegisterHtmlPageHandler
         }
 
         $identities = $htmlPages->reduce(
-            new Set(ResourceIdentity::class),
+            Set::of(ResourceIdentity::class),
             function(Set $identities, HtmlPage $htmlPage): Set {
                 return $identities->add($htmlPage->identity());
             }

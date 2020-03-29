@@ -17,7 +17,7 @@ class LanguagesSpecifiedTest extends TestCase
     {
         $event = new LanguagesSpecified(
             $identity = $this->createMock(Identity::class),
-            $languages = new Set(Language::class)
+            $languages = Set::of(Language::class)
         );
 
         $this->assertSame($identity, $event->identity());
@@ -27,11 +27,11 @@ class LanguagesSpecifiedTest extends TestCase
     public function testThrowWhenInvalidSetOfLanguages()
     {
         $this->expectException(\TypeError::class);
-        $this->expectExceptionMessage('Argument 2 must be of type SetInterface<Domain\Model\Language>');
+        $this->expectExceptionMessage('Argument 2 must be of type Set<Domain\Model\Language>');
 
         new LanguagesSpecified(
             $this->createMock(Identity::class),
-            new Set('string')
+            Set::of('string')
         );
     }
 }

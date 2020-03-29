@@ -13,12 +13,13 @@ use Innmind\InstallationMonitor\{
     Client,
     Event,
 };
+use Innmind\Url\Path;
 use Innmind\Immutable\{
     Map,
     Str,
-    SequenceInterface,
     Sequence,
 };
+use function Innmind\Immutable\join;
 
 final class Install implements Command
 {
@@ -31,7 +32,7 @@ final class Install implements Command
 
     public function __invoke(Environment $env, Arguments $arguments, Options $options): void
     {
-        $envFile = $env->workingDirectory().'/config/.env';
+        $envFile = $env->workingDirectory()->toString().'config/.env';
 
         if (file_exists($envFile)) {
             $env->error()->write(
@@ -42,14 +43,14 @@ final class Install implements Command
             return;
         }
 
-        $envVars = (new Map('string', 'string'))
-            ->put('API_KEY', \sha1(\random_bytes(32)));
+        $envVars = Map::of('string', 'string')
+            ('API_KEY', \sha1(\random_bytes(32)));
 
         $passwords = $this
             ->client
             ->events()
             ->filter(static function(Event $event): bool {
-                return (string) $event->name() === 'neo4j.password_changed';
+                return $event->name()->toString() === 'neo4j.password_changed';
             });
 
         if ($passwords->size() !== 1) {
@@ -61,7 +62,7 @@ final class Install implements Command
             return;
         }
 
-        $event = $passwords->current()->payload();
+        $event = $passwords->first()->payload();
         $user = $event->get('user');
         $password = $event->get('password');
 
@@ -72,35 +73,37 @@ final class Install implements Command
 
         file_put_contents(
             $envFile,
-            (string) $envVars
-                ->reduce(
-                    new Sequence,
-                    static function(SequenceInterface $lines, string $key, string $value): SequenceInterface {
-                        return $lines->add(sprintf(
-                            '%s=%s',
-                            $key,
-                            $value
-                        ));
-                    }
-                )
-                ->join("\n")
+            join(
+                "\n",
+                $envVars
+                    ->reduce(
+                        Sequence::strings(),
+                        static function(Sequence $lines, string $key, string $value): Sequence {
+                            return $lines->add(sprintf(
+                                '%s=%s',
+                                $key,
+                                $value
+                            ));
+                        }
+                    )
+            )->toString(),
         );
 
         $this->client->send(
             new Event(
                 new Event\Name('website_available'), // useful for infrastructure-nginx
-                (new Map('string', 'variable'))
-                    ->put('path', $env->workingDirectory().'/public')
+                Map::of('string', 'scalar|array')
+                    ('path', $env->workingDirectory()->resolve(Path::of('public'))->toString())
             ),
             new Event(
                 new Event\Name('library_installed'), // useful for crawler-app
-                (new Map('string', 'variable'))
-                    ->put('apiKey', $envVars->get('API_KEY'))
+                Map::of('string', 'scalar|array')
+                    ('apiKey', $envVars->get('API_KEY'))
             )
         );
     }
 
-    public function __toString(): string
+    public function toString(): string
     {
         return <<<USAGE
 install

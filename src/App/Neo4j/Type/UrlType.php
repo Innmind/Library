@@ -32,7 +32,7 @@ final class UrlType implements Type
             throw new InvalidArgumentException;
         }
 
-        return (string) $value;
+        return $value->toString();
     }
 
     /**
@@ -40,7 +40,7 @@ final class UrlType implements Type
      */
     public function fromDatabase($value)
     {
-        return Url::fromString((string) $value);
+        return Url::of((string) $value);
     }
 
     /**

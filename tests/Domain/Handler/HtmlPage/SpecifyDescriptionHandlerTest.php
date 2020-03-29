@@ -12,8 +12,8 @@ use Domain\{
     Event\HtmlPage\DescriptionSpecified
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query
 };
 use PHPUnit\Framework\TestCase;
 
@@ -35,8 +35,8 @@ class SpecifyDescriptionHandlerTest extends TestCase
             ->willReturn(
                 $page = new HtmlPage(
                     $command->identity(),
-                    $this->createMock(PathInterface::class),
-                    $this->createMock(QueryInterface::class)
+                    Path::none(),
+                    Query::none()
                 )
             );
 
@@ -44,7 +44,7 @@ class SpecifyDescriptionHandlerTest extends TestCase
         $this->assertSame('foo', $page->description());
         $this->assertInstanceOf(
             DescriptionSpecified::class,
-            $page->recordedEvents()->current()
+            $page->recordedEvents()->first()
         );
     }
 }

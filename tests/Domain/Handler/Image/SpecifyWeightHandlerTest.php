@@ -13,8 +13,8 @@ use Domain\{
     Event\Image\WeightSpecified
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query
 };
 use PHPUnit\Framework\TestCase;
 
@@ -36,8 +36,8 @@ class SpecifyWeightHandlerTest extends TestCase
             ->willReturn(
                 $image = new Image(
                     $command->identity(),
-                    $this->createMock(PathInterface::class),
-                    $this->createMock(QueryInterface::class)
+                    Path::none(),
+                    Query::none()
                 )
             );
 
@@ -45,7 +45,7 @@ class SpecifyWeightHandlerTest extends TestCase
         $this->assertCount(1, $image->recordedEvents());
         $this->assertInstanceOf(
             WeightSpecified::class,
-            $image->recordedEvents()->current()
+            $image->recordedEvents()->first()
         );
         $this->assertSame($command->weight(), $image->weight());
     }

@@ -20,7 +20,7 @@ use Innmind\HttpFramework\RequestHandler;
 use Innmind\Http\Message\{
     ServerRequest,
     Response,
-    StatusCode\StatusCode,
+    StatusCode,
 };
 
 final class CatchNotFound implements RequestHandler

@@ -27,7 +27,7 @@ final class ColourType implements Type
             return;
         }
 
-        return (string) $value->toRGBA();
+        return $value->toRGBA()->toString();
     }
 
     /**
@@ -35,7 +35,7 @@ final class ColourType implements Type
      */
     public function fromDatabase($value)
     {
-        return RGBA::fromString((string) $value);
+        return RGBA::of((string) $value);
     }
 
     /**

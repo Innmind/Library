@@ -39,15 +39,15 @@ class HostTest extends TestCase
         $this->assertCount(1, $host->recordedEvents());
         $this->assertInstanceOf(
             HostRegistered::class,
-            $host->recordedEvents()->current()
+            $host->recordedEvents()->first()
         );
         $this->assertSame(
             $identity,
-            $host->recordedEvents()->current()->identity()
+            $host->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $name,
-            $host->recordedEvents()->current()->name()
+            $host->recordedEvents()->first()->name()
         );
     }
 }

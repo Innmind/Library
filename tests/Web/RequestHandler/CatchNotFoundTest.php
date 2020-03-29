@@ -18,9 +18,10 @@ use Domain\Exception\{
     ReferenceNotFound,
 };
 use Innmind\HttpFramework\RequestHandler;
-use Innmind\Http\Message\{
-    ServerRequest,
-    Response,
+use Innmind\Http\{
+    Message\ServerRequest,
+    Message\Response,
+    ProtocolVersion,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -40,6 +41,10 @@ class CatchNotFoundTest extends TestCase
             $inner = $this->createMock(RequestHandler::class)
         );
         $request = $this->createMock(ServerRequest::class);
+        $request
+            ->expects($this->any())
+            ->method('protocolVersion')
+            ->willReturn(new ProtocolVersion(2, 0));
         $inner
             ->expects($this->once())
             ->method('__invoke')
@@ -58,6 +63,10 @@ class CatchNotFoundTest extends TestCase
             $inner = $this->createMock(RequestHandler::class)
         );
         $request = $this->createMock(ServerRequest::class);
+        $request
+            ->expects($this->any())
+            ->method('protocolVersion')
+            ->willReturn(new ProtocolVersion(2, 0));
         $inner
             ->expects($this->once())
             ->method('__invoke')
@@ -76,6 +85,10 @@ class CatchNotFoundTest extends TestCase
             $inner = $this->createMock(RequestHandler::class)
         );
         $request = $this->createMock(ServerRequest::class);
+        $request
+            ->expects($this->any())
+            ->method('protocolVersion')
+            ->willReturn(new ProtocolVersion(2, 0));
         $inner
             ->expects($this->once())
             ->method('__invoke')

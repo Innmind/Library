@@ -42,42 +42,42 @@ final class ResourceAccessor implements ResourceAccessorInterface
         RestIdentity $identity
     ): HttpResource {
         $image = $this->repository->get(
-            new Identity((string) $identity)
+            new Identity($identity->toString())
         );
         $result = $this->dbal->execute(
             (new Query)
-                ->match('host', ['Web', 'Host'])
-                ->linkedTo('resource', ['Web', 'Resource'])
+                ->match('host', 'Web', 'Host')
+                ->linkedTo('resource', 'Web', 'Resource')
                 ->through('RESOURCE_OF_HOST')
                 ->where('resource.identity = {identity}')
-                ->withParameter('identity', (string) $identity)
+                ->withParameter('identity', $identity->toString())
                 ->return('host')
         );
-        $properties = (new Map('string', Property::class))
-            ->put(
+        $properties = Map::of('string', Property::class)
+            (
                 'identity',
-                new Property('identity', (string) $image->identity())
+                new Property('identity', $image->identity()->toString())
             )
-            ->put(
+            (
                 'host',
                 new Property('host', $result->rows()->first()->value()['name'])
             )
-            ->put(
+            (
                 'path',
-                new Property('path', (string) $image->path())
+                new Property('path', $image->path()->toString())
             )
-            ->put(
+            (
                 'query',
-                new Property('query', (string) $image->query())
+                new Property('query', $image->query()->toString())
             )
-            ->put(
+            (
                 'descriptions',
                 new Property(
                     'descriptions',
                     $image
                         ->descriptions()
                         ->reduce(
-                            new Set('string'),
+                            Set::of('string'),
                             function(Set $carry, Description $description): Set {
                                 return $carry->add((string) $description);
                             }
@@ -90,9 +90,9 @@ final class ResourceAccessor implements ResourceAccessorInterface
                 'dimension',
                 new Property(
                     'dimension',
-                    (new Map('string', 'int'))
-                        ->put('width', $image->dimension()->width())
-                        ->put('height', $image->dimension()->height())
+                    Map::of('string', 'int')
+                        ('width', $image->dimension()->width())
+                        ('height', $image->dimension()->height())
                 )
             );
         }

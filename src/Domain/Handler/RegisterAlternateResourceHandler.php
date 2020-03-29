@@ -12,6 +12,7 @@ use Domain\{
     Specification\Alternate\Language,
     Exception\AlternateAlreadyExist
 };
+use function Innmind\Immutable\first;
 
 final class RegisterAlternateResourceHandler
 {
@@ -31,7 +32,7 @@ final class RegisterAlternateResourceHandler
         );
 
         if ($alternates->size() > 0) {
-            throw new AlternateAlreadyExist($alternates->current());
+            throw new AlternateAlreadyExist(first($alternates));
         }
 
         $this->repository->add(

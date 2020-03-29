@@ -15,7 +15,7 @@ use Domain\{
     Entity\HttpResource\Identity as ResourceIdentity,
 };
 use Innmind\Specification\Comparator;
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use PHPUnit\Framework\TestCase;
 
 class CitationTest extends TestCase
@@ -25,7 +25,7 @@ class CitationTest extends TestCase
         $identity = $this->createMock(CitationIdentity::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $spec = new Citation($identity);
 
@@ -41,24 +41,24 @@ class CitationTest extends TestCase
         $identity = $this->createMock(CitationIdentity::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $spec = new Citation($identity);
         $appearance = new Entity(
             $this->createMock(Identity::class),
             $this->createMock(CitationIdentity::class),
             $this->createMock(ResourceIdentity::class),
-            $this->createMock(PointInTimeInterface::class)
+            $this->createMock(PointInTime::class)
         );
         $appearance
             ->citation()
             ->expects($this->at(0))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $appearance
             ->citation()
             ->expects($this->at(1))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('foo');
 
         $this->assertTrue($spec->isSatisfiedBy($appearance));

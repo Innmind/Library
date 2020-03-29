@@ -42,42 +42,42 @@ final class ResourceAccessor implements ResourceAccessorInterface
         RestIdentity $identity
     ): HttpResource {
         $resource = $this->repository->get(
-            new Identity((string) $identity)
+            new Identity($identity->toString())
         );
         $result = $this->dbal->execute(
             (new Query)
-                ->match('host', ['Web', 'Host'])
-                ->linkedTo('resource', ['Web', 'Resource'])
+                ->match('host', 'Web', 'Host')
+                ->linkedTo('resource', 'Web', 'Resource')
                 ->through('RESOURCE_OF_HOST')
                 ->where('resource.identity = {identity}')
-                ->withParameter('identity', (string) $identity)
+                ->withParameter('identity', $identity->toString())
                 ->return('host')
         );
-        $properties = (new Map('string', Property::class))
-            ->put(
+        $properties = Map::of('string', Property::class)
+            (
                 'identity',
-                new Property('identity', (string) $resource->identity())
+                new Property('identity', $resource->identity()->toString())
             )
-            ->put(
+            (
                 'host',
                 new Property('host', $result->rows()->first()->value()['name'])
             )
-            ->put(
+            (
                 'path',
-                new Property('path', (string) $resource->path())
+                new Property('path', $resource->path()->toString())
             )
-            ->put(
+            (
                 'query',
-                new Property('query', (string) $resource->query())
+                new Property('query', $resource->query()->toString())
             )
-            ->put(
+            (
                 'languages',
                 new Property(
                     'languages',
                     $resource
                         ->languages()
                         ->reduce(
-                            new Set('string'),
+                            Set::of('string'),
                             function(Set $carry, Language $language): Set {
                                 return $carry->add((string) $language);
                             }

@@ -7,7 +7,7 @@ use Domain\{
     Command\HtmlPage\SpecifyIosAppLink,
     Entity\HtmlPage\Identity
 };
-use Innmind\Url\UrlInterface;
+use Innmind\Url\Url;
 use PHPUnit\Framework\TestCase;
 
 class SpecifyIosAppLinkTest extends TestCase
@@ -16,7 +16,7 @@ class SpecifyIosAppLinkTest extends TestCase
     {
         $command = new SpecifyIosAppLink(
             $identity = $this->createMock(Identity::class),
-            $url = $this->createMock(UrlInterface::class)
+            $url = Url::of('example.com')
         );
 
         $this->assertSame($identity, $command->identity());

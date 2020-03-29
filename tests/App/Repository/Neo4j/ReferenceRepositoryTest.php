@@ -18,10 +18,8 @@ use Innmind\Neo4j\ONM\{
     Repository,
     Exception\EntityNotFound,
 };
-use Innmind\Immutable\{
-    SetInterface,
-    Set,
-};
+use Innmind\Immutable\Set;
+use function Innmind\Immutable\unwrap;
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 
@@ -130,12 +128,12 @@ class ReferenceRepositoryTest extends TestCase
         $identity = new Identity((string) Uuid::uuid4());
         $infra
             ->expects($this->at(0))
-            ->method('has')
+            ->method('contains')
             ->with($identity)
             ->willReturn(true);
         $infra
             ->expects($this->at(1))
-            ->method('has')
+            ->method('contains')
             ->with($identity)
             ->willReturn(false);
 
@@ -152,14 +150,17 @@ class ReferenceRepositoryTest extends TestCase
             ->expects($this->once())
             ->method('all')
             ->willReturn(
-                $all = $this->createMock(SetInterface::class)
+                Set::of(
+                    Reference::class,
+                    new Reference(
+                        new Identity((string) Uuid::uuid4()),
+                        $this->createMock(HttpResourceIdentity::class),
+                        $this->createMock(HttpResourceIdentity::class)
+                    )
+                )
             );
-        $all
-            ->expects($this->once())
-            ->method('size')
-            ->willReturn(42);
 
-        $this->assertSame(42, $repository->count());
+        $this->assertSame(1, $repository->count());
     }
 
     public function testAll()
@@ -171,7 +172,7 @@ class ReferenceRepositoryTest extends TestCase
             ->expects($this->once())
             ->method('all')
             ->willReturn(
-                (new Set('object'))->add(
+                Set::objects(
                     $entity = new Reference(
                         new Identity((string) Uuid::uuid4()),
                         $this->createMock(HttpResourceIdentity::class),
@@ -182,9 +183,9 @@ class ReferenceRepositoryTest extends TestCase
 
         $all = $repository->all();
 
-        $this->assertInstanceOf(SetInterface::class, $all);
+        $this->assertInstanceOf(Set::class, $all);
         $this->assertSame(Reference::class, (string) $all->type());
-        $this->assertSame([$entity], $all->toPrimitive());
+        $this->assertSame([$entity], unwrap($all));
     }
 
     public function testMatching()
@@ -198,7 +199,7 @@ class ReferenceRepositoryTest extends TestCase
             ->method('matching')
             ->with($specification)
             ->willReturn(
-                (new Set('object'))->add(
+                Set::objects(
                     $entity = new Reference(
                         new Identity((string) Uuid::uuid4()),
                         $this->createMock(HttpResourceIdentity::class),
@@ -209,8 +210,8 @@ class ReferenceRepositoryTest extends TestCase
 
         $all = $repository->matching($specification);
 
-        $this->assertInstanceOf(SetInterface::class, $all);
+        $this->assertInstanceOf(Set::class, $all);
         $this->assertSame(Reference::class, (string) $all->type());
-        $this->assertSame([$entity], $all->toPrimitive());
+        $this->assertSame([$entity], unwrap($all));
     }
 }

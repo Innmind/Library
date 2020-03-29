@@ -14,7 +14,7 @@ use Domain\{
     Entity\HttpResource\Identity as ResourceIdentity,
 };
 use Innmind\Specification\Comparator;
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use PHPUnit\Framework\TestCase;
 
 class CanonicalTest extends TestCase
@@ -24,7 +24,7 @@ class CanonicalTest extends TestCase
         $identity = $this->createMock(ResourceIdentity::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $spec = new Canonical($identity);
 
@@ -40,24 +40,24 @@ class CanonicalTest extends TestCase
         $identity = $this->createMock(ResourceIdentity::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $spec = new Canonical($identity);
         $canonical = new Entity(
             $this->createMock(Identity::class),
             $this->createMock(ResourceIdentity::class),
             $this->createMock(ResourceIdentity::class),
-            $this->createMock(PointInTimeInterface::class)
+            $this->createMock(PointInTime::class)
         );
         $canonical
             ->canonical()
             ->expects($this->at(0))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $canonical
             ->canonical()
             ->expects($this->at(1))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('foo');
 
         $this->assertTrue($spec->isSatisfiedBy($canonical));

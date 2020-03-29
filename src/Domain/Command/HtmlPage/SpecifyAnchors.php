@@ -7,20 +7,20 @@ use Domain\{
     Entity\HtmlPage\Identity,
     Entity\HtmlPage\Anchor
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 final class SpecifyAnchors
 {
     private Identity $identity;
-    private SetInterface $anchors;
+    private Set $anchors;
 
     public function __construct(
         Identity $identity,
-        SetInterface $anchors
+        Set $anchors
     ) {
         if ((string) $anchors->type() !== Anchor::class) {
             throw new \TypeError(sprintf(
-                'Argument 2 must be of type SetInterface<%s>',
+                'Argument 2 must be of type Set<%s>',
                 Anchor::class
             ));
         }
@@ -34,7 +34,7 @@ final class SpecifyAnchors
         return $this->identity;
     }
 
-    public function anchors(): SetInterface
+    public function anchors(): Set
     {
         return $this->anchors;
     }

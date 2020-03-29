@@ -8,20 +8,20 @@ use Domain\{
     Entity\Author\Identity as AuthorIdentity,
     Entity\HttpResource\Identity as ResourceIdentity
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 
 final class ResourceAuthorRegistered
 {
     private Identity $identity;
     private AuthorIdentity $author;
     private ResourceIdentity $resource;
-    private PointInTimeInterface $asOf;
+    private PointInTime $asOf;
 
     public function __construct(
         Identity $identity,
         AuthorIdentity $author,
         ResourceIdentity $resource,
-        PointInTimeInterface $asOf
+        PointInTime $asOf
     ) {
         $this->identity = $identity;
         $this->author = $author;
@@ -44,7 +44,7 @@ final class ResourceAuthorRegistered
         return $this->resource;
     }
 
-    public function asOf(): PointInTimeInterface
+    public function asOf(): PointInTime
     {
         return $this->asOf;
     }

@@ -10,7 +10,7 @@ use Domain\{
     Entity\HttpResource\Identity as ResourceIdentity,
     Event\CitationAppearanceRegistered,
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use Innmind\EventBus\ContainsRecordedEvents;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +22,7 @@ class CitationAppearanceTest extends TestCase
             $identity = $this->createMock(Identity::class),
             $citation = $this->createMock(CitationIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
-            $foundAt = $this->createMock(PointInTimeInterface::class)
+            $foundAt = $this->createMock(PointInTime::class)
         );
 
         $this->assertInstanceOf(ContainsRecordedEvents::class, $entity);
@@ -39,30 +39,30 @@ class CitationAppearanceTest extends TestCase
             $identity = $this->createMock(Identity::class),
             $citation = $this->createMock(CitationIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
-            $foundAt = $this->createMock(PointInTimeInterface::class)
+            $foundAt = $this->createMock(PointInTime::class)
         );
 
         $this->assertInstanceOf(CitationAppearance::class, $entity);
         $this->assertCount(1, $entity->recordedEvents());
         $this->assertInstanceOf(
             CitationAppearanceRegistered::class,
-            $entity->recordedEvents()->current()
+            $entity->recordedEvents()->first()
         );
         $this->assertSame(
             $identity,
-            $entity->recordedEvents()->current()->identity()
+            $entity->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $citation,
-            $entity->recordedEvents()->current()->citation()
+            $entity->recordedEvents()->first()->citation()
         );
         $this->assertSame(
             $resource,
-            $entity->recordedEvents()->current()->resource()
+            $entity->recordedEvents()->first()->resource()
         );
         $this->assertSame(
             $foundAt,
-            $entity->recordedEvents()->current()->foundAt()
+            $entity->recordedEvents()->first()->foundAt()
         );
     }
 }

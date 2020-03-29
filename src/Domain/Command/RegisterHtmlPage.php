@@ -9,8 +9,8 @@ use Domain\Entity\{
     Host\Identity as HostIdentity
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query
 };
 
 final class RegisterHtmlPage
@@ -18,15 +18,15 @@ final class RegisterHtmlPage
     private Identity $identity;
     private HostIdentity $host;
     private RelationIdentity $relation;
-    private PathInterface $path;
-    private QueryInterface $query;
+    private Path $path;
+    private Query $query;
 
     public function __construct(
         Identity $identity,
         HostIdentity $host,
         RelationIdentity $relation,
-        PathInterface $path,
-        QueryInterface $query
+        Path $path,
+        Query $query
     ) {
         $this->identity = $identity;
         $this->host = $host;
@@ -50,12 +50,12 @@ final class RegisterHtmlPage
         return $this->relation;
     }
 
-    public function path(): PathInterface
+    public function path(): Path
     {
         return $this->path;
     }
 
-    public function query(): QueryInterface
+    public function query(): Query
     {
         return $this->query;
     }

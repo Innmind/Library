@@ -44,79 +44,79 @@ final class ResourceAccessor implements ResourceAccessorInterface
         RestIdentity $identity
     ): HttpResource {
         $resource = $this->repository->get(
-            new Identity((string) $identity)
+            new Identity($identity->toString())
         );
         $result = $this->dbal->execute(
             (new Query)
-                ->match('host', ['Web', 'Host'])
-                ->linkedTo('resource', ['Web', 'Resource'])
+                ->match('host', 'Web', 'Host')
+                ->linkedTo('resource', 'Web', 'Resource')
                 ->through('RESOURCE_OF_HOST')
                 ->where('resource.identity = {identity}')
-                ->withParameter('identity', (string) $identity)
+                ->withParameter('identity', $identity->toString())
                 ->with('host', 'resource')
-                ->maybeMatch('author', ['Person', 'Author'])
+                ->maybeMatch('author', 'Person', 'Author')
                 ->linkedTo('resource')
                 ->through('AUTHOR_OF_RESOURCE')
                 ->with('host', 'resource', 'author')
-                ->maybeMatch('citation', ['Citation'])
+                ->maybeMatch('citation', 'Citation')
                 ->linkedTo('resource')
                 ->through('CITED_IN_RESOURCE')
                 ->return('host', 'author', 'collect(citation.text) as citations')
         );
-        $properties = (new Map('string', Property::class))
-            ->put(
+        $properties = Map::of('string', Property::class)
+            (
                 'identity',
-                new Property('identity', (string) $resource->identity())
+                new Property('identity', $resource->identity()->toString())
             )
-            ->put(
+            (
                 'host',
                 new Property('host', $result->rows()->first()->value()['name'])
             )
-            ->put(
+            (
                 'path',
-                new Property('path', (string) $resource->path())
+                new Property('path', $resource->path()->toString())
             )
-            ->put(
+            (
                 'query',
-                new Property('query', (string) $resource->query())
+                new Property('query', $resource->query()->toString())
             )
-            ->put(
+            (
                 'languages',
                 new Property(
                     'languages',
                     $resource
                         ->languages()
                         ->reduce(
-                            new Set('string'),
+                            Set::of('string'),
                             function(Set $carry, Language $language): Set {
                                 return $carry->add((string) $language);
                             }
                         )
                 )
             )
-            ->put(
+            (
                 'anchors',
                 new Property(
                     'anchors',
                     $resource
                         ->anchors()
                         ->reduce(
-                            new Set('string'),
+                            Set::of('string'),
                             function(Set $carry, Anchor $anchor): Set {
                                 return $carry->add((string) $anchor);
                             }
                         )
                 )
             )
-            ->put(
+            (
                 'main_content',
                 new Property('main_content', $resource->mainContent())
             )
-            ->put(
+            (
                 'description',
                 new Property('description', $resource->description())
             )
-            ->put(
+            (
                 'title',
                 new Property('title', $resource->title())
             );
@@ -140,7 +140,7 @@ final class ResourceAccessor implements ResourceAccessorInterface
         }
 
         if ($citations->count() > 0) {
-            $set = new Set('string');
+            $set = Set::of('string');
 
             foreach ($citations->first()->value() as $citation) {
                 $set = $set->add($citation);
@@ -162,28 +162,28 @@ final class ResourceAccessor implements ResourceAccessorInterface
         if ($resource->hasThemeColour()) {
             $properties = $properties->put(
                 'theme_colour',
-                new Property('theme_colour', (string) $resource->themeColour())
+                new Property('theme_colour', $resource->themeColour()->toString())
             );
         }
 
         if ($resource->hasAndroidAppLink()) {
             $properties = $properties->put(
                 'android_app_link',
-                new Property('android_app_link', (string) $resource->androidAppLink())
+                new Property('android_app_link', $resource->androidAppLink()->toString())
             );
         }
 
         if ($resource->hasIosAppLink()) {
             $properties = $properties->put(
                 'ios_app_link',
-                new Property('ios_app_link', (string) $resource->iosAppLink())
+                new Property('ios_app_link', $resource->iosAppLink()->toString())
             );
         }
 
         if ($resource->hasPreview()) {
             $properties = $properties->put(
                 'preview',
-                new Property('preview', (string) $resource->preview())
+                new Property('preview', $resource->preview()->toString())
             );
         }
 

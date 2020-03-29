@@ -4,16 +4,16 @@ declare(strict_types = 1);
 namespace Domain\Command\HtmlPage;
 
 use Domain\Entity\HtmlPage\Identity;
-use Innmind\Url\UrlInterface;
+use Innmind\Url\Url;
 
 final class SpecifyAndroidAppLink
 {
     private Identity $identity;
-    private UrlInterface $url;
+    private Url $url;
 
     public function __construct(
         Identity $identity,
-        UrlInterface $url
+        Url $url
     ) {
         $this->identity = $identity;
         $this->url = $url;
@@ -24,7 +24,7 @@ final class SpecifyAndroidAppLink
         return $this->identity;
     }
 
-    public function url(): UrlInterface
+    public function url(): Url
     {
         return $this->url;
     }

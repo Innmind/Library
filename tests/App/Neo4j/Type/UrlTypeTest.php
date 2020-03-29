@@ -22,7 +22,7 @@ class UrlTypeTest extends TestCase
     {
         $this->assertSame(
             'foo.com',
-            (new UrlType)->forDatabase(Url::fromString('foo.com'))
+            (new UrlType)->forDatabase(Url::of('foo.com'))
         );
         $this->assertNull(
             UrlType::nullable()->forDatabase(null)
@@ -44,7 +44,7 @@ class UrlTypeTest extends TestCase
         );
         $this->assertSame(
             'foo',
-            (string) (new UrlType)->fromDatabase('foo')
+            (new UrlType)->fromDatabase('foo')->toString()
         );
     }
 

@@ -20,7 +20,7 @@ final class Alternate implements Comparator, Specification
 
     public function __construct(Identity $value)
     {
-        $this->value = (string) $value;
+        $this->value = $value->toString();
     }
 
     /**
@@ -49,6 +49,6 @@ final class Alternate implements Comparator, Specification
 
     public function isSatisfiedBy(Entity $alternate): bool
     {
-        return (string) $alternate->alternate() === $this->value;
+        return $alternate->alternate()->toString() === $this->value;
     }
 }

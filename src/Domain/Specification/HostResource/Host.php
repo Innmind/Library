@@ -20,7 +20,7 @@ final class Host implements Comparator, Specification
 
     public function __construct(Identity $value)
     {
-        $this->value = (string) $value;
+        $this->value = $value->toString();
     }
 
     /**
@@ -49,6 +49,6 @@ final class Host implements Comparator, Specification
 
     public function isSatisfiedBy(HostResource $relation): bool
     {
-        return (string) $relation->host() === $this->value;
+        return $relation->host()->toString() === $this->value;
     }
 }

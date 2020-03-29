@@ -24,7 +24,7 @@ class HttpResourceTest extends TestCase
         $identity = $this->createMock(ResourceIdentity::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $spec = new HttpResource($identity);
 
@@ -40,7 +40,7 @@ class HttpResourceTest extends TestCase
         $identity = $this->createMock(ResourceIdentity::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $spec = new HttpResource($identity);
         $alternate = new Alternate(
@@ -52,12 +52,12 @@ class HttpResourceTest extends TestCase
         $alternate
             ->resource()
             ->expects($this->at(0))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $alternate
             ->resource()
             ->expects($this->at(1))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('foo');
 
         $this->assertTrue($spec->isSatisfiedBy($alternate));

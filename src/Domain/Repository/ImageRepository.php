@@ -8,7 +8,7 @@ use Domain\{
     Entity\Image,
     Specification\HttpResource\Specification
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 interface ImageRepository
 {
@@ -22,12 +22,12 @@ interface ImageRepository
     public function count(): int;
 
     /**
-     * @return SetInterface<Image>
+     * @return Set<Image>
      */
-    public function all(): SetInterface;
+    public function all(): Set;
 
     /**
-     * @return SetInterface<Image>
+     * @return Set<Image>
      */
-    public function matching(Specification $specification): SetInterface;
+    public function matching(Specification $specification): Set;
 }

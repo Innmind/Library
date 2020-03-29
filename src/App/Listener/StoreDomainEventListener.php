@@ -6,8 +6,9 @@ namespace App\Listener;
 use Innmind\Filesystem\{
     Adapter,
     File\File,
-    Stream\StringStream
+    Name,
 };
+use Innmind\Stream\Readable\Stream;
 
 final class StoreDomainEventListener
 {
@@ -26,19 +27,19 @@ final class StoreDomainEventListener
             return;
         }
 
-        $identity = (string) $event->identity();
+        $identity = new Name($event->identity()->toString());
         $content = [];
 
-        if ($this->filesystem->has($identity)) {
+        if ($this->filesystem->contains($identity)) {
             $file = $this->filesystem->get($identity);
-            $content = json_decode((string) $file->content());
+            $content = json_decode($file->content()->toString());
         }
 
         $content[] = serialize($event);
         $this->filesystem->add(
             new File(
                 $identity,
-                new StringStream(json_encode($content))
+                Stream::ofContent(json_encode($content)),
             )
         );
     }

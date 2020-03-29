@@ -9,7 +9,7 @@ use Domain\{
     Entity\HttpResource\Identity as ResourceIdentity,
     Event\ResourceAuthorRegistered,
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use Innmind\EventBus\{
     ContainsRecordedEvents,
     EventRecorder,
@@ -22,13 +22,13 @@ final class ResourceAuthor implements ContainsRecordedEvents
     private Identity $identity;
     private AuthorIdentity $author;
     private ResourceIdentity $resource;
-    private PointInTimeInterface $asOf;
+    private PointInTime $asOf;
 
     public function __construct(
         Identity $identity,
         AuthorIdentity $author,
         ResourceIdentity $resource,
-        PointInTimeInterface $asOf
+        PointInTime $asOf
     ) {
         $this->identity = $identity;
         $this->author = $author;
@@ -40,7 +40,7 @@ final class ResourceAuthor implements ContainsRecordedEvents
         Identity $identity,
         AuthorIdentity $author,
         ResourceIdentity $resource,
-        PointInTimeInterface $asOf
+        PointInTime $asOf
     ): self {
         $self = new self($identity, $author, $resource, $asOf);
         $self->record(new ResourceAuthorRegistered(
@@ -68,7 +68,7 @@ final class ResourceAuthor implements ContainsRecordedEvents
         return $this->resource;
     }
 
-    public function asOf(): PointInTimeInterface
+    public function asOf(): PointInTime
     {
         return $this->asOf;
     }

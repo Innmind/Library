@@ -18,10 +18,8 @@ use Innmind\Neo4j\ONM\{
     Repository,
     Exception\EntityNotFound,
 };
-use Innmind\Immutable\{
-    SetInterface,
-    Set,
-};
+use Innmind\Immutable\Set;
+use function Innmind\Immutable\unwrap;
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 
@@ -127,12 +125,12 @@ class HostRepositoryTest extends TestCase
         $identity = new Identity((string) Uuid::uuid4());
         $infra
             ->expects($this->at(0))
-            ->method('has')
+            ->method('contains')
             ->with($identity)
             ->willReturn(true);
         $infra
             ->expects($this->at(1))
-            ->method('has')
+            ->method('contains')
             ->with($identity)
             ->willReturn(false);
 
@@ -149,14 +147,16 @@ class HostRepositoryTest extends TestCase
             ->expects($this->once())
             ->method('all')
             ->willReturn(
-                $all = $this->createMock(SetInterface::class)
+                Set::of(
+                    Host::class,
+                    new Host(
+                        new Identity((string) Uuid::uuid4()),
+                        new Name('foo')
+                    )
+                )
             );
-        $all
-            ->expects($this->once())
-            ->method('size')
-            ->willReturn(42);
 
-        $this->assertSame(42, $repository->count());
+        $this->assertSame(1, $repository->count());
     }
 
     public function testAll()
@@ -168,7 +168,7 @@ class HostRepositoryTest extends TestCase
             ->expects($this->once())
             ->method('all')
             ->willReturn(
-                (new Set('object'))->add(
+                Set::objects(
                     $host = new Host(
                         new Identity((string) Uuid::uuid4()),
                         new Name('foo')
@@ -178,9 +178,9 @@ class HostRepositoryTest extends TestCase
 
         $all = $repository->all();
 
-        $this->assertInstanceOf(SetInterface::class, $all);
+        $this->assertInstanceOf(Set::class, $all);
         $this->assertSame(Host::class, (string) $all->type());
-        $this->assertSame([$host], $all->toPrimitive());
+        $this->assertSame([$host], unwrap($all));
     }
 
     public function testMatching()
@@ -194,7 +194,7 @@ class HostRepositoryTest extends TestCase
             ->method('matching')
             ->with($specification)
             ->willReturn(
-                (new Set('object'))->add(
+                Set::objects(
                     $host = new Host(
                         new Identity((string) Uuid::uuid4()),
                         new Name('foo')
@@ -204,8 +204,8 @@ class HostRepositoryTest extends TestCase
 
         $all = $repository->matching($specification);
 
-        $this->assertInstanceOf(SetInterface::class, $all);
+        $this->assertInstanceOf(Set::class, $all);
         $this->assertSame(Host::class, (string) $all->type());
-        $this->assertSame([$host], $all->toPrimitive());
+        $this->assertSame([$host], unwrap($all));
     }
 }

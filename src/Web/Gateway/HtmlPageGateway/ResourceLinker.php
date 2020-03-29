@@ -37,7 +37,7 @@ final class ResourceLinker implements ResourceLinkerInterface
      */
     public function __invoke(Reference $from, Link ...$links): void
     {
-        $from = new ResourceIdentity((string) $from->identity());
+        $from = new ResourceIdentity($from->identity()->toString());
 
         foreach ($links as $link) {
             switch ($link->relationship()) {
@@ -66,7 +66,7 @@ final class ResourceLinker implements ResourceLinkerInterface
                 new RegisterAlternateResource(
                     new AlternateIdentity((string) Uuid::uuid4()),
                     $from,
-                    new ResourceIdentity((string) $to->identity()),
+                    new ResourceIdentity($to->identity()->toString()),
                     new Language($language)
                 )
             );
@@ -81,7 +81,7 @@ final class ResourceLinker implements ResourceLinkerInterface
             ($this->handle)(
                 new MakeCanonicalLink(
                     new CanonicalIdentity((string) Uuid::uuid4()),
-                    new ResourceIdentity((string) $to->identity()),
+                    new ResourceIdentity($to->identity()->toString()),
                     $from
                 )
             );

@@ -31,7 +31,7 @@ final class ApiKey implements Resolver
 
         // this will not be used elsewhere in the app so no need to create a real class
         return new class implements Identity {
-            public function __toString(): string
+            public function toString(): string
             {
                 return 'authorized client';
             }

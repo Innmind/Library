@@ -4,14 +4,14 @@ declare(strict_types = 1);
 namespace Domain\Command;
 
 use Domain\Entity\Domain\Identity;
-use Innmind\Url\Authority\HostInterface;
+use Innmind\Url\Authority\Host;
 
 final class RegisterDomain
 {
     private Identity $identity;
-    private HostInterface $host;
+    private Host $host;
 
-    public function __construct(Identity $identity, HostInterface $host)
+    public function __construct(Identity $identity, Host $host)
     {
         $this->identity = $identity;
         $this->host = $host;
@@ -22,7 +22,7 @@ final class RegisterDomain
         return $this->identity;
     }
 
-    public function host(): HostInterface
+    public function host(): Host
     {
         return $this->host;
     }

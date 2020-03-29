@@ -8,7 +8,7 @@ use Domain\{
     Entity\CitationAppearance,
     Specification\CitationAppearance\Specification
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 interface CitationAppearanceRepository
 {
@@ -22,12 +22,12 @@ interface CitationAppearanceRepository
     public function count(): int;
 
     /**
-     * @return SetInterface<CitationAppearance>
+     * @return Set<CitationAppearance>
      */
-    public function all(): SetInterface;
+    public function all(): Set;
 
     /**
-     * @return SetInterface<CitationAppearance>
+     * @return Set<CitationAppearance>
      */
-    public function matching(Specification $specification): SetInterface;
+    public function matching(Specification $specification): Set;
 }

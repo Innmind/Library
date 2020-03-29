@@ -11,8 +11,9 @@ use Domain\Event\HtmlPage\TitleSpecified;
 use Innmind\Filesystem\{
     Adapter,
     File\File,
-    Stream\StringStream
+    Name,
 };
+use Innmind\Stream\Readable\Stream;
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 
@@ -38,8 +39,8 @@ class StoreDomainEventListenerTest extends TestCase
         $identity = new Identity((string) Uuid::uuid4());
         $filesystem
             ->expects($this->once())
-            ->method('has')
-            ->with((string) $identity)
+            ->method('contains')
+            ->with(new Name($identity->toString()))
             ->willReturn(false);
         $event = new TitleSpecified(
             $identity,
@@ -49,9 +50,9 @@ class StoreDomainEventListenerTest extends TestCase
             ->expects($this->once())
             ->method('add')
             ->with($this->callback(function($file) use ($identity, $event): bool {
-                $content = json_decode((string) $file->content(), true);
+                $content = json_decode($file->content()->toString(), true);
 
-                return (string) $file->name() === (string) $identity &&
+                return $file->name()->toString() === $identity->toString() &&
                     count($content) === 1 &&
                     unserialize($content[0]) == $event;
             }));
@@ -67,16 +68,16 @@ class StoreDomainEventListenerTest extends TestCase
         $identity = new Identity((string) Uuid::uuid4());
         $filesystem
             ->expects($this->once())
-            ->method('has')
-            ->with((string) $identity)
+            ->method('contains')
+            ->with(new Name($identity->toString()))
             ->willReturn(true);
         $filesystem
             ->expects($this->once())
             ->method('get')
             ->willReturn(
-                new File(
-                    (string) $identity,
-                    new StringStream(json_encode(['foo']))
+                File::named(
+                    $identity->toString(),
+                    Stream::ofContent(json_encode(['foo']))
                 )
             );
         $event = new TitleSpecified(
@@ -87,9 +88,9 @@ class StoreDomainEventListenerTest extends TestCase
             ->expects($this->once())
             ->method('add')
             ->with($this->callback(function($file) use ($identity, $event): bool {
-                $content = json_decode((string) $file->content(), true);
+                $content = json_decode($file->content()->toString(), true);
 
-                return (string) $file->name() === (string) $identity &&
+                return $file->name()->toString() === $identity->toString() &&
                     count($content) === 2 &&
                     $content[0] === 'foo' &&
                     unserialize($content[1]) == $event;

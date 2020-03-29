@@ -20,15 +20,12 @@ use Domain\{
     Exception\InvalidArgumentException,
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface,
-    UrlInterface,
+    Path,
+    Query,
+    Url,
 };
 use Innmind\Colour\RGBA;
-use Innmind\Immutable\{
-    Set,
-    SetInterface,
-};
+use Innmind\Immutable\Set;
 
 final class HtmlPage extends HttpResource
 {
@@ -38,27 +35,27 @@ final class HtmlPage extends HttpResource
     private bool $isJournal = false;
     private ?RGBA $themeColour = null;
     private string $title = '';
-    private ?UrlInterface $android = null;
-    private ?UrlInterface $ios = null;
-    private ?UrlInterface $preview = null;
+    private ?Url $android = null;
+    private ?Url $ios = null;
+    private ?Url $preview = null;
 
     public function __construct(
         ResourceIdentity $identity,
-        PathInterface $path,
-        QueryInterface $query
+        Path $path,
+        Query $query
     ) {
         if (!$identity instanceof Identity) {
             throw new InvalidArgumentException;
         }
 
         parent::__construct($identity, $path, $query);
-        $this->anchors = new Set(Anchor::class);
+        $this->anchors = Set::of(Anchor::class);
     }
 
     public static function register(
         ResourceIdentity $identity,
-        PathInterface $path,
-        QueryInterface $query
+        Path $path,
+        Query $query
     ): HttpResource {
         $self = new self($identity, $path, $query);
         $self->record(new HtmlPageRegistered($identity, $path, $query));
@@ -92,11 +89,11 @@ final class HtmlPage extends HttpResource
         return $this->description;
     }
 
-    public function specifyAnchors(SetInterface $anchors): self
+    public function specifyAnchors(Set $anchors): self
     {
         if ((string) $anchors->type() !== Anchor::class) {
             throw new \TypeError(sprintf(
-                'Argument 1 must be of type SetInterface<%s>',
+                'Argument 1 must be of type Set<%s>',
                 Anchor::class
             ));
         }
@@ -108,9 +105,9 @@ final class HtmlPage extends HttpResource
     }
 
     /**
-     * @return SetInterface<Anchor>
+     * @return Set<Anchor>
      */
-    public function anchors(): SetInterface
+    public function anchors(): Set
     {
         return $this->anchors;
     }
@@ -159,7 +156,7 @@ final class HtmlPage extends HttpResource
         return $this->title;
     }
 
-    public function specifyAndroidAppLink(UrlInterface $url): self
+    public function specifyAndroidAppLink(Url $url): self
     {
         $this->android = $url;
         $this->record(new AndroidAppLinkSpecified($this->identity(), $url));
@@ -169,15 +166,15 @@ final class HtmlPage extends HttpResource
 
     public function hasAndroidAppLink(): bool
     {
-        return $this->android instanceof UrlInterface;
+        return $this->android instanceof Url;
     }
 
-    public function androidAppLink(): UrlInterface
+    public function androidAppLink(): Url
     {
         return $this->android;
     }
 
-    public function specifyIosAppLink(UrlInterface $url): self
+    public function specifyIosAppLink(Url $url): self
     {
         $this->ios = $url;
         $this->record(new IosAppLinkSpecified($this->identity(), $url));
@@ -187,15 +184,15 @@ final class HtmlPage extends HttpResource
 
     public function hasIosAppLink(): bool
     {
-        return $this->ios instanceof UrlInterface;
+        return $this->ios instanceof Url;
     }
 
-    public function iosAppLink(): UrlInterface
+    public function iosAppLink(): Url
     {
         return $this->ios;
     }
 
-    public function usePreview(UrlInterface $preview): self
+    public function usePreview(Url $preview): self
     {
         $this->preview = $preview;
         $this->record(new PreviewSpecified($this->identity(), $preview));
@@ -205,10 +202,10 @@ final class HtmlPage extends HttpResource
 
     public function hasPreview(): bool
     {
-        return $this->preview instanceof UrlInterface;
+        return $this->preview instanceof Url;
     }
 
-    public function preview(): UrlInterface
+    public function preview(): Url
     {
         return $this->preview;
     }

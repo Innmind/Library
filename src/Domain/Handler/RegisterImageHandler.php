@@ -16,19 +16,19 @@ use Domain\{
     Specification\HostResource\Host,
     Exception\ImageAlreadyExist
 };
-use Innmind\TimeContinuum\TimeContinuumInterface;
+use Innmind\TimeContinuum\Clock;
 use Innmind\Immutable\Set;
 
 final class RegisterImageHandler
 {
     private ImageRepository $imageRepository;
     private HostResourceRepository $relationRepository;
-    private TimeContinuumInterface $clock;
+    private Clock $clock;
 
     public function __construct(
         ImageRepository $imageRepository,
         HostResourceRepository $relationRepository,
-        TimeContinuumInterface $clock
+        Clock $clock
     ) {
         $this->imageRepository = $imageRepository;
         $this->relationRepository = $relationRepository;
@@ -70,7 +70,7 @@ final class RegisterImageHandler
         }
 
         $identities = $images->reduce(
-            new Set(ResourceIdentity::class),
+            Set::of(ResourceIdentity::class),
             function(Set $identities, Image $image): Set {
                 return $identities->add($image->identity());
             }

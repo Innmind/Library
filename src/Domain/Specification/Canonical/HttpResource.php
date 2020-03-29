@@ -20,7 +20,7 @@ final class HttpResource implements Comparator, Specification
 
     public function __construct(Identity $value)
     {
-        $this->value = (string) $value;
+        $this->value = $value->toString();
     }
 
     /**
@@ -49,6 +49,6 @@ final class HttpResource implements Comparator, Specification
 
     public function isSatisfiedBy(Entity $canonical): bool
     {
-        return (string) $canonical->resource() === $this->value;
+        return $canonical->resource()->toString() === $this->value;
     }
 }

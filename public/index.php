@@ -12,7 +12,6 @@ use Innmind\Http\Message\{
     Environment,
 };
 use Innmind\Url\{
-    UrlInterface,
     Url,
     Path,
 };
@@ -26,10 +25,7 @@ use Innmind\Debug\{
     CodeEditor,
     Profiler\Section\CaptureAppGraph,
 };
-use Innmind\Immutable\{
-    MapInterface,
-    Set,
-};
+use Innmind\Immutable\Set;
 
 new class extends Main
 {
@@ -37,7 +33,7 @@ new class extends Main
 
     protected function preload(OperatingSystem $os, Environment $environment): void
     {
-        $os = cartographer($os)['http_server'](Url::fromString(__DIR__));
+        $os = cartographer($os)['http_server'](Url::of(__DIR__));
 
         if ($this->handle) {
             return;
@@ -45,19 +41,19 @@ new class extends Main
 
         $environment = env(
             $environment,
-            $os->filesystem()->mount(new Path(__DIR__.'/../config'))
+            $os->filesystem()->mount(Path::of(__DIR__.'/../config/'))
         );
 
         $debug = $environment->contains('debug');
 
         $dsns = Set::of(
-            UrlInterface::class,
-            Url::fromString('file://'.__DIR__.'/../var/log.txt')
+            Url::class,
+            Url::of('file://'.__DIR__.'/../var/log.txt')
         );
 
         if ($environment->contains('sentry')) {
             $dsns = $dsns->add(
-                Url::fromString('sentry://'.$environment->get('sentry'))
+                Url::of('sentry://'.$environment->get('sentry'))
             );
         }
 
@@ -66,7 +62,7 @@ new class extends Main
         if ($debug) {
             $debugger = debug(
                 $os,
-                Url::fromString($environment->get('profiler')),
+                Url::of($environment->get('profiler')),
                 $environment,
                 CodeEditor::sublimeText(),
                 Set::of('string', CaptureAppGraph::class)
@@ -82,8 +78,8 @@ new class extends Main
         $app = app(
             $domain,
             $os->remote()->http(),
-            Url::fromString($environment->get('neo4j')),
-            $os->filesystem()->mount(new Path(__DIR__.'/../var/innmind/domain_events')),
+            Url::of($environment->get('neo4j')),
+            $os->filesystem()->mount(Path::of(__DIR__.'/../var/innmind/domain_events/')),
             $dsns,
             $debug ? null : 'error'
         );
@@ -106,7 +102,7 @@ new class extends Main
             $this->handle = $debugger['http']($this->handle);
         }
     }
-    protected function main(ServerRequest $request, OperatingSystem $os): Response
+    protected function main(ServerRequest $request): Response
     {
         return ($this->handle)($request);
     }

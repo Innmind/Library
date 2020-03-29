@@ -14,10 +14,7 @@ use Innmind\Neo4j\ONM\{
     Repository,
     Exception\EntityNotFound
 };
-use Innmind\Immutable\{
-    SetInterface,
-    Set
-};
+use Innmind\Immutable\Set;
 
 final class DomainRepository implements DomainRepositoryInterface
 {
@@ -58,7 +55,7 @@ final class DomainRepository implements DomainRepositoryInterface
 
     public function has(Identity $identity): bool
     {
-        return $this->infrastructure->has($identity);
+        return $this->infrastructure->contains($identity);
     }
 
     public function count(): int
@@ -69,13 +66,13 @@ final class DomainRepository implements DomainRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function all(): SetInterface
+    public function all(): Set
     {
         return $this
             ->infrastructure
             ->all()
             ->reduce(
-                new Set(Domain::class),
+                Set::of(Domain::class),
                 function(Set $all, Domain $domain): Set {
                     return $all->add($domain);
                 }
@@ -85,13 +82,13 @@ final class DomainRepository implements DomainRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function matching(Specification $specification): SetInterface
+    public function matching(Specification $specification): Set
     {
         return $this
             ->infrastructure
             ->matching($specification)
             ->reduce(
-                new Set(Domain::class),
+                Set::of(Domain::class),
                 function(Set $all, Domain $domain): Set {
                     return $all->add($domain);
                 }

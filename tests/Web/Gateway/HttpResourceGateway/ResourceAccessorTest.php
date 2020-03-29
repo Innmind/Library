@@ -35,9 +35,9 @@ use Innmind\Neo4j\DBAL\{
 use Innmind\Immutable\{
     Map,
     Set,
-    SetInterface,
-    Stream,
+    Sequence,
 };
+use function Innmind\Immutable\unwrap;
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 
@@ -71,13 +71,13 @@ class ResourceAccessorTest extends TestCase
             ->expects($this->once())
             ->method('get')
             ->with($this->callback(function(Identity $identity) use ($uuid) {
-                return (string) $identity === $uuid;
+                return $identity->toString() === $uuid;
             }))
             ->willReturn(
                 $resource = new Entity(
                     new Identity($uuid),
-                    new Path('foo'),
-                    new Query('bar')
+                    Path::of('foo'),
+                    Query::of('bar')
                 )
             );
         $this
@@ -87,8 +87,8 @@ class ResourceAccessorTest extends TestCase
             ->with($this->callback(function(DBALQuery $query) use ($uuid): bool {
                 return $query->cypher() === 'MATCH (host:Web:Host)-[:RESOURCE_OF_HOST]-(resource:Web:Resource) WHERE resource.identity = {identity} RETURN host' &&
                     $query->parameters()->count() === 1 &&
-                    $query->parameters()->current()->key() === 'identity' &&
-                    $query->parameters()->current()->value() === $uuid;
+                    $query->parameters()->values()->first()->key() === 'identity' &&
+                    $query->parameters()->values()->first()->value() === $uuid;
             }))
             ->willReturn(
                 $result = $this->createMock(Result::class)
@@ -97,15 +97,14 @@ class ResourceAccessorTest extends TestCase
             ->expects($this->once())
             ->method('rows')
             ->willReturn(
-                (new Stream(Row::class))
-                    ->add($row = $this->createMock(Row::class))
+                Sequence::of(Row::class, $row = $this->createMock(Row::class))
             );
         $row
             ->expects($this->once())
             ->method('value')
             ->willReturn(['name' => 'sub.example.com']);
         $resource->specifyLanguages(
-            (new Set(Language::class))->add(new Language('fr'))
+            Set::of(Language::class, new Language('fr'))
         );
         $resource->specifyCharset(new Charset('UTF-8'));
         $definition = new Definition(
@@ -162,7 +161,7 @@ class ResourceAccessorTest extends TestCase
         $this->assertSame('foo', $resource->property('path')->value());
         $this->assertSame('bar', $resource->property('query')->value());
         $this->assertInstanceOf(
-            SetInterface::class,
+            Set::class,
             $resource->property('languages')->value()
         );
         $this->assertSame(
@@ -171,7 +170,7 @@ class ResourceAccessorTest extends TestCase
         );
         $this->assertSame(
             ['fr'],
-            $resource->property('languages')->value()->toPrimitive()
+            unwrap($resource->property('languages')->value())
         );
         $this->assertSame('UTF-8', $resource->property('charset')->value());
     }

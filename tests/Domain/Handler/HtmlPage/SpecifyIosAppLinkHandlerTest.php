@@ -12,10 +12,10 @@ use Domain\{
     Event\HtmlPage\IosAppLinkSpecified
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query,
+    Url,
 };
-use Innmind\Url\UrlInterface;
 use PHPUnit\Framework\TestCase;
 
 class SpecifyIosAppLinkHandlerTest extends TestCase
@@ -27,7 +27,7 @@ class SpecifyIosAppLinkHandlerTest extends TestCase
         );
         $command = new SpecifyIosAppLink(
             $this->createMock(Identity::class),
-            $this->createMock(UrlInterface::class)
+            Url::of('http://example.com')
         );
         $repository
             ->expects($this->once())
@@ -36,8 +36,8 @@ class SpecifyIosAppLinkHandlerTest extends TestCase
             ->willReturn(
                 $page = new HtmlPage(
                     $command->identity(),
-                    $this->createMock(PathInterface::class),
-                    $this->createMock(QueryInterface::class)
+                    Path::none(),
+                    Query::none()
                 )
             );
 
@@ -45,7 +45,7 @@ class SpecifyIosAppLinkHandlerTest extends TestCase
         $this->assertSame($command->url(), $page->iosAppLink());
         $this->assertInstanceOf(
             IosAppLinkSpecified::class,
-            $page->recordedEvents()->current()
+            $page->recordedEvents()->first()
         );
     }
 }

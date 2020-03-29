@@ -12,7 +12,7 @@ final class Charset
 
     public function __construct(string $value)
     {
-        if (!(new Str($value))->matches('~^[a-zA-Z0-9\-_:\(\)]+$~')) {
+        if (!Str::of($value)->matches('~^[a-zA-Z0-9\-_:\(\)]+$~')) {
             throw new DomainException;
         }
 

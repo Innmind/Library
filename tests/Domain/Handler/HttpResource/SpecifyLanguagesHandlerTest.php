@@ -13,8 +13,8 @@ use Domain\{
     Model\Language
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query
 };
 use Innmind\Immutable\Set;
 use PHPUnit\Framework\TestCase;
@@ -34,22 +34,22 @@ class SpecifyLanguagesHandlerTest extends TestCase
             ->willReturn(
                 $resource = new HttpResource(
                     $identity,
-                    $this->createMock(PathInterface::class),
-                    $this->createMock(QueryInterface::class)
+                    Path::none(),
+                    Query::none()
                 )
             );
 
         $this->assertNull($handler(
             new SpecifyLanguages(
                 $identity,
-                $languages = (new Set(Language::class))
+                $languages = (Set::of(Language::class))
                     ->add(new Language('fr'))
             )
         ));
         $this->assertSame($languages, $resource->languages());
         $this->assertInstanceOf(
             LanguagesSpecified::class,
-            $resource->recordedEvents()->current()
+            $resource->recordedEvents()->first()
         );
     }
 }

@@ -13,10 +13,7 @@ use Domain\{
     Specification\Author\Name,
     Exception\AuthorAlreadyExist,
 };
-use Innmind\Immutable\{
-    Set,
-    SetInterface,
-};
+use Innmind\Immutable\Set;
 use PHPUnit\Framework\TestCase;
 
 class RegisterAuthorHandlerTest extends TestCase
@@ -36,7 +33,7 @@ class RegisterAuthorHandlerTest extends TestCase
             ->with($this->callback(function(Name $spec): bool {
                 return $spec->value() === 'John Doe';
             }))
-            ->willReturn(new Set(Author::class));
+            ->willReturn(Set::of(Author::class));
         $repository
             ->expects($this->once())
             ->method('add')
@@ -64,19 +61,12 @@ class RegisterAuthorHandlerTest extends TestCase
                 return $spec->value() === 'John Doe';
             }))
             ->willReturn(
-                $set = $this->createMock(SetInterface::class)
-            );
-        $set
-            ->expects($this->once())
-            ->method('size')
-            ->willReturn(1);
-        $set
-            ->expects($this->once())
-            ->method('current')
-            ->willReturn(
-                new Author(
-                    $this->createMock(Identity::class),
-                    new Model('foo')
+                Set::of(
+                    Author::class,
+                    new Author(
+                        $this->createMock(Identity::class),
+                        new Model('foo')
+                    )
                 )
             );
         $repository

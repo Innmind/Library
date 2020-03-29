@@ -18,13 +18,10 @@ use Domain\{
     Exception\CitationAppearanceAlreadyExist,
 };
 use Innmind\TimeContinuum\{
-    TimeContinuumInterface,
-    PointInTimeInterface,
+    Clock,
+    PointInTime,
 };
-use Innmind\Immutable\{
-    Set,
-    SetInterface,
-};
+use Innmind\Immutable\Set;
 use PHPUnit\Framework\TestCase;
 
 class RegisterAppearanceHandlerTest extends TestCase
@@ -33,7 +30,7 @@ class RegisterAppearanceHandlerTest extends TestCase
     {
         $handler = new RegisterAppearanceHandler(
             $repository = $this->createMock(CitationAppearanceRepository::class),
-            $clock = $this->createMock(TimeContinuumInterface::class)
+            $clock = $this->createMock(Clock::class)
         );
         $command = new RegisterAppearance(
             $this->createMock(Identity::class),
@@ -43,18 +40,18 @@ class RegisterAppearanceHandlerTest extends TestCase
         $command
             ->citation()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willreturn('citation uuid');
         $command
             ->resource()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willreturn('resource uuid');
         $clock
             ->expects($this->once())
             ->method('now')
             ->willReturn(
-                $now = $this->createMock(PointInTimeInterface::class)
+                $now = $this->createMock(PointInTime::class)
             );
         $repository
             ->expects($this->once())
@@ -65,7 +62,7 @@ class RegisterAppearanceHandlerTest extends TestCase
                     $spec->left()->value() === 'citation uuid' &&
                     $spec->right()->value() === 'resource uuid';
             }))
-            ->willReturn(new Set(CitationAppearance::class));
+            ->willReturn(Set::of(CitationAppearance::class));
         $repository
             ->expects($this->once())
             ->method('add')
@@ -75,7 +72,7 @@ class RegisterAppearanceHandlerTest extends TestCase
                     $entity->resource() === $command->resource() &&
                     $entity->foundAt() === $now &&
                     $entity->recordedEvents()->size() === 1 &&
-                    $entity->recordedEvents()->current() instanceof CitationAppearanceRegistered;
+                    $entity->recordedEvents()->first() instanceof CitationAppearanceRegistered;
             }));
 
         $this->assertNull($handler($command));
@@ -85,7 +82,7 @@ class RegisterAppearanceHandlerTest extends TestCase
     {
         $handler = new RegisterAppearanceHandler(
             $repository = $this->createMock(CitationAppearanceRepository::class),
-            $clock = $this->createMock(TimeContinuumInterface::class)
+            $clock = $this->createMock(Clock::class)
         );
         $command = new RegisterAppearance(
             $this->createMock(Identity::class),
@@ -95,12 +92,12 @@ class RegisterAppearanceHandlerTest extends TestCase
         $command
             ->citation()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willreturn('citation uuid');
         $command
             ->resource()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willreturn('resource uuid');
         $clock
             ->expects($this->never())
@@ -115,21 +112,14 @@ class RegisterAppearanceHandlerTest extends TestCase
                     $spec->right()->value() === 'resource uuid';
             }))
             ->willReturn(
-                $set = $this->createMock(SetInterface::class)
-            );
-        $set
-            ->expects($this->once())
-            ->method('size')
-            ->willReturn(1);
-        $set
-            ->expects($this->once())
-            ->method('current')
-            ->willReturn(
-                new CitationAppearance(
-                    $this->createMock(Identity::class),
-                    $this->createMock(CitationIdentity::class),
-                    $this->createMock(ResourceIdentity::class),
-                    $this->createMock(PointInTimeInterface::class)
+                Set::of(
+                    CitationAppearance::class,
+                    new CitationAppearance(
+                        $this->createMock(Identity::class),
+                        $this->createMock(CitationIdentity::class),
+                        $this->createMock(ResourceIdentity::class),
+                        $this->createMock(PointInTime::class)
+                    )
                 )
             );
         $repository

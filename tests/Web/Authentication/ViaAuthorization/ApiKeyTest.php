@@ -46,6 +46,6 @@ class ApiKeyTest extends TestCase
         $identity = $check(new AuthorizationValue('Bearer', 'foo'));
 
         $this->assertInstanceOf(Identity::class, $identity);
-        $this->assertSame('authorized client', (string) $identity);
+        $this->assertSame('authorized client', $identity->toString());
     }
 }

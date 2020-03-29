@@ -20,7 +20,7 @@ final class Source implements Comparator, Specification
 
     public function __construct(Identity $value)
     {
-        $this->value = (string) $value;
+        $this->value = $value->toString();
     }
 
     /**
@@ -49,6 +49,6 @@ final class Source implements Comparator, Specification
 
     public function isSatisfiedBy(Reference $reference): bool
     {
-        return (string) $reference->source() === $this->value;
+        return $reference->source()->toString() === $this->value;
     }
 }

@@ -15,9 +15,9 @@ use Innmind\Neo4j\DBAL\Connection;
 use Innmind\Http\{
     Message\ServerRequest\ServerRequest,
     Message\Response,
-    Message\Method\Method,
-    ProtocolVersion\ProtocolVersion,
-    Headers\Headers,
+    Message\Method,
+    ProtocolVersion,
+    Headers,
     Header\Accept,
     Header\AcceptValue,
     Header\Authorization,
@@ -44,7 +44,7 @@ class HttpResourceTest extends TestCase
             ->will($this->throwException(new HttpResourceNotFound));
 
         $response = $handle(new ServerRequest(
-            Url::fromString('http://localhost/api/web/resource/fc1cc2b4-2c09-43b1-8c19-3499068950ed'),
+            Url::of('http://localhost/api/web/resource/fc1cc2b4-2c09-43b1-8c19-3499068950ed'),
             Method::get(),
             new ProtocolVersion(1, 1),
             Headers::of(
@@ -59,7 +59,7 @@ class HttpResourceTest extends TestCase
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(404, $response->statusCode()->value());
-        $this->assertSame('', (string) $response->body());
+        $this->assertSame('', $response->body()->toString());
     }
 
     public function testErrorWhenNoAuth()
@@ -74,7 +74,7 @@ class HttpResourceTest extends TestCase
         );
 
         $response = $handle(new ServerRequest(
-            Url::fromString('http://localhost/api/web/resource/fc1cc2b4-2c09-43b1-8c19-3499068950ed'),
+            Url::of('http://localhost/api/web/resource/fc1cc2b4-2c09-43b1-8c19-3499068950ed'),
             Method::get(),
             new ProtocolVersion(1, 1),
             Headers::of(
@@ -86,7 +86,7 @@ class HttpResourceTest extends TestCase
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(401, $response->statusCode()->value());
-        $this->assertSame('', (string) $response->body());
+        $this->assertSame('', $response->body()->toString());
     }
 
     public function testOptions()
@@ -101,7 +101,7 @@ class HttpResourceTest extends TestCase
         );
 
         $response = $handle(new ServerRequest(
-            Url::fromString('http://localhost/api/web/resource/'),
+            Url::of('http://localhost/api/web/resource/'),
             Method::options(),
             new ProtocolVersion(1, 1),
             Headers::of(
@@ -118,11 +118,11 @@ class HttpResourceTest extends TestCase
         $this->assertSame(200, $response->statusCode()->value());
         $this->assertSame(
             'Content-Type: application/json',
-            (string) $response->headers()->get('content-type')
+            $response->headers()->get('content-type')->toString()
         );
         $this->assertSame(
             '{"identity":"identity","properties":{"identity":{"type":"string","access":["READ"],"variants":[],"optional":false},"host":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"path":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"query":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"languages":{"type":"set<string>","access":["READ","CREATE"],"variants":[],"optional":true},"charset":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true}},"metas":{"allowed_media_types":["*\/*; q=0.1"]},"rangeable":true,"linkable_to":[{"relationship":"referrer","resource_path":"web.resource","parameters":[]}]}',
-            (string) $response->body()
+            $response->body()->toString()
         );
     }
 }

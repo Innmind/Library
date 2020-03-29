@@ -13,8 +13,8 @@ use Domain\{
     Event\HttpResource\CharsetSpecified
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query
 };
 use PHPUnit\Framework\TestCase;
 
@@ -33,8 +33,8 @@ class SpecifyCharsetHandlerTest extends TestCase
             ->willReturn(
                 $resource = new HttpResource(
                     $identity,
-                    $this->createMock(PathInterface::class),
-                    $this->createMock(QueryInterface::class)
+                    Path::none(),
+                    Query::none()
                 )
             );
 
@@ -44,7 +44,7 @@ class SpecifyCharsetHandlerTest extends TestCase
         $this->assertSame($charset, $resource->charset());
         $this->assertInstanceOf(
             CharsetSpecified::class,
-            $resource->recordedEvents()->current()
+            $resource->recordedEvents()->first()
         );
     }
 }

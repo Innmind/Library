@@ -80,7 +80,7 @@ function bootstrap(
         require __DIR__.'/config/rest.php',
         Route::of(
             new Route\Name('capabilities'),
-            Str::of('OPTIONS /\*')
+            Str::of('OPTIONS /*')
         ),
         new Prefix('/api')
     );

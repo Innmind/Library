@@ -3,10 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Neo4j\Type\HttpResource;
 
-use Innmind\Url\{
-    Query,
-    NullQuery,
-};
+use Innmind\Url\Query;
 use Innmind\Neo4j\ONM\Type;
 
 final class QueryType implements Type
@@ -16,7 +13,7 @@ final class QueryType implements Type
      */
     public function forDatabase($value)
     {
-        return (string) $value;
+        return $value->toString();
     }
 
     /**
@@ -26,7 +23,7 @@ final class QueryType implements Type
     {
         $value = (string) $value;
 
-        return empty($value) ? new NullQuery : new Query($value);
+        return empty($value) ? Query::none() : Query::of($value);
     }
 
     /**

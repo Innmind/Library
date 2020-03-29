@@ -14,8 +14,8 @@ use Domain\{
     Event\ResourceAuthorRegistered
 };
 use Innmind\TimeContinuum\{
-    TimeContinuumInterface,
-    PointInTimeInterface
+    Clock,
+    PointInTime
 };
 use PHPUnit\Framework\TestCase;
 
@@ -25,7 +25,7 @@ class RegisterAuthorHandlerTest extends TestCase
     {
         $handler = new RegisterAuthorHandler(
             $repository = $this->createMock(ResourceAuthorRepository::class),
-            $clock = $this->createMock(TimeContinuumInterface::class)
+            $clock = $this->createMock(Clock::class)
         );
         $command = new RegisterAuthor(
             $this->createMock(Identity::class),
@@ -36,7 +36,7 @@ class RegisterAuthorHandlerTest extends TestCase
             ->expects($this->once())
             ->method('now')
             ->willReturn(
-                $now = $this->createMock(PointInTimeInterface::class)
+                $now = $this->createMock(PointInTime::class)
             );
         $repository
             ->expects($this->once())
@@ -47,7 +47,7 @@ class RegisterAuthorHandlerTest extends TestCase
                     $entity->resource() === $command->resource() &&
                     $entity->asOf() === $now &&
                     $entity->recordedEvents()->size() === 1 &&
-                    $entity->recordedEvents()->current() instanceof ResourceAuthorRegistered;
+                    $entity->recordedEvents()->first() instanceof ResourceAuthorRegistered;
             }));
 
         $this->assertNull($handler($command));

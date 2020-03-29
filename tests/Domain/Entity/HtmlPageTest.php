@@ -22,9 +22,9 @@ use Domain\{
     Exception\InvalidArgumentException,
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface,
-    UrlInterface,
+    Path,
+    Query,
+    Url,
 };
 use Innmind\Colour\RGBA;
 use Innmind\Immutable\Set;
@@ -36,8 +36,8 @@ class HtmlPageTest extends TestCase
     {
         $htmlPage = new HtmlPage(
             $identity = $this->createMock(Identity::class),
-            $path = $this->createMock(PathInterface::class),
-            $query = $this->createMock(QueryInterface::class)
+            $path = Path::none(),
+            $query = Query::none()
         );
 
         $this->assertInstanceOf(HttpResource::class, $htmlPage);
@@ -57,8 +57,8 @@ class HtmlPageTest extends TestCase
 
         new HtmlPage(
             $this->createMock(ResourceIdentity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
     }
 
@@ -66,27 +66,27 @@ class HtmlPageTest extends TestCase
     {
         $htmlPage = HtmlPage::register(
             $identity = $this->createMock(Identity::class),
-            $path = $this->createMock(PathInterface::class),
-            $query = $this->createMock(QueryInterface::class)
+            $path = Path::none(),
+            $query = Query::none()
         );
 
         $this->assertInstanceOf(HtmlPage::class, $htmlPage);
         $this->assertCount(1, $htmlPage->recordedEvents());
         $this->assertInstanceOf(
             HtmlPageRegistered::class,
-            $htmlPage->recordedEvents()->current()
+            $htmlPage->recordedEvents()->first()
         );
         $this->assertSame(
             $identity,
-            $htmlPage->recordedEvents()->current()->identity()
+            $htmlPage->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $path,
-            $htmlPage->recordedEvents()->current()->path()
+            $htmlPage->recordedEvents()->first()->path()
         );
         $this->assertSame(
             $query,
-            $htmlPage->recordedEvents()->current()->query()
+            $htmlPage->recordedEvents()->first()->query()
         );
     }
 
@@ -94,8 +94,8 @@ class HtmlPageTest extends TestCase
     {
         $htmlPage = new HtmlPage(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
         $this->assertSame('', $htmlPage->mainContent());
@@ -107,15 +107,15 @@ class HtmlPageTest extends TestCase
         $this->assertCount(1, $htmlPage->recordedEvents());
         $this->assertInstanceOf(
             MainContentSpecified::class,
-            $htmlPage->recordedEvents()->current()
+            $htmlPage->recordedEvents()->first()
         );
         $this->assertSame(
             $htmlPage->identity(),
-            $htmlPage->recordedEvents()->current()->identity()
+            $htmlPage->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $htmlPage->mainContent(),
-            $htmlPage->recordedEvents()->current()->mainContent()
+            $htmlPage->recordedEvents()->first()->mainContent()
         );
     }
 
@@ -123,8 +123,8 @@ class HtmlPageTest extends TestCase
     {
         $htmlPage = new HtmlPage(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
         $this->assertSame('', $htmlPage->description());
@@ -136,15 +136,15 @@ class HtmlPageTest extends TestCase
         $this->assertCount(1, $htmlPage->recordedEvents());
         $this->assertInstanceOf(
             DescriptionSpecified::class,
-            $htmlPage->recordedEvents()->current()
+            $htmlPage->recordedEvents()->first()
         );
         $this->assertSame(
             $htmlPage->identity(),
-            $htmlPage->recordedEvents()->current()->identity()
+            $htmlPage->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $htmlPage->description(),
-            $htmlPage->recordedEvents()->current()->description()
+            $htmlPage->recordedEvents()->first()->description()
         );
     }
 
@@ -152,8 +152,8 @@ class HtmlPageTest extends TestCase
     {
         $htmlPage = new HtmlPage(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
         $this->assertCount(0, $htmlPage->anchors());
@@ -161,7 +161,7 @@ class HtmlPageTest extends TestCase
         $this->assertSame(
             $htmlPage,
             $htmlPage->specifyAnchors(
-                $anchors = (new Set(Anchor::class))
+                $anchors = (Set::of(Anchor::class))
                     ->add(new Anchor('foo'))
             )
         );
@@ -169,38 +169,38 @@ class HtmlPageTest extends TestCase
         $this->assertCount(1, $htmlPage->recordedEvents());
         $this->assertInstanceOf(
             AnchorsSpecified::class,
-            $htmlPage->recordedEvents()->current()
+            $htmlPage->recordedEvents()->first()
         );
         $this->assertSame(
             $htmlPage->identity(),
-            $htmlPage->recordedEvents()->current()->identity()
+            $htmlPage->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $htmlPage->anchors(),
-            $htmlPage->recordedEvents()->current()->anchors()
+            $htmlPage->recordedEvents()->first()->anchors()
         );
     }
 
     public function testThrowWhenInvalidAnchorsSet()
     {
         $this->expectException(\TypeError::class);
-        $this->expectExceptionMessage('Argument 1 must be of type SetInterface<Domain\Entity\HtmlPage\Anchor>');
+        $this->expectExceptionMessage('Argument 1 must be of type Set<Domain\Entity\HtmlPage\Anchor>');
 
         $htmlPage = new HtmlPage(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
-        $htmlPage->specifyAnchors(new Set('int'));
+        $htmlPage->specifyAnchors(Set::of('int'));
     }
 
     public function testFlagAsJournal()
     {
         $htmlPage = new HtmlPage(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
         $this->assertFalse($htmlPage->isJournal());
@@ -212,11 +212,11 @@ class HtmlPageTest extends TestCase
         $this->assertCount(1, $htmlPage->recordedEvents());
         $this->assertInstanceOf(
             FlaggedAsJournal::class,
-            $htmlPage->recordedEvents()->current()
+            $htmlPage->recordedEvents()->first()
         );
         $this->assertSame(
             $htmlPage->identity(),
-            $htmlPage->recordedEvents()->current()->identity()
+            $htmlPage->recordedEvents()->first()->identity()
         );
     }
 
@@ -224,29 +224,29 @@ class HtmlPageTest extends TestCase
     {
         $htmlPage = new HtmlPage(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
         $this->assertSame(
             $htmlPage,
             $htmlPage->specifyThemeColour(
-                $colour = RGBA::fromString('39f')
+                $colour = RGBA::of('39f')
             )
         );
         $this->assertSame($colour, $htmlPage->themeColour());
         $this->assertCount(1, $htmlPage->recordedEvents());
         $this->assertInstanceOf(
             ThemeColourSpecified::class,
-            $htmlPage->recordedEvents()->current()
+            $htmlPage->recordedEvents()->first()
         );
         $this->assertSame(
             $htmlPage->identity(),
-            $htmlPage->recordedEvents()->current()->identity()
+            $htmlPage->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $htmlPage->themeColour(),
-            $htmlPage->recordedEvents()->current()->colour()
+            $htmlPage->recordedEvents()->first()->colour()
         );
     }
 
@@ -254,8 +254,8 @@ class HtmlPageTest extends TestCase
     {
         $htmlPage = new HtmlPage(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
         $this->assertSame('', $htmlPage->title());
@@ -267,15 +267,15 @@ class HtmlPageTest extends TestCase
         $this->assertCount(1, $htmlPage->recordedEvents());
         $this->assertInstanceOf(
             TitleSpecified::class,
-            $htmlPage->recordedEvents()->current()
+            $htmlPage->recordedEvents()->first()
         );
         $this->assertSame(
             $htmlPage->identity(),
-            $htmlPage->recordedEvents()->current()->identity()
+            $htmlPage->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $htmlPage->title(),
-            $htmlPage->recordedEvents()->current()->title()
+            $htmlPage->recordedEvents()->first()->title()
         );
     }
 
@@ -283,29 +283,29 @@ class HtmlPageTest extends TestCase
     {
         $htmlPage = new HtmlPage(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
         $this->assertSame(
             $htmlPage,
             $htmlPage->specifyAndroidAppLink(
-                $url = $this->createMock(UrlInterface::class)
+                $url = Url::of('http://example.com')
             )
         );
         $this->assertSame($url, $htmlPage->androidAppLink());
         $this->assertCount(1, $htmlPage->recordedEvents());
         $this->assertInstanceOf(
             AndroidAppLinkSpecified::class,
-            $htmlPage->recordedEvents()->current()
+            $htmlPage->recordedEvents()->first()
         );
         $this->assertSame(
             $htmlPage->identity(),
-            $htmlPage->recordedEvents()->current()->identity()
+            $htmlPage->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $htmlPage->androidAppLink(),
-            $htmlPage->recordedEvents()->current()->url()
+            $htmlPage->recordedEvents()->first()->url()
         );
     }
 
@@ -313,29 +313,29 @@ class HtmlPageTest extends TestCase
     {
         $htmlPage = new HtmlPage(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
         $this->assertSame(
             $htmlPage,
             $htmlPage->specifyIosAppLink(
-                $url = $this->createMock(UrlInterface::class)
+                $url = Url::of('http://example.com')
             )
         );
         $this->assertSame($url, $htmlPage->iosAppLink());
         $this->assertCount(1, $htmlPage->recordedEvents());
         $this->assertInstanceOf(
             IosAppLinkSpecified::class,
-            $htmlPage->recordedEvents()->current()
+            $htmlPage->recordedEvents()->first()
         );
         $this->assertSame(
             $htmlPage->identity(),
-            $htmlPage->recordedEvents()->current()->identity()
+            $htmlPage->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $htmlPage->iosAppLink(),
-            $htmlPage->recordedEvents()->current()->url()
+            $htmlPage->recordedEvents()->first()->url()
         );
     }
 
@@ -343,29 +343,29 @@ class HtmlPageTest extends TestCase
     {
         $htmlPage = new HtmlPage(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
         $this->assertFalse($htmlPage->hasPreview());
         $this->assertSame(
             $htmlPage,
-            $htmlPage->usePreview($url = $this->createMock(UrlInterface::class))
+            $htmlPage->usePreview($url = Url::of('http://example.com'))
         );
         $this->assertTrue($htmlPage->hasPreview());
         $this->assertSame($url, $htmlPage->preview());
         $this->assertCount(1, $htmlPage->recordedEvents());
         $this->assertInstanceOf(
             PreviewSpecified::class,
-            $htmlPage->recordedEvents()->current()
+            $htmlPage->recordedEvents()->first()
         );
         $this->assertSame(
             $htmlPage->identity(),
-            $htmlPage->recordedEvents()->current()->identity()
+            $htmlPage->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $htmlPage->preview(),
-            $htmlPage->recordedEvents()->current()->url()
+            $htmlPage->recordedEvents()->first()->url()
         );
     }
 }

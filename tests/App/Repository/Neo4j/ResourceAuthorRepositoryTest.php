@@ -19,11 +19,9 @@ use Innmind\Neo4j\ONM\{
     Repository,
     Exception\EntityNotFound,
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
-use Innmind\Immutable\{
-    SetInterface,
-    Set,
-};
+use Innmind\TimeContinuum\PointInTime;
+use Innmind\Immutable\Set;
+use function Innmind\Immutable\unwrap;
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 
@@ -54,7 +52,7 @@ class ResourceAuthorRepositoryTest extends TestCase
                     $identity,
                     $this->createMock(AuthorIdentity::class),
                     $this->createMock(HttpResourceIdentity::class),
-                    $this->createMock(PointInTimeInterface::class)
+                    $this->createMock(PointInTime::class)
                 )
             );
 
@@ -91,7 +89,7 @@ class ResourceAuthorRepositoryTest extends TestCase
             new Identity((string) Uuid::uuid4()),
             $this->createMock(AuthorIdentity::class),
             $this->createMock(HttpResourceIdentity::class),
-            $this->createMock(PointInTimeInterface::class)
+            $this->createMock(PointInTime::class)
         );
         $infra
             ->expects($this->once())
@@ -116,7 +114,7 @@ class ResourceAuthorRepositoryTest extends TestCase
                     $identity,
                     $this->createMock(AuthorIdentity::class),
                     $this->createMock(HttpResourceIdentity::class),
-                    $this->createMock(PointInTimeInterface::class)
+                    $this->createMock(PointInTime::class)
                 )
             );
         $infra
@@ -135,12 +133,12 @@ class ResourceAuthorRepositoryTest extends TestCase
         $identity = new Identity((string) Uuid::uuid4());
         $infra
             ->expects($this->at(0))
-            ->method('has')
+            ->method('contains')
             ->with($identity)
             ->willReturn(true);
         $infra
             ->expects($this->at(1))
-            ->method('has')
+            ->method('contains')
             ->with($identity)
             ->willReturn(false);
 
@@ -157,14 +155,18 @@ class ResourceAuthorRepositoryTest extends TestCase
             ->expects($this->once())
             ->method('all')
             ->willReturn(
-                $all = $this->createMock(SetInterface::class)
+                Set::of(
+                    ResourceAuthor::class,
+                    new ResourceAuthor(
+                        new Identity((string) Uuid::uuid4()),
+                        $this->createMock(AuthorIdentity::class),
+                        $this->createMock(HttpResourceIdentity::class),
+                        $this->createMock(PointInTime::class)
+                    )
+                )
             );
-        $all
-            ->expects($this->once())
-            ->method('size')
-            ->willReturn(42);
 
-        $this->assertSame(42, $repository->count());
+        $this->assertSame(1, $repository->count());
     }
 
     public function testAll()
@@ -176,21 +178,21 @@ class ResourceAuthorRepositoryTest extends TestCase
             ->expects($this->once())
             ->method('all')
             ->willReturn(
-                (new Set('object'))->add(
+                Set::objects(
                     $entity = new ResourceAuthor(
                         new Identity((string) Uuid::uuid4()),
                         $this->createMock(AuthorIdentity::class),
                         $this->createMock(HttpResourceIdentity::class),
-                        $this->createMock(PointInTimeInterface::class)
+                        $this->createMock(PointInTime::class)
                     )
                 )
             );
 
         $all = $repository->all();
 
-        $this->assertInstanceOf(SetInterface::class, $all);
+        $this->assertInstanceOf(Set::class, $all);
         $this->assertSame(ResourceAuthor::class, (string) $all->type());
-        $this->assertSame([$entity], $all->toPrimitive());
+        $this->assertSame([$entity], unwrap($all));
     }
 
     public function testMatching()
@@ -204,20 +206,20 @@ class ResourceAuthorRepositoryTest extends TestCase
             ->method('matching')
             ->with($specification)
             ->willReturn(
-                (new Set('object'))->add(
+                Set::objects(
                     $entity = new ResourceAuthor(
                         new Identity((string) Uuid::uuid4()),
                         $this->createMock(AuthorIdentity::class),
                         $this->createMock(HttpResourceIdentity::class),
-                        $this->createMock(PointInTimeInterface::class)
+                        $this->createMock(PointInTime::class)
                     )
                 )
             );
 
         $all = $repository->matching($specification);
 
-        $this->assertInstanceOf(SetInterface::class, $all);
+        $this->assertInstanceOf(Set::class, $all);
         $this->assertSame(ResourceAuthor::class, (string) $all->type());
-        $this->assertSame([$entity], $all->toPrimitive());
+        $this->assertSame([$entity], unwrap($all));
     }
 }

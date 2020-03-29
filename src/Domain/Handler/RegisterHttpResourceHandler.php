@@ -16,19 +16,19 @@ use Domain\{
     Specification\HostResource\Host,
     Exception\HttpResourceAlreadyExist
 };
-use Innmind\TimeContinuum\TimeContinuumInterface;
+use Innmind\TimeContinuum\Clock;
 use Innmind\Immutable\Set;
 
 final class RegisterHttpResourceHandler
 {
     private HttpResourceRepository $resourceRepository;
     private HostResourceRepository $relationRepository;
-    private TimeContinuumInterface $clock;
+    private Clock $clock;
 
     public function __construct(
         HttpResourceRepository $resourceRepository,
         HostResourceRepository $relationRepository,
-        TimeContinuumInterface $clock
+        Clock $clock
     ) {
         $this->resourceRepository = $resourceRepository;
         $this->relationRepository = $relationRepository;
@@ -70,7 +70,7 @@ final class RegisterHttpResourceHandler
         }
 
         $identities = $resources->reduce(
-            new Set(Identity::class),
+            Set::of(Identity::class),
             function(Set $identities, HttpResource $resource): Set {
                 return $identities->add($resource->identity());
             }

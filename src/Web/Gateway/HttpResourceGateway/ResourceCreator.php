@@ -25,7 +25,6 @@ use Innmind\Url\{
     Authority\Host,
     Path,
     Query,
-    NullQuery,
 };
 use Innmind\Rest\Server\{
     ResourceCreator as ResourceCreatorInterface,
@@ -64,7 +63,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             ($this->handle)(
                 new RegisterDomain(
                     $domain = new DomainIdentity((string) Uuid::uuid4()),
-                    $host = new Host($resource->property('host')->value())
+                    $host = Host::of($resource->property('host')->value())
                 )
             );
         } catch (DomainAlreadyExist $e) {
@@ -98,8 +97,8 @@ final class ResourceCreator implements ResourceCreatorInterface
                 $identity = new Identity((string) Uuid::uuid4()),
                 $host,
                 new HostResourceIdentity((string) Uuid::uuid4()),
-                new Path($resource->property('path')->value()),
-                empty($query) ? new NullQuery : new Query($query)
+                Path::of($resource->property('path')->value()),
+                empty($query) ? Query::none() : Query::of($query)
             )
         );
 
@@ -130,11 +129,13 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $languages = new Set(Language::class);
-
-        foreach ($resource->property('languages')->value() as $language) {
-            $languages = $languages->add(new Language($language));
-        }
+        $languages = $resource
+            ->property('languages')
+            ->value()
+            ->mapTo(
+                Language::class,
+                static fn(string $language): Language => new Language($language),
+            );
 
         ($this->handle)(
             new SpecifyLanguages(

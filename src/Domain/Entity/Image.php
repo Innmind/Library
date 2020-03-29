@@ -16,13 +16,10 @@ use Domain\{
     Exception\InvalidArgumentException,
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface,
+    Path,
+    Query,
 };
-use Innmind\Immutable\{
-    Set,
-    SetInterface,
-};
+use Innmind\Immutable\Set;
 
 final class Image extends HttpResource
 {
@@ -32,21 +29,21 @@ final class Image extends HttpResource
 
     public function __construct(
         ResourceIdentity $identity,
-        PathInterface $path,
-        QueryInterface $query
+        Path $path,
+        Query $query
     ) {
         if (!$identity instanceof Identity) {
             throw new InvalidArgumentException;
         }
 
         parent::__construct($identity, $path, $query);
-        $this->descriptions = new Set(Description::class);
+        $this->descriptions = Set::of(Description::class);
     }
 
     public static function register(
         ResourceIdentity $identity,
-        PathInterface $path,
-        QueryInterface $query
+        Path $path,
+        Query $query
     ): HttpResource {
         $self = new self($identity, $path, $query);
         $self->record(new ImageRegistered($identity, $path, $query));
@@ -110,9 +107,9 @@ final class Image extends HttpResource
     }
 
     /**
-     * @return SetInterface<Description>
+     * @return Set<Description>
      */
-    public function descriptions(): SetInterface
+    public function descriptions(): Set
     {
         return $this->descriptions;
     }

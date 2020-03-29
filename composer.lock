@@ -4,48 +4,50 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "09e5fd804ed4289a9a5e8cc1d0d89132",
+    "content-hash": "16f78ef1a56f529a186ce01aaf246a2f",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.3.3",
+            "version": "6.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "407b0cb880ace85c9b63c5f9551db498cb2d50ba"
+                "reference": "43ece0e75098b7ecd8d13918293029e555a50f82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/407b0cb880ace85c9b63c5f9551db498cb2d50ba",
-                "reference": "407b0cb880ace85c9b63c5f9551db498cb2d50ba",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/43ece0e75098b7ecd8d13918293029e555a50f82",
+                "reference": "43ece0e75098b7ecd8d13918293029e555a50f82",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "guzzlehttp/promises": "^1.0",
-                "guzzlehttp/psr7": "^1.4",
+                "guzzlehttp/psr7": "^1.6.1",
                 "php": ">=5.5"
             },
             "require-dev": {
                 "ext-curl": "*",
                 "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.4 || ^7.0",
-                "psr/log": "^1.0"
+                "psr/log": "^1.1"
             },
             "suggest": {
+                "ext-intl": "Required for Internationalized Domain Name (IDN) support",
                 "psr/log": "Required for using the Log middleware"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.3-dev"
+                    "dev-master": "6.5-dev"
                 }
             },
             "autoload": {
-                "files": [
-                    "src/functions_include.php"
-                ],
                 "psr-4": {
                     "GuzzleHttp\\": "src/"
-                }
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -69,7 +71,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2018-04-22T15:46:56+00:00"
+            "time": "2019-12-23T11:57:10+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -124,33 +126,37 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.5.2",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "9f83dded91781a01c63574e387eaa769be769115"
+                "reference": "239400de7a173fe9901b9ac7c06497751f00727a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/9f83dded91781a01c63574e387eaa769be769115",
-                "reference": "9f83dded91781a01c63574e387eaa769be769115",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/239400de7a173fe9901b9ac7c06497751f00727a",
+                "reference": "239400de7a173fe9901b9ac7c06497751f00727a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0",
                 "psr/http-message": "~1.0",
-                "ralouphie/getallheaders": "^2.0.5"
+                "ralouphie/getallheaders": "^2.0.5 || ^3.0.0"
             },
             "provide": {
                 "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
+                "ext-zlib": "*",
                 "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.8"
+            },
+            "suggest": {
+                "zendframework/zend-httphandlerrunner": "Emit PSR-7 responses"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5-dev"
+                    "dev-master": "1.6-dev"
                 }
             },
             "autoload": {
@@ -187,37 +193,35 @@
                 "uri",
                 "url"
             ],
-            "time": "2018-12-04T20:46:45+00:00"
+            "time": "2019-07-01T23:21:34+00:00"
         },
         {
             "name": "innmind/cli",
-            "version": "1.7.1",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/CLI.git",
-                "reference": "c6546822910f629b8e26d6f2618cc2cbd614d070"
+                "reference": "520091221ce6a6b2e1b7a441311a40b55582b166"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/CLI/zipball/c6546822910f629b8e26d6f2618cc2cbd614d070",
-                "reference": "c6546822910f629b8e26d6f2618cc2cbd614d070",
+                "url": "https://api.github.com/repos/Innmind/CLI/zipball/520091221ce6a6b2e1b7a441311a40b55582b166",
+                "reference": "520091221ce6a6b2e1b7a441311a40b55582b166",
                 "shasum": ""
             },
             "require": {
-                "innmind/filesystem": "^3.3",
-                "innmind/immutable": "^2.7",
-                "innmind/operating-system": "^1.4",
-                "innmind/stack-trace": "^2.0",
-                "innmind/stream": "^1.3",
-                "innmind/time-warp": "^1.0",
-                "innmind/url": "^2.0",
-                "php": "~7.2",
-                "symfony/dotenv": "^4.2"
+                "innmind/immutable": "~3.3",
+                "innmind/operating-system": "~2.0",
+                "innmind/stack-trace": "~3.0",
+                "innmind/stream": "~2.0",
+                "innmind/url": "~3.0",
+                "php": "~7.4",
+                "symfony/dotenv": "~5.0"
             },
             "require-dev": {
-                "giorgiosironi/eris": "^0.9.0",
-                "innmind/server-control": "^2.2",
-                "phpunit/phpunit": "~6.0"
+                "giorgiosironi/eris": "^0.11.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "^3.8"
             },
             "type": "library",
             "autoload": {
@@ -243,33 +247,45 @@
             "keywords": [
                 "cli"
             ],
-            "time": "2019-03-17T10:14:37+00:00"
+            "time": "2020-02-10T19:11:14+00:00"
         },
         {
             "name": "innmind/colour",
-            "version": "2.1.0",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Colour.git",
-                "reference": "1d5859798805af5deed944e06e6d6a96407655ae"
+                "reference": "67608ed7771f70721b36d6367b8040af94216568"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Colour/zipball/1d5859798805af5deed944e06e6d6a96407655ae",
-                "reference": "1d5859798805af5deed944e06e6d6a96407655ae",
+                "url": "https://api.github.com/repos/Innmind/Colour/zipball/67608ed7771f70721b36d6367b8040af94216568",
+                "reference": "67608ed7771f70721b36d6367b8040af94216568",
                 "shasum": ""
             },
             "require": {
-                "innmind/immutable": "~2.10",
-                "php": "~7.1"
+                "innmind/immutable": "~3.0",
+                "php": "~7.4"
+            },
+            "conflict": {
+                "innmind/black-box": "<4.0|~5.0"
+            },
+            "provide": {
+                "innmind/black-box": "4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~7.0"
+                "innmind/black-box": "^4.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
+            },
+            "suggest": {
+                "innmind/black-box": "For property based testing"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Innmind\\Colour\\": "src/"
+                    "Innmind\\Colour\\": "src/",
+                    "Fixtures\\Innmind\\Colour\\": "fixtures/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -287,31 +303,32 @@
             "keywords": [
                 "colour"
             ],
-            "time": "2018-11-04T12:43:34+00:00"
+            "time": "2020-01-05T17:19:48+00:00"
         },
         {
             "name": "innmind/command-bus",
-            "version": "3.0.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/CommandBus.git",
-                "reference": "f0d0c12ebc2fb3644e06156271ab7ed7686393cc"
+                "reference": "6400859c139b228b1bc8066c36815560920079fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/CommandBus/zipball/f0d0c12ebc2fb3644e06156271ab7ed7686393cc",
-                "reference": "f0d0c12ebc2fb3644e06156271ab7ed7686393cc",
+                "url": "https://api.github.com/repos/Innmind/CommandBus/zipball/6400859c139b228b1bc8066c36815560920079fb",
+                "reference": "6400859c139b228b1bc8066c36815560920079fb",
                 "shasum": ""
             },
             "require": {
-                "innmind/immutable": "~2.10",
-                "innmind/reflection": "~3.0",
-                "php": "~7.2",
+                "innmind/immutable": "~3.0",
+                "innmind/reflection": "~4.0",
+                "php": "~7.4",
                 "psr/log": "^1.0",
                 "ramsey/uuid": "^3.5"
             },
             "require-dev": {
-                "phpunit/phpunit": "~7.0"
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
             },
             "type": "library",
             "autoload": {
@@ -338,28 +355,29 @@
                 "command bus",
                 "ddd"
             ],
-            "time": "2018-11-01T15:16:02+00:00"
+            "time": "2020-01-28T17:18:01+00:00"
         },
         {
             "name": "innmind/event-bus",
-            "version": "3.0.0",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/EventBus.git",
-                "reference": "3f3b62a8b284107eac05e4edde7f1409de925e58"
+                "reference": "03ca83dae0c376bd74dde7c7183c71393c4b15b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/EventBus/zipball/3f3b62a8b284107eac05e4edde7f1409de925e58",
-                "reference": "3f3b62a8b284107eac05e4edde7f1409de925e58",
+                "url": "https://api.github.com/repos/Innmind/EventBus/zipball/03ca83dae0c376bd74dde7c7183c71393c4b15b9",
+                "reference": "03ca83dae0c376bd74dde7c7183c71393c4b15b9",
                 "shasum": ""
             },
             "require": {
-                "innmind/immutable": "~2.10",
-                "php": "~7.2"
+                "innmind/immutable": "~3.0",
+                "php": "~7.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "~7.0"
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
             },
             "type": "library",
             "autoload": {
@@ -386,31 +404,86 @@
                 "dispatcher",
                 "event"
             ],
-            "time": "2018-11-01T14:16:34+00:00"
+            "time": "2020-03-28T16:20:34+00:00"
         },
         {
-            "name": "innmind/filesystem",
-            "version": "3.3.1",
+            "name": "innmind/file-watch",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Innmind/Filesystem.git",
-                "reference": "9b1bcfac328f5849ea187497d5264aa747584e15"
+                "url": "https://github.com/Innmind/FileWatch.git",
+                "reference": "4aa136626b88453ef6fcf39e4808dd7f6673baef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Filesystem/zipball/9b1bcfac328f5849ea187497d5264aa747584e15",
-                "reference": "9b1bcfac328f5849ea187497d5264aa747584e15",
+                "url": "https://api.github.com/repos/Innmind/FileWatch/zipball/4aa136626b88453ef6fcf39e4808dd7f6673baef",
+                "reference": "4aa136626b88453ef6fcf39e4808dd7f6673baef",
                 "shasum": ""
             },
             "require": {
-                "innmind/immutable": "~2.10",
-                "innmind/stream": "^1.3",
-                "php": "~7.1",
-                "symfony/filesystem": "^3.0|~4.0",
-                "symfony/finder": "~3.0|~4.0"
+                "innmind/server-control": "~3.0",
+                "innmind/time-continuum": "~2.0",
+                "innmind/time-warp": "~2.0",
+                "innmind/url": "~3.0",
+                "php": "~7.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "~7.0"
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Innmind\\FileWatch\\": "src/"
+                },
+                "files": [
+                    "src/bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "Library to execute code when a file changes",
+            "homepage": "http://github.com/Innmind/FileWatch",
+            "keywords": [
+                "file",
+                "watch"
+            ],
+            "time": "2020-01-19T10:55:52+00:00"
+        },
+        {
+            "name": "innmind/filesystem",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/Filesystem.git",
+                "reference": "9793cb59e71872a790c9e92738def435b3a1e2df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/Filesystem/zipball/9793cb59e71872a790c9e92738def435b3a1e2df",
+                "reference": "9793cb59e71872a790c9e92738def435b3a1e2df",
+                "shasum": ""
+            },
+            "require": {
+                "innmind/immutable": "~3.0",
+                "innmind/media-type": "^1.1",
+                "innmind/stream": "~2.0",
+                "innmind/url": "^3.1",
+                "php": "~7.4",
+                "symfony/filesystem": "^3.0|~4.0|~5.0",
+                "symfony/finder": "~3.0|~4.0|~5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "^3.7"
             },
             "type": "library",
             "autoload": {
@@ -433,32 +506,33 @@
             "keywords": [
                 "filesystem"
             ],
-            "time": "2019-02-24T17:15:49+00:00"
+            "time": "2019-12-15T12:31:22+00:00"
         },
         {
             "name": "innmind/graphviz",
-            "version": "1.2.2",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Graphviz.git",
-                "reference": "1d62d8454ab01ea0e3b582d2abe5a1b52d2c8853"
+                "reference": "7be0f2656ec1a578accf86ef338299eea120a5e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Graphviz/zipball/1d62d8454ab01ea0e3b582d2abe5a1b52d2c8853",
-                "reference": "1d62d8454ab01ea0e3b582d2abe5a1b52d2c8853",
+                "url": "https://api.github.com/repos/Innmind/Graphviz/zipball/7be0f2656ec1a578accf86ef338299eea120a5e0",
+                "reference": "7be0f2656ec1a578accf86ef338299eea120a5e0",
                 "shasum": ""
             },
             "require": {
-                "innmind/colour": "^2.0",
-                "innmind/immutable": "^2.6",
-                "innmind/stream": "^1.4",
-                "innmind/url": "^2.0",
-                "php": "~7.1"
+                "innmind/colour": "~3.0",
+                "innmind/immutable": "~3.0",
+                "innmind/stream": "~2.0",
+                "innmind/url": "~3.0",
+                "php": "~7.4"
             },
             "require-dev": {
-                "giorgiosironi/eris": "^0.9.0",
-                "phpunit/phpunit": "~6.0"
+                "giorgiosironi/eris": "^0.11.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
             },
             "type": "library",
             "autoload": {
@@ -478,34 +552,37 @@
             ],
             "description": "Graphviz abstraction",
             "homepage": "http://github.com/Innmind/Graphviz",
-            "time": "2019-01-25T20:53:43+00:00"
+            "time": "2020-01-07T18:52:30+00:00"
         },
         {
             "name": "innmind/http",
-            "version": "3.9.1",
+            "version": "4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Http.git",
-                "reference": "9de33122f3591335b9351d2e28b923baaac69f08"
+                "reference": "5a7b9731e207cc01acee3699337f67d103a77007"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Http/zipball/9de33122f3591335b9351d2e28b923baaac69f08",
-                "reference": "9de33122f3591335b9351d2e28b923baaac69f08",
+                "url": "https://api.github.com/repos/Innmind/Http/zipball/5a7b9731e207cc01acee3699337f67d103a77007",
+                "reference": "5a7b9731e207cc01acee3699337f67d103a77007",
                 "shasum": ""
             },
             "require": {
-                "innmind/filesystem": "~3.0",
-                "innmind/immutable": "~2.1",
-                "innmind/stream": "^1.3",
-                "innmind/time-continuum": "^1.0",
-                "innmind/url": "~2.0",
-                "php": "~7.1"
+                "guzzlehttp/psr7": "^1.6",
+                "innmind/filesystem": "~4.0",
+                "innmind/immutable": "~3.0",
+                "innmind/stream": "~2.0",
+                "innmind/time-continuum": "~2.0",
+                "innmind/url": "~3.0",
+                "php": "~7.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "~6.0",
+                "giorgiosironi/eris": "^0.11.0",
+                "phpunit/phpunit": "~8.0",
                 "psr/http-message": "^1.0",
-                "symfony/http-foundation": "^3.0|^4.0"
+                "symfony/http-foundation": "~4.4|~5.0",
+                "vimeo/psalm": "~3.7.0"
             },
             "type": "library",
             "autoload": {
@@ -529,30 +606,30 @@
                 "Value Object",
                 "http"
             ],
-            "time": "2019-02-28T17:55:18+00:00"
+            "time": "2020-02-15T14:50:57+00:00"
         },
         {
             "name": "innmind/http-authentication",
-            "version": "1.4.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/HttpAuthentication.git",
-                "reference": "e40d05e8546956aab270b72f4357bd4bdb1770b9"
+                "reference": "b04d3cf2ad2dcd20e1190c0bcd814a14673cfab8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/HttpAuthentication/zipball/e40d05e8546956aab270b72f4357bd4bdb1770b9",
-                "reference": "e40d05e8546956aab270b72f4357bd4bdb1770b9",
+                "url": "https://api.github.com/repos/Innmind/HttpAuthentication/zipball/b04d3cf2ad2dcd20e1190c0bcd814a14673cfab8",
+                "reference": "b04d3cf2ad2dcd20e1190c0bcd814a14673cfab8",
                 "shasum": ""
             },
             "require": {
-                "innmind/http": "^3.6",
-                "php": "~7.2"
+                "innmind/http": "~4.2",
+                "php": "~7.4"
             },
             "require-dev": {
-                "giorgiosironi/eris": "^0.10.0",
-                "innmind/compose": "^1.7",
-                "phpunit/phpunit": "~7.0"
+                "giorgiosironi/eris": "^0.11.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "^3.9"
             },
             "type": "library",
             "autoload": {
@@ -579,34 +656,35 @@
                 "Authentication",
                 "http"
             ],
-            "time": "2018-09-22T16:31:28+00:00"
+            "time": "2020-03-01T14:01:15+00:00"
         },
         {
             "name": "innmind/http-framework",
-            "version": "1.4.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/HttpFramework.git",
-                "reference": "1f836cc1a143bc054296c0ad4c5018b9425cd486"
+                "reference": "ec1f8cb802553339f52814a1459ebf02f8e3d32c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/HttpFramework/zipball/1f836cc1a143bc054296c0ad4c5018b9425cd486",
-                "reference": "1f836cc1a143bc054296c0ad4c5018b9425cd486",
+                "url": "https://api.github.com/repos/Innmind/HttpFramework/zipball/ec1f8cb802553339f52814a1459ebf02f8e3d32c",
+                "reference": "ec1f8cb802553339f52814a1459ebf02f8e3d32c",
                 "shasum": ""
             },
             "require": {
-                "innmind/filesystem": "^3.3",
-                "innmind/http": "^3.8",
-                "innmind/http-authentication": "^1.1",
-                "innmind/rest-server": "^7.0",
-                "innmind/router": "^1.0",
-                "php": "~7.2",
-                "symfony/dotenv": "^4.1"
+                "innmind/filesystem": "~4.0",
+                "innmind/http": "~4.2",
+                "innmind/http-authentication": "~2.0",
+                "innmind/rest-server": "~8.0",
+                "innmind/router": "~2.0",
+                "php": "~7.4",
+                "symfony/dotenv": "~5.0"
             },
             "require-dev": {
-                "giorgiosironi/eris": "^0.10.0",
-                "phpunit/phpunit": "~7.0"
+                "giorgiosironi/eris": "^0.11.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "^3.10"
             },
             "type": "library",
             "autoload": {
@@ -633,31 +711,29 @@
                 "framework",
                 "http"
             ],
-            "time": "2019-02-09T16:19:17+00:00"
+            "time": "2020-03-23T17:09:30+00:00"
         },
         {
             "name": "innmind/http-server",
-            "version": "1.4.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/HttpServer.git",
-                "reference": "ea9c53444621d05148d6018afb991be0f75cb1a9"
+                "reference": "935962ebadf121a1e8abc49de6d2264559140a2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/HttpServer/zipball/ea9c53444621d05148d6018afb991be0f75cb1a9",
-                "reference": "ea9c53444621d05148d6018afb991be0f75cb1a9",
+                "url": "https://api.github.com/repos/Innmind/HttpServer/zipball/935962ebadf121a1e8abc49de6d2264559140a2d",
+                "reference": "935962ebadf121a1e8abc49de6d2264559140a2d",
                 "shasum": ""
             },
             "require": {
-                "innmind/filesystem": "^3.2",
-                "innmind/http": "^3.5",
-                "innmind/operating-system": "^1.4",
-                "php": "~7.2"
+                "innmind/http": "~4.2",
+                "innmind/operating-system": "~2.0",
+                "php": "~7.4"
             },
             "require-dev": {
-                "giorgiosironi/eris": "^0.9.0",
-                "phpunit/phpunit": "~6.0"
+                "vimeo/psalm": "^3.9"
             },
             "type": "library",
             "autoload": {
@@ -681,31 +757,34 @@
                 "http",
                 "server"
             ],
-            "time": "2019-02-20T18:59:04+00:00"
+            "time": "2020-03-01T10:53:59+00:00"
         },
         {
             "name": "innmind/http-transport",
-            "version": "4.0.0",
+            "version": "5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/HttpTransport.git",
-                "reference": "e21e28fb9fb799b07556f23f214264f4c81bd5da"
+                "reference": "960b24c631d5d4847ca4a566732a40595c20c667"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/HttpTransport/zipball/e21e28fb9fb799b07556f23f214264f4c81bd5da",
-                "reference": "e21e28fb9fb799b07556f23f214264f4c81bd5da",
+                "url": "https://api.github.com/repos/Innmind/HttpTransport/zipball/960b24c631d5d4847ca4a566732a40595c20c667",
+                "reference": "960b24c631d5d4847ca4a566732a40595c20c667",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.2",
-                "innmind/http": "~3.0",
-                "php": "~7.2",
+                "innmind/http": "~4.0",
+                "innmind/time-continuum": "~2.0",
+                "innmind/time-warp": "~2.0",
+                "php": "~7.4",
                 "psr/log": "^1.0",
                 "ramsey/uuid": "^3.5"
             },
             "require-dev": {
-                "phpunit/phpunit": "~7.0"
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
             },
             "type": "library",
             "autoload": {
@@ -732,33 +811,44 @@
                 "client",
                 "http"
             ],
-            "time": "2019-01-04T15:07:09+00:00"
+            "time": "2020-01-19T11:48:13+00:00"
         },
         {
             "name": "innmind/immutable",
-            "version": "2.14.0",
+            "version": "3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Immutable.git",
-                "reference": "fa24a010dd8008b21ebfbe89a7927d4e251d7b04"
+                "reference": "367b0b2e7407bea48a014fe72c860cfa4e35b1be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Immutable/zipball/fa24a010dd8008b21ebfbe89a7927d4e251d7b04",
-                "reference": "fa24a010dd8008b21ebfbe89a7927d4e251d7b04",
+                "url": "https://api.github.com/repos/Innmind/Immutable/zipball/367b0b2e7407bea48a014fe72c860cfa4e35b1be",
+                "reference": "367b0b2e7407bea48a014fe72c860cfa4e35b1be",
                 "shasum": ""
             },
             "require": {
-                "php": "~7.1"
+                "php": "~7.4"
+            },
+            "conflict": {
+                "innmind/black-box": "<4.1|~5.0"
+            },
+            "provide": {
+                "innmind/black-box": "4.1.0"
             },
             "require-dev": {
-                "phpbench/phpbench": "^0.14.0",
-                "phpunit/phpunit": "~6.0"
+                "innmind/black-box": "^4.1",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.8"
+            },
+            "suggest": {
+                "innmind/black-box": "For property based testing"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Innmind\\Immutable\\": "src/"
+                    "Innmind\\Immutable\\": "src/",
+                    "Fixtures\\Innmind\\Immutable\\": "fixtures/"
                 },
                 "files": [
                     "src/functions.php"
@@ -780,40 +870,50 @@
                 "immutable",
                 "wrapper"
             ],
-            "time": "2019-04-29T03:49:16+00:00"
+            "time": "2020-03-26T11:24:22+00:00"
         },
         {
             "name": "innmind/installation-monitor",
-            "version": "2.1.0",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/InstallationMonitor.git",
-                "reference": "a681eecbf0f6fc5ba74d43b0db7009f132d57cdb"
+                "reference": "4eca0b4b4d0fcde5401fccbdd913bd88cbd22627"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/InstallationMonitor/zipball/a681eecbf0f6fc5ba74d43b0db7009f132d57cdb",
-                "reference": "a681eecbf0f6fc5ba74d43b0db7009f132d57cdb",
+                "url": "https://api.github.com/repos/Innmind/InstallationMonitor/zipball/4eca0b4b4d0fcde5401fccbdd913bd88cbd22627",
+                "reference": "4eca0b4b4d0fcde5401fccbdd913bd88cbd22627",
                 "shasum": ""
             },
             "require": {
-                "innmind/cli": "^1.3",
-                "innmind/immutable": "^2.10",
-                "innmind/ipc": "^2.0",
+                "innmind/cli": "~2.0",
+                "innmind/immutable": "~3.5",
+                "innmind/ipc": "~3.0",
                 "innmind/json": "^1.0",
-                "innmind/operating-system": "^1.0",
-                "innmind/server-control": "^2.5",
-                "innmind/server-status": "^1.1",
-                "php": "~7.2"
+                "innmind/operating-system": "~2.0",
+                "innmind/silent-cartographer": "~2.0",
+                "php": "~7.4"
             },
             "require-dev": {
                 "giorgiosironi/eris": "^0.10.0",
-                "phpunit/phpunit": "~8.0"
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "^3.10"
             },
             "bin": [
                 "installation-monitor"
             ],
             "type": "library",
+            "extra": {
+                "gene": {
+                    "expression": [
+                        "installation-monitor oversee --daemon"
+                    ],
+                    "suppression": [
+                        "installation-monitor kill"
+                    ]
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Innmind\\InstallationMonitor\\": "src/"
@@ -834,27 +934,28 @@
             ],
             "description": "Simple socket to accumulate and dispatch system events",
             "homepage": "http://github.com/Innmind/InstallationMonitor",
-            "time": "2019-02-23T12:35:14+00:00"
+            "time": "2020-03-28T17:23:25+00:00"
         },
         {
             "name": "innmind/ip",
-            "version": "1.0.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/IP.git",
-                "reference": "7b3d61d1b46ea41c4ad988bf64d0380de63a1df7"
+                "reference": "781da1c4a59d993878bcd7a434f3166213e4e3ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/IP/zipball/7b3d61d1b46ea41c4ad988bf64d0380de63a1df7",
-                "reference": "7b3d61d1b46ea41c4ad988bf64d0380de63a1df7",
+                "url": "https://api.github.com/repos/Innmind/IP/zipball/781da1c4a59d993878bcd7a434f3166213e4e3ed",
+                "reference": "781da1c4a59d993878bcd7a434f3166213e4e3ed",
                 "shasum": ""
             },
             "require": {
-                "php": "~7.1"
+                "php": "~7.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "~6.0"
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "^3.8"
             },
             "type": "library",
             "autoload": {
@@ -878,37 +979,33 @@
                 "IP",
                 "address"
             ],
-            "time": "2017-07-12T06:46:23+00:00"
+            "time": "2020-01-06T19:46:13+00:00"
         },
         {
             "name": "innmind/ipc",
-            "version": "2.1.1",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/IPC.git",
-                "reference": "2e800a98c8ecf478b733798cfe763cf98d0673ce"
+                "reference": "faab2cab0c5ac4388141667602f2414a88cfaa9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/IPC/zipball/2e800a98c8ecf478b733798cfe763cf98d0673ce",
-                "reference": "2e800a98c8ecf478b733798cfe763cf98d0673ce",
+                "url": "https://api.github.com/repos/Innmind/IPC/zipball/faab2cab0c5ac4388141667602f2414a88cfaa9e",
+                "reference": "faab2cab0c5ac4388141667602f2414a88cfaa9e",
                 "shasum": ""
             },
             "require": {
-                "innmind/filesystem": "^3.3",
-                "innmind/immutable": "^2.13",
-                "innmind/operating-system": "^1.6",
-                "innmind/socket": "^2.0",
-                "innmind/time-continuum": "^1.3",
-                "innmind/time-warp": "^1.0",
-                "innmind/url": "^2.0",
-                "php": "~7.2"
+                "innmind/immutable": "~3.0",
+                "innmind/media-type": "^1.2",
+                "innmind/operating-system": "~2.0",
+                "innmind/url": "~3.0",
+                "php": "~7.4"
             },
             "require-dev": {
                 "giorgiosironi/eris": "^0.11.0",
-                "innmind/server-control": "^2.7",
-                "innmind/server-status": "^1.3",
-                "phpunit/phpunit": "~8.0"
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "^3.8"
             },
             "type": "library",
             "autoload": {
@@ -935,29 +1032,30 @@
                 "communication",
                 "process"
             ],
-            "time": "2019-03-10T10:08:42+00:00"
+            "time": "2020-03-27T12:18:45+00:00"
         },
         {
             "name": "innmind/json",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Json.git",
-                "reference": "f048d8e3a236ccd4ef8b5d3400d7c00bfcbdf9ac"
+                "reference": "8c594b927370f12d3bdd6966e5d76221d5299a49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Json/zipball/f048d8e3a236ccd4ef8b5d3400d7c00bfcbdf9ac",
-                "reference": "f048d8e3a236ccd4ef8b5d3400d7c00bfcbdf9ac",
+                "url": "https://api.github.com/repos/Innmind/Json/zipball/8c594b927370f12d3bdd6966e5d76221d5299a49",
+                "reference": "8c594b927370f12d3bdd6966e5d76221d5299a49",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "~7.2"
+                "php": "~7.3"
             },
             "require-dev": {
                 "giorgiosironi/eris": "^0.10.0",
-                "phpunit/phpunit": "~7.0"
+                "phpunit/phpunit": "~7.0",
+                "vimeo/psalm": "^3.7"
             },
             "type": "library",
             "autoload": {
@@ -980,32 +1078,33 @@
             "keywords": [
                 "json"
             ],
-            "time": "2018-11-25T18:19:38+00:00"
+            "time": "2019-11-30T11:31:20+00:00"
         },
         {
             "name": "innmind/logger",
-            "version": "1.1.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Logger.git",
-                "reference": "5ad93d79b75891f38e33f73325868696308cf3f9"
+                "reference": "5660178d35ab6ae5211ce6ab06741bb85fa650d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Logger/zipball/5ad93d79b75891f38e33f73325868696308cf3f9",
-                "reference": "5ad93d79b75891f38e33f73325868696308cf3f9",
+                "url": "https://api.github.com/repos/Innmind/Logger/zipball/5660178d35ab6ae5211ce6ab06741bb85fa650d5",
+                "reference": "5660178d35ab6ae5211ce6ab06741bb85fa650d5",
                 "shasum": ""
             },
             "require": {
-                "innmind/url": "^2.0",
-                "monolog/monolog": "^1.23",
-                "php": "~7.2",
+                "innmind/url": "~3.0",
+                "monolog/monolog": "~2.0",
+                "php": "~7.4",
                 "psr/log": "^1.0"
             },
             "require-dev": {
-                "giorgiosironi/eris": "^0.10.0",
-                "phpunit/phpunit": "~7.0",
-                "sentry/sentry": "^1.9"
+                "php-http/guzzle6-adapter": "^2.0",
+                "phpunit/phpunit": "~8.0",
+                "sentry/sentry": "~2.0",
+                "vimeo/psalm": "^3.8"
             },
             "type": "library",
             "autoload": {
@@ -1032,36 +1131,91 @@
                 "logger",
                 "psr-3"
             ],
-            "time": "2019-01-04T15:44:35+00:00"
+            "time": "2020-02-03T17:35:19+00:00"
         },
         {
-            "name": "innmind/neo4j-dbal",
-            "version": "5.0.0",
+            "name": "innmind/media-type",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Innmind/neo4j-dbal.git",
-                "reference": "031c962e6f39cfa04d386ad51068f901fcb3b920"
+                "url": "https://github.com/Innmind/MediaType.git",
+                "reference": "cdff91744019966a5165266052953be58d5f86fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/neo4j-dbal/zipball/031c962e6f39cfa04d386ad51068f901fcb3b920",
-                "reference": "031c962e6f39cfa04d386ad51068f901fcb3b920",
+                "url": "https://api.github.com/repos/Innmind/MediaType/zipball/cdff91744019966a5165266052953be58d5f86fc",
+                "reference": "cdff91744019966a5165266052953be58d5f86fc",
                 "shasum": ""
             },
             "require": {
-                "innmind/http-transport": "~4.0",
-                "innmind/immutable": "~2.0",
+                "innmind/immutable": "^3.0",
+                "php": "~7.4"
+            },
+            "conflict": {
+                "innmind/black-box": "<4.0|~5.0"
+            },
+            "provide": {
+                "innmind/black-box": "4.0"
+            },
+            "require-dev": {
+                "innmind/black-box": "^4.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
+            },
+            "suggest": {
+                "innmind/black-box": "For property based testing"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Innmind\\MediaType\\": "src/",
+                    "Fixtures\\Innmind\\MediaType\\": "fixtures/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Langlade",
+                    "email": "langlade.baptiste@gmail.com"
+                }
+            ],
+            "description": "Model of media types",
+            "homepage": "http://github.com/Innmind/MediaType",
+            "keywords": [
+                "media type"
+            ],
+            "time": "2020-01-05T17:28:55+00:00"
+        },
+        {
+            "name": "innmind/neo4j-dbal",
+            "version": "6.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Innmind/neo4j-dbal.git",
+                "reference": "0f55c09a2afa94de6e5ec002d23b23f32c3d8734"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Innmind/neo4j-dbal/zipball/0f55c09a2afa94de6e5ec002d23b23f32c3d8734",
+                "reference": "0f55c09a2afa94de6e5ec002d23b23f32c3d8734",
+                "shasum": ""
+            },
+            "require": {
+                "innmind/immutable": "~3.5",
                 "innmind/json": "^1.1",
-                "innmind/time-continuum": "~1.0",
-                "php": "~7.2",
+                "innmind/operating-system": "~2.0",
+                "php": "~7.4",
                 "psr/log": "^1.0"
             },
             "require-dev": {
-                "giorgiosironi/eris": "^0.10.0",
-                "innmind/cli": "^1.5",
-                "innmind/object-graph": "^1.2",
-                "innmind/server-control": "^2.7",
-                "phpunit/phpunit": "~6.0"
+                "giorgiosironi/eris": "^0.11.0",
+                "innmind/cli": "~2.0",
+                "innmind/object-graph": "~2.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "^3.10"
             },
             "type": "library",
             "autoload": {
@@ -1088,38 +1242,39 @@
                 "neo4j",
                 "wrapper"
             ],
-            "time": "2019-01-07T19:56:40+00:00"
+            "time": "2020-03-24T18:06:29+00:00"
         },
         {
             "name": "innmind/neo4j-onm",
-            "version": "6.0.0",
+            "version": "7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/neo4j-onm.git",
-                "reference": "4241ed8fb15082937199f1b9373ebdefcad0e7b4"
+                "reference": "d8fb2588e3f00ae51a5335c2b978744345447cc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/4241ed8fb15082937199f1b9373ebdefcad0e7b4",
-                "reference": "4241ed8fb15082937199f1b9373ebdefcad0e7b4",
+                "url": "https://api.github.com/repos/Innmind/neo4j-onm/zipball/d8fb2588e3f00ae51a5335c2b978744345447cc3",
+                "reference": "d8fb2588e3f00ae51a5335c2b978744345447cc3",
                 "shasum": ""
             },
             "require": {
-                "innmind/event-bus": "~3.0",
-                "innmind/immutable": "~2.10",
-                "innmind/neo4j-dbal": "~5.0",
-                "innmind/reflection": "~3.0",
+                "innmind/event-bus": "~4.0",
+                "innmind/immutable": "~3.5",
+                "innmind/neo4j-dbal": "~6.0",
+                "innmind/reflection": "~4.0",
                 "innmind/specification": "~2.0",
-                "php": "~7.2",
+                "php": "~7.4",
                 "ramsey/uuid": "^3.2"
             },
             "require-dev": {
-                "innmind/cli": "^1.5",
-                "innmind/command-bus": "^3.0",
-                "innmind/object-graph": "^1.2",
-                "innmind/server-control": "^2.7",
-                "innmind/time-continuum": "^1.0",
-                "phpunit/phpunit": "~7.0"
+                "innmind/cli": "~2.0",
+                "innmind/command-bus": "~4.0",
+                "innmind/object-graph": "~2.0",
+                "innmind/server-control": "~3.0",
+                "innmind/time-continuum": "~2.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "^3.10"
             },
             "suggest": {
                 "innmind/command-bus": "To dispatch entities domain events",
@@ -1151,38 +1306,40 @@
                 "neo4j",
                 "node"
             ],
-            "time": "2019-01-08T19:04:06+00:00"
+            "time": "2020-03-26T10:25:03+00:00"
         },
         {
             "name": "innmind/operating-system",
-            "version": "1.6.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/OperatingSystem.git",
-                "reference": "602277edab0428c8d79780a4cdb72939874b2b16"
+                "reference": "23aa7294511eb253a730b1b27bf912b14819f520"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/OperatingSystem/zipball/602277edab0428c8d79780a4cdb72939874b2b16",
-                "reference": "602277edab0428c8d79780a4cdb72939874b2b16",
+                "url": "https://api.github.com/repos/Innmind/OperatingSystem/zipball/23aa7294511eb253a730b1b27bf912b14819f520",
+                "reference": "23aa7294511eb253a730b1b27bf912b14819f520",
                 "shasum": ""
             },
             "require": {
-                "innmind/filesystem": "^3.2",
-                "innmind/http-transport": "^4.0",
-                "innmind/server-control": "^2.6",
-                "innmind/server-status": "^1.1",
-                "innmind/signals": "^1.0",
-                "innmind/socket": "^2.0",
-                "innmind/time-continuum": "^1.2",
-                "innmind/time-warp": "^1.0",
-                "php": "~7.2"
+                "innmind/file-watch": "~2.0",
+                "innmind/filesystem": "~4.0",
+                "innmind/http-transport": "~5.0",
+                "innmind/server-control": "~3.0",
+                "innmind/server-status": "~2.0",
+                "innmind/signals": "~2.0",
+                "innmind/socket": "~3.0",
+                "innmind/time-continuum": "~2.0",
+                "innmind/time-warp": "~2.0",
+                "php": "~7.4"
             },
             "require-dev": {
                 "giorgiosironi/eris": "^0.11.0",
-                "innmind/ip": "^1.0",
-                "innmind/url": "^2.0",
-                "phpunit/phpunit": "~7.0"
+                "innmind/ip": "~2.0",
+                "innmind/url": "~3.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
             },
             "type": "library",
             "autoload": {
@@ -1206,28 +1363,29 @@
                 "abstraction",
                 "operating system"
             ],
-            "time": "2019-02-26T19:12:14+00:00"
+            "time": "2020-01-19T12:25:56+00:00"
         },
         {
             "name": "innmind/reflection",
-            "version": "3.0.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Reflection.git",
-                "reference": "cc25ac3cff73772d4876dc26722eaa11df8cf8f4"
+                "reference": "3ef2ca0fb00d5a02132047af336423bc1efd3b5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Reflection/zipball/cc25ac3cff73772d4876dc26722eaa11df8cf8f4",
-                "reference": "cc25ac3cff73772d4876dc26722eaa11df8cf8f4",
+                "url": "https://api.github.com/repos/Innmind/Reflection/zipball/3ef2ca0fb00d5a02132047af336423bc1efd3b5b",
+                "reference": "3ef2ca0fb00d5a02132047af336423bc1efd3b5b",
                 "shasum": ""
             },
             "require": {
-                "innmind/immutable": "~2.10",
-                "php": "~7.2"
+                "innmind/immutable": "~3.0",
+                "php": "~7.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "~7.0"
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "^3.7"
             },
             "type": "library",
             "autoload": {
@@ -1250,36 +1408,37 @@
             "keywords": [
                 "reflection"
             ],
-            "time": "2018-11-01T12:49:45+00:00"
+            "time": "2019-12-12T20:06:22+00:00"
         },
         {
             "name": "innmind/rest-server",
-            "version": "7.0.0",
+            "version": "8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/rest-server.git",
-                "reference": "01e1169e25fdb6d92f2bc42461e5a92dc08ed0bb"
+                "reference": "999103d19013c0e71e4422856ac5167d451b1eeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/rest-server/zipball/01e1169e25fdb6d92f2bc42461e5a92dc08ed0bb",
-                "reference": "01e1169e25fdb6d92f2bc42461e5a92dc08ed0bb",
+                "url": "https://api.github.com/repos/Innmind/rest-server/zipball/999103d19013c0e71e4422856ac5167d451b1eeb",
+                "reference": "999103d19013c0e71e4422856ac5167d451b1eeb",
                 "shasum": ""
             },
             "require": {
-                "innmind/filesystem": "~3.0",
-                "innmind/http": "~3.8",
-                "innmind/immutable": "~2.12",
+                "innmind/filesystem": "~4.0",
+                "innmind/http": "~4.2",
+                "innmind/immutable": "~3.5",
                 "innmind/json": "^1.0",
                 "innmind/specification": "~2.0",
-                "innmind/url-template": "^1.0",
-                "php": "~7.2",
+                "innmind/url-template": "~2.0",
+                "php": "~7.4",
                 "willdurand/negotiation": "^2.0"
             },
             "require-dev": {
-                "giorgiosironi/eris": "^0.10.0",
-                "innmind/time-continuum": "^1.3",
-                "phpunit/phpunit": "~7.0"
+                "giorgiosironi/eris": "^0.11.0",
+                "innmind/time-continuum": "~2.2",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "^3.9"
             },
             "suggest": {
                 "innmind/time-continuum": "In order to use point in time type"
@@ -1309,34 +1468,34 @@
                 "api",
                 "rest"
             ],
-            "time": "2019-01-11T20:06:13+00:00"
+            "time": "2020-03-15T16:24:49+00:00"
         },
         {
             "name": "innmind/router",
-            "version": "1.1.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Router.git",
-                "reference": "1f83e7c60d0123bd0708cb6748a1aae1daba45c5"
+                "reference": "17f22f6313c0cfedf15870a4d69d9820b6ab343c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Router/zipball/1f83e7c60d0123bd0708cb6748a1aae1daba45c5",
-                "reference": "1f83e7c60d0123bd0708cb6748a1aae1daba45c5",
+                "url": "https://api.github.com/repos/Innmind/Router/zipball/17f22f6313c0cfedf15870a4d69d9820b6ab343c",
+                "reference": "17f22f6313c0cfedf15870a4d69d9820b6ab343c",
                 "shasum": ""
             },
             "require": {
-                "innmind/http": "^3.6",
-                "innmind/immutable": "^2.8",
-                "innmind/url": "^2.0",
-                "innmind/url-template": "^1.2",
-                "php": "~7.2",
-                "symfony/yaml": "^4.1"
+                "innmind/http": "~4.0",
+                "innmind/immutable": "~3.3",
+                "innmind/url": "~3.0",
+                "innmind/url-template": "~2.0",
+                "php": "~7.4",
+                "symfony/yaml": "^4.1|~5.0"
             },
             "require-dev": {
-                "giorgiosironi/eris": "^0.10.0",
-                "innmind/compose": "^1.7",
-                "phpunit/phpunit": "~7.0"
+                "giorgiosironi/eris": "^0.11.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.8"
             },
             "type": "library",
             "autoload": {
@@ -1363,32 +1522,34 @@
                 "http",
                 "router"
             ],
-            "time": "2018-09-02T10:04:11+00:00"
+            "time": "2020-02-01T17:52:02+00:00"
         },
         {
             "name": "innmind/server-control",
-            "version": "2.8.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/ServerControl.git",
-                "reference": "9ee6d8faee455b63f3997eca89061adfe382cf99"
+                "reference": "0c237b3405fbbb01e3671122eadaba72ae7badde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/ServerControl/zipball/9ee6d8faee455b63f3997eca89061adfe382cf99",
-                "reference": "9ee6d8faee455b63f3997eca89061adfe382cf99",
+                "url": "https://api.github.com/repos/Innmind/ServerControl/zipball/0c237b3405fbbb01e3671122eadaba72ae7badde",
+                "reference": "0c237b3405fbbb01e3671122eadaba72ae7badde",
                 "shasum": ""
             },
             "require": {
-                "innmind/immutable": "^2.10",
-                "innmind/stream": "^1.3",
-                "innmind/url": "^2.0",
-                "php": "~7.1",
+                "innmind/immutable": "~3.0",
+                "innmind/stream": "~2.0",
+                "innmind/url": "~3.0",
+                "php": "~7.4",
                 "psr/log": "^1.0",
-                "symfony/process": "^3.2|~4.0"
+                "symfony/process": "~4.0|~5.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~7.0"
+                "innmind/black-box": "^4.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
             },
             "type": "library",
             "autoload": {
@@ -1408,31 +1569,32 @@
             ],
             "description": "Allows to control the server from php",
             "homepage": "http://github.com/Innmind/ServerControl",
-            "time": "2019-03-16T10:57:57+00:00"
+            "time": "2020-01-18T18:29:08+00:00"
         },
         {
             "name": "innmind/server-status",
-            "version": "1.3.0",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/ServerStatus.git",
-                "reference": "4fa160c75bdb66d2319a128aad847c63e3dde80e"
+                "reference": "dfa9125b232641103edbc06f279cf211262e0928"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/ServerStatus/zipball/4fa160c75bdb66d2319a128aad847c63e3dde80e",
-                "reference": "4fa160c75bdb66d2319a128aad847c63e3dde80e",
+                "url": "https://api.github.com/repos/Innmind/ServerStatus/zipball/dfa9125b232641103edbc06f279cf211262e0928",
+                "reference": "dfa9125b232641103edbc06f279cf211262e0928",
                 "shasum": ""
             },
             "require": {
-                "innmind/immutable": "~2.10",
-                "innmind/time-continuum": "^1.0",
-                "innmind/url": "^2.0",
-                "php": "~7.1",
-                "symfony/process": "^3.2|~4.0"
+                "innmind/immutable": "~3.0",
+                "innmind/time-continuum": "~2.0",
+                "innmind/url": "~3.0",
+                "php": "~7.4",
+                "symfony/process": "~4.0|~5.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~6.0"
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
             },
             "type": "library",
             "autoload": {
@@ -1452,29 +1614,30 @@
             ],
             "description": "Library to access various components of the operating system",
             "homepage": "http://github.com/Innmind/ServerStatus",
-            "time": "2019-01-05T14:32:02+00:00"
+            "time": "2020-02-08T14:22:53+00:00"
         },
         {
             "name": "innmind/signals",
-            "version": "1.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Signals.git",
-                "reference": "b475508e4dc8dd4f7f294f44549cc2831eea902f"
+                "reference": "5531c2d3d5c48be0d9c965eca32ed6919f442725"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Signals/zipball/b475508e4dc8dd4f7f294f44549cc2831eea902f",
-                "reference": "b475508e4dc8dd4f7f294f44549cc2831eea902f",
+                "url": "https://api.github.com/repos/Innmind/Signals/zipball/5531c2d3d5c48be0d9c965eca32ed6919f442725",
+                "reference": "5531c2d3d5c48be0d9c965eca32ed6919f442725",
                 "shasum": ""
             },
             "require": {
-                "innmind/immutable": "^2.13",
-                "php": "~7.2"
+                "innmind/immutable": "~3.0",
+                "php": "~7.4"
             },
             "require-dev": {
                 "giorgiosironi/eris": "^0.11.0",
-                "phpunit/phpunit": "~8.0"
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
             },
             "type": "library",
             "autoload": {
@@ -1499,36 +1662,37 @@
                 "handler",
                 "signal"
             ],
-            "time": "2019-02-25T20:55:05+00:00"
+            "time": "2020-03-27T11:21:22+00:00"
         },
         {
             "name": "innmind/silent-cartographer",
-            "version": "1.1.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/SilentCartographer.git",
-                "reference": "656500cdc9a7de2dc91f4d1333d66af2f4d12f87"
+                "reference": "ab39d8b3f2f05ea628423219e191bcf97b8a9254"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/SilentCartographer/zipball/656500cdc9a7de2dc91f4d1333d66af2f4d12f87",
-                "reference": "656500cdc9a7de2dc91f4d1333d66af2f4d12f87",
+                "url": "https://api.github.com/repos/Innmind/SilentCartographer/zipball/ab39d8b3f2f05ea628423219e191bcf97b8a9254",
+                "reference": "ab39d8b3f2f05ea628423219e191bcf97b8a9254",
                 "shasum": ""
             },
             "require": {
-                "innmind/cli": "^1.7",
-                "innmind/immutable": "^2.13",
-                "innmind/ipc": "^2.0",
+                "innmind/cli": "~2.0",
+                "innmind/immutable": "~3.5",
+                "innmind/ipc": "~3.0",
                 "innmind/json": "^1.1",
-                "innmind/operating-system": "^1.6",
-                "innmind/server-status": "^1.3",
-                "innmind/url": "^2.0",
-                "php": "~7.2"
+                "innmind/operating-system": "~2.0",
+                "innmind/url": "~3.3",
+                "php": "~7.4"
             },
             "require-dev": {
                 "giorgiosironi/eris": "^0.11.0",
-                "innmind/object-graph": "^1.4",
-                "phpunit/phpunit": "~8.0"
+                "innmind/black-box": "^4.2",
+                "innmind/object-graph": "~2.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "^3.10"
             },
             "bin": [
                 "silent-cartographer"
@@ -1554,33 +1718,34 @@
             ],
             "description": "Library to visualize processes manipulating the operating system",
             "homepage": "http://github.com/Innmind/SilentCartographer",
-            "time": "2019-03-26T18:55:48+00:00"
+            "time": "2020-03-27T15:53:21+00:00"
         },
         {
             "name": "innmind/socket",
-            "version": "2.1.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Socket.git",
-                "reference": "bab6474ded7b9971462513bf5160a5af5c044f68"
+                "reference": "9a91c3c15ed35d1fcdd90f1d8773824748e9539e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Socket/zipball/bab6474ded7b9971462513bf5160a5af5c044f68",
-                "reference": "bab6474ded7b9971462513bf5160a5af5c044f68",
+                "url": "https://api.github.com/repos/Innmind/Socket/zipball/9a91c3c15ed35d1fcdd90f1d8773824748e9539e",
+                "reference": "9a91c3c15ed35d1fcdd90f1d8773824748e9539e",
                 "shasum": ""
             },
             "require": {
-                "innmind/event-bus": "^3.0",
-                "innmind/immutable": "^2.10",
-                "innmind/ip": "^1.0",
-                "innmind/stream": "^1.5",
-                "innmind/url": "^2.0",
-                "php": "~7.2"
+                "innmind/event-bus": "~4.0",
+                "innmind/immutable": "~3.0",
+                "innmind/ip": "~2.0",
+                "innmind/stream": "~2.0",
+                "innmind/url": "~3.0",
+                "php": "~7.4"
             },
             "require-dev": {
-                "innmind/server-control": "^2.0",
-                "phpunit/phpunit": "~8.0"
+                "phpunit/phpunit": "~8.0",
+                "symfony/process": "^5.0",
+                "vimeo/psalm": "~3.7.0"
             },
             "type": "library",
             "autoload": {
@@ -1603,7 +1768,7 @@
             "keywords": [
                 "Socket"
             ],
-            "time": "2019-02-24T15:58:54+00:00"
+            "time": "2020-01-06T21:18:11+00:00"
         },
         {
             "name": "innmind/specification",
@@ -1651,26 +1816,24 @@
         },
         {
             "name": "innmind/stack",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Stack.git",
-                "reference": "b7137df8c77bbdfd34d8c34666b0af5a7eb444ee"
+                "reference": "8d22ad10c630719ca0484c36db9cd0113b0d0303"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Stack/zipball/b7137df8c77bbdfd34d8c34666b0af5a7eb444ee",
-                "reference": "b7137df8c77bbdfd34d8c34666b0af5a7eb444ee",
+                "url": "https://api.github.com/repos/Innmind/Stack/zipball/8d22ad10c630719ca0484c36db9cd0113b0d0303",
+                "reference": "8d22ad10c630719ca0484c36db9cd0113b0d0303",
                 "shasum": ""
             },
             "require": {
-                "innmind/immutable": "^2.13",
                 "php": "~7.2"
             },
             "require-dev": {
-                "giorgiosironi/eris": "^0.11.0",
                 "phpunit/phpunit": "~8.0",
-                "symfony/var-dumper": "^4.2"
+                "vimeo/psalm": "^3.8"
             },
             "type": "library",
             "autoload": {
@@ -1694,32 +1857,34 @@
                 "builder",
                 "stack"
             ],
-            "time": "2019-04-27T08:34:32+00:00"
+            "time": "2020-02-03T18:04:11+00:00"
         },
         {
             "name": "innmind/stack-trace",
-            "version": "2.0.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/StackTrace.git",
-                "reference": "5e2ab237c8d6c25c8be3a7b097def4a4dbe69215"
+                "reference": "a6776adf243464deff6dc6b38993b89154e68993"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/StackTrace/zipball/5e2ab237c8d6c25c8be3a7b097def4a4dbe69215",
-                "reference": "5e2ab237c8d6c25c8be3a7b097def4a4dbe69215",
+                "url": "https://api.github.com/repos/Innmind/StackTrace/zipball/a6776adf243464deff6dc6b38993b89154e68993",
+                "reference": "a6776adf243464deff6dc6b38993b89154e68993",
                 "shasum": ""
             },
             "require": {
-                "innmind/graphviz": "^1.2",
-                "innmind/immutable": "^2.13",
-                "innmind/url": "^2.0",
-                "php": "~7.2"
+                "innmind/graphviz": "~2.0",
+                "innmind/immutable": "~3.0",
+                "innmind/url": "~3.0",
+                "php": "~7.4"
             },
             "require-dev": {
                 "giorgiosironi/eris": "^0.11.0",
-                "innmind/file-watch": "^1.0",
-                "phpunit/phpunit": "~6.0"
+                "innmind/file-watch": "~2.0",
+                "innmind/operating-system": "^2.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
             },
             "type": "library",
             "autoload": {
@@ -1744,30 +1909,32 @@
                 "inspect",
                 "stack trace"
             ],
-            "time": "2019-01-25T20:23:23+00:00"
+            "time": "2020-01-30T19:55:59+00:00"
         },
         {
             "name": "innmind/stream",
-            "version": "1.5.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Stream.git",
-                "reference": "c210f9b789d376211f1b75570e407bdc4114a496"
+                "reference": "b540fe4366c049304d6f7c74e1a435d10aee4674"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Stream/zipball/c210f9b789d376211f1b75570e407bdc4114a496",
-                "reference": "c210f9b789d376211f1b75570e407bdc4114a496",
+                "url": "https://api.github.com/repos/Innmind/Stream/zipball/b540fe4366c049304d6f7c74e1a435d10aee4674",
+                "reference": "b540fe4366c049304d6f7c74e1a435d10aee4674",
                 "shasum": ""
             },
             "require": {
-                "innmind/immutable": "^2.13",
-                "innmind/time-continuum": "^1.0",
-                "php": "~7.2"
+                "innmind/immutable": "~3.0",
+                "innmind/time-continuum": "~2.0",
+                "innmind/url": "^3.0",
+                "php": "~7.4"
             },
             "require-dev": {
                 "phpunit/phpunit": "~8.0",
-                "symfony/process": "^4.0"
+                "symfony/process": "^4.0",
+                "vimeo/psalm": "^3.7"
             },
             "type": "library",
             "autoload": {
@@ -1790,32 +1957,44 @@
             "keywords": [
                 "stream"
             ],
-            "time": "2019-02-24T15:03:00+00:00"
+            "time": "2019-12-13T21:04:26+00:00"
         },
         {
             "name": "innmind/time-continuum",
-            "version": "1.3.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/TimeContinuum.git",
-                "reference": "599386030ff1dd7b3470bd0b7f5494f2ae33c946"
+                "reference": "d9a925f0f42468cbc00585cbb0f44171fb6e394c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/TimeContinuum/zipball/599386030ff1dd7b3470bd0b7f5494f2ae33c946",
-                "reference": "599386030ff1dd7b3470bd0b7f5494f2ae33c946",
+                "url": "https://api.github.com/repos/Innmind/TimeContinuum/zipball/d9a925f0f42468cbc00585cbb0f44171fb6e394c",
+                "reference": "d9a925f0f42468cbc00585cbb0f44171fb6e394c",
                 "shasum": ""
             },
             "require": {
-                "php": "~7.2"
+                "php": "~7.4"
+            },
+            "conflict": {
+                "innmind/black-box": "<4.0|~5.0"
+            },
+            "provide": {
+                "innmind/black-box": "4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~7.0"
+                "innmind/black-box": "^4.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
+            },
+            "suggest": {
+                "innmind/black-box": "For property based testing"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Innmind\\TimeContinuum\\": "src/"
+                    "Innmind\\TimeContinuum\\": "src/",
+                    "Fixtures\\Innmind\\TimeContinuum\\": "fixtures/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1833,29 +2012,29 @@
             "keywords": [
                 "time"
             ],
-            "time": "2018-12-01T13:51:25+00:00"
+            "time": "2020-02-15T15:18:13+00:00"
         },
         {
             "name": "innmind/time-warp",
-            "version": "1.0.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/TimeWarp.git",
-                "reference": "098d1a5beeee8d410901f6d3160bb2d7fe299ddd"
+                "reference": "ddfcb0344b7ad4e715233b5d09ad4fce04aab299"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/TimeWarp/zipball/098d1a5beeee8d410901f6d3160bb2d7fe299ddd",
-                "reference": "098d1a5beeee8d410901f6d3160bb2d7fe299ddd",
+                "url": "https://api.github.com/repos/Innmind/TimeWarp/zipball/ddfcb0344b7ad4e715233b5d09ad4fce04aab299",
+                "reference": "ddfcb0344b7ad4e715233b5d09ad4fce04aab299",
                 "shasum": ""
             },
             "require": {
-                "innmind/time-continuum": "^1.2",
-                "php": "~7.2"
+                "innmind/time-continuum": "~2.0",
+                "php": "~7.4"
             },
             "require-dev": {
-                "giorgiosironi/eris": "^0.10.0",
-                "phpunit/phpunit": "~7.0"
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "^3.8"
             },
             "type": "library",
             "autoload": {
@@ -1879,34 +2058,46 @@
                 "time",
                 "warp"
             ],
-            "time": "2018-09-23T10:54:02+00:00"
+            "time": "2020-01-06T19:29:00+00:00"
         },
         {
             "name": "innmind/url",
-            "version": "2.0.3",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Url.git",
-                "reference": "4bdcc65ddc2a63cd560f22aeeb9b5e1fb968c80a"
+                "reference": "81388dfebd11b0dd1154fcefdff5b5c1db626530"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Url/zipball/4bdcc65ddc2a63cd560f22aeeb9b5e1fb968c80a",
-                "reference": "4bdcc65ddc2a63cd560f22aeeb9b5e1fb968c80a",
+                "url": "https://api.github.com/repos/Innmind/Url/zipball/81388dfebd11b0dd1154fcefdff5b5c1db626530",
+                "reference": "81388dfebd11b0dd1154fcefdff5b5c1db626530",
                 "shasum": ""
             },
             "require": {
-                "innmind/immutable": "~2.0",
+                "innmind/immutable": "~3.0",
                 "league/uri": "~5.0",
-                "php": "~7.0"
+                "php": "~7.4"
+            },
+            "conflict": {
+                "innmind/black-box": "<4.0|~5.0"
+            },
+            "provide": {
+                "innmind/black-box": "4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~6.0"
+                "innmind/black-box": "^4.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
+            },
+            "suggest": {
+                "innmind/black-box": "For property based testing"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Innmind\\Url\\": "src/"
+                    "Innmind\\Url\\": "src/",
+                    "Fixtures\\Innmind\\Url\\": "fixtures/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1924,30 +2115,31 @@
             "keywords": [
                 "url"
             ],
-            "time": "2017-11-30T07:16:59+00:00"
+            "time": "2020-01-28T20:49:37+00:00"
         },
         {
             "name": "innmind/url-template",
-            "version": "1.2.2",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/UrlTemplate.git",
-                "reference": "35e1f09ee0c56363b3a69133a483fd388321735c"
+                "reference": "7057c1efaf9bb7e43af2ede4f49624248e6103a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/UrlTemplate/zipball/35e1f09ee0c56363b3a69133a483fd388321735c",
-                "reference": "35e1f09ee0c56363b3a69133a483fd388321735c",
+                "url": "https://api.github.com/repos/Innmind/UrlTemplate/zipball/7057c1efaf9bb7e43af2ede4f49624248e6103a9",
+                "reference": "7057c1efaf9bb7e43af2ede4f49624248e6103a9",
                 "shasum": ""
             },
             "require": {
-                "innmind/immutable": "^2.8",
-                "innmind/url": "^2.0",
-                "php": "~7.2"
+                "innmind/immutable": "~3.1",
+                "innmind/url": "~3.0",
+                "php": "~7.4"
             },
             "require-dev": {
-                "giorgiosironi/eris": "^0.9.0",
-                "phpunit/phpunit": "~6.0"
+                "giorgiosironi/eris": "^0.11.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
             },
             "type": "library",
             "autoload": {
@@ -1971,25 +2163,26 @@
                 "rfc6570",
                 "url template"
             ],
-            "time": "2019-01-19T10:28:48+00:00"
+            "time": "2020-01-05T10:03:52+00:00"
         },
         {
             "name": "jeremykendall/php-domain-parser",
-            "version": "5.5.0",
+            "version": "5.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jeremykendall/php-domain-parser.git",
-                "reference": "93efea6362ee769d41754336abfb29aead38cfe2"
+                "reference": "fc210036cf739f679a125145b1a23c202d5cc485"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jeremykendall/php-domain-parser/zipball/93efea6362ee769d41754336abfb29aead38cfe2",
-                "reference": "93efea6362ee769d41754336abfb29aead38cfe2",
+                "url": "https://api.github.com/repos/jeremykendall/php-domain-parser/zipball/fc210036cf739f679a125145b1a23c202d5cc485",
+                "reference": "fc210036cf739f679a125145b1a23c202d5cc485",
                 "shasum": ""
             },
             "require": {
                 "ext-intl": "*",
                 "php": ">=7.0",
+                "psr/log": "^1.1",
                 "psr/simple-cache": "^1.0.1"
             },
             "require-dev": {
@@ -2031,13 +2224,13 @@
                     "role": "Developer"
                 },
                 {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/jeremykendall/php-domain-parser/graphs/contributors"
-                },
-                {
                     "name": "Ignace Nyamagana Butera",
                     "homepage": "http://nyamsprod.com",
                     "role": "Developer"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/jeremykendall/php-domain-parser/graphs/contributors"
                 }
             ],
             "description": "Public Suffix List based URL parsing implemented in PHP.",
@@ -2049,7 +2242,7 @@
                 "icann",
                 "idn"
             ],
-            "time": "2019-04-14T07:14:35+00:00"
+            "time": "2019-12-29T06:43:19+00:00"
         },
         {
             "name": "league/uri",
@@ -2528,21 +2721,21 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.24.0",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266"
+                "reference": "c861fcba2ca29404dc9e617eedd9eff4616986b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266",
-                "reference": "bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c861fcba2ca29404dc9e617eedd9eff4616986b8",
+                "reference": "c861fcba2ca29404dc9e617eedd9eff4616986b8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0",
-                "psr/log": "~1.0"
+                "php": "^7.2",
+                "psr/log": "^1.0.1"
             },
             "provide": {
                 "psr/log-implementation": "1.0.0"
@@ -2550,33 +2743,36 @@
             "require-dev": {
                 "aws/aws-sdk-php": "^2.4.9 || ^3.0",
                 "doctrine/couchdb": "~1.0@dev",
-                "graylog2/gelf-php": "~1.0",
-                "jakub-onderka/php-parallel-lint": "0.9",
+                "elasticsearch/elasticsearch": "^6.0",
+                "graylog2/gelf-php": "^1.4.2",
+                "jakub-onderka/php-parallel-lint": "^0.9",
                 "php-amqplib/php-amqplib": "~2.4",
                 "php-console/php-console": "^3.1.3",
-                "phpunit/phpunit": "~4.5",
-                "phpunit/phpunit-mock-objects": "2.3.0",
+                "phpspec/prophecy": "^1.6.1",
+                "phpunit/phpunit": "^8.3",
+                "predis/predis": "^1.1",
+                "rollbar/rollbar": "^1.3",
                 "ruflin/elastica": ">=0.90 <3.0",
-                "sentry/sentry": "^0.13",
                 "swiftmailer/swiftmailer": "^5.3|^6.0"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
                 "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "elasticsearch/elasticsearch": "Allow sending log messages to an Elasticsearch server via official client",
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
-                "ext-mongo": "Allow sending log messages to a MongoDB server",
+                "ext-mbstring": "Allow to work properly with unicode symbols",
+                "ext-mongodb": "Allow sending log messages to a MongoDB server (via driver)",
                 "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
-                "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
+                "mongodb/mongodb": "Allow sending log messages to a MongoDB server (via library)",
                 "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
                 "php-console/php-console": "Allow sending log messages to Google Chrome",
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
-                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
-                "sentry/sentry": "Allow sending log messages to a Sentry server"
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -2602,7 +2798,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2018-11-05T09:00:11+00:00"
+            "time": "2019-12-20T14:22:59+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -2701,16 +2897,16 @@
         },
         {
             "name": "psr/log",
-            "version": "1.1.0",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd"
+                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
-                "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/0f73288fd15629204f9d42b7055f72dacbe811fc",
+                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc",
                 "shasum": ""
             },
             "require": {
@@ -2719,7 +2915,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -2744,7 +2940,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2018-11-20T15:27:04+00:00"
+            "time": "2020-03-23T09:12:05+00:00"
         },
         {
             "name": "psr/simple-cache",
@@ -2796,24 +2992,24 @@
         },
         {
             "name": "ralouphie/getallheaders",
-            "version": "2.0.5",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ralouphie/getallheaders.git",
-                "reference": "5601c8a83fbba7ef674a7369456d12f1e0d0eafa"
+                "reference": "120b605dfeb996808c31b6477290a714d356e822"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/5601c8a83fbba7ef674a7369456d12f1e0d0eafa",
-                "reference": "5601c8a83fbba7ef674a7369456d12f1e0d0eafa",
+                "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/120b605dfeb996808c31b6477290a714d356e822",
+                "reference": "120b605dfeb996808c31b6477290a714d356e822",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3"
+                "php": ">=5.6"
             },
             "require-dev": {
-                "phpunit/phpunit": "~3.7.0",
-                "satooshi/php-coveralls": ">=1.0"
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^5 || ^6.5"
             },
             "type": "library",
             "autoload": {
@@ -2832,48 +3028,50 @@
                 }
             ],
             "description": "A polyfill for getallheaders.",
-            "time": "2016-02-11T07:05:27+00:00"
+            "time": "2019-03-08T08:55:37+00:00"
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.8.0",
+            "version": "3.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "d09ea80159c1929d75b3f9c60504d613aeb4a1e3"
+                "reference": "7e1633a6964b48589b142d60542f9ed31bd37a92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/d09ea80159c1929d75b3f9c60504d613aeb4a1e3",
-                "reference": "d09ea80159c1929d75b3f9c60504d613aeb4a1e3",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/7e1633a6964b48589b142d60542f9ed31bd37a92",
+                "reference": "7e1633a6964b48589b142d60542f9ed31bd37a92",
                 "shasum": ""
             },
             "require": {
-                "paragonie/random_compat": "^1.0|^2.0|9.99.99",
-                "php": "^5.4 || ^7.0",
+                "ext-json": "*",
+                "paragonie/random_compat": "^1 | ^2 | 9.99.99",
+                "php": "^5.4 | ^7 | ^8",
                 "symfony/polyfill-ctype": "^1.8"
             },
             "replace": {
                 "rhumsaa/uuid": "self.version"
             },
             "require-dev": {
-                "codeception/aspect-mock": "^1.0 | ~2.0.0",
-                "doctrine/annotations": "~1.2.0",
-                "goaop/framework": "1.0.0-alpha.2 | ^1.0 | ~2.1.0",
-                "ircmaxell/random-lib": "^1.1",
-                "jakub-onderka/php-parallel-lint": "^0.9.0",
-                "mockery/mockery": "^0.9.9",
+                "codeception/aspect-mock": "^1 | ^2",
+                "doctrine/annotations": "^1.2",
+                "goaop/framework": "1.0.0-alpha.2 | ^1 | ^2.1",
+                "jakub-onderka/php-parallel-lint": "^1",
+                "mockery/mockery": "^0.9.11 | ^1",
                 "moontoast/math": "^1.1",
-                "php-mock/php-mock-phpunit": "^0.3|^1.1",
-                "phpunit/phpunit": "^4.7|^5.0|^6.5",
-                "squizlabs/php_codesniffer": "^2.3"
+                "paragonie/random-lib": "^2",
+                "php-mock/php-mock-phpunit": "^0.3 | ^1.1",
+                "phpunit/phpunit": "^4.8 | ^5.4 | ^6.5",
+                "squizlabs/php_codesniffer": "^3.5"
             },
             "suggest": {
                 "ext-ctype": "Provides support for PHP Ctype functions",
                 "ext-libsodium": "Provides the PECL libsodium extension for use with the SodiumRandomGenerator",
+                "ext-openssl": "Provides the OpenSSL extension for use with the OpenSslGenerator",
                 "ext-uuid": "Provides the PECL UUID extension for use with the PeclUuidTimeGenerator and PeclUuidRandomGenerator",
-                "ircmaxell/random-lib": "Provides RandomLib for use with the RandomLibAdapter",
                 "moontoast/math": "Provides support for converting UUID to 128-bit integer (in string form).",
+                "paragonie/random-lib": "Provides RandomLib for use with the RandomLibAdapter",
                 "ramsey/uuid-console": "A console application for generating UUIDs with ramsey/uuid",
                 "ramsey/uuid-doctrine": "Allows the use of Ramsey\\Uuid\\Uuid as Doctrine field type."
             },
@@ -2886,7 +3084,10 @@
             "autoload": {
                 "psr-4": {
                     "Ramsey\\Uuid\\": "src/"
-                }
+                },
+                "files": [
+                    "src/functions.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -2894,17 +3095,17 @@
             ],
             "authors": [
                 {
+                    "name": "Ben Ramsey",
+                    "email": "ben@benramsey.com",
+                    "homepage": "https://benramsey.com"
+                },
+                {
                     "name": "Marijn Huizendveld",
                     "email": "marijn.huizendveld@gmail.com"
                 },
                 {
                     "name": "Thibaud Fabre",
                     "email": "thibaud@aztech.io"
-                },
-                {
-                    "name": "Ben Ramsey",
-                    "email": "ben@benramsey.com",
-                    "homepage": "https://benramsey.com"
                 }
             ],
             "description": "Formerly rhumsaa/uuid. A PHP 5.4+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
@@ -2914,32 +3115,32 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2018-07-19T23:38:55+00:00"
+            "time": "2020-02-21T04:36:14+00:00"
         },
         {
             "name": "symfony/dotenv",
-            "version": "v4.2.7",
+            "version": "v5.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dotenv.git",
-                "reference": "b541d63b83532be55a020db8ed2e50598385a583"
+                "reference": "48c8fdda51e5b24d031ce8ec221caa186337e36f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dotenv/zipball/b541d63b83532be55a020db8ed2e50598385a583",
-                "reference": "b541d63b83532be55a020db8ed2e50598385a583",
+                "url": "https://api.github.com/repos/symfony/dotenv/zipball/48c8fdda51e5b24d031ce8ec221caa186337e36f",
+                "reference": "48c8fdda51e5b24d031ce8ec221caa186337e36f",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1.3"
+                "php": "^7.2.5"
             },
             "require-dev": {
-                "symfony/process": "~3.4|~4.0"
+                "symfony/process": "^4.4|^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.2-dev"
+                    "dev-master": "5.0-dev"
                 }
             },
             "autoload": {
@@ -2971,30 +3172,30 @@
                 "env",
                 "environment"
             ],
-            "time": "2019-04-01T07:32:59+00:00"
+            "time": "2020-02-29T10:07:09+00:00"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v4.2.7",
+            "version": "v5.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "e16b9e471703b2c60b95f14d31c1239f68f11601"
+                "reference": "81daae1bc46cb8eef557f5faa36e9c785f983db1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/e16b9e471703b2c60b95f14d31c1239f68f11601",
-                "reference": "e16b9e471703b2c60b95f14d31c1239f68f11601",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/81daae1bc46cb8eef557f5faa36e9c785f983db1",
+                "reference": "81daae1bc46cb8eef557f5faa36e9c785f983db1",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1.3",
+                "php": "^7.2.5",
                 "symfony/polyfill-ctype": "~1.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.2-dev"
+                    "dev-master": "5.0-dev"
                 }
             },
             "autoload": {
@@ -3021,20 +3222,20 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2019-02-07T11:40:08+00:00"
+            "time": "2020-03-16T13:02:39+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v4.2.7",
+            "version": "v4.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "e45135658bd6c14b61850bf131c4f09a55133f69"
+                "reference": "ea69c129aed9fdeca781d4b77eb20b62cf5d5357"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/e45135658bd6c14b61850bf131c4f09a55133f69",
-                "reference": "e45135658bd6c14b61850bf131c4f09a55133f69",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/ea69c129aed9fdeca781d4b77eb20b62cf5d5357",
+                "reference": "ea69c129aed9fdeca781d4b77eb20b62cf5d5357",
                 "shasum": ""
             },
             "require": {
@@ -3043,7 +3244,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.2-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "autoload": {
@@ -3070,7 +3271,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2019-04-06T13:51:08+00:00"
+            "time": "2020-02-14T07:42:58+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -3132,16 +3333,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v4.2.7",
+            "version": "v4.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "8cf39fb4ccff793340c258ee7760fd40bfe745fe"
+                "reference": "b9863d0f7b684d7c4c13e665325b5ff047de0aee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/8cf39fb4ccff793340c258ee7760fd40bfe745fe",
-                "reference": "8cf39fb4ccff793340c258ee7760fd40bfe745fe",
+                "url": "https://api.github.com/repos/symfony/process/zipball/b9863d0f7b684d7c4c13e665325b5ff047de0aee",
+                "reference": "b9863d0f7b684d7c4c13e665325b5ff047de0aee",
                 "shasum": ""
             },
             "require": {
@@ -3150,7 +3351,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.2-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "autoload": {
@@ -3177,20 +3378,20 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2019-04-10T16:20:36+00:00"
+            "time": "2020-03-23T12:37:11+00:00"
         },
         {
             "name": "symfony/yaml",
-            "version": "v4.2.7",
+            "version": "v4.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "6712daf03ee25b53abb14e7e8e0ede1a770efdb1"
+                "reference": "43d7a46b1f80b4fd2ecfac4a9a4cc1f22d029fbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/6712daf03ee25b53abb14e7e8e0ede1a770efdb1",
-                "reference": "6712daf03ee25b53abb14e7e8e0ede1a770efdb1",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/43d7a46b1f80b4fd2ecfac4a9a4cc1f22d029fbb",
+                "reference": "43d7a46b1f80b4fd2ecfac4a9a4cc1f22d029fbb",
                 "shasum": ""
             },
             "require": {
@@ -3201,7 +3402,7 @@
                 "symfony/console": "<3.4"
             },
             "require-dev": {
-                "symfony/console": "~3.4|~4.0"
+                "symfony/console": "^3.4|^4.0|^5.0"
             },
             "suggest": {
                 "symfony/console": "For validating YAML files using the lint command"
@@ -3209,7 +3410,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.2-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "autoload": {
@@ -3236,7 +3437,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2019-03-30T15:58:42+00:00"
+            "time": "2020-03-16T08:56:54+00:00"
         },
         {
             "name": "willdurand/negotiation",
@@ -3294,27 +3495,27 @@
     "packages-dev": [
         {
             "name": "composer/ca-bundle",
-            "version": "1.1.4",
+            "version": "1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "558f321c52faeb4828c03e7dc0cfe39a09e09a2d"
+                "reference": "47fe531de31fca4a1b997f87308e7d7804348f7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/558f321c52faeb4828c03e7dc0cfe39a09e09a2d",
-                "reference": "558f321c52faeb4828c03e7dc0cfe39a09e09a2d",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/47fe531de31fca4a1b997f87308e7d7804348f7e",
+                "reference": "47fe531de31fca4a1b997f87308e7d7804348f7e",
                 "shasum": ""
             },
             "require": {
                 "ext-openssl": "*",
                 "ext-pcre": "*",
-                "php": "^5.3.2 || ^7.0"
+                "php": "^5.3.2 || ^7.0 || ^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5",
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || 6.5 - 8",
                 "psr/log": "^1.0",
-                "symfony/process": "^2.5 || ^3.0 || ^4.0"
+                "symfony/process": "^2.5 || ^3.0 || ^4.0 || ^5.0"
             },
             "type": "library",
             "extra": {
@@ -3346,7 +3547,7 @@
                 "ssl",
                 "tls"
             ],
-            "time": "2019-01-28T09:30:10+00:00"
+            "time": "2020-01-13T10:02:55+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -3469,39 +3670,34 @@
         },
         {
             "name": "innmind/debug",
-            "version": "1.3.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Debug.git",
-                "reference": "8f26fff629eb15e5d4c5224c3010f8b10e2c293e"
+                "reference": "7dcdfe4f3bbc69b71792d2b1fc7feec9fb6d5919"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Debug/zipball/8f26fff629eb15e5d4c5224c3010f8b10e2c293e",
-                "reference": "8f26fff629eb15e5d4c5224c3010f8b10e2c293e",
+                "url": "https://api.github.com/repos/Innmind/Debug/zipball/7dcdfe4f3bbc69b71792d2b1fc7feec9fb6d5919",
+                "reference": "7dcdfe4f3bbc69b71792d2b1fc7feec9fb6d5919",
                 "shasum": ""
             },
             "require": {
-                "innmind/cli": "^1.5",
-                "innmind/command-bus": "^3.0",
-                "innmind/event-bus": "^3.0",
-                "innmind/filesystem": "^3.3",
-                "innmind/http": "~3.9",
-                "innmind/http-framework": "^1.3",
-                "innmind/immutable": "^2.13",
+                "innmind/cli": "~2.0",
+                "innmind/command-bus": "~4.0",
+                "innmind/event-bus": "~4.0",
+                "innmind/http-framework": "~2.0",
+                "innmind/immutable": "~3.5",
                 "innmind/json": "^1.1",
-                "innmind/object-graph": "^1.4",
-                "innmind/operating-system": "^1.6",
-                "innmind/rest-client": "^7.1",
-                "innmind/server-control": "^2.7",
-                "innmind/stack-trace": "^2.0",
-                "innmind/time-continuum": "^1.3",
-                "php": "~7.2"
+                "innmind/object-graph": "~2.0",
+                "innmind/operating-system": "~2.0",
+                "innmind/rest-client": "~8.0",
+                "innmind/stack-trace": "~3.0",
+                "php": "~7.4"
             },
             "require-dev": {
-                "innmind/server-status": "^1.3",
-                "innmind/socket": "^2.0",
-                "phpunit/phpunit": "~8.0"
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "^3.10"
             },
             "type": "library",
             "autoload": {
@@ -3529,31 +3725,32 @@
                 "debug",
                 "http"
             ],
-            "time": "2019-04-28T10:31:14+00:00"
+            "time": "2020-03-26T16:20:55+00:00"
         },
         {
             "name": "innmind/object-graph",
-            "version": "1.5.2",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/ObjectGraph.git",
-                "reference": "00c87c3b4431fde76977a25cd5e7b4a896ca318c"
+                "reference": "91c5122058fce57869c1646b1099cf07df475731"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/ObjectGraph/zipball/00c87c3b4431fde76977a25cd5e7b4a896ca318c",
-                "reference": "00c87c3b4431fde76977a25cd5e7b4a896ca318c",
+                "url": "https://api.github.com/repos/Innmind/ObjectGraph/zipball/91c5122058fce57869c1646b1099cf07df475731",
+                "reference": "91c5122058fce57869c1646b1099cf07df475731",
                 "shasum": ""
             },
             "require": {
-                "innmind/graphviz": "^1.2",
-                "innmind/immutable": "^2.13",
-                "innmind/reflection": "^3.0",
-                "innmind/url": "^2.0",
-                "php": "~7.2"
+                "innmind/graphviz": "~2.0",
+                "innmind/immutable": "~3.0",
+                "innmind/reflection": "~4.0",
+                "innmind/url": "~3.0",
+                "php": "~7.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "~8.0"
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
             },
             "type": "library",
             "autoload": {
@@ -3578,39 +3775,37 @@
                 "graphviz",
                 "object graph"
             ],
-            "time": "2019-04-27T12:09:37+00:00"
+            "time": "2020-01-08T20:18:31+00:00"
         },
         {
             "name": "innmind/rest-client",
-            "version": "7.1.1",
+            "version": "8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/rest-client.git",
-                "reference": "439ae684fd4d6b623cd2a0fd7a0f830f5a54378d"
+                "reference": "1c8838316b31b4f48d4a0a912ee55fe49a4da836"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/rest-client/zipball/439ae684fd4d6b623cd2a0fd7a0f830f5a54378d",
-                "reference": "439ae684fd4d6b623cd2a0fd7a0f830f5a54378d",
+                "url": "https://api.github.com/repos/Innmind/rest-client/zipball/1c8838316b31b4f48d4a0a912ee55fe49a4da836",
+                "reference": "1c8838316b31b4f48d4a0a912ee55fe49a4da836",
                 "shasum": ""
             },
             "require": {
-                "innmind/filesystem": "~3.0",
-                "innmind/http": "~3.8",
-                "innmind/http-transport": "~4.0",
-                "innmind/immutable": "~2.12",
+                "innmind/http": "~4.2",
+                "innmind/immutable": "~3.5",
                 "innmind/json": "^1.1",
+                "innmind/operating-system": "~2.0",
                 "innmind/specification": "~2.0",
-                "innmind/url-resolver": "~3.0",
-                "php": "~7.2",
+                "innmind/url-resolver": "~4.0",
+                "php": "~7.4",
                 "willdurand/negotiation": "^2.2"
             },
             "require-dev": {
-                "innmind/cli": "^1.5",
-                "innmind/object-graph": "^1.2",
-                "innmind/server-control": "^2.7",
-                "innmind/server-status": "^1.3",
-                "phpunit/phpunit": "~7.0"
+                "innmind/cli": "~2.0",
+                "innmind/object-graph": "~2.0",
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "^3.10"
             },
             "type": "library",
             "autoload": {
@@ -3638,29 +3833,30 @@
                 "client",
                 "rest"
             ],
-            "time": "2019-02-21T17:50:44+00:00"
+            "time": "2020-03-23T15:39:17+00:00"
         },
         {
             "name": "innmind/url-resolver",
-            "version": "3.2.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/url-resolver.git",
-                "reference": "39cc1b41d406e975c34ae0d36cc4ee398795e870"
+                "reference": "8c96c543dc24da1f916832de2d1387eede3acf25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/url-resolver/zipball/39cc1b41d406e975c34ae0d36cc4ee398795e870",
-                "reference": "39cc1b41d406e975c34ae0d36cc4ee398795e870",
+                "url": "https://api.github.com/repos/Innmind/url-resolver/zipball/8c96c543dc24da1f916832de2d1387eede3acf25",
+                "reference": "8c96c543dc24da1f916832de2d1387eede3acf25",
                 "shasum": ""
             },
             "require": {
-                "innmind/immutable": "~2.0",
-                "innmind/url": "^2.0",
-                "php": "~7.2"
+                "innmind/immutable": "~3.0",
+                "innmind/url": "~3.3",
+                "php": "~7.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "~7.0"
+                "phpunit/phpunit": "~8.0",
+                "vimeo/psalm": "~3.7.0"
             },
             "type": "library",
             "autoload": {
@@ -3685,7 +3881,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2019-01-06T10:18:26+00:00"
+            "time": "2020-01-30T17:40:05+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -4560,29 +4756,29 @@
         },
         {
             "name": "pimple/pimple",
-            "version": "v3.2.3",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Pimple.git",
-                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32"
+                "reference": "e55d12f9d6a0e7f9c85992b73df1267f46279930"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/9e403941ef9d65d20cba7d54e29fe906db42cf32",
-                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/e55d12f9d6a0e7f9c85992b73df1267f46279930",
+                "reference": "e55d12f9d6a0e7f9c85992b73df1267f46279930",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0",
+                "php": "^7.2.5",
                 "psr/container": "^1.0"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "^3.2"
+                "symfony/phpunit-bridge": "^3.4|^4.4|^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2.x-dev"
+                    "dev-master": "3.3.x-dev"
                 }
             },
             "autoload": {
@@ -4601,12 +4797,12 @@
                 }
             ],
             "description": "Pimple, a simple Dependency Injection Container",
-            "homepage": "http://pimple.sensiolabs.org",
+            "homepage": "https://pimple.symfony.com",
             "keywords": [
                 "container",
                 "dependency injection"
             ],
-            "time": "2018-01-21T07:42:36+00:00"
+            "time": "2020-03-03T09:12:48+00:00"
         },
         {
             "name": "psr/container",
@@ -5274,25 +5470,28 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.2.7",
+            "version": "v4.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "e2840bb38bddad7a0feaf85931e38fdcffdb2f81"
+                "reference": "20bc0c1068565103075359f5ce9e0639b36f92d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/e2840bb38bddad7a0feaf85931e38fdcffdb2f81",
-                "reference": "e2840bb38bddad7a0feaf85931e38fdcffdb2f81",
+                "url": "https://api.github.com/repos/symfony/console/zipball/20bc0c1068565103075359f5ce9e0639b36f92d1",
+                "reference": "20bc0c1068565103075359f5ce9e0639b36f92d1",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1.3",
-                "symfony/contracts": "^1.0",
-                "symfony/polyfill-mbstring": "~1.0"
+                "symfony/polyfill-mbstring": "~1.0",
+                "symfony/polyfill-php73": "^1.8",
+                "symfony/service-contracts": "^1.1|^2"
             },
             "conflict": {
                 "symfony/dependency-injection": "<3.4",
+                "symfony/event-dispatcher": "<4.3|>=5",
+                "symfony/lock": "<4.4",
                 "symfony/process": "<3.3"
             },
             "provide": {
@@ -5300,11 +5499,12 @@
             },
             "require-dev": {
                 "psr/log": "~1.0",
-                "symfony/config": "~3.4|~4.0",
-                "symfony/dependency-injection": "~3.4|~4.0",
-                "symfony/event-dispatcher": "~3.4|~4.0",
-                "symfony/lock": "~3.4|~4.0",
-                "symfony/process": "~3.4|~4.0"
+                "symfony/config": "^3.4|^4.0|^5.0",
+                "symfony/dependency-injection": "^3.4|^4.0|^5.0",
+                "symfony/event-dispatcher": "^4.3",
+                "symfony/lock": "^4.4|^5.0",
+                "symfony/process": "^3.4|^4.0|^5.0",
+                "symfony/var-dumper": "^4.3|^5.0"
             },
             "suggest": {
                 "psr/log": "For using the console logger",
@@ -5315,7 +5515,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.2-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "autoload": {
@@ -5342,88 +5542,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-04-08T14:23:48+00:00"
-        },
-        {
-            "name": "symfony/contracts",
-            "version": "v1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/contracts.git",
-                "reference": "1aa7ab2429c3d594dd70689604b5cf7421254cdf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/contracts/zipball/1aa7ab2429c3d594dd70689604b5cf7421254cdf",
-                "reference": "1aa7ab2429c3d594dd70689604b5cf7421254cdf",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1.3"
-            },
-            "require-dev": {
-                "psr/cache": "^1.0",
-                "psr/container": "^1.0"
-            },
-            "suggest": {
-                "psr/cache": "When using the Cache contracts",
-                "psr/container": "When using the Service contracts",
-                "symfony/cache-contracts-implementation": "",
-                "symfony/service-contracts-implementation": "",
-                "symfony/translation-contracts-implementation": ""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Contracts\\": ""
-                },
-                "exclude-from-classmap": [
-                    "**/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "A set of abstractions extracted out of the Symfony components",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "abstractions",
-                "contracts",
-                "decoupling",
-                "interfaces",
-                "interoperability",
-                "standards"
-            ],
-            "time": "2018-12-05T08:06:11+00:00"
+            "time": "2020-03-16T08:56:54+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.11.0",
+            "version": "v1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "fe5e94c604826c35a32fa832f35bd036b6799609"
+                "reference": "81ffd3a9c6d707be22e3012b827de1c9775fc5ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fe5e94c604826c35a32fa832f35bd036b6799609",
-                "reference": "fe5e94c604826c35a32fa832f35bd036b6799609",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/81ffd3a9c6d707be22e3012b827de1c9775fc5ac",
+                "reference": "81ffd3a9c6d707be22e3012b827de1c9775fc5ac",
                 "shasum": ""
             },
             "require": {
@@ -5435,7 +5567,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.11-dev"
+                    "dev-master": "1.15-dev"
                 }
             },
             "autoload": {
@@ -5469,20 +5601,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-02-06T07:57:58+00:00"
+            "time": "2020-03-09T19:04:49+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
-            "version": "v1.11.0",
+            "version": "v1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php72.git",
-                "reference": "ab50dcf166d5f577978419edd37aa2bb8eabce0c"
+                "reference": "37b0976c78b94856543260ce09b460a7bc852747"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/ab50dcf166d5f577978419edd37aa2bb8eabce0c",
-                "reference": "ab50dcf166d5f577978419edd37aa2bb8eabce0c",
+                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/37b0976c78b94856543260ce09b460a7bc852747",
+                "reference": "37b0976c78b94856543260ce09b460a7bc852747",
                 "shasum": ""
             },
             "require": {
@@ -5491,7 +5623,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.11-dev"
+                    "dev-master": "1.15-dev"
                 }
             },
             "autoload": {
@@ -5524,20 +5656,136 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-02-06T07:57:58+00:00"
+            "time": "2020-02-27T09:26:54+00:00"
         },
         {
-            "name": "symfony/var-dumper",
-            "version": "v4.2.7",
+            "name": "symfony/polyfill-php73",
+            "version": "v1.15.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "e760a38e12b15032325e64be63f7ffc1817af617"
+                "url": "https://github.com/symfony/polyfill-php73.git",
+                "reference": "0f27e9f464ea3da33cbe7ca3bdf4eb66def9d0f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/e760a38e12b15032325e64be63f7ffc1817af617",
-                "reference": "e760a38e12b15032325e64be63f7ffc1817af617",
+                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/0f27e9f464ea3da33cbe7ca3bdf4eb66def9d0f7",
+                "reference": "0f27e9f464ea3da33cbe7ca3bdf4eb66def9d0f7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.15-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php73\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ],
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2020-02-27T09:26:54+00:00"
+        },
+        {
+            "name": "symfony/service-contracts",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/service-contracts.git",
+                "reference": "144c5e51266b281231e947b51223ba14acf1a749"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/144c5e51266b281231e947b51223ba14acf1a749",
+                "reference": "144c5e51266b281231e947b51223ba14acf1a749",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5",
+                "psr/container": "^1.0"
+            },
+            "suggest": {
+                "symfony/service-implementation": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Contracts\\Service\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Generic abstractions related to writing services",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "standards"
+            ],
+            "time": "2019-11-18T17:27:11+00:00"
+        },
+        {
+            "name": "symfony/var-dumper",
+            "version": "v4.4.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/var-dumper.git",
+                "reference": "6dae4692ac91230b33b70d9a48882ff5c838d67a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/6dae4692ac91230b33b70d9a48882ff5c838d67a",
+                "reference": "6dae4692ac91230b33b70d9a48882ff5c838d67a",
                 "shasum": ""
             },
             "require": {
@@ -5551,9 +5799,9 @@
             },
             "require-dev": {
                 "ext-iconv": "*",
-                "symfony/console": "~3.4|~4.0",
-                "symfony/process": "~3.4|~4.0",
-                "twig/twig": "~1.34|~2.4"
+                "symfony/console": "^3.4|^4.0|^5.0",
+                "symfony/process": "^4.4|^5.0",
+                "twig/twig": "^1.34|^2.4|^3.0"
             },
             "suggest": {
                 "ext-iconv": "To convert non-UTF-8 strings to UTF-8 (or symfony/polyfill-iconv in case ext-iconv cannot be used).",
@@ -5566,7 +5814,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.2-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "autoload": {
@@ -5600,7 +5848,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2019-04-17T14:57:01+00:00"
+            "time": "2020-03-18T07:15:43+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -5697,7 +5945,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "~7.2"
+        "php": "~7.4"
     },
     "platform-dev": []
 }

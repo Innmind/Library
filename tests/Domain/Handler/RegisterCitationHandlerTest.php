@@ -14,10 +14,7 @@ use Domain\{
     Event\CitationRegistered,
     Exception\CitationAlreadyExist,
 };
-use Innmind\Immutable\{
-    Set,
-    SetInterface,
-};
+use Innmind\Immutable\Set;
 use PHPUnit\Framework\TestCase;
 
 class RegisterCitationHandlerTest extends TestCase
@@ -37,7 +34,7 @@ class RegisterCitationHandlerTest extends TestCase
             ->with($this->callback(function(Text $spec): bool {
                 return $spec->value() === 'foo';
             }))
-            ->willReturn(new Set(Citation::class));
+            ->willReturn(Set::of(Citation::class));
         $repository
             ->expects($this->once())
             ->method('add')
@@ -45,7 +42,7 @@ class RegisterCitationHandlerTest extends TestCase
                 return $citation->identity() === $command->identity() &&
                     $citation->text() === $command->text() &&
                     $citation->recordedEvents()->size() === 1 &&
-                    $citation->recordedEvents()->current() instanceof CitationRegistered;
+                    $citation->recordedEvents()->first() instanceof CitationRegistered;
             }));
 
         $this->assertNull($handler($command));
@@ -67,19 +64,12 @@ class RegisterCitationHandlerTest extends TestCase
                 return $spec->value() === 'foo';
             }))
             ->willReturn(
-                $set = $this->createMock(SetInterface::class)
-            );
-        $set
-            ->expects($this->once())
-            ->method('size')
-            ->willReturn(1);
-        $set
-            ->expects($this->once())
-            ->method('current')
-            ->willReturn(
-                new Citation(
-                    $this->createMock(Identity::class),
-                    new Model('foo')
+                Set::of(
+                    Citation::class,
+                    new Citation(
+                        $this->createMock(Identity::class),
+                        new Model('foo')
+                    )
                 )
             );
         $repository

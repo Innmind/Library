@@ -15,9 +15,9 @@ use Innmind\Neo4j\DBAL\Connection;
 use Innmind\Http\{
     Message\ServerRequest\ServerRequest,
     Message\Response,
-    Message\Method\Method,
-    ProtocolVersion\ProtocolVersion,
-    Headers\Headers,
+    Message\Method,
+    ProtocolVersion,
+    Headers,
     Header\Accept,
     Header\AcceptValue,
     Header\Authorization,
@@ -44,7 +44,7 @@ class HtmlPageTest extends TestCase
             ->will($this->throwException(new HtmlPageNotFound));
 
         $response = $handle(new ServerRequest(
-            Url::fromString('http://localhost/api/web/html_page/fc1cc2b4-2c09-43b1-8c19-3499068950ed'),
+            Url::of('http://localhost/api/web/html_page/fc1cc2b4-2c09-43b1-8c19-3499068950ed'),
             Method::get(),
             new ProtocolVersion(1, 1),
             Headers::of(
@@ -59,7 +59,7 @@ class HtmlPageTest extends TestCase
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(404, $response->statusCode()->value());
-        $this->assertSame('', (string) $response->body());
+        $this->assertSame('', $response->body()->toString());
     }
 
     public function testErrorWhenNoAuth()
@@ -74,7 +74,7 @@ class HtmlPageTest extends TestCase
         );
 
         $response = $handle(new ServerRequest(
-            Url::fromString('http://localhost/api/web/html_page/fc1cc2b4-2c09-43b1-8c19-3499068950ed'),
+            Url::of('http://localhost/api/web/html_page/fc1cc2b4-2c09-43b1-8c19-3499068950ed'),
             Method::get(),
             new ProtocolVersion(1, 1),
             Headers::of(
@@ -86,7 +86,7 @@ class HtmlPageTest extends TestCase
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(401, $response->statusCode()->value());
-        $this->assertSame('', (string) $response->body());
+        $this->assertSame('', $response->body()->toString());
     }
 
     public function testOptions()
@@ -101,7 +101,7 @@ class HtmlPageTest extends TestCase
         );
 
         $response = $handle(new ServerRequest(
-            Url::fromString('http://localhost/api/web/html_page/'),
+            Url::of('http://localhost/api/web/html_page/'),
             Method::options(),
             new ProtocolVersion(1, 1),
             Headers::of(
@@ -118,11 +118,11 @@ class HtmlPageTest extends TestCase
         $this->assertSame(200, $response->statusCode()->value());
         $this->assertSame(
             'Content-Type: application/json',
-            (string) $response->headers()->get('content-type')
+            $response->headers()->get('content-type')->toString()
         );
         $this->assertSame(
             '{"identity":"identity","properties":{"identity":{"type":"string","access":["READ"],"variants":[],"optional":false},"host":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"author":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"citations":{"type":"set<string>","access":["READ","CREATE"],"variants":[],"optional":true},"path":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"query":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":false},"languages":{"type":"set<string>","access":["READ","CREATE"],"variants":[],"optional":true},"charset":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"main_content":{"type":"string","access":["CREATE"],"variants":[],"optional":true},"description":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"anchors":{"type":"set<string>","access":["READ","CREATE"],"variants":[],"optional":true},"theme_colour":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"title":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"android_app_link":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"ios_app_link":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"preview":{"type":"string","access":["READ","CREATE"],"variants":[],"optional":true},"is_journal":{"type":"bool","access":["CREATE"],"variants":[],"optional":true}},"metas":{"allowed_media_types":["text\/html","text\/xml","application\/xml","application\/xhtml+xml"]},"rangeable":true,"linkable_to":[{"relationship":"alternate","resource_path":"web.html_page","parameters":["language"]},{"relationship":"canonical","resource_path":"web.html_page","parameters":[]}]}',
-            (string) $response->body()
+            $response->body()->toString()
         );
     }
 }

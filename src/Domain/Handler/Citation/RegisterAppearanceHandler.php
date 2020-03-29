@@ -11,16 +11,17 @@ use Domain\{
     Specification\CitationAppearance\HttpResource,
     Exception\CitationAppearanceAlreadyExist
 };
-use Innmind\TimeContinuum\TimeContinuumInterface;
+use Innmind\TimeContinuum\Clock;
+use function Innmind\Immutable\first;
 
 final class RegisterAppearanceHandler
 {
     private CitationAppearanceRepository $repository;
-    private TimeContinuumInterface $clock;
+    private Clock $clock;
 
     public function __construct(
         CitationAppearanceRepository $repository,
-        TimeContinuumInterface $clock
+        Clock $clock
     ) {
         $this->repository = $repository;
         $this->clock = $clock;
@@ -35,7 +36,7 @@ final class RegisterAppearanceHandler
 
         if ($appearances->size() > 0) {
             throw new CitationAppearanceAlreadyExist(
-                $appearances->current()
+                first($appearances)
             );
         }
 

@@ -18,9 +18,10 @@ use Domain\{
     Exception\InvalidArgumentException,
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface,
+    Path,
+    Query,
 };
+use function Innmind\Immutable\unwrap;
 use PHPUnit\Framework\TestCase;
 
 class ImageTest extends TestCase
@@ -29,8 +30,8 @@ class ImageTest extends TestCase
     {
         $image = new Image(
             $identity = $this->createMock(Identity::class),
-            $path = $this->createMock(PathInterface::class),
-            $query = $this->createMock(QueryInterface::class)
+            $path = Path::none(),
+            $query = Query::none()
         );
 
         $this->assertInstanceOf(HttpResource::class, $image);
@@ -49,8 +50,8 @@ class ImageTest extends TestCase
 
         new Image(
             $this->createMock(ResourceIdentity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
     }
 
@@ -58,27 +59,27 @@ class ImageTest extends TestCase
     {
         $image = Image::register(
             $identity = $this->createMock(Identity::class),
-            $path = $this->createMock(PathInterface::class),
-            $query = $this->createMock(QueryInterface::class)
+            $path = Path::none(),
+            $query = Query::none()
         );
 
         $this->assertInstanceOf(Image::class, $image);
         $this->assertCount(1, $image->recordedEvents());
         $this->assertInstanceOf(
             ImageRegistered::class,
-            $image->recordedEvents()->current()
+            $image->recordedEvents()->first()
         );
         $this->assertSame(
             $identity,
-            $image->recordedEvents()->current()->identity()
+            $image->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $path,
-            $image->recordedEvents()->current()->path()
+            $image->recordedEvents()->first()->path()
         );
         $this->assertSame(
             $query,
-            $image->recordedEvents()->current()->query()
+            $image->recordedEvents()->first()->query()
         );
     }
 
@@ -86,8 +87,8 @@ class ImageTest extends TestCase
     {
         $image = new Image(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
         $this->assertSame(
@@ -101,15 +102,15 @@ class ImageTest extends TestCase
         $this->assertCount(1, $image->recordedEvents());
         $this->assertInstanceOf(
             DimensionSpecified::class,
-            $image->recordedEvents()->current()
+            $image->recordedEvents()->first()
         );
         $this->assertSame(
             $image->identity(),
-            $image->recordedEvents()->current()->identity()
+            $image->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $image->dimension(),
-            $image->recordedEvents()->current()->dimension()
+            $image->recordedEvents()->first()->dimension()
         );
     }
 
@@ -117,8 +118,8 @@ class ImageTest extends TestCase
     {
         $image = new Image(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
         $this->assertSame(
@@ -130,15 +131,15 @@ class ImageTest extends TestCase
         $this->assertCount(1, $image->recordedEvents());
         $this->assertInstanceOf(
             WeightSpecified::class,
-            $image->recordedEvents()->current()
+            $image->recordedEvents()->first()
         );
         $this->assertSame(
             $image->identity(),
-            $image->recordedEvents()->current()->identity()
+            $image->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $weight,
-            $image->recordedEvents()->current()->weight()
+            $image->recordedEvents()->first()->weight()
         );
     }
 
@@ -146,15 +147,15 @@ class ImageTest extends TestCase
     {
         $image = new Image(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
         $this->assertSame(
             $image,
             $image->addDescription($description = new Description('foobar'))
         );
-        $this->assertSame([$description], $image->descriptions()->toPrimitive());
+        $this->assertSame([$description], unwrap($image->descriptions()));
         $this->assertSame(
             Description::class,
             (string) $image->descriptions()->type()
@@ -162,15 +163,15 @@ class ImageTest extends TestCase
         $this->assertCount(1, $image->recordedEvents());
         $this->assertInstanceOf(
             DescriptionAdded::class,
-            $image->recordedEvents()->current()
+            $image->recordedEvents()->first()
         );
         $this->assertSame(
             $image->identity(),
-            $image->recordedEvents()->current()->identity()
+            $image->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $description,
-            $image->recordedEvents()->current()->description()
+            $image->recordedEvents()->first()->description()
         );
     }
 
@@ -178,8 +179,8 @@ class ImageTest extends TestCase
     {
         $image = new Image(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
         $image->addDescription(new Description('foobar'));

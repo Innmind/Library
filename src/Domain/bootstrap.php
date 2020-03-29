@@ -3,14 +3,11 @@ declare(strict_types = 1);
 
 namespace Domain;
 
-use Innmind\TimeContinuum\TimeContinuumInterface;
-use Innmind\Immutable\{
-    MapInterface,
-    Map,
-};
+use Innmind\TimeContinuum\Clock;
+use Innmind\Immutable\Map;
 
 /**
- * @return MapInterface<string, callable>
+ * @return Map<string, callable>
  */
 function bootstrap(
     Repository\AuthorRepository $authorRepository,
@@ -28,8 +25,8 @@ function bootstrap(
     Repository\CanonicalRepository $canonicalRepository,
     Repository\ReferenceRepository $referenceRepository,
     \Pdp\Rules $domainParser,
-    TimeContinuumInterface $clock
-): MapInterface {
+    Clock $clock
+): Map {
     return Map::of('string', 'callable')
         (
             Command\RegisterAuthor::class,

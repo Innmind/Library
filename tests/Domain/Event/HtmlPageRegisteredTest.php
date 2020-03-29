@@ -8,8 +8,8 @@ use Domain\{
     Event\HtmlPageRegistered
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query
 };
 use PHPUnit\Framework\TestCase;
 
@@ -19,8 +19,8 @@ class HtmlPageRegisteredTest extends TestCase
     {
         $event = new HtmlPageRegistered(
             $identity = $this->createMock(Identity::class),
-            $path = $this->createMock(PathInterface::class),
-            $query = $this->createMock(QueryInterface::class)
+            $path = Path::none(),
+            $query = Query::none()
         );
 
         $this->assertSame($identity, $event->identity());

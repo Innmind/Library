@@ -12,8 +12,8 @@ use Domain\{
     Event\HtmlPage\FlaggedAsJournal
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query
 };
 use PHPUnit\Framework\TestCase;
 
@@ -34,8 +34,8 @@ class FlagAsJournalHandlerTest extends TestCase
             ->willReturn(
                 $page = new HtmlPage(
                     $command->identity(),
-                    $this->createMock(PathInterface::class),
-                    $this->createMock(QueryInterface::class)
+                    Path::none(),
+                    Query::none()
                 )
             );
 
@@ -43,7 +43,7 @@ class FlagAsJournalHandlerTest extends TestCase
         $this->assertTrue($page->isJournal());
         $this->assertInstanceOf(
             FlaggedAsJournal::class,
-            $page->recordedEvents()->current()
+            $page->recordedEvents()->first()
         );
     }
 }

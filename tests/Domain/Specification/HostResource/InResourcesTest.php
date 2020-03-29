@@ -17,7 +17,7 @@ use Domain\{
 };
 use Innmind\Specification\Comparator;
 use Innmind\Immutable\Set;
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use PHPUnit\Framework\TestCase;
 
 class InResourcesTest extends TestCase
@@ -27,9 +27,9 @@ class InResourcesTest extends TestCase
         $identity = $this->createMock(ResourceIdentity::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
-        $set = (new Set(ResourceIdentity::class))
+        $set = (Set::of(ResourceIdentity::class))
             ->add($identity);
         $spec = new InResources($set);
 
@@ -44,7 +44,7 @@ class InResourcesTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        new InResources(new Set('string'));
+        new InResources(Set::of('string'));
     }
 
     public function testIsSatisfiedBy()
@@ -52,14 +52,14 @@ class InResourcesTest extends TestCase
         $identity1 = $this->createMock(ResourceIdentity::class);
         $identity1
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $identity2 = $this->createMock(ResourceIdentity::class);
         $identity2
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('0');
-        $set = (new Set(ResourceIdentity::class))
+        $set = (Set::of(ResourceIdentity::class))
             ->add($identity1)
             ->add($identity2);
         $spec = new InResources($set);
@@ -67,17 +67,17 @@ class InResourcesTest extends TestCase
             $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(ResourceIdentity::class),
-            $this->createMock(PointInTimeInterface::class)
+            $this->createMock(PointInTime::class)
         );
         $relation
             ->resource()
             ->expects($this->at(0))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $relation
             ->resource()
             ->expects($this->at(1))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('');
 
         $this->assertTrue($spec->isSatisfiedBy($relation));
@@ -87,7 +87,7 @@ class InResourcesTest extends TestCase
     public function testAnd()
     {
         $identity = $this->createMock(ResourceIdentity::class);
-        $set = (new Set(ResourceIdentity::class))
+        $set = (Set::of(ResourceIdentity::class))
             ->add($identity);
         $spec = new InResources($set);
 
@@ -100,7 +100,7 @@ class InResourcesTest extends TestCase
     public function testOr()
     {
         $identity = $this->createMock(ResourceIdentity::class);
-        $set = (new Set(ResourceIdentity::class))
+        $set = (Set::of(ResourceIdentity::class))
             ->add($identity);
         $spec = new InResources($set);
 
@@ -113,7 +113,7 @@ class InResourcesTest extends TestCase
     public function testNot()
     {
         $identity = $this->createMock(ResourceIdentity::class);
-        $set = (new Set(ResourceIdentity::class))
+        $set = (Set::of(ResourceIdentity::class))
             ->add($identity);
         $spec = new InResources($set);
 

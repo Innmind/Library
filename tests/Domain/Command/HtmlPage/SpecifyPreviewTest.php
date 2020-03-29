@@ -7,7 +7,7 @@ use Domain\{
     Command\HtmlPage\SpecifyPreview,
     Entity\HtmlPage\Identity
 };
-use Innmind\Url\UrlInterface;
+use Innmind\Url\Url;
 use PHPUnit\Framework\TestCase;
 
 class SpecifyPreviewTest extends TestCase
@@ -16,7 +16,7 @@ class SpecifyPreviewTest extends TestCase
     {
         $command = new SpecifyPreview(
             $identity = $this->createMock(Identity::class),
-            $url = $this->createMock(UrlInterface::class)
+            $url = Url::of('example.com')
         );
 
         $this->assertSame($identity, $command->identity());

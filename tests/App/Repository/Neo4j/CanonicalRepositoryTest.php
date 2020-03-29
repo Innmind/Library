@@ -18,11 +18,9 @@ use Innmind\Neo4j\ONM\{
     Repository,
     Exception\EntityNotFound,
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
-use Innmind\Immutable\{
-    SetInterface,
-    Set,
-};
+use Innmind\TimeContinuum\PointInTime;
+use Innmind\Immutable\Set;
+use function Innmind\Immutable\unwrap;
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 
@@ -53,7 +51,7 @@ class CanonicalRepositoryTest extends TestCase
                     $identity,
                     $this->createMock(HttpResourceIdentity::class),
                     $this->createMock(HttpResourceIdentity::class),
-                    $this->createMock(PointInTimeInterface::class)
+                    $this->createMock(PointInTime::class)
                 )
             );
 
@@ -90,7 +88,7 @@ class CanonicalRepositoryTest extends TestCase
             new Identity((string) Uuid::uuid4()),
             $this->createMock(HttpResourceIdentity::class),
             $this->createMock(HttpResourceIdentity::class),
-            $this->createMock(PointInTimeInterface::class)
+            $this->createMock(PointInTime::class)
         );
         $infra
             ->expects($this->once())
@@ -115,7 +113,7 @@ class CanonicalRepositoryTest extends TestCase
                     $identity,
                     $this->createMock(HttpResourceIdentity::class),
                     $this->createMock(HttpResourceIdentity::class),
-                    $this->createMock(PointInTimeInterface::class)
+                    $this->createMock(PointInTime::class)
                 )
             );
         $infra
@@ -134,12 +132,12 @@ class CanonicalRepositoryTest extends TestCase
         $identity = new Identity((string) Uuid::uuid4());
         $infra
             ->expects($this->at(0))
-            ->method('has')
+            ->method('contains')
             ->with($identity)
             ->willReturn(true);
         $infra
             ->expects($this->at(1))
-            ->method('has')
+            ->method('contains')
             ->with($identity)
             ->willReturn(false);
 
@@ -156,14 +154,18 @@ class CanonicalRepositoryTest extends TestCase
             ->expects($this->once())
             ->method('all')
             ->willReturn(
-                $all = $this->createMock(SetInterface::class)
+                Set::of(
+                    Canonical::class,
+                    new Canonical(
+                        new Identity((string) Uuid::uuid4()),
+                        $this->createMock(HttpResourceIdentity::class),
+                        $this->createMock(HttpResourceIdentity::class),
+                        $this->createMock(PointInTime::class)
+                    )
+                )
             );
-        $all
-            ->expects($this->once())
-            ->method('size')
-            ->willReturn(42);
 
-        $this->assertSame(42, $repository->count());
+        $this->assertSame(1, $repository->count());
     }
 
     public function testAll()
@@ -175,21 +177,21 @@ class CanonicalRepositoryTest extends TestCase
             ->expects($this->once())
             ->method('all')
             ->willReturn(
-                (new Set('object'))->add(
+                Set::objects(
                     $entity = new Canonical(
                         new Identity((string) Uuid::uuid4()),
                         $this->createMock(HttpResourceIdentity::class),
                         $this->createMock(HttpResourceIdentity::class),
-                        $this->createMock(PointInTimeInterface::class)
+                        $this->createMock(PointInTime::class)
                     )
                 )
             );
 
         $all = $repository->all();
 
-        $this->assertInstanceOf(SetInterface::class, $all);
+        $this->assertInstanceOf(Set::class, $all);
         $this->assertSame(Canonical::class, (string) $all->type());
-        $this->assertSame([$entity], $all->toPrimitive());
+        $this->assertSame([$entity], unwrap($all));
     }
 
     public function testMatching()
@@ -203,20 +205,20 @@ class CanonicalRepositoryTest extends TestCase
             ->method('matching')
             ->with($specification)
             ->willReturn(
-                (new Set('object'))->add(
+                Set::objects(
                     $entity = new Canonical(
                         new Identity((string) Uuid::uuid4()),
                         $this->createMock(HttpResourceIdentity::class),
                         $this->createMock(HttpResourceIdentity::class),
-                        $this->createMock(PointInTimeInterface::class)
+                        $this->createMock(PointInTime::class)
                     )
                 )
             );
 
         $all = $repository->matching($specification);
 
-        $this->assertInstanceOf(SetInterface::class, $all);
+        $this->assertInstanceOf(Set::class, $all);
         $this->assertSame(Canonical::class, (string) $all->type());
-        $this->assertSame([$entity], $all->toPrimitive());
+        $this->assertSame([$entity], unwrap($all));
     }
 }

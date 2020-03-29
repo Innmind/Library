@@ -14,8 +14,8 @@ use Domain\{
 };
 use Innmind\Specification\Comparator;
 use Innmind\Url\{
-    QueryInterface,
-    PathInterface,
+    Query as QueryModel,
+    Path,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -23,11 +23,7 @@ class QueryTest extends TestCase
 {
     public function testInterface()
     {
-        $query = $this->createMock(QueryInterface::class);
-        $query
-            ->expects($this->once())
-            ->method('__toString')
-            ->willReturn('?foo');
+        $query = QueryModel::of('?foo');
         $spec = new Query($query);
 
         $this->assertInstanceOf(Comparator::class, $spec);
@@ -39,33 +35,23 @@ class QueryTest extends TestCase
 
     public function testIsSatisfiedBy()
     {
-        $query = $this->createMock(QueryInterface::class);
-        $query
-            ->expects($this->once())
-            ->method('__toString')
-            ->willReturn('?foo');
-        $spec = new Query($query);
-        $resource = new HttpResource(
-            $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $query = $this->createMock(QueryInterface::class)
-        );
-        $query
-            ->expects($this->at(0))
-            ->method('__toString')
-            ->willReturn('?foo');
-        $query
-            ->expects($this->at(1))
-            ->method('__toString')
-            ->willReturn('?bar');
+        $spec = new Query(QueryModel::of('foo'));
 
-        $this->assertTrue($spec->isSatisfiedBy($resource));
-        $this->assertFalse($spec->isSatisfiedBy($resource));
+        $this->assertTrue($spec->isSatisfiedBy(new HttpResource(
+            $this->createMock(Identity::class),
+            Path::none(),
+            QueryModel::of('foo')
+        )));
+        $this->assertFalse($spec->isSatisfiedBy(new HttpResource(
+            $this->createMock(Identity::class),
+            Path::none(),
+            QueryModel::of('bar')
+        )));
     }
 
     public function testAnd()
     {
-        $query = $this->createMock(QueryInterface::class);
+        $query = QueryModel::none();
         $spec = new Query($query);
 
         $this->assertInstanceOf(
@@ -76,7 +62,7 @@ class QueryTest extends TestCase
 
     public function testOr()
     {
-        $query = $this->createMock(QueryInterface::class);
+        $query = QueryModel::none();
         $spec = new Query($query);
 
         $this->assertInstanceOf(
@@ -87,7 +73,7 @@ class QueryTest extends TestCase
 
     public function testNot()
     {
-        $path = $this->createMock(QueryInterface::class);
+        $path = QueryModel::none();
         $spec = new Query($path);
 
         $this->assertInstanceOf(

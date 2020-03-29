@@ -14,9 +14,9 @@ use Innmind\Neo4j\DBAL\Connection;
 use Innmind\Http\{
     Message\ServerRequest\ServerRequest,
     Message\Response,
-    Message\Method\Method,
-    ProtocolVersion\ProtocolVersion,
-    Headers\Headers,
+    Message\Method,
+    ProtocolVersion,
+    Headers,
     Header\Authorization,
     Header\AuthorizationValue,
 };
@@ -37,7 +37,7 @@ class CapabilitiesTest extends TestCase
         );
 
         $response = $handle(new ServerRequest(
-            Url::fromString('http://localhost/*'),
+            Url::of('http://localhost/*'),
             Method::options(),
             new ProtocolVersion(1, 1),
             Headers::of(
@@ -51,9 +51,9 @@ class CapabilitiesTest extends TestCase
         $this->assertSame(200, $response->statusCode()->value());
         $this->assertSame(
             'Link: </api/web/resource/>; rel="web.resource", </api/web/image/>; rel="web.image", </api/web/html_page/>; rel="web.html_page"',
-            (string) $response->headers()->get('link')
+            $response->headers()->get('link')->toString()
         );
-        $this->assertSame('', (string) $response->body());
+        $this->assertSame('', $response->body()->toString());
     }
 
     public function testErrorWhenNoAuth()
@@ -68,14 +68,14 @@ class CapabilitiesTest extends TestCase
         );
 
         $response = $handle(new ServerRequest(
-            Url::fromString('http://localhost/*'),
+            Url::of('http://localhost/*'),
             Method::options(),
             new ProtocolVersion(1, 1)
         ));
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(401, $response->statusCode()->value());
-        $this->assertFalse($response->headers()->has('link'));
-        $this->assertSame('', (string) $response->body());
+        $this->assertFalse($response->headers()->contains('link'));
+        $this->assertSame('', $response->body()->toString());
     }
 }

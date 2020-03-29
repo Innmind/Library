@@ -28,9 +28,8 @@ use Innmind\Rest\Server\{
     Link\Parameter,
 };
 use Innmind\CommandBus\CommandBus;
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use Innmind\Immutable\{
-    MapInterface,
     Map,
     Set,
 };
@@ -63,20 +62,20 @@ class ResourceLinkerTest extends TestCase
         $identity = $this->createMock(IdentityInterface::class);
         $identity
             ->expects($this->exactly(3))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn((string) Uuid::uuid4());
         $to = $this->createMock(IdentityInterface::class);
         $to
             ->expects($this->exactly(4))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn((string) Uuid::uuid4());
         $bus
             ->expects($this->at(0))
             ->method('__invoke')
             ->with($this->callback(function($command) use ($identity, $to): bool {
                 return $command instanceof RegisterAlternateResource &&
-                    (string) $command->resource() === (string) $identity &&
-                    (string) $command->alternate() === (string) $to &&
+                    $command->resource()->toString() === $identity->toString() &&
+                    $command->alternate()->toString() === $to->toString() &&
                     (string) $command->language() === 'fr-CA';
             }));
         $bus
@@ -84,8 +83,8 @@ class ResourceLinkerTest extends TestCase
             ->method('__invoke')
             ->with($this->callback(function($command) use ($identity, $to): bool {
                 return $command instanceof MakeCanonicalLink &&
-                    (string) $command->resource() === (string) $identity &&
-                    (string) $command->canonical() === (string) $to;
+                    $command->resource()->toString() === $identity->toString() &&
+                    $command->canonical()->toString() === $to->toString();
             }));
 
         $this->assertNull(
@@ -118,12 +117,12 @@ class ResourceLinkerTest extends TestCase
         $identity = $this->createMock(IdentityInterface::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn((string) Uuid::uuid4());
         $to = $this->createMock(IdentityInterface::class);
         $to
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn((string) Uuid::uuid4());
         $bus
             ->expects($this->once())
@@ -167,12 +166,12 @@ class ResourceLinkerTest extends TestCase
         $identity = $this->createMock(IdentityInterface::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn((string) Uuid::uuid4());
         $to = $this->createMock(IdentityInterface::class);
         $to
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn((string) Uuid::uuid4());
         $bus
             ->expects($this->once())
@@ -184,7 +183,7 @@ class ResourceLinkerTest extends TestCase
                             $this->createMock(CanonicalIdentity::class),
                             $this->createMock(ResourceIdentity::class),
                             $this->createMock(ResourceIdentity::class),
-                            $this->createMock(PointInTimeInterface::class)
+                            $this->createMock(PointInTime::class)
                         )
                     )
                 )

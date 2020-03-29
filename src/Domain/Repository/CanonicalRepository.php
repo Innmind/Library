@@ -8,7 +8,7 @@ use Domain\{
     Entity\Canonical,
     Specification\Canonical\Specification
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 interface CanonicalRepository
 {
@@ -22,12 +22,12 @@ interface CanonicalRepository
     public function count(): int;
 
     /**
-     * @return SetInterface<Canonical>
+     * @return Set<Canonical>
      */
-    public function all(): SetInterface;
+    public function all(): Set;
 
     /**
-     * @return SetInterface<Canonical>
+     * @return Set<Canonical>
      */
-    public function matching(Specification $specification): SetInterface;
+    public function matching(Specification $specification): Set;
 }

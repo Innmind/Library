@@ -38,6 +38,7 @@ use Innmind\Immutable\{
     Map,
     Set,
 };
+use function Innmind\Immutable\first;
 use PHPUnit\Framework\TestCase;
 
 class ResourceCreatorTest extends TestCase
@@ -63,14 +64,14 @@ class ResourceCreatorTest extends TestCase
             ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof RegisterDomain &&
-                    (string) $command->host() === 'example.com';
+                    $command->host()->toString() === 'example.com';
             }));
         $bus
             ->expects($this->at(1))
             ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof RegisterHost &&
-                    (string) $command->host() === 'example.com';
+                    $command->host()->toString() === 'example.com';
             }));
         $bus
             ->expects($this->at(2))
@@ -79,8 +80,8 @@ class ResourceCreatorTest extends TestCase
                 $expected = $command->identity();
 
                 return $command instanceof RegisterHtmlPage &&
-                    (string) $command->path() === 'foo' &&
-                    (string) $command->query() === 'bar';
+                    $command->path()->toString() === 'foo' &&
+                    $command->query()->toString() === 'bar';
             }));
         $bus
             ->expects($this->at(3))
@@ -95,7 +96,7 @@ class ResourceCreatorTest extends TestCase
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyLanguages &&
                     $command->languages()->size() === 1 &&
-                    (string) $command->languages()->current() === 'fr';
+                    (string) first($command->languages()) === 'fr';
             }));
         $bus
             ->expects($this->at(5))
@@ -135,14 +136,14 @@ class ResourceCreatorTest extends TestCase
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyAnchors &&
                     $command->anchors()->size() === 1 &&
-                    (string) $command->anchors()->current() === '#someAnchor';
+                    (string) first($command->anchors()) === '#someAnchor';
             }));
         $bus
             ->expects($this->at(11))
             ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyAndroidAppLink &&
-                    (string) $command->url() === 'android://foo/';
+                    $command->url()->toString() === 'android://foo/';
             }));
         $bus
             ->expects($this->at(12))
@@ -156,7 +157,7 @@ class ResourceCreatorTest extends TestCase
             ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyIosAppLink &&
-                    (string) $command->url() === 'ios://foo/';
+                    $command->url()->toString() === 'ios://foo/';
             }));
         $bus
             ->expects($this->at(14))
@@ -170,7 +171,7 @@ class ResourceCreatorTest extends TestCase
             ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyThemeColour &&
-                    (string) $command->colour() === '#3399ff';
+                    $command->colour()->toString() === '#3399ff';
             }));
         $bus
             ->expects($this->at(16))
@@ -184,7 +185,7 @@ class ResourceCreatorTest extends TestCase
             ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyPreview &&
-                    (string) $command->url() === 'http://some.photo/url';
+                    $command->url()->toString() === 'http://some.photo/url';
             }));
         $definition = new Definition(
             'html_page',
@@ -227,7 +228,7 @@ class ResourceCreatorTest extends TestCase
             ->expects($this->at(6))
             ->method('property')
             ->with('languages')
-            ->willReturn(new Property('languages', (new Set('string'))->add('fr')));
+            ->willReturn(new Property('languages', Set::strings('fr')));
         $resource
             ->expects($this->at(7))
             ->method('has')
@@ -247,7 +248,7 @@ class ResourceCreatorTest extends TestCase
             ->expects($this->at(10))
             ->method('property')
             ->with('citations')
-            ->willReturn(new Property('citations', (new Set('string'))->add('cite')));
+            ->willReturn(new Property('citations', Set::strings('cite')));
         $resource
             ->expects($this->at(11))
             ->method('has')
@@ -262,7 +263,7 @@ class ResourceCreatorTest extends TestCase
             ->expects($this->at(13))
             ->method('property')
             ->with('anchors')
-            ->willReturn(new Property('anchors', (new Set('string'))->add('someAnchor')));
+            ->willReturn(new Property('anchors', Set::strings('someAnchor')));
         $resource
             ->expects($this->at(14))
             ->method('has')

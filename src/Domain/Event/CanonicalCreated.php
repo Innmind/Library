@@ -7,20 +7,20 @@ use Domain\{
     Entity\Canonical\Identity,
     Entity\HttpResource\Identity as ResourceIdentity
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 
 final class CanonicalCreated
 {
     private Identity $identity;
     private ResourceIdentity $canonical;
     private ResourceIdentity $resource;
-    private PointInTimeInterface $foundAt;
+    private PointInTime $foundAt;
 
     public function __construct(
         Identity $identity,
         ResourceIdentity $canonical,
         ResourceIdentity $resource,
-        PointInTimeInterface $foundAt
+        PointInTime $foundAt
     ) {
         $this->identity = $identity;
         $this->canonical = $canonical;
@@ -43,7 +43,7 @@ final class CanonicalCreated
         return $this->resource;
     }
 
-    public function foundAt(): PointInTimeInterface
+    public function foundAt(): PointInTime
     {
         return $this->foundAt;
     }

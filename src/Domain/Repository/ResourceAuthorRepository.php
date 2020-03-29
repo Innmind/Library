@@ -8,7 +8,7 @@ use Domain\{
     Entity\ResourceAuthor,
     Specification\ResourceAuthor\Specification
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 interface ResourceAuthorRepository
 {
@@ -22,12 +22,12 @@ interface ResourceAuthorRepository
     public function count(): int;
 
     /**
-     * @return SetInterface<ResourceAuthor>
+     * @return Set<ResourceAuthor>
      */
-    public function all(): SetInterface;
+    public function all(): Set;
 
     /**
-     * @return SetInterface<ResourceAuthor>
+     * @return Set<ResourceAuthor>
      */
-    public function matching(Specification $specification): SetInterface;
+    public function matching(Specification $specification): Set;
 }

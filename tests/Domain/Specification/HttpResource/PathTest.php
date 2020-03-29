@@ -14,8 +14,8 @@ use Domain\{
 };
 use Innmind\Specification\Comparator;
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface,
+    Path as PathModel,
+    Query,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -23,11 +23,7 @@ class PathTest extends TestCase
 {
     public function testInterface()
     {
-        $path = $this->createMock(PathInterface::class);
-        $path
-            ->expects($this->once())
-            ->method('__toString')
-            ->willReturn('/foo');
+        $path = PathModel::of('/foo');
         $spec = new Path($path);
 
         $this->assertInstanceOf(Comparator::class, $spec);
@@ -39,33 +35,23 @@ class PathTest extends TestCase
 
     public function testIsSatisfiedBy()
     {
-        $path = $this->createMock(PathInterface::class);
-        $path
-            ->expects($this->once())
-            ->method('__toString')
-            ->willReturn('/foo');
-        $spec = new Path($path);
-        $resource = new HttpResource(
-            $this->createMock(Identity::class),
-            $path = $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
-        );
-        $path
-            ->expects($this->at(0))
-            ->method('__toString')
-            ->willReturn('/foo');
-        $path
-            ->expects($this->at(1))
-            ->method('__toString')
-            ->willReturn('/bar');
+        $spec = new Path(PathModel::of('/foo'));
 
-        $this->assertTrue($spec->isSatisfiedBy($resource));
-        $this->assertFalse($spec->isSatisfiedBy($resource));
+        $this->assertTrue($spec->isSatisfiedBy(new HttpResource(
+            $this->createMock(Identity::class),
+            PathModel::of('/foo'),
+            Query::none()
+        )));
+        $this->assertFalse($spec->isSatisfiedBy(new HttpResource(
+            $this->createMock(Identity::class),
+            PathModel::of('/bar'),
+            Query::none()
+        )));
     }
 
     public function testAnd()
     {
-        $path = $this->createMock(PathInterface::class);
+        $path = PathModel::none();
         $spec = new Path($path);
 
         $this->assertInstanceOf(
@@ -76,7 +62,7 @@ class PathTest extends TestCase
 
     public function testOr()
     {
-        $path = $this->createMock(PathInterface::class);
+        $path = PathModel::none();
         $spec = new Path($path);
 
         $this->assertInstanceOf(
@@ -87,7 +73,7 @@ class PathTest extends TestCase
 
     public function testNot()
     {
-        $path = $this->createMock(PathInterface::class);
+        $path = PathModel::none();
         $spec = new Path($path);
 
         $this->assertInstanceOf(

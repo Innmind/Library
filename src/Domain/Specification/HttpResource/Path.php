@@ -8,7 +8,7 @@ use Innmind\Specification\{
     Comparator,
     Sign,
 };
-use Innmind\Url\PathInterface;
+use Innmind\Url\Path as PathModel;
 
 final class Path implements Comparator, Specification
 {
@@ -16,9 +16,9 @@ final class Path implements Comparator, Specification
 
     private string $value;
 
-    public function __construct(PathInterface $value)
+    public function __construct(PathModel $value)
     {
-        $this->value = (string) $value;
+        $this->value = $value->toString();
     }
 
     /**
@@ -47,6 +47,6 @@ final class Path implements Comparator, Specification
 
     public function isSatisfiedBy(HttpResource $resource): bool
     {
-        return (string) $resource->path() === $this->value;
+        return $resource->path()->toString() === $this->value;
     }
 }

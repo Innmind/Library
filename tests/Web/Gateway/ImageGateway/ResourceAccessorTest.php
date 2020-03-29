@@ -36,10 +36,9 @@ use Innmind\Neo4j\DBAL\{
 use Innmind\Immutable\{
     Map,
     Set,
-    SetInterface,
-    MapInterface,
-    Stream,
+    Sequence,
 };
+use function Innmind\Immutable\unwrap;
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 
@@ -73,13 +72,13 @@ class ResourceAccessorTest extends TestCase
             ->expects($this->once())
             ->method('get')
             ->with($this->callback(function(Identity $identity) use ($uuid) {
-                return (string) $identity === $uuid;
+                return $identity->toString() === $uuid;
             }))
             ->willReturn(
                 $image = new Image(
                     new Identity($uuid),
-                    new Path('foo'),
-                    new Query('bar')
+                    Path::of('foo'),
+                    Query::of('bar')
                 )
             );
         $this
@@ -89,8 +88,8 @@ class ResourceAccessorTest extends TestCase
             ->with($this->callback(function(DBALQuery $query) use ($uuid): bool {
                 return $query->cypher() === 'MATCH (host:Web:Host)-[:RESOURCE_OF_HOST]-(resource:Web:Resource) WHERE resource.identity = {identity} RETURN host' &&
                     $query->parameters()->count() === 1 &&
-                    $query->parameters()->current()->key() === 'identity' &&
-                    $query->parameters()->current()->value() === $uuid;
+                    $query->parameters()->values()->first()->key() === 'identity' &&
+                    $query->parameters()->values()->first()->value() === $uuid;
             }))
             ->willReturn(
                 $result = $this->createMock(Result::class)
@@ -99,8 +98,7 @@ class ResourceAccessorTest extends TestCase
             ->expects($this->once())
             ->method('rows')
             ->willReturn(
-                (new Stream(Row::class))
-                    ->add($row = $this->createMock(Row::class))
+                Sequence::of(Row::class, $row = $this->createMock(Row::class))
             );
         $row
             ->expects($this->once())
@@ -168,7 +166,7 @@ class ResourceAccessorTest extends TestCase
         $this->assertSame('foo', $resource->property('path')->value());
         $this->assertSame('bar', $resource->property('query')->value());
         $this->assertInstanceOf(
-            MapInterface::class,
+            Map::class,
             $resource->property('dimension')->value()
         );
         $this->assertSame(
@@ -181,15 +179,15 @@ class ResourceAccessorTest extends TestCase
         );
         $this->assertSame(
             ['width', 'height'],
-            $resource->property('dimension')->value()->keys()->toPrimitive()
+            unwrap($resource->property('dimension')->value()->keys())
         );
         $this->assertSame(
             [42, 24],
-            $resource->property('dimension')->value()->values()->toPrimitive()
+            unwrap($resource->property('dimension')->value()->values())
         );
         $this->assertSame(1337, $resource->property('weight')->value());
         $this->assertInstanceOf(
-            SetInterface::class,
+            Set::class,
             $resource->property('descriptions')->value()
         );
         $this->assertSame(
@@ -198,7 +196,7 @@ class ResourceAccessorTest extends TestCase
         );
         $this->assertSame(
             ['whatever'],
-            $resource->property('descriptions')->value()->toPrimitive()
+            unwrap($resource->property('descriptions')->value())
         );
     }
 }

@@ -51,14 +51,14 @@ class ResourceCreatorTest extends TestCase
             ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof RegisterDomain &&
-                    (string) $command->host() === 'example.com';
+                    $command->host()->toString() === 'example.com';
             }));
         $bus
             ->expects($this->at(1))
             ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof RegisterHost &&
-                    (string) $command->host() === 'example.com';
+                    $command->host()->toString() === 'example.com';
             }));
         $bus
             ->expects($this->at(2))
@@ -67,8 +67,8 @@ class ResourceCreatorTest extends TestCase
                 $expected = $command->identity();
 
                 return $command instanceof RegisterImage &&
-                    (string) $command->path() === 'foo' &&
-                    (string) $command->query() === 'bar';
+                    $command->path()->toString() === 'foo' &&
+                    $command->query()->toString() === 'bar';
             }));
         $bus
             ->expects($this->at(3))
@@ -125,9 +125,9 @@ class ResourceCreatorTest extends TestCase
             ->willReturn(
                 new Property(
                     'dimension',
-                    (new Map('string', 'int'))
-                        ->put('width', 42)
-                        ->put('height', 24)
+                    Map::of('string', 'int')
+                        ('width', 42)
+                        ('height', 24)
                 )
             );
         $resource
@@ -152,7 +152,7 @@ class ResourceCreatorTest extends TestCase
             ->willReturn(
                 new Property(
                     'descriptions',
-                    (new Set('string'))->add('foo')
+                    Set::strings('foo')
                 )
             );
 

@@ -8,7 +8,7 @@ use Domain\{
     Entity\DomainHost,
     Specification\DomainHost\Specification
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 interface DomainHostRepository
 {
@@ -22,12 +22,12 @@ interface DomainHostRepository
     public function count(): int;
 
     /**
-     * @return SetInterface<DomainHost>
+     * @return Set<DomainHost>
      */
-    public function all(): SetInterface;
+    public function all(): Set;
 
     /**
-     * @return SetInterface<DomainHost>
+     * @return Set<DomainHost>
      */
-    public function matching(Specification $specification): SetInterface;
+    public function matching(Specification $specification): Set;
 }

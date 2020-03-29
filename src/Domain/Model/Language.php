@@ -12,7 +12,7 @@ final class Language
 
     public function __construct(string $value)
     {
-        if (!(new Str($value))->matches('~^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$~')) {
+        if (!Str::of($value)->matches('~^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$~')) {
             throw new DomainException;
         }
 

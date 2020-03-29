@@ -38,9 +38,9 @@ use Innmind\Neo4j\DBAL\{
 use Innmind\Immutable\{
     Map,
     Set,
-    SetInterface,
-    Stream,
+    Sequence,
 };
+use function Innmind\Immutable\unwrap;
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 
@@ -74,13 +74,13 @@ class ResourceAccessorTest extends TestCase
             ->expects($this->once())
             ->method('get')
             ->with($this->callback(function(Identity $identity) use ($uuid) {
-                return (string) $identity === $uuid;
+                return $identity->toString() === $uuid;
             }))
             ->willReturn(
                 $page = new HtmlPage(
                     new Identity($uuid),
-                    new Path('foo'),
-                    new Query('bar')
+                    Path::of('foo'),
+                    Query::of('bar')
                 )
             );
         $this
@@ -90,8 +90,8 @@ class ResourceAccessorTest extends TestCase
             ->with($this->callback(function(DBALQuery $query) use ($uuid): bool {
                 return $query->cypher() === 'MATCH (host:Web:Host)-[:RESOURCE_OF_HOST]-(resource:Web:Resource) WHERE resource.identity = {identity} WITH host, resource OPTIONAL MATCH (author:Person:Author)-[:AUTHOR_OF_RESOURCE]-(resource) WITH host, resource, author OPTIONAL MATCH (citation:Citation)-[:CITED_IN_RESOURCE]-(resource) RETURN host, author, collect(citation.text) as citations' &&
                     $query->parameters()->count() === 1 &&
-                    $query->parameters()->current()->key() === 'identity' &&
-                    $query->parameters()->current()->value() === $uuid;
+                    $query->parameters()->values()->first()->key() === 'identity' &&
+                    $query->parameters()->values()->first()->value() === $uuid;
             }))
             ->willReturn(
                 $result = $this->createMock(Result::class)
@@ -100,28 +100,27 @@ class ResourceAccessorTest extends TestCase
             ->expects($this->exactly(3))
             ->method('rows')
             ->willReturn(
-                (new Stream(Row::class))
-                    ->add($row = $this->createMock(Row::class))
+                Sequence::of(Row::class, $row = $this->createMock(Row::class))
             );
         $row
             ->expects($this->once())
             ->method('value')
             ->willReturn(['name' => 'sub.example.com']);
         $page->specifyLanguages(
-            (new Set(Language::class))->add(new Language('fr'))
+            Set::of(Language::class, new Language('fr'))
         );
         $page->specifyCharset(new Charset('UTF-8'));
         $page->flagAsJournal();
         $page->specifyAnchors(
-            (new Set(Anchor::class))->add(new Anchor('someAnchor'))
+            Set::of(Anchor::class, new Anchor('someAnchor'))
         );
-        $page->specifyAndroidAppLink(Url::fromString('android://foo/'));
-        $page->specifyIosAppLink(Url::fromString('ios://foo/'));
+        $page->specifyAndroidAppLink(Url::of('android://foo/'));
+        $page->specifyIosAppLink(Url::of('ios://foo/'));
         $page->specifyDescription('desc');
         $page->specifyMainContent('content');
-        $page->specifyThemeColour(RGBA::fromString('39f'));
+        $page->specifyThemeColour(RGBA::of('39f'));
         $page->specifyTitle('title');
-        $page->usePreview(Url::fromString('http://some.photo/url'));
+        $page->usePreview(Url::of('http://some.photo/url'));
         $definition = new Definition(
             'html_page',
             new Gateway('html_page'),
@@ -216,7 +215,7 @@ class ResourceAccessorTest extends TestCase
         $this->assertSame('foo', $resource->property('path')->value());
         $this->assertSame('bar', $resource->property('query')->value());
         $this->assertInstanceOf(
-            SetInterface::class,
+            Set::class,
             $resource->property('languages')->value()
         );
         $this->assertSame(
@@ -225,7 +224,7 @@ class ResourceAccessorTest extends TestCase
         );
         $this->assertSame(
             ['fr'],
-            $resource->property('languages')->value()->toPrimitive()
+            unwrap($resource->property('languages')->value())
         );
         $this->assertSame('UTF-8', $resource->property('charset')->value());
         $this->assertSame('content', $resource->property('main_content')->value());
@@ -236,7 +235,7 @@ class ResourceAccessorTest extends TestCase
         );
         $this->assertSame(
             ['#someAnchor'],
-            $resource->property('anchors')->value()->toPrimitive()
+            unwrap($resource->property('anchors')->value())
         );
         $this->assertSame('#3399ff', $resource->property('theme_colour')->value());
         $this->assertSame('title', $resource->property('title')->value());

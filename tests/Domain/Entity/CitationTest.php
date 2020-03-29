@@ -39,15 +39,15 @@ class CitationTest extends TestCase
         $this->assertCount(1, $entity->recordedEvents());
         $this->assertInstanceOf(
             CitationRegistered::class,
-            $entity->recordedEvents()->current()
+            $entity->recordedEvents()->first()
         );
         $this->assertSame(
             $identity,
-            $entity->recordedEvents()->current()->identity()
+            $entity->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $text,
-            $entity->recordedEvents()->current()->text()
+            $entity->recordedEvents()->first()->text()
         );
     }
 }

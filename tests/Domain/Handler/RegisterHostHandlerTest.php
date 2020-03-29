@@ -20,14 +20,11 @@ use Domain\{
     Exception\HostAlreadyExist,
 };
 use Innmind\TimeContinuum\{
-    TimeContinuumInterface,
-    PointInTimeInterface,
+    Clock,
+    PointInTime,
 };
 use Innmind\Url\Authority\Host;
-use Innmind\Immutable\{
-    Set,
-    SetInterface,
-};
+use Innmind\Immutable\Set;
 use PHPUnit\Framework\TestCase;
 
 class RegisterHostHandlerTest extends TestCase
@@ -37,13 +34,13 @@ class RegisterHostHandlerTest extends TestCase
         $handler = new RegisterHostHandler(
             $hostRepository = $this->createMock(HostRepository::class),
             $domainHostRepository = $this->createMock(DomainHostRepository::class),
-            $clock = $this->createMock(TimeContinuumInterface::class)
+            $clock = $this->createMock(Clock::class)
         );
         $command = new RegisterHost(
             $this->createMock(Identity::class),
             $this->createMock(DomainIdentity::class),
             $this->createMock(RelationIdentity::class),
-            new Host('www.example.com')
+            Host::of('www.example.com')
         );
         $hostRepository
             ->expects($this->once())
@@ -51,12 +48,12 @@ class RegisterHostHandlerTest extends TestCase
             ->with($this->callback(function(Name $spec): bool {
                 return $spec->value() === 'www.example.com';
             }))
-            ->willReturn(new Set(HostEntity::class));
+            ->willReturn(Set::of(HostEntity::class));
         $clock
             ->expects($this->once())
             ->method('now')
             ->willReturn(
-                $now = $this->createMock(PointInTimeInterface::class)
+                $now = $this->createMock(PointInTime::class)
             );
         $hostRepository
             ->expects($this->once())
@@ -65,7 +62,7 @@ class RegisterHostHandlerTest extends TestCase
                 return $host->identity() === $command->identity() &&
                     (string) $host->name() === 'www.example.com' &&
                     $host->recordedEvents()->size() === 1 &&
-                    $host->recordedEvents()->current() instanceof HostRegistered;
+                    $host->recordedEvents()->first() instanceof HostRegistered;
             }));
         $domainHostRepository
             ->expects($this->once())
@@ -76,7 +73,7 @@ class RegisterHostHandlerTest extends TestCase
                     $relation->host() === $command->identity() &&
                     $relation->foundAt() === $now &&
                     $relation->recordedEvents()->size() === 1 &&
-                    $relation->recordedEvents()->current() instanceof DomainHostCreated;
+                    $relation->recordedEvents()->first() instanceof DomainHostCreated;
             }));
 
         $this->assertNull($handler($command));
@@ -87,13 +84,13 @@ class RegisterHostHandlerTest extends TestCase
         $handler = new RegisterHostHandler(
             $hostRepository = $this->createMock(HostRepository::class),
             $domainHostRepository = $this->createMock(DomainHostRepository::class),
-            $clock = $this->createMock(TimeContinuumInterface::class)
+            $clock = $this->createMock(Clock::class)
         );
         $command = new RegisterHost(
             $this->createMock(Identity::class),
             $this->createMock(DomainIdentity::class),
             $this->createMock(RelationIdentity::class),
-            new Host('www.example.com')
+            Host::of('www.example.com')
         );
         $hostRepository
             ->expects($this->once())
@@ -102,19 +99,12 @@ class RegisterHostHandlerTest extends TestCase
                 return $spec->value() === 'www.example.com';
             }))
             ->willReturn(
-                $set = $this->createMock(SetInterface::class)
-            );
-        $set
-            ->expects($this->once())
-            ->method('size')
-            ->willReturn(1);
-        $set
-            ->expects($this->once())
-            ->method('current')
-            ->willReturn(
-                new HostEntity(
-                    $this->createMock(Identity::class),
-                    new NameModel('example.com')
+                Set::of(
+                    HostEntity::class,
+                    new HostEntity(
+                        $this->createMock(Identity::class),
+                        new NameModel('example.com')
+                    )
                 )
             );
         $clock

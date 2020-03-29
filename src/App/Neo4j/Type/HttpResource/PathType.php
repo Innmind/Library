@@ -13,7 +13,7 @@ final class PathType implements Type
      */
     public function forDatabase($value)
     {
-        return (string) $value;
+        return $value->toString();
     }
 
     /**
@@ -21,7 +21,7 @@ final class PathType implements Type
      */
     public function fromDatabase($value)
     {
-        return new Path((string) $value);
+        return Path::of((string) $value);
     }
 
     /**

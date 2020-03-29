@@ -12,10 +12,10 @@ use Domain\{
     Event\HtmlPage\AndroidAppLinkSpecified
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query,
+    Url,
 };
-use Innmind\Url\UrlInterface;
 use PHPUnit\Framework\TestCase;
 
 class SpecifyAndroidAppLinkHandlerTest extends TestCase
@@ -27,7 +27,7 @@ class SpecifyAndroidAppLinkHandlerTest extends TestCase
         );
         $command = new SpecifyAndroidAppLink(
             $this->createMock(Identity::class),
-            $this->createMock(UrlInterface::class)
+            Url::of('http://example.com')
         );
         $repository
             ->expects($this->once())
@@ -36,8 +36,8 @@ class SpecifyAndroidAppLinkHandlerTest extends TestCase
             ->willReturn(
                 $page = new HtmlPage(
                     $command->identity(),
-                    $this->createMock(PathInterface::class),
-                    $this->createMock(QueryInterface::class)
+                    Path::none(),
+                    Query::none()
                 )
             );
 
@@ -45,7 +45,7 @@ class SpecifyAndroidAppLinkHandlerTest extends TestCase
         $this->assertSame($command->url(), $page->androidAppLink());
         $this->assertInstanceOf(
             AndroidAppLinkSpecified::class,
-            $page->recordedEvents()->current()
+            $page->recordedEvents()->first()
         );
     }
 }
