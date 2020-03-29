@@ -3,6 +3,6 @@ declare(strict_types = 1);
 
 namespace App\Exception;
 
-interface Exception
+interface Exception extends \Throwable
 {
 }
