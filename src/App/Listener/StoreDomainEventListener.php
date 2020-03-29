@@ -11,7 +11,7 @@ use Innmind\Filesystem\{
 
 final class StoreDomainEventListener
 {
-    private $filesystem;
+    private Adapter $filesystem;
 
     public function __construct(Adapter $filesystem)
     {

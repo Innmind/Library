@@ -7,9 +7,9 @@ use Domain\Exception\DomainException;
 
 final class Dimension
 {
-    private $height;
-    private $width;
-    private $string;
+    private int $height;
+    private int $width;
+    private string $string;
 
     public function __construct(int $width, int $height)
     {

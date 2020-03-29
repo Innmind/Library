@@ -7,7 +7,7 @@ use Domain\Entity\Alternate;
 
 final class AlternateAlreadyExist extends LogicException
 {
-    private $alternate;
+    private Alternate $alternate;
 
     public function __construct(Alternate $alternate)
     {

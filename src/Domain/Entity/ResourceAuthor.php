@@ -19,10 +19,10 @@ final class ResourceAuthor implements ContainsRecordedEvents
 {
     use EventRecorder;
 
-    private $identity;
-    private $author;
-    private $resource;
-    private $asOf;
+    private Identity $identity;
+    private AuthorIdentity $author;
+    private ResourceIdentity $resource;
+    private PointInTimeInterface $asOf;
 
     public function __construct(
         Identity $identity,

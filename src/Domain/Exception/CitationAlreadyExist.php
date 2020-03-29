@@ -7,7 +7,7 @@ use Domain\Entity\Citation;
 
 final class CitationAlreadyExist extends LogicException
 {
-    private $citation;
+    private Citation $citation;
 
     public function __construct(Citation $citation)
     {

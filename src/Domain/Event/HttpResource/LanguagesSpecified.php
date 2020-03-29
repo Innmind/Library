@@ -11,8 +11,8 @@ use Innmind\Immutable\SetInterface;
 
 final class LanguagesSpecified
 {
-    private $identity;
-    private $languages;
+    private Identity $identity;
+    private SetInterface $languages;
 
     public function __construct(
         Identity $identity,

@@ -11,9 +11,9 @@ use Innmind\Url\{
 
 final class HtmlPageRegistered
 {
-    private $identity;
-    private $path;
-    private $query;
+    private Identity $identity;
+    private PathInterface $path;
+    private QueryInterface $query;
 
     public function __construct(
         Identity $identity,

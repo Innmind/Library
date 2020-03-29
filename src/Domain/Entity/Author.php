@@ -17,8 +17,8 @@ final class Author implements ContainsRecordedEvents
 {
     use EventRecorder;
 
-    private $identity;
-    private $name;
+    private Identity $identity;
+    private Name $name;
 
     public function __construct(Identity $identity, Name $name)
     {

@@ -19,10 +19,10 @@ final class HostResource implements ContainsRecordedEvents
 {
     use EventRecorder;
 
-    private $identity;
-    private $host;
-    private $resource;
-    private $foundAt;
+    private Identity $identity;
+    private HostIdentity $host;
+    private ResourceIdentity $resource;
+    private PointInTimeInterface $foundAt;
 
     public function __construct(
         Identity $identity,

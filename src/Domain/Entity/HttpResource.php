@@ -29,11 +29,11 @@ class HttpResource implements ContainsRecordedEvents
 {
     use EventRecorder;
 
-    private $identity;
-    private $path;
-    private $query;
-    private $languages;
-    private $charset;
+    private Identity $identity;
+    private PathInterface $path;
+    private QueryInterface $query;
+    private Set $languages;
+    private ?Charset $charset = null;
 
     public function __construct(
         Identity $identity,

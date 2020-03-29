@@ -17,9 +17,9 @@ use Innmind\Rest\Server\{
 
 final class HtmlPageGateway implements Gateway
 {
-    private $resourceCreator;
-    private $resourceAccessor;
-    private $resourceLinker;
+    private HtmlPageGateway\ResourceCreator $resourceCreator;
+    private HtmlPageGateway\ResourceAccessor $resourceAccessor;
+    private HtmlPageGateway\ResourceLinker $resourceLinker;
 
     public function __construct(
         HtmlPageGateway\ResourceCreator $resourceCreator,

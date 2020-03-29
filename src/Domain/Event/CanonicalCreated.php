@@ -11,10 +11,10 @@ use Innmind\TimeContinuum\PointInTimeInterface;
 
 final class CanonicalCreated
 {
-    private $identity;
-    private $canonical;
-    private $resource;
-    private $foundAt;
+    private Identity $identity;
+    private ResourceIdentity $canonical;
+    private ResourceIdentity $resource;
+    private PointInTimeInterface $foundAt;
 
     public function __construct(
         Identity $identity,

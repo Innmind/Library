@@ -21,7 +21,7 @@ final class InResources implements Comparator, Specification
 {
     use Composable;
 
-    private $value;
+    private SetInterface $value;
 
     public function __construct(SetInterface $value)
     {

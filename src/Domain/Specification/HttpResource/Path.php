@@ -14,7 +14,7 @@ final class Path implements Comparator, Specification
 {
     use Composable;
 
-    private $value;
+    private string $value;
 
     public function __construct(PathInterface $value)
     {

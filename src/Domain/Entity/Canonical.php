@@ -18,10 +18,10 @@ final class Canonical implements ContainsRecordedEvents
 {
     use EventRecorder;
 
-    private $identity;
-    private $canonical;
-    private $resource;
-    private $foundAt;
+    private Identity $identity;
+    private ResourceIdentity $canonical;
+    private ResourceIdentity $resource;
+    private PointInTimeInterface $foundAt;
 
     public function __construct(
         Identity $identity,

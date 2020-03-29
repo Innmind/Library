@@ -10,8 +10,8 @@ use Domain\{
 
 final class DimensionSpecified
 {
-    private $identity;
-    private $dimension;
+    private Identity $identity;
+    private Dimension $dimension;
 
     public function __construct(
         Identity $identity,

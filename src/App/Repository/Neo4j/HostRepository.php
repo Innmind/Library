@@ -21,7 +21,7 @@ use Innmind\Immutable\{
 
 final class HostRepository implements HostRepositoryInterface
 {
-    private $infrastructure;
+    private Repository $infrastructure;
 
     public function __construct(Repository $infrastructure)
     {

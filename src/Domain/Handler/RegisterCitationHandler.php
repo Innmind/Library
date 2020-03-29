@@ -13,7 +13,7 @@ use Domain\{
 
 final class RegisterCitationHandler
 {
-    private $repository;
+    private CitationRepository $repository;
 
     public function __construct(CitationRepository $repository)
     {

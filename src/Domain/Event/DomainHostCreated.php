@@ -12,10 +12,10 @@ use Innmind\TimeContinuum\PointInTimeInterface;
 
 final class DomainHostCreated
 {
-    private $identity;
-    private $domain;
-    private $host;
-    private $foundAt;
+    private Identity $identity;
+    private DomainIdentity $domain;
+    private HostIdentity $host;
+    private PointInTimeInterface $foundAt;
 
     public function __construct(
         Identity $identity,

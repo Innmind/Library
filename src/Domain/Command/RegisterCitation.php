@@ -10,8 +10,8 @@ use Domain\Entity\Citation\{
 
 final class RegisterCitation
 {
-    private $identity;
-    private $text;
+    private Identity $identity;
+    private Text $text;
 
     public function __construct(Identity $identity, Text $text)
     {

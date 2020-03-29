@@ -17,9 +17,9 @@ use Innmind\TimeContinuum\TimeContinuumInterface;
 
 final class RegisterHostHandler
 {
-    private $hostRepository;
-    private $domainHostRepository;
-    private $clock;
+    private HostRepository $hostRepository;
+    private DomainHostRepository $domainHostRepository;
+    private TimeContinuumInterface $clock;
 
     public function __construct(
         HostRepository $hostRepository,

@@ -7,8 +7,8 @@ use Domain\Entity\HtmlPage\Identity;
 
 final class SpecifyMainContent
 {
-    private $identity;
-    private $mainContent;
+    private Identity $identity;
+    private string $mainContent;
 
     public function __construct(Identity $identity, string $mainContent)
     {

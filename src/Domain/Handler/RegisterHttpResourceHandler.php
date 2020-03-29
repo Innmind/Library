@@ -21,9 +21,9 @@ use Innmind\Immutable\Set;
 
 final class RegisterHttpResourceHandler
 {
-    private $resourceRepository;
-    private $relationRepository;
-    private $clock;
+    private HttpResourceRepository $resourceRepository;
+    private HostResourceRepository $relationRepository;
+    private TimeContinuumInterface $clock;
 
     public function __construct(
         HttpResourceRepository $resourceRepository,

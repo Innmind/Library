@@ -21,9 +21,9 @@ use Innmind\Immutable\Set;
 
 final class RegisterImageHandler
 {
-    private $imageRepository;
-    private $relationRepository;
-    private $clock;
+    private ImageRepository $imageRepository;
+    private HostResourceRepository $relationRepository;
+    private TimeContinuumInterface $clock;
 
     public function __construct(
         ImageRepository $imageRepository,

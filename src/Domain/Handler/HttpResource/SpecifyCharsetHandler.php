@@ -10,7 +10,7 @@ use Domain\{
 
 final class SpecifyCharsetHandler
 {
-    private $repository;
+    private HttpResourceRepository $repository;
 
     public function __construct(HttpResourceRepository $repository)
     {

@@ -28,8 +28,8 @@ use Innmind\Immutable\{
 
 final class ResourceAccessor implements ResourceAccessorInterface
 {
-    private $repository;
-    private $dbal;
+    private HtmlPageRepository $repository;
+    private Connection $dbal;
 
     public function __construct(
         HtmlPageRepository $repository,

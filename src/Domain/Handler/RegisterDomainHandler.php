@@ -17,8 +17,8 @@ use Pdp\Rules;
 
 final class RegisterDomainHandler
 {
-    private $repository;
-    private $rules;
+    private DomainRepository $repository;
+    private Rules $rules;
 
     public function __construct(
         DomainRepository $repository,

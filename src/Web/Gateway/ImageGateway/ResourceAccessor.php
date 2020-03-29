@@ -26,8 +26,8 @@ use Innmind\Immutable\{
 
 final class ResourceAccessor implements ResourceAccessorInterface
 {
-    private $repository;
-    private $dbal;
+    private ImageRepository $repository;
+    private Connection $dbal;
 
     public function __construct(
         ImageRepository $repository,

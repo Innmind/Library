@@ -16,7 +16,7 @@ final class Target implements Comparator, Specification
 {
     use Composable;
 
-    private $value;
+    private string $value;
 
     public function __construct(Identity $value)
     {

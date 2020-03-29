@@ -7,7 +7,7 @@ use Domain\Entity\HtmlPage\Identity;
 
 final class FlagAsJournal
 {
-    private $identity;
+    private Identity $identity;
 
     public function __construct(Identity $identity)
     {

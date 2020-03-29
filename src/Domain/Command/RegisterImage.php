@@ -15,11 +15,11 @@ use Innmind\Url\{
 
 final class RegisterImage
 {
-    private $identity;
-    private $host;
-    private $relation;
-    private $path;
-    private $query;
+    private Identity $identity;
+    private HostIdentity $host;
+    private RelationIdentity $relation;
+    private PathInterface $path;
+    private QueryInterface $query;
 
     public function __construct(
         Identity $identity,

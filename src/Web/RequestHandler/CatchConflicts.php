@@ -25,7 +25,7 @@ use Innmind\Http\Message\{
 
 final class CatchConflicts implements RequestHandler
 {
-    private $handle;
+    private RequestHandler $handle;
 
     public function __construct(RequestHandler $handle)
     {

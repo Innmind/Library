@@ -10,8 +10,8 @@ use Domain\Entity\Image\{
 
 final class SpecifyDimension
 {
-    private $identity;
-    private $dimension;
+    private Identity $identity;
+    private Dimension $dimension;
 
     public function __construct(Identity $identity, Dimension $dimension)
     {

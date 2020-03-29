@@ -14,7 +14,7 @@ final class Query implements Comparator, Specification
 {
     use Composable;
 
-    private $value;
+    private string $value;
 
     public function __construct(QueryInterface $value)
     {

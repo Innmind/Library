@@ -8,7 +8,7 @@ use Innmind\Neo4j\ONM\Type;
 
 final class ColourType implements Type
 {
-    private $nullable = false;
+    private bool $nullable = false;
 
     public static function nullable(): self
     {

@@ -32,15 +32,15 @@ use Innmind\Immutable\{
 
 final class HtmlPage extends HttpResource
 {
-    private $mainContent = '';
-    private $description = '';
-    private $anchors;
-    private $isJournal = false;
-    private $themeColour;
-    private $title = '';
-    private $android;
-    private $ios;
-    private $preview;
+    private string $mainContent = '';
+    private string $description = '';
+    private Set $anchors;
+    private bool $isJournal = false;
+    private ?RGBA $themeColour = null;
+    private string $title = '';
+    private ?UrlInterface $android = null;
+    private ?UrlInterface $ios = null;
+    private ?UrlInterface $preview = null;
 
     public function __construct(
         ResourceIdentity $identity,

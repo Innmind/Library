@@ -21,9 +21,9 @@ use Innmind\Immutable\Set;
 
 final class RegisterHtmlPageHandler
 {
-    private $htmlPageRepository;
-    private $relationRepository;
-    private $clock;
+    private HtmlPageRepository $htmlPageRepository;
+    private HostResourceRepository $relationRepository;
+    private TimeContinuumInterface $clock;
 
     public function __construct(
         HtmlPageRepository $htmlPageRepository,

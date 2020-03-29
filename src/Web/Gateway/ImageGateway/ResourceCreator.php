@@ -41,7 +41,7 @@ use Ramsey\Uuid\Uuid;
 
 final class ResourceCreator implements ResourceCreatorInterface
 {
-    private $handle;
+    private CommandBus $handle;
 
     public function __construct(CommandBus $handle)
     {

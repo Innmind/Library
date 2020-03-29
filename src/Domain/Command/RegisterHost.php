@@ -12,10 +12,10 @@ use Innmind\Url\Authority\HostInterface;
 
 final class RegisterHost
 {
-    private $identity;
-    private $domain;
-    private $relation;
-    private $host;
+    private Identity $identity;
+    private DomainIdentity $domain;
+    private RelationIdentity $relation;
+    private HostInterface $host;
 
     public function __construct(
         Identity $identity,

@@ -8,8 +8,8 @@ use Innmind\Url\UrlInterface;
 
 final class SpecifyAndroidAppLink
 {
-    private $identity;
-    private $url;
+    private Identity $identity;
+    private UrlInterface $url;
 
     public function __construct(
         Identity $identity,

@@ -12,7 +12,7 @@ class Not implements NotInterface
 {
     use Composable;
 
-    private $specification;
+    private Specification $specification;
 
     public function __construct(Specification $specification)
     {

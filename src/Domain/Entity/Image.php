@@ -26,9 +26,9 @@ use Innmind\Immutable\{
 
 final class Image extends HttpResource
 {
-    private $dimension;
-    private $weight;
-    private $descriptions;
+    private ?Dimension $dimension = null;
+    private ?Weight $weight = null;
+    private Set $descriptions;
 
     public function __construct(
         ResourceIdentity $identity,

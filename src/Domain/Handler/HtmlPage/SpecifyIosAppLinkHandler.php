@@ -10,7 +10,7 @@ use Domain\{
 
 final class SpecifyIosAppLinkHandler
 {
-    private $repository;
+    private HtmlPageRepository $repository;
 
     public function __construct(HtmlPageRepository $repository)
     {

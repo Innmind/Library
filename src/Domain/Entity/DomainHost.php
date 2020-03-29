@@ -19,10 +19,10 @@ final class DomainHost implements ContainsRecordedEvents
 {
     use EventRecorder;
 
-    private $identity;
-    private $domain;
-    private $host;
-    private $foundAt;
+    private Identity $identity;
+    private DomainIdentity $domain;
+    private HostIdentity $host;
+    private PointInTimeInterface $foundAt;
 
     public function __construct(
         Identity $identity,

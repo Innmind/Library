@@ -19,10 +19,10 @@ final class CitationAppearance implements ContainsRecordedEvents
 {
     use EventRecorder;
 
-    private $identity;
-    private $citation;
-    private $resource;
-    private $foundAt;
+    private Identity $identity;
+    private CitationIdentity $citation;
+    private ResourceIdentity $resource;
+    private PointInTimeInterface $foundAt;
 
     public function __construct(
         Identity $identity,

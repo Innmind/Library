@@ -21,7 +21,7 @@ use Innmind\Immutable\{
 
 final class AlternateRepository implements AlternateRepositoryInterface
 {
-    private $infrastructure;
+    private Repository $infrastructure;
 
     public function __construct(Repository $infrastructure)
     {

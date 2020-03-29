@@ -11,9 +11,9 @@ use Domain\Entity\Domain\{
 
 final class DomainRegistered
 {
-    private $identity;
-    private $name;
-    private $tld;
+    private Identity $identity;
+    private Name $name;
+    private TopLevelDomain $tld;
 
     public function __construct(
         Identity $identity,

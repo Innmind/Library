@@ -7,7 +7,7 @@ use Domain\Entity\Host;
 
 final class HostAlreadyExist extends LogicException
 {
-    private $host;
+    private Host $host;
 
     public function __construct(Host $host)
     {

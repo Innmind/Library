@@ -17,9 +17,9 @@ final class Reference implements ContainsRecordedEvents
 {
     use EventRecorder;
 
-    private $identity;
-    private $source;
-    private $target;
+    private Identity $identity;
+    private ResourceIdentity $source;
+    private ResourceIdentity $target;
 
     public function __construct(
         Identity $identity,

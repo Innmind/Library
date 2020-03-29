@@ -15,7 +15,7 @@ use Domain\{
 
 final class RegisterAlternateResourceHandler
 {
-    private $repository;
+    private AlternateRepository $repository;
 
     public function __construct(AlternateRepository $repository)
     {

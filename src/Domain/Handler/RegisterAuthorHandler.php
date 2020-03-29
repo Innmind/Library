@@ -13,7 +13,7 @@ use Domain\{
 
 final class RegisterAuthorHandler
 {
-    private $repository;
+    private AuthorRepository $repository;
 
     public function __construct(AuthorRepository $repository)
     {

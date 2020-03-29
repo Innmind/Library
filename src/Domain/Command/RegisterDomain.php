@@ -8,8 +8,8 @@ use Innmind\Url\Authority\HostInterface;
 
 final class RegisterDomain
 {
-    private $identity;
-    private $host;
+    private Identity $identity;
+    private HostInterface $host;
 
     public function __construct(Identity $identity, HostInterface $host)
     {

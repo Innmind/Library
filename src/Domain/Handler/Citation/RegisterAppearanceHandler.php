@@ -15,8 +15,8 @@ use Innmind\TimeContinuum\TimeContinuumInterface;
 
 final class RegisterAppearanceHandler
 {
-    private $repository;
-    private $clock;
+    private CitationAppearanceRepository $repository;
+    private TimeContinuumInterface $clock;
 
     public function __construct(
         CitationAppearanceRepository $repository,

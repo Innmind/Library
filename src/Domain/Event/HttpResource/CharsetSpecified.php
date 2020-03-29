@@ -10,8 +10,8 @@ use Domain\Entity\HttpResource\{
 
 final class CharsetSpecified
 {
-    private $identity;
-    private $charset;
+    private Identity $identity;
+    private Charset $charset;
 
     public function __construct(Identity $identity, Charset $charset)
     {

@@ -10,8 +10,8 @@ use Domain\Entity\Image\{
 
 final class WeightSpecified
 {
-    private $identity;
-    private $weight;
+    private Identity $identity;
+    private Weight $weight;
 
     public function __construct(Identity $identity, Weight $weight)
     {

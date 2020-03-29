@@ -22,7 +22,7 @@ use Innmind\Immutable\{
 
 final class Install implements Command
 {
-    private $client;
+    private Client $client;
 
     public function __construct(Client $client)
     {

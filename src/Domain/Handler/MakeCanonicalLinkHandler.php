@@ -15,8 +15,8 @@ use Innmind\TimeContinuum\TimeContinuumInterface;
 
 final class MakeCanonicalLinkHandler
 {
-    private $repository;
-    private $clock;
+    private CanonicalRepository $repository;
+    private TimeContinuumInterface $clock;
 
     public function __construct(
         CanonicalRepository $repository,

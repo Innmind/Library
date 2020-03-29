@@ -14,7 +14,7 @@ use Domain\{
 
 final class ReferResourceHandler
 {
-    private $repository;
+    private ReferenceRepository $repository;
 
     public function __construct(ReferenceRepository $repository)
     {

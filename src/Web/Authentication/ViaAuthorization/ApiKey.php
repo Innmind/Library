@@ -12,7 +12,7 @@ use Innmind\Http\Header\AuthorizationValue;
 
 final class ApiKey implements Resolver
 {
-    private $apiKey;
+    private string $apiKey;
 
     public function __construct(string $apiKey)
     {

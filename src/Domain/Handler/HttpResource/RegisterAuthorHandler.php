@@ -12,8 +12,8 @@ use Innmind\TimeContinuum\TimeContinuumInterface;
 
 final class RegisterAuthorHandler
 {
-    private $repository;
-    private $clock;
+    private ResourceAuthorRepository $repository;
+    private TimeContinuumInterface $clock;
 
     public function __construct(
         ResourceAuthorRepository $repository,

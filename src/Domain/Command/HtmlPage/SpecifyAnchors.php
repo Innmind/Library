@@ -11,8 +11,8 @@ use Innmind\Immutable\SetInterface;
 
 final class SpecifyAnchors
 {
-    private $identity;
-    private $anchors;
+    private Identity $identity;
+    private SetInterface $anchors;
 
     public function __construct(
         Identity $identity,

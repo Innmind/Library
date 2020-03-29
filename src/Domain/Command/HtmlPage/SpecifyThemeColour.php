@@ -8,8 +8,8 @@ use Innmind\Colour\RGBA;
 
 final class SpecifyThemeColour
 {
-    private $identity;
-    private $colour;
+    private Identity $identity;
+    private RGBA $colour;
 
     public function __construct(
         Identity $identity,

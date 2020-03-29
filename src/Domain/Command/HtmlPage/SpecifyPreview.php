@@ -8,8 +8,8 @@ use Innmind\Url\UrlInterface;
 
 final class SpecifyPreview
 {
-    private $identity;
-    private $url;
+    private Identity $identity;
+    private UrlInterface $url;
 
     public function __construct(
         Identity $identity,
