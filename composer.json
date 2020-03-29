@@ -49,9 +49,6 @@
         "symfony/var-dumper": "^4.1",
         "innmind/debug": "^1.0"
     },
-    "scripts": {
-        "test" : "bin/phpunit --colors=always"
-    },
     "bin": ["bin/library"],
     "extra": {
         "gene": {
