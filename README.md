@@ -1,10 +1,8 @@
 # Library
 
-| `master` | `develop` |
-|----------|-----------|
-| [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Innmind/Library/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Innmind/Library/?branch=master) | [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Innmind/Library/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/Innmind/Library/?branch=develop) |
-| [![Code Coverage](https://scrutinizer-ci.com/g/Innmind/Library/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Innmind/Library/?branch=master) | [![Code Coverage](https://scrutinizer-ci.com/g/Innmind/Library/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/Innmind/Library/?branch=develop) |
-| [![Build Status](https://scrutinizer-ci.com/g/Innmind/Library/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Innmind/Library/build-status/master) | [![Build Status](https://scrutinizer-ci.com/g/Innmind/Library/badges/build.png?b=develop)](https://scrutinizer-ci.com/g/Innmind/Library/build-status/develop) |
+[![Build Status](https://github.com/Innmind/Library/workflows/CI/badge.svg)](https://github.com/Innmind/Library/actions?query=workflow%3ACI)
+[![codecov](https://codecov.io/gh/Innmind/Library/branch/develop/graph/badge.svg)](https://codecov.io/gh/Innmind/Library)
+[![Type Coverage](https://shepherd.dev/github/Innmind/Library/coverage.svg)](https://shepherd.dev/github/Innmind/Library)
 
 Store indexed http resources in a [graph](https://neo4j.com) database.
 
