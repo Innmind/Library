@@ -43,6 +43,7 @@ class InResourcesTest extends TestCase
     public function testThrowWhenInvalidSet()
     {
         $this->expectException(\TypeError::class);
+        $this->expectExceptionMessage('Argument 1 must be of type Set<Domain\Entity\HttpResource\Identity>, Set<string> given');
 
         new InResources(Set::of('string'));
     }
