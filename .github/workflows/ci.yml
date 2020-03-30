@@ -34,7 +34,7 @@ jobs:
       - name: PHPUnit
         run: vendor/bin/phpunit --coverage-clover=coverage.clover
       - name: Infection
-        run: vendor/bin/infection -s --only-covered --min-msi=100
+        run: vendor/bin/infection -s --only-covered --min-msi=97
       - uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
