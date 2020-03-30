@@ -8,22 +8,16 @@ use Domain\{
     Model\Language
 };
 use Innmind\Immutable\Set;
+use function Innmind\Immutable\assertSet;
 
 final class LanguagesSpecified
 {
     private Identity $identity;
     private Set $languages;
 
-    public function __construct(
-        Identity $identity,
-        Set $languages
-    ) {
-        if ((string) $languages->type() !== Language::class) {
-            throw new \TypeError(sprintf(
-                'Argument 2 must be of type Set<%s>',
-                Language::class
-            ));
-        }
+    public function __construct(Identity $identity, Set $languages)
+    {
+        assertSet(Language::class, $languages, 2);
 
         $this->identity = $identity;
         $this->languages = $languages;

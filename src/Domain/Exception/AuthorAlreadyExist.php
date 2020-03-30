@@ -12,7 +12,6 @@ final class AuthorAlreadyExist extends LogicException
     public function __construct(Author $author)
     {
         $this->author = $author;
-        parent::__construct();
     }
 
     /**

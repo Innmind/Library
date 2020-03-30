@@ -26,6 +26,7 @@ use Innmind\Url\{
 };
 use Innmind\Colour\RGBA;
 use Innmind\Immutable\Set;
+use function Innmind\Immutable\assertSet;
 
 final class HtmlPage extends HttpResource
 {
@@ -104,12 +105,7 @@ final class HtmlPage extends HttpResource
      */
     public function specifyAnchors(Set $anchors): self
     {
-        if ((string) $anchors->type() !== Anchor::class) {
-            throw new \TypeError(sprintf(
-                'Argument 1 must be of type Set<%s>',
-                Anchor::class
-            ));
-        }
+        assertSet(Anchor::class, $anchors, 1);
 
         $this->anchors = $anchors;
         $this->record(new AnchorsSpecified($this->identity(), $anchors));

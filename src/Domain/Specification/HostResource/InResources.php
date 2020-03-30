@@ -13,7 +13,10 @@ use Innmind\Specification\{
     Sign,
 };
 use Innmind\Immutable\Set;
-use function Innmind\Immutable\unwrap;
+use function Innmind\Immutable\{
+    unwrap,
+    assertSet,
+};
 
 final class InResources implements Comparator, Specification
 {
@@ -23,9 +26,7 @@ final class InResources implements Comparator, Specification
 
     public function __construct(Set $value)
     {
-        if ((string) $value->type() !== Identity::class) {
-            throw new InvalidArgumentException;
-        }
+        assertSet(Identity::class, $value, 1);
 
         $this->value = $value->reduce(
             Set::of('string'),

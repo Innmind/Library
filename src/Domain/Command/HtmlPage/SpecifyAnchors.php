@@ -8,6 +8,7 @@ use Domain\{
     Entity\HtmlPage\Anchor
 };
 use Innmind\Immutable\Set;
+use function Innmind\Immutable\assertSet;
 
 final class SpecifyAnchors
 {
@@ -18,16 +19,9 @@ final class SpecifyAnchors
     /**
      * @param Set<Anchor> $anchors
      */
-    public function __construct(
-        Identity $identity,
-        Set $anchors
-    ) {
-        if ((string) $anchors->type() !== Anchor::class) {
-            throw new \TypeError(sprintf(
-                'Argument 2 must be of type Set<%s>',
-                Anchor::class
-            ));
-        }
+    public function __construct(Identity $identity, Set $anchors)
+    {
+        assertSet(Anchor::class, $anchors, 2);
 
         $this->identity = $identity;
         $this->anchors = $anchors;

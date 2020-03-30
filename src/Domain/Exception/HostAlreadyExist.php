@@ -12,7 +12,6 @@ final class HostAlreadyExist extends LogicException
     public function __construct(Host $host)
     {
         $this->host = $host;
-        parent::__construct();
     }
 
     /**

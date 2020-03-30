@@ -12,7 +12,6 @@ final class AlternateAlreadyExist extends LogicException
     public function __construct(Alternate $alternate)
     {
         $this->alternate = $alternate;
-        parent::__construct();
     }
 
     /**

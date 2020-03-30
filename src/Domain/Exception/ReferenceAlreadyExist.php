@@ -12,7 +12,6 @@ final class ReferenceAlreadyExist extends LogicException
     public function __construct(Reference $reference)
     {
         $this->reference = $reference;
-        parent::__construct();
     }
 
     /**

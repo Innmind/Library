@@ -42,7 +42,7 @@ class InResourcesTest extends TestCase
 
     public function testThrowWhenInvalidSet()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\TypeError::class);
 
         new InResources(Set::of('string'));
     }

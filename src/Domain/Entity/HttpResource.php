@@ -21,6 +21,7 @@ use Innmind\Url\{
     Query,
 };
 use Innmind\Immutable\Set;
+use function Innmind\Immutable\assertSet;
 
 class HttpResource implements ContainsRecordedEvents
 {
@@ -71,12 +72,7 @@ class HttpResource implements ContainsRecordedEvents
 
     public function specifyLanguages(Set $languages): self
     {
-        if ((string) $languages->type() !== Language::class) {
-            throw new \TypeError(sprintf(
-                'Argument 1 must be of type Set<%s>',
-                Language::class
-            ));
-        }
+        assertSet(Language::class, $languages, 1);
 
         if ($languages->size() === 0) {
             throw new DomainException;
