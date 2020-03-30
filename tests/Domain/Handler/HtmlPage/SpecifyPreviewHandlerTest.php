@@ -12,10 +12,10 @@ use Domain\{
     Event\HtmlPage\PreviewSpecified
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query,
+    Url,
 };
-use Innmind\Url\UrlInterface;
 use PHPUnit\Framework\TestCase;
 
 class SpecifyPreviewHandlerTest extends TestCase
@@ -27,7 +27,7 @@ class SpecifyPreviewHandlerTest extends TestCase
         );
         $command = new SpecifyPreview(
             $this->createMock(Identity::class),
-            $this->createMock(UrlInterface::class)
+            Url::of('http://example.com')
         );
         $repository
             ->expects($this->once())
@@ -36,8 +36,8 @@ class SpecifyPreviewHandlerTest extends TestCase
             ->willReturn(
                 $page = new HtmlPage(
                     $command->identity(),
-                    $this->createMock(PathInterface::class),
-                    $this->createMock(QueryInterface::class)
+                    Path::none(),
+                    Query::none()
                 )
             );
 
@@ -45,7 +45,7 @@ class SpecifyPreviewHandlerTest extends TestCase
         $this->assertSame($command->url(), $page->preview());
         $this->assertInstanceOf(
             PreviewSpecified::class,
-            $page->recordedEvents()->current()
+            $page->recordedEvents()->first()
         );
     }
 }

@@ -9,24 +9,24 @@ use Domain\Entity\{
     Host\Identity as HostIdentity
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query
 };
 
 final class RegisterHttpResource
 {
-    private $identity;
-    private $host;
-    private $relation;
-    private $path;
-    private $query;
+    private Identity $identity;
+    private HostIdentity $host;
+    private RelationIdentity $relation;
+    private Path $path;
+    private Query $query;
 
     public function __construct(
         Identity $identity,
         HostIdentity $host,
         RelationIdentity $relation,
-        PathInterface $path,
-        QueryInterface $query
+        Path $path,
+        Query $query
     ) {
         $this->identity = $identity;
         $this->host = $host;
@@ -50,12 +50,12 @@ final class RegisterHttpResource
         return $this->relation;
     }
 
-    public function path(): PathInterface
+    public function path(): Path
     {
         return $this->path;
     }
 
-    public function query(): QueryInterface
+    public function query(): Query
     {
         return $this->query;
     }

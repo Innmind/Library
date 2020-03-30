@@ -9,7 +9,7 @@ use Domain\{
     Entity\Author\Identity as AuthorIdentity,
     Entity\HttpResource\Identity as ResourceIdentity
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use PHPUnit\Framework\TestCase;
 
 class ResourceAuthorRegisteredTest extends TestCase
@@ -20,7 +20,7 @@ class ResourceAuthorRegisteredTest extends TestCase
             $identity = $this->createMock(Identity::class),
             $author = $this->createMock(AuthorIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
-            $asOf = $this->createMock(PointInTimeInterface::class)
+            $asOf = $this->createMock(PointInTime::class)
         );
 
         $this->assertSame($identity, $event->identity());

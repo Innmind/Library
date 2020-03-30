@@ -24,7 +24,6 @@ use Innmind\Rest\Server\{
 };
 use Innmind\CommandBus\CommandBus;
 use Innmind\Immutable\{
-    MapInterface,
     Map,
     Set,
 };
@@ -57,20 +56,20 @@ class ResourceLinkerTest extends TestCase
         $identity = $this->createMock(IdentityInterface::class);
         $identity
             ->expects($this->exactly(2))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn((string) Uuid::uuid4());
         $to = $this->createMock(IdentityInterface::class);
         $to
             ->expects($this->exactly(2))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn((string) Uuid::uuid4());
         $bus
             ->expects($this->once())
             ->method('__invoke')
             ->with($this->callback(function($command) use ($identity, $to): bool {
                 return $command instanceof ReferResource &&
-                    (string) $command->source() === (string) $identity &&
-                    (string) $command->target() === (string) $to;
+                    $command->source()->toString() === $identity->toString() &&
+                    $command->target()->toString() === $to->toString();
             }));
 
         $this->assertNull(
@@ -98,12 +97,12 @@ class ResourceLinkerTest extends TestCase
         $identity = $this->createMock(IdentityInterface::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn((string) Uuid::uuid4());
         $to = $this->createMock(IdentityInterface::class);
         $to
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn((string) Uuid::uuid4());
         $bus
             ->expects($this->once())

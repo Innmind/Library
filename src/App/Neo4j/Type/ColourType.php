@@ -8,7 +8,7 @@ use Innmind\Neo4j\ONM\Type;
 
 final class ColourType implements Type
 {
-    private $nullable = false;
+    private bool $nullable = false;
 
     public static function nullable(): self
     {
@@ -27,7 +27,8 @@ final class ColourType implements Type
             return;
         }
 
-        return (string) $value->toRGBA();
+        /** @psalm-suppress MixedMethodCall */
+        return $value->toRGBA()->toString();
     }
 
     /**
@@ -35,7 +36,7 @@ final class ColourType implements Type
      */
     public function fromDatabase($value)
     {
-        return RGBA::fromString((string) $value);
+        return RGBA::of((string) $value);
     }
 
     /**

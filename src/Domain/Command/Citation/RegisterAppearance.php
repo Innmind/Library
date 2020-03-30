@@ -11,9 +11,9 @@ use Domain\Entity\{
 
 final class RegisterAppearance
 {
-    private $identity;
-    private $citation;
-    private $resource;
+    private Identity $identity;
+    private CitationIdentity $citation;
+    private ResourceIdentity $resource;
 
     public function __construct(
         Identity $identity,

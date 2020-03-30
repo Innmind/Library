@@ -5,5 +5,5 @@ namespace Domain\Entity\HostResource;
 
 interface Identity
 {
-    public function __toString(): string;
+    public function toString(): string;
 }

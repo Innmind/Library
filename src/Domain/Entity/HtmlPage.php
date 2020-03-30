@@ -20,50 +20,58 @@ use Domain\{
     Exception\InvalidArgumentException,
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface,
-    UrlInterface,
+    Path,
+    Query,
+    Url,
 };
 use Innmind\Colour\RGBA;
-use Innmind\Immutable\{
-    Set,
-    SetInterface,
-};
+use Innmind\Immutable\Set;
+use function Innmind\Immutable\assertSet;
 
 final class HtmlPage extends HttpResource
 {
-    private $mainContent = '';
-    private $description = '';
-    private $anchors;
-    private $isJournal = false;
-    private $themeColour;
-    private $title = '';
-    private $android;
-    private $ios;
-    private $preview;
+    private string $mainContent = '';
+    private string $description = '';
+    /** @var Set<Anchor> */
+    private Set $anchors;
+    private bool $isJournal = false;
+    private ?RGBA $themeColour = null;
+    private string $title = '';
+    private ?Url $android = null;
+    private ?Url $ios = null;
+    private ?Url $preview = null;
 
     public function __construct(
         ResourceIdentity $identity,
-        PathInterface $path,
-        QueryInterface $query
+        Path $path,
+        Query $query
     ) {
         if (!$identity instanceof Identity) {
             throw new InvalidArgumentException;
         }
 
         parent::__construct($identity, $path, $query);
-        $this->anchors = new Set(Anchor::class);
+        /** @var Set<Anchor> */
+        $this->anchors = Set::of(Anchor::class);
     }
 
     public static function register(
         ResourceIdentity $identity,
-        PathInterface $path,
-        QueryInterface $query
-    ): HttpResource {
+        Path $path,
+        Query $query
+    ): self {
         $self = new self($identity, $path, $query);
+        /** @psalm-suppress ArgumentTypeCoercion */
         $self->record(new HtmlPageRegistered($identity, $path, $query));
 
         return $self;
+    }
+
+    /** @psalm-suppress MoreSpecificReturnType */
+    public function identity(): Identity
+    {
+        /** @psalm-suppress LessSpecificReturnStatement */
+        return parent::identity();
     }
 
     public function specifyMainContent(string $content): self
@@ -92,14 +100,12 @@ final class HtmlPage extends HttpResource
         return $this->description;
     }
 
-    public function specifyAnchors(SetInterface $anchors): self
+    /**
+     * @param Set<Anchor> $anchors
+     */
+    public function specifyAnchors(Set $anchors): self
     {
-        if ((string) $anchors->type() !== Anchor::class) {
-            throw new \TypeError(sprintf(
-                'Argument 1 must be of type SetInterface<%s>',
-                Anchor::class
-            ));
-        }
+        assertSet(Anchor::class, $anchors, 1);
 
         $this->anchors = $anchors;
         $this->record(new AnchorsSpecified($this->identity(), $anchors));
@@ -108,9 +114,9 @@ final class HtmlPage extends HttpResource
     }
 
     /**
-     * @return SetInterface<Anchor>
+     * @return Set<Anchor>
      */
-    public function anchors(): SetInterface
+    public function anchors(): Set
     {
         return $this->anchors;
     }
@@ -141,8 +147,10 @@ final class HtmlPage extends HttpResource
         return $this->themeColour instanceof RGBA;
     }
 
+    /** @psalm-suppress InvalidNullableReturnType */
     public function themeColour(): RGBA
     {
+        /** @psalm-suppress NullableReturnStatement */
         return $this->themeColour;
     }
 
@@ -159,7 +167,7 @@ final class HtmlPage extends HttpResource
         return $this->title;
     }
 
-    public function specifyAndroidAppLink(UrlInterface $url): self
+    public function specifyAndroidAppLink(Url $url): self
     {
         $this->android = $url;
         $this->record(new AndroidAppLinkSpecified($this->identity(), $url));
@@ -169,15 +177,17 @@ final class HtmlPage extends HttpResource
 
     public function hasAndroidAppLink(): bool
     {
-        return $this->android instanceof UrlInterface;
+        return $this->android instanceof Url;
     }
 
-    public function androidAppLink(): UrlInterface
+    /** @psalm-suppress InvalidNullableReturnType */
+    public function androidAppLink(): Url
     {
+        /** @psalm-suppress NullableReturnStatement */
         return $this->android;
     }
 
-    public function specifyIosAppLink(UrlInterface $url): self
+    public function specifyIosAppLink(Url $url): self
     {
         $this->ios = $url;
         $this->record(new IosAppLinkSpecified($this->identity(), $url));
@@ -187,15 +197,17 @@ final class HtmlPage extends HttpResource
 
     public function hasIosAppLink(): bool
     {
-        return $this->ios instanceof UrlInterface;
+        return $this->ios instanceof Url;
     }
 
-    public function iosAppLink(): UrlInterface
+    /** @psalm-suppress InvalidNullableReturnType */
+    public function iosAppLink(): Url
     {
+        /** @psalm-suppress NullableReturnStatement */
         return $this->ios;
     }
 
-    public function usePreview(UrlInterface $preview): self
+    public function usePreview(Url $preview): self
     {
         $this->preview = $preview;
         $this->record(new PreviewSpecified($this->identity(), $preview));
@@ -205,11 +217,13 @@ final class HtmlPage extends HttpResource
 
     public function hasPreview(): bool
     {
-        return $this->preview instanceof UrlInterface;
+        return $this->preview instanceof Url;
     }
 
-    public function preview(): UrlInterface
+    /** @psalm-suppress InvalidNullableReturnType */
+    public function preview(): Url
     {
+        /** @psalm-suppress NullableReturnStatement */
         return $this->preview;
     }
 }

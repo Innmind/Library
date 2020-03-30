@@ -10,7 +10,7 @@ use Domain\{
 
 final class SpecifyLanguagesHandler
 {
-    private $repository;
+    private HttpResourceRepository $repository;
 
     public function __construct(HttpResourceRepository $repository)
     {

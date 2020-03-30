@@ -13,9 +13,9 @@ class AndSpecification implements Composite
 {
     use Composable;
 
-    private $left;
-    private $right;
-    private $operator;
+    private Specification $left;
+    private Specification $right;
+    private Operator $operator;
 
     public function __construct(
         Specification $left,

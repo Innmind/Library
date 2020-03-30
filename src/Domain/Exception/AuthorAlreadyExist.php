@@ -7,12 +7,11 @@ use Domain\Entity\Author;
 
 final class AuthorAlreadyExist extends LogicException
 {
-    private $author;
+    private Author $author;
 
     public function __construct(Author $author)
     {
         $this->author = $author;
-        parent::__construct();
     }
 
     /**

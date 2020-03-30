@@ -7,12 +7,11 @@ use Domain\Entity\CitationAppearance;
 
 final class CitationAppearanceAlreadyExist extends LogicException
 {
-    private $appearance;
+    private CitationAppearance $appearance;
 
     public function __construct(CitationAppearance $appearance)
     {
         $this->appearance = $appearance;
-        parent::__construct();
     }
 
     /**

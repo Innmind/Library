@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\HttpResource\Identity,
     Entity\HttpResource,
-    Specification\HttpResource\Specification
+    Specification\HttpResource\Specification,
+    Exception\HttpResourceNotFound,
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 interface HttpResourceRepository
 {
     /**
-     * @throws HttpResourceNotFoundException
+     * @throws HttpResourceNotFound
      */
     public function get(Identity $identity): HttpResource;
     public function add(HttpResource $httpResource): self;
@@ -22,12 +23,12 @@ interface HttpResourceRepository
     public function count(): int;
 
     /**
-     * @return SetInterface<HttpResource>
+     * @return Set<HttpResource>
      */
-    public function all(): SetInterface;
+    public function all(): Set;
 
     /**
-     * @return SetInterface<HttpResource>
+     * @return Set<HttpResource>
      */
-    public function matching(Specification $specification): SetInterface;
+    public function matching(Specification $specification): Set;
 }

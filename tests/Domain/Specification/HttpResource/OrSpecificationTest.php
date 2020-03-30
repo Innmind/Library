@@ -11,8 +11,8 @@ use Domain\{
     Entity\HttpResource\Identity,
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface,
+    Path,
+    Query,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -37,8 +37,8 @@ class OrSpecificationTest extends TestCase
         );
         $resource = new HttpResource(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
         $spec
             ->left()

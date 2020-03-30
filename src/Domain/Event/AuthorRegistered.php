@@ -10,8 +10,8 @@ use Domain\Entity\Author\{
 
 final class AuthorRegistered
 {
-    private $identity;
-    private $name;
+    private Identity $identity;
+    private Name $name;
 
     public function __construct(Identity $identity, Name $name)
     {

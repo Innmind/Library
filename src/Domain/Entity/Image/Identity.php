@@ -7,5 +7,5 @@ use Domain\Entity\HttpResource\Identity as ResourceIdentity;
 
 interface Identity extends ResourceIdentity
 {
-    public function __toString(): string;
+    public function toString(): string;
 }

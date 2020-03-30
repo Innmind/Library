@@ -13,11 +13,13 @@ trait Composable
 {
     public function and(MasterSpec $specification): Composite
     {
+        /** @psalm-suppress ArgumentTypeCoercion */
         return new AndSpecification($this, $specification);
     }
 
     public function or(MasterSpec $specification): Composite
     {
+        /** @psalm-suppress ArgumentTypeCoercion */
         return new OrSpecification($this, $specification);
     }
 

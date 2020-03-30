@@ -16,11 +16,11 @@ final class Target implements Comparator, Specification
 {
     use Composable;
 
-    private $value;
+    private string $value;
 
     public function __construct(Identity $value)
     {
-        $this->value = (string) $value;
+        $this->value = $value->toString();
     }
 
     /**
@@ -49,6 +49,6 @@ final class Target implements Comparator, Specification
 
     public function isSatisfiedBy(Reference $reference): bool
     {
-        return (string) $reference->target() === $this->value;
+        return $reference->target()->toString() === $this->value;
     }
 }

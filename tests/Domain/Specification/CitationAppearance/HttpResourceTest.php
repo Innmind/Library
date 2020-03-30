@@ -15,7 +15,7 @@ use Domain\{
     Entity\HttpResource\Identity as ResourceIdentity,
 };
 use Innmind\Specification\Comparator;
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use PHPUnit\Framework\TestCase;
 
 class HttpResourceTest extends TestCase
@@ -25,7 +25,7 @@ class HttpResourceTest extends TestCase
         $identity = $this->createMock(ResourceIdentity::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $spec = new HttpResource($identity);
 
@@ -41,24 +41,24 @@ class HttpResourceTest extends TestCase
         $identity = $this->createMock(ResourceIdentity::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $spec = new HttpResource($identity);
         $appearance = new Entity(
             $this->createMock(Identity::class),
             $this->createMock(CitationIdentity::class),
             $this->createMock(ResourceIdentity::class),
-            $this->createMock(PointInTimeInterface::class)
+            $this->createMock(PointInTime::class)
         );
         $appearance
             ->resource()
             ->expects($this->at(0))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $appearance
             ->resource()
             ->expects($this->at(1))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('foo');
 
         $this->assertTrue($spec->isSatisfiedBy($appearance));

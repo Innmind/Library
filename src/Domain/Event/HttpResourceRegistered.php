@@ -5,20 +5,20 @@ namespace Domain\Event;
 
 use Domain\Entity\HttpResource\Identity;
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query
 };
 
 final class HttpResourceRegistered
 {
-    private $identity;
-    private $path;
-    private $query;
+    private Identity $identity;
+    private Path $path;
+    private Query $query;
 
     public function __construct(
         Identity $identity,
-        PathInterface $path,
-        QueryInterface $query
+        Path $path,
+        Query $query
     ) {
         $this->identity = $identity;
         $this->path = $path;
@@ -30,12 +30,12 @@ final class HttpResourceRegistered
         return $this->identity;
     }
 
-    public function path(): PathInterface
+    public function path(): Path
     {
         return $this->path;
     }
 
-    public function query(): QueryInterface
+    public function query(): Query
     {
         return $this->query;
     }

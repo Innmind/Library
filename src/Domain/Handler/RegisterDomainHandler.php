@@ -13,12 +13,13 @@ use Domain\{
     Specification\Domain\TopLevelDomain as TopLevelDomainSpec,
     Exception\DomainAlreadyExist
 };
+use function Innmind\Immutable\first;
 use Pdp\Rules;
 
 final class RegisterDomainHandler
 {
-    private $repository;
-    private $rules;
+    private DomainRepository $repository;
+    private Rules $rules;
 
     public function __construct(
         DomainRepository $repository,
@@ -30,7 +31,7 @@ final class RegisterDomainHandler
 
     public function __invoke(RegisterDomain $wished): void
     {
-        $domain = $this->rules->resolve((string) $wished->host());
+        $domain = $this->rules->resolve($wished->host()->toString());
         [$name, $tld] = explode(
             '.',
             (string) $domain->getRegistrableDomain(),
@@ -39,13 +40,14 @@ final class RegisterDomainHandler
         $name = new Name($name);
         $tld = new TopLevelDomain($tld);
 
+        /** @psalm-suppress InvalidArgument */
         $existing = $this->repository->matching(
             (new NameSpec($name))
                 ->and(new TopLevelDomainSpec($tld))
         );
 
         if ($existing->size() !== 0) {
-            throw new DomainAlreadyExist($existing->current());
+            throw new DomainAlreadyExist(first($existing));
         }
 
         $this->repository->add(

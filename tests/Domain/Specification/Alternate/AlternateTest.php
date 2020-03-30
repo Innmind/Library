@@ -24,7 +24,7 @@ class AlternateTest extends TestCase
         $identity = $this->createMock(ResourceIdentity::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $spec = new Alternate($identity);
 
@@ -40,7 +40,7 @@ class AlternateTest extends TestCase
         $identity = $this->createMock(ResourceIdentity::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $spec = new Alternate($identity);
         $alternate = new Entity(
@@ -52,12 +52,12 @@ class AlternateTest extends TestCase
         $alternate
             ->alternate()
             ->expects($this->at(0))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $alternate
             ->alternate()
             ->expects($this->at(1))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('foo');
 
         $this->assertTrue($spec->isSatisfiedBy($alternate));

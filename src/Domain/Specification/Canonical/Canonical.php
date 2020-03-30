@@ -16,11 +16,11 @@ final class Canonical implements Comparator, Specification
 {
     use Composable;
 
-    private $value;
+    private string $value;
 
     public function __construct(Identity $value)
     {
-        $this->value = (string) $value;
+        $this->value = $value->toString();
     }
 
     /**
@@ -49,6 +49,6 @@ final class Canonical implements Comparator, Specification
 
     public function isSatisfiedBy(Entity $canonical): bool
     {
-        return (string) $canonical->canonical() === $this->value;
+        return $canonical->canonical()->toString() === $this->value;
     }
 }

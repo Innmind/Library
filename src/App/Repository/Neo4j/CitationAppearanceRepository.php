@@ -14,14 +14,11 @@ use Innmind\Neo4j\ONM\{
     Repository,
     Exception\EntityNotFound
 };
-use Innmind\Immutable\{
-    SetInterface,
-    Set
-};
+use Innmind\Immutable\Set;
 
 final class CitationAppearanceRepository implements CitationAppearanceRepositoryInterface
 {
-    private $infrastructure;
+    private Repository $infrastructure;
 
     public function __construct(Repository $infrastructure)
     {
@@ -29,11 +26,15 @@ final class CitationAppearanceRepository implements CitationAppearanceRepository
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MoreSpecificReturnType
      */
     public function get(Identity $identity): CitationAppearance
     {
         try {
+            /**
+             * @psalm-suppress InvalidArgument
+             * @psalm-suppress LessSpecificReturnStatement
+             */
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
             throw new CitationAppearanceNotFound('', 0, $e);
@@ -58,7 +59,8 @@ final class CitationAppearanceRepository implements CitationAppearanceRepository
 
     public function has(Identity $identity): bool
     {
-        return $this->infrastructure->has($identity);
+        /** @psalm-suppress InvalidArgument */
+        return $this->infrastructure->contains($identity);
     }
 
     public function count(): int
@@ -69,32 +71,22 @@ final class CitationAppearanceRepository implements CitationAppearanceRepository
     /**
      * {@inheritdoc}
      */
-    public function all(): SetInterface
+    public function all(): Set
     {
         return $this
             ->infrastructure
             ->all()
-            ->reduce(
-                new Set(CitationAppearance::class),
-                function(Set $all, CitationAppearance $entity): Set {
-                    return $all->add($entity);
-                }
-            );
+            ->toSetOf(CitationAppearance::class);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function matching(Specification $specification): SetInterface
+    public function matching(Specification $specification): Set
     {
         return $this
             ->infrastructure
             ->matching($specification)
-            ->reduce(
-                new Set(CitationAppearance::class),
-                function(Set $all, CitationAppearance $entity): Set {
-                    return $all->add($entity);
-                }
-            );
+            ->toSetOf(CitationAppearance::class);
     }
 }

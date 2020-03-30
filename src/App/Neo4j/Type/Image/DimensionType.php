@@ -17,6 +17,7 @@ final class DimensionType implements Type
             return;
         }
 
+        /** @psalm-suppress MixedMethodCall */
         return [$value->width(), $value->height()];
     }
 
@@ -25,6 +26,7 @@ final class DimensionType implements Type
      */
     public function fromDatabase($value)
     {
+        /** @psalm-suppress MixedArrayAccess */
         return new Dimension((int) $value[0], (int) $value[1]);
     }
 

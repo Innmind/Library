@@ -16,11 +16,11 @@ final class HttpResource implements Comparator, Specification
 {
     use Composable;
 
-    private $value;
+    private string $value;
 
     public function __construct(Identity $value)
     {
-        $this->value = (string) $value;
+        $this->value = $value->toString();
     }
 
     /**
@@ -49,6 +49,6 @@ final class HttpResource implements Comparator, Specification
 
     public function isSatisfiedBy(CitationAppearance $appearance): bool
     {
-        return (string) $appearance->resource() === $this->value;
+        return $appearance->resource()->toString() === $this->value;
     }
 }

@@ -28,15 +28,12 @@ use Domain\{
     Exception\ReferenceAlreadyExist,
 };
 use Innmind\HttpFramework\RequestHandler;
-use Innmind\Http\Message\{
-    ServerRequest,
-    Response,
+use Innmind\Http\{
+    Message\ServerRequest,
+    Message\Response,
+    ProtocolVersion,
 };
-use Innmind\Url\{
-    PathInterface,
-    QueryInterface,
-};
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use PHPUnit\Framework\TestCase;
 
 class CatchConflictsTest extends TestCase
@@ -55,6 +52,10 @@ class CatchConflictsTest extends TestCase
             $inner = $this->createMock(RequestHandler::class)
         );
         $request = $this->createMock(ServerRequest::class);
+        $request
+            ->expects($this->any())
+            ->method('protocolVersion')
+            ->willReturn(new ProtocolVersion(2, 0));
         $inner
             ->expects($this->once())
             ->method('__invoke')
@@ -73,6 +74,10 @@ class CatchConflictsTest extends TestCase
             $inner = $this->createMock(RequestHandler::class)
         );
         $request = $this->createMock(ServerRequest::class);
+        $request
+            ->expects($this->any())
+            ->method('protocolVersion')
+            ->willReturn(new ProtocolVersion(2, 0));
         $inner
             ->expects($this->once())
             ->method('__invoke')
@@ -91,6 +96,10 @@ class CatchConflictsTest extends TestCase
             $inner = $this->createMock(RequestHandler::class)
         );
         $request = $this->createMock(ServerRequest::class);
+        $request
+            ->expects($this->any())
+            ->method('protocolVersion')
+            ->willReturn(new ProtocolVersion(2, 0));
         $inner
             ->expects($this->once())
             ->method('__invoke')
@@ -129,7 +138,7 @@ class CatchConflictsTest extends TestCase
                         $this->createMock(Canonical\Identity::class),
                         $this->createMock(HttpResource\Identity::class),
                         $this->createMock(HttpResource\Identity::class),
-                        $this->createMock(PointInTimeInterface::class)
+                        $this->createMock(PointInTime::class)
                     )
                 ),
             ],
@@ -147,7 +156,7 @@ class CatchConflictsTest extends TestCase
                         $this->createMock(CitationAppearance\Identity::class),
                         $this->createMock(Citation\Identity::class),
                         $this->createMock(HttpResource\Identity::class),
-                        $this->createMock(PointInTimeInterface::class)
+                        $this->createMock(PointInTime::class)
                     )
                 ),
             ],

@@ -5,5 +5,5 @@ namespace Domain\Entity\CitationAppearance;
 
 interface Identity
 {
-    public function __toString(): string;
+    public function toString(): string;
 }

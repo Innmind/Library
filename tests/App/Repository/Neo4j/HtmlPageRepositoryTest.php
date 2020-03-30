@@ -14,17 +14,15 @@ use Domain\{
     Exception\HtmlPageNotFound,
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface,
+    Path,
+    Query,
 };
 use Innmind\Neo4j\ONM\{
     Repository,
     Exception\EntityNotFound,
 };
-use Innmind\Immutable\{
-    SetInterface,
-    Set,
-};
+use Innmind\Immutable\Set;
+use function Innmind\Immutable\unwrap;
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 
@@ -53,8 +51,8 @@ class HtmlPageRepositoryTest extends TestCase
             ->willReturn(
                 $expected = new HtmlPage(
                     $identity,
-                    $this->createMock(PathInterface::class),
-                    $this->createMock(QueryInterface::class)
+                    Path::none(),
+                    Query::none()
                 )
             );
 
@@ -89,8 +87,8 @@ class HtmlPageRepositoryTest extends TestCase
         );
         $entity = new HtmlPage(
             new Identity((string) Uuid::uuid4()),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
         $infra
             ->expects($this->once())
@@ -113,8 +111,8 @@ class HtmlPageRepositoryTest extends TestCase
             ->willReturn(
                 $entity = new HtmlPage(
                     $identity,
-                    $this->createMock(PathInterface::class),
-                    $this->createMock(QueryInterface::class)
+                    Path::none(),
+                    Query::none()
                 )
             );
         $infra
@@ -133,12 +131,12 @@ class HtmlPageRepositoryTest extends TestCase
         $identity = new Identity((string) Uuid::uuid4());
         $infra
             ->expects($this->at(0))
-            ->method('has')
+            ->method('contains')
             ->with($identity)
             ->willReturn(true);
         $infra
             ->expects($this->at(1))
-            ->method('has')
+            ->method('contains')
             ->with($identity)
             ->willReturn(false);
 
@@ -155,14 +153,17 @@ class HtmlPageRepositoryTest extends TestCase
             ->expects($this->once())
             ->method('all')
             ->willReturn(
-                $all = $this->createMock(SetInterface::class)
+                Set::of(
+                    HtmlPage::class,
+                    new HtmlPage(
+                        new Identity((string) Uuid::uuid4()),
+                        Path::none(),
+                        Query::none()
+                    )
+                )
             );
-        $all
-            ->expects($this->once())
-            ->method('size')
-            ->willReturn(42);
 
-        $this->assertSame(42, $repository->count());
+        $this->assertSame(1, $repository->count());
     }
 
     public function testAll()
@@ -174,20 +175,20 @@ class HtmlPageRepositoryTest extends TestCase
             ->expects($this->once())
             ->method('all')
             ->willReturn(
-                (new Set('object'))->add(
+                Set::objects(
                     $entity = new HtmlPage(
                         new Identity((string) Uuid::uuid4()),
-                        $this->createMock(PathInterface::class),
-                        $this->createMock(QueryInterface::class)
+                        Path::none(),
+                        Query::none()
                     )
                 )
             );
 
         $all = $repository->all();
 
-        $this->assertInstanceOf(SetInterface::class, $all);
+        $this->assertInstanceOf(Set::class, $all);
         $this->assertSame(HtmlPage::class, (string) $all->type());
-        $this->assertSame([$entity], $all->toPrimitive());
+        $this->assertSame([$entity], unwrap($all));
     }
 
     public function testMatching()
@@ -201,19 +202,19 @@ class HtmlPageRepositoryTest extends TestCase
             ->method('matching')
             ->with($specification)
             ->willReturn(
-                (new Set('object'))->add(
+                Set::objects(
                     $entity = new HtmlPage(
                         new Identity((string) Uuid::uuid4()),
-                        $this->createMock(PathInterface::class),
-                        $this->createMock(QueryInterface::class)
+                        Path::none(),
+                        Query::none()
                     )
                 )
             );
 
         $all = $repository->matching($specification);
 
-        $this->assertInstanceOf(SetInterface::class, $all);
+        $this->assertInstanceOf(Set::class, $all);
         $this->assertSame(HtmlPage::class, (string) $all->type());
-        $this->assertSame([$entity], $all->toPrimitive());
+        $this->assertSame([$entity], unwrap($all));
     }
 }

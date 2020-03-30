@@ -21,6 +21,7 @@ use Innmind\Immutable\{
     Set,
 };
 
+/** @psalm-suppress InvalidArgument */
 return [
     Aggregate::of(
         new ClassName(Entity\Author::class),

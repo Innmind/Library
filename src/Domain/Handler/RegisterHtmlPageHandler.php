@@ -16,19 +16,19 @@ use Domain\{
     Specification\HostResource\Host,
     Exception\HtmlPageAlreadyExist
 };
-use Innmind\TimeContinuum\TimeContinuumInterface;
+use Innmind\TimeContinuum\Clock;
 use Innmind\Immutable\Set;
 
 final class RegisterHtmlPageHandler
 {
-    private $htmlPageRepository;
-    private $relationRepository;
-    private $clock;
+    private HtmlPageRepository $htmlPageRepository;
+    private HostResourceRepository $relationRepository;
+    private Clock $clock;
 
     public function __construct(
         HtmlPageRepository $htmlPageRepository,
         HostResourceRepository $relationRepository,
-        TimeContinuumInterface $clock
+        Clock $clock
     ) {
         $this->htmlPageRepository = $htmlPageRepository;
         $this->relationRepository = $relationRepository;
@@ -60,6 +60,7 @@ final class RegisterHtmlPageHandler
      */
     private function verifyResourceDoesntExist(RegisterHtmlPage $wished): void
     {
+        /** @psalm-suppress InvalidArgument */
         $htmlPages = $this->htmlPageRepository->matching(
             (new Path($wished->path()))
                 ->and(new Query($wished->query()))
@@ -70,11 +71,12 @@ final class RegisterHtmlPageHandler
         }
 
         $identities = $htmlPages->reduce(
-            new Set(ResourceIdentity::class),
+            Set::of(ResourceIdentity::class),
             function(Set $identities, HtmlPage $htmlPage): Set {
                 return $identities->add($htmlPage->identity());
             }
         );
+        /** @psalm-suppress InvalidArgument */
         $relations = $this->relationRepository->matching(
             (new InResources($identities))
                 ->and(new Host($wished->host()))

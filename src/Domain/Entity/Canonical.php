@@ -12,22 +12,22 @@ use Innmind\EventBus\{
     ContainsRecordedEvents,
     EventRecorder,
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 
 final class Canonical implements ContainsRecordedEvents
 {
     use EventRecorder;
 
-    private $identity;
-    private $canonical;
-    private $resource;
-    private $foundAt;
+    private Identity $identity;
+    private ResourceIdentity $canonical;
+    private ResourceIdentity $resource;
+    private PointInTime $foundAt;
 
     public function __construct(
         Identity $identity,
         ResourceIdentity $canonical,
         ResourceIdentity $resource,
-        PointInTimeInterface $foundAt
+        PointInTime $foundAt
     ) {
         $this->identity = $identity;
         $this->canonical = $canonical;
@@ -39,7 +39,7 @@ final class Canonical implements ContainsRecordedEvents
         Identity $identity,
         ResourceIdentity $canonical,
         ResourceIdentity $resource,
-        PointInTimeInterface $foundAt
+        PointInTime $foundAt
     ): self {
         $self = new self($identity, $canonical, $resource, $foundAt);
         $self->record(new CanonicalCreated(
@@ -67,7 +67,7 @@ final class Canonical implements ContainsRecordedEvents
         return $this->resource;
     }
 
-    public function foundAt(): PointInTimeInterface
+    public function foundAt(): PointInTime
     {
         return $this->foundAt;
     }

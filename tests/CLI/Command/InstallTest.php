@@ -17,7 +17,7 @@ use Innmind\InstallationMonitor\{
 use Innmind\Url\Path;
 use Innmind\Stream\Writable;
 use Innmind\Immutable\{
-    Stream,
+    Sequence,
     Map,
     Str,
 };
@@ -58,7 +58,7 @@ USAGE;
 
         $this->assertSame(
             $usage,
-            (string) new Install($this->createMock(Client::class))
+            (new Install($this->createMock(Client::class)))->toString()
         );
     }
 
@@ -70,13 +70,13 @@ USAGE;
         $client
             ->expects($this->once())
             ->method('events')
-            ->willReturn(Stream::of(
+            ->willReturn(Sequence::of(
                 Event::class,
                 new Event(
                     new Event\Name('neo4j.password_changed'),
-                    (new Map('string', 'variable'))
-                        ->put('user', 'foo')
-                        ->put('password', 'bar')
+                    Map::of('string', 'scalar|array')
+                        ('user', 'foo')
+                        ('password', 'bar')
                 )
             ));
         $client
@@ -85,11 +85,11 @@ USAGE;
             ->with(
                 new Event(
                     new Event\Name('website_available'),
-                    (new Map('string', 'variable'))
-                        ->put('path', '/tmp/public')
+                    Map::of('string', 'scalar|array')
+                        ('path', '/tmp/public')
                 ),
                 $this->callback(static function(Event $event): bool {
-                    return (string) $event->name() === 'library_installed' &&
+                    return $event->name()->toString() === 'library_installed' &&
                         $event->payload()->contains('apiKey') &&
                         strlen($event->payload()->get('apiKey')) === 40;
                 })
@@ -98,7 +98,7 @@ USAGE;
         $env
             ->expects($this->any())
             ->method('workingDirectory')
-            ->willReturn(new Path('/tmp'));
+            ->willReturn(Path::of('/tmp/'));
         $env
             ->expects($this->never())
             ->method('error');
@@ -131,7 +131,7 @@ USAGE;
         $env
             ->expects($this->any())
             ->method('workingDirectory')
-            ->willReturn(new Path('/tmp'));
+            ->willReturn(Path::of('/tmp/'));
         $env
             ->expects($this->once())
             ->method('error')
@@ -161,7 +161,7 @@ USAGE;
         $client
             ->expects($this->once())
             ->method('events')
-            ->willReturn(Stream::of(Event::class));
+            ->willReturn(Sequence::of(Event::class));
         $client
             ->expects($this->never())
             ->method('send');
@@ -169,7 +169,7 @@ USAGE;
         $env
             ->expects($this->any())
             ->method('workingDirectory')
-            ->willReturn(new Path('/tmp'));
+            ->willReturn(Path::of('/tmp/'));
         $env
             ->expects($this->once())
             ->method('error')
@@ -199,19 +199,19 @@ USAGE;
         $client
             ->expects($this->once())
             ->method('events')
-            ->willReturn(Stream::of(
+            ->willReturn(Sequence::of(
                 Event::class,
                 new Event(
                     new Event\Name('neo4j.password_changed'),
-                    (new Map('string', 'variable'))
-                        ->put('user', 'foo')
-                        ->put('password', 'bar')
+                    Map::of('string', 'scalar|array')
+                        ('user', 'foo')
+                        ('password', 'bar')
                 ),
                 new Event(
                     new Event\Name('neo4j.password_changed'),
-                    (new Map('string', 'variable'))
-                        ->put('user', 'bar')
-                        ->put('password', 'bar')
+                    Map::of('string', 'scalar|array')
+                        ('user', 'bar')
+                        ('password', 'bar')
                 )
             ));
         $client
@@ -221,7 +221,7 @@ USAGE;
         $env
             ->expects($this->any())
             ->method('workingDirectory')
-            ->willReturn(new Path('/tmp'));
+            ->willReturn(Path::of('/tmp/'));
         $env
             ->expects($this->once())
             ->method('error')

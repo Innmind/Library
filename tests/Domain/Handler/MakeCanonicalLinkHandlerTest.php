@@ -17,13 +17,10 @@ use Domain\{
     Exception\CanonicalAlreadyExist,
 };
 use Innmind\TimeContinuum\{
-    TimeContinuumInterface,
-    PointInTimeInterface,
+    Clock,
+    PointInTime,
 };
-use Innmind\Immutable\{
-    Set,
-    SetInterface,
-};
+use Innmind\Immutable\Set;
 use PHPUnit\Framework\TestCase;
 
 class MakeCanonicalLinkHandlerTest extends TestCase
@@ -32,7 +29,7 @@ class MakeCanonicalLinkHandlerTest extends TestCase
     {
         $handler = new MakeCanonicalLinkHandler(
             $repository = $this->createMock(CanonicalRepository::class),
-            $clock = $this->createMock(TimeContinuumInterface::class)
+            $clock = $this->createMock(Clock::class)
         );
         $command = new MakeCanonicalLink(
             $this->createMock(Identity::class),
@@ -42,18 +39,18 @@ class MakeCanonicalLinkHandlerTest extends TestCase
         $command
             ->canonical()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('canonical uuid');
         $command
             ->resource()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('resource uuid');
         $clock
             ->expects($this->once())
             ->method('now')
             ->willReturn(
-                $now = $this->createMock(PointInTimeInterface::class)
+                $now = $this->createMock(PointInTime::class)
             );
         $repository
             ->expects($this->once())
@@ -64,7 +61,7 @@ class MakeCanonicalLinkHandlerTest extends TestCase
                     $spec->left()->value() === 'resource uuid' &&
                     $spec->right()->value() === 'canonical uuid';
             }))
-            ->willReturn(new Set(Canonical::class));
+            ->willReturn(Set::of(Canonical::class));
         $repository
             ->expects($this->once())
             ->method('add')
@@ -74,7 +71,7 @@ class MakeCanonicalLinkHandlerTest extends TestCase
                     $canonical->resource() === $command->resource() &&
                     $canonical->foundAt() === $now &&
                     $canonical->recordedEvents()->size() === 1 &&
-                    $canonical->recordedEvents()->current() instanceof CanonicalCreated;
+                    $canonical->recordedEvents()->first() instanceof CanonicalCreated;
             }));
 
         $this->assertNull($handler($command));
@@ -84,7 +81,7 @@ class MakeCanonicalLinkHandlerTest extends TestCase
     {
         $handler = new MakeCanonicalLinkHandler(
             $repository = $this->createMock(CanonicalRepository::class),
-            $clock = $this->createMock(TimeContinuumInterface::class)
+            $clock = $this->createMock(Clock::class)
         );
         $command = new MakeCanonicalLink(
             $this->createMock(Identity::class),
@@ -94,12 +91,12 @@ class MakeCanonicalLinkHandlerTest extends TestCase
         $command
             ->canonical()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('canonical uuid');
         $command
             ->resource()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('resource uuid');
         $repository
             ->expects($this->once())
@@ -111,21 +108,14 @@ class MakeCanonicalLinkHandlerTest extends TestCase
                     $spec->right()->value() === 'canonical uuid';
             }))
             ->willReturn(
-                $set = $this->createMock(SetInterface::class)
-            );
-        $set
-            ->expects($this->once())
-            ->method('size')
-            ->willReturn(1);
-        $set
-            ->expects($this->once())
-            ->method('current')
-            ->willReturn(
-                new Canonical(
-                    $this->createMock(Identity::class),
-                    $this->createMock(ResourceIdentity::class),
-                    $this->createMock(ResourceIdentity::class),
-                    $this->createMock(PointInTimeInterface::class)
+                Set::of(
+                    Canonical::class,
+                    new Canonical(
+                        $this->createMock(Identity::class),
+                        $this->createMock(ResourceIdentity::class),
+                        $this->createMock(ResourceIdentity::class),
+                        $this->createMock(PointInTime::class)
+                    )
                 )
             );
         $repository

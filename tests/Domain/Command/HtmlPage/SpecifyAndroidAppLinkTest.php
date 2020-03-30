@@ -7,7 +7,7 @@ use Domain\{
     Command\HtmlPage\SpecifyAndroidAppLink,
     Entity\HtmlPage\Identity
 };
-use Innmind\Url\UrlInterface;
+use Innmind\Url\Url;
 use PHPUnit\Framework\TestCase;
 
 class SpecifyAndroidAppLinkTest extends TestCase
@@ -16,7 +16,7 @@ class SpecifyAndroidAppLinkTest extends TestCase
     {
         $command = new SpecifyAndroidAppLink(
             $identity = $this->createMock(Identity::class),
-            $url = $this->createMock(UrlInterface::class)
+            $url = Url::of('example.com')
         );
 
         $this->assertSame($identity, $command->identity());

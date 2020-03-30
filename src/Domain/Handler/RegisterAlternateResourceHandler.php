@@ -12,10 +12,11 @@ use Domain\{
     Specification\Alternate\Language,
     Exception\AlternateAlreadyExist
 };
+use function Innmind\Immutable\first;
 
 final class RegisterAlternateResourceHandler
 {
-    private $repository;
+    private AlternateRepository $repository;
 
     public function __construct(AlternateRepository $repository)
     {
@@ -24,6 +25,7 @@ final class RegisterAlternateResourceHandler
 
     public function __invoke(RegisterAlternateResource $wished): void
     {
+        /** @psalm-suppress InvalidArgument */
         $alternates = $this->repository->matching(
             (new HttpResource($wished->resource()))
                 ->and(new AlternateSpec($wished->alternate()))
@@ -31,7 +33,7 @@ final class RegisterAlternateResourceHandler
         );
 
         if ($alternates->size() > 0) {
-            throw new AlternateAlreadyExist($alternates->current());
+            throw new AlternateAlreadyExist(first($alternates));
         }
 
         $this->repository->add(

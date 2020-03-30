@@ -12,7 +12,7 @@ use Domain\{
     Entity\Host\Identity as HostIdentity,
     Entity\HttpResource\Identity as ResourceIdentity,
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use PHPUnit\Framework\TestCase;
 
 class AndSpecificationTest extends TestCase
@@ -38,7 +38,7 @@ class AndSpecificationTest extends TestCase
             $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(ResourceIdentity::class),
-            $this->createMock(PointInTimeInterface::class)
+            $this->createMock(PointInTime::class)
         );
         $spec
             ->left()

@@ -17,39 +17,37 @@ use Innmind\EventBus\{
     EventRecorder,
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface,
+    Path,
+    Query,
 };
-use Innmind\Immutable\{
-    Set,
-    SetInterface,
-};
+use Innmind\Immutable\Set;
+use function Innmind\Immutable\assertSet;
 
 class HttpResource implements ContainsRecordedEvents
 {
     use EventRecorder;
 
-    private $identity;
-    private $path;
-    private $query;
-    private $languages;
-    private $charset;
+    private Identity $identity;
+    private Path $path;
+    private Query $query;
+    private Set $languages;
+    private ?Charset $charset = null;
 
     public function __construct(
         Identity $identity,
-        PathInterface $path,
-        QueryInterface $query
+        Path $path,
+        Query $query
     ) {
         $this->identity = $identity;
         $this->path = $path;
         $this->query = $query;
-        $this->languages = new Set(Language::class);
+        $this->languages = Set::of(Language::class);
     }
 
     public static function register(
         Identity $identity,
-        PathInterface $path,
-        QueryInterface $query
+        Path $path,
+        Query $query
     ): self {
         $self = new self($identity, $path, $query);
         $self->record(new HttpResourceRegistered($identity, $path, $query));
@@ -62,24 +60,19 @@ class HttpResource implements ContainsRecordedEvents
         return $this->identity;
     }
 
-    public function path(): PathInterface
+    public function path(): Path
     {
         return $this->path;
     }
 
-    public function query(): QueryInterface
+    public function query(): Query
     {
         return $this->query;
     }
 
-    public function specifyLanguages(SetInterface $languages): self
+    public function specifyLanguages(Set $languages): self
     {
-        if ((string) $languages->type() !== Language::class) {
-            throw new \TypeError(sprintf(
-                'Argument 1 must be of type SetInterface<%s>',
-                Language::class
-            ));
-        }
+        assertSet(Language::class, $languages, 1);
 
         if ($languages->size() === 0) {
             throw new DomainException;
@@ -91,7 +84,7 @@ class HttpResource implements ContainsRecordedEvents
         return $this;
     }
 
-    public function languages(): SetInterface
+    public function languages(): Set
     {
         return $this->languages;
     }
@@ -109,8 +102,10 @@ class HttpResource implements ContainsRecordedEvents
         return $this->charset instanceof Charset;
     }
 
+    /** @psalm-suppress InvalidNullableReturnType */
     public function charset(): Charset
     {
+        /** @psalm-suppress NullableReturnStatement */
         return $this->charset;
     }
 }

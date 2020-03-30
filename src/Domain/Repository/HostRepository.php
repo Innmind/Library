@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\Host\Identity,
     Entity\Host,
-    Specification\Host\Specification
+    Specification\Host\Specification,
+    Exception\HostNotFound,
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 interface HostRepository
 {
     /**
-     * @throws HostNotFoundException
+     * @throws HostNotFound
      */
     public function get(Identity $identity): Host;
     public function add(Host $host): self;
@@ -22,12 +23,12 @@ interface HostRepository
     public function count(): int;
 
     /**
-     * @return SetInterface<Host>
+     * @return Set<Host>
      */
-    public function all(): SetInterface;
+    public function all(): Set;
 
     /**
-     * @return SetInterface<Host>
+     * @return Set<Host>
      */
-    public function matching(Specification $specification): SetInterface;
+    public function matching(Specification $specification): Set;
 }

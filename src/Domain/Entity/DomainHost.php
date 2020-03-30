@@ -9,7 +9,7 @@ use Domain\{
     Entity\Host\Identity as HostIdentity,
     Event\DomainHostCreated,
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use Innmind\EventBus\{
     ContainsRecordedEvents,
     EventRecorder,
@@ -19,16 +19,16 @@ final class DomainHost implements ContainsRecordedEvents
 {
     use EventRecorder;
 
-    private $identity;
-    private $domain;
-    private $host;
-    private $foundAt;
+    private Identity $identity;
+    private DomainIdentity $domain;
+    private HostIdentity $host;
+    private PointInTime $foundAt;
 
     public function __construct(
         Identity $identity,
         DomainIdentity $domain,
         HostIdentity $host,
-        PointInTimeInterface $foundAt
+        PointInTime $foundAt
     ) {
         $this->identity = $identity;
         $this->domain = $domain;
@@ -40,7 +40,7 @@ final class DomainHost implements ContainsRecordedEvents
         Identity $identity,
         DomainIdentity $domain,
         HostIdentity $host,
-        PointInTimeInterface $foundAt
+        PointInTime $foundAt
     ): self {
         $self = new self($identity, $domain, $host, $foundAt);
         $self->record(new DomainHostCreated(
@@ -68,7 +68,7 @@ final class DomainHost implements ContainsRecordedEvents
         return $this->host;
     }
 
-    public function foundAt(): PointInTimeInterface
+    public function foundAt(): PointInTime
     {
         return $this->foundAt;
     }

@@ -25,6 +25,7 @@ use Innmind\Immutable\{
     Map,
     Set,
 };
+use function Innmind\Immutable\first;
 use PHPUnit\Framework\TestCase;
 
 class ResourceCreatorTest extends TestCase
@@ -50,14 +51,14 @@ class ResourceCreatorTest extends TestCase
             ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof RegisterDomain &&
-                    (string) $command->host() === 'example.com';
+                    $command->host()->toString() === 'example.com';
             }));
         $bus
             ->expects($this->at(1))
             ->method('__invoke')
             ->with($this->callback(function($command) {
                 return $command instanceof RegisterHost &&
-                    (string) $command->host() === 'example.com';
+                    $command->host()->toString() === 'example.com';
             }));
         $bus
             ->expects($this->at(2))
@@ -66,8 +67,8 @@ class ResourceCreatorTest extends TestCase
                 $expected = $command->identity();
 
                 return $command instanceof RegisterHttpResource &&
-                    (string) $command->path() === 'foo' &&
-                    (string) $command->query() === 'bar';
+                    $command->path()->toString() === 'foo' &&
+                    $command->query()->toString() === 'bar';
             }));
         $bus
             ->expects($this->at(3))
@@ -82,7 +83,7 @@ class ResourceCreatorTest extends TestCase
             ->with($this->callback(function($command) {
                 return $command instanceof SpecifyLanguages &&
                     $command->languages()->size() === 1 &&
-                    (string) $command->languages()->current() === 'fr';
+                    (string) first($command->languages()) === 'fr';
             }));
         $definition = new Definition(
             'http_resource',
@@ -125,7 +126,7 @@ class ResourceCreatorTest extends TestCase
             ->expects($this->at(6))
             ->method('property')
             ->with('languages')
-            ->willReturn(new Property('languages', (new Set('string'))->add('fr')));
+            ->willReturn(new Property('languages', Set::strings('fr')));
 
         $identity = $creator($definition, $resource);
 

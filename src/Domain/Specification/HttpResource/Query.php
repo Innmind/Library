@@ -8,17 +8,17 @@ use Innmind\Specification\{
     Comparator,
     Sign,
 };
-use Innmind\Url\QueryInterface;
+use Innmind\Url\Query as QueryModel;
 
 final class Query implements Comparator, Specification
 {
     use Composable;
 
-    private $value;
+    private string $value;
 
-    public function __construct(QueryInterface $value)
+    public function __construct(QueryModel $value)
     {
-        $this->value = (string) $value;
+        $this->value = $value->toString();
     }
 
     /**
@@ -47,6 +47,6 @@ final class Query implements Comparator, Specification
 
     public function isSatisfiedBy(HttpResource $resource): bool
     {
-        return (string) $resource->query() === $this->value;
+        return $resource->query()->toString() === $this->value;
     }
 }

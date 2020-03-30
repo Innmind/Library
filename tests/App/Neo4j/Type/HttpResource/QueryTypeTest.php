@@ -4,10 +4,7 @@ declare(strict_types = 1);
 namespace Tests\App\Neo4j\Type\HttpResource;
 
 use App\Neo4j\Type\HttpResource\QueryType;
-use Innmind\Url\{
-    Query,
-    NullQuery,
-};
+use Innmind\Url\Query;
 use Innmind\Neo4j\ONM\Type;
 use PHPUnit\Framework\TestCase;
 
@@ -25,7 +22,7 @@ class QueryTypeTest extends TestCase
     {
         $this->assertSame(
             'foo',
-            (new QueryType)->forDatabase(new Query('foo'))
+            (new QueryType)->forDatabase(Query::of('foo'))
         );
     }
 
@@ -35,17 +32,17 @@ class QueryTypeTest extends TestCase
             Query::class,
             (new QueryType)->fromDatabase('foo')
         );
-        $this->assertInstanceOf(
-            NullQuery::class,
+        $this->assertEquals(
+            Query::none(),
             (new QueryType)->fromDatabase('')
         );
-        $this->assertInstanceOf(
-            NullQuery::class,
+        $this->assertEquals(
+            Query::none(),
             (new QueryType)->fromDatabase(null)
         );
         $this->assertSame(
             'foo',
-            (string) (new QueryType)->fromDatabase('foo')
+            (new QueryType)->fromDatabase('foo')->toString()
         );
     }
 

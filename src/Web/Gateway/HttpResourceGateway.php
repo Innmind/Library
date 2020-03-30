@@ -17,9 +17,9 @@ use Innmind\Rest\Server\{
 
 final class HttpResourceGateway implements Gateway
 {
-    private $resourceCreator;
-    private $resourceAccessor;
-    private $resourceLinker;
+    private HttpResourceGateway\ResourceCreator $resourceCreator;
+    private HttpResourceGateway\ResourceAccessor $resourceAccessor;
+    private HttpResourceGateway\ResourceLinker $resourceLinker;
 
     public function __construct(
         HttpResourceGateway\ResourceCreator $resourceCreator,

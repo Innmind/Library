@@ -19,10 +19,8 @@ use Innmind\Neo4j\ONM\{
     Repository,
     Exception\EntityNotFound,
 };
-use Innmind\Immutable\{
-    SetInterface,
-    Set,
-};
+use Innmind\Immutable\Set;
+use function Innmind\Immutable\unwrap;
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 
@@ -134,12 +132,12 @@ class AlternateRepositoryTest extends TestCase
         $identity = new Identity((string) Uuid::uuid4());
         $infra
             ->expects($this->at(0))
-            ->method('has')
+            ->method('contains')
             ->with($identity)
             ->willReturn(true);
         $infra
             ->expects($this->at(1))
-            ->method('has')
+            ->method('contains')
             ->with($identity)
             ->willReturn(false);
 
@@ -156,14 +154,18 @@ class AlternateRepositoryTest extends TestCase
             ->expects($this->once())
             ->method('all')
             ->willReturn(
-                $all = $this->createMock(SetInterface::class)
+                Set::of(
+                    Alternate::class,
+                    new Alternate(
+                        new Identity((string) Uuid::uuid4()),
+                        $this->createMock(HttpResourceIdentity::class),
+                        $this->createMock(HttpResourceIdentity::class),
+                        new Language('fr')
+                    )
+                )
             );
-        $all
-            ->expects($this->once())
-            ->method('size')
-            ->willReturn(42);
 
-        $this->assertSame(42, $repository->count());
+        $this->assertSame(1, $repository->count());
     }
 
     public function testAll()
@@ -175,7 +177,7 @@ class AlternateRepositoryTest extends TestCase
             ->expects($this->once())
             ->method('all')
             ->willReturn(
-                (new Set('object'))->add(
+                Set::objects(
                     $entity = new Alternate(
                         new Identity((string) Uuid::uuid4()),
                         $this->createMock(HttpResourceIdentity::class),
@@ -187,9 +189,9 @@ class AlternateRepositoryTest extends TestCase
 
         $all = $repository->all();
 
-        $this->assertInstanceOf(SetInterface::class, $all);
+        $this->assertInstanceOf(Set::class, $all);
         $this->assertSame(Alternate::class, (string) $all->type());
-        $this->assertSame([$entity], $all->toPrimitive());
+        $this->assertSame([$entity], unwrap($all));
     }
 
     public function testMatching()
@@ -203,7 +205,7 @@ class AlternateRepositoryTest extends TestCase
             ->method('matching')
             ->with($specification)
             ->willReturn(
-                (new Set('object'))->add(
+                Set::objects(
                     $entity = new Alternate(
                         new Identity((string) Uuid::uuid4()),
                         $this->createMock(HttpResourceIdentity::class),
@@ -215,8 +217,8 @@ class AlternateRepositoryTest extends TestCase
 
         $all = $repository->matching($specification);
 
-        $this->assertInstanceOf(SetInterface::class, $all);
+        $this->assertInstanceOf(Set::class, $all);
         $this->assertSame(Alternate::class, (string) $all->type());
-        $this->assertSame([$entity], $all->toPrimitive());
+        $this->assertSame([$entity], unwrap($all));
     }
 }

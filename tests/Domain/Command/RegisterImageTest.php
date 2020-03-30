@@ -10,8 +10,8 @@ use Domain\{
     Entity\HostResource\Identity as RelationIdentity
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query
 };
 use PHPUnit\Framework\TestCase;
 
@@ -23,8 +23,8 @@ class RegisterImageTest extends TestCase
             $identity = $this->createMock(Identity::class),
             $host = $this->createMock(HostIdentity::class),
             $relation = $this->createMock(RelationIdentity::class),
-            $path = $this->createMock(PathInterface::class),
-            $query = $this->createMock(QueryInterface::class)
+            $path = Path::none(),
+            $query = Query::none()
         );
 
         $this->assertSame($identity, $command->identity());

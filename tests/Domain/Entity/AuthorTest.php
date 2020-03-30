@@ -39,15 +39,15 @@ class AuthorTest extends TestCase
         $this->assertCount(1, $entity->recordedEvents());
         $this->assertInstanceOf(
             AuthorRegistered::class,
-            $entity->recordedEvents()->current()
+            $entity->recordedEvents()->first()
         );
         $this->assertSame(
             $identity,
-            $entity->recordedEvents()->current()->identity()
+            $entity->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $name,
-            $entity->recordedEvents()->current()->name()
+            $entity->recordedEvents()->first()->name()
         );
     }
 }

@@ -15,7 +15,7 @@ use Domain\{
     Entity\HttpResource\Identity as ResourceIdentity,
 };
 use Innmind\Specification\Comparator;
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use PHPUnit\Framework\TestCase;
 
 class HostTest extends TestCase
@@ -25,7 +25,7 @@ class HostTest extends TestCase
         $identity = $this->createMock(HostIdentity::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $spec = new Host($identity);
 
@@ -41,24 +41,24 @@ class HostTest extends TestCase
         $identity = $this->createMock(HostIdentity::class);
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $spec = new Host($identity);
         $relation = new Entity(
             $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(ResourceIdentity::class),
-            $this->createMock(PointInTimeInterface::class)
+            $this->createMock(PointInTime::class)
         );
         $relation
             ->host()
             ->expects($this->at(0))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('uuid');
         $relation
             ->host()
             ->expects($this->at(1))
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('foo');
 
         $this->assertTrue($spec->isSatisfiedBy($relation));

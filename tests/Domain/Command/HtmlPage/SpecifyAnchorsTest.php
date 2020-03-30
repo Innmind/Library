@@ -17,7 +17,7 @@ class SpecifyAnchorsTest extends TestCase
     {
         $command = new SpecifyAnchors(
             $identity = $this->createMock(Identity::class),
-            $anchors = new Set(Anchor::class)
+            $anchors = Set::of(Anchor::class)
         );
 
         $this->assertSame($identity, $command->identity());
@@ -27,11 +27,11 @@ class SpecifyAnchorsTest extends TestCase
     public function testThrowWhenInvalidAnchorSet()
     {
         $this->expectException(\TypeError::class);
-        $this->expectExceptionMessage('Argument 2 must be of type SetInterface<Domain\Entity\HtmlPage\Anchor>');
+        $this->expectExceptionMessage('Argument 2 must be of type Set<Domain\Entity\HtmlPage\Anchor>');
 
         new SpecifyAnchors(
             $this->createMock(Identity::class),
-            new Set('string')
+            Set::of('string')
         );
     }
 }

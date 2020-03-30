@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\Author\Identity,
     Entity\Author,
-    Specification\Author\Specification
+    Specification\Author\Specification,
+    Exception\AuthorNotFound,
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 interface AuthorRepository
 {
     /**
-     * @throws AuthorNotFoundException
+     * @throws AuthorNotFound
      */
     public function get(Identity $identity): Author;
     public function add(Author $author): self;
@@ -22,12 +23,12 @@ interface AuthorRepository
     public function count(): int;
 
     /**
-     * @return SetInterface<Author>
+     * @return Set<Author>
      */
-    public function all(): SetInterface;
+    public function all(): Set;
 
     /**
-     * @return SetInterface<Author>
+     * @return Set<Author>
      */
-    public function matching(Specification $specification): SetInterface;
+    public function matching(Specification $specification): Set;
 }

@@ -17,8 +17,8 @@ use Innmind\Rest\Server\{
 
 final class ImageGateway implements Gateway
 {
-    private $resourceCreator;
-    private $resourceAccessor;
+    private ImageGateway\ResourceCreator $resourceCreator;
+    private ImageGateway\ResourceAccessor $resourceAccessor;
 
     public function __construct(
         ImageGateway\ResourceCreator $resourceCreator,

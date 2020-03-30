@@ -10,7 +10,7 @@ use Domain\{
     Entity\HttpResource\Identity as ResourceIdentity,
     Event\ResourceAuthorRegistered,
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use Innmind\EventBus\ContainsRecordedEvents;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +22,7 @@ class ResourceAuthorTest extends TestCase
             $identity = $this->createMock(Identity::class),
             $author = $this->createMock(AuthorIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
-            $asOf = $this->createMock(PointInTimeInterface::class)
+            $asOf = $this->createMock(PointInTime::class)
         );
 
         $this->assertInstanceOf(ContainsRecordedEvents::class, $entity);
@@ -39,30 +39,30 @@ class ResourceAuthorTest extends TestCase
             $identity = $this->createMock(Identity::class),
             $author = $this->createMock(AuthorIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
-            $asOf = $this->createMock(PointInTimeInterface::class)
+            $asOf = $this->createMock(PointInTime::class)
         );
 
         $this->assertInstanceOf(ResourceAuthor::class, $entity);
         $this->assertCount(1, $entity->recordedEvents());
         $this->assertInstanceOf(
             ResourceAuthorRegistered::class,
-            $entity->recordedEvents()->current()
+            $entity->recordedEvents()->first()
         );
         $this->assertSame(
             $identity,
-            $entity->recordedEvents()->current()->identity()
+            $entity->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $author,
-            $entity->recordedEvents()->current()->author()
+            $entity->recordedEvents()->first()->author()
         );
         $this->assertSame(
             $resource,
-            $entity->recordedEvents()->current()->resource()
+            $entity->recordedEvents()->first()->resource()
         );
         $this->assertSame(
             $asOf,
-            $entity->recordedEvents()->current()->asOf()
+            $entity->recordedEvents()->first()->asOf()
         );
     }
 }

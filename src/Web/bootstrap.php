@@ -52,9 +52,14 @@ function bootstrap(
     string $apiKey
 ): RequestHandler {
     $framework = framework();
+    /**
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress InvalidArgument
+     * @psalm-suppress InvalidScalarArgument
+     */
     $rest = $framework['bridge']['rest_server'](
         Map::of('string', Gateway::class)
-            (
+            ->put(
                 'http_resource',
                 new HttpResourceGateway(
                     new HttpResourceGateway\ResourceCreator($bus),
@@ -62,14 +67,14 @@ function bootstrap(
                     new HttpResourceGateway\ResourceLinker($bus)
                 )
             )
-            (
+            ->put(
                 'image',
                 new ImageGateway(
                     new ImageGateway\ResourceCreator($bus),
                     new ImageGateway\ResourceAccessor($imageRepository, $dbal)
                 )
             )
-            (
+            ->put(
                 'html_page',
                 new HtmlPageGateway(
                     new HtmlPageGateway\ResourceCreator($bus),
@@ -80,12 +85,16 @@ function bootstrap(
         require __DIR__.'/config/rest.php',
         Route::of(
             new Route\Name('capabilities'),
-            Str::of('OPTIONS /\*')
+            Str::of('OPTIONS /*')
         ),
         new Prefix('/api')
     );
 
     $auth = auth();
+    /**
+     * @psalm-suppress InvalidArgument
+     * @psalm-suppress InvalidScalarArgument
+     */
     $authenticate = $framework['authenticate'](
         $auth['validate_authorization_header'](
             $auth['any'](

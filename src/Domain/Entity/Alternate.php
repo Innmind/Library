@@ -18,10 +18,10 @@ final class Alternate implements ContainsRecordedEvents
 {
     use EventRecorder;
 
-    private $identity;
-    private $resource;
-    private $alternate;
-    private $language;
+    private Identity $identity;
+    private ResourceIdentity $resource;
+    private ResourceIdentity $alternate;
+    private Language $language;
 
     public function __construct(
         Identity $identity,

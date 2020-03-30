@@ -10,7 +10,7 @@ use Domain\{
     Entity\Host\Identity as HostIdentity,
     Event\DomainHostCreated,
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use Innmind\EventBus\ContainsRecordedEvents;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +22,7 @@ class DomainHostTest extends TestCase
             $identity = $this->createMock(Identity::class),
             $domain = $this->createMock(DomainIdentity::class),
             $host = $this->createMock(HostIdentity::class),
-            $foundAt = $this->createMock(PointInTimeInterface::class)
+            $foundAt = $this->createMock(PointInTime::class)
         );
 
         $this->assertInstanceOf(ContainsRecordedEvents::class, $entity);
@@ -39,30 +39,30 @@ class DomainHostTest extends TestCase
             $identity = $this->createMock(Identity::class),
             $domain = $this->createMock(DomainIdentity::class),
             $host = $this->createMock(HostIdentity::class),
-            $foundAt = $this->createMock(PointInTimeInterface::class)
+            $foundAt = $this->createMock(PointInTime::class)
         );
 
         $this->assertInstanceOf(DomainHost::class, $entity);
         $this->assertCount(1, $entity->recordedEvents());
         $this->assertInstanceOf(
             DomainHostCreated::class,
-            $entity->recordedEvents()->current()
+            $entity->recordedEvents()->first()
         );
         $this->assertSame(
             $identity,
-            $entity->recordedEvents()->current()->identity()
+            $entity->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $domain,
-            $entity->recordedEvents()->current()->domain()
+            $entity->recordedEvents()->first()->domain()
         );
         $this->assertSame(
             $host,
-            $entity->recordedEvents()->current()->host()
+            $entity->recordedEvents()->first()->host()
         );
         $this->assertSame(
             $foundAt,
-            $entity->recordedEvents()->current()->foundAt()
+            $entity->recordedEvents()->first()->foundAt()
         );
     }
 }

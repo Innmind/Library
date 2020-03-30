@@ -11,9 +11,9 @@ use Domain\Entity\{
 
 final class RegisterAuthor
 {
-    private $identity;
-    private $author;
-    private $resource;
+    private Identity $identity;
+    private AuthorIdentity $author;
+    private ResourceIdentity $resource;
 
     public function __construct(
         Identity $identity,

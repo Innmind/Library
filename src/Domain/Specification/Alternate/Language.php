@@ -16,7 +16,7 @@ final class Language implements Comparator, Specification
 {
     use Composable;
 
-    private $value;
+    private string $value;
 
     public function __construct(Model $value)
     {

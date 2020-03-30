@@ -8,11 +8,11 @@ use Innmind\Immutable\Str;
 
 final class Language
 {
-    private $value;
+    private string $value;
 
     public function __construct(string $value)
     {
-        if (!(new Str($value))->matches('~^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$~')) {
+        if (!Str::of($value)->matches('~^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$~')) {
             throw new DomainException;
         }
 

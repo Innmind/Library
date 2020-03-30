@@ -28,8 +28,8 @@ use Innmind\Immutable\{
 
 final class ResourceAccessor implements ResourceAccessorInterface
 {
-    private $repository;
-    private $dbal;
+    private HtmlPageRepository $repository;
+    private Connection $dbal;
 
     public function __construct(
         HtmlPageRepository $repository,
@@ -44,82 +44,60 @@ final class ResourceAccessor implements ResourceAccessorInterface
         RestIdentity $identity
     ): HttpResource {
         $resource = $this->repository->get(
-            new Identity((string) $identity)
+            new Identity($identity->toString())
         );
         $result = $this->dbal->execute(
             (new Query)
-                ->match('host', ['Web', 'Host'])
-                ->linkedTo('resource', ['Web', 'Resource'])
+                ->match('host', 'Web', 'Host')
+                ->linkedTo('resource', 'Web', 'Resource')
                 ->through('RESOURCE_OF_HOST')
                 ->where('resource.identity = {identity}')
-                ->withParameter('identity', (string) $identity)
+                ->withParameter('identity', $identity->toString())
                 ->with('host', 'resource')
-                ->maybeMatch('author', ['Person', 'Author'])
+                ->maybeMatch('author', 'Person', 'Author')
                 ->linkedTo('resource')
                 ->through('AUTHOR_OF_RESOURCE')
                 ->with('host', 'resource', 'author')
-                ->maybeMatch('citation', ['Citation'])
+                ->maybeMatch('citation', 'Citation')
                 ->linkedTo('resource')
                 ->through('CITED_IN_RESOURCE')
                 ->return('host', 'author', 'collect(citation.text) as citations')
         );
-        $properties = (new Map('string', Property::class))
-            ->put(
-                'identity',
-                new Property('identity', (string) $resource->identity())
-            )
-            ->put(
-                'host',
-                new Property('host', $result->rows()->first()->value()['name'])
-            )
-            ->put(
-                'path',
-                new Property('path', (string) $resource->path())
-            )
-            ->put(
-                'query',
-                new Property('query', (string) $resource->query())
-            )
-            ->put(
+        /**
+         * @psalm-suppress PossiblyInvalidArrayAccess
+         * @var list<Property>
+         */
+        $properties = [
+            new Property('identity', $resource->identity()->toString()),
+            new Property('host', $result->rows()->first()->value()['name']),
+            new Property('path', $resource->path()->toString()),
+            new Property('query', $resource->query()->toString()),
+            new Property(
                 'languages',
-                new Property(
-                    'languages',
-                    $resource
-                        ->languages()
-                        ->reduce(
-                            new Set('string'),
-                            function(Set $carry, Language $language): Set {
-                                return $carry->add((string) $language);
-                            }
-                        )
-                )
-            )
-            ->put(
+                $resource
+                    ->languages()
+                    ->reduce(
+                        Set::of('string'),
+                        function(Set $carry, Language $language): Set {
+                            return $carry->add((string) $language);
+                        }
+                    )
+            ),
+            new Property(
                 'anchors',
-                new Property(
-                    'anchors',
-                    $resource
-                        ->anchors()
-                        ->reduce(
-                            new Set('string'),
-                            function(Set $carry, Anchor $anchor): Set {
-                                return $carry->add((string) $anchor);
-                            }
-                        )
-                )
-            )
-            ->put(
-                'main_content',
-                new Property('main_content', $resource->mainContent())
-            )
-            ->put(
-                'description',
-                new Property('description', $resource->description())
-            )
-            ->put(
-                'title',
-                new Property('title', $resource->title())
-            );
+                $resource
+                    ->anchors()
+                    ->reduce(
+                        Set::of('string'),
+                        function(Set $carry, Anchor $anchor): Set {
+                            return $carry->add((string) $anchor);
+                        }
+                    )
+            ),
+            new Property('main_content', $resource->mainContent()),
+            new Property('description', $resource->description()),
+            new Property('title', $resource->title()),
+        ];
 
         $authors = $result
             ->rows()
@@ -133,60 +111,44 @@ final class ResourceAccessor implements ResourceAccessorInterface
             });
 
         if ($authors->count() > 0) {
-            $properties = $properties->put(
-                'author',
-                new Property('author', $authors->first()->value()['name'])
-            );
+            /** @psalm-suppress PossiblyInvalidArrayAccess */
+            $properties[] = new Property('author', $authors->first()->value()['name']);
         }
 
         if ($citations->count() > 0) {
-            $set = new Set('string');
+            $set = Set::strings();
 
+            /**
+             * @psalm-suppress PossiblyInvalidIterator
+             * @var string $citation
+             */
             foreach ($citations->first()->value() as $citation) {
                 $set = $set->add($citation);
             }
 
-            $properties = $properties->put(
-                'citations',
-                new Property('citations', $set)
-            );
+            $properties[] = new Property('citations', $set);
         }
 
         if ($resource->hasCharset()) {
-            $properties = $properties->put(
-                'charset',
-                new Property('charset', (string) $resource->charset())
-            );
+            $properties[] = new Property('charset', (string) $resource->charset());
         }
 
         if ($resource->hasThemeColour()) {
-            $properties = $properties->put(
-                'theme_colour',
-                new Property('theme_colour', (string) $resource->themeColour())
-            );
+            $properties[] = new Property('theme_colour', $resource->themeColour()->toString());
         }
 
         if ($resource->hasAndroidAppLink()) {
-            $properties = $properties->put(
-                'android_app_link',
-                new Property('android_app_link', (string) $resource->androidAppLink())
-            );
+            $properties[] = new Property('android_app_link', $resource->androidAppLink()->toString());
         }
 
         if ($resource->hasIosAppLink()) {
-            $properties = $properties->put(
-                'ios_app_link',
-                new Property('ios_app_link', (string) $resource->iosAppLink())
-            );
+            $properties[] = new Property('ios_app_link', $resource->iosAppLink()->toString());
         }
 
         if ($resource->hasPreview()) {
-            $properties = $properties->put(
-                'preview',
-                new Property('preview', (string) $resource->preview())
-            );
+            $properties[] = new Property('preview', $resource->preview()->toString());
         }
 
-        return new HttpResource\HttpResource($definition, $properties);
+        return HttpResource\HttpResource::of($definition, ...$properties);
     }
 }

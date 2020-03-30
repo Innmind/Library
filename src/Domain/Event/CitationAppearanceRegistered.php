@@ -8,20 +8,20 @@ use Domain\{
     Entity\Citation\Identity as CitationIdentity,
     Entity\HttpResource\Identity as ResourceIdentity
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 
 final class CitationAppearanceRegistered
 {
-    private $identity;
-    private $citation;
-    private $resource;
-    private $foundAt;
+    private Identity $identity;
+    private CitationIdentity $citation;
+    private ResourceIdentity $resource;
+    private PointInTime $foundAt;
 
     public function __construct(
         Identity $identity,
         CitationIdentity $citation,
         ResourceIdentity $resource,
-        PointInTimeInterface $foundAt
+        PointInTime $foundAt
     ) {
         $this->identity = $identity;
         $this->citation = $citation;
@@ -44,7 +44,7 @@ final class CitationAppearanceRegistered
         return $this->resource;
     }
 
-    public function foundAt(): PointInTimeInterface
+    public function foundAt(): PointInTime
     {
         return $this->foundAt;
     }

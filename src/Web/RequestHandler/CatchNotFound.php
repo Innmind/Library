@@ -20,12 +20,12 @@ use Innmind\HttpFramework\RequestHandler;
 use Innmind\Http\Message\{
     ServerRequest,
     Response,
-    StatusCode\StatusCode,
+    StatusCode,
 };
 
 final class CatchNotFound implements RequestHandler
 {
-    private $handle;
+    private RequestHandler $handle;
 
     public function __construct(RequestHandler $handle)
     {

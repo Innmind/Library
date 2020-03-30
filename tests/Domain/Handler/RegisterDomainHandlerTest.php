@@ -18,10 +18,7 @@ use Domain\{
 };
 use Domain\Specification;
 use Innmind\Url\Authority\Host;
-use Innmind\Immutable\{
-    Set,
-    SetInterface,
-};
+use Innmind\Immutable\Set;
 use Pdp\{
     Rules,
     Manager,
@@ -40,7 +37,7 @@ class RegisterDomainHandlerTest extends TestCase
         );
         $command = new RegisterDomain(
             $this->createMock(Identity::class),
-            new Host('www.example.co.uk')
+            Host::of('www.example.co.uk')
         );
 
         $repository
@@ -52,7 +49,7 @@ class RegisterDomainHandlerTest extends TestCase
                     $spec->left()->value() === 'example' &&
                     $spec->right()->value() === 'co.uk';
             }))
-            ->willReturn(new Set(Domain::class));
+            ->willReturn(Set::of(Domain::class));
         $repository
             ->expects($this->once())
             ->method('add')
@@ -72,7 +69,7 @@ class RegisterDomainHandlerTest extends TestCase
         );
         $command = new RegisterDomain(
             $this->createMock(Identity::class),
-            new Host('www.example.co.uk')
+            Host::of('www.example.co.uk')
         );
 
         $repository
@@ -85,25 +82,18 @@ class RegisterDomainHandlerTest extends TestCase
                     $spec->right()->value() === 'co.uk';
             }))
             ->willReturn(
-                $set = $this->createMock(SetInterface::class)
+                Set::of(
+                    Domain::class,
+                    new Domain(
+                        $this->createMock(Identity::class),
+                        new NameModel('foo'),
+                        new TLD('fr')
+                    )
+                )
             );
         $repository
             ->expects($this->never())
             ->method('add');
-        $set
-            ->expects($this->once())
-            ->method('size')
-            ->willReturn(1);
-        $set
-            ->expects($this->once())
-            ->method('current')
-            ->willReturn(
-                new Domain(
-                    $this->createMock(Identity::class),
-                    new NameModel('foo'),
-                    new TLD('fr')
-                )
-            );
 
         $this->expectException(DomainAlreadyExist::class);
 

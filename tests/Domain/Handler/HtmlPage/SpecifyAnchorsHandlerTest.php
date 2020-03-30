@@ -13,8 +13,8 @@ use Domain\{
     Event\HtmlPage\AnchorsSpecified
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query
 };
 use Innmind\Immutable\Set;
 use PHPUnit\Framework\TestCase;
@@ -28,7 +28,7 @@ class SpecifyAnchorsHandlerTest extends TestCase
         );
         $command = new SpecifyAnchors(
             $this->createMock(Identity::class),
-            new Set(Anchor::class)
+            Set::of(Anchor::class)
         );
         $repository
             ->expects($this->once())
@@ -37,8 +37,8 @@ class SpecifyAnchorsHandlerTest extends TestCase
             ->willReturn(
                 $page = new HtmlPage(
                     $command->identity(),
-                    $this->createMock(PathInterface::class),
-                    $this->createMock(QueryInterface::class)
+                    Path::none(),
+                    Query::none()
                 )
             );
 
@@ -46,7 +46,7 @@ class SpecifyAnchorsHandlerTest extends TestCase
         $this->assertSame($command->anchors(), $page->anchors());
         $this->assertInstanceOf(
             AnchorsSpecified::class,
-            $page->recordedEvents()->current()
+            $page->recordedEvents()->first()
         );
     }
 }

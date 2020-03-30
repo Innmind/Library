@@ -12,27 +12,26 @@ use Innmind\Specification\{
     Comparator,
     Sign,
 };
-use Innmind\Immutable\{
-    SetInterface,
-    Set,
+use Innmind\Immutable\Set;
+use function Innmind\Immutable\{
+    unwrap,
+    assertSet,
 };
 
 final class InResources implements Comparator, Specification
 {
     use Composable;
 
-    private $value;
+    private Set $value;
 
-    public function __construct(SetInterface $value)
+    public function __construct(Set $value)
     {
-        if ((string) $value->type() !== Identity::class) {
-            throw new InvalidArgumentException;
-        }
+        assertSet(Identity::class, $value, 1);
 
         $this->value = $value->reduce(
-            new Set('string'),
+            Set::of('string'),
             static function(Set $carry, Identity $identity): Set {
-                return $carry->add((string) $identity);
+                return $carry->add($identity->toString());
             }
         );
     }
@@ -58,11 +57,11 @@ final class InResources implements Comparator, Specification
      */
     public function value()
     {
-        return $this->value->toPrimitive();
+        return unwrap($this->value);
     }
 
     public function isSatisfiedBy(HostResource $relation): bool
     {
-        return $this->value->contains((string) $relation->resource());
+        return $this->value->contains($relation->resource()->toString());
     }
 }

@@ -8,20 +8,20 @@ use Domain\Entity\{
     Domain\Identity as DomainIdentity,
     DomainHost\Identity as RelationIdentity
 };
-use Innmind\Url\Authority\HostInterface;
+use Innmind\Url\Authority\Host;
 
 final class RegisterHost
 {
-    private $identity;
-    private $domain;
-    private $relation;
-    private $host;
+    private Identity $identity;
+    private DomainIdentity $domain;
+    private RelationIdentity $relation;
+    private Host $host;
 
     public function __construct(
         Identity $identity,
         DomainIdentity $domain,
         RelationIdentity $relation,
-        HostInterface $host
+        Host $host
     ) {
         $this->identity = $identity;
         $this->domain = $domain;
@@ -44,7 +44,7 @@ final class RegisterHost
         return $this->relation;
     }
 
-    public function host(): HostInterface
+    public function host(): Host
     {
         return $this->host;
     }

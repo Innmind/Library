@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\Alternate\Identity,
     Entity\Alternate,
-    Specification\Alternate\Specification
+    Specification\Alternate\Specification,
+    Exception\AlternateNotFound,
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 interface AlternateRepository
 {
     /**
-     * @throws AlternateNotFoundException
+     * @throws AlternateNotFound
      */
     public function get(Identity $identity): Alternate;
     public function add(Alternate $alternate): self;
@@ -22,12 +23,12 @@ interface AlternateRepository
     public function count(): int;
 
     /**
-     * @return SetInterface<Alternate>
+     * @return Set<Alternate>
      */
-    public function all(): SetInterface;
+    public function all(): Set;
 
     /**
-     * @return SetInterface<Alternate>
+     * @return Set<Alternate>
      */
-    public function matching(Specification $specification): SetInterface;
+    public function matching(Specification $specification): Set;
 }

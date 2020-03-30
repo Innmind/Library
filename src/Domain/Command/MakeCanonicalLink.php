@@ -10,9 +10,9 @@ use Domain\Entity\{
 
 final class MakeCanonicalLink
 {
-    private $identity;
-    private $canonical;
-    private $resource;
+    private Identity $identity;
+    private ResourceIdentity $canonical;
+    private ResourceIdentity $resource;
 
     public function __construct(
         Identity $identity,

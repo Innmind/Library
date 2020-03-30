@@ -20,6 +20,10 @@ use Innmind\Immutable\{
     Map,
 };
 
+/**
+ * @psalm-suppress InvalidArgument
+ * @psalm-suppress InvalidScalarArgument
+ */
 return Directory::of(
     'web',
     Set::of(Directory::class),
@@ -62,7 +66,7 @@ return Directory::of(
         ),
         Set::of(Action::class, Action::get(), Action::create(), Action::link()),
         Set::of(AllowedLink::class, new AllowedLink('referrer', 'web.resource')),
-        Map::of('scalar', 'variable')
+        Map::of('scalar', 'scalar|array')
             ('allowed_media_types', ['*/*; q=0.1'])
     ),
     HttpResource::rangeable(
@@ -114,7 +118,7 @@ return Directory::of(
         ),
         Set::of(Action::class, Action::get(), Action::create()),
         null,
-        Map::of('scalar', 'variable')
+        Map::of('scalar', 'scalar|array')
             ('allowed_media_types', ['image/*'])
     ),
     HttpResource::rangeable(
@@ -219,7 +223,7 @@ return Directory::of(
             ),
             new AllowedLink('canonical', 'web.html_page')
         ),
-        Map::of('scalar', 'variable')
+        Map::of('scalar', 'scalar|array')
             ('allowed_media_types', [
                 'text/html',
                 'text/xml',

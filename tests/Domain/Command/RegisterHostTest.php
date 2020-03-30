@@ -9,7 +9,7 @@ use Domain\{
     Entity\Domain\Identity as DomainIdentity,
     Entity\DomainHost\Identity as RelationIdentity
 };
-use Innmind\Url\Authority\HostInterface;
+use Innmind\Url\Authority\Host;
 use PHPUnit\Framework\TestCase;
 
 class RegisterHostTest extends TestCase
@@ -20,7 +20,7 @@ class RegisterHostTest extends TestCase
             $identity = $this->createMock(Identity::class),
             $domain = $this->createMock(DomainIdentity::class),
             $relation = $this->createMock(RelationIdentity::class),
-            $host = $this->createMock(HostInterface::class)
+            $host = Host::none()
         );
 
         $this->assertSame($identity, $command->identity());

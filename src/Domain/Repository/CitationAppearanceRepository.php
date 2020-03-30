@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\CitationAppearance\Identity,
     Entity\CitationAppearance,
-    Specification\CitationAppearance\Specification
+    Specification\CitationAppearance\Specification,
+    Exception\CitationAppearanceNotFound,
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 interface CitationAppearanceRepository
 {
     /**
-     * @throws CitationAppearanceNotFoundException
+     * @throws CitationAppearanceNotFound
      */
     public function get(Identity $identity): CitationAppearance;
     public function add(CitationAppearance $citationAppearance): self;
@@ -22,12 +23,12 @@ interface CitationAppearanceRepository
     public function count(): int;
 
     /**
-     * @return SetInterface<CitationAppearance>
+     * @return Set<CitationAppearance>
      */
-    public function all(): SetInterface;
+    public function all(): Set;
 
     /**
-     * @return SetInterface<CitationAppearance>
+     * @return Set<CitationAppearance>
      */
-    public function matching(Specification $specification): SetInterface;
+    public function matching(Specification $specification): Set;
 }

@@ -11,10 +11,11 @@ use Domain\{
     Specification\Reference\Target,
     Exception\ReferenceAlreadyExist
 };
+use function Innmind\Immutable\first;
 
 final class ReferResourceHandler
 {
-    private $repository;
+    private ReferenceRepository $repository;
 
     public function __construct(ReferenceRepository $repository)
     {
@@ -23,13 +24,14 @@ final class ReferResourceHandler
 
     public function __invoke(ReferResource $wished): void
     {
+        /** @psalm-suppress InvalidArgument */
         $references = $this->repository->matching(
             (new Source($wished->source()))
                 ->and(new Target($wished->target()))
         );
 
         if ($references->size() > 0) {
-            throw new ReferenceAlreadyExist($references->current());
+            throw new ReferenceAlreadyExist(first($references));
         }
 
         $this->repository->add(

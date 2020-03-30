@@ -10,7 +10,7 @@ use Domain\{
 
 final class AddDescriptionHandler
 {
-    private $repository;
+    private ImageRepository $repository;
 
     public function __construct(ImageRepository $repository)
     {

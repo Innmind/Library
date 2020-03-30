@@ -7,12 +7,11 @@ use Domain\Entity\Reference;
 
 final class ReferenceAlreadyExist extends LogicException
 {
-    private $reference;
+    private Reference $reference;
 
     public function __construct(Reference $reference)
     {
         $this->reference = $reference;
-        parent::__construct();
     }
 
     /**

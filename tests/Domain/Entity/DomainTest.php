@@ -43,19 +43,19 @@ class DomainTest extends TestCase
         $this->assertCount(1, $domain->recordedEvents());
         $this->assertInstanceOf(
             DomainRegistered::class,
-            $domain->recordedEvents()->current()
+            $domain->recordedEvents()->first()
         );
         $this->assertSame(
             $identity,
-            $domain->recordedEvents()->current()->identity()
+            $domain->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $name,
-            $domain->recordedEvents()->current()->name()
+            $domain->recordedEvents()->first()->name()
         );
         $this->assertSame(
             $tld,
-            $domain->recordedEvents()->current()->tld()
+            $domain->recordedEvents()->first()->tld()
         );
     }
 }

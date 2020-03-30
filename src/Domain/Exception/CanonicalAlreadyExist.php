@@ -7,12 +7,11 @@ use Domain\Entity\Canonical;
 
 final class CanonicalAlreadyExist extends LogicException
 {
-    private $canonical;
+    private Canonical $canonical;
 
     public function __construct(Canonical $canonical)
     {
         $this->canonical = $canonical;
-        parent::__construct();
     }
 
     /**

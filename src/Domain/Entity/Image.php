@@ -16,42 +16,49 @@ use Domain\{
     Exception\InvalidArgumentException,
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface,
+    Path,
+    Query,
 };
-use Innmind\Immutable\{
-    Set,
-    SetInterface,
-};
+use Innmind\Immutable\Set;
 
 final class Image extends HttpResource
 {
-    private $dimension;
-    private $weight;
-    private $descriptions;
+    private ?Dimension $dimension = null;
+    private ?Weight $weight = null;
+    /** @var Set<Description> */
+    private Set $descriptions;
 
     public function __construct(
         ResourceIdentity $identity,
-        PathInterface $path,
-        QueryInterface $query
+        Path $path,
+        Query $query
     ) {
         if (!$identity instanceof Identity) {
             throw new InvalidArgumentException;
         }
 
         parent::__construct($identity, $path, $query);
-        $this->descriptions = new Set(Description::class);
+        /** @var Set<Description> */
+        $this->descriptions = Set::of(Description::class);
     }
 
     public static function register(
         ResourceIdentity $identity,
-        PathInterface $path,
-        QueryInterface $query
-    ): HttpResource {
+        Path $path,
+        Query $query
+    ): self {
         $self = new self($identity, $path, $query);
+        /** @psalm-suppress ArgumentTypeCoercion */
         $self->record(new ImageRegistered($identity, $path, $query));
 
         return $self;
+    }
+
+    /** @psalm-suppress MoreSpecificReturnType */
+    public function identity(): Identity
+    {
+        /** @psalm-suppress LessSpecificReturnStatement */
+        return parent::identity();
     }
 
     public function specifyDimension(Dimension $dimension): self
@@ -67,8 +74,10 @@ final class Image extends HttpResource
         return $this->dimension instanceof Dimension;
     }
 
+    /** @psalm-suppress InvalidNullableReturnType */
     public function dimension(): Dimension
     {
+        /** @psalm-suppress NullableReturnStatement */
         return $this->dimension;
     }
 
@@ -85,8 +94,10 @@ final class Image extends HttpResource
         return $this->weight instanceof Weight;
     }
 
+    /** @psalm-suppress InvalidNullableReturnType */
     public function weight(): Weight
     {
+        /** @psalm-suppress NullableReturnStatement */
         return $this->weight;
     }
 
@@ -110,9 +121,9 @@ final class Image extends HttpResource
     }
 
     /**
-     * @return SetInterface<Description>
+     * @return Set<Description>
      */
-    public function descriptions(): SetInterface
+    public function descriptions(): Set
     {
         return $this->descriptions;
     }

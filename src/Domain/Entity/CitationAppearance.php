@@ -9,7 +9,7 @@ use Domain\{
     Entity\HttpResource\Identity as ResourceIdentity,
     Event\CitationAppearanceRegistered,
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use Innmind\EventBus\{
     ContainsRecordedEvents,
     EventRecorder,
@@ -19,16 +19,16 @@ final class CitationAppearance implements ContainsRecordedEvents
 {
     use EventRecorder;
 
-    private $identity;
-    private $citation;
-    private $resource;
-    private $foundAt;
+    private Identity $identity;
+    private CitationIdentity $citation;
+    private ResourceIdentity $resource;
+    private PointInTime $foundAt;
 
     public function __construct(
         Identity $identity,
         CitationIdentity $citation,
         ResourceIdentity $resource,
-        PointInTimeInterface $foundAt
+        PointInTime $foundAt
     ) {
         $this->identity = $identity;
         $this->citation = $citation;
@@ -40,7 +40,7 @@ final class CitationAppearance implements ContainsRecordedEvents
         Identity $identity,
         CitationIdentity $citation,
         ResourceIdentity $resource,
-        PointInTimeInterface $foundAt
+        PointInTime $foundAt
     ): self {
         $self = new self($identity, $citation, $resource, $foundAt);
         $self->record(new CitationAppearanceRegistered(
@@ -68,7 +68,7 @@ final class CitationAppearance implements ContainsRecordedEvents
         return $this->resource;
     }
 
-    public function foundAt(): PointInTimeInterface
+    public function foundAt(): PointInTime
     {
         return $this->foundAt;
     }

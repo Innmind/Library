@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\Reference\Identity,
     Entity\Reference,
-    Specification\Reference\Specification
+    Specification\Reference\Specification,
+    Exception\ReferenceNotFound,
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 interface ReferenceRepository
 {
     /**
-     * @throws ReferenceNotFoundException
+     * @throws ReferenceNotFound
      */
     public function get(Identity $identity): Reference;
     public function add(Reference $reference): self;
@@ -22,12 +23,12 @@ interface ReferenceRepository
     public function count(): int;
 
     /**
-     * @return SetInterface<Reference>
+     * @return Set<Reference>
      */
-    public function all(): SetInterface;
+    public function all(): Set;
 
     /**
-     * @return SetInterface<Reference>
+     * @return Set<Reference>
      */
-    public function matching(Specification $specification): SetInterface;
+    public function matching(Specification $specification): Set;
 }

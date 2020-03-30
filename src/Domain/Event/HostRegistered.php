@@ -10,8 +10,8 @@ use Domain\Entity\Host\{
 
 final class HostRegistered
 {
-    private $identity;
-    private $name;
+    private Identity $identity;
+    private Name $name;
 
     public function __construct(
         Identity $identity,

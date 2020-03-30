@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\Canonical\Identity,
     Entity\Canonical,
-    Specification\Canonical\Specification
+    Specification\Canonical\Specification,
+    Exception\CanonicalNotFound,
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 interface CanonicalRepository
 {
     /**
-     * @throws CanonicalNotFoundException
+     * @throws CanonicalNotFound
      */
     public function get(Identity $identity): Canonical;
     public function add(Canonical $canonical): self;
@@ -22,12 +23,12 @@ interface CanonicalRepository
     public function count(): int;
 
     /**
-     * @return SetInterface<Canonical>
+     * @return Set<Canonical>
      */
-    public function all(): SetInterface;
+    public function all(): Set;
 
     /**
-     * @return SetInterface<Canonical>
+     * @return Set<Canonical>
      */
-    public function matching(Specification $specification): SetInterface;
+    public function matching(Specification $specification): Set;
 }

@@ -14,8 +14,8 @@ use Domain\{
     Exception\DomainException,
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface,
+    Path,
+    Query,
 };
 use Innmind\EventBus\ContainsRecordedEvents;
 use Innmind\Immutable\Set;
@@ -27,8 +27,8 @@ class HttpResourceTest extends TestCase
     {
         $resource = new HttpResource(
             $identity = $this->createMock(Identity::class),
-            $path = $this->createMock(PathInterface::class),
-            $query = $this->createMock(QueryInterface::class)
+            $path = Path::none(),
+            $query = Query::none()
         );
 
         $this->assertInstanceOf(ContainsRecordedEvents::class, $resource);
@@ -42,8 +42,8 @@ class HttpResourceTest extends TestCase
     {
         $resource = HttpResource::register(
             $identity = $this->createMock(Identity::class),
-            $path = $this->createMock(PathInterface::class),
-            $query = $this->createMock(QueryInterface::class)
+            $path = Path::none(),
+            $query = Query::none()
         );
 
         $this->assertInstanceOf(HttpResource::class, $resource);
@@ -53,19 +53,19 @@ class HttpResourceTest extends TestCase
         $this->assertCount(1, $resource->recordedEvents());
         $this->assertInstanceOf(
             HttpResourceRegistered::class,
-            $resource->recordedEvents()->current()
+            $resource->recordedEvents()->first()
         );
-        $this->assertSame($identity, $resource->recordedEvents()->current()->identity());
-        $this->assertSame($path, $resource->recordedEvents()->current()->path());
-        $this->assertSame($query, $resource->recordedEvents()->current()->query());
+        $this->assertSame($identity, $resource->recordedEvents()->first()->identity());
+        $this->assertSame($path, $resource->recordedEvents()->first()->path());
+        $this->assertSame($query, $resource->recordedEvents()->first()->query());
     }
 
     public function testSpecifyLanguages()
     {
         $resource = new HttpResource(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
         $this->assertCount(0, $resource->languages());
@@ -76,7 +76,7 @@ class HttpResourceTest extends TestCase
         $this->assertSame(
             $resource,
             $resource->specifyLanguages(
-                $languages = (new Set(Language::class))
+                $languages = (Set::of(Language::class))
                     ->add(new Language('fr'))
             )
         );
@@ -84,28 +84,28 @@ class HttpResourceTest extends TestCase
         $this->assertCount(1, $resource->recordedEvents());
         $this->assertInstanceOf(
             LanguagesSpecified::class,
-            $resource->recordedEvents()->current()
+            $resource->recordedEvents()->first()
         );
         $this->assertSame(
             $resource->identity(),
-            $resource->recordedEvents()->current()->identity()
+            $resource->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $resource->languages(),
-            $resource->recordedEvents()->current()->languages()
+            $resource->recordedEvents()->first()->languages()
         );
     }
 
     public function testThrowWhenInvalidLanguagesType()
     {
         $this->expectException(\TypeError::class);
-        $this->expectExceptionMessage('Argument 1 must be of type SetInterface<Domain\Model\Language>');
+        $this->expectExceptionMessage('Argument 1 must be of type Set<Domain\Model\Language>');
 
         (new HttpResource(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
-        ))->specifyLanguages((new Set('int'))->add(42));
+            Path::none(),
+            Query::none()
+        ))->specifyLanguages((Set::of('int'))->add(42));
     }
 
     public function testThrowWhenEmptyLanguagesSet()
@@ -114,17 +114,17 @@ class HttpResourceTest extends TestCase
 
         (new HttpResource(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
-        ))->specifyLanguages(new Set(Language::class));
+            Path::none(),
+            Query::none()
+        ))->specifyLanguages(Set::of(Language::class));
     }
 
     public function testSpecifyCharset()
     {
         $resource = new HttpResource(
             $this->createMock(Identity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            Path::none(),
+            Query::none()
         );
 
         $this->assertFalse($resource->hasCharset());
@@ -137,15 +137,15 @@ class HttpResourceTest extends TestCase
         $this->assertCount(1, $resource->recordedEvents());
         $this->assertInstanceOf(
             CharsetSpecified::class,
-            $resource->recordedEvents()->current()
+            $resource->recordedEvents()->first()
         );
         $this->assertSame(
             $resource->identity(),
-            $resource->recordedEvents()->current()->identity()
+            $resource->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $resource->charset(),
-            $resource->recordedEvents()->current()->charset()
+            $resource->recordedEvents()->first()->charset()
         );
     }
 }

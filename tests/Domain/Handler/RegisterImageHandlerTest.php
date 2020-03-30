@@ -24,12 +24,12 @@ use Domain\{
     Exception\ImageAlreadyExist,
 };
 use Innmind\TimeContinuum\{
-    TimeContinuumInterface,
-    PointInTimeInterface,
+    Clock,
+    PointInTime,
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface,
+    Path as PathModel,
+    Query as QueryModel,
 };
 use Innmind\Immutable\Set;
 use PHPUnit\Framework\TestCase;
@@ -41,31 +41,21 @@ class RegisterImageHandlerTest extends TestCase
         $handler = new RegisterImageHandler(
             $imageRepository = $this->createMock(ImageRepository::class),
             $relationRepository = $this->createMock(HostResourceRepository::class),
-            $clock = $this->createMock(TimeContinuumInterface::class)
+            $clock = $this->createMock(Clock::class)
         );
         $command = new RegisterImage(
             $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(RelationIdentity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            PathModel::of('/path'),
+            QueryModel::of('?query')
         );
-        $command
-            ->path()
-            ->expects($this->once())
-            ->method('__toString')
-            ->willReturn('/path');
-        $command
-            ->query()
-            ->expects($this->once())
-            ->method('__toString')
-            ->willReturn('?query');
 
         $clock
             ->expects($this->once())
             ->method('now')
             ->willReturn(
-                $now = $this->createMock(PointInTimeInterface::class)
+                $now = $this->createMock(PointInTime::class)
             );
         $imageRepository
             ->expects($this->once())
@@ -76,7 +66,7 @@ class RegisterImageHandlerTest extends TestCase
                     $spec->left()->value() === '/path' &&
                     $spec->right()->value() === '?query';
             }))
-            ->willReturn(new Set(Image::class));
+            ->willReturn(Set::of(Image::class));
         $relationRepository
             ->expects($this->never())
             ->method('matching');
@@ -88,7 +78,7 @@ class RegisterImageHandlerTest extends TestCase
                     $image->path() === $command->path() &&
                     $image->query() === $command->query() &&
                     $image->recordedEvents()->size() === 1 &&
-                    $image->recordedEvents()->current() instanceof ImageRegistered;
+                    $image->recordedEvents()->first() instanceof ImageRegistered;
             }));
         $relationRepository
             ->expects($this->once())
@@ -108,36 +98,26 @@ class RegisterImageHandlerTest extends TestCase
         $handler = new RegisterImageHandler(
             $imageRepository = $this->createMock(ImageRepository::class),
             $relationRepository = $this->createMock(HostResourceRepository::class),
-            $clock = $this->createMock(TimeContinuumInterface::class)
+            $clock = $this->createMock(Clock::class)
         );
         $command = new RegisterImage(
             $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(RelationIdentity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            PathModel::of('/path'),
+            QueryModel::of('?query')
         );
-        $command
-            ->path()
-            ->expects($this->once())
-            ->method('__toString')
-            ->willReturn('/path');
-        $command
-            ->query()
-            ->expects($this->once())
-            ->method('__toString')
-            ->willReturn('?query');
         $command
             ->host()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('host uuid');
 
         $clock
             ->expects($this->once())
             ->method('now')
             ->willReturn(
-                $now = $this->createMock(PointInTimeInterface::class)
+                $now = $this->createMock(PointInTime::class)
             );
         $imageRepository
             ->expects($this->once())
@@ -149,17 +129,18 @@ class RegisterImageHandlerTest extends TestCase
                     $spec->right()->value() === '?query';
             }))
             ->willReturn(
-                (new Set(Image::class))->add(
+                Set::of(
+                    Image::class,
                     new Image(
                         $identity = $this->createMock(Identity::class),
-                        $this->createMock(PathInterface::class),
-                        $this->createMock(QueryInterface::class)
+                        PathModel::none(),
+                        QueryModel::none()
                     )
                 )
             );
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('image uuid');
         $relationRepository
             ->expects($this->once())
@@ -168,7 +149,7 @@ class RegisterImageHandlerTest extends TestCase
                 return $spec->left()->value() === ['image uuid'] &&
                     $spec->right()->value() === 'host uuid';
             }))
-            ->willReturn(new Set(Host::class));
+            ->willReturn(Set::of(Host::class));
         $imageRepository
             ->expects($this->once())
             ->method('add')
@@ -196,29 +177,19 @@ class RegisterImageHandlerTest extends TestCase
         $handler = new RegisterImageHandler(
             $imageRepository = $this->createMock(ImageRepository::class),
             $relationRepository = $this->createMock(HostResourceRepository::class),
-            $clock = $this->createMock(TimeContinuumInterface::class)
+            $clock = $this->createMock(Clock::class)
         );
         $command = new RegisterImage(
             $this->createMock(Identity::class),
             $this->createMock(HostIdentity::class),
             $this->createMock(RelationIdentity::class),
-            $this->createMock(PathInterface::class),
-            $this->createMock(QueryInterface::class)
+            PathModel::of('/path'),
+            QueryModel::of('?query')
         );
-        $command
-            ->path()
-            ->expects($this->once())
-            ->method('__toString')
-            ->willReturn('/path');
-        $command
-            ->query()
-            ->expects($this->once())
-            ->method('__toString')
-            ->willReturn('?query');
         $command
             ->host()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('host uuid');
 
         $clock
@@ -234,17 +205,18 @@ class RegisterImageHandlerTest extends TestCase
                     $spec->right()->value() === '?query';
             }))
             ->willReturn(
-                (new Set(Image::class))->add(
+                Set::of(
+                    Image::class,
                     new Image(
                         $identity = $this->createMock(Identity::class),
-                        $this->createMock(PathInterface::class),
-                        $this->createMock(QueryInterface::class)
+                        PathModel::none(),
+                        QueryModel::none()
                     )
                 )
             );
         $identity
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('image uuid');
         $relationRepository
             ->expects($this->once())
@@ -256,7 +228,8 @@ class RegisterImageHandlerTest extends TestCase
                     $spec->right()->value() === 'host uuid';
             }))
             ->willReturn(
-                (new Set(Host::class))->add(
+                Set::of(
+                    Host::class,
                     new Host(
                         $this->createMock(HostIdentity::class),
                         new Name('some.domain.tld')

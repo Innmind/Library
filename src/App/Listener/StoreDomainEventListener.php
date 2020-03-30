@@ -6,19 +6,20 @@ namespace App\Listener;
 use Innmind\Filesystem\{
     Adapter,
     File\File,
-    Stream\StringStream
+    Name,
 };
+use Innmind\Stream\Readable\Stream;
 
 final class StoreDomainEventListener
 {
-    private $filesystem;
+    private Adapter $filesystem;
 
     public function __construct(Adapter $filesystem)
     {
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke($event): void
+    public function __invoke(object $event): void
     {
         $class = get_class($event);
 
@@ -26,19 +27,24 @@ final class StoreDomainEventListener
             return;
         }
 
-        $identity = (string) $event->identity();
+        /**
+         * @psalm-suppress MixedArgument
+         * @psalm-suppress MixedMethodCall
+         */
+        $identity = new Name($event->identity()->toString());
         $content = [];
 
-        if ($this->filesystem->has($identity)) {
+        if ($this->filesystem->contains($identity)) {
             $file = $this->filesystem->get($identity);
-            $content = json_decode((string) $file->content());
+            /** @var list<string> */
+            $content = json_decode($file->content()->toString());
         }
 
         $content[] = serialize($event);
         $this->filesystem->add(
             new File(
                 $identity,
-                new StringStream(json_encode($content))
+                Stream::ofContent(json_encode($content)),
             )
         );
     }

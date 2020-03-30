@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\Domain\Identity,
     Entity\Domain,
-    Specification\Domain\Specification
+    Specification\Domain\Specification,
+    Exception\DomainNotFound,
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
 
 interface DomainRepository
 {
     /**
-     * @throws DomainNotFoundException
+     * @throws DomainNotFound
      */
     public function get(Identity $identity): Domain;
     public function add(Domain $domain): self;
@@ -22,12 +23,12 @@ interface DomainRepository
     public function count(): int;
 
     /**
-     * @return SetInterface<Domain>
+     * @return Set<Domain>
      */
-    public function all(): SetInterface;
+    public function all(): Set;
 
     /**
-     * @return SetInterface<Domain>
+     * @return Set<Domain>
      */
-    public function matching(Specification $specification): SetInterface;
+    public function matching(Specification $specification): Set;
 }

@@ -7,23 +7,21 @@ use Domain\{
     Entity\HtmlPage\Identity,
     Entity\HtmlPage\Anchor
 };
-use Innmind\Immutable\SetInterface;
+use Innmind\Immutable\Set;
+use function Innmind\Immutable\assertSet;
 
 final class SpecifyAnchors
 {
-    private $identity;
-    private $anchors;
+    private Identity $identity;
+    /** @var Set<Anchor> */
+    private Set $anchors;
 
-    public function __construct(
-        Identity $identity,
-        SetInterface $anchors
-    ) {
-        if ((string) $anchors->type() !== Anchor::class) {
-            throw new \TypeError(sprintf(
-                'Argument 2 must be of type SetInterface<%s>',
-                Anchor::class
-            ));
-        }
+    /**
+     * @param Set<Anchor> $anchors
+     */
+    public function __construct(Identity $identity, Set $anchors)
+    {
+        assertSet(Anchor::class, $anchors, 2);
 
         $this->identity = $identity;
         $this->anchors = $anchors;
@@ -34,7 +32,10 @@ final class SpecifyAnchors
         return $this->identity;
     }
 
-    public function anchors(): SetInterface
+    /**
+     * @return Set<Anchor>
+     */
+    public function anchors(): Set
     {
         return $this->anchors;
     }

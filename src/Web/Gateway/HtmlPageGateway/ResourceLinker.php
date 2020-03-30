@@ -25,7 +25,7 @@ use Ramsey\Uuid\Uuid;
 
 final class ResourceLinker implements ResourceLinkerInterface
 {
-    private $handle;
+    private CommandBus $handle;
 
     public function __construct(CommandBus $handle)
     {
@@ -37,11 +37,12 @@ final class ResourceLinker implements ResourceLinkerInterface
      */
     public function __invoke(Reference $from, Link ...$links): void
     {
-        $from = new ResourceIdentity((string) $from->identity());
+        $from = new ResourceIdentity($from->identity()->toString());
 
         foreach ($links as $link) {
             switch ($link->relationship()) {
                 case 'alternate':
+                    /** @psalm-suppress MixedArgument */
                     $this->registerAlternate(
                         $from,
                         $link->reference(),
@@ -64,9 +65,9 @@ final class ResourceLinker implements ResourceLinkerInterface
         try {
             ($this->handle)(
                 new RegisterAlternateResource(
-                    new AlternateIdentity((string) Uuid::uuid4()),
+                    new AlternateIdentity(Uuid::uuid4()->toString()),
                     $from,
-                    new ResourceIdentity((string) $to->identity()),
+                    new ResourceIdentity($to->identity()->toString()),
                     new Language($language)
                 )
             );
@@ -80,8 +81,8 @@ final class ResourceLinker implements ResourceLinkerInterface
         try {
             ($this->handle)(
                 new MakeCanonicalLink(
-                    new CanonicalIdentity((string) Uuid::uuid4()),
-                    new ResourceIdentity((string) $to->identity()),
+                    new CanonicalIdentity(Uuid::uuid4()->toString()),
+                    new ResourceIdentity($to->identity()->toString()),
                     $from
                 )
             );

@@ -7,8 +7,8 @@ use Domain\Entity\HtmlPage\Identity;
 
 final class DescriptionSpecified
 {
-    private $identity;
-    private $description;
+    private Identity $identity;
+    private string $description;
 
     public function __construct(Identity $identity, string $description)
     {

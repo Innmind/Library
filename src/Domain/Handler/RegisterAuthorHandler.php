@@ -10,10 +10,11 @@ use Domain\{
     Specification\Author\Name,
     Exception\AuthorAlreadyExist
 };
+use function Innmind\Immutable\first;
 
 final class RegisterAuthorHandler
 {
-    private $repository;
+    private AuthorRepository $repository;
 
     public function __construct(AuthorRepository $repository)
     {
@@ -25,7 +26,7 @@ final class RegisterAuthorHandler
         $authors = $this->repository->matching(new Name($wished->name()));
 
         if ($authors->size() > 0) {
-            throw new AuthorAlreadyExist($authors->current());
+            throw new AuthorAlreadyExist(first($authors));
         }
 
         $this->repository->add(

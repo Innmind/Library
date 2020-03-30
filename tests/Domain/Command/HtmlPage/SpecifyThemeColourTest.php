@@ -16,7 +16,7 @@ class SpecifyThemeColourTest extends TestCase
     {
         $command = new SpecifyThemeColour(
             $identity = $this->createMock(Identity::class),
-            $colour = RGBA::fromString('39f')
+            $colour = RGBA::of('39f')
         );
 
         $this->assertSame($identity, $command->identity());

@@ -40,12 +40,12 @@ class RegisterAlternateResourceHandlerTest extends TestCase
         $command
             ->resource()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('resource uuid');
         $command
             ->alternate()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('alternate uuid');
         $repository
             ->expects($this->once())
@@ -59,7 +59,7 @@ class RegisterAlternateResourceHandlerTest extends TestCase
                     $spec->left()->right()->value() === 'alternate uuid' &&
                     $spec->right()->value() === 'fr';
             }))
-            ->willReturn(new Set(Alternate::class));
+            ->willReturn(Set::of(Alternate::class));
         $repository
             ->expects($this->once())
             ->method('add')
@@ -69,7 +69,7 @@ class RegisterAlternateResourceHandlerTest extends TestCase
                     $alternate->alternate() === $command->alternate() &&
                     $alternate->language() === $command->language() &&
                     $alternate->recordedEvents()->size() === 1 &&
-                    $alternate->recordedEvents()->current() instanceof AlternateCreated;
+                    $alternate->recordedEvents()->first() instanceof AlternateCreated;
             }));
 
         $this->assertNull($handler($command));
@@ -89,12 +89,12 @@ class RegisterAlternateResourceHandlerTest extends TestCase
         $command
             ->resource()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('resource uuid');
         $command
             ->alternate()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('alternate uuid');
         $repository
             ->expects($this->once())
@@ -109,21 +109,14 @@ class RegisterAlternateResourceHandlerTest extends TestCase
                     $spec->right()->value() === 'fr';
             }))
             ->willReturn(
-                $set = $this->createMock(SetInterface::class)
-            );
-        $set
-            ->expects($this->once())
-            ->method('size')
-            ->willReturn(1);
-        $set
-            ->expects($this->once())
-            ->method('current')
-            ->willReturn(
-                new Alternate(
-                    $this->createMock(Identity::class),
-                    $this->createMock(ResourceIdentity::class),
-                    $this->createMock(ResourceIdentity::class),
-                    new Model('fr')
+                Set::of(
+                    Alternate::class,
+                    new Alternate(
+                        $this->createMock(Identity::class),
+                        $this->createMock(ResourceIdentity::class),
+                        $this->createMock(ResourceIdentity::class),
+                        new Model('fr')
+                    )
                 )
             );
         $repository

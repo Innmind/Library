@@ -8,16 +8,16 @@ use Domain\{
     Repository\ResourceAuthorRepository,
     Entity\ResourceAuthor
 };
-use Innmind\TimeContinuum\TimeContinuumInterface;
+use Innmind\TimeContinuum\Clock;
 
 final class RegisterAuthorHandler
 {
-    private $repository;
-    private $clock;
+    private ResourceAuthorRepository $repository;
+    private Clock $clock;
 
     public function __construct(
         ResourceAuthorRepository $repository,
-        TimeContinuumInterface $clock
+        Clock $clock
     ) {
         $this->repository = $repository;
         $this->clock = $clock;

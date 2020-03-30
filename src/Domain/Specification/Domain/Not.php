@@ -19,6 +19,7 @@ final class Not extends ParentSpec implements Specification
 
     public function isSatisfiedBy(Entity $domain): bool
     {
+        /** @psalm-suppress UndefinedInterfaceMethod */
         return !$this->specification()->isSatisfiedBy($domain);
     }
 }

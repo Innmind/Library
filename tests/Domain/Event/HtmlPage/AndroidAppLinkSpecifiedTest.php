@@ -7,7 +7,7 @@ use Domain\{
     Event\HtmlPage\AndroidAppLinkSpecified,
     Entity\HtmlPage\Identity
 };
-use Innmind\Url\UrlInterface;
+use Innmind\Url\Url;
 use PHPUnit\Framework\TestCase;
 
 class AndroidAppLinkSpecifiedTest extends TestCase
@@ -16,7 +16,7 @@ class AndroidAppLinkSpecifiedTest extends TestCase
     {
         $event = new AndroidAppLinkSpecified(
             $identity = $this->createMock(Identity::class),
-            $url = $this->createMock(UrlInterface::class)
+            $url = Url::of('exmaple.com')
         );
 
         $this->assertSame($identity, $event->identity());

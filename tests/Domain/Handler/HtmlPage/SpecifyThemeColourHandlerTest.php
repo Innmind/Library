@@ -12,8 +12,8 @@ use Domain\{
     Event\HtmlPage\ThemeColourSpecified
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query
 };
 use Innmind\Colour\RGBA;
 use PHPUnit\Framework\TestCase;
@@ -27,7 +27,7 @@ class SpecifyThemeColourHandlerTest extends TestCase
         );
         $command = new SpecifyThemeColour(
             $this->createMock(Identity::class),
-            RGBA::fromString('39f')
+            RGBA::of('39f')
         );
         $repository
             ->expects($this->once())
@@ -36,8 +36,8 @@ class SpecifyThemeColourHandlerTest extends TestCase
             ->willReturn(
                 $page = new HtmlPage(
                     $command->identity(),
-                    $this->createMock(PathInterface::class),
-                    $this->createMock(QueryInterface::class)
+                    Path::none(),
+                    Query::none()
                 )
             );
 
@@ -45,7 +45,7 @@ class SpecifyThemeColourHandlerTest extends TestCase
         $this->assertSame($command->colour(), $page->themeColour());
         $this->assertInstanceOf(
             ThemeColourSpecified::class,
-            $page->recordedEvents()->current()
+            $page->recordedEvents()->first()
         );
     }
 }

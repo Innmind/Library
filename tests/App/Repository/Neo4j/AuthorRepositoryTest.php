@@ -18,10 +18,8 @@ use Innmind\Neo4j\ONM\{
     Repository,
     Exception\EntityNotFound,
 };
-use Innmind\Immutable\{
-    SetInterface,
-    Set,
-};
+use Innmind\Immutable\Set;
+use function Innmind\Immutable\unwrap;
 use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 
@@ -127,12 +125,12 @@ class AuthorRepositoryTest extends TestCase
         $identity = new Identity((string) Uuid::uuid4());
         $infra
             ->expects($this->at(0))
-            ->method('has')
+            ->method('contains')
             ->with($identity)
             ->willReturn(true);
         $infra
             ->expects($this->at(1))
-            ->method('has')
+            ->method('contains')
             ->with($identity)
             ->willReturn(false);
 
@@ -149,14 +147,16 @@ class AuthorRepositoryTest extends TestCase
             ->expects($this->once())
             ->method('all')
             ->willReturn(
-                $all = $this->createMock(SetInterface::class)
+                Set::of(
+                    Author::class,
+                    new Author(
+                        new Identity((string) Uuid::uuid4()),
+                        new Name('foo')
+                    )
+                )
             );
-        $all
-            ->expects($this->once())
-            ->method('size')
-            ->willReturn(42);
 
-        $this->assertSame(42, $repository->count());
+        $this->assertSame(1, $repository->count());
     }
 
     public function testAll()
@@ -168,7 +168,7 @@ class AuthorRepositoryTest extends TestCase
             ->expects($this->once())
             ->method('all')
             ->willReturn(
-                (new Set('object'))->add(
+                Set::objects(
                     $author = new Author(
                         new Identity((string) Uuid::uuid4()),
                         new Name('foo')
@@ -178,9 +178,9 @@ class AuthorRepositoryTest extends TestCase
 
         $all = $repository->all();
 
-        $this->assertInstanceOf(SetInterface::class, $all);
+        $this->assertInstanceOf(Set::class, $all);
         $this->assertSame(Author::class, (string) $all->type());
-        $this->assertSame([$author], $all->toPrimitive());
+        $this->assertSame([$author], unwrap($all));
     }
 
     public function testMatching()
@@ -194,7 +194,7 @@ class AuthorRepositoryTest extends TestCase
             ->method('matching')
             ->with($specification)
             ->willReturn(
-                (new Set('object'))->add(
+                Set::objects(
                     $author = new Author(
                         new Identity((string) Uuid::uuid4()),
                         new Name('foo')
@@ -204,8 +204,8 @@ class AuthorRepositoryTest extends TestCase
 
         $all = $repository->matching($specification);
 
-        $this->assertInstanceOf(SetInterface::class, $all);
+        $this->assertInstanceOf(Set::class, $all);
         $this->assertSame(Author::class, (string) $all->type());
-        $this->assertSame([$author], $all->toPrimitive());
+        $this->assertSame([$author], unwrap($all));
     }
 }

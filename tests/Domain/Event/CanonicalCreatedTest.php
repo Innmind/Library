@@ -8,7 +8,7 @@ use Domain\{
     Entity\Canonical\Identity,
     Entity\HttpResource\Identity as ResourceIdentity
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 use PHPUnit\Framework\TestCase;
 
 class CanonicalCreatedTest extends TestCase
@@ -19,7 +19,7 @@ class CanonicalCreatedTest extends TestCase
             $identity = $this->createMock(Identity::class),
             $canonical = $this->createMock(ResourceIdentity::class),
             $resource = $this->createMock(ResourceIdentity::class),
-            $foundAt = $this->createMock(PointInTimeInterface::class)
+            $foundAt = $this->createMock(PointInTime::class)
         );
 
         $this->assertSame($identity, $event->identity());

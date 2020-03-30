@@ -9,7 +9,7 @@ use Innmind\Neo4j\ONM\Type;
 
 final class UrlType implements Type
 {
-    private $nullable = false;
+    private bool $nullable = false;
 
     public static function nullable(): self
     {
@@ -32,7 +32,8 @@ final class UrlType implements Type
             throw new InvalidArgumentException;
         }
 
-        return (string) $value;
+        /** @psalm-suppress MixedMethodCall */
+        return $value->toString();
     }
 
     /**
@@ -40,7 +41,7 @@ final class UrlType implements Type
      */
     public function fromDatabase($value)
     {
-        return Url::fromString((string) $value);
+        return Url::of((string) $value);
     }
 
     /**

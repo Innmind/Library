@@ -8,20 +8,20 @@ use Domain\{
     Entity\Host\Identity as HostIdentity,
     Entity\HttpResource\Identity as ResourceIdentity
 };
-use Innmind\TimeContinuum\PointInTimeInterface;
+use Innmind\TimeContinuum\PointInTime;
 
 final class HostResourceCreated
 {
-    private $identity;
-    private $host;
-    private $resource;
-    private $foundAt;
+    private Identity $identity;
+    private HostIdentity $host;
+    private ResourceIdentity $resource;
+    private PointInTime $foundAt;
 
     public function __construct(
         Identity $identity,
         HostIdentity $host,
         ResourceIdentity $resource,
-        PointInTimeInterface $foundAt
+        PointInTime $foundAt
     ) {
         $this->identity = $identity;
         $this->host = $host;
@@ -44,7 +44,7 @@ final class HostResourceCreated
         return $this->resource;
     }
 
-    public function foundAt(): PointInTimeInterface
+    public function foundAt(): PointInTime
     {
         return $this->foundAt;
     }

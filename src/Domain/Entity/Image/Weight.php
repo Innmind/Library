@@ -7,7 +7,7 @@ use Domain\Exception\DomainException;
 
 final class Weight
 {
-    private $value;
+    private int $value;
 
     public function __construct(int $value)
     {

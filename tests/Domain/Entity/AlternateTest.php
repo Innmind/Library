@@ -45,23 +45,23 @@ class AlternateTest extends TestCase
         $this->assertCount(1, $entity->recordedEvents());
         $this->assertInstanceOf(
             AlternateCreated::class,
-            $entity->recordedEvents()->current()
+            $entity->recordedEvents()->first()
         );
         $this->assertSame(
             $identity,
-            $entity->recordedEvents()->current()->identity()
+            $entity->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $resource,
-            $entity->recordedEvents()->current()->resource()
+            $entity->recordedEvents()->first()->resource()
         );
         $this->assertSame(
             $alternate,
-            $entity->recordedEvents()->current()->alternate()
+            $entity->recordedEvents()->first()->alternate()
         );
         $this->assertSame(
             $language,
-            $entity->recordedEvents()->current()->language()
+            $entity->recordedEvents()->first()->language()
         );
     }
 }

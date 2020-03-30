@@ -16,10 +16,7 @@ use Domain\{
     Event\ReferenceCreated,
     Exception\ReferenceAlreadyExist,
 };
-use Innmind\Immutable\{
-    Set,
-    SetInterface,
-};
+use Innmind\Immutable\Set;
 use PHPUnit\Framework\TestCase;
 
 class ReferResourceHandlerTest extends TestCase
@@ -37,12 +34,12 @@ class ReferResourceHandlerTest extends TestCase
         $command
             ->source()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('source uuid');
         $command
             ->target()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('target uuid');
         $repository
             ->expects($this->once())
@@ -53,7 +50,7 @@ class ReferResourceHandlerTest extends TestCase
                     $spec->left()->value() === 'source uuid' &&
                     $spec->right()->value() === 'target uuid';
             }))
-            ->willReturn(new Set(Reference::class));
+            ->willReturn(Set::of(Reference::class));
         $repository
             ->expects($this->once())
             ->method('add')
@@ -62,7 +59,7 @@ class ReferResourceHandlerTest extends TestCase
                     $ref->source() === $command->source() &&
                     $ref->target() === $command->target() &&
                     $ref->recordedEvents()->size() === 1 &&
-                    $ref->recordedEvents()->current() instanceof ReferenceCreated;
+                    $ref->recordedEvents()->first() instanceof ReferenceCreated;
             }));
 
         $this->assertNull($handler($command));
@@ -81,12 +78,12 @@ class ReferResourceHandlerTest extends TestCase
         $command
             ->source()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('source uuid');
         $command
             ->target()
             ->expects($this->once())
-            ->method('__toString')
+            ->method('toString')
             ->willReturn('target uuid');
         $repository
             ->expects($this->once())
@@ -98,20 +95,13 @@ class ReferResourceHandlerTest extends TestCase
                     $spec->right()->value() === 'target uuid';
             }))
             ->willReturn(
-                $set = $this->createMock(SetInterface::class)
-            );
-        $set
-            ->expects($this->once())
-            ->method('size')
-            ->willReturn(1);
-        $set
-            ->expects($this->once())
-            ->method('current')
-            ->willReturn(
-                new Reference(
-                    $this->createMock(Identity::class),
-                    $this->createMock(ResourceIdentity::class),
-                    $this->createMock(ResourceIdentity::class)
+                Set::of(
+                    Reference::class,
+                    new Reference(
+                        $this->createMock(Identity::class),
+                        $this->createMock(ResourceIdentity::class),
+                        $this->createMock(ResourceIdentity::class)
+                    )
                 )
             );
         $repository

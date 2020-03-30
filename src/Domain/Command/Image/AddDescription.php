@@ -10,8 +10,8 @@ use Domain\Entity\Image\{
 
 final class AddDescription
 {
-    private $identity;
-    private $description;
+    private Identity $identity;
+    private Description $description;
 
     public function __construct(
         Identity $identity,

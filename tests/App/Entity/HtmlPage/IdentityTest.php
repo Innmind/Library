@@ -22,6 +22,6 @@ class IdentityTest extends TestCase
         $this->assertInstanceOf(IdentityInterface::class, $identity);
         $this->assertInstanceOf(HttpResourceIdentity::class, $identity);
         $this->assertInstanceOf(RestIdentity::class, $identity);
-        $this->assertSame($uuid, (string) $identity);
+        $this->assertSame($uuid, $identity->toString());
     }
 }

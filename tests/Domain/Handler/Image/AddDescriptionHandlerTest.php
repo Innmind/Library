@@ -13,9 +13,10 @@ use Domain\{
     Event\Image\DescriptionAdded
 };
 use Innmind\Url\{
-    PathInterface,
-    QueryInterface
+    Path,
+    Query
 };
+use function Innmind\Immutable\unwrap;
 use PHPUnit\Framework\TestCase;
 
 class AddDescriptionHandlerTest extends TestCase
@@ -36,19 +37,19 @@ class AddDescriptionHandlerTest extends TestCase
             ->willReturn(
                 $image = new Image(
                     $command->identity(),
-                    $this->createMock(PathInterface::class),
-                    $this->createMock(QueryInterface::class)
+                    Path::none(),
+                    Query::none()
                 )
             );
 
         $this->assertNull($handler($command));
         $this->assertSame(
             [$command->description()],
-            $image->descriptions()->toPrimitive()
+            unwrap($image->descriptions())
         );
         $this->assertInstanceOf(
             DescriptionAdded::class,
-            $image->recordedEvents()->current()
+            $image->recordedEvents()->first()
         );
     }
 }

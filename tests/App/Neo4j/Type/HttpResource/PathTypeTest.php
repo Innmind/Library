@@ -22,7 +22,7 @@ class PathTypeTest extends TestCase
     {
         $this->assertSame(
             'foo',
-            (new PathType)->forDatabase(new Path('foo'))
+            (new PathType)->forDatabase(Path::of('foo'))
         );
     }
 
@@ -34,7 +34,7 @@ class PathTypeTest extends TestCase
         );
         $this->assertSame(
             'foo',
-            (string) (new PathType)->fromDatabase('foo')
+            (new PathType)->fromDatabase('foo')->toString()
         );
     }
 

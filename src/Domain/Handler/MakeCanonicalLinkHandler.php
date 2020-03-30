@@ -11,16 +11,17 @@ use Domain\{
     Specification\Canonical\Canonical as CanonicalSpec,
     Exception\CanonicalAlreadyExist
 };
-use Innmind\TimeContinuum\TimeContinuumInterface;
+use Innmind\TimeContinuum\Clock;
+use function Innmind\Immutable\first;
 
 final class MakeCanonicalLinkHandler
 {
-    private $repository;
-    private $clock;
+    private CanonicalRepository $repository;
+    private Clock $clock;
 
     public function __construct(
         CanonicalRepository $repository,
-        TimeContinuumInterface $clock
+        Clock $clock
     ) {
         $this->repository = $repository;
         $this->clock = $clock;
@@ -28,13 +29,14 @@ final class MakeCanonicalLinkHandler
 
     public function __invoke(MakeCanonicalLink $wished): void
     {
+        /** @psalm-suppress InvalidArgument */
         $canonicals = $this->repository->matching(
             (new HttpResource($wished->resource()))
                 ->and(new CanonicalSpec($wished->canonical()))
         );
 
         if ($canonicals->size() > 0) {
-            throw new CanonicalAlreadyExist($canonicals->current());
+            throw new CanonicalAlreadyExist(first($canonicals));
         }
 
         $this->repository->add(

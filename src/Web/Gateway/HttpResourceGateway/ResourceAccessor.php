@@ -26,8 +26,8 @@ use Innmind\Immutable\{
 
 final class ResourceAccessor implements ResourceAccessorInterface
 {
-    private $repository;
-    private $dbal;
+    private HttpResourceRepository $repository;
+    private Connection $dbal;
 
     public function __construct(
         HttpResourceRepository $repository,
@@ -42,56 +42,43 @@ final class ResourceAccessor implements ResourceAccessorInterface
         RestIdentity $identity
     ): HttpResource {
         $resource = $this->repository->get(
-            new Identity((string) $identity)
+            new Identity($identity->toString())
         );
         $result = $this->dbal->execute(
             (new Query)
-                ->match('host', ['Web', 'Host'])
-                ->linkedTo('resource', ['Web', 'Resource'])
+                ->match('host', 'Web', 'Host')
+                ->linkedTo('resource', 'Web', 'Resource')
                 ->through('RESOURCE_OF_HOST')
                 ->where('resource.identity = {identity}')
-                ->withParameter('identity', (string) $identity)
+                ->withParameter('identity', $identity->toString())
                 ->return('host')
         );
-        $properties = (new Map('string', Property::class))
-            ->put(
-                'identity',
-                new Property('identity', (string) $resource->identity())
-            )
-            ->put(
-                'host',
-                new Property('host', $result->rows()->first()->value()['name'])
-            )
-            ->put(
-                'path',
-                new Property('path', (string) $resource->path())
-            )
-            ->put(
-                'query',
-                new Property('query', (string) $resource->query())
-            )
-            ->put(
+        /**
+         * @psalm-suppress PossiblyInvalidArrayAccess
+         * @var list<Property>
+         */
+        $properties = [
+            new Property('identity', $resource->identity()->toString()),
+            new Property('host', $result->rows()->first()->value()['name']),
+            new Property('path', $resource->path()->toString()),
+            new Property('query', $resource->query()->toString()),
+            new Property(
                 'languages',
-                new Property(
-                    'languages',
-                    $resource
-                        ->languages()
-                        ->reduce(
-                            new Set('string'),
-                            function(Set $carry, Language $language): Set {
-                                return $carry->add((string) $language);
-                            }
-                        )
-                )
-            );
+                $resource
+                    ->languages()
+                    ->reduce(
+                        Set::of('string'),
+                        function(Set $carry, Language $language): Set {
+                            return $carry->add((string) $language);
+                        }
+                    )
+            ),
+        ];
 
         if ($resource->hasCharset()) {
-            $properties = $properties->put(
-                'charset',
-                new Property('charset', (string) $resource->charset())
-            );
+            $properties[] = new Property('charset', (string) $resource->charset());
         }
 
-        return new HttpResource\HttpResource($definition, $properties);
+        return HttpResource\HttpResource::of($definition, ...$properties);
     }
 }

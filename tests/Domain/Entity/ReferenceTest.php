@@ -41,19 +41,19 @@ class ReferenceTest extends TestCase
         $this->assertCount(1, $entity->recordedEvents());
         $this->assertInstanceOf(
             ReferenceCreated::class,
-            $entity->recordedEvents()->current()
+            $entity->recordedEvents()->first()
         );
         $this->assertSame(
             $identity,
-            $entity->recordedEvents()->current()->identity()
+            $entity->recordedEvents()->first()->identity()
         );
         $this->assertSame(
             $source,
-            $entity->recordedEvents()->current()->source()
+            $entity->recordedEvents()->first()->source()
         );
         $this->assertSame(
             $target,
-            $entity->recordedEvents()->current()->target()
+            $entity->recordedEvents()->first()->target()
         );
     }
 }

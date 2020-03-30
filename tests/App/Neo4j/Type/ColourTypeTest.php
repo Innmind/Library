@@ -22,7 +22,7 @@ class ColourTypeTest extends TestCase
     {
         $this->assertSame(
             '#3399ff',
-            (new ColourType)->forDatabase(RGBA::fromString('39F'))
+            (new ColourType)->forDatabase(RGBA::of('39F'))
         );
         $this->assertNull(
             ColourType::nullable()->forDatabase(null)
@@ -44,7 +44,7 @@ class ColourTypeTest extends TestCase
         );
         $this->assertSame(
             '#3399ff',
-            (string) (new ColourType)->fromDatabase('#39F')
+            (new ColourType)->fromDatabase('#39F')->toString()
         );
     }
 

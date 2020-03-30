@@ -18,9 +18,9 @@ final class Domain implements ContainsRecordedEvents
 {
     use EventRecorder;
 
-    private $identity;
-    private $name;
-    private $tld;
+    private Identity $identity;
+    private Name $name;
+    private TopLevelDomain $tld;
 
     public function __construct(
         Identity $identity,
