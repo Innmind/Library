@@ -32,6 +32,7 @@ final class UrlType implements Type
             throw new InvalidArgumentException;
         }
 
+        /** @psalm-suppress MixedMethodCall */
         return $value->toString();
     }
 

@@ -26,11 +26,15 @@ final class HostResourceRepository implements HostResourceRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MoreSpecificReturnType
      */
     public function get(Identity $identity): HostResource
     {
         try {
+            /**
+             * @psalm-suppress InvalidArgument
+             * @psalm-suppress LessSpecificReturnStatement
+             */
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
             throw new HostResourceNotFound('', 0, $e);
@@ -55,6 +59,7 @@ final class HostResourceRepository implements HostResourceRepositoryInterface
 
     public function has(Identity $identity): bool
     {
+        /** @psalm-suppress InvalidArgument */
         return $this->infrastructure->contains($identity);
     }
 
@@ -71,12 +76,7 @@ final class HostResourceRepository implements HostResourceRepositoryInterface
         return $this
             ->infrastructure
             ->all()
-            ->reduce(
-                Set::of(HostResource::class),
-                function(Set $all, HostResource $hostResource): Set {
-                    return $all->add($hostResource);
-                }
-            );
+            ->toSetOf(HostResource::class);
     }
 
     /**
@@ -87,11 +87,6 @@ final class HostResourceRepository implements HostResourceRepositoryInterface
         return $this
             ->infrastructure
             ->matching($specification)
-            ->reduce(
-                Set::of(HostResource::class),
-                function(Set $all, HostResource $hostResource): Set {
-                    return $all->add($hostResource);
-                }
-            );
+            ->toSetOf(HostResource::class);
     }
 }

@@ -60,6 +60,7 @@ final class RegisterHtmlPageHandler
      */
     private function verifyResourceDoesntExist(RegisterHtmlPage $wished): void
     {
+        /** @psalm-suppress InvalidArgument */
         $htmlPages = $this->htmlPageRepository->matching(
             (new Path($wished->path()))
                 ->and(new Query($wished->query()))
@@ -75,6 +76,7 @@ final class RegisterHtmlPageHandler
                 return $identities->add($htmlPage->identity());
             }
         );
+        /** @psalm-suppress InvalidArgument */
         $relations = $this->relationRepository->matching(
             (new InResources($identities))
                 ->and(new Host($wished->host()))

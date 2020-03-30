@@ -19,7 +19,7 @@ final class StoreDomainEventListener
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke($event): void
+    public function __invoke(object $event): void
     {
         $class = get_class($event);
 
@@ -27,11 +27,16 @@ final class StoreDomainEventListener
             return;
         }
 
+        /**
+         * @psalm-suppress MixedArgument
+         * @psalm-suppress MixedMethodCall
+         */
         $identity = new Name($event->identity()->toString());
         $content = [];
 
         if ($this->filesystem->contains($identity)) {
             $file = $this->filesystem->get($identity);
+            /** @var list<string> */
             $content = json_decode($file->content()->toString());
         }
 

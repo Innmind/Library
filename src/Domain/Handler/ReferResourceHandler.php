@@ -24,6 +24,7 @@ final class ReferResourceHandler
 
     public function __invoke(ReferResource $wished): void
     {
+        /** @psalm-suppress InvalidArgument */
         $references = $this->repository->matching(
             (new Source($wished->source()))
                 ->and(new Target($wished->target()))

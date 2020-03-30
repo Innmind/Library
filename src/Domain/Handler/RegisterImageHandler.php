@@ -60,6 +60,7 @@ final class RegisterImageHandler
      */
     private function verifyResourceDoesntExist(RegisterImage $wished): void
     {
+        /** @psalm-suppress InvalidArgument */
         $images = $this->imageRepository->matching(
             (new Path($wished->path()))
                 ->and(new Query($wished->query()))
@@ -75,6 +76,7 @@ final class RegisterImageHandler
                 return $identities->add($image->identity());
             }
         );
+        /** @psalm-suppress InvalidArgument */
         $relations = $this->relationRepository->matching(
             (new InResources($identities))
                 ->and(new Host($wished->host()))

@@ -31,6 +31,7 @@ final class HtmlPage extends HttpResource
 {
     private string $mainContent = '';
     private string $description = '';
+    /** @var Set<Anchor> */
     private Set $anchors;
     private bool $isJournal = false;
     private ?RGBA $themeColour = null;
@@ -49,6 +50,7 @@ final class HtmlPage extends HttpResource
         }
 
         parent::__construct($identity, $path, $query);
+        /** @var Set<Anchor> */
         $this->anchors = Set::of(Anchor::class);
     }
 
@@ -56,11 +58,19 @@ final class HtmlPage extends HttpResource
         ResourceIdentity $identity,
         Path $path,
         Query $query
-    ): HttpResource {
+    ): self {
         $self = new self($identity, $path, $query);
+        /** @psalm-suppress ArgumentTypeCoercion */
         $self->record(new HtmlPageRegistered($identity, $path, $query));
 
         return $self;
+    }
+
+    /** @psalm-suppress MoreSpecificReturnType */
+    public function identity(): Identity
+    {
+        /** @psalm-suppress LessSpecificReturnStatement */
+        return parent::identity();
     }
 
     public function specifyMainContent(string $content): self
@@ -89,6 +99,9 @@ final class HtmlPage extends HttpResource
         return $this->description;
     }
 
+    /**
+     * @param Set<Anchor> $anchors
+     */
     public function specifyAnchors(Set $anchors): self
     {
         if ((string) $anchors->type() !== Anchor::class) {
@@ -138,8 +151,10 @@ final class HtmlPage extends HttpResource
         return $this->themeColour instanceof RGBA;
     }
 
+    /** @psalm-suppress InvalidNullableReturnType */
     public function themeColour(): RGBA
     {
+        /** @psalm-suppress NullableReturnStatement */
         return $this->themeColour;
     }
 
@@ -169,8 +184,10 @@ final class HtmlPage extends HttpResource
         return $this->android instanceof Url;
     }
 
+    /** @psalm-suppress InvalidNullableReturnType */
     public function androidAppLink(): Url
     {
+        /** @psalm-suppress NullableReturnStatement */
         return $this->android;
     }
 
@@ -187,8 +204,10 @@ final class HtmlPage extends HttpResource
         return $this->ios instanceof Url;
     }
 
+    /** @psalm-suppress InvalidNullableReturnType */
     public function iosAppLink(): Url
     {
+        /** @psalm-suppress NullableReturnStatement */
         return $this->ios;
     }
 
@@ -205,8 +224,10 @@ final class HtmlPage extends HttpResource
         return $this->preview instanceof Url;
     }
 
+    /** @psalm-suppress InvalidNullableReturnType */
     public function preview(): Url
     {
+        /** @psalm-suppress NullableReturnStatement */
         return $this->preview;
     }
 }

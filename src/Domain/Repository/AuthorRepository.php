@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\Author\Identity,
     Entity\Author,
-    Specification\Author\Specification
+    Specification\Author\Specification,
+    Exception\AuthorNotFound,
 };
 use Innmind\Immutable\Set;
 
 interface AuthorRepository
 {
     /**
-     * @throws AuthorNotFoundException
+     * @throws AuthorNotFound
      */
     public function get(Identity $identity): Author;
     public function add(Author $author): self;

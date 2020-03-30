@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\Domain\Identity,
     Entity\Domain,
-    Specification\Domain\Specification
+    Specification\Domain\Specification,
+    Exception\DomainNotFound,
 };
 use Innmind\Immutable\Set;
 
 interface DomainRepository
 {
     /**
-     * @throws DomainNotFoundException
+     * @throws DomainNotFound
      */
     public function get(Identity $identity): Domain;
     public function add(Domain $domain): self;

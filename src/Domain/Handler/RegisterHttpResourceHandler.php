@@ -60,6 +60,7 @@ final class RegisterHttpResourceHandler
      */
     private function verifyResourceDoesntExist(RegisterHttpResource $wished): void
     {
+        /** @psalm-suppress InvalidArgument */
         $resources = $this->resourceRepository->matching(
             (new Path($wished->path()))
                 ->and(new Query($wished->query()))
@@ -75,6 +76,7 @@ final class RegisterHttpResourceHandler
                 return $identities->add($resource->identity());
             }
         );
+        /** @psalm-suppress InvalidArgument */
         $relations = $this->relationRepository->matching(
             (new InResources($identities))
                 ->and(new Host($wished->host()))

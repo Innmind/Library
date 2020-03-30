@@ -30,7 +30,7 @@ use function Innmind\Immutable\unwrap;
 use Pdp;
 
 /**
- * @param callable:MapInterface<string, callable> $domain
+ * @param callable(): Map<string, callable> $domain
  * @param Set<Url>|null $dsns
  */
 function bootstrap(
@@ -39,7 +39,7 @@ function bootstrap(
     Url $neo4j,
     Adapter $domainEventStore,
     Set $dsns = null,
-    string $activationLevel = null
+    string $activationLevel = ''
 ): array {
     $dsns = $dsns ?? Set::of(Url::class);
     $domainParser = (new Pdp\Manager(
@@ -57,6 +57,10 @@ function bootstrap(
     $httpTransport = $log($http);
 
     $eventBuses = eventBus();
+    /**
+     * @psalm-suppress InvalidArgument
+     * @psalm-suppress InvalidScalarArgument
+     */
     $eventBus = $eventBuses['bus'](
         Map::of('string', 'callable')
             ('Domain\Event\*', new Listener\StoreDomainEventListener($domainEventStore))
@@ -67,6 +71,10 @@ function bootstrap(
         $clock,
         $neo4j
     );
+    /**
+     * @psalm-suppress InvalidArgument
+     * @psalm-suppress MixedArgument
+     */
     $onm = onm(
         $dbal,
         Set::of(
@@ -74,20 +82,20 @@ function bootstrap(
             ... (require __DIR__.'/config/neo4j.php')
         ),
         Map::of('string', Generator::class)
-            (Entity\Alternate\Identity::class, new UuidGenerator(Entity\Alternate\Identity::class))
-            (Entity\Author\Identity::class, new UuidGenerator(Entity\Author\Identity::class))
-            (Entity\Canonical\Identity::class, new UuidGenerator(Entity\Canonical\Identity::class))
-            (Entity\Citation\Identity::class, new UuidGenerator(Entity\Citation\Identity::class))
-            (Entity\CitationAppearance\Identity::class, new UuidGenerator(Entity\CitationAppearance\Identity::class))
-            (Entity\Domain\Identity::class, new UuidGenerator(Entity\Domain\Identity::class))
-            (Entity\DomainHost\Identity::class, new UuidGenerator(Entity\DomainHost\Identity::class))
-            (Entity\Host\Identity::class, new UuidGenerator(Entity\Host\Identity::class))
-            (Entity\HostResource\Identity::class, new UuidGenerator(Entity\HostResource\Identity::class))
-            (Entity\HtmlPage\Identity::class, new UuidGenerator(Entity\HtmlPage\Identity::class))
-            (Entity\HttpResource\Identity::class, new UuidGenerator(Entity\HttpResource\Identity::class))
-            (Entity\Image\Identity::class, new UuidGenerator(Entity\Image\Identity::class))
-            (Entity\Reference\Identity::class, new UuidGenerator(Entity\Reference\Identity::class))
-            (Entity\ResourceAuthor\Identity::class, new UuidGenerator(Entity\ResourceAuthor\Identity::class)),
+            ->put(Entity\Alternate\Identity::class, new UuidGenerator(Entity\Alternate\Identity::class))
+            ->put(Entity\Author\Identity::class, new UuidGenerator(Entity\Author\Identity::class))
+            ->put(Entity\Canonical\Identity::class, new UuidGenerator(Entity\Canonical\Identity::class))
+            ->put(Entity\Citation\Identity::class, new UuidGenerator(Entity\Citation\Identity::class))
+            ->put(Entity\CitationAppearance\Identity::class, new UuidGenerator(Entity\CitationAppearance\Identity::class))
+            ->put(Entity\Domain\Identity::class, new UuidGenerator(Entity\Domain\Identity::class))
+            ->put(Entity\DomainHost\Identity::class, new UuidGenerator(Entity\DomainHost\Identity::class))
+            ->put(Entity\Host\Identity::class, new UuidGenerator(Entity\Host\Identity::class))
+            ->put(Entity\HostResource\Identity::class, new UuidGenerator(Entity\HostResource\Identity::class))
+            ->put(Entity\HtmlPage\Identity::class, new UuidGenerator(Entity\HtmlPage\Identity::class))
+            ->put(Entity\HttpResource\Identity::class, new UuidGenerator(Entity\HttpResource\Identity::class))
+            ->put(Entity\Image\Identity::class, new UuidGenerator(Entity\Image\Identity::class))
+            ->put(Entity\Reference\Identity::class, new UuidGenerator(Entity\Reference\Identity::class))
+            ->put(Entity\ResourceAuthor\Identity::class, new UuidGenerator(Entity\ResourceAuthor\Identity::class)),
         $eventBus
     );
 
@@ -163,8 +171,7 @@ function bootstrap(
         $onm['command_bus']['clear_domain_events'],
         $onm['command_bus']['dispatch_domain_events'],
         $onm['command_bus']['flush'],
-        $commandBuses['bus']
-    )($handlers);
+    )($commandBuses['bus']($handlers));
 
     return [
         'command_bus' => $commandBus,

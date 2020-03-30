@@ -17,6 +17,7 @@ final class WeightType implements Type
             return;
         }
 
+        /** @psalm-suppress MixedMethodCall */
         return $value->toInt();
     }
 

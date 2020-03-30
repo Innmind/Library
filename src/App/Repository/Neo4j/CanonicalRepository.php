@@ -26,11 +26,15 @@ final class CanonicalRepository implements CanonicalRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MoreSpecificReturnType
      */
     public function get(Identity $identity): Canonical
     {
         try {
+            /**
+             * @psalm-suppress InvalidArgument
+             * @psalm-suppress LessSpecificReturnStatement
+             */
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
             throw new CanonicalNotFound('', 0, $e);
@@ -55,6 +59,7 @@ final class CanonicalRepository implements CanonicalRepositoryInterface
 
     public function has(Identity $identity): bool
     {
+        /** @psalm-suppress InvalidArgument */
         return $this->infrastructure->contains($identity);
     }
 
@@ -71,12 +76,7 @@ final class CanonicalRepository implements CanonicalRepositoryInterface
         return $this
             ->infrastructure
             ->all()
-            ->reduce(
-                Set::of(Canonical::class),
-                function(Set $all, Canonical $entity): Set {
-                    return $all->add($entity);
-                }
-            );
+            ->toSetOf(Canonical::class);
     }
 
     /**
@@ -87,11 +87,6 @@ final class CanonicalRepository implements CanonicalRepositoryInterface
         return $this
             ->infrastructure
             ->matching($specification)
-            ->reduce(
-                Set::of(Canonical::class),
-                function(Set $all, Canonical $entity): Set {
-                    return $all->add($entity);
-                }
-            );
+            ->toSetOf(Canonical::class);
     }
 }

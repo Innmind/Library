@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\CitationAppearance\Identity,
     Entity\CitationAppearance,
-    Specification\CitationAppearance\Specification
+    Specification\CitationAppearance\Specification,
+    Exception\CitationAppearanceNotFound,
 };
 use Innmind\Immutable\Set;
 
 interface CitationAppearanceRepository
 {
     /**
-     * @throws CitationAppearanceNotFoundException
+     * @throws CitationAppearanceNotFound
      */
     public function get(Identity $identity): CitationAppearance;
     public function add(CitationAppearance $citationAppearance): self;

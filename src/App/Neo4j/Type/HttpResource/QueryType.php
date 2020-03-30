@@ -13,6 +13,7 @@ final class QueryType implements Type
      */
     public function forDatabase($value)
     {
+        /** @psalm-suppress MixedMethodCall */
         return $value->toString();
     }
 

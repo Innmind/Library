@@ -26,11 +26,15 @@ final class CitationAppearanceRepository implements CitationAppearanceRepository
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MoreSpecificReturnType
      */
     public function get(Identity $identity): CitationAppearance
     {
         try {
+            /**
+             * @psalm-suppress InvalidArgument
+             * @psalm-suppress LessSpecificReturnStatement
+             */
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
             throw new CitationAppearanceNotFound('', 0, $e);
@@ -55,6 +59,7 @@ final class CitationAppearanceRepository implements CitationAppearanceRepository
 
     public function has(Identity $identity): bool
     {
+        /** @psalm-suppress InvalidArgument */
         return $this->infrastructure->contains($identity);
     }
 
@@ -71,12 +76,7 @@ final class CitationAppearanceRepository implements CitationAppearanceRepository
         return $this
             ->infrastructure
             ->all()
-            ->reduce(
-                Set::of(CitationAppearance::class),
-                function(Set $all, CitationAppearance $entity): Set {
-                    return $all->add($entity);
-                }
-            );
+            ->toSetOf(CitationAppearance::class);
     }
 
     /**
@@ -87,11 +87,6 @@ final class CitationAppearanceRepository implements CitationAppearanceRepository
         return $this
             ->infrastructure
             ->matching($specification)
-            ->reduce(
-                Set::of(CitationAppearance::class),
-                function(Set $all, CitationAppearance $entity): Set {
-                    return $all->add($entity);
-                }
-            );
+            ->toSetOf(CitationAppearance::class);
     }
 }

@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\Reference\Identity,
     Entity\Reference,
-    Specification\Reference\Specification
+    Specification\Reference\Specification,
+    Exception\ReferenceNotFound,
 };
 use Innmind\Immutable\Set;
 
 interface ReferenceRepository
 {
     /**
-     * @throws ReferenceNotFoundException
+     * @throws ReferenceNotFound
      */
     public function get(Identity $identity): Reference;
     public function add(Reference $reference): self;

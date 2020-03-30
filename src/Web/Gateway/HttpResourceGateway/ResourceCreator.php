@@ -19,6 +19,7 @@ use Domain\{
     Exception\DomainAlreadyExist,
     Exception\HostAlreadyExist,
     Entity\HttpResource\Charset,
+    Entity\Host\Identity as HostIdentityInterface,
     Model\Language,
 };
 use Innmind\Url\{
@@ -57,15 +58,14 @@ final class ResourceCreator implements ResourceCreatorInterface
         return $identity;
     }
 
-    private function registerHost(HttpResource $resource): HostIdentity
+    private function registerHost(HttpResource $resource): HostIdentityInterface
     {
+        $domain = new DomainIdentity(Uuid::uuid4()->toString());
+        /** @psalm-suppress MixedArgument */
+        $host = Host::of($resource->property('host')->value());
+
         try {
-            ($this->handle)(
-                new RegisterDomain(
-                    $domain = new DomainIdentity((string) Uuid::uuid4()),
-                    $host = Host::of($resource->property('host')->value())
-                )
-            );
+            ($this->handle)(new RegisterDomain($domain, $host));
         } catch (DomainAlreadyExist $e) {
             $domain = $e->domain()->identity();
         }
@@ -73,9 +73,9 @@ final class ResourceCreator implements ResourceCreatorInterface
         try {
             ($this->handle)(
                 new RegisterHost(
-                    $identity = new HostIdentity((string) Uuid::uuid4()),
+                    $identity = new HostIdentity(Uuid::uuid4()->toString()),
                     $domain,
-                    new DomainHostIdentity((string) Uuid::uuid4()),
+                    new DomainHostIdentity(Uuid::uuid4()->toString()),
                     $host
                 )
             );
@@ -88,15 +88,17 @@ final class ResourceCreator implements ResourceCreatorInterface
 
     private function registerResource(
         HttpResource $resource,
-        HostIdentity $host
+        HostIdentityInterface $host
     ): Identity {
+        /** @var string */
         $query = $resource->property('query')->value();
 
+        /** @psalm-suppress MixedArgument */
         ($this->handle)(
             new RegisterHttpResource(
-                $identity = new Identity((string) Uuid::uuid4()),
+                $identity = new Identity(Uuid::uuid4()->toString()),
                 $host,
-                new HostResourceIdentity((string) Uuid::uuid4()),
+                new HostResourceIdentity(Uuid::uuid4()->toString()),
                 Path::of($resource->property('path')->value()),
                 empty($query) ? Query::none() : Query::of($query)
             )
@@ -113,6 +115,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
+        /** @psalm-suppress MixedArgument */
         ($this->handle)(
             new SpecifyCharset(
                 $identity,
@@ -129,13 +132,13 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $languages = $resource
-            ->property('languages')
-            ->value()
-            ->mapTo(
-                Language::class,
-                static fn(string $language): Language => new Language($language),
-            );
+        /** @var Set<string> */
+        $languages = $resource->property('languages')->value();
+        /** @var Set<Language> */
+        $languages = $languages->mapTo(
+            Language::class,
+            static fn(string $language): Language => new Language($language),
+        );
 
         ($this->handle)(
             new SpecifyLanguages(

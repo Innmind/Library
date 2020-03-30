@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\Canonical\Identity,
     Entity\Canonical,
-    Specification\Canonical\Specification
+    Specification\Canonical\Specification,
+    Exception\CanonicalNotFound,
 };
 use Innmind\Immutable\Set;
 
 interface CanonicalRepository
 {
     /**
-     * @throws CanonicalNotFoundException
+     * @throws CanonicalNotFound
      */
     public function get(Identity $identity): Canonical;
     public function add(Canonical $canonical): self;

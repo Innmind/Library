@@ -29,6 +29,7 @@ final class MakeCanonicalLinkHandler
 
     public function __invoke(MakeCanonicalLink $wished): void
     {
+        /** @psalm-suppress InvalidArgument */
         $canonicals = $this->repository->matching(
             (new HttpResource($wished->resource()))
                 ->and(new CanonicalSpec($wished->canonical()))

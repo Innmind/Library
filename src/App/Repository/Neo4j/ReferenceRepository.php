@@ -26,11 +26,15 @@ final class ReferenceRepository implements ReferenceRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MoreSpecificReturnType
      */
     public function get(Identity $identity): Reference
     {
         try {
+            /**
+             * @psalm-suppress InvalidArgument
+             * @psalm-suppress LessSpecificReturnStatement
+             */
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
             throw new ReferenceNotFound('', 0, $e);
@@ -55,6 +59,7 @@ final class ReferenceRepository implements ReferenceRepositoryInterface
 
     public function has(Identity $identity): bool
     {
+        /** @psalm-suppress InvalidArgument */
         return $this->infrastructure->contains($identity);
     }
 
@@ -71,12 +76,7 @@ final class ReferenceRepository implements ReferenceRepositoryInterface
         return $this
             ->infrastructure
             ->all()
-            ->reduce(
-                Set::of(Reference::class),
-                function(Set $all, Reference $entity): Set {
-                    return $all->add($entity);
-                }
-            );
+            ->toSetOf(Reference::class);
     }
 
     /**
@@ -87,11 +87,6 @@ final class ReferenceRepository implements ReferenceRepositoryInterface
         return $this
             ->infrastructure
             ->matching($specification)
-            ->reduce(
-                Set::of(Reference::class),
-                function(Set $all, Reference $entity): Set {
-                    return $all->add($entity);
-                }
-            );
+            ->toSetOf(Reference::class);
     }
 }

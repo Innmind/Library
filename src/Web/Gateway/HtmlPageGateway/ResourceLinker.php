@@ -42,6 +42,7 @@ final class ResourceLinker implements ResourceLinkerInterface
         foreach ($links as $link) {
             switch ($link->relationship()) {
                 case 'alternate':
+                    /** @psalm-suppress MixedArgument */
                     $this->registerAlternate(
                         $from,
                         $link->reference(),
@@ -64,7 +65,7 @@ final class ResourceLinker implements ResourceLinkerInterface
         try {
             ($this->handle)(
                 new RegisterAlternateResource(
-                    new AlternateIdentity((string) Uuid::uuid4()),
+                    new AlternateIdentity(Uuid::uuid4()->toString()),
                     $from,
                     new ResourceIdentity($to->identity()->toString()),
                     new Language($language)
@@ -80,7 +81,7 @@ final class ResourceLinker implements ResourceLinkerInterface
         try {
             ($this->handle)(
                 new MakeCanonicalLink(
-                    new CanonicalIdentity((string) Uuid::uuid4()),
+                    new CanonicalIdentity(Uuid::uuid4()->toString()),
                     new ResourceIdentity($to->identity()->toString()),
                     $from
                 )

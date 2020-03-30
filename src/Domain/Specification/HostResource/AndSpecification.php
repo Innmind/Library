@@ -21,6 +21,7 @@ final class AndSpecification extends ParentSpec implements Specification
 
     public function isSatisfiedBy(Entity $relation): bool
     {
+        /** @psalm-suppress UndefinedInterfaceMethod */
         return $this->left()->isSatisfiedBy($relation) &&
             $this->right()->isSatisfiedBy($relation);
     }

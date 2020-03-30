@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\ResourceAuthor\Identity,
     Entity\ResourceAuthor,
-    Specification\ResourceAuthor\Specification
+    Specification\ResourceAuthor\Specification,
+    Exception\ResourceAuthorNotFound,
 };
 use Innmind\Immutable\Set;
 
 interface ResourceAuthorRepository
 {
     /**
-     * @throws ResourceAuthorNotFoundException
+     * @throws ResourceAuthorNotFound
      */
     public function get(Identity $identity): ResourceAuthor;
     public function add(ResourceAuthor $resourceAuthor): self;

@@ -49,7 +49,7 @@ final class ResourceLinker implements ResourceLinkerInterface
         try {
             ($this->handle)(
                 new ReferResource(
-                    new ReferenceIdentity((string) Uuid::uuid4()),
+                    new ReferenceIdentity(Uuid::uuid4()->toString()),
                     $from,
                     new ResourceIdentity($to->identity()->toString())
                 )

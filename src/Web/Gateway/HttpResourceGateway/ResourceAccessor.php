@@ -53,45 +53,32 @@ final class ResourceAccessor implements ResourceAccessorInterface
                 ->withParameter('identity', $identity->toString())
                 ->return('host')
         );
-        $properties = Map::of('string', Property::class)
-            (
-                'identity',
-                new Property('identity', $resource->identity()->toString())
-            )
-            (
-                'host',
-                new Property('host', $result->rows()->first()->value()['name'])
-            )
-            (
-                'path',
-                new Property('path', $resource->path()->toString())
-            )
-            (
-                'query',
-                new Property('query', $resource->query()->toString())
-            )
-            (
+        /**
+         * @psalm-suppress PossiblyInvalidArrayAccess
+         * @var list<Property>
+         */
+        $properties = [
+            new Property('identity', $resource->identity()->toString()),
+            new Property('host', $result->rows()->first()->value()['name']),
+            new Property('path', $resource->path()->toString()),
+            new Property('query', $resource->query()->toString()),
+            new Property(
                 'languages',
-                new Property(
-                    'languages',
-                    $resource
-                        ->languages()
-                        ->reduce(
-                            Set::of('string'),
-                            function(Set $carry, Language $language): Set {
-                                return $carry->add((string) $language);
-                            }
-                        )
-                )
-            );
+                $resource
+                    ->languages()
+                    ->reduce(
+                        Set::of('string'),
+                        function(Set $carry, Language $language): Set {
+                            return $carry->add((string) $language);
+                        }
+                    )
+            ),
+        ];
 
         if ($resource->hasCharset()) {
-            $properties = $properties->put(
-                'charset',
-                new Property('charset', (string) $resource->charset())
-            );
+            $properties[] = new Property('charset', (string) $resource->charset());
         }
 
-        return new HttpResource\HttpResource($definition, $properties);
+        return HttpResource\HttpResource::of($definition, ...$properties);
     }
 }

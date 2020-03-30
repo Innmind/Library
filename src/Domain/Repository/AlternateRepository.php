@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\Alternate\Identity,
     Entity\Alternate,
-    Specification\Alternate\Specification
+    Specification\Alternate\Specification,
+    Exception\AlternateNotFound,
 };
 use Innmind\Immutable\Set;
 
 interface AlternateRepository
 {
     /**
-     * @throws AlternateNotFoundException
+     * @throws AlternateNotFound
      */
     public function get(Identity $identity): Alternate;
     public function add(Alternate $alternate): self;

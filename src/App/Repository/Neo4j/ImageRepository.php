@@ -26,11 +26,15 @@ final class ImageRepository implements ImageRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MoreSpecificReturnType
      */
     public function get(Identity $identity): Image
     {
         try {
+            /**
+             * @psalm-suppress InvalidArgument
+             * @psalm-suppress LessSpecificReturnStatement
+             */
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
             throw new ImageNotFound('', 0, $e);
@@ -55,6 +59,7 @@ final class ImageRepository implements ImageRepositoryInterface
 
     public function has(Identity $identity): bool
     {
+        /** @psalm-suppress InvalidArgument */
         return $this->infrastructure->contains($identity);
     }
 
@@ -71,12 +76,7 @@ final class ImageRepository implements ImageRepositoryInterface
         return $this
             ->infrastructure
             ->all()
-            ->reduce(
-                Set::of(Image::class),
-                function(Set $all, Image $image): Set {
-                    return $all->add($image);
-                }
-            );
+            ->toSetOf(Image::class);
     }
 
     /**
@@ -87,11 +87,6 @@ final class ImageRepository implements ImageRepositoryInterface
         return $this
             ->infrastructure
             ->matching($specification)
-            ->reduce(
-                Set::of(Image::class),
-                function(Set $all, Image $image): Set {
-                    return $all->add($image);
-                }
-            );
+            ->toSetOf(Image::class);
     }
 }

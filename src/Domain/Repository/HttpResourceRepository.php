@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\HttpResource\Identity,
     Entity\HttpResource,
-    Specification\HttpResource\Specification
+    Specification\HttpResource\Specification,
+    Exception\HttpResourceNotFound,
 };
 use Innmind\Immutable\Set;
 
 interface HttpResourceRepository
 {
     /**
-     * @throws HttpResourceNotFoundException
+     * @throws HttpResourceNotFound
      */
     public function get(Identity $identity): HttpResource;
     public function add(HttpResource $httpResource): self;

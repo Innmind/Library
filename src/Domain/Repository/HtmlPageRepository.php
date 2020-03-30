@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\HtmlPage\Identity,
     Entity\HtmlPage,
-    Specification\HttpResource\Specification
+    Specification\HttpResource\Specification,
+    Exception\HtmlPageNotFound,
 };
 use Innmind\Immutable\Set;
 
 interface HtmlPageRepository
 {
     /**
-     * @throws HtmlPageNotFoundException
+     * @throws HtmlPageNotFound
      */
     public function get(Identity $identity): HtmlPage;
     public function add(HtmlPage $htmlPage): self;

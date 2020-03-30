@@ -21,6 +21,7 @@ final class OrSpecification extends ParentSpec implements Specification
 
     public function isSatisfiedBy(Entity $appearance): bool
     {
+        /** @psalm-suppress UndefinedInterfaceMethod */
         return $this->left()->isSatisfiedBy($appearance) ||
             $this->right()->isSatisfiedBy($appearance);
     }

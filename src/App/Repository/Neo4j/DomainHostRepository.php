@@ -26,11 +26,15 @@ final class DomainHostRepository implements DomainHostRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MoreSpecificReturnType
      */
     public function get(Identity $identity): DomainHost
     {
         try {
+            /**
+             * @psalm-suppress InvalidArgument
+             * @psalm-suppress LessSpecificReturnStatement
+             */
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
             throw new DomainHostNotFound('', 0, $e);
@@ -55,6 +59,7 @@ final class DomainHostRepository implements DomainHostRepositoryInterface
 
     public function has(Identity $identity): bool
     {
+        /** @psalm-suppress InvalidArgument */
         return $this->infrastructure->contains($identity);
     }
 
@@ -71,12 +76,7 @@ final class DomainHostRepository implements DomainHostRepositoryInterface
         return $this
             ->infrastructure
             ->all()
-            ->reduce(
-                Set::of(DomainHost::class),
-                function(Set $all, DomainHost $domainHost): Set {
-                    return $all->add($domainHost);
-                }
-            );
+            ->toSetOf(DomainHost::class);
     }
 
     /**
@@ -87,11 +87,6 @@ final class DomainHostRepository implements DomainHostRepositoryInterface
         return $this
             ->infrastructure
             ->matching($specification)
-            ->reduce(
-                Set::of(DomainHost::class),
-                function(Set $all, DomainHost $domainHost): Set {
-                    return $all->add($domainHost);
-                }
-            );
+            ->toSetOf(DomainHost::class);
     }
 }

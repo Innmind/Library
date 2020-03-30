@@ -43,6 +43,10 @@ final class Install implements Command
             return;
         }
 
+        /**
+         * @psalm-suppress InvalidArgument
+         * @var Map<string, string>
+         */
         $envVars = Map::of('string', 'string')
             ('API_KEY', \sha1(\random_bytes(32)));
 
@@ -63,32 +67,33 @@ final class Install implements Command
         }
 
         $event = $passwords->first()->payload();
+        /** @var string */
         $user = $event->get('user');
+        /** @var string */
         $password = $event->get('password');
 
         $envVars = $envVars->put(
             'NEO4J',
             "http://$user:$password@localhost:7474/"
         );
+        /** @var Sequence<string> */
+        $dotEnv = $envVars->reduce(
+            Sequence::strings(),
+            static function(Sequence $lines, string $key, string $value): Sequence {
+                return $lines->add(sprintf(
+                    '%s=%s',
+                    $key,
+                    $value
+                ));
+            },
+        );
 
         file_put_contents(
             $envFile,
-            join(
-                "\n",
-                $envVars
-                    ->reduce(
-                        Sequence::strings(),
-                        static function(Sequence $lines, string $key, string $value): Sequence {
-                            return $lines->add(sprintf(
-                                '%s=%s',
-                                $key,
-                                $value
-                            ));
-                        }
-                    )
-            )->toString(),
+            join("\n", $dotEnv)->toString(),
         );
 
+        /** @psalm-suppress InvalidArgument */
         $this->client->send(
             new Event(
                 new Event\Name('website_available'), // useful for infrastructure-nginx

@@ -26,11 +26,15 @@ final class HtmlPageRepository implements HtmlPageRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MoreSpecificReturnType
      */
     public function get(Identity $identity): HtmlPage
     {
         try {
+            /**
+             * @psalm-suppress InvalidArgument
+             * @psalm-suppress LessSpecificReturnStatement
+             */
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
             throw new HtmlPageNotFound('', 0, $e);
@@ -55,6 +59,7 @@ final class HtmlPageRepository implements HtmlPageRepositoryInterface
 
     public function has(Identity $identity): bool
     {
+        /** @psalm-suppress InvalidArgument */
         return $this->infrastructure->contains($identity);
     }
 
@@ -71,12 +76,7 @@ final class HtmlPageRepository implements HtmlPageRepositoryInterface
         return $this
             ->infrastructure
             ->all()
-            ->reduce(
-                Set::of(HtmlPage::class),
-                function(Set $all, HtmlPage $page): Set {
-                    return $all->add($page);
-                }
-            );
+            ->toSetOf(HtmlPage::class);
     }
 
     /**
@@ -87,11 +87,6 @@ final class HtmlPageRepository implements HtmlPageRepositoryInterface
         return $this
             ->infrastructure
             ->matching($specification)
-            ->reduce(
-                Set::of(HtmlPage::class),
-                function(Set $all, HtmlPage $page): Set {
-                    return $all->add($page);
-                }
-            );
+            ->toSetOf(HtmlPage::class);
     }
 }

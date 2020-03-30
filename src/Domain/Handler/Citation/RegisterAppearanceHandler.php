@@ -29,6 +29,7 @@ final class RegisterAppearanceHandler
 
     public function __invoke(RegisterAppearance $wished): void
     {
+        /** @psalm-suppress InvalidArgument */
         $appearances = $this->repository->matching(
             (new Citation($wished->citation()))
                 ->and(new HttpResource($wished->resource()))

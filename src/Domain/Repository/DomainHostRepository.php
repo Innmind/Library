@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\DomainHost\Identity,
     Entity\DomainHost,
-    Specification\DomainHost\Specification
+    Specification\DomainHost\Specification,
+    Exception\DomainHostNotFound,
 };
 use Innmind\Immutable\Set;
 
 interface DomainHostRepository
 {
     /**
-     * @throws DomainHostNotFoundException
+     * @throws DomainHostNotFound
      */
     public function get(Identity $identity): DomainHost;
     public function add(DomainHost $domainHost): self;

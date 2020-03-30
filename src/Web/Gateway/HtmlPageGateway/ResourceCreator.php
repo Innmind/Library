@@ -41,6 +41,7 @@ use Domain\{
     Entity\HtmlPage\Anchor,
     Entity\Author\Name as AuthorName,
     Entity\Citation\Text as CitationText,
+    Entity\Host\Identity as HostIdentityInterface,
     Model\Language,
 };
 use Innmind\Url\{
@@ -92,15 +93,14 @@ final class ResourceCreator implements ResourceCreatorInterface
         return $identity;
     }
 
-    private function registerHost(HttpResource $resource): HostIdentity
+    private function registerHost(HttpResource $resource): HostIdentityInterface
     {
+        $domain = new DomainIdentity(Uuid::uuid4()->toString());
+        /** @psalm-suppress MixedArgument */
+        $host = Host::of($resource->property('host')->value());
+
         try {
-            ($this->handle)(
-                new RegisterDomain(
-                    $domain = new DomainIdentity((string) Uuid::uuid4()),
-                    $host = Host::of($resource->property('host')->value())
-                )
-            );
+            ($this->handle)(new RegisterDomain($domain, $host));
         } catch (DomainAlreadyExist $e) {
             $domain = $e->domain()->identity();
         }
@@ -108,9 +108,9 @@ final class ResourceCreator implements ResourceCreatorInterface
         try {
             ($this->handle)(
                 new RegisterHost(
-                    $identity = new HostIdentity((string) Uuid::uuid4()),
+                    $identity = new HostIdentity(Uuid::uuid4()->toString()),
                     $domain,
-                    new DomainHostIdentity((string) Uuid::uuid4()),
+                    new DomainHostIdentity(Uuid::uuid4()->toString()),
                     $host
                 )
             );
@@ -123,15 +123,17 @@ final class ResourceCreator implements ResourceCreatorInterface
 
     private function registerResource(
         HttpResource $resource,
-        HostIdentity $host
+        HostIdentityInterface $host
     ): Identity {
+        /** @var string */
         $query = $resource->property('query')->value();
 
+        /** @psalm-suppress MixedArgument */
         ($this->handle)(
             new RegisterHtmlPage(
-                $identity = new Identity((string) Uuid::uuid4()),
+                $identity = new Identity(Uuid::uuid4()->toString()),
                 $host,
-                new HostResourceIdentity((string) Uuid::uuid4()),
+                new HostResourceIdentity(Uuid::uuid4()->toString()),
                 Path::of($resource->property('path')->value()),
                 empty($query) ? Query::none() : Query::of($query)
             )
@@ -148,6 +150,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
+        /** @psalm-suppress MixedArgument */
         ($this->handle)(
             new SpecifyCharset(
                 $identity,
@@ -164,13 +167,13 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $languages = $resource
-            ->property('languages')
-            ->value()
-            ->mapTo(
-                Language::class,
-                static fn(string $language): Language => new Language($language),
-            );
+        /** @var Set<string> */
+        $languages = $resource->property('languages')->value();
+        /** @var Set<Language> */
+        $languages = $languages->mapTo(
+            Language::class,
+            static fn(string $language): Language => new Language($language),
+        );
 
         ($this->handle)(
             new SpecifyLanguages(
@@ -189,9 +192,10 @@ final class ResourceCreator implements ResourceCreatorInterface
         }
 
         try {
+            /** @psalm-suppress MixedArgument */
             ($this->handle)(
                 new RegisterAuthor(
-                    $author = new AuthorIdentity((string) Uuid::uuid4()),
+                    $author = new AuthorIdentity(Uuid::uuid4()->toString()),
                     new AuthorName(
                         $resource->property('author')->value()
                     )
@@ -203,7 +207,7 @@ final class ResourceCreator implements ResourceCreatorInterface
 
         ($this->handle)(
             new RegisterResourceAuthor(
-                new ResourceAuthorIdentity((string) Uuid::uuid4()),
+                new ResourceAuthorIdentity(Uuid::uuid4()->toString()),
                 $author,
                 $identity
             )
@@ -218,12 +222,11 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $resource
-            ->property('citations')
-            ->value()
-            ->foreach(function(string $citation) use ($identity): void {
-                $this->registerCitation($citation, $identity);
-            });
+        /** @var Set<string> */
+        $citations = $resource->property('citations')->value();
+        $citations->foreach(function(string $citation) use ($identity): void {
+            $this->registerCitation($citation, $identity);
+        });
     }
 
     private function registerCitation(string $citation, Identity $identity): void
@@ -231,7 +234,7 @@ final class ResourceCreator implements ResourceCreatorInterface
         try {
             ($this->handle)(
                 new RegisterCitation(
-                    $citationIdentity = new CitationIdentity((string) Uuid::uuid4()),
+                    $citationIdentity = new CitationIdentity(Uuid::uuid4()->toString()),
                     new CitationText($citation)
                 )
             );
@@ -241,7 +244,7 @@ final class ResourceCreator implements ResourceCreatorInterface
 
         ($this->handle)(
             new RegisterAppearance(
-                new CitationAppearanceIdentity((string) Uuid::uuid4()),
+                new CitationAppearanceIdentity(Uuid::uuid4()->toString()),
                 $citationIdentity,
                 $identity
             )
@@ -271,18 +274,16 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
+        /** @var Set<string> */
+        $anchors = $resource->property('anchors')->value();
+
         ($this->handle)(
             new SpecifyAnchors(
                 $identity,
-                $resource
-                    ->property('anchors')
-                    ->value()
-                    ->reduce(
-                        Set::of(Anchor::class),
-                        function(Set $carry, string $anchor): Set {
-                            return $carry->add(new Anchor($anchor));
-                        }
-                    )
+                $anchors->mapTo(
+                    Anchor::class,
+                    static fn(string $anchor): Anchor => new Anchor($anchor),
+                ),
             )
         );
     }
@@ -295,6 +296,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
+        /** @psalm-suppress MixedArgument */
         ($this->handle)(
             new SpecifyAndroidAppLink(
                 $identity,
@@ -313,6 +315,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
+        /** @psalm-suppress MixedArgument */
         ($this->handle)(
             new SpecifyDescription(
                 $identity,
@@ -329,6 +332,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
+        /** @psalm-suppress MixedArgument */
         ($this->handle)(
             new SpecifyIosAppLink(
                 $identity,
@@ -347,6 +351,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
+        /** @psalm-suppress MixedArgument */
         ($this->handle)(
             new SpecifyMainContent(
                 $identity,
@@ -363,6 +368,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
+        /** @psalm-suppress MixedArgument */
         $colour = Colour::of(
             $resource->property('theme_colour')->value()
         );
@@ -383,6 +389,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
+        /** @psalm-suppress MixedArgument */
         ($this->handle)(
             new SpecifyTitle(
                 $identity,
@@ -399,6 +406,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
+        /** @psalm-suppress MixedArgument */
         ($this->handle)(
             new SpecifyPreview(
                 $identity,

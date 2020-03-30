@@ -12,8 +12,12 @@ use Innmind\Immutable\Set;
 final class SpecifyAnchors
 {
     private Identity $identity;
+    /** @var Set<Anchor> */
     private Set $anchors;
 
+    /**
+     * @param Set<Anchor> $anchors
+     */
     public function __construct(
         Identity $identity,
         Set $anchors
@@ -34,6 +38,9 @@ final class SpecifyAnchors
         return $this->identity;
     }
 
+    /**
+     * @return Set<Anchor>
+     */
     public function anchors(): Set
     {
         return $this->anchors;

@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\Image\Identity,
     Entity\Image,
-    Specification\HttpResource\Specification
+    Specification\HttpResource\Specification,
+    Exception\ImageNotFound,
 };
 use Innmind\Immutable\Set;
 
 interface ImageRepository
 {
     /**
-     * @throws ImageNotFoundException
+     * @throws ImageNotFound
      */
     public function get(Identity $identity): Image;
     public function add(Image $image): self;

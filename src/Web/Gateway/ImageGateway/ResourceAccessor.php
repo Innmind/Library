@@ -53,57 +53,42 @@ final class ResourceAccessor implements ResourceAccessorInterface
                 ->withParameter('identity', $identity->toString())
                 ->return('host')
         );
-        $properties = Map::of('string', Property::class)
-            (
-                'identity',
-                new Property('identity', $image->identity()->toString())
-            )
-            (
-                'host',
-                new Property('host', $result->rows()->first()->value()['name'])
-            )
-            (
-                'path',
-                new Property('path', $image->path()->toString())
-            )
-            (
-                'query',
-                new Property('query', $image->query()->toString())
-            )
-            (
+        /**
+         * @psalm-suppress PossiblyInvalidArrayAccess
+         * @var list<Property>
+         */
+        $properties = [
+            new Property('identity', $image->identity()->toString()),
+            new Property('host', $result->rows()->first()->value()['name']),
+            new Property('path', $image->path()->toString()),
+            new Property('query', $image->query()->toString()),
+            new Property(
                 'descriptions',
-                new Property(
-                    'descriptions',
-                    $image
-                        ->descriptions()
-                        ->reduce(
-                            Set::of('string'),
-                            function(Set $carry, Description $description): Set {
-                                return $carry->add((string) $description);
-                            }
-                        )
-                )
-            );
+                $image
+                    ->descriptions()
+                    ->reduce(
+                        Set::of('string'),
+                        function(Set $carry, Description $description): Set {
+                            return $carry->add((string) $description);
+                        }
+                    )
+            ),
+        ];
 
         if ($image->isDimensionKnown()) {
-            $properties = $properties->put(
+            /** @psalm-suppress InvalidArgument */
+            $properties[] = new Property(
                 'dimension',
-                new Property(
-                    'dimension',
-                    Map::of('string', 'int')
-                        ('width', $image->dimension()->width())
-                        ('height', $image->dimension()->height())
-                )
+                Map::of('string', 'int')
+                    ('width', $image->dimension()->width())
+                    ('height', $image->dimension()->height())
             );
         }
 
         if ($image->isWeightKnown()) {
-            $properties = $properties->put(
-                'weight',
-                new Property('weight', $image->weight()->toInt())
-            );
+            $properties[] = new Property('weight', $image->weight()->toInt());
         }
 
-        return new HttpResource\HttpResource($definition, $properties);
+        return HttpResource\HttpResource::of($definition, ...$properties);
     }
 }

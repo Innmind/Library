@@ -106,8 +106,10 @@ class HttpResource implements ContainsRecordedEvents
         return $this->charset instanceof Charset;
     }
 
+    /** @psalm-suppress InvalidNullableReturnType */
     public function charset(): Charset
     {
+        /** @psalm-suppress NullableReturnStatement */
         return $this->charset;
     }
 }

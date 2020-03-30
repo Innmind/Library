@@ -27,6 +27,7 @@ final class ColourType implements Type
             return;
         }
 
+        /** @psalm-suppress MixedMethodCall */
         return $value->toRGBA()->toString();
     }
 

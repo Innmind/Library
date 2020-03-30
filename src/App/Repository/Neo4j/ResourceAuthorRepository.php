@@ -26,11 +26,15 @@ final class ResourceAuthorRepository implements ResourceAuthorRepositoryInterfac
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MoreSpecificReturnType
      */
     public function get(Identity $identity): ResourceAuthor
     {
         try {
+            /**
+             * @psalm-suppress InvalidArgument
+             * @psalm-suppress LessSpecificReturnStatement
+             */
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
             throw new ResourceAuthorNotFound('', 0, $e);
@@ -55,6 +59,7 @@ final class ResourceAuthorRepository implements ResourceAuthorRepositoryInterfac
 
     public function has(Identity $identity): bool
     {
+        /** @psalm-suppress InvalidArgument */
         return $this->infrastructure->contains($identity);
     }
 
@@ -71,12 +76,7 @@ final class ResourceAuthorRepository implements ResourceAuthorRepositoryInterfac
         return $this
             ->infrastructure
             ->all()
-            ->reduce(
-                Set::of(ResourceAuthor::class),
-                function(Set $all, ResourceAuthor $entity): Set {
-                    return $all->add($entity);
-                }
-            );
+            ->toSetOf(ResourceAuthor::class);
     }
 
     /**
@@ -87,11 +87,6 @@ final class ResourceAuthorRepository implements ResourceAuthorRepositoryInterfac
         return $this
             ->infrastructure
             ->matching($specification)
-            ->reduce(
-                Set::of(ResourceAuthor::class),
-                function(Set $all, ResourceAuthor $entity): Set {
-                    return $all->add($entity);
-                }
-            );
+            ->toSetOf(ResourceAuthor::class);
     }
 }

@@ -26,11 +26,15 @@ final class HttpResourceRepository implements HttpResourceRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MoreSpecificReturnType
      */
     public function get(Identity $identity): HttpResource
     {
         try {
+            /**
+             * @psalm-suppress InvalidArgument
+             * @psalm-suppress LessSpecificReturnStatement
+             */
             return $this->infrastructure->get($identity);
         } catch (EntityNotFound $e) {
             throw new HttpResourceNotFound('', 0, $e);
@@ -55,6 +59,7 @@ final class HttpResourceRepository implements HttpResourceRepositoryInterface
 
     public function has(Identity $identity): bool
     {
+        /** @psalm-suppress InvalidArgument */
         return $this->infrastructure->contains($identity);
     }
 
@@ -71,12 +76,7 @@ final class HttpResourceRepository implements HttpResourceRepositoryInterface
         return $this
             ->infrastructure
             ->all()
-            ->reduce(
-                Set::of(HttpResource::class),
-                function(Set $all, HttpResource $resource): Set {
-                    return $all->add($resource);
-                }
-            );
+            ->toSetOf(HttpResource::class);
     }
 
     /**
@@ -87,11 +87,6 @@ final class HttpResourceRepository implements HttpResourceRepositoryInterface
         return $this
             ->infrastructure
             ->matching($specification)
-            ->reduce(
-                Set::of(HttpResource::class),
-                function(Set $all, HttpResource $resource): Set {
-                    return $all->add($resource);
-                }
-            );
+            ->toSetOf(HttpResource::class);
     }
 }

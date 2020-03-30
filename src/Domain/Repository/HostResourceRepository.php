@@ -6,14 +6,15 @@ namespace Domain\Repository;
 use Domain\{
     Entity\HostResource\Identity,
     Entity\HostResource,
-    Specification\HostResource\Specification
+    Specification\HostResource\Specification,
+    Exception\HostResourceNotFound,
 };
 use Innmind\Immutable\Set;
 
 interface HostResourceRepository
 {
     /**
-     * @throws HostResourceNotFoundException
+     * @throws HostResourceNotFound
      */
     public function get(Identity $identity): HostResource;
     public function add(HostResource $hostResource): self;

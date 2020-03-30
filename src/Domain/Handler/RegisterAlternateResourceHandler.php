@@ -25,6 +25,7 @@ final class RegisterAlternateResourceHandler
 
     public function __invoke(RegisterAlternateResource $wished): void
     {
+        /** @psalm-suppress InvalidArgument */
         $alternates = $this->repository->matching(
             (new HttpResource($wished->resource()))
                 ->and(new AlternateSpec($wished->alternate()))

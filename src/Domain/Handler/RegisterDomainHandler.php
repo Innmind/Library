@@ -40,6 +40,7 @@ final class RegisterDomainHandler
         $name = new Name($name);
         $tld = new TopLevelDomain($tld);
 
+        /** @psalm-suppress InvalidArgument */
         $existing = $this->repository->matching(
             (new NameSpec($name))
                 ->and(new TopLevelDomainSpec($tld))

@@ -20,6 +20,10 @@ use Innmind\Immutable\{
     Map,
 };
 
+/**
+ * @psalm-suppress InvalidArgument
+ * @psalm-suppress InvalidScalarArgument
+ */
 return Directory::of(
     'web',
     Set::of(Directory::class),

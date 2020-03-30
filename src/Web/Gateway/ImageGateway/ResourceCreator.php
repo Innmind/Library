@@ -22,6 +22,7 @@ use Domain\{
     Entity\Image\Dimension,
     Entity\Image\Weight,
     Entity\Image\Description,
+    Entity\Host\Identity as HostIdentityInterface,
 };
 use Innmind\Url\{
     Authority\Host,
@@ -35,7 +36,10 @@ use Innmind\Rest\Server\{
     Identity as IdentityInterface,
 };
 use Innmind\CommandBus\CommandBus;
-use Innmind\Immutable\Set;
+use Innmind\Immutable\{
+    Set,
+    Map,
+};
 use Ramsey\Uuid\Uuid;
 
 final class ResourceCreator implements ResourceCreatorInterface
@@ -60,15 +64,14 @@ final class ResourceCreator implements ResourceCreatorInterface
         return $identity;
     }
 
-    private function registerHost(HttpResource $resource): HostIdentity
+    private function registerHost(HttpResource $resource): HostIdentityInterface
     {
+        $domain = new DomainIdentity(Uuid::uuid4()->toString());
+        /** @psalm-suppress MixedArgument */
+        $host = Host::of($resource->property('host')->value());
+
         try {
-            ($this->handle)(
-                new RegisterDomain(
-                    $domain = new DomainIdentity((string) Uuid::uuid4()),
-                    $host = Host::of($resource->property('host')->value())
-                )
-            );
+            ($this->handle)(new RegisterDomain($domain, $host));
         } catch (DomainAlreadyExist $e) {
             $domain = $e->domain()->identity();
         }
@@ -76,9 +79,9 @@ final class ResourceCreator implements ResourceCreatorInterface
         try {
             ($this->handle)(
                 new RegisterHost(
-                    $identity = new HostIdentity((string) Uuid::uuid4()),
+                    $identity = new HostIdentity(Uuid::uuid4()->toString()),
                     $domain,
-                    new DomainHostIdentity((string) Uuid::uuid4()),
+                    new DomainHostIdentity(Uuid::uuid4()->toString()),
                     $host
                 )
             );
@@ -91,15 +94,17 @@ final class ResourceCreator implements ResourceCreatorInterface
 
     private function registerImage(
         HttpResource $resource,
-        HostIdentity $host
+        HostIdentityInterface $host
     ): Identity {
+        /** @var string */
         $query = $resource->property('query')->value();
 
+        /** @psalm-suppress MixedArgument */
         ($this->handle)(
             new RegisterImage(
-                $identity = new Identity((string) Uuid::uuid4()),
+                $identity = new Identity(Uuid::uuid4()->toString()),
                 $host,
-                new HostResourceIdentity((string) Uuid::uuid4()),
+                new HostResourceIdentity(Uuid::uuid4()->toString()),
                 Path::of($resource->property('path')->value()),
                 empty($query) ? Query::none() : Query::of($query)
             )
@@ -116,6 +121,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
+        /** @var Map<string, int> */
         $dimension = $resource->property('dimension')->value();
 
         ($this->handle)(
@@ -137,6 +143,7 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
+        /** @psalm-suppress MixedArgument */
         ($this->handle)(
             new SpecifyWeight(
                 $identity,
@@ -153,16 +160,15 @@ final class ResourceCreator implements ResourceCreatorInterface
             return;
         }
 
-        $resource
-            ->property('descriptions')
-            ->value()
-            ->foreach(function(string $description) use ($identity): void {
-                ($this->handle)(
-                    new AddDescription(
-                        $identity,
-                        new Description($description)
-                    )
-                );
-            });
+        /** @var Set<string> */
+        $descriptions = $resource->property('descriptions')->value();
+        $descriptions->foreach(function(string $description) use ($identity): void {
+            ($this->handle)(
+                new AddDescription(
+                    $identity,
+                    new Description($description)
+                )
+            );
+        });
     }
 }
