@@ -8,14 +8,12 @@
             "Domain\\": "src/Domain/",
             "App\\": "src/App/",
             "Web\\": "src/Web/",
-            "CLI\\": "src/CLI/",
             "Library\\Gene\\": "src/Gene/"
         },
         "files": [
             "src/App/bootstrap.php",
             "src/Domain/bootstrap.php",
-            "src/Web/bootstrap.php",
-            "src/CLI/bootstrap.php"
+            "src/Web/bootstrap.php"
         ]
     },
     "autoload-dev": {
@@ -52,7 +50,6 @@
         "innmind/debug": "~2.0",
         "vimeo/psalm": "^3.10"
     },
-    "bin": ["bin/library"],
     "provide": {
         "innmind/genome": "3.0"
     }
