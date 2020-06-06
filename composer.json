@@ -8,7 +8,8 @@
             "Domain\\": "src/Domain/",
             "App\\": "src/App/",
             "Web\\": "src/Web/",
-            "CLI\\": "src/CLI/"
+            "CLI\\": "src/CLI/",
+            "Library\\Gene\\": "src/Gene/"
         },
         "files": [
             "src/App/bootstrap.php",
@@ -41,7 +42,8 @@
         "innmind/installation-monitor": "~3.0",
         "innmind/cli": "~2.0",
         "innmind/stack": "^1.0",
-        "innmind/silent-cartographer": "~2.0"
+        "innmind/silent-cartographer": "~2.0",
+        "innmind/genome": "^3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.0",
@@ -51,9 +53,7 @@
         "vimeo/psalm": "^3.10"
     },
     "bin": ["bin/library"],
-    "extra": {
-        "gene": {
-            "expression": ["bin/library install"]
-        }
+    "provide": {
+        "innmind/genome": "3.0"
     }
 }
