@@ -70,6 +70,7 @@ final class RegisterHttpResourceHandler
             return;
         }
 
+        /** @var Set<Identity> */
         $identities = $resources->reduce(
             Set::of(Identity::class),
             function(Set $identities, HttpResource $resource): Set {

@@ -41,6 +41,7 @@ function bootstrap(
     Set $dsns = null,
     string $activationLevel = ''
 ): array {
+    /** @var Set<Url> */
     $dsns = $dsns ?? Set::of(Url::class);
     $domainParser = (new Pdp\Manager(
         new Pdp\Cache,

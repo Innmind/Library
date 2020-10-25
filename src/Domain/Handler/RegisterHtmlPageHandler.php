@@ -70,6 +70,7 @@ final class RegisterHtmlPageHandler
             return;
         }
 
+        /** @var Set<ResourceIdentity> */
         $identities = $htmlPages->reduce(
             Set::of(ResourceIdentity::class),
             function(Set $identities, HtmlPage $htmlPage): Set {

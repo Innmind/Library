@@ -48,9 +48,9 @@
         "infection/infection": "^0.15",
         "symfony/var-dumper": "^4.1",
         "innmind/debug": "~2.0",
-        "vimeo/psalm": "^3.10"
+        "vimeo/psalm": "~4.0"
     },
     "provide": {
-        "innmind/genome": "3.0"
+        "innmind/genome-genes": "3.0"
     }
 }
