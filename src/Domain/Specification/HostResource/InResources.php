@@ -22,12 +22,17 @@ final class InResources implements Comparator, Specification
 {
     use Composable;
 
+    /** @var Set<string> */
     private Set $value;
 
+    /**
+     * @param Set<Identity> $value
+     */
     public function __construct(Set $value)
     {
         assertSet(Identity::class, $value, 1);
 
+        /** @var Set<string> */
         $this->value = $value->reduce(
             Set::of('string'),
             static function(Set $carry, Identity $identity): Set {

@@ -65,6 +65,7 @@ final class ResourceAccessor implements ResourceAccessorInterface
         );
         /**
          * @psalm-suppress PossiblyInvalidArrayAccess
+         * @psalm-suppress MixedArgumentTypeCoercion
          * @var list<Property>
          */
         $properties = [

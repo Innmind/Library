@@ -620,16 +620,16 @@
         },
         {
             "name": "innmind/genome",
-            "version": "3.0.0",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Innmind/Genome.git",
-                "reference": "c1c2ec26c98e5311e8739a425faab57153e45e77"
+                "reference": "91308b8dc309658cc5b71e728328f677a8021e7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Innmind/Genome/zipball/c1c2ec26c98e5311e8739a425faab57153e45e77",
-                "reference": "c1c2ec26c98e5311e8739a425faab57153e45e77",
+                "url": "https://api.github.com/repos/Innmind/Genome/zipball/91308b8dc309658cc5b71e728328f677a8021e7d",
+                "reference": "91308b8dc309658cc5b71e728328f677a8021e7d",
                 "shasum": ""
             },
             "require": {
@@ -639,9 +639,13 @@
             },
             "require-dev": {
                 "innmind/black-box": "^4.9",
+                "nikic/php-parser": "~4.6.0",
                 "phpunit/phpunit": "~9.0",
                 "vimeo/psalm": "^3.9"
             },
+            "bin": [
+                "genome"
+            ],
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -665,7 +669,11 @@
                 "library",
                 "project"
             ],
-            "time": "2020-06-06T13:04:29+00:00"
+            "support": {
+                "issues": "http://github.com/Innmind/Genome/issues",
+                "source": "https://github.com/Innmind/Genome/tree/master"
+            },
+            "time": "2020-09-05T08:49:03+00:00"
         },
         {
             "name": "innmind/graphviz",

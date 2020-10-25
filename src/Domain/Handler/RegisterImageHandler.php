@@ -70,6 +70,7 @@ final class RegisterImageHandler
             return;
         }
 
+        /** @var Set<ResourceIdentity> */
         $identities = $images->reduce(
             Set::of(ResourceIdentity::class),
             function(Set $identities, Image $image): Set {
