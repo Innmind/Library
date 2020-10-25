@@ -51,6 +51,6 @@
         "vimeo/psalm": "^3.10"
     },
     "provide": {
-        "innmind/genome": "3.0"
+        "innmind/genome-genes": "3.0"
     }
 }
